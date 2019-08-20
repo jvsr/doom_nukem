@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.h": "c",
+		"ratio": "c",
+		"locale": "c",
+		"sstream": "c"
+	}
+}
