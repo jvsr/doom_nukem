@@ -1,0 +1,16 @@
+language: c
+
+os:
+  - osx
+  - linux
+
+notifications:
+  email: false
+  slack: true
+
+branches:
+  only:
+    - master
+
+install:
+  - bash .travisInstall.bash
