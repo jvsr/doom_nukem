@@ -14,3 +14,6 @@ branches:
 
 install:
   - bash .travisInstall.bash
+
+script:
+  - bash .travisScript.bash
