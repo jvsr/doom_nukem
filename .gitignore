@@ -1,5 +1,14 @@
+# Executable
+doom-nukem
+doomtest
+
 # Prerequisites
 *.d
+
+# Gcov files
+*.gcno
+*.gcda
+*.c.gcov
 
 # Object files
 *.o
