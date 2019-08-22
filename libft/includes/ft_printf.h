@@ -6,15 +6,20 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/02 14:13:30 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/15 14:15:30 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/21 23:47:37 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include "ft_bool.h"
+# include "ft_list.h"
+# include "ft_color.h"
+# include "ft_utf8.h"
+# include <stdlib.h>
+# include <string.h>
 # include <stdarg.h>
-# include "typedefs.h"
 
 /*
 ** TYPES: (% followed by:)
@@ -28,7 +33,7 @@
 ** a = hexdouble (base 16, lowercase)
 ** A = hexdouble (base 16, uppercase)
 ** c = unsigned int (If an l modifier is present, wint_t (wide char))
-** s = const char * (If an l modifier is present, const T_WCHAR *)
+** s = char * (If an l modifier is present, T_WCHAR *)
 ** p = void *
 */
 
@@ -74,55 +79,61 @@ typedef enum	e_type
 
 typedef	struct	s_info
 {
+	va_list	args;
 	t_bool	flag[7];
-	char	*buff;
 	char	type;
 	char	width;
 	int		length;
-	int		var_base;
-	int		fd;
-	t_bool	iszero;
-	t_bool	isnegative;
-	size_t	buff_len;
-	size_t	added;
-	size_t	padadded;
 	ssize_t	precision;
 	ssize_t	var_len;
 	t_type	var_type;
-	va_list	args;
+	int		var_base;
+	t_bool	iszero;
+	t_bool	isnegative;
+	char	*buff;
 	t_list	*buff_list;
+	size_t	buff_len;
+	size_t	added;
+	size_t	padadded;
+	int		fd;
 }				t_info;
 
-char			*ft_strformat_len(size_t *len, const char *format, ...);
-char			*ft_strformat(const char *format, ...);
-int				pf_getlength(t_info *info, const char *str);
-int				pf_gettype(t_info *info, const char *str);
-intmax_t		pf_overflowsigned(t_info *info);
-size_t			pf_addstr(t_info *info, char *str);
-size_t			pf_commands(t_info *info, const char *str);
-size_t			pf_distribute(t_info *info, const char *start);
-size_t			pf_formatcolor(t_info *info, const char *start);
-size_t			pf_getflag(t_info *info, const char *str);
-size_t			pf_getinfo(t_info *info, const char *str);
-size_t			pf_getprecision(t_info *info, const char *str);
-size_t			pf_getwidth(t_info *info, const char *str);
-ssize_t			ft_dprintf(int fd, const char *format, ...);
-ssize_t			ft_printf(const char *format, ...);
-t_bool			pf_ispositiveint(t_info *info);
-t_bool			pf_issignint(t_info *info);
-t_bool			pf_isstr(t_info *info);
-t_bool			pf_isunsignint(t_info *info);
-t_bool			pf_iszeropad(t_info *info);
+/*
+** "Face" Functions
+*/
+
+ssize_t			ft_printf(char *format, ...);
+ssize_t			ft_dprintf(int fd, char *format, ...);
+char			*ft_strformat(char *format, ...);
+char			*ft_strformat_len(size_t *len, char *format, ...);
+
+/*
+** Distribute Functions
+*/
+
+size_t			pf_commands(t_info *info, char *str);
+size_t			pf_distribute(t_info *info, char *start);
+void			pf_formatdistribute(t_info *info);
+
+/*
+** Info Functions
+*/
+
 t_info			*pf_infonew(void);
-uintmax_t		pf_overflowunsigned(t_info *info);
-void			pf_addchar(t_info *info, char c);
-void			pf_addnstr(t_info *info, char *str, size_t n);
-void			pf_addnum(t_info *info, intmax_t value);
-t_bool			pf_addtobuff(t_info *info, char *str, size_t len);
-void			pf_addunum(t_info *info, uintmax_t value, size_t len, int base);
-void			pf_addwchar(t_info *info, t_wchar c);
-void			pf_addwcharstr(t_info *info, t_wchar *str, size_t n);
-void			pf_format(t_info *info);
+void			pf_infosetdefault(t_info *info);
+size_t			pf_getinfo(t_info *info, char *str);
+size_t			pf_getflag(t_info *info, char *str);
+size_t			pf_getprecision(t_info *info, char *str);
+size_t			pf_getwidth(t_info *info, char *str);
+int				pf_getlength(t_info *info, char *str);
+int				pf_gettype(t_info *info, char *str);
+void			pf_setvar_base(t_info *info);
+void			pf_setvar_type(t_info *info);
+
+/*
+** Format Functions
+*/
+
 void			pf_formatbackpad(t_info *info);
 void			pf_formatchar(t_info *info);
 void			pf_formatdouble(t_info *info);
@@ -130,12 +141,40 @@ void			pf_formatnum(t_info *info);
 void			pf_formatpad(t_info *info);
 void			pf_formatstr(t_info *info);
 void			pf_formatunum(t_info *info);
-void			pf_infosetdefault(t_info *info);
-void			pf_setcolor(t_info *info, int color);
-void			pf_setcolorbg(t_info *info, int color);
-void			pf_setrgbcolor(t_info *info, t_color r, t_color g, t_color b);
-void			pf_setrgbcolorbg(t_info *info, t_color r, t_color g, t_color b);
-void			pf_setvar_base(t_info *info);
-void			pf_setvar_type(t_info *info);
+size_t			pf_formatcolor(t_info *info, char *start);
+
+/*
+** Buffer Management Functions
+*/
+
+t_bool			pf_addtobuff(t_info *info, char *str, size_t len);
+size_t			pf_addstr(t_info *info, char *str);
+void			pf_addchar(t_info *info, char c);
+void			pf_addnstr(t_info *info, char *str, size_t n);
+void			pf_addnum(t_info *info, intmax_t value);
+void			pf_addunum(t_info *info, uintmax_t value, size_t len, int base);
+void			pf_addwchar(t_info *info, t_wchar c);
+void			pf_addwcharstr(t_info *info, t_wchar *str, size_t n);
+void			pf_addcolor(t_info *info, int color);
+void			pf_addcolorbg(t_info *info, int color);
+void			pf_addrgbcolor(t_info *info, t_color r, t_color g, t_color b);
+void			pf_addrgbcolorbg(t_info *info, t_color r, t_color g, t_color b);
+
+/*
+** Is Functions
+*/
+
+t_bool			pf_ispositiveint(t_info *info);
+t_bool			pf_issignint(t_info *info);
+t_bool			pf_isstr(t_info *info);
+t_bool			pf_isunsignint(t_info *info);
+t_bool			pf_iszeropad(t_info *info);
+
+/*
+** Overflow Functions
+*/
+
+intmax_t		pf_overflowsigned(t_info *info);
+uintmax_t		pf_overflowunsigned(t_info *info);
 
 #endif
