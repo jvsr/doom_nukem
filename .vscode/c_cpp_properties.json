@@ -1,31 +1,31 @@
 {
-    "configurations": [
-        {
-            "name": "Mac",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "/Users/${env:USER}/.brew/Cellar/criterion/2.3.3/include/**"
-            ],
-            "macFrameworkPath": [
-                "/System/Library/Frameworks",
-                "/Library/Frameworks"
-            ],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "${default}"
-        },
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "/usr/include/**"
-            ],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "${default}"
-        }
-    ],
-    "version": 4
+	"configurations": [
+		{
+			"name": "Mac",
+			"includePath": [
+				"${workspaceFolder}/**",
+				"/Users/${env:USER}/.brew/Cellar/criterion/2.3.3/include/**"
+			],
+			"macFrameworkPath": [
+				"/System/Library/Frameworks",
+				"/Library/Frameworks"
+			],
+			"compilerPath": "/usr/bin/clang",
+			"cStandard": "c11",
+			"cppStandard": "c++17",
+			"intelliSenseMode": "${default}"
+		},
+		{
+			"name": "Linux",
+			"includePath": [
+				"${workspaceFolder}/**",
+				"/usr/include/**"
+			],
+			"compilerPath": "/usr/bin/gcc",
+			"cStandard": "c11",
+			"cppStandard": "c++17",
+			"intelliSenseMode": "${default}"
+		}
+	],
+	"version": 4
 }
