@@ -1,3 +1,4 @@
+#$(PARENTNAME) = Name of parent folder
 #$(SUBLIB) = Name of outputfile
 #$(SRCFOLDER) = Name of the folder which holds the sources
 #$(INCLUDES) = Path to the includes folder
@@ -5,7 +6,7 @@
 #$(CCFLAGS) = All the flags that will be used to compile
 
 #Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = $(SRCFOLDER) character bool list memory
+HEADERS = $(SRCFOLDER)
 HEADERS := $(HEADERS:%=ft_%.h)
 
 #Additions to the compile flags (-Wall -Wextra -Werror allready included)

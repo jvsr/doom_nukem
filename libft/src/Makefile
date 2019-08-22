@@ -6,14 +6,14 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/22 16:34:52 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/22 18:57:59 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 #Input values for sublib (From parrent makefile)
 SUBLIB =
 FOLDER =
-LIBNAME =
+PARENTNAME =
 
 #Input values for compile (From parrent makefile)
 CCSILENT =
@@ -24,6 +24,7 @@ CCOPTIMISE =
 GCOV =
 GCOVSILENT =
 GCOVFLAGS =
+LIBFT_DISABLE_GCOV =
 
 #Own names
 SRCFOLDER = $(SUBLIB:%.a=%)
@@ -39,7 +40,7 @@ include $(MAKEINCLUDES)/Makefile.color
 
 #Compile flags
 CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) $(CCOPTIMISE)
-ifeq ($(GCOV), TRUE)
+ifeq ($(GCOV)&&$(LIBFT_DISABLE_GCOV), TRUE&&FALSE)
 CCFLAGS += -coverage
 endif
 
@@ -56,7 +57,7 @@ SRCS := $(sort $(SRCS))
 OBJS = $(SRCS:.c=.o)
 GCNOS = $(OBJS:.o=.gcno)
 COMPILE_FILES = $(OBJS)
-ifeq ($(GCOV), TRUE)
+ifeq ($(GCOV)&&$(LIBFT_DISABLE_GCOV), TRUE&&FALSE)
 COMPILE_FILES += $(GCNOS)
 endif
 
@@ -77,18 +78,18 @@ all: $(NAME)
 
 #Create $(NAME)
 $(NAME): $(COMPILE_FILES)
-	@$(call FNC_PRINT_EQUAL,$(LIBNAME)-$(SRCFOLDER),$(SUBLIB))
+	@$(call FNC_PRINT_EQUAL,$(PARENTNAME)-$(SRCFOLDER),$(SUBLIB))
 	@rm -f $(NAME)
 	@ar rcs $(NAME) $(OBJS)
 
 #Run gcov
 gcovreport: $(NAME)
-	$(GCOVREPORT)
+	@$(GCOVREPORT)
 
 #Compile .o or .gcno if $(GCOV)==TRUE
 %.o %.gcno: %.c $(HEADERS)
 ifeq ($(CCSILENT), FALSE)
-	@$(call FNC_PRINT_PLUS,$(LIBNAME)-$(SRCFOLDER),$(shell basename $@))
+	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(shell basename $@))
 endif
 	@rm -f $(<:.c=.o)
 	@$(CC) $(CCFLAGS) -o $(<:.c=.o) -c $<
@@ -96,7 +97,7 @@ endif
 #Clean all non .a files
 clean:
 ifneq ($(wildcard $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)),)
-	@$(call FNC_PRINT_MIN,$(LIBNAME)-$(SRCFOLDER),clean)
+	@$(call FNC_PRINT_MIN,$(PARENTNAME)-$(SRCFOLDER),clean)
 	@rm -f $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)
 endif
 
