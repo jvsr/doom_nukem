@@ -1,0 +1,24 @@
+#$(SUBLIB) = Name of outputfile
+#$(SRCFOLDER) = Name of the folder which holds the sources
+#$(INCLUDES) = Path to the includes folder
+#$(MAKEINCLUDES) = Path to the makefile includes folder
+#$(CCFLAGS) = All the flags that will be used to compile
+
+#Headers libary is dependent on (relative to $(INCLUDES))
+HEADERS = $(SRCFOLDER) character bool list memory
+HEADERS := $(HEADERS:%=ft_%.h)
+
+#Additions to the compile flags (-Wall -Wextra -Werror allready included)
+CCFLAGS +=
+
+#Source file prefix
+PREFIX =
+
+#All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
+#These will be automaticly prefixed with ft_ and sufixed with .c
+FT_SRCS = hashdjb2 hashdjb2_nocase hashmapadd hashmapnew hashsdbm \
+	hashsdbm_nocase hashdjb2a hashdjb2a_nocase
+
+#All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
+#These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+SRCS =

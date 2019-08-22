@@ -3,6 +3,7 @@
 		"*.h": "c",
 		"ratio": "c",
 		"locale": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"Makefile*": "makefile"
 	}
 }
