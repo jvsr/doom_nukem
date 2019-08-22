@@ -3,17 +3,18 @@
         {
             "name": "Mac",
             "includePath": [
-				"${workspaceFolder}/includes",
-				"/Users/pholster/.brew/Cellar/criterion/2.3.3/include"
+                "${workspaceFolder}/**",
+                "/Users/${env:USER}/.brew/Cellar/criterion/2.3.3/include/**"
             ],
             "macFrameworkPath": [
                 "/System/Library/Frameworks",
                 "/Library/Frameworks"
             ],
-            "intelliSenseMode": "clang-x64",
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
-            "cppStandard": "c++17"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "${default}"
+        },
         }
     ],
     "version": 4
