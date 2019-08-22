@@ -15,8 +15,6 @@ SUBLIBS = main
 
 #Executibale name
 NAME = doom-nukem
-BASENAME = $(NAME:%.a=%)
-PARENTNAME = $(BASENAME)
 
 #Compile settings
 CCSILENT = FALSE
@@ -76,7 +74,7 @@ all: $(NAME)
 
 #Create $(NAME)
 $(NAME): $(LIB) $(SUBLIBS)
-	@$(call FNC_PRINT_EQUAL,$(BASENAME),$(NAME))
+	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIB)
 
@@ -118,7 +116,7 @@ ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) fclean
 endif
 ifneq ($(FCLEAN),)
-	@$(call FNC_PRINT_DEL,$(BASENAME),fclean $(FCLEAN:src/$(SUBLIBSPATH)/%=%))
+	@$(call FNC_PRINT_DEL,$(NAME),fclean $(FCLEAN:src/$(SUBLIBSPATH)/%=%))
 	@rm -f $(NAME) $(SUBLIBS)
 endif
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
