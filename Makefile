@@ -25,6 +25,7 @@ CCOPTIMISE =
 GCOV = FALSE
 GCOVSILENT = TRUE
 GCOVFLAGS = -f -b -c
+LIBFT_DISABLE_GCOV = TRUE
 
 #Mafile includes
 MAKEINCLUDES = includes/libft
@@ -69,6 +70,7 @@ export CCSILENT
 export CCSTRICT
 export CCOPTIMISE
 export PARENTNAME
+export LIBFT_DISABLE_GCOV
 
 all: $(NAME)
 
