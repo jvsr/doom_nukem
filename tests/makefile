@@ -24,7 +24,7 @@ MAKEINCLUDES = $(INCLUDES)/libft
 include $(MAKEINCLUDES)/Makefile.color
 
 #Compile flags
-CCFLAGS = -g -coverage -I$(INCLUDES) -I$(CRITERIONINCLUDES)
+CCFLAGS = -g -I$(INCLUDES) -I$(CRITERIONINCLUDES)
 ifeq ($(shell uname -s), Linux)
 CCFLAGS += -w
 endif
@@ -49,6 +49,9 @@ CRITERIONINCLUDES = $(INSTALLPATH)/include
 CRITERIONLIB = -L$(INSTALLPATH)/lib -lcriterion
 
 #Header dependency
+LIBS = $(LIB) $(CRITERIONLIB)
+
+# Header dependency
 HEADERS := $(HEADERS:%=$(INCLUDES)/%) $(CRITERIONINCLUDES)
 HEADERS := $(sort $(HEADERS))
 
@@ -65,7 +68,7 @@ all: $(NAME)
 #Create $(NAME)
 $(NAME): $(TESTOBJS) $(LIB)
 	@$(call FNC_PRINT_EQUAL,$(PARENTNAME)-$(NAME),$(NAME))
-	@$(CC) $(CCFLAGS) -o $(NAME) $(TESTOBJS) $(OBJS) $(LIB) $(CRITERIONLIB)
+	@$(CC) -coverage $(CCFLAGS) -o $(NAME) $(TESTOBJS) $(OBJS) $(LIBS)
 	#-Wl,-alias,_wrap_malloc,_malloc -Wl,-alias,_wrap_free,_free
 
 #Compile .o

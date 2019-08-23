@@ -12,4 +12,4 @@ CCFLAGS +=
 
 #All source files for test (relative to src/)
 #These will be automaticly prefixed with ft_ and sufixed with .c
-SRCS =
+SRCS = test
