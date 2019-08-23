@@ -6,63 +6,64 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/22 19:06:36 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/23 11:49:43 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-#Sublib folder names
+# Sublib folder names
 SUBLIBS = main
 
-#Executibale name
+# Executibale name
 NAME = doom-nukem
+PARENTNAME = $(NAME)
 
-#Compile settings
+# Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
 CCOPTIMISE =
 
-#Gcov settings
+# Gcov settings
 GCOV = FALSE
 GCOVSILENT = TRUE
 GCOVFLAGS = -f -b -c
 LIBFT_DISABLE_GCOV = TRUE
 
-#Mafile includes
+# Mafile includes
 MAKEINCLUDES = includes/libft
 include $(MAKEINCLUDES)/Makefile.color
 
-#Tests info
+# Tests info
 TESTPATH = tests
 TESTNAME = doomtest
 TEST = $(TESTPATH)/$(TESTNAME)
 
-#Libft info
+# Libft info
 LIBPATH = libft
 LIB = $(LIBPATH)/libft.a
 
-#Sublib info
+# Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
 SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.a)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
-#Fclean target files
+# Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
-#Function - Get all objects of sublibs
+# Function - Get all objects of sublibs
 SEDESCAPE = $(1:src/$(SUBLIBSPATH)/%.a=src\/%\/)
 GETOBJS = $(shell ar -t $(1) | grep '\.o' | sed 's/^/$(call SEDESCAPE,$(1))/g')
 OBJS = $(foreach DIR,$(SUBLIBS),$(call GETOBJS,$(DIR)))
 
-#Function - Clean all sublib .a
+# Function - Clean all sublib .a
 CLEANSUBLIB = $(SUBLIBMAKE) SUBLIB=$(1:src/$(SUBLIBSPATH)/%=%) clean &&
 SUBLIBS_CLEAN = $(foreach DIR,$(SUBLIBS),$(call CLEANSUBLIB,$(DIR))) :
 
-#Function - Clean all sublib .a
+# Function - Clean all sublib .a
 GCOVSUBLIB = $(SUBLIBMAKE) SUBLIB=$(1:src/$(SUBLIBSPATH)/%=%) gcovreport &&
 SUBLIBS_GCOV = $(foreach DIR,$(SUBLIBS),$(call GCOVSUBLIB,$(DIR))) :
 
-#Export vars to sublib makefile
+# Export vars to sublib makefile
 export GCOV
 export GCOVSILENT
 export GCOVFLAGS
@@ -74,13 +75,13 @@ export LIBFT_DISABLE_GCOV
 
 all: $(NAME)
 
-#Create $(NAME)
+# Create $(NAME)
 $(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIB)
 
-#Run test and gcov if $(GCOV)==TRUE
+# Run test and gcov if $(GCOV)==TRUE
 test: $(NAME) FORCE
 ifeq ($(wildcard $(TESTPATH)),)
 	@echo "Error: $(TESTPATH) not present"
@@ -92,19 +93,19 @@ ifeq ($(GCOV), TRUE)
 endif
 endif
 
-#Compile $(LIB)
+# Compile $(LIB)
 $(LIB): FORCE
 	@$(MAKE) -s -e -C $(LIBPATH)
 
-#Compile $(SUBLIBS)
+# Compile $(SUBLIBS)
 src/$(SUBLIBSPATH)/%.a: src/$(SUBLIBSPATH) FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
 
-#Create $(SUBLIBSPATH) if it doesnt exsist
+# Create $(SUBLIBSPATH) if it doesnt exsist
 src/$(SUBLIBSPATH):
 	@mkdir src/$(SUBLIBSPATH)
 
-#Clean all non .a files
+# Clean all non .a files
 clean:
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
@@ -112,7 +113,7 @@ endif
 	@$(SUBLIBS_CLEAN)
 	@$(MAKE) -s -e -C $(LIBPATH) clean
 
-#Clean all .a files
+# Clean all .a files
 fclean: clean
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) fclean
@@ -123,7 +124,7 @@ ifneq ($(FCLEAN),)
 endif
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
 
-#Recompile
+# Recompile
 re: fclean $(NAME)
 
 FORCE: ;

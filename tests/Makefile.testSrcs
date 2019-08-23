@@ -1,15 +1,15 @@
-#$(PARENTNAME) = Name of parent folder
-#$(NAME) = Name of outputfile
-#$(INCLUDES) = Path to the includes folder
-#$(MAKEINCLUDES) = Path to the makefile includes folder
-#$(CCFLAGS) = All the flags that will be used to compile
+# $(PARENTNAME) = Name of parent folder
+# $(NAME) = Name of outputfile
+# $(INCLUDES) = Path to the includes folder
+# $(MAKEINCLUDES) = Path to the makefile includes folder
+# $(CCFLAGS) = All the flags that will be used to compile
 
-#Headers libary is dependent on (relative to includes or .)
+# Headers libary is dependent on (relative to includes or .)
 HEADERS = doom_nukem.h
 
-#Additions to the compile flags
+# Additions to the compile flags
 CCFLAGS +=
 
-#All source files for test (relative to src/)
-#These will be automaticly prefixed with ft_ and sufixed with .c
+# All source files for test (relative to src/)
+# These will be automaticly prefixed with test_ft_ and sufixed with .c
 SRCS = test
