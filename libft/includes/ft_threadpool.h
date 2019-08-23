@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/17 20:26:14 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:02:40 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/23 11:11:22 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct	s_pool
 }				t_pool;
 
 /*
-** "Face" Functions
+** ------------------------------"Face" Functions-------------------------------
 */
 
 t_pool			*ft_poolnew(size_t size, t_bool tracktime);
@@ -67,14 +67,14 @@ t_bool			ft_poolquefront(t_pool *pool, void (*f)(), size_t count, ...);
 t_bool			ft_threadnew(pthread_t *thread, void (*f)(), size_t count, ...);
 
 /*
-** Management Functions
+** ----------------------------Management Functions-----------------------------
 */
 
 void			*tp_threadmanager(void *param);
 t_bool			tp_addtoque(t_pool *pool, t_bool priority, t_task *task);
 
 /*
-** Task Functions
+** -------------------------------Task Functions--------------------------------
 */
 
 t_bool			tp_taskrunfnc(t_task *task);

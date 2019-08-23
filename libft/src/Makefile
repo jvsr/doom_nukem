@@ -6,54 +6,54 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/22 18:57:59 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/23 11:07:25 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-#Input values for sublib (From parrent makefile)
+# Input values for sublib (From parrent makefile)
 SUBLIB =
 FOLDER =
 PARENTNAME =
 
-#Input values for compile (From parrent makefile)
+# Input values for compile (From parrent makefile)
 CCSILENT =
 CCSTRICT =
 CCOPTIMISE =
 
-#Input values for gcov (From parrent makefile)
+# Input values for gcov (From parrent makefile)
 GCOV =
 GCOVSILENT =
 GCOVFLAGS =
 LIBFT_DISABLE_GCOV =
 
-#Own names
+# Own names
 SRCFOLDER = $(SUBLIB:%.a=%)
 NAME = $(FOLDER)/$(SUBLIB)
 
-#Misc setup
+# Misc setup
 SILENCE = 2>/dev/null 1>/dev/null
 
-#Includes
+# Includes
 INCLUDES = ../includes
 MAKEINCLUDES = $(INCLUDES)
 include $(MAKEINCLUDES)/Makefile.color
 
-#Compile flags
+# Compile flags
 CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) $(CCOPTIMISE)
 ifeq ($(GCOV)&&$(LIBFT_DISABLE_GCOV), TRUE&&FALSE)
 CCFLAGS += -coverage
 endif
 
-#Get correct srcs variable
+# Get correct srcs variable
 include Makefile.$(SRCFOLDER)Srcs
 
-#Dependency prefix
+# Dependency prefix
 HEADERS := $(HEADERS:%=$(INCLUDES)/%)
 HEADERS := $(sort $(HEADERS))
 SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)_%.c)
 SRCS := $(sort $(SRCS))
 
-#Compile dependencys
+# Compile dependencys
 OBJS = $(SRCS:.c=.o)
 GCNOS = $(OBJS:.o=.gcno)
 COMPILE_FILES = $(OBJS)
@@ -61,12 +61,12 @@ ifeq ($(GCOV)&&$(LIBFT_DISABLE_GCOV), TRUE&&FALSE)
 COMPILE_FILES += $(GCNOS)
 endif
 
-#Trash files
+# Trash files
 GCDAS = $(OBJS:.o=.gcda)
 TEMPS = $(SRCS:.c=.c~)
 GCOVS = $(OBJS:.o=.c.gcov)
 
-#Function - Gcov report
+# Function - Gcov report
 BASE_GCOVS = $(GCOVS:$(SRCFOLDER)/%=%)
 MOVE_GCOVS = mv -f $(BASE_GCOVS) $(SRCFOLDER) || true
 GCOVREPORT = (gcov $(GCOVFLAGS) $(SRCS) && $(MOVE_GCOVS))
@@ -76,17 +76,17 @@ endif
 
 all: $(NAME)
 
-#Create $(NAME)
+# Create $(NAME)
 $(NAME): $(COMPILE_FILES)
 	@$(call FNC_PRINT_EQUAL,$(PARENTNAME)-$(SRCFOLDER),$(SUBLIB))
 	@rm -f $(NAME)
 	@ar rcs $(NAME) $(OBJS)
 
-#Run gcov
+# Run gcov
 gcovreport: $(NAME)
 	@$(GCOVREPORT)
 
-#Compile .o or .gcno if $(GCOV)==TRUE
+# Compile .o or .gcno if $(GCOV)==TRUE
 %.o %.gcno: %.c $(HEADERS)
 ifeq ($(CCSILENT), FALSE)
 	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(shell basename $@))
@@ -94,17 +94,17 @@ endif
 	@rm -f $(<:.c=.o)
 	@$(CC) $(CCFLAGS) -o $(<:.c=.o) -c $<
 
-#Clean all non .a files
+# Clean all non .a files
 clean:
 ifneq ($(wildcard $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)),)
 	@$(call FNC_PRINT_MIN,$(PARENTNAME)-$(SRCFOLDER),clean)
 	@rm -f $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)
 endif
 
-#Norm fclean
+# Norm fclean
 fclean: clean
 
-#Recompile
+# Recompile
 re: clean all
 
 FORCE: ;

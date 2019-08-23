@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/02 14:13:30 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 23:47:37 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/23 11:05:51 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ typedef	struct	s_info
 }				t_info;
 
 /*
-** "Face" Functions
+** ------------------------------"Face" Functions-------------------------------
 */
 
 ssize_t			ft_printf(char *format, ...);
@@ -108,7 +108,7 @@ char			*ft_strformat(char *format, ...);
 char			*ft_strformat_len(size_t *len, char *format, ...);
 
 /*
-** Distribute Functions
+** ----------------------------Distribute Functions-----------------------------
 */
 
 size_t			pf_commands(t_info *info, char *str);
@@ -116,7 +116,7 @@ size_t			pf_distribute(t_info *info, char *start);
 void			pf_formatdistribute(t_info *info);
 
 /*
-** Info Functions
+** -------------------------------Info Functions--------------------------------
 */
 
 t_info			*pf_infonew(void);
@@ -131,7 +131,7 @@ void			pf_setvar_base(t_info *info);
 void			pf_setvar_type(t_info *info);
 
 /*
-** Format Functions
+** ------------------------------Format Functions-------------------------------
 */
 
 void			pf_formatbackpad(t_info *info);
@@ -144,7 +144,7 @@ void			pf_formatunum(t_info *info);
 size_t			pf_formatcolor(t_info *info, char *start);
 
 /*
-** Buffer Management Functions
+** -------------------------Buffer Management Functions-------------------------
 */
 
 t_bool			pf_addtobuff(t_info *info, char *str, size_t len);
@@ -161,7 +161,7 @@ void			pf_addrgbcolor(t_info *info, t_color r, t_color g, t_color b);
 void			pf_addrgbcolorbg(t_info *info, t_color r, t_color g, t_color b);
 
 /*
-** Is Functions
+** --------------------------------Is Functions---------------------------------
 */
 
 t_bool			pf_ispositiveint(t_info *info);
@@ -171,7 +171,7 @@ t_bool			pf_isunsignint(t_info *info);
 t_bool			pf_iszeropad(t_info *info);
 
 /*
-** Overflow Functions
+** -----------------------------Overflow Functions------------------------------
 */
 
 intmax_t		pf_overflowsigned(t_info *info);
