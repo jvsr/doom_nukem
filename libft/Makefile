@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/23 11:03:35 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/24 14:25:13 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ ifeq ($(wildcard $(TESTPATH)),)
 else
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) OBJS="$(OBJS:src/%=../src/%)"
 	@./$(TEST)
-ifeq ($(GCOV)&&$(LIBFT_DISABLE_GCOV), TRUE&&FALSE)
+ifeq ($(GCOV)_$(LIBFT_DISABLE_GCOV), TRUE_FALSE)
 	@$(SUBLIBS_GCOV)
 endif
 endif

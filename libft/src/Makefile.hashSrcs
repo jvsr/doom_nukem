@@ -6,7 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = $(SRCFOLDER)
+HEADERS =
 HEADERS := $(HEADERS:%=ft_%.h)
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
@@ -18,7 +18,7 @@ PREFIX =
 # All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with ft_ and sufixed with .c
 FT_SRCS = hashdjb2 hashdjb2_nocase hashmapadd hashmapnew hashsdbm \
-	hashsdbm_nocase hashdjb2a hashdjb2a_nocase
+	hashsdbm_nocase hashdjb2a hashdjb2a_nocase hashmapget
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c

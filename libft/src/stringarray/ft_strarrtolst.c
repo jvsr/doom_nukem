@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/13 14:48:15 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:41:29 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/23 15:58:26 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ t_list			*ft_strarrtolst(char **arr)
 	t_list	*returnlst;
 
 	i = 0;
-	returnlst = ft_lstnew(arr[i], ft_strlen(arr[i]) + 1);
+	returnlst = ft_lstnew_dup(arr[i], ft_strlen(arr[i]) + 1);
 	if (returnlst == NULL)
 		return (NULL);
 	prvlst = returnlst;
 	i++;
 	while (arr[i] != NULL)
 	{
-		newlst = ft_lstnew(arr[i], ft_strlen(arr[i]) + 1);
+		newlst = ft_lstnew_dup(arr[i], ft_strlen(arr[i]) + 1);
 		if (newlst == NULL)
 			return (freeret(&returnlst));
 		prvlst->next = newlst;

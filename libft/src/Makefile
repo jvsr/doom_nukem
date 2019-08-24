@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/23 11:07:25 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/24 14:25:06 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
 CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) $(CCOPTIMISE)
-ifeq ($(GCOV)&&$(LIBFT_DISABLE_GCOV), TRUE&&FALSE)
+ifeq ($(GCOV)_$(LIBFT_DISABLE_GCOV), TRUE_FALSE)
 CCFLAGS += -coverage
 endif
 
@@ -57,7 +57,7 @@ SRCS := $(sort $(SRCS))
 OBJS = $(SRCS:.c=.o)
 GCNOS = $(OBJS:.o=.gcno)
 COMPILE_FILES = $(OBJS)
-ifeq ($(GCOV)&&$(LIBFT_DISABLE_GCOV), TRUE&&FALSE)
+ifeq ($(GCOV)_$(LIBFT_DISABLE_GCOV), TRUE_FALSE)
 COMPILE_FILES += $(GCNOS)
 endif
 
