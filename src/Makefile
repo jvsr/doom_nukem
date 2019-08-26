@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/26 17:14:27 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/26 17:27:18 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ MAKEINCLUDES = $(INCLUDES)/libft
 include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
-CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) $(CCOPTIMISE)
+CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) -I$(FRAMEWORKINCLUDES) $(CCOPTIMISE)
 ifeq ($(GCOV), TRUE)
 CCFLAGS += -coverage
 endif
@@ -50,7 +50,7 @@ endif
 include Makefile.$(SRCFOLDER)Srcs
 
 # Dependency prefix
-HEADERS := $(HEADERS:%=$(INCLUDES)/%) $(FRAMEWORKINCLUDES)
+HEADERS := $(HEADERS:%=$(INCLUDES)/%)
 HEADERS := $(sort $(HEADERS))
 SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)_%.c)
 SRCS := $(sort $(SRCS))

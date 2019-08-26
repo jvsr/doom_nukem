@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/26 17:16:02 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/26 17:27:13 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ MAKEINCLUDES = $(INCLUDES)/libft
 include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
-CCFLAGS = -g -I$(INCLUDES) -I$(CRITERIONINCLUDES)
+CCFLAGS = -g -I$(INCLUDES) -I$(FRAMEWORKINCLUDES)
 ifeq ($(shell uname -s), Linux)
 CCFLAGS += -w
 endif
@@ -47,7 +47,7 @@ CRITERIONLIB = -L$(FRAMEWORKPATH)/lib -lcriterion
 LIBS = $(LIB) $(SDL2LIB) $(CRITERIONLIB)
 
 # Header dependency
-HEADERS := $(HEADERS:%=$(INCLUDES)/%) $(FRAMEWORKINCLUDES)
+HEADERS := $(HEADERS:%=$(INCLUDES)/%)
 HEADERS := $(sort $(HEADERS))
 
 # Dependency prefix
