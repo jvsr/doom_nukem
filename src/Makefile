@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/23 11:50:18 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/26 17:27:18 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@
 SUBLIB =
 FOLDER =
 PARENTNAME =
+FRAMEWORKPATH =
+FRAMEWORKINCLUDES =
+SDL2LIB =
 
 # Input values for compile (From parrent makefile)
 CCSILENT =
@@ -38,7 +41,7 @@ MAKEINCLUDES = $(INCLUDES)/libft
 include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
-CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) $(CCOPTIMISE)
+CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) -I$(FRAMEWORKINCLUDES) $(CCOPTIMISE)
 ifeq ($(GCOV), TRUE)
 CCFLAGS += -coverage
 endif

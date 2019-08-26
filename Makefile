@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/23 11:49:43 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/26 17:14:47 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,19 @@ TEST = $(TESTPATH)/$(TESTNAME)
 LIBPATH = libft
 LIB = $(LIBPATH)/libft.a
 
+# FrameWorkPaths
+ifeq ($(shell uname -s), Linux)
+FRAMEWORKPATH := /usr
+else
+FRAMEWORKPATH := $(shell brew --cellar)/..
+endif
+
+# Path to framework includes folder
+FRAMEWORKINCLUDES = $(FRAMEWORKPATH)/include
+
+# SDL2 dependency
+SDL2LIB = -L$(FRAMEWORKPATH)/lib -lSDL2
+
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
@@ -71,6 +84,9 @@ export CCSILENT
 export CCSTRICT
 export CCOPTIMISE
 export PARENTNAME
+export FRAMEWORKPATH
+export FRAMEWORKINCLUDES
+export SDL2LIB
 export LIBFT_DISABLE_GCOV
 
 all: $(NAME)
@@ -79,7 +95,7 @@ all: $(NAME)
 $(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -coverage -o $(NAME) $(OBJS) $(LIB)
+	@gcc -coverage -o $(NAME) $(OBJS) $(LIB) $(SDL2LIB)
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(NAME) FORCE
