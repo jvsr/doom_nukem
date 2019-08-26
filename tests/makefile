@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/23 11:49:17 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/26 17:27:13 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@
 NAME =
 OBJS =
 PARENTNAME =
+FRAMEWORKPATH =
+FRAMEWORKINCLUDES =
+SDL2LIB =
 
 # Compile settings
 CCSILENT = FALSE
@@ -24,7 +27,7 @@ MAKEINCLUDES = $(INCLUDES)/libft
 include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
-CCFLAGS = -g -I$(INCLUDES) -I$(CRITERIONINCLUDES)
+CCFLAGS = -g -I$(INCLUDES) -I$(FRAMEWORKINCLUDES)
 ifeq ($(shell uname -s), Linux)
 CCFLAGS += -w
 endif
@@ -37,22 +40,14 @@ LIBPATH = ../libft
 LIBNAME = libft
 LIB = $(LIBPATH)/$(LIBNAME).a
 
-# Criterion install path
-ifeq ($(shell uname -s), Linux)
-INSTALLPATH := /usr
-else
-INSTALLPATH := $(shell brew --cellar)/..
-endif
-
 # Criterion dependency
-CRITERIONINCLUDES = $(INSTALLPATH)/include
-CRITERIONLIB = -L$(INSTALLPATH)/lib -lcriterion
+CRITERIONLIB = -L$(FRAMEWORKPATH)/lib -lcriterion
 
 # All libs for compilation
-LIBS = $(LIB) $(CRITERIONLIB)
+LIBS = $(LIB) $(SDL2LIB) $(CRITERIONLIB)
 
 # Header dependency
-HEADERS := $(HEADERS:%=$(INCLUDES)/%) $(CRITERIONINCLUDES)
+HEADERS := $(HEADERS:%=$(INCLUDES)/%)
 HEADERS := $(sort $(HEADERS))
 
 # Dependency prefix
