@@ -4,7 +4,7 @@
 			"name": "Mac",
 			"includePath": [
 				"${workspaceFolder}/**",
-				"/Users/${env:USER}/.brew/Cellar/criterion/2.3.3/include/**"
+				"/Users/${env:USER}/.brew/Cellar/**"
 			],
 			"macFrameworkPath": [
 				"/System/Library/Frameworks",
