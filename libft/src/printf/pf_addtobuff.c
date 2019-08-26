@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/15 22:58:40 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:25:44 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/23 15:58:03 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_bool	addtolst(t_info *info)
 	static	t_list	*prv;
 	t_list			*new;
 
-	new = ft_lstnew(info->buff, PF_BUFF_SIZE);
+	new = ft_lstnew_dup(info->buff, PF_BUFF_SIZE);
 	if (prv == NULL)
 		info->buff_list = new;
 	else

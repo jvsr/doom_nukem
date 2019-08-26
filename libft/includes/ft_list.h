@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/08 16:12:36 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/22 13:06:33 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/23 15:56:42 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_list			*ft_lstindex(t_list *lst, size_t index);
 t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list			*ft_lstnew(void *content, size_t content_size);
+t_list			*ft_lstnew_dup(void *content, size_t content_size);
 t_list			*ft_lstunlink(t_list *head, t_list *lst);
 size_t			ft_lstlen(t_list *lst);
 size_t			ft_lstnlen(t_list *lst, size_t n);

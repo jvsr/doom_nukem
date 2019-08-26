@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/19 18:05:11 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:07:26 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/23 16:11:15 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_hashmap		*ft_hashmapnew(size_t size, size_t (*f)(char *))
 	new = (t_hashmap *)ft_memalloc(sizeof(t_hashmap));
 	if (new == NULL)
 		return (NULL);
-	new->arr = (t_list **)ft_memalloc(sizeof(t_list *) * size);
+	new->arr = (t_hashlist **)ft_memalloc(sizeof(t_hashlist *) * size);
 	if (new->arr == NULL)
 	{
 		free(new);

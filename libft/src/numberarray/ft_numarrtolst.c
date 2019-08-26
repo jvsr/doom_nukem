@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/14 10:14:45 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:22:22 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/23 15:57:42 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list			*ft_numarrtolst(intmax_t *arr, size_t len)
 
 	i = 0;
 	num = arr[i];
-	returnlst = ft_lstnew(&num, (sizeof(intmax_t) * ft_numlen(num)));
+	returnlst = ft_lstnew_dup(&num, (sizeof(intmax_t) * ft_numlen(num)));
 	if (returnlst == NULL)
 		return (NULL);
 	prvlst = returnlst;
@@ -38,7 +38,7 @@ t_list			*ft_numarrtolst(intmax_t *arr, size_t len)
 	{
 		i++;
 		num = arr[i];
-		newlst = ft_lstnew(&num, (sizeof(intmax_t) * ft_numlen(num)));
+		newlst = ft_lstnew_dup(&num, (sizeof(intmax_t) * ft_numlen(num)));
 		if (newlst == NULL)
 			return (freeret(&returnlst));
 		prvlst->next = newlst;
