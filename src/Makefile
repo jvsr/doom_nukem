@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/23 11:50:18 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/26 17:14:27 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@
 SUBLIB =
 FOLDER =
 PARENTNAME =
+FRAMEWORKPATH =
+FRAMEWORKINCLUDES =
+SDL2LIB =
 
 # Input values for compile (From parrent makefile)
 CCSILENT =
@@ -47,7 +50,7 @@ endif
 include Makefile.$(SRCFOLDER)Srcs
 
 # Dependency prefix
-HEADERS := $(HEADERS:%=$(INCLUDES)/%)
+HEADERS := $(HEADERS:%=$(INCLUDES)/%) $(FRAMEWORKINCLUDES)
 HEADERS := $(sort $(HEADERS))
 SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)_%.c)
 SRCS := $(sort $(SRCS))
