@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/26 17:27:18 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/27 13:38:18 by ehollidg      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ include Makefile.$(SRCFOLDER)Srcs
 # Dependency prefix
 HEADERS := $(HEADERS:%=$(INCLUDES)/%)
 HEADERS := $(sort $(HEADERS))
-SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)_%.c)
+SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
 SRCS := $(sort $(SRCS))
 
 # Compile dependencys
