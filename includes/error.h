@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_main.c                                          :+:    :+:            */
+/*   error.h                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/22 17:24:38 by pholster      ########   odam.nl         */
+/*   Created: 2019/08/27 14:35:51 by jvisser        #+#    #+#                */
+/*   Updated: 2019/08/27 15:13:06 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		main(void)
-{
-	return (0);
-}
+#ifndef ERROR_H
+# define ERROR_H
+
+void	error_msg(const char *msg, int error_code);
+
+#endif
