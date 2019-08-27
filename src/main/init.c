@@ -21,7 +21,7 @@
 
 static void		init_sdl(void)
 {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+	if (SDL_Init(0) < 0)
 		error_msg(SDL_GetError(), 1);
 }
 

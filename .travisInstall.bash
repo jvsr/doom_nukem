@@ -1,7 +1,6 @@
 #!/bin/bash
 
 function linuxInstall {
-	export DISPLAY=:0
 	sudo add-apt-repository -y ppa:snaipewastaken/ppa
 	sudo apt-get update
 	sudo apt-get install -y libsdl2-dev
