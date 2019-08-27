@@ -1,13 +1,19 @@
 #!/bin/bash
 
-if [ -z "$TRAVIS" ] || [[ $TRAVIS != true ]]; then
+function linuxRun {
+	xvfb-run --server-args="-screen 0 1920x1080x24" make test GCOV=TRUE
+}
+
+function osxRun {
+	make test GCOV=TRUE
+}
+
+if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
 	echo "Error: Not running travis"
-	exit
-elif [[ $TRAVIS_OS_NAME != "linux" ]] && [[ $TRAVIS_OS_NAME != "osx" ]]; then
+elif [[ $TRAVIS_OS_NAME == "linux" ]]; then
+	linuxRun
+elif [[ $TRAVIS_OS_NAME == "osx" ]]; then
+	osxRun
+else
 	echo "Error: OS is not supported"
-	exit
 fi
-
-make test GCOV=TRUE
-
-exit

@@ -5,10 +5,6 @@ function linuxInstall {
 	sudo apt-get update
 	sudo apt-get install -y libsdl2-dev
 	sudo apt-get install -y criterion-dev
-
-	sudo apt-get install -y xvfb
-	export DISPLAY=':99.0'
-	Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
 }
 
 function osxInstall {
