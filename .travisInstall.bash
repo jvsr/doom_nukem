@@ -3,11 +3,13 @@
 function linuxInstall {
     sudo add-apt-repository -y ppa:snaipewastaken/ppa
     sudo apt-get update
+    sudo apt-get install -y libsdl2-dev
     sudo apt-get install -y criterion-dev
 }
 
 function osxInstall {
     export HOMEBREW_NO_AUTO_UPDATE=1
+    brew install SDL2
     brew install snaipe/soft/criterion
 }
 
