@@ -2,6 +2,8 @@
     "files.associations": {
         "sdl.h": "c",
         "error.h": "c",
-        "game.h": "c"
+        "game.h": "c",
+        "libft.h": "c",
+        "init.h": "c"
     }
 }

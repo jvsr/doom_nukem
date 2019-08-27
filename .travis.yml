@@ -8,6 +8,10 @@ notifications:
   email: false
   slack: true
 
+env:
+  global:
+    - CODECOV_TOKEN="749f156c-d5c7-425f-a226-c52fac07344c"
+
 branches:
   only:
     - master
@@ -17,3 +21,6 @@ install:
 
 script:
   - bash .travisScript.bash
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -X gcov
