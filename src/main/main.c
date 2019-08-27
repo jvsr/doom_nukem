@@ -6,11 +6,12 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/27 15:10:44 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/27 17:08:49 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL.h>
+#include "gui.h"
 #include "game.h"
 #include "init.h"
 
