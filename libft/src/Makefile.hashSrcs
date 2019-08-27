@@ -18,7 +18,8 @@ PREFIX =
 # All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with ft_ and sufixed with .c
 FT_SRCS = hashdjb2 hashdjb2_nocase hashmapadd hashmapnew hashsdbm \
-	hashsdbm_nocase hashdjb2a hashdjb2a_nocase hashmapget
+	hashsdbm_nocase hashdjb2a hashdjb2a_nocase hashmapget hashmapdelone \
+	hashmapdel
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
