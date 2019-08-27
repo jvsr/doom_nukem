@@ -5,11 +5,11 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to includes or .)
-HEADERS = doom_nukem.h
+HEADERS = init.h
 
 # Additions to the compile flags
 CCFLAGS +=
 
 # All source files for test (relative to src/)
 # These will be automaticly prefixed with test_ft_ and sufixed with .c
-SRCS = test
+SRCS = main

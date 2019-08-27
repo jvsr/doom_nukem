@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/27 15:03:27 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/27 15:44:48 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static	void	init_window_surface(t_game *game)
 
 static void		init_game(t_game *game)
 {
-	game->rendering = running;
+	game->state = running;
 }
 
 t_game			*init(void)

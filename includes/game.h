@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/27 15:11:31 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/27 15:37:21 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef	enum	e_state
 
 typedef struct	s_game
 {
-	t_state		rendering;
+	t_state		state;
 	SDL_Window	*window;
 	SDL_Surface	*surface;
 	t_ui		*ui;
