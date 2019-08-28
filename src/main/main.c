@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/27 15:53:47 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/08/29 00:12:56 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ static int	destroy(t_game *game)
 	return (1);
 }
 
+#include "keymap.h"
+
 int			main(void)
 {
 	t_game *game;
 
 	game = init();
-	loop(game);
+	keymapgetname(0);
+//	loop(game);
 	return (destroy(game));
 }
