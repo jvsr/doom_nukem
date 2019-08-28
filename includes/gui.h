@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/28 17:23:38 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/28 17:48:01 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ t_button	*buttoncolournew(t_guiinfo *guiinfo, char *text, t_font *font,
 t_text		*textnew(t_guiinfo *guiinfo, char *text, t_font *font);
 t_image		*imagenew(t_guiinfo *guiinfo, SDL_Surface *texture);
 t_image		*panelnew(t_guiinfo *guiinfo);
+void		buttondestroy(t_button *button);
+void		paneldestroy(t_panel *panel);
+void		textdestroy(t_text *text);
 
 #endif
