@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main
+SUBLIBS = main keymap
 
 # Executibale name
 NAME = doom-nukem
