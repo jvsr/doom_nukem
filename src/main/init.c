@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 14:33:42 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 16:21:50 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static	void	init_window_surface(t_game *game)
 	if (game->window == NULL)
 		error_msg(SDL_GetError(), 1);
 	game->surface = SDL_GetWindowSurface(game->window);
+	game->guisurface = NULL;
+	SDL_BlitSurface(game->surface, NULL, game->guisurface, NULL);
 }
 
 static void		init_game(t_game *game)

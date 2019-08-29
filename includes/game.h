@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/29 14:36:10 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 16:09:20 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_game
 	t_state		state;
 	SDL_Window	*window;
 	SDL_Surface	*surface;
+	SDL_Surface	*guisurface;
 	t_gui		*ui;
 	t_level		*level;
 	t_player	*player;
