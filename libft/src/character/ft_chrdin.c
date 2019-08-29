@@ -12,7 +12,7 @@
 
 #include "ft_character.h"
 
-t_bool		ft_chrdin(char *str, char *dlm)
+t_bool		ft_chrdin(const char *str, const char *dlm)
 {
 	return (ft_chrdindex(str, dlm) != -1);
 }

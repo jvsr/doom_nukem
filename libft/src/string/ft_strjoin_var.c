@@ -32,7 +32,7 @@ char			*ft_strjoin_var(size_t count, ...)
 		i++;
 	}
 	va_end(args);
-	str = ft_strjoin_arr(arr);
+	str = ft_strjoin_arr((const char **)arr);
 	ft_memdel((void **)&arr);
 	return (str);
 }

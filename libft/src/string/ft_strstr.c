@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-char	*ft_strstr(char *str, char *needle)
+char	*ft_strstr(const char *str, const char *needle)
 {
 	size_t	i;
 	size_t	j;
@@ -20,7 +20,7 @@ char	*ft_strstr(char *str, char *needle)
 	i = 0;
 	j = 0;
 	if (needle[j] == '\0')
-		return (str);
+		return ((char *)str);
 	while (str[i] != '\0' && needle[j] != '\0')
 	{
 		if (j > 0 && str[i - j] != needle[0])
@@ -34,6 +34,6 @@ char	*ft_strstr(char *str, char *needle)
 	if (str[i - 1] == needle[j])
 		j++;
 	if (needle[j] == '\0')
-		return (&str[i - j]);
+		return ((char *)&str[i - j]);
 	return (NULL);
 }

@@ -26,5 +26,5 @@ uintmax_t	pf_overflowunsigned(t_info *info)
 		return ((unsigned short)va_arg(info->args, int));
 	if (info->var_type == SIZE_T)
 		return (va_arg(info->args, size_t));
-	return (va_arg(info->args, unsigned int));
+	return (va_arg(info->args, unsigned));
 }

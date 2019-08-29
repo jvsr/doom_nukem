@@ -12,7 +12,7 @@
 
 #include "ft_color.h"
 
-ssize_t		ft_colorcode(char *str)
+ssize_t		ft_colorcode(const char *str)
 {
 	return (ft_colorncode(str, 16));
 }

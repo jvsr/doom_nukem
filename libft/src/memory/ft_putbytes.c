@@ -14,14 +14,14 @@
 #include "ft_character.h"
 #include "ft_string.h"
 
-t_bool		ft_putbytes(void *bytes, size_t n)
+t_bool		ft_putbytes(const void *bytes, size_t n)
 {
-	int		ret;
-	char	*byts;
+	int					ret;
+	const unsigned char	*byts;
 
 	if (bytes == NULL)
 		return (ft_putstr(NULL));
-	byts = (char *)bytes;
+	byts = bytes;
 	while (n > 0)
 	{
 		n--;

@@ -12,12 +12,12 @@
 
 #include "ft_list.h"
 
-t_list	*ft_lstindex(t_list *lst, size_t index)
+t_list	*ft_lstindex(const t_list *lst, size_t index)
 {
 	while (lst != NULL && index > 0)
 	{
 		lst = lst->next;
 		index--;
 	}
-	return (lst);
+	return ((t_list *)lst);
 }

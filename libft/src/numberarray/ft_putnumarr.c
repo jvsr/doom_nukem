@@ -15,7 +15,7 @@
 #include "ft_string.h"
 #include "ft_number.h"
 
-t_bool	ft_putnumarr(intmax_t *arr, size_t len)
+t_bool	ft_putnumarr(const intmax_t *arr, size_t len)
 {
 	size_t	i;
 

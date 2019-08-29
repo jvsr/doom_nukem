@@ -12,7 +12,8 @@
 
 #include "ft_stringarray.h"
 
-void	ft_strarrnsortrev(char **arr, t_bool (*f)(char *, char *), size_t n)
+void	ft_strarrnsortrev(char **arr, t_bool (*f)(const char *, const char *),
+			size_t n)
 {
 	size_t	i;
 	size_t	j;
@@ -23,7 +24,8 @@ void	ft_strarrnsortrev(char **arr, t_bool (*f)(char *, char *), size_t n)
 	{
 		j = i;
 		current = arr[i];
-		while (j > 0 && f(current, arr[j - 1]) == FALSE)
+		while (j > 0 &&
+			f((const char *)current, (const char *)arr[j - 1]) == FALSE)
 		{
 			arr[j] = arr[j - 1];
 			j--;

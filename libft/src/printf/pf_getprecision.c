@@ -14,7 +14,7 @@
 #include "ft_character.h"
 #include "ft_number.h"
 
-size_t		pf_getprecision(t_info *info, char *str)
+size_t		pf_getprecision(t_info *info, const char *str)
 {
 	size_t	i;
 

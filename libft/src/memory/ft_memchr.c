@@ -12,17 +12,19 @@
 
 #include "ft_memory.h"
 
-void	*ft_memchr(void *str, int c, size_t len)
+void	*ft_memchr(const void *str, int c, size_t len)
 {
-	unsigned char	*temp_str;
-	size_t			i;
+	const unsigned char	*temp_str;
+	unsigned char		temp_c;
+	size_t				i;
 
 	i = 0;
-	temp_str = (unsigned char *)str;
+	temp_c = c;
+	temp_str = str;
 	while (i < len)
 	{
-		if (temp_str[i] == (unsigned char)c)
-			return (&temp_str[i]);
+		if (temp_str[i] == temp_c)
+			return ((void *)&temp_str[i]);
 		i++;
 	}
 	return (NULL);

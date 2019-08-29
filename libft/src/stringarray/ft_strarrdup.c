@@ -12,7 +12,7 @@
 
 #include "ft_stringarray.h"
 
-char	**ft_strarrdup(char **arr)
+char	**ft_strarrdup(const char **arr)
 {
 	char	**dup;
 

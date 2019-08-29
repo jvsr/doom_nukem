@@ -15,7 +15,7 @@
 #include "ft_string.h"
 #include "ft_number.h"
 
-static size_t	getrgb(char *str, t_color *rgb)
+static size_t	getrgb(const char *str, t_color *rgb)
 {
 	size_t	i;
 	size_t	totallen;
@@ -63,7 +63,7 @@ static size_t	addcolor(t_info *info, t_bool bck, size_t len, t_color color)
 	return (2 + len + bck);
 }
 
-size_t			pf_formatcolor(t_info *info, char *str)
+size_t			pf_formatcolor(t_info *info, const char *str)
 {
 	t_color	rgb[3];
 	char	*colorstr;

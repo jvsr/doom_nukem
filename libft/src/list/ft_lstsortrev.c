@@ -13,7 +13,7 @@
 #include "ft_list.h"
 
 static t_list	*join(t_list *head, t_list *half,
-	t_bool (*f)(t_list *, t_list *))
+	t_bool (*f)(const t_list *, const t_list *))
 {
 	if (head == NULL)
 		return (half);
@@ -28,7 +28,8 @@ static t_list	*join(t_list *head, t_list *half,
 	return (head);
 }
 
-void			ft_lstsortrev(t_list **head, t_bool (*f)(t_list *, t_list *))
+void			ft_lstsortrev(t_list **head,
+					t_bool (*f)(const t_list *, const t_list *))
 {
 	t_list	*half;
 	t_list	*temp;

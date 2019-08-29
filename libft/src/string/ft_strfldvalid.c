@@ -14,7 +14,7 @@
 #include "ft_character.h"
 #include "ft_stringarray.h"
 
-t_bool	ft_strfldvalid(char **arr, size_t x, size_t y, char *dlm)
+t_bool	ft_strfldvalid(const char **arr, size_t x, size_t y, const char *dlm)
 {
 	long long	bytes[2];
 	size_t		i;

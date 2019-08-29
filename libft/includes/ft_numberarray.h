@@ -18,8 +18,8 @@
 # include <string.h>
 # include <stdint.h>
 
-t_bool		ft_putnumarr(intmax_t *arr, size_t len);
-t_list		*ft_numarrtolst(intmax_t *arr, size_t len);
+t_bool		ft_putnumarr(const intmax_t *arr, size_t len);
+t_list		*ft_numarrtolst(const intmax_t *arr, size_t len);
 t_bool		ft_numarrsortac(intmax_t current, intmax_t num);
 void		ft_numarrsort(intmax_t *arr,
 				t_bool (*f)(intmax_t, intmax_t), size_t len);

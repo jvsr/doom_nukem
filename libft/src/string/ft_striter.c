@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-void	ft_striter(char *str, void (*f)(char *))
+void	ft_striter(const char *str, void (*f)(const char *))
 {
 	size_t	i;
 

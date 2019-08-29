@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_bool	pf_ispositiveint(t_info *info)
+t_bool	pf_ispositiveint(const t_info *info)
 {
 	return (pf_issignint(info) && info->isnegative == FALSE);
 }

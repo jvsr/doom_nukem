@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_bool	pf_iszeropad(t_info *info)
+t_bool	pf_iszeropad(const t_info *info)
 {
 	if (info->precision != -1 && info->var_len != 0 &&
 		info->var_len >= info->precision)

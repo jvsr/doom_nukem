@@ -102,17 +102,17 @@ typedef	struct	s_info
 ** ------------------------------"Face" Functions-------------------------------
 */
 
-ssize_t			ft_printf(char *format, ...);
-ssize_t			ft_dprintf(int fd, char *format, ...);
-char			*ft_strformat(char *format, ...);
-char			*ft_strformat_len(size_t *len, char *format, ...);
+ssize_t			ft_printf(const char *format, ...);
+ssize_t			ft_dprintf(int fd, const char *format, ...);
+char			*ft_strformat(const char *format, ...);
+char			*ft_strformat_len(size_t *len, const char *format, ...);
 
 /*
 ** ----------------------------Distribute Functions-----------------------------
 */
 
-size_t			pf_commands(t_info *info, char *str);
-size_t			pf_distribute(t_info *info, char *start);
+size_t			pf_commands(t_info *info, const char *str);
+size_t			pf_distribute(t_info *info, const char *start);
 void			pf_formatdistribute(t_info *info);
 
 /*
@@ -121,12 +121,12 @@ void			pf_formatdistribute(t_info *info);
 
 t_info			*pf_infonew(void);
 void			pf_infosetdefault(t_info *info);
-size_t			pf_getinfo(t_info *info, char *str);
-size_t			pf_getflag(t_info *info, char *str);
-size_t			pf_getprecision(t_info *info, char *str);
-size_t			pf_getwidth(t_info *info, char *str);
-int				pf_getlength(t_info *info, char *str);
-int				pf_gettype(t_info *info, char *str);
+size_t			pf_getinfo(t_info *info, const char *str);
+size_t			pf_getflag(t_info *info, const char *str);
+size_t			pf_getprecision(t_info *info, const char *str);
+size_t			pf_getwidth(t_info *info, const char *str);
+int				pf_getlength(t_info *info, const char *str);
+int				pf_gettype(t_info *info, const char *str);
 void			pf_setvar_base(t_info *info);
 void			pf_setvar_type(t_info *info);
 
@@ -141,20 +141,20 @@ void			pf_formatnum(t_info *info);
 void			pf_formatpad(t_info *info);
 void			pf_formatstr(t_info *info);
 void			pf_formatunum(t_info *info);
-size_t			pf_formatcolor(t_info *info, char *start);
+size_t			pf_formatcolor(t_info *info, const char *start);
 
 /*
 ** -------------------------Buffer Management Functions-------------------------
 */
 
-t_bool			pf_addtobuff(t_info *info, char *str, size_t len);
-size_t			pf_addstr(t_info *info, char *str);
+t_bool			pf_addtobuff(t_info *info, const char *str, size_t len);
+size_t			pf_addstr(t_info *info, const char *str);
 void			pf_addchar(t_info *info, char c);
-void			pf_addnstr(t_info *info, char *str, size_t n);
+void			pf_addnstr(t_info *info, const char *str, size_t n);
 void			pf_addnum(t_info *info, intmax_t value);
 void			pf_addunum(t_info *info, uintmax_t value, size_t len, int base);
 void			pf_addwchar(t_info *info, t_wchar c);
-void			pf_addwcharstr(t_info *info, t_wchar *str, size_t n);
+void			pf_addwcharstr(t_info *info, const t_wchar *str, size_t n);
 void			pf_addcolor(t_info *info, int color);
 void			pf_addcolorbg(t_info *info, int color);
 void			pf_addrgbcolor(t_info *info, t_color r, t_color g, t_color b);
@@ -164,11 +164,11 @@ void			pf_addrgbcolorbg(t_info *info, t_color r, t_color g, t_color b);
 ** --------------------------------Is Functions---------------------------------
 */
 
-t_bool			pf_ispositiveint(t_info *info);
-t_bool			pf_issignint(t_info *info);
-t_bool			pf_isstr(t_info *info);
-t_bool			pf_isunsignint(t_info *info);
-t_bool			pf_iszeropad(t_info *info);
+t_bool			pf_ispositiveint(const t_info *info);
+t_bool			pf_issignint(const t_info *info);
+t_bool			pf_isstr(const t_info *info);
+t_bool			pf_isunsignint(const t_info *info);
+t_bool			pf_iszeropad(const t_info *info);
 
 /*
 ** -----------------------------Overflow Functions------------------------------

@@ -14,7 +14,7 @@
 #include "ft_string.h"
 #include "ft_number.h"
 
-t_bool	ft_putpointer(void *pointer)
+t_bool	ft_putpointer(const void *pointer)
 {
 	if (ft_putstr("0x") == FALSE)
 		return (FALSE);

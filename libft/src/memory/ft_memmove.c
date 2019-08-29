@@ -12,7 +12,7 @@
 
 #include "ft_memory.h"
 
-void	*ft_memmove(void *dst, void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	if ((size_t)dst - (size_t)src >= len)
 		ft_memcpy(dst, src, len);

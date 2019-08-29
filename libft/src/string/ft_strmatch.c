@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-t_bool	ft_strmatch(char *str, char *needle)
+t_bool	ft_strmatch(const char *str, const char *needle)
 {
 	if (needle[0] == '\0' && str[0] == '\0')
 		return (TRUE);

@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "ft_hash.h"
-#include "ft_string.h"
+#include <stdlib.h>
 
-void	ft_hashmapdelone(t_hashmap *map, char *key, void (*del)(void *))
+void	ft_hashmapdelone(const t_hashmap *map, const void *key, size_t keysize,
+			void (*del)(void *))
 {
 	t_hashlist	*current;
 	t_hashlist	*prv;
@@ -22,7 +23,7 @@ void	ft_hashmapdelone(t_hashmap *map, char *key, void (*del)(void *))
 	prv = NULL;
 	index = map->f(key) % map->size;
 	current = map->arr[index];
-	while (current != NULL && ft_strequ(current->key, key) == FALSE)
+	while (current != NULL && hs_keyequ(current, key, keysize) == FALSE)
 	{
 		prv = current;
 		current = current->next;

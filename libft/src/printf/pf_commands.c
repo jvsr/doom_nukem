@@ -14,7 +14,7 @@
 #include "ft_character.h"
 #include "ft_string.h"
 
-size_t		pf_commands(t_info *info, char *str)
+size_t		pf_commands(t_info *info, const char *str)
 {
 	size_t	len;
 

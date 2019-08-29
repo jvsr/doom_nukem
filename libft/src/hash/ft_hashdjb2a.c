@@ -12,13 +12,15 @@
 
 #include "ft_hash.h"
 
-size_t	ft_hashdjb2a(char *str)
+size_t	ft_hashdjb2a(const void *key)
 {
-	size_t	hash;
-	size_t	i;
+	const char	*str;
+	size_t		hash;
+	size_t		i;
 
 	i = 0;
 	hash = 5381;
+	str = key;
 	while (str[i] != '\0')
 	{
 		hash = str[i] ^ (hash * 33);

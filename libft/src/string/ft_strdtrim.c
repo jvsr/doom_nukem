@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-char	*ft_strdtrim(char *str, char *dlm)
+char	*ft_strdtrim(const char *str, const char *dlm)
 {
 	char		*ret;
 	long long	bytes[2];

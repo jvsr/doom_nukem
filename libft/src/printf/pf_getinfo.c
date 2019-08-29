@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include "ft_character.h"
 
-static int	checkinfo(t_info *info, char *str)
+static int	checkinfo(t_info *info, const char *str)
 {
 	if (ft_chrin(PF_A_FLAG, *str) || ft_chrin(PF_A_SPACER, *str))
 		return (pf_getflag(info, str));
@@ -29,7 +29,7 @@ static int	checkinfo(t_info *info, char *str)
 	return (0);
 }
 
-size_t		pf_getinfo(t_info *info, char *str)
+size_t		pf_getinfo(t_info *info, const char *str)
 {
 	int		ret;
 	size_t	i;

@@ -12,11 +12,11 @@
 
 #include "ft_memory.h"
 
-int		ft_memcmp(void *str1, void *str2, size_t len)
+int		ft_memcmp(const void *str1, const void *str2, size_t len)
 {
-	size_t			i;
-	unsigned char	*temp_str1;
-	unsigned char	*temp_str2;
+	size_t				i;
+	const unsigned char	*temp_str1;
+	const unsigned char	*temp_str2;
 
 	i = 0;
 	temp_str1 = str1;

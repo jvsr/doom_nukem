@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-char		**ft_strsplit(char *str, char c)
+char		**ft_strsplit(const char *str, char c)
 {
 	char	**arr;
 	char	*cs;

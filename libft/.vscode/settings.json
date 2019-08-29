@@ -1,0 +1,15 @@
+{
+	"files.associations": {
+		"*.h": "c",
+		"Makefile*": "makefile",
+		"__functional_base": "c",
+		"__locale": "c",
+		"bitset": "c",
+		"functional": "c",
+		"memory": "c",
+		"string": "c",
+		"system_error": "c",
+		"vector": "c",
+		"sstream": "c"
+	}
+}

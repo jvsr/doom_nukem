@@ -15,9 +15,9 @@
 
 void	*ft_memalloc(size_t size)
 {
-	char	*ap;
+	unsigned char	*ap;
 
-	ap = (char *)malloc(size);
+	ap = (unsigned char *)malloc(size);
 	if (ap == NULL)
 		return (NULL);
 	ft_memset(ap, 0, size);
