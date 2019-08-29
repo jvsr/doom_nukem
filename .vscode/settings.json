@@ -6,6 +6,10 @@
         "libft.h": "c",
         "init.h": "c",
         "locale": "c",
-        "string": "c"
+        "string": "c",
+        "time.h": "c",
+        "coord.h": "c",
+        "color.h": "c",
+        "Makefile*": "makefile"
     }
 }
