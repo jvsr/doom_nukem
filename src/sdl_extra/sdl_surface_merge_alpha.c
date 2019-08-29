@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_surface_merge.c                                :+:    :+:            */
+/*   sdl_surface_merge_alpha.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/28 19:12:11 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/08/29 13:48:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,13 @@
 #include "coord.h"
 #include "color.h"
 
-static void	rgba_to_color(t_color *c, int color)
-{
-	c->a = (unsigned char)(color >> 24);
-	c->r = (unsigned char)(color >> 16);
-	c->g = (unsigned char)(color >> 8);
-	c->b = (unsigned char)(color);
-}
-
-static void	color_to_rgba(int *color, t_color c)
-{
-	*color = 0;
-	*color = (c.a << 24) | *color;
-	*color = (c.r << 16) | *color;
-	*color = (c.g << 8) | *color;
-	*color = (c.b) | *color;
-}
+/*
+** * Surface merge will take two surfaces and a starting pixel.
+** * The starting pixel represents the top left corner of the src surface.
+** * It will then copy the src surface directly into the dst surface.
+** * It does not take an Alpha stat into account,
+** * this function considers the Alpha to be 255
+*/
 
 static void	merge_pixels(int *dst, int *src)
 {

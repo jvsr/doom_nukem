@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/28 19:18:13 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/08/29 13:54:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,18 @@
 #include "coord.h"
 #include "color.h"
 
+/*
+** * Surface merge will take two surfaces and a starting pixel.
+** * The starting pixel represents the top left corner of the src surface.
+** * It will then copy the src surface directly into the dst surface.
+** * It does not take an Alpha stat into account,
+** * this function considers the Alpha to be 255
+*/
+
 void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src,
 									t_pixel start)
 {
+	int		len;
 	t_pixel	cur;
 
 	cur.y = 0;
@@ -29,19 +38,13 @@ void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src,
 			break ;
 		else if (start.y + cur.y >= 0)
 		{
-			cur.x = 0;
-			while (cur.x < src->w)
-			{
-				if (start.x + cur.x > dst->w - 1)
-					break ;
-				else if (start.x + cur.x >= 0)
-				{
-					ft_memcpy(dst->pixels + ((start.y + cur.y) * dst->w
-						+ start.x + cur.x) * 4, src->pixels + ((cur.y * src->w)
-						+ cur.x) * 4, sizeof(int));
-				}
-				cur.x++;
-			}
+			len = src->w;
+			if (start.x + len > dst->w)
+				len -= start.x + len - dst->w;
+			ft_memcpy(
+				dst->pixels + ((start.y + cur.y) * dst->w + start.x) * 4,
+				src->pixels + cur.y * src->w * 4,
+				len * 4);
 		}
 		cur.y++;
 	}
