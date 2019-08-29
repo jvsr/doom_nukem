@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 14:16:59 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 14:33:42 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static	void	init_window_surface(t_game *game)
 		SDL_WINDOW_MOUSE_FOCUS);
 	if (game->window == NULL)
 		error_msg(SDL_GetError(), 1);
+	game->surface = SDL_GetWindowSurface(game->window);
 }
 
 static void		init_game(t_game *game)
