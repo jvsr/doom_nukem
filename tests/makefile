@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/26 17:27:13 by pholster      ########   odam.nl          #
+#    Updated: 2019/08/27 15:55:28 by jvisser       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ HEADERS := $(sort $(HEADERS))
 SRCS := $(SRCS:%=src/test_ft_%.c)
 SRCS := $(sort $(SRCS))
 TESTOBJS = $(SRCS:.c=.o)
+LIBOBJS = $(filter-out ../src/main/main.o, $(OBJS))
 
 # Trash files
 TEMPS = $(SRCS:.c=.c~)
@@ -63,7 +64,7 @@ all: $(NAME)
 # Create $(NAME)
 $(NAME): $(TESTOBJS) $(LIB)
 	@$(call FNC_PRINT_EQUAL,$(PARENTNAME)-$(NAME),$(NAME))
-	@$(CC) -coverage $(CCFLAGS) -o $(NAME) $(TESTOBJS) $(OBJS) $(LIBS)
+	@$(CC) -coverage $(CCFLAGS) -o $(NAME) $(TESTOBJS) $(LIBOBJS) $(LIBS)
 	#-Wl,-alias,_wrap_malloc,_malloc -Wl,-alias,_wrap_free,_free
 
 # Compile .o

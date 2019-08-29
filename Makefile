@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/29 14:04:43 by ehollidg      ########   odam.nl          #
+#    Updated: 2019/08/29 14:16:49 by ehollidg      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ $(NAME): $(LIB) $(SUBLIBS)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIB) $(SDL2LIB) $(SDL2TTF)
 
 # Run test and gcov if $(GCOV)==TRUE
-test: $(NAME) FORCE
+test: $(LIB) $(SUBLIBS) FORCE
 ifeq ($(wildcard $(TESTPATH)),)
 	@echo "Error: $(TESTPATH) not present"
 else
