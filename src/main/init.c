@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/27 15:03:27 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 14:03:14 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "game.h"
 #include "init.h"
 #include "error.h"
+#include "gui.h"
 
 static void		init_sdl(void)
 {
@@ -54,6 +55,7 @@ t_game			*init(void)
 	t_game *game;
 
 	init_sdl();
+	TTF_Init();
 	game = alloc_game();
 	init_window_surface(game);
 	init_game(game);

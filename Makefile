@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/28 16:18:21 by ehollidg      ########   odam.nl          #
+#    Updated: 2019/08/29 14:04:43 by ehollidg      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,9 @@ FRAMEWORKINCLUDES = $(FRAMEWORKPATH)/include
 # SDL2 dependency
 SDL2LIB = -L$(FRAMEWORKPATH)/lib -lSDL2
 
+# SDL2_TTf dependency
+SDL2TTF = -L$(FRAMEWORKPATH)/lib -lSDL2_TTF
+
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
@@ -87,6 +90,7 @@ export PARENTNAME
 export FRAMEWORKPATH
 export FRAMEWORKINCLUDES
 export SDL2LIB
+export SDL2TTF
 export LIBFT_DISABLE_GCOV
 
 all: $(NAME)
@@ -95,7 +99,7 @@ all: $(NAME)
 $(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -coverage -o $(NAME) $(OBJS) $(LIB) $(SDL2LIB)
+	@gcc -coverage -o $(NAME) $(OBJS) $(LIB) $(SDL2LIB) $(SDL2TTF)
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(NAME) FORCE

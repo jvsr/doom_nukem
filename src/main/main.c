@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/27 17:08:49 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 14:02:46 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	destroy(t_game *game)
 {
 	SDL_DestroyWindow(game->window);
 	SDL_Quit();
+	TTF_Quit();
 	return (1);
 }
 

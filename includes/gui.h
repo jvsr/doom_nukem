@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/29 12:13:53 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 14:01:18 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "libft/ft_bool.h"
 #include "coord.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "libft/ft_list.h"
 #include "game.h"
 
