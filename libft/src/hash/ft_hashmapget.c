@@ -17,7 +17,7 @@ void	*ft_hashmapget(const t_hashmap *map, const void *key, size_t keysize)
 	t_hashlist	*current;
 	size_t		index;
 
-	index = map->f(key) % map->size;
+	index = map->f(key, keysize) % map->size;
 	current = map->arr[index];
 	while (current != NULL && hs_keyequ(current, key, keysize) == FALSE)
 		current = current->next;

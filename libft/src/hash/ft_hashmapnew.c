@@ -13,7 +13,7 @@
 #include "ft_hash.h"
 #include "ft_memory.h"
 
-t_hashmap		*ft_hashmapnew(size_t size, size_t (*f)(const void *))
+t_hashmap		*ft_hashmapnew(size_t size, size_t (*f)(const void *, size_t))
 {
 	t_hashmap	*new;
 

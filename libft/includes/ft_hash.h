@@ -28,16 +28,16 @@ typedef struct	s_hashmap
 {
 	size_t				size;
 	t_hashlist			**arr;
-	size_t				(*f)(const void *);
+	size_t				(*f)(const void *, size_t);
 }				t_hashmap;
 
-t_hashmap		*ft_hashmapnew(size_t size, size_t (*f)(const void *));
-size_t			ft_hashsdbm(const void *key);
-size_t			ft_hashdjb2(const void *key);
-size_t			ft_hashdjb2a(const void *key);
-size_t			ft_hashsdbm_nocase(const void *key);
-size_t			ft_hashdjb2_nocase(const void *key);
-size_t			ft_hashdjb2a_nocase(const void *key);
+t_hashmap		*ft_hashmapnew(size_t size, size_t (*f)(const void *, size_t));
+size_t			ft_hashsdbm(const void *key, size_t size);
+size_t			ft_hashdjb2(const void *key, size_t size);
+size_t			ft_hashdjb2a(const void *key, size_t size);
+size_t			ft_hashsdbm_nocase(const void *key, size_t size);
+size_t			ft_hashdjb2_nocase(const void *key, size_t size);
+size_t			ft_hashdjb2a_nocase(const void *key, size_t size);
 void			ft_hashmapdel(t_hashmap *map, void (*del)(void *));
 void			*ft_hashmapget_str(const t_hashmap *map, const char *key);
 t_bool			ft_hashmapadd_str(const t_hashmap *map, const char *key,

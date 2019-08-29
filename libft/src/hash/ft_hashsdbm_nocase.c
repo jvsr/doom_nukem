@@ -13,7 +13,7 @@
 #include "ft_hash.h"
 #include "ft_character.h"
 
-size_t	ft_hashsdbm_nocase(const void *key)
+size_t	ft_hashsdbm_nocase(const void *key, size_t size)
 {
 	const char	*str;
 	size_t		hash;
@@ -22,7 +22,7 @@ size_t	ft_hashsdbm_nocase(const void *key)
 	i = 0;
 	hash = 0;
 	str = key;
-	while (str[i] != '\0')
+	while (i < size)
 	{
 		hash = ft_tolower(str[i]) + (hash << 6) + (hash << 16) - hash;
 		i++;

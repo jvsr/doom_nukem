@@ -39,7 +39,7 @@ t_bool				ft_hashmapadd(const t_hashmap *map, const void *key,
 	t_hashlist	*current;
 	size_t		index;
 
-	index = map->f(key) % map->size;
+	index = map->f(key, keysize) % map->size;
 	current = map->arr[index];
 	if (current == NULL)
 	{
