@@ -22,4 +22,5 @@ FT_SRCS =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = buttondestroy imagedestroy paneldestroy textdestroy buttoncolournew \
-	buttontexturenew imagenew panelnew textnew transformparentset
+	buttontexturenew imagenew panelnew textnew transformparentset \
+	childrendestroy

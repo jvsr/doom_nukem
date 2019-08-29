@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 11:11:02 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/29 11:33:00 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 13:22:41 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include "libft/ft_list.h"
 #include "libft/ft_string.h"
 
-void		deletegui(t_transform *transform)
+void		deletegui(t_transform *transform, const t_bool destroychildren)
 {
 	if (transform->guitype == BUTTON)
-		buttondestroy((t_button*)transform->guielem, TRUE);
+		buttondestroy((t_button*)transform->guielem, destroychildren);
 	else if (transform->guitype == PANEL)
-		paneldestroy((t_panel*)transform->guielem, TRUE);
+		paneldestroy((t_panel*)transform->guielem, destroychildren);
 	else if (transform->guitype == TEXT)
-		textdestroy((t_text*)transform->guielem, TRUE);
+		textdestroy((t_text*)transform->guielem, destroychildren);
 	else if (transform->guitype == IMAGE)
-		imagedestroy((t_image*)transform->guielem, TRUE);
+		imagedestroy((t_image*)transform->guielem, destroychildren);
 }
 
 void		childrendestroy(t_list *children, const t_bool destroychildren)
@@ -34,7 +34,7 @@ void		childrendestroy(t_list *children, const t_bool destroychildren)
 		return ;
 	while (children != NULL)
 	{
-		deletegui((t_transform*)children->content);
+		deletegui((t_transform*)children->content, destroychildren);
 		ft_strdel(&((t_transform*)children->content)->name);
 		lst = children->next;
 		free(children);
