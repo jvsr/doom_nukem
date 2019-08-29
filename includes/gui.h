@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/29 11:41:44 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/08/29 12:13:53 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 #include "libft/ft_bool.h"
 #include "coord.h"
-#include <SDL/SDL_ttf.h>
 #include <SDL2/SDL.h>
 #include "libft/ft_list.h"
 #include "game.h"
+
+typedef struct s_transform t_transform;
 
 typedef	enum	e_fonttype
 {
@@ -64,7 +65,7 @@ typedef struct	s_buttton
 	t_font			font;
 	t_coord			size;
 	SDL_Surface		*texture;
-	void			(*onclick)(t_game *, t_button *);
+	void			(*onclick)(t_game *, struct s_buttton *);
 }				t_button;
 
 typedef struct	s_image
@@ -88,18 +89,18 @@ typedef struct	s_guiinfo
 	t_coord		size;
 }				t_guiinfo;
 
-t_button	*buttontexturenew(const t_guiinfo *guiinfo, const char *text,
-			const t_font *font, const SDL_Surface *texture);
-t_button	*buttoncolournew(const t_guiinfo *guiinfo, const char *text, 
-			const t_font *font, const unsigned int colour);
-t_text		*textnew(const t_guiinfo *guiinfo, const char *text,
-			const t_font *font);
-t_image		*imagenew(const t_guiinfo *guiinfo, const SDL_Surface *texture);
-t_image		*panelnew(const t_guiinfo *guiinfo);
+t_button	*buttontexturenew(t_guiinfo *guiinfo, char *text,
+			t_font *font, const SDL_Surface *texture);
+t_button	*buttoncolournew(t_guiinfo *guiinfo, char *text, t_font *font,
+			 const unsigned int colour);
+t_text		*textnew(t_guiinfo *guiinfo, char *text, t_font *font);
+t_image		*imagenew(t_guiinfo *guiinfo, const SDL_Surface *texture);
+t_panel		*panelnew(t_guiinfo *guiinfo);
 void		buttondestroy(t_button *button, const t_bool destroychildren);
 void		paneldestroy(t_panel *panel, const t_bool destroychildren);
 void		textdestroy(t_text *text, const t_bool destroychildren);
 void		imagedestroy(t_image *image, const t_bool destroychildren);
 void		childrendestroy(t_list *children, const t_bool destroychildren);
+void		transformparentset(t_transform *child, t_transform *parent);
 
 #endif
