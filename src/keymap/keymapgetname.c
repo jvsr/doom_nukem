@@ -15,11 +15,9 @@
 const t_keypair	g_keytable[] = {
 	(const t_keypair){NULL, SDLK_UNKNOWN},
 
-/*
-**	(const t_keypair){"BUTTON_LEFT", SDL_BUTTON_LEFT},
-**	(const t_keypair){"BUTTON_RIGHT", SDL_BUTTON_RIGHT},
-**	(const t_keypair){"BUTTON_MIDDLE", SDL_BUTTON_MIDDLE},
-*/
+	(const t_keypair){"BUTTON_LEFT", SDL_BUTTON_LEFT},
+	(const t_keypair){"BUTTON_RIGHT", SDL_BUTTON_RIGHT},
+	(const t_keypair){"BUTTON_MIDDLE", SDL_BUTTON_MIDDLE},
 
 	(const t_keypair){"RETURN", SDLK_RETURN},
 	(const t_keypair){"ESCAPE", SDLK_ESCAPE},
@@ -267,22 +265,22 @@ const t_keypair	g_keytable[] = {
 static void	duplicatecheck(void)
 {
 	const size_t	size = sizeof(g_keytable) / sizeof(const t_keypair);
-	size_t			j;
+	//size_t			j;
 	size_t			i;
 
 	i = 0;
 	while (i < size)
 	{
 		//ft_printf("%s: %zu\n", g_keytable[i].name, g_keytable[i].key);
-		j = i + 1;
-		while (j < size)
-		{
-			if (g_keytable[i].key == g_keytable[j].key)
-				ft_printf("Duplicate key found at: %s - %s\n", g_keytable[i].name, g_keytable[j].name);
-			j++;
-		}
-		if (g_keytable[i].key == 0)
-			ft_printf("Found zero value at: %s\n", g_keytable[i].name);
+		// j = i + 1;
+		// while (j < size)
+		// {
+		// 	if (g_keytable[i].key == g_keytable[j].key)
+		// 		ft_printf("Duplicate key found at: %s - %s\n", g_keytable[i].name, g_keytable[j].name);
+		// 	j++;
+		// }
+		// if (g_keytable[i].key == 0)
+		// 	ft_printf("Found zero value at: %s\n", g_keytable[i].name);
 		i++;
 	}
 }

@@ -14,21 +14,21 @@
 #include "game.h"
 #include "init.h"
 
-static int	destroy(t_game *game)
-{
-	SDL_DestroyWindow(game->window);
-	SDL_Quit();
-	return (1);
-}
+// static int	destroy(t_game *game)
+// {
+// 	SDL_DestroyWindow(game->window);
+// 	SDL_Quit();
+// 	return (1);
+// }
 
 #include "keymap.h"
 
 int			main(void)
 {
-	t_game *game;
+	// t_game *game;
 
-	game = init();
+	// game = init();
 	keymapgetname(0);
-//	loop(game);
-	return (destroy(game));
+	// loop(game);
+	return (0); //destroy(game)
 }
