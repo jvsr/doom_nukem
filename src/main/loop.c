@@ -12,22 +12,48 @@
 
 #include "game.h"
 
-static void		polled(t_game *game, SDL_Event *event)
+#include "keymap.h"
+
+static void		checkquit(t_game *game, SDL_Event event)
 {
-	if (event->type == SDL_QUIT)
+	if (event.type == SDL_QUIT)
 		game->state = stopped;
-	else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_ESCAPE)
+	else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		game->state = stopped;
+}
+
+static void		keymap(t_game *game, SDL_Event event)
+{
+	if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+		keymaptoggle(game->keymap, event.key.keysym.sym, TRUE);
+	else if (event.type == SDL_KEYUP && event.key.repeat == 0)
+		keymaptoggle(game->keymap, event.key.keysym.sym, FALSE);
+	else if (event.type == SDL_MOUSEBUTTONDOWN)
+		keymaptoggle(game->keymap, event.button.button, TRUE);
+	else if (event.type == SDL_MOUSEBUTTONUP)
+		keymaptoggle(game->keymap, event.button.button, FALSE);
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
+		keymapprint(game->keymap);
 }
 
 void			loop(t_game *game)
 {
 	SDL_Event event;
 
+	keymapprint(game->keymap);
+	keymaptoggle(game->keymap, SDLK_SPACE, TRUE);
+	keymapprint(game->keymap);
+	keymaptoggle(game->keymap, SDLK_SPACE, FALSE);
+	keymapprint(game->keymap);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
-			polled(game, &event);
+		{
+			checkquit(game, event);
+			//keymap(game, event);
+		}
+		SDL_Delay(100);
+		//keymapprint(game->keymap);
 		SDL_UpdateWindowSurface(game->window);
 	}
 }

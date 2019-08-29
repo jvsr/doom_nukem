@@ -1,9 +1,14 @@
 {
     "files.associations": {
-        "sdl.h": "c",
-        "error.h": "c",
-        "game.h": "c",
-        "libft.h": "c",
-        "init.h": "c"
-    }
+		"*.h": "c",
+		"Makefile*": "makefile",
+		"sdl.h": "c",
+		"error.h": "c",
+		"game.h": "c",
+		"libft.h": "c",
+		"init.h": "c",
+		"iterator": "c",
+		"locale": "c",
+		"string": "c"
+	}
 }

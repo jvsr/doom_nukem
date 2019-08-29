@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keymapgetname.c                                    :+:    :+:            */
+/*   keymapprint.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/28 17:15:14 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/29 00:18:37 by pholster      ########   odam.nl         */
+/*   Created: 2019/08/29 15:53:13 by pholster       #+#    #+#                */
+/*   Updated: 2019/08/29 15:53:13 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keymap.h"
+#include "libft/ft_string.h"
+#include "libft/ft_printf.h"
+#include "libft/ft_hash.h"
 
 const t_keypair	g_keytable[] = {
 	(const t_keypair){NULL, SDLK_UNKNOWN},
@@ -260,35 +263,47 @@ const t_keypair	g_keytable[] = {
 	(const t_keypair){"AUDIOFASTFORWARD", SDLK_AUDIOFASTFORWARD}
 };
 
-#include "libft/ft_printf.h"
-
-static void	duplicatecheck(void)
+const char	*getname(void *key)
 {
-	const size_t	size = sizeof(g_keytable) / sizeof(const t_keypair);
-	//size_t			j;
-	size_t			i;
+	size_t		i;
+	size_t		size;
+	SDL_Keycode	*sdlk;
 
 	i = 0;
+	sdlk = key;
+	size = sizeof(g_keytable) / sizeof(t_keypair);
 	while (i < size)
 	{
-		//ft_printf("%s: %zu\n", g_keytable[i].name, g_keytable[i].key);
-		// j = i + 1;
-		// while (j < size)
-		// {
-		// 	if (g_keytable[i].key == g_keytable[j].key)
-		// 		ft_printf("Duplicate key found at: %s - %s\n", g_keytable[i].name, g_keytable[j].name);
-		// 	j++;
-		// }
-		// if (g_keytable[i].key == 0)
-		// 	ft_printf("Found zero value at: %s\n", g_keytable[i].name);
+		if (g_keytable[i].key == *sdlk)
+			return (g_keytable[i].name);
 		i++;
 	}
+	return (NULL);
 }
 
-const char	*keymapgetname(SDL_Keycode key)
+t_bool		keymapprint(const t_hashmap *keymap)
 {
-	(void)key;
-	duplicatecheck();
-	ft_printf("sizeof: %zu\n", sizeof(SDL_Keycode));
-	return (NULL);
+	size_t		i;
+	t_hashlist	*current;
+	const char	*name;
+	t_keystate	value;
+
+	i = 0;
+	ft_putline(" Keymap ");
+	while (i < keymap->size)
+	{
+		current = keymap->arr[i];
+		while (current != NULL)
+		{
+			name = getname(current->key);
+			value = *((t_keystate *)current->value);
+			ft_printf("Name: %s - held: %d toggled: %d\n", name,
+				(value & KEY_HELDDOWN) == KEY_HELDDOWN,
+				(value & KEY_TOGGLED) == KEY_TOGGLED);
+			current = current->next;
+		}
+		i++;
+	}
+	ft_putline("");
+	return (TRUE);
 }
