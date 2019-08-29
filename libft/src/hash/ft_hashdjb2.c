@@ -12,16 +12,16 @@
 
 #include "ft_hash.h"
 
-size_t	ft_hashdjb2(const void *key)
+size_t	ft_hashdjb2(const void *key, size_t size)
 {
 	const char	*str;
-	size_t	hash;
-	size_t	i;
+	size_t		hash;
+	size_t		i;
 
 	i = 0;
 	hash = 5381;
 	str = key;
-	while (str[i] != '\0')
+	while (i < size)
 	{
 		hash = str[i] + (hash * 33);
 		i++;
