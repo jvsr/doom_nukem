@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include <unistd.h>
 
-t_bool	ft_putnstr_fd(char *str, size_t n, int fd)
+t_bool	ft_putnstr_fd(const char *str, size_t n, int fd)
 {
 	if (str == NULL)
 		return (write(fd, "(null)", n) != -1);

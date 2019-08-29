@@ -19,7 +19,7 @@ static void	handleconflicts(t_info *info)
 	PF_FLAG_ZERO = (PF_FLAG_MIN == FALSE && PF_FLAG_ZERO);
 }
 
-size_t		pf_getflag(t_info *info, char *str)
+size_t		pf_getflag(t_info *info, const char *str)
 {
 	size_t	i;
 	t_bool	spacer;

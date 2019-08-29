@@ -26,7 +26,7 @@ static int	length(int c)
 	return (-1);
 }
 
-int			pf_getlength(t_info *info, char *str)
+int			pf_getlength(t_info *info, const char *str)
 {
 	if (ft_chrin(PF_A_LENGTH_D, info->length) && *str == info->length)
 		info->length += *str;

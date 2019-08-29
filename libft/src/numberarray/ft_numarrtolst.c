@@ -20,7 +20,7 @@ static t_list	*freeret(t_list **lst)
 	return (NULL);
 }
 
-t_list			*ft_numarrtolst(intmax_t *arr, size_t len)
+t_list			*ft_numarrtolst(const intmax_t *arr, size_t len)
 {
 	t_list		*returnlst;
 	t_list		*prvlst;

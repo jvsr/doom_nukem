@@ -12,7 +12,7 @@
 
 #include "ft_stringarray.h"
 
-size_t	ft_strarrlen(char **arr)
+size_t	ft_strarrlen(const char **arr)
 {
 	size_t	len;
 

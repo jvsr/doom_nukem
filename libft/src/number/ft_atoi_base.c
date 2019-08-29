@@ -14,7 +14,7 @@
 #include "ft_character.h"
 #include "ft_string.h"
 
-intmax_t		ft_atoi_base(char *str, int base)
+intmax_t		ft_atoi_base(const char *str, int base)
 {
 	char		*base_str;
 	uintmax_t	result;

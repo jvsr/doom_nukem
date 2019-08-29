@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_memory.h"
 
-static size_t	totallen(char **arr)
+static size_t	totallen(const char **arr)
 {
 	size_t	len;
 	size_t	i;
@@ -28,7 +28,7 @@ static size_t	totallen(char **arr)
 	return (len + 1);
 }
 
-static char		*joinstrs(char *str, char **arr)
+static char		*joinstrs(char *str, const char **arr)
 {
 	size_t	i;
 	size_t	j;
@@ -47,7 +47,7 @@ static char		*joinstrs(char *str, char **arr)
 	return (str);
 }
 
-char			*ft_strjoin_arr(char **arr)
+char			*ft_strjoin_arr(const char **arr)
 {
 	char	*str;
 

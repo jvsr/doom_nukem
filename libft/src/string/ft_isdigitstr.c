@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-t_bool		ft_isdigitstr(char *str)
+t_bool		ft_isdigitstr(const char *str)
 {
 	size_t	len;
 

@@ -29,7 +29,7 @@ static t_bool	putbit(unsigned char c, int size)
 	return (ft_putchar(base_str[c % 16]));
 }
 
-static t_bool	putcontent(unsigned char *content, size_t size)
+static t_bool	putcontent(const unsigned char *content, size_t size)
 {
 	size_t	i;
 
@@ -51,7 +51,7 @@ static t_bool	putcontent(unsigned char *content, size_t size)
 	return (ft_putchar('\n'));
 }
 
-static t_bool	putreport(unsigned char *mem, size_t i)
+static t_bool	putreport(const unsigned char *mem, size_t i)
 {
 	size_t		printed;
 
@@ -71,13 +71,13 @@ static t_bool	putreport(unsigned char *mem, size_t i)
 	return (putcontent(&mem[i - printed + (i % 2)], printed - (i % 2)));
 }
 
-t_bool			ft_putmemory(void *addr, size_t size)
+t_bool			ft_putmemory(const void *addr, size_t size)
 {
-	unsigned char	*mem;
-	size_t			i;
+	const unsigned char	*mem;
+	size_t				i;
 
 	i = 0;
-	mem = (unsigned char *)addr;
+	mem = addr;
 	if (addr == NULL)
 		return (ft_putstr(NULL));
 	while (i < size)

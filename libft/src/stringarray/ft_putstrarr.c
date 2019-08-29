@@ -13,7 +13,7 @@
 #include "ft_stringarray.h"
 #include "ft_string.h"
 
-t_bool	ft_putstrarr(char **arr)
+t_bool	ft_putstrarr(const char **arr)
 {
 	size_t	i;
 

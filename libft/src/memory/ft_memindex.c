@@ -12,9 +12,9 @@
 
 #include "ft_memory.h"
 
-ssize_t	ft_memindex(void *str, int c, size_t len)
+ssize_t	ft_memindex(const void *str, int c, size_t len)
 {
-	char	*ptr;
+	const unsigned char	*ptr;
 
 	ptr = ft_memchr(str, c, len);
 	if (ptr == NULL)

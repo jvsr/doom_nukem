@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_bool	pf_isunsignint(t_info *info)
+t_bool	pf_isunsignint(const t_info *info)
 {
 	if (info->var_type == U_INT || info->var_type == U_SHORT)
 		return (TRUE);

@@ -12,7 +12,8 @@
 
 #include "ft_number.h"
 
-float	ft_normalize(intmax_t value, intmax_t *range, intmax_t *outrange)
+float	ft_normalize(intmax_t value, const intmax_t *range,
+			const intmax_t *outrange)
 {
 	intmax_t	rangemin;
 	intmax_t	rangemax;

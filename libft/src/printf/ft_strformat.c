@@ -59,7 +59,7 @@ static char		*freeret(t_info *info)
 	return (str);
 }
 
-char			*ft_strformat(char *format, ...)
+char			*ft_strformat(const char *format, ...)
 {
 	size_t	i;
 	t_info	*info;

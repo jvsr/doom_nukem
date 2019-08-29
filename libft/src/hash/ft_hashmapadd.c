@@ -12,28 +12,29 @@
 
 #include "ft_hash.h"
 #include "ft_memory.h"
-#include "ft_string.h"
 
-static t_hashlist	*newlst(char *key, void *value)
+static t_hashlist	*newlst(const void *key, size_t keysize, void *value)
 {
-	char		*key_dup;
+	void		*key_dup;
 	t_hashlist	*new;
 
-	key_dup = ft_strdup(key);
+	key_dup = ft_memdup(key, keysize);
 	if (key_dup == NULL)
 		return (NULL);
 	new = (t_hashlist *)ft_memalloc(sizeof(t_hashlist));
 	if (new == NULL)
 	{
-		ft_strdel(&key_dup);
+		ft_memdel(&key_dup);
 		return (NULL);
 	}
 	new->key = key_dup;
 	new->value = value;
+	new->keysize = keysize;
 	return (new);
 }
 
-t_bool				ft_hashmapadd(t_hashmap *map, char *key, void *value)
+t_bool				ft_hashmapadd(const t_hashmap *map, const void *key,
+						size_t keysize, void *value)
 {
 	t_hashlist	*current;
 	size_t		index;
@@ -42,16 +43,16 @@ t_bool				ft_hashmapadd(t_hashmap *map, char *key, void *value)
 	current = map->arr[index];
 	if (current == NULL)
 	{
-		map->arr[index] = newlst(key, value);
+		map->arr[index] = newlst(key, keysize, value);
 		return (map->arr[index] != NULL);
 	}
-	while (current->next != NULL && ft_strequ(current->key, key) == FALSE)
+	while (current->next != NULL && hs_keyequ(current, key, keysize) == FALSE)
 		current = current->next;
-	if (ft_strequ(current->key, key) == TRUE)
+	if (hs_keyequ(current, key, keysize) == TRUE)
 	{
 		current->value = value;
 		return (TRUE);
 	}
-	current->next = newlst(key, value);
+	current->next = newlst(key, keysize, value);
 	return (current->next != NULL);
 }

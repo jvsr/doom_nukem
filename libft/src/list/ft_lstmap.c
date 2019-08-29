@@ -28,7 +28,7 @@ static t_list	*list_set(t_list *elem)
 	return (new);
 }
 
-t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list			*ft_lstmap(const t_list *lst, t_list *(*f)(const t_list *elem))
 {
 	t_list	*current;
 	t_list	*retlst;

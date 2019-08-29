@@ -12,7 +12,7 @@
 
 #include "ft_threadpool.h"
 
-void		ft_pooljoin(t_pool *pool)
+void		ft_pooljoin(const t_pool *pool)
 {
 	if (pool == NULL)
 		return ;

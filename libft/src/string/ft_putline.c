@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-t_bool	ft_putline(char *str)
+t_bool	ft_putline(const char *str)
 {
 	return (ft_putline_fd(str, 1));
 }

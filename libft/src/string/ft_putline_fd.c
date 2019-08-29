@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-t_bool	ft_putline_fd(char *str, int fd)
+t_bool	ft_putline_fd(const char *str, int fd)
 {
 	int		ret;
 	size_t	len;

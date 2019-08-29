@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-t_bool		ft_strnin(char **arr, char *str, size_t n)
+t_bool		ft_strnin(const char **arr, const char *str, size_t n)
 {
 	return (ft_strnindex(arr, str, n) != -1);
 }

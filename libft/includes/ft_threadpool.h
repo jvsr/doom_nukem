@@ -60,8 +60,8 @@ typedef struct	s_pool
 
 t_pool			*ft_poolnew(size_t size, t_bool tracktime);
 void			ft_pooldel(t_pool **pool);
-void			ft_pooljoin(t_pool *pool);
-t_bool			ft_pooldone(t_pool *pool);
+void			ft_pooljoin(const t_pool *pool);
+t_bool			ft_pooldone(const t_pool *pool);
 t_bool			ft_poolqueback(t_pool *pool, void (*f)(), size_t count, ...);
 t_bool			ft_poolquefront(t_pool *pool, void (*f)(), size_t count, ...);
 t_bool			ft_threadnew(pthread_t *thread, void (*f)(), size_t count, ...);
@@ -77,7 +77,7 @@ t_bool			tp_addtoque(t_pool *pool, t_bool priority, t_task *task);
 ** -------------------------------Task Functions--------------------------------
 */
 
-t_bool			tp_taskrunfnc(t_task *task);
+t_bool			tp_taskrunfnc(const t_task *task);
 t_task			*tp_tasksetinfo(t_task *task, void (*f)(), size_t count,
 					va_list params);
 
