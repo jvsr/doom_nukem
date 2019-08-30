@@ -12,21 +12,25 @@
 
 #include "keymap.h"
 #include "libft/ft_hash.h"
+#include "libft/ft_memory.h"
 
 t_bool	keymaptoggle(const t_hashmap *keymap, SDL_Keycode key, t_bool pressed)
 {
-	t_keystate	state;
+	t_keystate	*current;
 
-	state = keymapget(keymap, key);
+	current = ft_hashmapget(keymap, &key, sizeof(key));
+	if (current == NULL)
+		current = (t_keystate *)ft_memalloc(sizeof(t_keystate));
+	if (current == NULL)
+		return (FALSE);
 	if (pressed == TRUE)
 	{
-		//state |= KEY_HELDDOWN;
-		//state = KEY_HELDDOWN;
-		//state &= ~(state & KEY_TOGGLED);
+		*current |= KEY_HELDDOWN;
+		*current ^= KEY_TOGGLED;
 	}
 	else
 	{
-		//state = 0;
+		*current &= ~KEY_HELDDOWN;
 	}
-	return (keymapset(keymap, key, state));
+	return (ft_hashmapadd(keymap, &key, sizeof(key), current));
 }

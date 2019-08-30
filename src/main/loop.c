@@ -40,20 +40,19 @@ void			loop(t_game *game)
 {
 	SDL_Event event;
 
-	keymapprint(game->keymap);
-	keymaptoggle(game->keymap, SDLK_SPACE, TRUE);
-	keymapprint(game->keymap);
-	keymaptoggle(game->keymap, SDLK_SPACE, FALSE);
-	keymapprint(game->keymap);
+	// keymaptoggle(game->keymap, SDLK_SPACE, TRUE);
+	// keymapprint(game->keymap);
+	// keymaptoggle(game->keymap, SDLK_SPACE, FALSE);
+	// keymapprint(game->keymap);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
 		{
 			checkquit(game, event);
-			//keymap(game, event);
+			keymap(game, event);
 		}
+		keymapprint(game->keymap);
 		SDL_Delay(100);
-		//keymapprint(game->keymap);
 		SDL_UpdateWindowSurface(game->window);
 	}
 }

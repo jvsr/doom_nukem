@@ -297,9 +297,9 @@ t_bool		keymapprint(const t_hashmap *keymap)
 		{
 			name = getname(current->key);
 			value = *((t_keystate *)current->value);
-			ft_printf("Name: %s - held: %d toggled: %d\n", name,
+			ft_printf("Name: %s - held: %d toggled: %d (value: %d)\n", name,
 				(value & KEY_HELDDOWN) == KEY_HELDDOWN,
-				(value & KEY_TOGGLED) == KEY_TOGGLED);
+				(value & KEY_TOGGLED) == KEY_TOGGLED, value);
 			current = current->next;
 		}
 		i++;

@@ -12,11 +12,17 @@
 
 #include "keymap.h"
 #include "libft/ft_hash.h"
+#include "libft/ft_memory.h"
 
 t_bool	keymapset(const t_hashmap *keymap, SDL_Keycode key, t_keystate state)
 {
-	t_keystate	copy_state;
+	t_keystate	*current;
 
-	copy_state = state;
-	return (ft_hashmapadd(keymap, &key, sizeof(key), &copy_state));
+	current = ft_hashmapget(keymap, &key, sizeof(key));
+	if (current == NULL)
+		current = (t_keystate *)ft_memalloc(sizeof(t_keystate));
+	if (current == NULL)
+		return (FALSE);
+	*current = state;
+	return (ft_hashmapadd(keymap, &key, sizeof(key), current));
 }
