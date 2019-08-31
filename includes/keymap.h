@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:35:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 00:00:11 by pholster      ########   odam.nl         */
+/*   Updated: 2019/08/31 15:14:43 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ typedef struct	s_keypair
 }				t_keypair;
 
 t_bool			keymapinit(t_game *game);
-t_bool			keymapprint(const t_hashmap *keymap);
+void			keymapprint(const t_hashmap *keymap);
 t_keystate		keymapget(const t_hashmap *keymap, SDL_Keycode key);
+void			keymapsetall(const t_hashmap *keymap, t_keystate state);
 t_bool			keymaptoggle(const t_hashmap *keymap, SDL_Keycode key,
 					t_bool pressed);
 t_bool			keymapset(const t_hashmap *keymap, SDL_Keycode key,
