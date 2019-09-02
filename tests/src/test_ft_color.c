@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 16:19:32 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 18:11:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/02 17:49:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ Test(color_to_rgba, white) {
     SDL_Surface *s;
 
     res = 0;
-    c.r == 0xFF;
-    c.g == 0xFF;
-    c.b == 0xFF;
-    c.a == 0xFF;
+    c.r = 0xFF;
+    c.g = 0xFF;
+    c.b = 0xFF;
+    c.a = 0xFF;
 	s = SDL_CreateRGBSurface(0, 3, 3, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-    color_to_rgba(&res, c);
+    res = color_to_rgba(c);
     cr_assert(res == SDL_MapRGBA(s->format, 0xFF, 0xFF, 0xFF, 0xFF));
 }
 
@@ -73,13 +73,12 @@ Test(color_to_rgba, black) {
     SDL_Surface *s;
 
     res = 0;
-    c.r == 0x00;
-    c.g == 0x00;
-    c.b == 0x00;
-    c.a == 0x00;
+    c.r = 0x00;
+    c.g = 0x00;
+    c.b = 0x00;
+    c.a = 0x00;
 	s = SDL_CreateRGBSurface(0, 3, 3, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-    color_to_rgba(&res, c);
-        printf("%d ~ %d\n", res, SDL_MapRGBA(s->format, 0x00, 0x00, 0x00, 0x00));
+    res = color_to_rgba(c);
     cr_assert(res == SDL_MapRGBA(s->format, 0x00, 0x00, 0x00, 0x00));
 }
 
@@ -89,12 +88,11 @@ Test(color_to_rgba, other) {
     SDL_Surface *s;
 
     res = 0;
-    c.r == 0x4A;
-    c.g == 0x11;
-    c.b == 0xDE;
-    c.a == 0xF0;
+    c.r = 0x4A;
+    c.g = 0x11;
+    c.b = 0xDE;
+    c.a = 0xF0;
 	s = SDL_CreateRGBSurface(0, 3, 3, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-    color_to_rgba(&res, c);
-    printf("%d ~ %d", res, SDL_MapRGBA(s->format, 0x4A, 0x11, 0xDE, 0xF0));
+    res = color_to_rgba(c);
     cr_assert(res == SDL_MapRGBA(s->format, 0x4A, 0x11, 0xDE, 0xF0));
 }

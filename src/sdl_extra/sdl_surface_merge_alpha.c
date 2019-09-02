@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 17:34:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/02 17:47:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int		calculate_color(int *dst, int *src)
 static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 								t_pixel start, t_pixel cur)
 {
-	size_t		len;
+	int			len;
 	const int	*start_dst = (int*)(dst->userdata);
 	const int	*start_src = (int*)(src->userdata);
 	const int	ref_dst = *start_dst;
@@ -58,7 +58,7 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 			return (len);
 		len++;
 	}
-	return (len);
+	return ((size_t)len);
 }
 
 static void		copy_color(int *dst, int color, size_t length)
