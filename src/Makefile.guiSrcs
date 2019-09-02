@@ -23,4 +23,4 @@ FT_SRCS =
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = buttondestroy imagedestroy paneldestroy textdestroy buttoncolournew \
 	buttontexturenew imagenew panelnew textnew transformparentset \
-	childrendestroy drawgui drawelem drawtext
+	childrendestroy drawgui drawelem drawtext drawimage

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 17:28:28 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/02 12:01:08 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/02 16:38:16 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void		drawelem(t_gui *ui, t_transform *elem)
 
 	//if (elem->guitype == BUTTON)
 		//drawbutton
-	//else if (elem->guitype == IMAGE)
-		//drawimage;
+	if (elem->guitype == IMAGE)
+		drawimage(ui, (t_image*)elem->guielem);
 	//else if (elem->guitype == PANEL)
 		//drawpanel;
-	if (elem->guitype == TEXT)
+	else if (elem->guitype == TEXT)
 		drawtext(ui, (t_text*)elem->guielem);
 	lst = elem->children;
 	while (lst != NULL)

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/02 12:13:49 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/02 16:37:38 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
 # include "libft/ft_list.h"
+
+#define time(func) \
+    do { \
+        clock_t start = clock(); \
+        func; \
+        clock_t stop = clock(); \
+        printf("Time elapsed: %f seconds\n", (double)(stop - start) / CLOCKS_PER_SEC); \
+    } while (0)
 
 typedef struct s_transform t_transform;
 typedef struct s_game		t_game;
@@ -117,5 +125,6 @@ void		transformparentset(t_transform *child, t_transform *parent);
 void		drawelem(t_gui *ui, t_transform *elem);
 void		drawgui(t_game *game);
 void		drawtext(t_gui *ui, t_text *text);
+void		drawimage(t_gui *ui, t_image *image);
 
 #endif
