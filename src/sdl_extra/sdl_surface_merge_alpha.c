@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 17:23:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/02 17:34:17 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		copy_color(int *dst, int color, size_t length)
 	i = 0;
 	while (i < length)
 	{
-		ft_memcpy(&dst[i], &color, 4);
+		dst[i] = color;
 		i++;
 	}
 }
