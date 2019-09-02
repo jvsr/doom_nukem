@@ -12,6 +12,8 @@
         "coord.h": "c",
         "color.h": "c",
         "Makefile*": "makefile",
-        "criterion.h": "c"
+        "criterion.h": "c",
+        "ios": "c",
+        "test.h": "c"
     }
 }
