@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 13:54:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/08/29 16:05:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 */
 
 void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src,
-									t_pixel start)
+								t_pixel start)
 {
 	int		len;
 	t_pixel	cur;

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 17:00:37 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 13:46:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/02 12:00:49 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_color
 	unsigned char	a;
 }				t_color;
 
+int		color_to_rgba(t_color c);
 void	rgba_to_color(t_color *c, int color);
-void	color_to_rgba(int *color, t_color c);
 
 #endif
