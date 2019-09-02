@@ -6,25 +6,26 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/29 14:01:18 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/02 12:13:49 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GUI_H
 # define GUI_H
 
-#include "libft/ft_bool.h"
-#include "coord.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include "libft/ft_list.h"
-#include "game.h"
+# include "libft/ft_bool.h"
+# include "coord.h"
+# include <SDL2/SDL.h>
+# include <SDL2/SDL_ttf.h>
+# include "libft/ft_list.h"
 
 typedef struct s_transform t_transform;
+typedef struct s_game		t_game;
 
 typedef	enum	e_fonttype
 {
-	arial
+	ROBOTO,
+	MONOF
 }				t_fonttype;
 
 typedef enum	e_guielem
@@ -39,6 +40,7 @@ typedef struct s_font
 {
 	t_fonttype	font;
 	float		size;
+	SDL_Color	colour;
 }				t_font;
 
 typedef struct	s_transform
@@ -79,8 +81,17 @@ typedef struct	s_image
 typedef struct	s_panel
 {
 	t_transform		transform;
+	SDL_Surface		*panel;
 	t_coord			size;
 }				t_panel;
+
+typedef struct	s_gui
+{
+	t_transform	transform;
+	t_bool		redraw;
+	SDL_Surface	*guisurface;
+	TTF_Font	*font[2];
+}				t_gui;
 
 typedef struct	s_guiinfo
 {
@@ -103,5 +114,8 @@ void		textdestroy(t_text *text, const t_bool destroychildren);
 void		imagedestroy(t_image *image, const t_bool destroychildren);
 void		childrendestroy(t_list *children, const t_bool destroychildren);
 void		transformparentset(t_transform *child, t_transform *parent);
+void		drawelem(t_gui *ui, t_transform *elem);
+void		drawgui(t_game *game);
+void		drawtext(t_gui *ui, t_text *text);
 
 #endif

@@ -6,15 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 16:21:50 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/02 13:35:52 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL.h>
 #include <errno.h>
-
 #include "libft/ft_memory.h"
-
 #include "game.h"
 #include "init.h"
 #include "error.h"
@@ -33,6 +31,8 @@ static t_game	*alloc_game(void)
 	game = (t_game *)ft_memalloc(sizeof(t_game));
 	if (game == NULL)
 		error_msg(strerror(errno), errno);
+	game->ui.font[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 23);
+	game->ui.font[1] = TTF_OpenFont("fonts/monof55.ttf", 23);
 	return (game);
 }
 
@@ -44,8 +44,8 @@ static	void	init_window_surface(t_game *game)
 	if (game->window == NULL)
 		error_msg(SDL_GetError(), 1);
 	game->surface = SDL_GetWindowSurface(game->window);
-	game->guisurface = NULL;
-	SDL_BlitSurface(game->surface, NULL, game->guisurface, NULL);
+	game->ui.guisurface = SDL_CreateRGBSurface(0, game->surface->w,
+		game->surface->h, 32, 0, 0, 0, 0);
 }
 
 static void		init_game(t_game *game)
