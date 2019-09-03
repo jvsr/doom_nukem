@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "game.h"
-
 #include "keymap.h"
 
 static void		checkquit(t_game *game, SDL_Event event)
