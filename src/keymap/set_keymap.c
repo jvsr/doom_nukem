@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keymapset.c                                        :+:    :+:            */
+/*   set_keymap.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -17,6 +17,12 @@
 
 #include "keymap.h"
 #include "error.h"
+
+/*
+** * set keymap will take the keymap, keysym and a state.
+** * It will then set the state of the key to the given state.
+** * If the key isnt monitored yet it will add the key to the monitored keys.
+*/
 
 t_bool	set_keymap(const t_hashmap *keymap, SDL_Keycode key, t_keystate state)
 {

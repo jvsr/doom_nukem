@@ -18,6 +18,13 @@
 #include "game.h"
 #include "error.h"
 
+/*
+** * init keymap will take the game struct.
+** * It will then allocate space for the keymap defined by INIT_KEYMAP_SIZE.
+** * And then set the hashing algorithm to the one defined by INIT_KEYMAP_ALGO.
+** * If the allocation failed the programm exists.
+*/
+
 t_bool	init_keymap(t_game *game)
 {
 	game->keymap = ft_hashmapnew(INIT_KEYMAP_SIZE, INIT_KEYMAP_ALGO);

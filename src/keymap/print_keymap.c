@@ -16,6 +16,11 @@
 
 #include "keymap.h"
 
+/*
+** * print keymap will take the keymap. (This function is for debug only)
+** * It will then print the state of every monitored key.
+*/
+
 const t_keypair	g_keytable[] = {
 	(const t_keypair){NULL, SDLK_UNKNOWN},
 
@@ -282,7 +287,7 @@ const char	*getname(void *key)
 	return (NULL);
 }
 
-void	print_keymap(const t_hashmap *keymap)
+void		print_keymap(const t_hashmap *keymap)
 {
 	size_t		i;
 	t_hashlist	*current;

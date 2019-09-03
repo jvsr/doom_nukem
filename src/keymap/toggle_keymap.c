@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keymaptoggle.c                                     :+:    :+:            */
+/*   toggle_keymap.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -17,6 +17,14 @@
 
 #include "error.h"
 #include "keymap.h"
+
+/*
+** * toggle keymap will take the keymap, keysym and if the key is being pressed.
+** * It will then based on the current state of the key change the state.
+** * If the key is being pressed it toggles the toggle and sets helddown to 1.
+** * if the key is not being pressed it sets helddown to 0.
+** * If the key isnt monitored yet it will add the key to the monitored keys.
+*/
 
 t_bool	toggle_keymap(const t_hashmap *keymap, SDL_Keycode key, t_bool pressed)
 {

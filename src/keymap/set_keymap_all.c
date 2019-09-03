@@ -14,6 +14,11 @@
 
 #include "keymap.h"
 
+/*
+** * set keymap all will take the keymap and a state.
+** * It will then change the state of every monitored key to the given state.
+*/
+
 void		set_keymap_all(const t_hashmap *keymap, t_keystate state)
 {
 	size_t		i;
