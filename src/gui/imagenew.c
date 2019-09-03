@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:15:07 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/02 17:39:50 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/03 10:29:12 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_image		*imagenew(t_guiinfo *guiinfo, const SDL_Surface *texture)
 	t_image *image;
 
 	image = (t_image*)ft_memalloc(sizeof(t_image));
-	printf("Image -> %p\n", texture);
 	image->texture = SDL_CreateRGBSurface(0, (int)texture->w, (int)texture->h, 32, 0, 0, 0, 0);
 	sdl_surface_merge(image->texture, (SDL_Surface*)texture, (t_pixel){0, 0});
 	ft_memcpy(&image->transform.position, &guiinfo->position, sizeof(t_coord));
