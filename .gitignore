@@ -50,6 +50,7 @@ doomtest
 *.su
 *.idb
 *.pdb
+personal.h
 
 # Kernel Module Compile Results
 *.mod*
