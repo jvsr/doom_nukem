@@ -15,7 +15,7 @@
 #include "ft_number.h"
 #include "ft_character.h"
 
-t_bool	ft_putnumlst(t_list *lst)
+t_bool	ft_putnumlst(const t_list *lst)
 {
 	intmax_t	*n;
 

@@ -20,8 +20,9 @@ static char	**freeret(char **arr)
 	return (NULL);
 }
 
-char		**ft_lsttostrarr(t_list *lst)
+char		**ft_lsttostrarr(const t_list *lst)
 {
+	t_list	*current;
 	char	**arr;
 	char	*str;
 	size_t	i;
@@ -34,13 +35,14 @@ char		**ft_lsttostrarr(t_list *lst)
 	arr = ft_strarrnew(len);
 	if (arr == NULL)
 		return (NULL);
-	while (lst != NULL)
+	current = (t_list *)lst;
+	while (current != NULL)
 	{
-		str = ft_strdup((char *)lst->content);
+		str = ft_strdup((char *)current->content);
 		if (str == NULL)
 			return (freeret(arr));
 		arr[i] = str;
-		lst = lst->next;
+		current = current->next;
 		i++;
 	}
 	arr[i] = NULL;

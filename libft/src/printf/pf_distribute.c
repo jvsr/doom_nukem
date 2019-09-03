@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-size_t		pf_distribute(t_info *info, char *start)
+size_t		pf_distribute(t_info *info, const char *start)
 {
 	size_t	ret;
 

@@ -15,7 +15,7 @@
 #include "ft_number.h"
 #include "ft_character.h"
 
-t_bool	ft_putlstsize(t_list *lst)
+t_bool	ft_putlstsize(const t_list *lst)
 {
 	if (lst == NULL)
 		return (ft_putstr(NULL));

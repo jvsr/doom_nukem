@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	pf_addwcharstr(t_info *info, t_wchar *str, size_t n)
+void	pf_addwcharstr(t_info *info, const t_wchar *str, size_t n)
 {
 	size_t	i;
 	size_t	bytes;

@@ -14,7 +14,7 @@
 #include "ft_string.h"
 #include "ft_stringarray.h"
 
-ssize_t		ft_colorlcode(char *str)
+ssize_t		ft_colorlcode(const char *str)
 {
 	char	**colors;
 	size_t	i;

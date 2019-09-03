@@ -13,8 +13,9 @@
 #include "ft_list.h"
 #include "ft_memory.h"
 
-intmax_t		*ft_lsttonumarr(t_list *lst)
+intmax_t		*ft_lsttonumarr(const t_list *lst)
 {
+	t_list		*current;
 	intmax_t	*arr;
 	intmax_t	*n;
 	size_t		i;
@@ -27,11 +28,12 @@ intmax_t		*ft_lsttonumarr(t_list *lst)
 	arr = (intmax_t *)ft_memalloc(sizeof(intmax_t) * len);
 	if (arr == NULL)
 		return (NULL);
-	while (lst != NULL)
+	current = (t_list *)lst;
+	while (current != NULL)
 	{
-		n = (intmax_t *)lst->content;
+		n = (intmax_t *)current->content;
 		arr[i] = *n;
-		lst = lst->next;
+		current = current->next;
 		i++;
 	}
 	return (arr);

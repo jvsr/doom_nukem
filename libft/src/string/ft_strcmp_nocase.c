@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-int		ft_strcmp_nocase(char *str1, char *str2)
+int		ft_strcmp_nocase(const char *str1, const char *str2)
 {
 	size_t			i;
 	unsigned char	temp_a;

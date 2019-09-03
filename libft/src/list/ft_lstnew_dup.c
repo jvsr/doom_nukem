@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstnew.c                                        :+:    :+:            */
+/*   ft_lstnew_dup.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -19,7 +19,7 @@ static t_list	*freeret(t_list *lst)
 	return (NULL);
 }
 
-t_list			*ft_lstnew_dup(void *content, size_t content_size)
+t_list			*ft_lstnew_dup(const void *content, size_t content_size)
 {
 	t_list	*lst;
 

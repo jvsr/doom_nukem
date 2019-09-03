@@ -12,7 +12,8 @@
 
 #include "ft_string.h"
 
-static size_t	strtotallen(char *str, char *find, size_t len, size_t seglen)
+static size_t	strtotallen(const char *str, const char *find, size_t len,
+					size_t seglen)
 {
 	char	*ptr;
 	size_t	found;
@@ -27,7 +28,8 @@ static size_t	strtotallen(char *str, char *find, size_t len, size_t seglen)
 	return (len - (seglen * found));
 }
 
-static char		*strset(char *str, char *find, char *replace, size_t *lentable)
+static char		*strset(const char *str, const char *find, const char *replace,
+					const size_t *lentable)
 {
 	size_t	i;
 	size_t	len;
@@ -52,7 +54,8 @@ static char		*strset(char *str, char *find, char *replace, size_t *lentable)
 	return (new);
 }
 
-char			*ft_strreplace(char *str, char *find, char *replace)
+char			*ft_strreplace(const char *str, const char *find,
+					const char *replace)
 {
 	size_t	findlen;
 	size_t	replacelen;

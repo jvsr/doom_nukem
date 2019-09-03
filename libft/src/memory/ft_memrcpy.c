@@ -16,10 +16,10 @@
 ** make it use 8 by 8 long long cpy
 */
 
-void	*ft_memrcpy(void *dst, void *src, size_t len)
+void	*ft_memrcpy(void *dst, const void *src, size_t len)
 {
-	unsigned char	*temp_dst;
-	unsigned char	*temp_src;
+	const unsigned char	*temp_src;
+	unsigned char		*temp_dst;
 
 	temp_dst = dst;
 	temp_src = src;

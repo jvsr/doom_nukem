@@ -20,7 +20,7 @@ void	ft_strarrrev(char **arr)
 	char	*temp;
 
 	i = 0;
-	len = ft_strarrlen((char **)arr);
+	len = ft_strarrlen((const char **)arr);
 	half = (len / 2);
 	while (i < half)
 	{

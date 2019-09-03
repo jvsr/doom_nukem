@@ -12,7 +12,7 @@
 
 #include "ft_character.h"
 
-ssize_t		ft_chrdindex(char *str, char *dlm)
+ssize_t		ft_chrdindex(const char *str, const char *dlm)
 {
 	size_t		i;
 	long long	bytes[2];

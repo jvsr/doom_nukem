@@ -13,7 +13,7 @@
 #include "ft_stringarray.h"
 #include "ft_string.h"
 
-char	**ft_strarrcpy(char **dst, char **src)
+char	**ft_strarrcpy(char **dst, const char **src)
 {
 	size_t		i;
 

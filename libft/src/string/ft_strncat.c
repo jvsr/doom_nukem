@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_memory.h"
 
-char	*ft_strncat(char *str1, char *str2, size_t n)
+char	*ft_strncat(char *str1, const char *str2, size_t n)
 {
 	size_t	str1len;
 	size_t	str2len;

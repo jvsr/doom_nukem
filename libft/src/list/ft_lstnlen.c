@@ -12,7 +12,7 @@
 
 #include "ft_list.h"
 
-size_t		ft_lstnlen(t_list *lst, size_t n)
+size_t		ft_lstnlen(const t_list *lst, size_t n)
 {
 	size_t	len;
 

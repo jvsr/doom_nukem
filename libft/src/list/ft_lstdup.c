@@ -18,7 +18,7 @@ static t_list	*freeret(t_list **lst)
 	return (NULL);
 }
 
-t_list			*ft_lstdup(t_list *lst)
+t_list			*ft_lstdup(const t_list *lst)
 {
 	t_list	*current;
 	t_list	*duplst;

@@ -12,7 +12,7 @@
 
 #include "ft_list.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+void	ft_lstiter(const t_list *lst, void (*f)(const t_list *elem))
 {
 	f(lst);
 	if (lst->next != NULL)

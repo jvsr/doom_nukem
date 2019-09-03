@@ -13,7 +13,7 @@
 #include "ft_stringarray.h"
 #include "ft_string.h"
 
-t_bool		ft_strarrsortac(char *current, char *str)
+t_bool		ft_strarrsortac(const char *current, const char *str)
 {
 	int		result;
 

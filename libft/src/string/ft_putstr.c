@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-t_bool	ft_putstr(char *str)
+t_bool	ft_putstr(const char *str)
 {
 	return (ft_putstr_fd(str, 1));
 }

@@ -20,7 +20,7 @@ static t_list	*freeret(t_list **lst)
 	return (NULL);
 }
 
-t_list			*ft_strarrtolst(char **arr)
+t_list			*ft_strarrtolst(const char **arr)
 {
 	size_t	i;
 	t_list	*newlst;

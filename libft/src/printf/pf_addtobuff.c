@@ -28,7 +28,7 @@ static t_bool	addtolst(t_info *info)
 	return (prv != NULL);
 }
 
-t_bool			pf_addtobuff(t_info *info, char *str, size_t len)
+t_bool			pf_addtobuff(t_info *info, const char *str, size_t len)
 {
 	t_bool	ret;
 	size_t	fit;

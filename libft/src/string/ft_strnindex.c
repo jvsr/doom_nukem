@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-ssize_t		ft_strnindex(char **arr, char *str, size_t n)
+ssize_t		ft_strnindex(const char **arr, const char *str, size_t n)
 {
 	size_t	i;
 

@@ -12,7 +12,7 @@
 
 #include "ft_memory.h"
 
-t_bool		ft_memequ(void *str1, void *str2, size_t len)
+t_bool		ft_memequ(const void *str1, const void *str2, size_t len)
 {
 	return (ft_memcmp(str1, str2, len) == 0);
 }

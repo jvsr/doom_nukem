@@ -26,7 +26,7 @@ static void	addword(char **arr, char *str, size_t *word)
 	*word += 1;
 }
 
-char		**ft_strdsplit(char *str, char *dlm)
+char		**ft_strdsplit(const char *str, const char *dlm)
 {
 	char		**arr;
 	long long	bytes[2];

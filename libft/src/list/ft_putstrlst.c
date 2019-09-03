@@ -13,7 +13,7 @@
 #include "ft_list.h"
 #include "ft_string.h"
 
-t_bool	ft_putstrlst(t_list *lst)
+t_bool	ft_putstrlst(const t_list *lst)
 {
 	if (lst == NULL)
 		return (ft_putstr(NULL));

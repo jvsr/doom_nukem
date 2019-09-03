@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_memory.h"
 
-char	*ft_strdup(char *str)
+char	*ft_strdup(const char *str)
 {
 	size_t	len;
 	char	*dup;

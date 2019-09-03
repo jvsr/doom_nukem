@@ -13,7 +13,7 @@
 #include "ft_utf8.h"
 #include "ft_string.h"
 
-t_bool	ft_pututf8str_fd(t_wchar *str, int fd)
+t_bool	ft_pututf8str_fd(const t_wchar *str, int fd)
 {
 	size_t	i;
 
