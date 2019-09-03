@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 15:53:13 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/31 15:11:34 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/03 13:51:49 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ const char	*getname(void *key)
 	return (NULL);
 }
 
-void	keymapprint(const t_hashmap *keymap)
+void	print_keymap(const t_hashmap *keymap)
 {
 	size_t		i;
 	t_hashlist	*current;

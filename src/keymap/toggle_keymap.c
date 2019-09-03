@@ -6,15 +6,19 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 15:14:43 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/29 15:14:43 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/03 13:52:24 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keymap.h"
+#include <errno.h>
+
 #include "libft/ft_hash.h"
 #include "libft/ft_memory.h"
 
-t_bool	keymaptoggle(const t_hashmap *keymap, SDL_Keycode key, t_bool pressed)
+#include "error.h"
+#include "keymap.h"
+
+t_bool	toggle_keymap(const t_hashmap *keymap, SDL_Keycode key, t_bool pressed)
 {
 	t_keystate	*current;
 
@@ -22,7 +26,7 @@ t_bool	keymaptoggle(const t_hashmap *keymap, SDL_Keycode key, t_bool pressed)
 	if (current == NULL)
 		current = (t_keystate *)ft_memalloc(sizeof(t_keystate));
 	if (current == NULL)
-		return (FALSE);
+		error_msg(strerror(errno), errno);
 	if (pressed == TRUE)
 	{
 		*current |= KEY_HELDDOWN;
