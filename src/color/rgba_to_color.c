@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   coord.h                                            :+:    :+:            */
+/*   rgba_to_color.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/27 13:36:58 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/28 17:59:22 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/29 13:47:23 by jvisser        #+#    #+#                */
+/*   Updated: 2019/08/29 13:47:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COORD_H
-# define COORD_H
+#include "color.h"
 
-typedef struct	s_coord
+void	rgba_to_color(t_color *c, int color)
 {
-	float		x;
-	float		y;
-}				t_coord;
-
-typedef struct	s_pixel
-{
-	int			x;
-	int			y;
-}				t_pixel;
-
-typedef struct	s_vec
-{
-	float		x;
-	float		y;
-	float		z;
-}				t_vec;
-
-#endif
+	c->a = (unsigned char)(color >> 24);
+	c->r = (unsigned char)(color >> 16);
+	c->g = (unsigned char)(color >> 8);
+	c->b = (unsigned char)(color);
+}

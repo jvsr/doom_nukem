@@ -1,9 +1,19 @@
 {
     "files.associations": {
+        "*.mainSrcs": "makefile",
         "sdl.h": "c",
         "error.h": "c",
         "game.h": "c",
         "libft.h": "c",
-        "init.h": "c"
+        "init.h": "c",
+        "locale": "c",
+        "string": "c",
+        "time.h": "c",
+        "coord.h": "c",
+        "color.h": "c",
+        "Makefile*": "makefile",
+        "criterion.h": "c",
+        "ios": "c",
+        "test.h": "c"
     }
 }
