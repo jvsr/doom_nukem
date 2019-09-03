@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/27 15:44:48 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/03 13:53:46 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 #include "libft/ft_memory.h"
 
+#include "keymap.h"
 #include "game.h"
 #include "init.h"
 #include "error.h"
-#include "keymap.h"
 
 static void		init_sdl(void)
 {
@@ -39,8 +39,8 @@ static t_game	*alloc_game(void)
 static	void	init_window_surface(t_game *game)
 {
 	game->window = SDL_CreateWindow("Doom Nukem", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_ALLOW_HIGHDPI |
-		SDL_WINDOW_MOUSE_FOCUS);
+		SDL_WINDOWPOS_CENTERED, INIT_WIDTH, INIT_HEIGHT,
+		SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MOUSE_FOCUS);
 	if (game->window == NULL)
 		error_msg(SDL_GetError(), 1);
 }
