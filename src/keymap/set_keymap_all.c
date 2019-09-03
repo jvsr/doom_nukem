@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keymapsetall.c                                     :+:    :+:            */
+/*   set_keymap_all.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keymap.h"
 #include "libft/ft_hash.h"
+
+#include "keymap.h"
 
 void		set_keymap_all(const t_hashmap *keymap, t_keystate state)
 {

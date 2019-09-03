@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keymapget.c                                        :+:    :+:            */
+/*   get_keymap.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keymap.h"
 #include "libft/ft_hash.h"
+
+#include "keymap.h"
 
 t_keystate	get_keymap(const t_hashmap *keymap, SDL_Keycode key)
 {

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keymapinit.c                                       :+:    :+:            */
+/*   init_keymap.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,15 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+
+#include "libft/ft_hash.h"
+
 #include "init.h"
 #include "game.h"
 #include "error.h"
-#include "libft/ft_hash.h"
 
 t_bool	init_keymap(t_game *game)
 {
 	game->keymap = ft_hashmapnew(INIT_KEYMAP_SIZE, INIT_KEYMAP_ALGO);
 	if (game->keymap == NULL)
-		error_msg("keymap fialed to allocate\n", 1);
+		error_msg(strerror(errno), errno);
 	return (game->keymap != NULL);
 }

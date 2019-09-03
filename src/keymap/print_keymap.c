@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keymapprint.c                                      :+:    :+:            */
+/*   print_keymap.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keymap.h"
 #include "libft/ft_string.h"
 #include "libft/ft_printf.h"
 #include "libft/ft_hash.h"
+
+#include "keymap.h"
 
 const t_keypair	g_keytable[] = {
 	(const t_keypair){NULL, SDLK_UNKNOWN},
