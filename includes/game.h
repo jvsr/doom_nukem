@@ -15,8 +15,6 @@
 
 # include <SDL2/SDL.h>
 
-# define INITHEIGHT 720
-# define INITWIDTH 1280
 typedef struct s_ui			t_ui;
 typedef struct s_level		t_level;
 typedef struct s_player		t_player;
