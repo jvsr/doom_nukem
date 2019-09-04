@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 17:34:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/03 10:25:42 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 	len = 1;
 	while (start_dst[len] == ref_dst && start_src[len] == ref_src)
 	{
-		if (start.x + cur.x + len > dst->w - 1 || cur.x + len > src->w - 1)
+		if (start.x + cur.x + (int)len > dst->w - 1 || cur.x + (int)len > src->w - 1)
 			return (len);
 		len++;
 	}

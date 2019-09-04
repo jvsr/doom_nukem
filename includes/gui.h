@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/02 16:37:38 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 14:55:09 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,7 @@
 # include <SDL2/SDL_ttf.h>
 # include "libft/ft_list.h"
 
-#define time(func) \
-    do { \
-        clock_t start = clock(); \
-        func; \
-        clock_t stop = clock(); \
-        printf("Time elapsed: %f seconds\n", (double)(stop - start) / CLOCKS_PER_SEC); \
-    } while (0)
+# define GUI_NAME "gui"
 
 typedef struct s_transform t_transform;
 typedef struct s_game		t_game;
@@ -53,13 +47,14 @@ typedef struct s_font
 
 typedef struct	s_transform
 {
-	char				*name;
-	t_coord				position;
-	t_bool				visible;
-	t_transform			*parent;
-	t_list				*children;
-	void				*guielem;
-	t_guielem			guitype;
+	char			*name;
+	t_coord			position;
+	t_bool			visible;
+	t_transform		*parent;
+	t_list			*children;
+	void			*guielem;
+	t_guielem		guitype;
+	void			(*onclick)(t_game *, t_transform *);
 }				t_transform;
 
 typedef struct	s_text
@@ -76,7 +71,6 @@ typedef struct	s_buttton
 	t_font			font;
 	t_coord			size;
 	SDL_Surface		*texture;
-	void			(*onclick)(t_game *, struct s_buttton *);
 }				t_button;
 
 typedef struct	s_image
@@ -99,6 +93,7 @@ typedef struct	s_gui
 	t_bool		redraw;
 	SDL_Surface	*guisurface;
 	TTF_Font	*font[2];
+	t_list		*onclicks;
 }				t_gui;
 
 typedef struct	s_guiinfo
@@ -116,15 +111,29 @@ t_button	*buttoncolournew(t_guiinfo *guiinfo, char *text, t_font *font,
 t_text		*textnew(t_guiinfo *guiinfo, char *text, t_font *font);
 t_image		*imagenew(t_guiinfo *guiinfo, const SDL_Surface *texture);
 t_panel		*panelnew(t_guiinfo *guiinfo);
-void		buttondestroy(t_button *button, const t_bool destroychildren);
-void		paneldestroy(t_panel *panel, const t_bool destroychildren);
-void		textdestroy(t_text *text, const t_bool destroychildren);
-void		imagedestroy(t_image *image, const t_bool destroychildren);
-void		childrendestroy(t_list *children, const t_bool destroychildren);
+void		buttondestroy(t_gui *ui, t_button *button,
+							const t_bool destroychildren);
+void		paneldestroy(t_gui *ui, t_panel *panel,
+							const t_bool destroychildren);
+void		textdestroy(t_gui *ui, t_text *text,
+							const t_bool destroychildren);
+void		imagedestroy(t_gui *ui, t_image *image,
+							const t_bool destroychildren);
+void		childrendestroy(t_gui *ui, t_list *children,
+							const t_bool destroychildren);
 void		transformparentset(t_transform *child, t_transform *parent);
 void		drawelem(t_gui *ui, t_transform *elem);
 void		drawgui(t_game *game);
 void		drawtext(t_gui *ui, t_text *text);
 void		drawimage(t_gui *ui, t_image *image);
+void		drawbutton(t_gui *ui, t_button *button);
+void		drawpanel(t_gui *ui, t_panel *panel);
+TTF_Font	*fontget(t_gui *ui, t_fonttype font);
+SDL_Surface	*textsurfaceget(t_gui *ui, char *text, t_font fonttype);
+void		transformaddclick(t_gui *ui, t_transform *transform,
+								void (*onclick)(t_game *, t_transform *));
+t_bool		transformgetvisible(t_transform *transform);
+void		clickdestroy(t_gui *ui, char *name);
+void		clickcheck(t_game *game);
 
 #endif

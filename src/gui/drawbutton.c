@@ -1,0 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   drawbutton.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/09/03 10:31:06 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/04 11:51:13 by ehollidg      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "gui.h"
+#include "game.h"
+#include "init.h"
+
+void		drawbutton(t_gui *ui, t_button *button)
+{
+	SDL_Surface *fontsurface;
+	SDL_Surface *dst;
+	t_pixel		pixel;
+	TTF_Font	*font;
+
+	font = fontget(ui, button->font.font);
+	fontsurface = textsurfaceget(ui, button->text, button->font);
+	dst = SDL_CreateRGBSurface(0, (int)((float)INITWIDTH * button->size.x),
+		(int)((float)INITHEIGHT * button->size.y), 32, 0, 0, 0, 0);
+	SDL_BlitScaled(button->texture, NULL, dst, NULL);
+	pixel = (t_pixel){(int)((float)INITWIDTH * button->transform.position.x),
+			(int)((float)INITHEIGHT * button->transform.position.y)};
+	sdl_surface_merge(ui->guisurface, dst, pixel);
+	sdl_surface_merge(ui->guisurface, fontsurface, pixel);
+	SDL_FreeSurface(fontsurface);
+	SDL_FreeSurface(dst);
+}

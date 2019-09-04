@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:19:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/29 12:11:27 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 13:39:02 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ t_button	*buttontexturenew(t_guiinfo *guiinfo, char *text,
 
 	button = (t_button*)ft_memalloc(sizeof(t_button));
 	button->texture = (SDL_Surface*)texture;
-	ft_strcpy(button->text, text);
+	button->text = ft_strdup(text);
 	ft_memcpy(&button->font, font, sizeof(t_font));
 	ft_memcpy(&button->transform.position, &guiinfo->position, sizeof(t_coord));
 	ft_memcpy(&button->size, &guiinfo->size, sizeof(t_coord));
-	ft_strcpy(button->transform.name, guiinfo->name);
+	button->transform.name = ft_strdup(guiinfo->name);
 	button->transform.children = NULL;
 	button->transform.guitype = BUTTON;
 	button->transform.guielem = (void*)button;
+	button->transform.onclick = NULL;
+	button->transform.visible = TRUE;
 	return (button);
 }

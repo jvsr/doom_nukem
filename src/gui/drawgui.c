@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/02 13:59:35 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 14:39:57 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void			drawgui(t_game *game)
 
 	if (game->ui.redraw == TRUE)
 	{
+		SDL_FillRect(game->ui.guisurface, NULL, 0);
 		lst = game->ui.transform.children;
 		while (lst != NULL)
 		{
-			drawelem(&game->ui, lst->content);
+			if (((t_transform*)lst->content)->visible == TRUE)
+				drawelem(&game->ui, lst->content);
 			lst = lst->next;
 		}
+		game->ui.redraw = FALSE;
 	}
 	sdl_surface_merge(game->surface, game->ui.guisurface, (t_pixel){0, 0});
-	game->ui.redraw = FALSE;
 }
