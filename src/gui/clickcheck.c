@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 14:12:49 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:12:48 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,8 @@ void			clickcheck(t_game *game)
 			locs[0] = getstart((t_transform*)lst->content);
 			locs[1] = getend((t_transform*)lst->content);
 			locs[1] = (t_pixel){locs[0].x + locs[1].x, locs[0].y + locs[1].y};
-			printf("Loc 0 -> %i, %i\n", locs[0].x, locs[0].y);
-			printf("Loc 1 -> %i, %i\n", locs[1].x, locs[1].y);
-			printf("Mouse -> %i, %i\n", x, y);
 			if (checkcolision(x, y, locs))
 			{
-				printf("Here\n");
 				((t_transform*)lst->content)->onclick(game,
 					(t_transform*)lst->content);
 				return ;

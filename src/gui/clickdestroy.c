@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:04:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 14:01:27 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:14:01 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		clickdestroy(t_gui *ui, char *name)
 	}
 	if (lst == NULL)
 		return ;
-	if (prev != NULL	)
+	if (prev != NULL)
 		prev->next = lst->next;
 	lst->next = NULL;
 	ft_lstdelone(&lst, NULL);
