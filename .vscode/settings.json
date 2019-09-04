@@ -14,6 +14,9 @@
         "Makefile*": "makefile",
         "criterion.h": "c",
         "ios": "c",
-        "test.h": "c"
+        "test.h": "c",
+        "tga.h": "c",
+        "unistd.h": "c",
+        "io.h": "c"
     }
 }
