@@ -6,13 +6,14 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:34:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/04 17:42:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 #include "game.h"
 #include "gui.h"
+#include "init.h"
 #include "libft/ft_list.h"
 
 static t_bool	checkcolision(int x, int y, t_pixel locs[2])

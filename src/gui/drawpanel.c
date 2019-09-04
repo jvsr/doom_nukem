@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:34:54 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/04 17:43:21 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "init.h"
 #include "sdl_extra.h"
 #include "libft/ft_list.h"
+#include "init.h"
 
 static void	drawchildren(t_gui *gui, t_transform *parent)
 {
