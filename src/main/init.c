@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 17:03:00 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:23:13 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_game	*alloc_game(void)
 		error_msg(strerror(errno), errno);
 	game->ui.font[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
 	game->ui.font[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
+	game->ui.font[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
 	game->ui.transform.name = ft_strdup(GUI_NAME);
 	game->ui.transform.visible = TRUE;
 	return (game);

@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/04 17:02:11 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:30:23 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include "coord.h"
 # include "gui.h"
 
-# define INITHEIGHT 720
-# define INITWIDTH 1280
 typedef struct s_ui			t_ui;
 typedef struct s_level		t_level;
 typedef struct s_player		t_player;

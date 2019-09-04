@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:27:03 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:32:03 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			loop(t_game *game)
 	t_button	*button;
 
 	button = buttoncolournew(&(t_guiinfo){"image", TRUE, (t_coord){0.4, 0.4},
-			(t_coord){0.2, 0.2}}, "Hey", &(t_font){ROBOTO, 0.2, (SDL_Color){0, 0, 0, 0}}, 0xFFFFFFFF);
+			(t_coord){0.2, 0.2}}, "Hey", &(t_font){ROBOTO, 0.2, (SDL_Color){0x18, 0xDF, 0xEE, 0x00}}, 0xFFFFFFFF);
 	transformparentset(&button->transform, &game->ui.transform);
 	transformaddclick(&game->ui, &button->transform, testfunc);
 	game->ui.redraw = TRUE;

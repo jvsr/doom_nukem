@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 10:43:56 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 11:51:45 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:33:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ SDL_Surface	*textsurfaceget(t_gui *ui, char *text, t_font fonttype)
 	surface = TTF_RenderText_Solid(font, text, fonttype.colour);
 	fsurface = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_RGBA4444, 0);
 	SDL_FreeSurface(surface);
-	dst = SDL_CreateRGBSurface(0, (int)((float)INITWIDTH * fonttype.size),
-			(int)((float)INITHEIGHT * fonttype.size), 32, 0, 0, 0, 0);
+	dst = SDL_CreateRGBSurface(0, (int)((float)INIT_WIDTH * fonttype.size),
+			(int)((float)INIT_HEIGHT * fonttype.size), 32, 0, 0, 0, 0);
 	SDL_BlitScaled(fsurface, NULL, dst, NULL);
 	SDL_FreeSurface(fsurface);
 	return (dst);

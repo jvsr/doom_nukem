@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 18:55:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 17:25:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/04 17:33:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main (void)
 		"Testing",							// window title
 		SDL_WINDOWPOS_CENTERED,           	// initial x position
 		SDL_WINDOWPOS_CENTERED,          	// initial y position
-		INITWIDTH,                             	// width, in pixels
-		INITHEIGHT,                             	// height, in pixels
+		INIT_WIDTH,                             	// width, in pixels
+		INIT_HEIGHT,                             	// height, in pixels
 		0					               	// flags - see below
 	);
 	if (window == NULL) {
@@ -69,19 +69,19 @@ int	main (void)
 					exit(0);
 				else if (event.key.keysym.sym == SDLK_1)
 				{
-					src1 = SDL_CreateRGBSurface(0, INITWIDTH, INITHEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-					src2 = SDL_CreateRGBSurface(0, INITWIDTH, INITHEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-					src3 = SDL_CreateRGBSurface(0, INITWIDTH, INITHEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+					src1 = SDL_CreateRGBSurface(0, INIT_WIDTH, INIT_HEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+					src2 = SDL_CreateRGBSurface(0, INIT_WIDTH, INIT_HEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+					src3 = SDL_CreateRGBSurface(0, INIT_WIDTH, INIT_HEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 					src4 = SDL_CreateRGBSurface(0, 160, 90, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 					SDL_FillRect(src1, NULL, SDL_MapRGBA(src1->format, 180, 21, 254, 85));
 					SDL_FillRect(src2, NULL, SDL_MapRGBA(src2->format, 55, 190, 245, 85));
 					SDL_FillRect(src3, NULL, SDL_MapRGBA(src3->format, 0, 0, 0, 130));
 					SDL_FillRect(src4, NULL, SDL_MapRGBA(src4->format, 0, 0, 0, 155));
 					time(
-						time(sdl_surface_merge_alpha(src1, src3, (t_pixel){INITWIDTH / 2, 0}), "surMerAlp1");
+						time(sdl_surface_merge_alpha(src1, src3, (t_pixel){INIT_WIDTH / 2, 0}), "surMerAlp1");
 						time(sdl_surface_merge_alpha(s, src1, (t_pixel){0, 0}), "surMerAlp2");
-						time(sdl_surface_merge_alpha(s, src2, (t_pixel){0, INITHEIGHT / 2}), "surMerAlp3");
-						time(sdl_surface_merge_alpha(s, src4, (t_pixel){INITWIDTH / 2 - 80, INITHEIGHT / 2 - 45}), "surMerAlp4");
+						time(sdl_surface_merge_alpha(s, src2, (t_pixel){0, INIT_HEIGHT / 2}), "surMerAlp3");
+						time(sdl_surface_merge_alpha(s, src4, (t_pixel){INIT_WIDTH / 2 - 80, INIT_HEIGHT / 2 - 45}), "surMerAlp4");
 					, "total");
 				}
 			}

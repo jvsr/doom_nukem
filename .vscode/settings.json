@@ -18,6 +18,8 @@
         "memory": "c",
         "tga.h": "c",
         "unistd.h": "c",
-        "io.h": "c"
+        "io.h": "c",
+        "sdl_extra.h": "c",
+        "gui.h": "c"
     }
 }

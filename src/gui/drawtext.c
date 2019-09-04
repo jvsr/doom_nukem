@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 17:27:05 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 11:51:37 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:33:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void				drawtext(t_gui *ui, t_text *text)
 	t_pixel		pixel;
 
 	srf = textsurfaceget(ui, text->text, text->font);
-	pixel = (t_pixel){(int)((float)INITWIDTH * text->transform.position.x),
-			(int)((float)INITHEIGHT * text->transform.position.y)};
+	pixel = (t_pixel){(int)((float)INIT_WIDTH * text->transform.position.x),
+			(int)((float)INIT_HEIGHT * text->transform.position.y)};
 	sdl_surface_merge(ui->guisurface, srf, pixel);
 	SDL_FreeSurface(srf);
 }

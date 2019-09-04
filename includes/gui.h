@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 14:55:09 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:20:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ typedef struct s_game		t_game;
 typedef	enum	e_fonttype
 {
 	ROBOTO,
-	MONOF
+	MONOF,
+	KARARC,
+	FONT_AMOUNT
 }				t_fonttype;
 
 typedef enum	e_guielem
@@ -92,7 +94,7 @@ typedef struct	s_gui
 	t_transform	transform;
 	t_bool		redraw;
 	SDL_Surface	*guisurface;
-	TTF_Font	*font[2];
+	TTF_Font	*font[FONT_AMOUNT];
 	t_list		*onclicks;
 }				t_gui;
 
