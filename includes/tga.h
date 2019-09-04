@@ -6,14 +6,12 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 15:39:05 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 16:20:31 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
-
-# define CLOSE_EVENT 17
 
 # include "SDL2/SDL.h"
 # if defined LINUX || defined __APPLE__
