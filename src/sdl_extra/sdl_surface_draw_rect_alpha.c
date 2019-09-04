@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/03 18:27:49 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/04 13:07:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ static void		copy_color(int *dst, Uint32 color, size_t length)
 	}
 }
 
-static size_t	merge_pixel(SDL_Surface *dst, t_color color, SDL_Rect rect, SDL_Point cur)
+static size_t	merge_pixel(SDL_Surface *dst, t_color color,
+							SDL_Rect rect, SDL_Point cur)
 {
 	size_t	length;
-	Uint32  color_value;
+	Uint32	color_value;
 
 	dst->userdata = dst->pixels + ((rect.y + cur.y) * dst->pitch)
 					+ (rect.x + cur.x) * 4;
@@ -67,9 +68,10 @@ static size_t	merge_pixel(SDL_Surface *dst, t_color color, SDL_Rect rect, SDL_Po
 	return (length);
 }
 
-void    sdl_surface_draw_rect_alpha(SDL_Surface *dst, t_color color, SDL_Rect rect)
+void			sdl_surface_draw_rect_alpha(SDL_Surface *dst, t_color color,
+											SDL_Rect rect)
 {
-	SDL_Point   cur;
+	SDL_Point	cur;
 
 	cur.y = 0;
 	while (cur.y < rect.h)
