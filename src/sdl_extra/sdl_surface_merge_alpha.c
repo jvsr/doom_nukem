@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 17:47:53 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/03 18:26:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,10 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 	const int	ref_dst = *start_dst;
 	const int	ref_src = *start_src;
 
-	len = 1;
-	while (start_dst[len] == ref_dst && start_src[len] == ref_src)
-	{
-		if (start.x + cur.x + len > dst->w - 1 || cur.x + len > src->w - 1)
-			return (len);
+	len = 0;
+	while (start.x + cur.x + len < dst->w && cur.x + len < src->w
+	&& start_dst[len] == ref_dst && start_src[len] == ref_src)
 		len++;
-	}
 	return ((size_t)len);
 }
 
@@ -79,8 +76,8 @@ static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
 	int		color;
 	size_t	length;
 
-	src->userdata = src->pixels + (cur.y * src->pitch) + (cur.x * 4);
-	dst->userdata = dst->pixels + ((start.y + cur.y) * dst->pitch)
+	src->userdata = src->pixels + cur.y * src->pitch + cur.x * 4;
+	dst->userdata = dst->pixels + (start.y + cur.y) * dst->pitch
 					+ (start.x + cur.x) * 4;
 	color = calculate_color(dst->userdata, src->userdata);
 	length = calculate_length(dst, src, start, cur);
@@ -106,7 +103,8 @@ void			sdl_surface_merge_alpha(SDL_Surface *dst, SDL_Surface *src,
 				if (start.x + cur.x > dst->w - 1)
 					break ;
 				else if (start.x + cur.x >= 0)
-					cur.x += merge_pixel(dst, src, start, cur);
+					cur.x += merge_pixel(dst, src, start, cur) - 1;
+				cur.x++;
 			}
 		}
 		cur.y++;

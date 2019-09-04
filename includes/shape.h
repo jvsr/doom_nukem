@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init.h                                             :+:    :+:            */
+/*   shape.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/27 14:39:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 16:29:21 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/04 13:08:45 by jvisser        #+#    #+#                */
+/*   Updated: 2019/09/04 16:27:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#ifndef SHAPE_H
+# define SHAPE_H
 
-# define INIT_WIDTH 1080
-# define INIT_HEIGHT 720
+# include <SDL2/SDL.h>
 
-typedef struct s_game	t_game;
-
-t_game	*init(void);
+typedef struct  s_circle
+{
+    size_t          d;
+    SDL_Point       mid;
+}               t_circle;
 
 #endif
