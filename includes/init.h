@@ -6,15 +6,15 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:39:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/27 15:12:55 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 16:29:21 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define INIT_WIDTH 1080
+# define INIT_HEIGHT 720
 
 typedef struct s_game	t_game;
 
