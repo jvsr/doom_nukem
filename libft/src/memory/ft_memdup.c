@@ -12,11 +12,11 @@
 
 #include "ft_memory.h"
 
-void	*ft_memdup(void *src, size_t len)
+void	*ft_memdup(const void *src, size_t len)
 {
-	char	*dup;
+	unsigned char	*dup;
 
-	dup = ft_memalloc(len);
+	dup = (unsigned char *)ft_memalloc(len);
 	if (dup == NULL)
 		return (NULL);
 	ft_memcpy(dup, src, len);

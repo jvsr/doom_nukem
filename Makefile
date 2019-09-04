@@ -6,12 +6,12 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/09/02 12:12:17 by ehollidg      ########   odam.nl          #
+#    Updated: 2019/09/04 17:02:30 by ehollidg      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra gui
+SUBLIBS = main color sdl_extra tga_reader gui
 
 # Executibale name
 NAME = doom-nukem

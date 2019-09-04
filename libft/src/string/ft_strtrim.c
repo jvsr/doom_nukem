@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-char	*ft_strtrim(char *str)
+char	*ft_strtrim(const char *str)
 {
 	return (ft_strdtrim(str, " \n\t"));
 }

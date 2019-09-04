@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-size_t		ft_strdlen(char *str, char *dlm)
+size_t		ft_strdlen(const char *str, const char *dlm)
 {
 	size_t		len;
 	long long	bytes[2];

@@ -13,14 +13,16 @@
 #include "ft_hash.h"
 #include "ft_character.h"
 
-size_t	ft_hashsdbm_nocase(char *str)
+size_t	ft_hashsdbm_nocase(const void *key, size_t size)
 {
-	size_t	hash;
-	size_t	i;
+	const char	*str;
+	size_t		hash;
+	size_t		i;
 
 	i = 0;
 	hash = 0;
-	while (str[i] != '\0')
+	str = key;
+	while (i < size)
 	{
 		hash = ft_tolower(str[i]) + (hash << 6) + (hash << 16) - hash;
 		i++;

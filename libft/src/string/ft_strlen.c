@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-static size_t	castmagic(long long *str)
+static size_t	castmagic(const long long *str)
 {
 	long long	himagic;
 	long long	lomagic;
@@ -41,7 +41,7 @@ static size_t	castmagic(long long *str)
 	return (0);
 }
 
-size_t			ft_strlen(char *str)
+size_t			ft_strlen(const char *str)
 {
 	size_t		len;
 
@@ -54,5 +54,5 @@ size_t			ft_strlen(char *str)
 			return (len);
 		len++;
 	}
-	return (len + castmagic((long long *)&str[len]));
+	return (len + castmagic((const long long *)&str[len]));
 }

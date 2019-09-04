@@ -12,7 +12,7 @@
 
 #include "ft_number.h"
 
-t_bool	ft_numin(intmax_t *arr, intmax_t num, size_t len)
+t_bool	ft_numin(const intmax_t *arr, intmax_t num, size_t len)
 {
 	while (len > 0)
 	{

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_bool		pf_isstr(t_info *info)
+t_bool		pf_isstr(const t_info *info)
 {
 	return (info->var_type == STR || info->var_type == T_WCHAR_STR);
 }

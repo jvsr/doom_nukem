@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 13:26:39 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:03:00 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_game	*alloc_game(void)
 static	void	init_window_surface(t_game *game)
 {
 	game->window = SDL_CreateWindow("Doom Nukem", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, INITWIDTH, INITHEIGHT, SDL_WINDOW_ALLOW_HIGHDPI |
+		SDL_WINDOWPOS_CENTERED, INIT_WIDTH, INIT_HEIGHT, SDL_WINDOW_ALLOW_HIGHDPI |
 		SDL_WINDOW_MOUSE_FOCUS);
 	if (game->window == NULL)
 		error_msg(SDL_GetError(), 1);

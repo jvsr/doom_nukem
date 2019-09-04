@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-void	ft_striteri(char *str, void (*f)(size_t, char *))
+void	ft_striteri(const char *str, void (*f)(size_t, const char *))
 {
 	size_t	i;
 

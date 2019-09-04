@@ -13,7 +13,7 @@
 #include "ft_list.h"
 #include "ft_memory.h"
 
-t_bool		ft_lstsortstrac(t_list *sortlst, t_list *lst)
+t_bool		ft_lstsortstrac(const t_list *sortlst, const t_list *lst)
 {
 	int		result;
 	size_t	n;

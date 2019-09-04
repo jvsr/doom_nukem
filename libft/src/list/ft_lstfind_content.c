@@ -13,9 +13,9 @@
 #include "ft_list.h"
 #include "ft_memory.h"
 
-t_list	*ft_lstfind_content(t_list *lst, void *content, size_t size)
+t_list	*ft_lstfind_content(const t_list *lst, void *content, size_t size)
 {
 	while (lst != NULL && ft_memequ(lst->content, content, size))
 		lst = lst->next;
-	return (lst);
+	return ((t_list *)lst);
 }

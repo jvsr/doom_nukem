@@ -15,6 +15,9 @@
         "criterion.h": "c",
         "ios": "c",
         "test.h": "c",
-        "memory": "c"
+        "memory": "c",
+        "tga.h": "c",
+        "unistd.h": "c",
+        "io.h": "c"
     }
 }

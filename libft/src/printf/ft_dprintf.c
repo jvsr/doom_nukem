@@ -29,7 +29,7 @@ static ssize_t	freeret(t_info *info)
 	return (ret);
 }
 
-ssize_t			ft_dprintf(int fd, char *format, ...)
+ssize_t			ft_dprintf(int fd, const char *format, ...)
 {
 	size_t	i;
 	t_info	*info;

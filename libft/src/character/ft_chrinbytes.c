@@ -12,7 +12,7 @@
 
 #include "ft_character.h"
 
-t_bool		ft_chrinbytes(long long *bytes, char c)
+t_bool		ft_chrinbytes(const long long *bytes, char c)
 {
 	if (c >= 64 && bytes[1] & (1LL << (c - 64)))
 		return (TRUE);

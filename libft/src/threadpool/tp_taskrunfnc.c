@@ -12,11 +12,11 @@
 
 #include "ft_threadpool.h"
 
-t_bool		tp_taskrunfnc(t_task *task)
+t_bool		tp_taskrunfnc(const t_task *task)
 {
 	void	**params;
 
-	params = task->params;
+	params = (void **)task->params;
 	if (task->param_count == 0)
 		task->fnc();
 	else if (task->param_count == 1)

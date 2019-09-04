@@ -12,7 +12,7 @@
 
 #include "ft_memory.h"
 
-void	*ft_memreplace(void **str1, void *str2)
+void	*ft_memreplace(void **str1, const void *str2)
 {
 	ft_memdel(str1);
 	*str1 = (void *)str2;

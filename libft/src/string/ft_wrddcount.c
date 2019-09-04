@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-size_t		ft_wrddcount(char *str, char *dlm)
+size_t		ft_wrddcount(const char *str, const char *dlm)
 {
 	long long	bytes[2];
 	size_t		count;

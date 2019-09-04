@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_bool		pf_issignint(t_info *info)
+t_bool		pf_issignint(const t_info *info)
 {
 	if (info->var_type == INT || info->var_type == INT_MAX)
 		return (TRUE);

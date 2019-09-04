@@ -12,7 +12,7 @@
 
 #include "ft_threadpool.h"
 
-t_bool		ft_pooldone(t_pool *pool)
+t_bool		ft_pooldone(const t_pool *pool)
 {
 	t_thread	*thread;
 	size_t		current;

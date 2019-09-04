@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_character.h"
 
-t_bool	ft_putendl_fd(char *str, int fd)
+t_bool	ft_putendl_fd(const char *str, int fd)
 {
 	if (ft_putstr_fd(str, fd) == FALSE)
 		return (FALSE);

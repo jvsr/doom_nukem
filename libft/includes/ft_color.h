@@ -17,13 +17,13 @@
 # include <string.h>
 # include <stdlib.h>
 
-typedef	unsigned int	t_color;
+typedef	unsigned	t_color;
 
 char		*ft_colorstr(int color);
 t_color		*ft_colorhextorgba(t_color color);
 t_color		ft_colorrgbatohex(t_color r, t_color g, t_color b, t_color a);
-ssize_t		ft_colorcode(char *str);
-ssize_t		ft_colorlcode(char *str);
-ssize_t		ft_colorncode(char *str, size_t n);
+ssize_t		ft_colorcode(const char *str);
+ssize_t		ft_colorlcode(const char *str);
+ssize_t		ft_colorncode(const char *str, size_t n);
 
 #endif

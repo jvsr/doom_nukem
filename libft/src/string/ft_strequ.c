@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-t_bool	ft_strequ(char *str1, char *str2)
+t_bool	ft_strequ(const char *str1, const char *str2)
 {
 	return (ft_strcmp(str1, str2) == 0);
 }

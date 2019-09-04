@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include "ft_string.h"
 
-size_t		pf_addstr(t_info *info, char *str)
+size_t		pf_addstr(t_info *info, const char *str)
 {
 	size_t	len;
 

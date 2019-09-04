@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	pf_addnstr(t_info *info, char *str, size_t n)
+void	pf_addnstr(t_info *info, const char *str, size_t n)
 {
 	if (n == 0)
 		return ;

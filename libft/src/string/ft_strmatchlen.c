@@ -12,7 +12,7 @@
 
 #include "ft_string.h"
 
-size_t	ft_strmatchlen(char *str1, char *str2)
+size_t	ft_strmatchlen(const char *str1, const char *str2)
 {
 	size_t			i;
 	unsigned char	temp_a;

@@ -13,7 +13,7 @@
 #include "ft_string.h"
 #include "ft_memory.h"
 
-char	*ft_strcpy(char *dst, char *src)
+char	*ft_strcpy(char *dst, const char *src)
 {
 	size_t	len;
 
