@@ -6,12 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:12:48 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:32:33 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "gui.h"
+#include "init.h"
 #include "libft/ft_list.h"
 
 static t_bool	checkcolision(int x, int y, t_pixel locs[2])
@@ -21,24 +22,24 @@ static t_bool	checkcolision(int x, int y, t_pixel locs[2])
 
 static t_pixel	getstart(t_transform *transform)
 {
-	return ((t_pixel){(transform->position.x * INITWIDTH),
-	transform->position.y * INITHEIGHT});
+	return ((t_pixel){(transform->position.x * INIT_WIDTH),
+	transform->position.y * INIT_HEIGHT});
 }
 
 static t_pixel	getend(t_transform *transform)
 {
 	if (transform->guitype == BUTTON)
-		return ((t_pixel){((t_button*)transform->guielem)->size.x * INITWIDTH,
-		((t_button*)transform->guielem)->size.y * INITHEIGHT});
+		return ((t_pixel){((t_button*)transform->guielem)->size.x * INIT_WIDTH,
+		((t_button*)transform->guielem)->size.y * INIT_HEIGHT});
 	else if (transform->guitype == IMAGE)
-		return ((t_pixel){((t_image*)transform->guielem)->size.x * INITWIDTH,
-		((t_image*)transform->guielem)->size.y * INITHEIGHT});
+		return ((t_pixel){((t_image*)transform->guielem)->size.x * INIT_WIDTH,
+		((t_image*)transform->guielem)->size.y * INIT_HEIGHT});
 	else if (transform->guitype == TEXT)
-		return ((t_pixel){((t_text*)transform->guielem)->font.size * INITWIDTH,
-		((t_text*)transform->guielem)->font.size * INITHEIGHT});
+		return ((t_pixel){((t_text*)transform->guielem)->font.size * INIT_WIDTH,
+		((t_text*)transform->guielem)->font.size * INIT_HEIGHT});
 	else
-		return ((t_pixel){((t_panel*)transform->guielem)->size.x * INITWIDTH,
-		((t_panel*)transform->guielem)->size.y * INITHEIGHT});
+		return ((t_pixel){((t_panel*)transform->guielem)->size.x * INIT_WIDTH,
+		((t_panel*)transform->guielem)->size.y * INIT_HEIGHT});
 	return ((t_pixel){0, 0});
 }
 

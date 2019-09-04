@@ -6,13 +6,14 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:57:53 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/04 17:33:50 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "game.h"
 #include "libft/ft_list.h"
+#include "init.h"
 
 static void	drawchildren(t_gui *gui, t_transform *parent)
 {
@@ -32,9 +33,9 @@ void		drawpanel(t_gui *ui, t_panel *panel)
 	t_pixel		pixel;
 	t_gui		gui;
 
-	dst = SDL_CreateRGBSurface(0, INITWIDTH, INITHEIGHT, 32, 0, 0, 0, 0);
-	pixel = (t_pixel){(int)((float)INITWIDTH * panel->transform.position.x),
-			(int)((float)INITHEIGHT * panel->transform.position.y)};
+	dst = SDL_CreateRGBSurface(0, INIT_WIDTH, INIT_HEIGHT, 32, 0, 0, 0, 0);
+	pixel = (t_pixel){(int)((float)INIT_WIDTH * panel->transform.position.x),
+			(int)((float)INIT_HEIGHT * panel->transform.position.y)};
 	gui.font[0] = ui->font[0];
 	gui.font[1] = ui->font[1];
 	gui.guisurface = dst;
