@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:42:57 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/06 11:14:40 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "gui.h"
 #include "init.h"
 #include "libft/ft_list.h"
+#include "libft/ft_string.h"
 
 static t_bool	checkcolision(int x, int y, t_pixel locs[2])
 {
@@ -44,13 +45,30 @@ static t_pixel	getend(t_transform *transform)
 	return ((t_pixel){0, 0});
 }
 
+static t_bool	isabove(t_transform *cur, t_transform *new)
+{
+	if (cur == NULL)
+		return (TRUE);
+	if (new == NULL)
+		return (FALSE);
+	while (cur->parent != NULL && new->parent != NULL &&
+		ft_strequ(cur->parent->name, new->parent->name) == FALSE)
+	{
+		cur = cur->parent;
+		new = new->parent;
+	}
+	return (new->layer > cur->layer);
+}
+
 void			clickcheck(t_game *game)
 {
-	int		x;
-	int		y;
-	t_list	*lst;
-	t_pixel	locs[2];
+	int			x;
+	int			y;
+	t_list		*lst;
+	t_pixel		locs[2];
+	t_transform *cur;
 
+	cur = NULL;
 	SDL_GetMouseState(&x, &y);
 	lst = game->ui.onclicks;
 	while (lst != NULL)
@@ -60,13 +78,10 @@ void			clickcheck(t_game *game)
 			locs[0] = getstart((t_transform*)lst->content);
 			locs[1] = getend((t_transform*)lst->content);
 			locs[1] = (t_pixel){locs[0].x + locs[1].x, locs[0].y + locs[1].y};
-			if (checkcolision(x, y, locs))
-			{
-				((t_transform*)lst->content)->onclick(game,
-					(t_transform*)lst->content);
-				return ;
-			}
+			if (checkcolision(x, y, locs) && isabove(cur, lst->content))
+				cur = ((t_transform*)lst->content);
 		}
 		lst = lst->next;
 	}
+	cur->onclick(game, cur);
 }

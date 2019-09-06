@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:19:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:39:02 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 11:09:52 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_button	*buttontexturenew(t_guiinfo *guiinfo, char *text,
 	button->transform.guielem = (void*)button;
 	button->transform.onclick = NULL;
 	button->transform.visible = TRUE;
+	button->transform.layer = 0;
 	return (button);
 }

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 11:02:33 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/29 11:08:49 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 11:11:50 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void		transformparentset(t_transform *child, t_transform *parent)
 		parent->children = ft_lstnew(child, sizeof(child));
 	else
 		ft_lstadd(&parent->children, ft_lstnew(child, sizeof(child)));
+	child->layer = (short)ft_lstlen(parent->children);
 }

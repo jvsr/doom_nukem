@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:06:16 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:39:35 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 11:10:32 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ t_text			*textnew(t_guiinfo *guiinfo, char *text,
 	textui->transform.guielem = (void*)textui;
 	textui->transform.onclick = NULL;
 	textui->transform.visible = TRUE;
+	textui->transform.layer = 0;
 	return (textui);
 }

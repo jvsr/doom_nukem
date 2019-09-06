@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:22:33 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:39:55 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 11:10:22 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ t_panel		*panelnew(t_guiinfo *guiinfo)
 	panel->transform.guielem = (void*)panel;
 	panel->transform.onclick = NULL;
 	panel->transform.visible = TRUE;
+	panel->transform.layer = 0;
 	return (panel);
 }

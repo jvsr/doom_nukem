@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:15:07 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:44:32 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 11:10:09 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_image		*imagenew(t_guiinfo *guiinfo, const SDL_Surface *texture)
 	image->transform.guielem = (void*)image;
 	image->transform.onclick = NULL;
 	image->transform.visible = TRUE;
+	image->transform.layer = 0;
 	return (image);
 }

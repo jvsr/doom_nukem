@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:20:20 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/06 11:09:23 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_transform
 	t_list			*children;
 	void			*guielem;
 	t_guielem		guitype;
+	short			layer;
 	void			(*onclick)(t_game *, t_transform *);
 }				t_transform;
 
