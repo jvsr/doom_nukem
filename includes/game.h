@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/04 17:43:03 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/06 14:39:20 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 # include <SDL2/SDL.h>
 # include "coord.h"
-# include "gui.h"
 
-typedef struct s_ui			t_ui;
+typedef struct s_gui		t_gui;
 typedef struct s_level		t_level;
 typedef struct s_player		t_player;
 typedef struct s_hashmap	t_hashmap;
