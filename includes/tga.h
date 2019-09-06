@@ -14,7 +14,7 @@
 # define MAIN_H
 
 # include "SDL2/SDL.h"
-# if defined LINUX || defined __APPLE__
+# if defined __linux__ || defined __APPLE__
 #  include "unistd.h"
 # else
 #  include "io.h"
