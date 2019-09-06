@@ -6,12 +6,12 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 13:33:35 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 14:44:33 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
 #include "gui.h"
+#include "game.h"
 
 static void		polled(t_game *game, SDL_Event *event)
 {

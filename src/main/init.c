@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 17:23:13 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/06 14:45:41 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <errno.h>
 #include "libft/ft_memory.h"
 #include "libft/ft_string.h"
+#include "gui.h"
 #include "game.h"
 #include "init.h"
 #include "error.h"
-#include "gui.h"
 
 static void		init_sdl(void)
 {

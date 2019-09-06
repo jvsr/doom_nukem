@@ -6,13 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 13:34:52 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 14:44:37 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
-#include "game.h"
 #include "gui.h"
+#include "game.h"
 #include "init.h"
 #include "libft/ft_list.h"
 #include "libft/ft_string.h"
