@@ -12,6 +12,7 @@
 
 #include "tga.h"
 #include "libft/ft_memory.h"
+#include <SDL2/SDL.h>
 
 SDL_Surface		*tgaopenassdl(char *loc)
 {
@@ -21,9 +22,7 @@ SDL_Surface		*tgaopenassdl(char *loc)
 	if (!opentga(&img, loc))
 		return (NULL);
 	sdl = SDL_CreateRGBSurfaceWithFormat(0, img.width, img.height, 32, SDL_PIXELFORMAT_RGBA32);
-	printf("Pixels Pointer -> %p, %p\n", sdl->pixels, img.pixels);
 	ft_memcpy(sdl->pixels, img.pixels, img.height * img.width * sizeof(int));
-	printf("%i, %i\n", ((int*)sdl->pixels)[45], img.pixels[45]);
 	free(img.pixels);
 	return (sdl);
 }
