@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 15:37:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 16:40:25 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/06 16:50:10 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ SDL_Surface		*tgaopenassdl(char *loc)
 
 	if (opentga(&img, loc))
 		return (NULL);
-	sdl = SDL_CreateRGBSurfaceWithFormat(0, img.width, img.height, 32, SDL_PIXELFORMAT_RGBA32);
+	sdl = SDL_CreateRGBSurfaceWithFormat(0, img.width, img.height, 32,
+		SDL_PIXELFORMAT_RGBA32);
 	ft_memcpy(sdl->pixels, img.pixels, img.height * img.width * sizeof(int));
 	free(img.pixels);
 	return (sdl);
