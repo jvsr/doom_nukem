@@ -6,14 +6,14 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/16 15:12:17 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/27 15:49:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/06 14:50:26 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft/ft_printf.h"
 #include <criterion/criterion.h>
-
+#include "gui.h"
 #include "game.h"
 #include "init.h"
 
