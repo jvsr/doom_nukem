@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/06 11:27:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:36:15 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 13:36:33 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_transform	*checkchildren(t_transform *trans, char *name)
 	return (NULL);
 }
 
-t_transform		*transformgetbyname(t_gui *ui, char *name)
+t_transform			*transformgetbyname(t_gui *ui, char *name)
 {
 	return (checkchildren(&ui->transform, name));
 }

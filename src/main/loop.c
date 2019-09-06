@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 18:36:46 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/06 13:33:35 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,10 @@ static void		polled(t_game *game, SDL_Event *event)
 		clickcheck(game);
 }
 
-static void		testfunc(t_game *game, t_transform *transform)
-{
-	(void)game;
-	transform->visible = FALSE;
-	game->ui.redraw = TRUE;
-}
-
 void			loop(t_game *game)
 {
 	SDL_Event event;
-	t_button	*button;
 
-	button = buttoncolournew(
-		&(t_guiinfo){"button", TRUE, (t_coord){0.4, 0.4}, (t_coord){0.2, 0.2}},
-		"Hey",
-		&(t_font){KARARC, 0.2, (SDL_Color){0x18, 0xDF, 0xEE, 0x00}},
-		0xFFFFFFFF);
-	transformparentset(&button->transform, &game->ui.transform);
-	transformaddclick(&game->ui, &button->transform, testfunc);
 	game->ui.redraw = TRUE;
 	while (game->state == running)
 	{
@@ -52,5 +37,4 @@ void			loop(t_game *game)
 		drawgui(game);
 		SDL_UpdateWindowSurface(game->window);
 	}
-	buttondestroy(&game->ui, button, TRUE);
 }

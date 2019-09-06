@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 12:18:54 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 13:36:07 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void			drawgui(t_game *game)
 {
 	t_list *lst;
+
 	if (game->ui.redraw == TRUE)
 	{
 		sdl_surface_draw_rect(game->ui.guisurface, (t_color){0, 0, 0, 0},

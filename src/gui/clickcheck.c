@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:14:40 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 13:34:52 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void			clickcheck(t_game *game)
 		}
 		lst = lst->next;
 	}
-	cur->onclick(game, cur);
+	if (cur != NULL)
+		cur->onclick(game, cur);
 }
