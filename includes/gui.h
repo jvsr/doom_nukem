@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:09:23 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 11:39:43 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ void		transformaddclick(t_gui *ui, t_transform *transform,
 t_bool		transformgetvisible(t_transform *transform);
 void		clickdestroy(t_gui *ui, char *name);
 void		clickcheck(t_game *game);
+t_transform	*transformgetbyname(t_gui *ui, char *name);
 
 #endif

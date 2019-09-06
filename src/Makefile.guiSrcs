@@ -25,4 +25,4 @@ SRCS = buttondestroy imagedestroy paneldestroy textdestroy buttoncolournew \
 	buttontexturenew imagenew panelnew textnew transformparentset \
 	childrendestroy drawgui drawelem drawtext drawimage fontget textsurfaceget \
 	drawbutton transformaddclick transformgetvisible clickdestroy clickcheck \
-	drawpanel
+	drawpanel transformgetbyname
