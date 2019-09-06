@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/06 11:46:42 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:48:32 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/06 12:17:45 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_transform	*transformgetinchildren(t_transform *trans, char *name)
 	lst = trans->children;
 	while (lst != NULL)
 	{
-		ret = checkchildren(lst->content, name);
+		ret = transformgetinchildren(lst->content, name);
 		if (ret != NULL)
 			return (ret);
 	}
