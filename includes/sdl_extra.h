@@ -6,23 +6,25 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 17:23:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 15:18:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 15:22:02 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SDL_EXTRA_H
 # define SDL_EXTRA_H
 
-#include <SDL2/SDL.h>
+# include <SDL2/SDL_rect.h>
+# include <SDL2/SDL_pixels.h>
+# include <SDL2/SDL_surface.h>
 
-typedef struct s_color  t_color;
-typedef struct s_pixel  t_pixel;
-typedef struct s_circle t_circle;
+typedef struct s_circle	t_circle;
 
-void    sdl_surface_draw_rect(SDL_Surface *dst, t_color color, SDL_Rect rect);
-void    sdl_surface_draw_rect_alpha(SDL_Surface *dst, t_color color, SDL_Rect rect);
-void	sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src, t_pixel start);
-void	sdl_surface_merge_alpha(SDL_Surface *dst, SDL_Surface *src, t_pixel start);
-void	sdl_surface_draw_circ(SDL_Surface *dst, t_color color, t_circle c);
+void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c);
+void	sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect);
+void	sdl_draw_surface_rect_alpha(SDL_Surface *dst, SDL_Color color,
+									SDL_Rect rect);
+void	sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src, SDL_Point start);
+void	sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src,
+								SDL_Point start);
 
 #endif

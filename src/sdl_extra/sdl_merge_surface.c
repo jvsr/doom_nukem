@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_surface_merge.c                                :+:    :+:            */
+/*   sdl_merge_surface.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/29 16:05:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 13:50:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_surface.h>
 
 #include "libft/ft_memory.h"
-
-#include "coord.h"
-#include "color.h"
 
 /*
 ** * Surface merge will take two surfaces and a starting pixel.
@@ -26,10 +24,10 @@
 */
 
 void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src,
-								t_pixel start)
+								SDL_Point start)
 {
-	int		len;
-	t_pixel	cur;
+	int			len;
+	SDL_Point	cur;
 
 	cur.y = 0;
 	while (cur.y < src->h)
