@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_surface_merge_alpha.c                          :+:    :+:            */
+/*   sdl_merge_surface_alpha.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 14:29:54 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 16:53:37 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_surface.h>
 
 #include "libft/ft_memory.h"
 
-#include "coord.h"
 #include "color.h"
 
 /*
@@ -28,8 +28,8 @@
 static int		calculate_color(int *dst, int *src)
 {
 	float		op;
-	t_color		cdst;
-	t_color		csrc;
+	SDL_Color	cdst;
+	SDL_Color	csrc;
 	const int	maxalpha = 255;
 
 	rgba_to_color(&cdst, *dst);
@@ -85,7 +85,7 @@ static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
 	return (length);
 }
 
-void			sdl_surface_merge_alpha(SDL_Surface *dst, SDL_Surface *src,
+void			sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src,
 										SDL_Point start)
 {
 	SDL_Point	cur;

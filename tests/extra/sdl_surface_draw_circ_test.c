@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 18:55:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 14:31:07 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 16:54:36 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ int	main (void)
 						time(sdl_surface_merge_alpha(s, src4, (SDL_Point){INIT_WIDTH / 2 - 80, INIT_HEIGHT / 2 - 45}), "surMerAlp4");
 						// time(sdl_surface_draw_rect_alpha(s, (t_color){180, 34, 23, 180}, (SDL_Rect){50, 60, 650, 600}), "surDrawRect1");
 						time(
-							time(sdl_surface_draw_rect_alpha(s, (t_color){0x33, 0x33, 0x33, 0xDD}, (SDL_Rect){50, 50, 160, 60}), "surDrawRect2");
-							time(sdl_surface_draw_rect_alpha(s, (t_color){0x33, 0x33, 0x33, 0xDD}, (SDL_Rect){60, 40, 140, 80}), "surDrawRect3");
-							time(sdl_surface_draw_rect_alpha(s, (t_color){0x99, 0x99, 0x99, 0xDD}, (SDL_Rect){60, 50, 140, 60}), "surDrawRect4");
+							time(sdl_draw_surface_rect_alpha(s, (t_color){0x33, 0x33, 0x33, 0xDD}, (SDL_Rect){50, 50, 160, 60}), "surDrawRect2");
+							time(sdl_draw_surface_rect_alpha(s, (t_color){0x33, 0x33, 0x33, 0xDD}, (SDL_Rect){60, 40, 140, 80}), "surDrawRect3");
+							time(sdl_draw_surface_rect_alpha(s, (t_color){0x99, 0x99, 0x99, 0xDD}, (SDL_Rect){60, 50, 140, 60}), "surDrawRect4");
 						, "button creation");	
-						time(sdl_surface_draw_rect_alpha(s, (t_color){0x66, 0x66, 0x66, 0x66}, (SDL_Rect){80, 80, INIT_WIDTH / 2 - 35, INIT_HEIGHT / 2 - 50}), "surDrawRect5");
+						time(sdl_draw_surface_rect_alpha(s, (t_color){0x66, 0x66, 0x66, 0x66}, (SDL_Rect){80, 80, INIT_WIDTH / 2 - 35, INIT_HEIGHT / 2 - 50}), "surDrawRect5");
 						time(sdl_surface_draw_circ(s, (t_color){0, 0, 0, 0xff}, (t_circle){100000, (SDL_Point){INIT_WIDTH, INIT_HEIGHT}}), "surDrawCirc1");
-						// time(sdl_surface_draw_rect_alpha(s, (t_color){180, 34, 23, 180}, (SDL_Rect){50, 60, 650, 600}), "surDrawRect6");
+						// time(sdl_draw_surface_rect_alpha(s, (t_color){180, 34, 23, 180}, (SDL_Rect){50, 60, 650, 600}), "surDrawRect6");
 					, "total");
 				}
 			}
@@ -118,7 +118,7 @@ gcc \
 src/color/rgba_to_color.c \
 src/color/color_to_rgba.c \
 src/sdl_extra/sdl_surface_draw_circ.c \
-src/sdl_extra/sdl_surface_merge_alpha.c \
-src/sdl_extra/sdl_surface_draw_rect_alpha.c \
+src/sdl_extra/sdl_merge_surface_alpha.c \
+src/sdl_extra/sdl_draw_surface_rect_alpha.c \
 tests/extra/sdl_surface_draw_circ_test.c
 */

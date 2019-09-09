@@ -6,12 +6,14 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 16:39:32 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/09 16:44:38 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef TGA_H
+# define TGA_H
+
+# include <SDL2/SDL.h>
 
 # include <SDL2/SDL.h>
 # include "libft/ft_bool.h"

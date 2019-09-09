@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 18:55:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 14:32:09 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 16:55:07 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,6 @@ gcc \
 src/color/rgba_to_color.c \
 src/color/color_to_rgba.c \
 src/sdl_extra/sdl_surface_draw_rect.c \
-src/sdl_extra/sdl_surface_merge_alpha.c \
+src/sdl_extra/sdl_merge_surface_alpha.c \
 tests/extra/sdl_surface_draw_rect_test.c
 */

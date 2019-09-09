@@ -6,22 +6,17 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 17:00:37 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 12:00:49 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 15:18:40 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-typedef struct	s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}				t_color;
+# include <SDL2/SDL_pixels.h>
+# include <_types/_uint32_t.h>
 
-int		color_to_rgba(t_color c);
-void	rgba_to_color(t_color *c, int color);
+uint32_t	color_to_rgba(SDL_Color c);
+void		rgba_to_color(SDL_Color *c, Uint32 color);
 
 #endif

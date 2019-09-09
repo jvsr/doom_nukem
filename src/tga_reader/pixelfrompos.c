@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 18:55:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 15:17:30 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 13:56:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	b32(unsigned char *str, size_t i)
 {
 	unsigned int	ret;
-	
+
 	ret = ~str[i + 2] << 24;
 	ret |= str[i + 1] << 16;
 	ret |= str[i] << 8;
@@ -26,7 +26,7 @@ static int	b32(unsigned char *str, size_t i)
 static int	b24(unsigned char *str, size_t i)
 {
 	unsigned int	ret;
-	
+
 	ret = str[i + 1] << 16;
 	ret |= str[i] << 8;
 	ret |= str[i + 2];

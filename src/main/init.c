@@ -6,12 +6,15 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/06 14:45:41 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 16:51:57 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
 #include <errno.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_error.h>
+#include <SDL2/SDL_video.h>
+
 #include "libft/ft_memory.h"
 #include "libft/ft_string.h"
 #include "gui.h"
@@ -42,9 +45,12 @@ static t_game	*alloc_game(void)
 
 static	void	init_window_surface(t_game *game)
 {
-	game->window = SDL_CreateWindow("Doom Nukem", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, INIT_WIDTH, INIT_HEIGHT, SDL_WINDOW_ALLOW_HIGHDPI |
-		SDL_WINDOW_MOUSE_FOCUS);
+	game->window = SDL_CreateWindow("Doom Nukem",
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		INIT_WIDTH,
+		INIT_HEIGHT,
+		SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MOUSE_FOCUS);
 	if (game->window == NULL)
 		error_msg(SDL_GetError(), 1);
 	game->surface = SDL_GetWindowSurface(game->window);
