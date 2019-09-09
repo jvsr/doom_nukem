@@ -17,9 +17,9 @@ branches:
     - master
 
 matrix:
-  fast_finish: true
   allow_failures:
-    - linux
+    - os: linux
+  fast_finish: true
 
 install:
   - bash .travisInstall.bash
