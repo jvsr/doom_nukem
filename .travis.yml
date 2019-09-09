@@ -16,6 +16,11 @@ branches:
   only:
     - master
 
+matrix:
+  fast_finish: true
+  allow_failures:
+    - linux
+
 install:
   - bash .travisInstall.bash
 
