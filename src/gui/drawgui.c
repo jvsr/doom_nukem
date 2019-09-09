@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:23:39 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:29:26 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void			drawgui(t_game *game)
 		}
 		game->ui.redraw = FALSE;
 	}
-	sdl_surface_merge(game->surface, game->ui.guisurface, (t_pixel){0, 0});
+	sdl_surface_merge(game->surface, game->ui.guisurface, (SDL_Point){0, 0});
 }

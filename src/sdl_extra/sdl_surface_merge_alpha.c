@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 18:33:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 14:29:54 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		calculate_color(int *dst, int *src)
 }
 
 static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
-								t_pixel start, t_pixel cur)
+								SDL_Point start, SDL_Point cur)
 {
 	int			len;
 	const int	*start_dst = (int*)(dst->userdata);
@@ -71,7 +71,7 @@ static void		copy_color(int *dst, int color, size_t length)
 }
 
 static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
-							t_pixel start, t_pixel cur)
+							SDL_Point start, SDL_Point cur)
 {
 	int		color;
 	size_t	length;
@@ -86,9 +86,9 @@ static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
 }
 
 void			sdl_surface_merge_alpha(SDL_Surface *dst, SDL_Surface *src,
-										t_pixel start)
+										SDL_Point start)
 {
-	t_pixel	cur;
+	SDL_Point	cur;
 
 	cur.y = 0;
 	while (cur.y < src->h)

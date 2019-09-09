@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 18:55:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 17:33:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 14:31:59 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "game.h"
 #include "test.h"
 
-void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src, t_pixel start);
+void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src, SDL_Point start);
 
 int	main (void)
 {
@@ -73,10 +73,10 @@ int	main (void)
 					SDL_FillRect(src3, NULL, SDL_MapRGBA(src3->format, 0, 0, 0, 130));
 					SDL_FillRect(src4, NULL, SDL_MapRGBA(src4->format, 0, 0, 0, 255));
 					time(
-						time(sdl_surface_merge(src1, src3, (t_pixel){INIT_WIDTH / 2, 0}), "surMer1");
-						time(sdl_surface_merge(s, src1, (t_pixel){0, 0}), "surMer2");
-						time(sdl_surface_merge(s, src2, (t_pixel){0, INIT_HEIGHT / 2 - 100}), "surMer3");
-						time(sdl_surface_merge(s, src4, (t_pixel){INIT_WIDTH / 2 - 80, INIT_HEIGHT / 2 - 45}), "surMer4");
+						time(sdl_surface_merge(src1, src3, (SDL_Point){INIT_WIDTH / 2, 0}), "surMer1");
+						time(sdl_surface_merge(s, src1, (SDL_Point){0, 0}), "surMer2");
+						time(sdl_surface_merge(s, src2, (SDL_Point){0, INIT_HEIGHT / 2 - 100}), "surMer3");
+						time(sdl_surface_merge(s, src4, (SDL_Point){INIT_WIDTH / 2 - 80, INIT_HEIGHT / 2 - 45}), "surMer4");
 					, "total");
 				}
 			}

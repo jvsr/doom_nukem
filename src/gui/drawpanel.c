@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:43:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 14:29:38 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static void	drawchildren(t_gui *gui, t_transform *parent)
 void		drawpanel(t_gui *ui, t_panel *panel)
 {
 	SDL_Surface *dst;
-	t_pixel		pixel;
+	SDL_Point		pixel;
 	t_gui		gui;
 
 	dst = SDL_CreateRGBSurface(0, INIT_WIDTH, INIT_HEIGHT, 32, 0, 0, 0, 0);
-	pixel = (t_pixel){(int)((float)INIT_WIDTH * panel->transform.position.x),
+	pixel = (SDL_Point){(int)((float)INIT_WIDTH * panel->transform.position.x),
 			(int)((float)INIT_HEIGHT * panel->transform.position.y)};
 	gui.font[0] = ui->font[0];
 	gui.font[1] = ui->font[1];
