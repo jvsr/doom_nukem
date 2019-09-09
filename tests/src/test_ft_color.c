@@ -6,18 +6,19 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 16:19:32 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 17:49:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 15:41:34 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_surface.h>
 
 #include <criterion/criterion.h>
 
 #include "color.h"
 
 Test(rgba_to_color, white) {
-    t_color c;
+    SDL_Color c;
     SDL_Surface *s;
 
 	s = SDL_CreateRGBSurface(0, 3, 3, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
@@ -29,7 +30,7 @@ Test(rgba_to_color, white) {
 }
 
 Test(rgba_to_color, black) {
-    t_color c;
+    SDL_Color c;
     SDL_Surface *s;
 
 	s = SDL_CreateRGBSurface(0, 3, 3, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
@@ -41,7 +42,7 @@ Test(rgba_to_color, black) {
 }
 
 Test(rgba_to_color, other) {
-    t_color c;
+    SDL_Color c;
     SDL_Surface *s;
 
 	s = SDL_CreateRGBSurface(0, 3, 3, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
@@ -54,7 +55,7 @@ Test(rgba_to_color, other) {
 
 Test(color_to_rgba, white) {
     int     res;
-    t_color c;
+    SDL_Color c;
     SDL_Surface *s;
 
     res = 0;
@@ -69,7 +70,7 @@ Test(color_to_rgba, white) {
 
 Test(color_to_rgba, black) {
     int     res;
-    t_color c;
+    SDL_Color c;
     SDL_Surface *s;
 
     res = 0;
@@ -84,7 +85,7 @@ Test(color_to_rgba, black) {
 
 Test(color_to_rgba, other) {
     int     res;
-    t_color c;
+    SDL_Color c;
     SDL_Surface *s;
 
     res = 0;
