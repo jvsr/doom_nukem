@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:37:45 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:19:15 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void			checkclick(t_game *game)
 	SDL_Point		locs[2];
 	t_transform *cur;
 
+	if(!game->cursoractive)
+		return ;
 	cur = NULL;
 	SDL_GetMouseState(&x, &y);
 	lst = game->ui.onclicks;
