@@ -19,7 +19,7 @@
 #include "game.h"
 
 /*
-** --------------------------------init_keymap---------------------------------
+** ---------------------------------init_keymap---------------------------------
 */
 
 Test(init_keymap, null, .signal=SIGSEGV)
@@ -34,4 +34,13 @@ Test(init_keymap, succsess)
 	game = (t_game *)ft_memalloc(sizeof(t_game));
 	init_keymap(game);
 	cr_assert(game->keymap != NULL);
+}
+
+/*
+** ---------------------------------get_keymap----------------------------------
+*/
+
+Test(get_keymap, null, .signal=SIGSEGV)
+{
+	get_keymap(NULL, 0);
 }
