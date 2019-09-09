@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 18:55:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/02 17:25:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 13:52:50 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "game.h"
 #include "test.h"
 
-void		sdl_surface_merge_alpha(SDL_Surface *dst, SDL_Surface *src, t_pixel start);
+void		sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src, t_pixel start);
 
 int	main (void)
 {
@@ -78,10 +78,10 @@ int	main (void)
 					SDL_FillRect(src3, NULL, SDL_MapRGBA(src3->format, 0, 0, 0, 130));
 					SDL_FillRect(src4, NULL, SDL_MapRGBA(src4->format, 0, 0, 0, 155));
 					time(
-						time(sdl_surface_merge_alpha(src1, src3, (t_pixel){INITWIDTH / 2, 0}), "surMerAlp1");
-						time(sdl_surface_merge_alpha(s, src1, (t_pixel){0, 0}), "surMerAlp2");
-						time(sdl_surface_merge_alpha(s, src2, (t_pixel){0, INITHEIGHT / 2}), "surMerAlp3");
-						time(sdl_surface_merge_alpha(s, src4, (t_pixel){INITWIDTH / 2 - 80, INITHEIGHT / 2 - 45}), "surMerAlp4");
+						time(sdl_merge_surface_alpha(src1, src3, (t_pixel){INITWIDTH / 2, 0}), "surMerAlp1");
+						time(sdl_merge_surface_alpha(s, src1, (t_pixel){0, 0}), "surMerAlp2");
+						time(sdl_merge_surface_alpha(s, src2, (t_pixel){0, INITHEIGHT / 2}), "surMerAlp3");
+						time(sdl_merge_surface_alpha(s, src4, (t_pixel){INITWIDTH / 2 - 80, INITHEIGHT / 2 - 45}), "surMerAlp4");
 					, "total");
 				}
 			}
@@ -104,8 +104,8 @@ gcc \
 -Llibft -lft \
 -I`brew --cellar`/../include \
 -L`brew --cellar`/../lib -lSDL2 \
-src/sdl_extra/sdl_surface_merge_alpha.c \
-src/sdl_extra/sdl_surface_merge_alpha_test.c \
+src/sdl_extra/sdl_merge_surface_alpha.c \
+src/sdl_extra/sdl_merge_surface_alpha_test.c \
 src/color/color_to_rgba.c \
 src/color/rgba_to_color.c
 */

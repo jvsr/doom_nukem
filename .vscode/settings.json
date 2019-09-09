@@ -17,6 +17,13 @@
         "test.h": "c",
         "tga.h": "c",
         "unistd.h": "c",
-        "io.h": "c"
+        "io.h": "c",
+        "sdl_pixels.h": "c",
+        "sdl_surface.h": "c",
+        "sdl_rect.h": "c",
+        "stdint.h": "c",
+        "_uint32_t.h": "c",
+        "sdl_keycode.h": "c",
+        "sdl_video.h": "c"
     }
 }

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_surface_merge_alpha.c                          :+:    :+:            */
+/*   sdl_merge_surface_alpha.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/03 18:26:33 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 15:23:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_surface.h>
 
 #include "libft/ft_memory.h"
 
-#include "coord.h"
 #include "color.h"
 
 /*
@@ -28,8 +28,8 @@
 static int		calculate_color(int *dst, int *src)
 {
 	float		op;
-	t_color		cdst;
-	t_color		csrc;
+	SDL_Color	cdst;
+	SDL_Color	csrc;
 	const int	maxalpha = 255;
 
 	rgba_to_color(&cdst, *dst);
@@ -43,7 +43,7 @@ static int		calculate_color(int *dst, int *src)
 }
 
 static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
-								t_pixel start, t_pixel cur)
+								SDL_Point start, SDL_Point cur)
 {
 	int			len;
 	const int	*start_dst = (int*)(dst->userdata);
@@ -71,7 +71,7 @@ static void		copy_color(int *dst, int color, size_t length)
 }
 
 static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
-							t_pixel start, t_pixel cur)
+							SDL_Point start, SDL_Point cur)
 {
 	int		color;
 	size_t	length;
@@ -85,10 +85,10 @@ static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
 	return (length);
 }
 
-void			sdl_surface_merge_alpha(SDL_Surface *dst, SDL_Surface *src,
-										t_pixel start)
+void			sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src,
+										SDL_Point start)
 {
-	t_pixel	cur;
+	SDL_Point	cur;
 
 	cur.y = 0;
 	while (cur.y < src->h)
