@@ -17,6 +17,10 @@
 
 #include "color.h"
 
+/*
+** -------------------------------rgba_to_color---------------------------------
+*/
+
 Test(rgba_to_color, white) {
     SDL_Color c;
     SDL_Surface *s;
@@ -52,6 +56,10 @@ Test(rgba_to_color, other) {
     cr_assert(c.b == 0xDE);
     cr_assert(c.a == 0xF0);
 }
+
+/*
+** -------------------------------color_to_rgba---------------------------------
+*/
 
 Test(color_to_rgba, white) {
     int     res;
