@@ -21,7 +21,7 @@
 ** * It will then print the state of every monitored key.
 */
 
-const t_keypair	g_keytable[] = {
+static const t_keypair	g_keytable[] = {
 	(const t_keypair){NULL, SDLK_UNKNOWN},
 
 	(const t_keypair){"BUTTON_LEFT", SDL_BUTTON_LEFT},
@@ -269,15 +269,14 @@ const t_keypair	g_keytable[] = {
 	(const t_keypair){"AUDIOFASTFORWARD", SDLK_AUDIOFASTFORWARD}
 };
 
-const char	*getname(void *key)
+static const char	*getname(void *key)
 {
-	size_t		i;
-	size_t		size;
-	SDL_Keycode	*sdlk;
+	const size_t	size = sizeof(g_keytable) / sizeof(t_keypair);
+	SDL_Keycode		*sdlk;
+	size_t			i;
 
 	i = 0;
 	sdlk = key;
-	size = sizeof(g_keytable) / sizeof(t_keypair);
 	while (i < size)
 	{
 		if (g_keytable[i].key == *sdlk)
@@ -287,12 +286,12 @@ const char	*getname(void *key)
 	return (NULL);
 }
 
-void		print_keymap(const t_hashmap *keymap)
+void				print_keymap(const t_hashmap *keymap)
 {
-	size_t		i;
-	t_hashlist	*current;
-	const char	*name;
-	t_keystate	value;
+	const char		*name;
+	size_t			i;
+	t_hashlist		*current;
+	t_keystate		value;
 
 	i = 0;
 	ft_putline(" Keymap ");
@@ -303,9 +302,9 @@ void		print_keymap(const t_hashmap *keymap)
 		{
 			name = getname(current->key);
 			value = *((t_keystate *)current->value);
-			ft_printf("Name: %s - held: %d toggled: %d (value: %d)\n", name,
+			ft_printf("Name: %s - held: %d toggled: %d\n", name,
 				(value & KEY_HELDDOWN) == KEY_HELDDOWN,
-				(value & KEY_TOGGLED) == KEY_TOGGLED, value);
+				(value & KEY_TOGGLED) == KEY_TOGGLED);
 			current = current->next;
 		}
 		i++;
