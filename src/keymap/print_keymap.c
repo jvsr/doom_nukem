@@ -24,7 +24,7 @@
 */
 
 static const t_keypair	g_keytable[] = {
-	(const t_keypair){"(null)", SDLK_UNKNOWN},
+	(const t_keypair){"UNKNOWN", SDLK_UNKNOWN},
 
 	(const t_keypair){"BUTTON_LEFT", SDL_BUTTON_LEFT},
 	(const t_keypair){"BUTTON_RIGHT", SDL_BUTTON_RIGHT},
