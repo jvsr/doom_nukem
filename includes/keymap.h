@@ -13,7 +13,8 @@
 #ifndef KEYMAP_H
 # define KEYMAP_H
 
-# include <SDL2/SDL.h>
+# include <SDL2/SDL_keycode.h>
+
 # include "libft/ft_bool.h"
 
 # define KEY_HELDDOWN 0x01
