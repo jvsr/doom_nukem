@@ -15,7 +15,7 @@
 #include "keymap.h"
 
 /*
-** * clear keymap all will take the keymap.
+** * clear_keymap will take the keymap.
 ** * It will then detete all monitored keys.
 */
 

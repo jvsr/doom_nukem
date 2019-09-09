@@ -19,7 +19,7 @@
 #include "keymap.h"
 
 /*
-** * toggle keymap will take the keymap, keysym and if the key is being pressed.
+** * toggle_keymap will take the keymap, keysym and if the key is being pressed.
 ** * It will then based on the current state of the key change the state.
 ** * If the key is being pressed it toggles the toggle and sets helddown to 1.
 ** * if the key is not being pressed it sets helddown to 0.

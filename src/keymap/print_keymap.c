@@ -19,7 +19,7 @@
 #include "keymap.h"
 
 /*
-** * print keymap will take the keymap. (This function is for debug only)
+** * print_keymap will take the keymap. (This function is for debug only)
 ** * It will then print the state of every monitored key.
 */
 

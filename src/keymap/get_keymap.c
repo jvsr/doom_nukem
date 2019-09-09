@@ -15,7 +15,7 @@
 #include "keymap.h"
 
 /*
-** * get keymap will take the keymap and a keysym code.
+** * get_keymap will take the keymap and a keysym code.
 ** * It will then retrieve the state of the key.
 ** * If the key isn't monitored this function returns a state of 0.
 */

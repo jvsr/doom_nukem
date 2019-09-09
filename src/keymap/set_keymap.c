@@ -19,7 +19,7 @@
 #include "error.h"
 
 /*
-** * set keymap will take the keymap, keysym and a state.
+** * set_keymap will take the keymap, keysym and a state.
 ** * It will then set the state of the key to the given state.
 ** * If the key isnt monitored yet it will add the key to the monitored keys.
 */

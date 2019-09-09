@@ -15,7 +15,7 @@
 #include "keymap.h"
 
 /*
-** * set keymap all will take the keymap and a state.
+** * set_keymap_all will take the keymap and a state.
 ** * It will then change the state of every monitored key to the given state.
 */
 

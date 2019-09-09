@@ -15,7 +15,7 @@
 #include "keymap.h"
 
 /*
-** * reset keymap all will take the keymap.
+** * reset_keymap will take the keymap.
 ** * It will then reset the state of every monitored key to 0.
 */
 
