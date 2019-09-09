@@ -6,17 +6,18 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/04 12:50:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 16:16:54 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-# include <SDL2/SDL.h>
+# include <SDL2/SDL_video.h>
+# include <SDL2/SDL_surface.h>
 
 typedef struct s_ui			t_ui;
-typedef struct s_level		t_level;
+typedef struct s_map		t_map;
 typedef struct s_player		t_player;
 typedef struct s_hashmap	t_hashmap;
 
@@ -33,7 +34,7 @@ typedef struct	s_game
 	SDL_Window	*window;
 	SDL_Surface	*surface;
 	t_ui		*ui;
-	t_level		*level;
+	t_map		*map;
 	t_player	*player;
 	t_hashmap	*keymap;
 }				t_game;

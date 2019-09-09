@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 15:27:46 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 18:42:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_game			*init(void)
 	game = alloc_game();
 	init_window_surface(game);
 	init_game(game);
+    init_map_player("maps/lvl_1_1.map", game);
 	return (game);
 }

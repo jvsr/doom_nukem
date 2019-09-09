@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init.h                                             :+:    :+:            */
+/*   player.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/27 14:39:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 18:40:06 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
+/*   Updated: 2019/09/09 17:28:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#ifndef PLAYER_H
+# define PLAYER_H
 
-# define INIT_WIDTH 1080
-# define INIT_HEIGHT 720
+#include <_types/_uint8_t.h>
+#include <_types/_uint32_t.h>
 
-typedef struct s_game	t_game;
+#include "coord.h"
 
-t_game	*init(void);
-void    init_map_player(const char *name, t_game *game);
+typedef struct	s_player
+{
+	t_vec		pos;
+    uint32_t    ang;
+	uint8_t		cur_sector;
+	uint8_t		hp;
+	uint8_t		ammo;
+	uint8_t		attk;
+}				t_player;
 
 #endif

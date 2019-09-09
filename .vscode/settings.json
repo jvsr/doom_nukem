@@ -24,6 +24,7 @@
         "stdint.h": "c",
         "_uint32_t.h": "c",
         "sdl_keycode.h": "c",
-        "sdl_video.h": "c"
+        "sdl_video.h": "c",
+        "errno.h": "c"
     }
 }
