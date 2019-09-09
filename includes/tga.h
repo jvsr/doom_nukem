@@ -6,14 +6,15 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 16:20:31 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 15:21:35 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef TGA_H
+# define TGA_H
 
-# include "SDL2/SDL.h"
+# include <SDL2/SDL.h>
+
 # if defined LINUX || defined __APPLE__
 #  include "unistd.h"
 # else

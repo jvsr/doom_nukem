@@ -6,9 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/08/27 15:38:15 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 15:26:58 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <SDL2/SDL_video.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
 
 #include "game.h"
 

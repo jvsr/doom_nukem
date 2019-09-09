@@ -6,18 +6,19 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/08 21:36:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 15:30:38 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 15:24:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tga.h"
 #include "libft/ft_memory.h"
+
+#include "tga.h"
 
 void		strtoimg(t_img *img, t_tga *tga, unsigned char *str)
 {
 	size_t i;
 	size_t j;
-	size_t size;	
+	size_t size;
 	size_t max;
 
 	i = 19 + tga->idlen;
