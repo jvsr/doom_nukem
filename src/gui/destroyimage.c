@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   imagedestroy.c                                     :+:    :+:            */
+/*   destroyimage.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:48:27 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:42:51 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:21:23 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "libft/ft_string.h"
 #include "libft/ft_list.h"
 
-void		imagedestroy(t_gui *ui, t_image *image,
-												const t_bool destroychildren)
+void		destroyimage(t_gui *ui, t_image *image,
+												const t_bool delchildren)
 {
 	if (image->transform.onclick != NULL)
-		clickdestroy(ui, image->transform.name);
-	if (destroychildren == TRUE)
-		childrendestroy(ui, image->transform.children, TRUE);
+		destroyclick(ui, image->transform.name);
+	if (delchildren == TRUE)
+		destroychildren(ui, image->transform.children, TRUE);
 	else if (image->transform.parent != NULL)
 		ft_lstadd(&image->transform.parent->children,
 			image->transform.children);

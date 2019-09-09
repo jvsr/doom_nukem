@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:06:16 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:10:32 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:06:48 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft/ft_memory.h"
 #include "libft/ft_string.h"
 
-t_text			*textnew(t_guiinfo *guiinfo, char *text,
+t_text			*newtext(t_guiinfo *guiinfo, char *text,
 				t_font *font)
 {
 	t_text *textui;

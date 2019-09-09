@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   childrendestroy.c                                  :+:    :+:            */
+/*   destroychildren.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 11:11:02 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:46:05 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:22:27 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 #include "libft/ft_string.h"
 
 void		deletegui(t_gui *ui, t_transform *transform,
-												const t_bool destroychildren)
+												const t_bool delchildren)
 {
 	if (transform->guitype == BUTTON)
-		buttondestroy(ui, (t_button*)transform->guielem, destroychildren);
+		destroybutton(ui, (t_button*)transform->guielem, delchildren);
 	else if (transform->guitype == PANEL)
-		paneldestroy(ui, (t_panel*)transform->guielem, destroychildren);
+		destroypanel(ui, (t_panel*)transform->guielem, delchildren);
 	else if (transform->guitype == TEXT)
-		textdestroy(ui, (t_text*)transform->guielem, destroychildren);
+		destroytext(ui, (t_text*)transform->guielem, delchildren);
 	else if (transform->guitype == IMAGE)
-		imagedestroy(ui, (t_image*)transform->guielem, destroychildren);
+		destroyimage(ui, (t_image*)transform->guielem, delchildren);
 }
 
-void		childrendestroy(t_gui *ui, t_list *children,
-												const t_bool destroychildren)
+void		destroychildren(t_gui *ui, t_list *children,
+												const t_bool delchildren)
 {
 	t_list *lst;
 
@@ -36,7 +36,7 @@ void		childrendestroy(t_gui *ui, t_list *children,
 		return ;
 	while (children != NULL)
 	{
-		deletegui(ui, (t_transform*)children->content, destroychildren);
+		deletegui(ui, (t_transform*)children->content, delchildren);
 		ft_strdel(&((t_transform*)children->content)->name);
 		lst = children->next;
 		free(children);

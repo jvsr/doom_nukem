@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   imagenew.c                                         :+:    :+:            */
+/*   newimage.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:15:07 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:10:09 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 13:40:58 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "game.h"
 #include "libft/ft_string.h"
 
-t_image		*imagenew(t_guiinfo *guiinfo, const SDL_Surface *texture)
+t_image		*newimage(t_guiinfo *guiinfo, const SDL_Surface *texture)
 {
 	t_image *image;
 

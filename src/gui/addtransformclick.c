@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transformaddclick.c                                :+:    :+:            */
+/*   addtransformclick.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 10:40:44 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 12:04:34 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:14:54 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "libft/ft_list.h"
 
-void		transformaddclick(t_gui *ui, t_transform *transform,
+void		addtransformclick(t_gui *ui, t_transform *transform,
 								void (*onclick)(t_game *, t_transform *))
 {
 	t_list *lst;

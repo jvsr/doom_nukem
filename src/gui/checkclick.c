@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   clickcheck.c                                       :+:    :+:            */
+/*   checkclick.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:24:48 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 13:37:45 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_bool	isabove(t_transform *cur, t_transform *new)
 	return (new->layer > cur->layer);
 }
 
-void			clickcheck(t_game *game)
+void			checkclick(t_game *game)
 {
 	int			x;
 	int			y;

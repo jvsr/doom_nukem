@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transformgetinchildren.c                           :+:    :+:            */
+/*   transformgetvisible.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/06 11:46:42 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:29:15 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/04 10:47:41 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 14:16:29 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
-#include "libft/ft_list.h"
 #include "libft/ft_string.h"
+#include "gui.h"
+#include "libft/ft_bool.h"
 
-t_transform	*transformgetinchildren(t_transform *trans, char *name)
+t_bool		gettransformvisible(t_transform *transform)
 {
-	t_list		*lst;
-	t_transform	*ret;
-
-	if (trans == NULL)
-		return (NULL);
-	if (ft_strequ(trans->name, name))
-		return (trans);
-	lst = trans->children;
-	while (lst != NULL)
+	while (transform != NULL && !ft_strcmp(transform->name, GUI_NAME))
 	{
-		ret = transformgetinchildren(lst->content, name);
-		if (ret != NULL)
-			return (ret);
+		if (transform->visible == FALSE)
+			return (FALSE);
+		transform = transform->parent;
 	}
-	return (NULL);
+	return (TRUE);
 }

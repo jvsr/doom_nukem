@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fontget.c                                          :+:    :+:            */
+/*   settransformparent.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/03 10:38:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/03 10:40:07 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/08/29 11:02:33 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 14:18:14 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
+#include "libft/ft_list.h"
 
-TTF_Font	*fontget(t_gui *ui, t_fonttype font)
+void		settransformparent(t_transform *child, t_transform *parent)
 {
-	if (font == ROBOTO)
-		return (ui->font[0]);
+	child->parent = parent;
+	if (parent->children == NULL)
+		parent->children = ft_lstnew(child, sizeof(child));
 	else
-		return (ui->font[1]);
+		ft_lstadd(&parent->children, ft_lstnew(child, sizeof(child)));
+	child->layer = (short)ft_lstlen(parent->children);
 }

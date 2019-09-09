@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 14:44:33 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:24:31 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		polled(t_game *game, SDL_Event *event)
 		game->state = stopped;
 	else if (event->type == SDL_MOUSEBUTTONDOWN && event->button.button
 		& SDL_BUTTON_LEFT)
-		clickcheck(game);
+		checkclick(game);
 }
 
 void			loop(t_game *game)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   buttoncolournew.c                                  :+:    :+:            */
+/*   newbuttoncolour.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 12:20:57 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 13:33:03 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "color.h"
 #include "sdl_extra.h"
 
-t_button	*buttoncolournew(t_guiinfo *guiinfo, char *text,
+t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text,
 			t_font *font, const t_color colour)
 {
 	t_button *button;

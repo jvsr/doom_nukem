@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transformparentset.c                               :+:    :+:            */
+/*   clickdestroy.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 11:02:33 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:11:50 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/04 11:04:51 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 13:38:19 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
+#include <stdlib.h>
 #include "libft/ft_list.h"
+#include "libft/ft_string.h"
 
-void		transformparentset(t_transform *child, t_transform *parent)
+void		destroyclick(t_gui *ui, char *name)
 {
-	child->parent = parent;
-	if (parent->children == NULL)
-		parent->children = ft_lstnew(child, sizeof(child));
-	else
-		ft_lstadd(&parent->children, ft_lstnew(child, sizeof(child)));
-	child->layer = (short)ft_lstlen(parent->children);
+	t_list *lst;
+	t_list *prev;
+
+	lst = ui->onclicks;
+	prev = NULL;
+	while (lst != NULL && !ft_strcmp(((t_transform*)lst->content)->name, name))
+	{
+		prev = lst;
+		lst = lst->next;
+	}
+	if (lst == NULL)
+		return ;
+	if (prev != NULL)
+		prev->next = lst->next;
+	lst->next = NULL;
+	ft_lstdelone(&lst, NULL);
 }

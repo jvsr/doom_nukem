@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:22:33 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 11:10:22 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 13:42:51 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "gui.h"
 #include "libft/ft_string.h"
 
-t_panel		*panelnew(t_guiinfo *guiinfo)
+t_panel		*newpanel(t_guiinfo *guiinfo)
 {
 	t_panel *panel;
 

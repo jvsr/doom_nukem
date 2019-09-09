@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 10:43:56 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 18:33:28 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 14:13:05 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "game.h"
 #include "init.h"
 
-SDL_Surface	*textsurfaceget(t_gui *ui, char *text, t_font fonttype)
+SDL_Surface	*gettextsurface(t_gui *ui, char *text, t_font fonttype)
 {
 	TTF_Font	*font;
 	SDL_Surface	*surface;
@@ -22,7 +22,7 @@ SDL_Surface	*textsurfaceget(t_gui *ui, char *text, t_font fonttype)
 	SDL_Surface	*fsurface;
 
 	dst = NULL;
-	font = fontget(ui, fonttype.font);
+	font = getfont(ui, fonttype.font);
 	surface = TTF_RenderText_Solid(font, text, fonttype.colour);
 	fsurface = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_RGBA4444, 0);
 	SDL_FreeSurface(surface);

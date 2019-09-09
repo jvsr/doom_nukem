@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   clickdestroy.c                                     :+:    :+:            */
+/*   transformgetinchildren.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 11:04:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 17:14:01 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/06 11:46:42 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 14:15:47 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
-#include <stdlib.h>
 #include "libft/ft_list.h"
 #include "libft/ft_string.h"
 
-void		clickdestroy(t_gui *ui, char *name)
+t_transform	*gettransforminchildren(t_transform *trans, char *name)
 {
-	t_list *lst;
-	t_list *prev;
+	t_list		*lst;
+	t_transform	*ret;
 
-	lst = ui->onclicks;
-	prev = NULL;
-	while (lst != NULL && !ft_strcmp(((t_transform*)lst->content)->name, name))
+	if (trans == NULL)
+		return (NULL);
+	if (ft_strequ(trans->name, name))
+		return (trans);
+	lst = trans->children;
+	while (lst != NULL)
 	{
-		prev = lst;
-		lst = lst->next;
+		ret = gettransforminchildren(lst->content, name);
+		if (ret != NULL)
+			return (ret);
 	}
-	if (lst == NULL)
-		return ;
-	if (prev != NULL)
-		prev->next = lst->next;
-	lst->next = NULL;
-	ft_lstdelone(&lst, NULL);
+	return (NULL);
 }

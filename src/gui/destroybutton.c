@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   buttondestroy.c                                    :+:    :+:            */
+/*   destroybutton.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:27:37 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 13:46:20 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:20:47 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include "libft/ft_list.h"
 #include "libft/ft_string.h"
 
-void		buttondestroy(t_gui *ui, t_button *button,
-												const t_bool destroychildren)
+void		destroybutton(t_gui *ui, t_button *button,
+												const t_bool delchildren)
 {
 	if (button->transform.onclick != NULL)
-		clickdestroy(ui, button->transform.name);
+		destroyclick(ui, button->transform.name);
 	ft_strdel(&button->text);
-	if (destroychildren == TRUE)
-		childrendestroy(ui, button->transform.children, TRUE);
+	if (delchildren == TRUE)
+		destroychildren(ui, button->transform.children, TRUE);
 	else if (button->transform.parent != NULL)
 		ft_lstadd(&button->transform.parent->children,
 			button->transform.children);

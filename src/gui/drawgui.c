@@ -6,10 +6,11 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 13:36:07 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:23:39 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_list.h"
 #include "gui.h"
 #include "game.h"
 #include "color.h"

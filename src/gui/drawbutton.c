@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 10:31:06 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 18:33:55 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 14:22:50 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		drawbutton(t_gui *ui, t_button *button)
 	SDL_Surface *dst;
 	t_pixel		pixel;
 
-	fontsurface = textsurfaceget(ui, button->text, button->font);
+	fontsurface = gettextsurface(ui, button->text, button->font);
 	dst = SDL_CreateRGBSurface(0, (int)((float)INIT_WIDTH * button->size.x),
 		(int)((float)INIT_HEIGHT * button->size.y), 32,
 		0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);

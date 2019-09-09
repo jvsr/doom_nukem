@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:22:30 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 14:22:01 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,38 +108,38 @@ typedef struct	s_guiinfo
 	t_coord		size;
 }				t_guiinfo;
 
-t_button	*buttontexturenew(t_guiinfo *guiinfo, char *text,
-			t_font *font, const SDL_Surface *texture);
-t_button	*buttoncolournew(t_guiinfo *guiinfo, char *text,
-			t_font *font, const t_color colour);
-t_text		*textnew(t_guiinfo *guiinfo, char *text, t_font *font);
-t_image		*imagenew(t_guiinfo *guiinfo, const SDL_Surface *texture);
-t_panel		*panelnew(t_guiinfo *guiinfo);
-void		buttondestroy(t_gui *ui, t_button *button,
-							const t_bool destroychildren);
-void		paneldestroy(t_gui *ui, t_panel *panel,
-							const t_bool destroychildren);
-void		textdestroy(t_gui *ui, t_text *text,
-							const t_bool destroychildren);
-void		imagedestroy(t_gui *ui, t_image *image,
-							const t_bool destroychildren);
-void		childrendestroy(t_gui *ui, t_list *children,
-							const t_bool destroychildren);
-void		transformparentset(t_transform *child, t_transform *parent);
+void		addtransformclick(t_gui *ui, t_transform *transform,
+								void (*onclick)(t_game *, t_transform *));
+void		checkclick(t_game *game);
+void		destroybutton(t_gui *ui, t_button *button,
+												const t_bool delchildren);
+void		destroypanel(t_gui *ui, t_panel *panel,
+							const t_bool delchildren);
+void		destroytext(t_gui *ui, t_text *text,
+							const t_bool delchildren);
+void		destroyimage(t_gui *ui, t_image *image,
+							const t_bool delchildren);
+void		destroychildren(t_gui *ui, t_list *children,
+							const t_bool delchildren);
+void		destroyclick(t_gui *ui, char *name);
 void		drawelem(t_gui *ui, t_transform *elem);
 void		drawgui(t_game *game);
 void		drawtext(t_gui *ui, t_text *text);
 void		drawimage(t_gui *ui, t_image *image);
 void		drawbutton(t_gui *ui, t_button *button);
 void		drawpanel(t_gui *ui, t_panel *panel);
-TTF_Font	*fontget(t_gui *ui, t_fonttype font);
-SDL_Surface	*textsurfaceget(t_gui *ui, char *text, t_font fonttype);
-void		transformaddclick(t_gui *ui, t_transform *transform,
-								void (*onclick)(t_game *, t_transform *));
-t_bool		transformgetvisible(t_transform *transform);
-void		clickdestroy(t_gui *ui, char *name);
-void		clickcheck(t_game *game);
-t_transform	*transformgetbyname(t_gui *ui, char *name);
-t_transform	*transformgetinchildren(t_transform *trans, char *name);
+TTF_Font	*getfont(t_gui *ui, t_fonttype font);
+SDL_Surface	*gettextsurface(t_gui *ui, char *text, t_font fonttype);
+t_bool		gettransformvisible(t_transform *transform);
+t_transform	*gettransformbyname(t_gui *ui, char *name);
+t_transform	*gettransforminchildren(t_transform *trans, char *name);
+t_button	*newbuttontexture(t_guiinfo *guiinfo, char *text,
+			t_font *font, const SDL_Surface *texture);
+t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text,
+			t_font *font, const t_color colour);
+t_text		*newtext(t_guiinfo *guiinfo, char *text, t_font *font);
+t_image		*newimage(t_guiinfo *guiinfo, const SDL_Surface *texture);
+t_panel		*newpanel(t_guiinfo *guiinfo);
+void		settransformparent(t_transform *child, t_transform *parent);
 
 #endif
