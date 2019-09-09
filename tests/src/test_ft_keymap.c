@@ -19,15 +19,15 @@
 #include "game.h"
 
 /*
-** --------------------------------init_hashmap---------------------------------
+** --------------------------------init_keymap---------------------------------
 */
 
-Test(init_hashmap, null, .signal=SIGSEGV)
+Test(init_keymap, null, .signal=SIGSEGV)
 {
 	init_keymap(NULL);
 }
 
-Test(init_hashmap, succsess)
+Test(init_keymap, succsess)
 {
 	t_game *game;
 
