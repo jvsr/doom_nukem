@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 14:44:37 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 13:24:48 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,32 @@
 #include "libft/ft_list.h"
 #include "libft/ft_string.h"
 
-static t_bool	checkcolision(int x, int y, t_pixel locs[2])
+static t_bool	checkcolision(int x, int y, SDL_Point locs[2])
 {
 	return (x > locs[0].x && x < locs[1].x && y > locs[0].y && y < locs[1].y);
 }
 
-static t_pixel	getstart(t_transform *transform)
+static SDL_Point	getstart(t_transform *transform)
 {
-	return ((t_pixel){(transform->position.x * INIT_WIDTH),
+	return ((SDL_Point){(transform->position.x * INIT_WIDTH),
 	transform->position.y * INIT_HEIGHT});
 }
 
-static t_pixel	getend(t_transform *transform)
+static SDL_Point	getend(t_transform *transform)
 {
 	if (transform->guitype == BUTTON)
-		return ((t_pixel){((t_button*)transform->guielem)->size.x * INIT_WIDTH,
+		return ((SDL_Point){((t_button*)transform->guielem)->size.x * INIT_WIDTH,
 		((t_button*)transform->guielem)->size.y * INIT_HEIGHT});
 	else if (transform->guitype == IMAGE)
-		return ((t_pixel){((t_image*)transform->guielem)->size.x * INIT_WIDTH,
+		return ((SDL_Point){((t_image*)transform->guielem)->size.x * INIT_WIDTH,
 		((t_image*)transform->guielem)->size.y * INIT_HEIGHT});
 	else if (transform->guitype == TEXT)
-		return ((t_pixel){((t_text*)transform->guielem)->font.size * INIT_WIDTH,
+		return ((SDL_Point){((t_text*)transform->guielem)->font.size * INIT_WIDTH,
 		((t_text*)transform->guielem)->font.size * INIT_HEIGHT});
 	else
-		return ((t_pixel){((t_panel*)transform->guielem)->size.x * INIT_WIDTH,
+		return ((SDL_Point){((t_panel*)transform->guielem)->size.x * INIT_WIDTH,
 		((t_panel*)transform->guielem)->size.y * INIT_HEIGHT});
-	return ((t_pixel){0, 0});
+	return ((SDL_Point){0, 0});
 }
 
 static t_bool	isabove(t_transform *cur, t_transform *new)
@@ -65,7 +65,7 @@ void			clickcheck(t_game *game)
 	int			x;
 	int			y;
 	t_list		*lst;
-	t_pixel		locs[2];
+	SDL_Point		locs[2];
 	t_transform *cur;
 
 	cur = NULL;
@@ -77,7 +77,7 @@ void			clickcheck(t_game *game)
 		{
 			locs[0] = getstart((t_transform*)lst->content);
 			locs[1] = getend((t_transform*)lst->content);
-			locs[1] = (t_pixel){locs[0].x + locs[1].x, locs[0].y + locs[1].y};
+			locs[1] = (SDL_Point){locs[0].x + locs[1].x, locs[0].y + locs[1].y};
 			if (checkcolision(x, y, locs) && isabove(cur, lst->content))
 				cur = ((t_transform*)lst->content);
 		}

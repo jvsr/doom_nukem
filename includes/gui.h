@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/06 12:21:37 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 13:22:30 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include "coord.h"
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
-# include "libft/ft_list.h"
 
 # define GUI_NAME "gui"
 
 typedef struct s_transform t_transform;
 typedef struct s_game		t_game;
 typedef struct s_color		t_color;
+typedef struct s_list		t_list;
 
 typedef	enum	e_fonttype
 {
