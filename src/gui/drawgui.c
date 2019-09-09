@@ -6,14 +6,14 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:12:24 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:33:28 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_list.h"
 #include "gui.h"
-#include "game.h"
 #include "sdl_extra.h"
+#include "game.h"
 
 void			drawgui(t_game *game)
 {
@@ -21,7 +21,7 @@ void			drawgui(t_game *game)
 
 	if (game->ui.redraw == TRUE)
 	{
-		sdl_surface_draw_rect(game->ui.guisurface, (SDL_Color){0, 0, 0, 0},
+		sdl_draw_surface_rect(game->ui.guisurface, (SDL_Color){0, 0, 0, 0},
 			(SDL_Rect){0, 0, game->ui.guisurface->w, game->ui.guisurface->h});
 		lst = game->ui.transform.children;
 		while (lst != NULL)
@@ -32,5 +32,5 @@ void			drawgui(t_game *game)
 		}
 		game->ui.redraw = FALSE;
 	}
-	sdl_surface_merge(game->surface, game->ui.guisurface, (SDL_Point){0, 0});
+	sdl_merge_surface(game->surface, game->ui.guisurface, (SDL_Point){0, 0});
 }

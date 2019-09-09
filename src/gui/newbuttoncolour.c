@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:12:33 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:35:14 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text,
 		INIT_WIDTH * guiinfo->size.x, INIT_HEIGHT * guiinfo->size.y,
 		32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	button->text = ft_strdup(text);
-	sdl_surface_draw_rect(button->texture, colour,
+	sdl_draw_surface_rect(button->texture, colour,
 					(SDL_Rect){0, 0, button->texture->w, button->texture->h});
 	ft_memcpy(&button->font, font, sizeof(t_font));
 	ft_memcpy(&button->transform.position, &guiinfo->position, sizeof(t_coord));

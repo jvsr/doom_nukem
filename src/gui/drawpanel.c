@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:29:38 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:34:23 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void		drawpanel(t_gui *ui, t_panel *panel)
 	gui.font[1] = ui->font[1];
 	gui.guisurface = dst;
 	drawchildren(&gui, &panel->transform);
-	sdl_surface_merge(ui->guisurface, dst, pixel);
+	sdl_merge_surface(ui->guisurface, dst, pixel);
 	SDL_FreeSurface(dst);
 }

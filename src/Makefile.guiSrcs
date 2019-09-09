@@ -25,4 +25,4 @@ SRCS = destroybutton destroyimage destroypanel destroytext newbuttoncolour \
 	newbuttontexture newimage newpanel newtext settransformparent \
 	destroychildren drawgui drawelem drawtext drawimage getfont gettextsurface \
 	drawbutton addtransformclick gettransformvisible destroyclick checkclick \
-	drawpanel gettransformbyname gettransforminchildren
+	drawpanel gettransformbyname gettransforminchildren newimagecolour

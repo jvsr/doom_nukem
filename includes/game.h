@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/09 17:18:27 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:44:13 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,5 @@ typedef struct	s_game
 }				t_game;
 
 void	loop(t_game *game);
-void	sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src, SDL_Point start);
-void	sdl_surface_merge_alpha(SDL_Surface *dst, SDL_Surface *src,
-		SDL_Point start);
 
 #endif

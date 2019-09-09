@@ -6,12 +6,12 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 10:31:06 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:29:22 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:42:37 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
-#include "game.h"
+#include "sdl_extra.h"
 #include "init.h"
 
 void		drawbutton(t_gui *ui, t_button *button)
@@ -27,8 +27,8 @@ void		drawbutton(t_gui *ui, t_button *button)
 	SDL_BlitScaled(button->texture, NULL, dst, NULL);
 	pixel = (SDL_Point){(int)((float)INIT_WIDTH * button->transform.position.x),
 			(int)((float)INIT_HEIGHT * button->transform.position.y)};
-	sdl_surface_merge_alpha(dst, fontsurface, (SDL_Point){0, 0});
-	sdl_surface_merge(ui->guisurface, dst, pixel);
+	sdl_merge_surface_alpha(dst, fontsurface, (SDL_Point){0, 0});
+	sdl_merge_surface(ui->guisurface, dst, pixel);
 	SDL_FreeSurface(fontsurface);
 	SDL_FreeSurface(dst);
 }

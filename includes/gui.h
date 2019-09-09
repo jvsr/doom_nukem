@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:22:28 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:41:12 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "libft/ft_bool.h"
 # include "coord.h"
-# include <SDL2/SDL.h>
+# include <SDL2/SDL_surface.h>
+# include <SDL2/SDL_pixels.h>
 # include <SDL2/SDL_ttf.h>
 
 # define GUI_NAME "gui"
@@ -138,6 +139,7 @@ t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text,
 			t_font *font, const SDL_Color colour);
 t_text		*newtext(t_guiinfo *guiinfo, char *text, t_font *font);
 t_image		*newimage(t_guiinfo *guiinfo, const SDL_Surface *texture);
+t_image		*newimagecolour(t_guiinfo *guiinfo, SDL_Color colour);
 t_panel		*newpanel(t_guiinfo *guiinfo);
 void		settransformparent(t_transform *child, t_transform *parent);
 
