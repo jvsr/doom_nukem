@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:19:15 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:22:10 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,15 @@ static t_bool	isabove(t_transform *cur, t_transform *new)
 	return (new->layer > cur->layer);
 }
 
-void			checkclick(t_game *game)
+void			checkclick(t_game *game, SDL_Point mpos)
 {
-	int			x;
-	int			y;
 	t_list		*lst;
-	SDL_Point		locs[2];
+	SDL_Point	locs[2];
 	t_transform *cur;
 
 	if(!game->cursoractive)
 		return ;
-	cur = NULL;
-	SDL_GetMouseState(&x, &y);
+	cur = NULL;;
 	lst = game->ui.onclicks;
 	while (lst != NULL)
 	{
@@ -80,7 +77,8 @@ void			checkclick(t_game *game)
 			locs[0] = getstart((t_transform*)lst->content);
 			locs[1] = getend((t_transform*)lst->content);
 			locs[1] = (SDL_Point){locs[0].x + locs[1].x, locs[0].y + locs[1].y};
-			if (checkcolision(x, y, locs) && isabove(cur, lst->content))
+			if (checkcolision(mpos.x, mpos.y, locs) && 
+				isabove(cur, lst->content))
 				cur = ((t_transform*)lst->content);
 		}
 		lst = lst->next;
