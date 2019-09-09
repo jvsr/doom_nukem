@@ -13,7 +13,7 @@
 #ifndef MAIN_H
 # define MAIN_H
 
-# include "SDL2/SDL.h"
+# include <SDL2/SDL.h>
 # include "libft/ft_bool.h"
 # if defined __linux__ || defined __APPLE__
 #  include "unistd.h"
