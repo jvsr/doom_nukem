@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_surface_draw_rect_alpha.c                      :+:    :+:            */
+/*   sdl_draw_surface_rect_alpha.c                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 13:07:52 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 13:53:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_surface.h>
 
 #include "color.h"
 
-static int		calculate_color(int *dst, t_color src)
+static int		calculate_color(int *dst, SDL_Color src)
 {
 	float		op;
-	t_color		cdst;
+	SDL_Color	cdst;
 	const int	maxalpha = 255;
 
 	rgba_to_color(&cdst, *dst);
@@ -54,7 +56,7 @@ static void		copy_color(int *dst, Uint32 color, size_t length)
 	}
 }
 
-static size_t	merge_pixel(SDL_Surface *dst, t_color color,
+static size_t	merge_pixel(SDL_Surface *dst, SDL_Color color,
 							SDL_Rect rect, SDL_Point cur)
 {
 	size_t	length;
@@ -68,7 +70,7 @@ static size_t	merge_pixel(SDL_Surface *dst, t_color color,
 	return (length);
 }
 
-void			sdl_surface_draw_rect_alpha(SDL_Surface *dst, t_color color,
+void			sdl_draw_surface_rect_alpha(SDL_Surface *dst, SDL_Color color,
 											SDL_Rect rect)
 {
 	SDL_Point	cur;

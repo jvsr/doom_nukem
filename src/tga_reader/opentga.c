@@ -6,13 +6,15 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/04 15:34:54 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 15:24:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tga.h"
 #include <fcntl.h>
+
 #include "libft/ft_string.h"
+
+#include "tga.h"
 
 static void	settgaheader(unsigned char *str, t_tga *tga, t_img *img)
 {
@@ -31,9 +33,9 @@ static void	settgaheader(unsigned char *str, t_tga *tga, t_img *img)
 
 int			opentga(t_img *img, char *loc)
 {
-	int		fd;
+	int				fd;
 	unsigned char	*str;
-	t_tga	tga;
+	t_tga			tga;
 
 	fd = open(loc, O_RDONLY);
 	if (fd == -1)

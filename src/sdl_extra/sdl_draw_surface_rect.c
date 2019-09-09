@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_surface_draw_rect.c                            :+:    :+:            */
+/*   sdl_draw_surface_rect.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/04 13:05:56 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 13:29:50 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_surface.h>
 
 #include "color.h"
 
-void	sdl_surface_draw_rect(SDL_Surface *dst, t_color color, SDL_Rect rect)
+void	sdl_surface_draw_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect)
 {
 	int			*start;
 	Uint32		color_value;
