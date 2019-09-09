@@ -19,9 +19,7 @@ void		drawbutton(t_gui *ui, t_button *button)
 	SDL_Surface *fontsurface;
 	SDL_Surface *dst;
 	t_pixel		pixel;
-	TTF_Font	*font;
 
-	font = fontget(ui, button->font.font);
 	fontsurface = textsurfaceget(ui, button->text, button->font);
 	dst = SDL_CreateRGBSurface(0, (int)((float)INIT_WIDTH * button->size.x),
 		(int)((float)INIT_HEIGHT * button->size.y), 32,
