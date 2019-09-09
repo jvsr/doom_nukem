@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:22:01 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:10:47 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 typedef struct s_transform t_transform;
 typedef struct s_game		t_game;
-typedef struct s_color		t_color;
 typedef struct s_list		t_list;
 
 typedef	enum	e_fonttype
@@ -136,7 +135,7 @@ t_transform	*gettransforminchildren(t_transform *trans, char *name);
 t_button	*newbuttontexture(t_guiinfo *guiinfo, char *text,
 			t_font *font, const SDL_Surface *texture);
 t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text,
-			t_font *font, const t_color colour);
+			t_font *font, const SDL_Color colour);
 t_text		*newtext(t_guiinfo *guiinfo, char *text, t_font *font);
 t_image		*newimage(t_guiinfo *guiinfo, const SDL_Surface *texture);
 t_panel		*newpanel(t_guiinfo *guiinfo);

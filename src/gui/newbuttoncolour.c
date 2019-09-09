@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:33:03 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:12:33 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #include "init.h"
 #include "libft/ft_memory.h"
 #include "libft/ft_string.h"
-#include "color.h"
 #include "sdl_extra.h"
 
 t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text,
-			t_font *font, const t_color colour)
+			t_font *font, const SDL_Color colour)
 {
 	t_button *button;
 

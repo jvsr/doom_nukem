@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 18:55:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 16:55:07 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:12:56 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	main (void)
 					time(
 						time(sdl_surface_merge_alpha(src1, src3, (SDL_Point){INIT_WIDTH / 2, 0}), "surMerAlp1");
 						time(sdl_surface_merge_alpha(s, src1, (SDL_Point){0, 0}), "surMerAlp2");
-						time(sdl_surface_merge_alpha(s, src2, (t_SDL_Pointpixel){0, INIT_HEIGHT / 2}), "surMerAlp3");
+						time(sdl_surface_merge_alpha(s, src2, (SDL_Point){0, INIT_HEIGHT / 2}), "surMerAlp3");
 						time(sdl_surface_merge_alpha(s, src4, (SDL_Point){INIT_WIDTH / 2 - 80, INIT_HEIGHT / 2 - 45}), "surMerAlp4");
-						time(sdl_surface_draw_rect(s, (t_color){180, 34, 23, 30}, (SDL_Rect){10, 10, INIT_WIDTH, INIT_HEIGHT}), "surDrawRect1");
+						time(sdl_surface_draw_rect(s, (SDL_Color){180, 34, 23, 30}, (SDL_Rect){10, 10, INIT_WIDTH, INIT_HEIGHT}), "surDrawRect1");
 					, "total");
 				}
 			}
