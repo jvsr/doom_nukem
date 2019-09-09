@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 16:53:26 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 17:55:00 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** * this function considers the Alpha to be 255
 */
 
-void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src,
+void		sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src,
 								SDL_Point start)
 {
 	int			len;

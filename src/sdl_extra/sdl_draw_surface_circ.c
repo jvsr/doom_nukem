@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 12:58:54 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 13:48:13 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 17:55:30 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "shape.h"
 #include "color.h"
 
-void	sdl_surface_draw_circ(SDL_Surface *dst, SDL_Color color, t_circle c)
+void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c)
 {
 	uint32_t		color_value;
 	SDL_Point		cur;

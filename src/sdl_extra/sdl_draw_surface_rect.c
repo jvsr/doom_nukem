@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 13:29:50 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 17:55:18 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "color.h"
 
-void	sdl_surface_draw_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect)
+void	sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect)
 {
 	int			*start;
 	Uint32		color_value;
