@@ -33,7 +33,6 @@ typedef struct	s_keypair
 	SDL_Keycode	key;
 }				t_keypair;
 
-t_bool			init_keymap(t_game *game);
 void			reset_keymap(const t_hashmap *keymap);
 void			clear_keymap(const t_hashmap *keymap);
 void			print_keymap(const t_hashmap *keymap);

@@ -26,10 +26,9 @@
 ** * If the allocation failed the programm exists.
 */
 
-t_bool	init_keymap(t_game *game)
+void	init_keymap(t_game *game)
 {
 	game->keymap = ft_hashmapnew(INIT_KEYMAP_SIZE, INIT_KEYMAP_ALGO);
 	if (game->keymap == NULL)
 		error_msg(strerror(errno), errno);
-	return (game->keymap != NULL);
 }

@@ -18,7 +18,6 @@
 #include "libft/ft_memory.h"
 #include "libft/ft_string.h"
 
-#include "keymap.h"
 #include "gui.h"
 #include "game.h"
 #include "init.h"

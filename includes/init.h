@@ -21,5 +21,6 @@
 typedef struct s_game	t_game;
 
 t_game	*init(void);
+void	init_keymap(t_game *game);
 
 #endif
