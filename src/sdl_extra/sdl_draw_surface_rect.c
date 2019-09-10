@@ -19,7 +19,7 @@
 void	sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect)
 {
 	int			*start;
-	UINT32		color_value;
+	t_uint32	color_value;
 	SDL_Point	cur;
 
 	color_value = color_to_rgba(color);

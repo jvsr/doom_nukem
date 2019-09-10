@@ -13,6 +13,7 @@
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
+
 #include "gui.h"
 #include "game.h"
 

@@ -10,8 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include <errno.h>
+#include <string.h>
+
 #include "libft/ft_list.h"
+
+#include "gui.h"
 #include "error.h"
 
 void		addtransformclick(t_gui *ui, t_transform *transform,
@@ -25,7 +29,7 @@ void		addtransformclick(t_gui *ui, t_transform *transform,
 	if (lst != NULL)
 		return ;
 	new = ft_lstnew(transform, sizeof(t_transform));
-	if(new == NULL)
-		error_msg("Error Allocating Onclicks", 1);
+	if (new == NULL)
+		error_msg(strerror(errno), errno);
 	ft_lstadd(&ui->onclicks, new);
 }

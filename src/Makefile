@@ -17,7 +17,7 @@ PARENTNAME =
 FRAMEWORKPATH =
 FRAMEWORKINCLUDES =
 SDL2LIB =
-SDL2TTF = 
+SDL2TTF =
 
 # Input values for compile (From parrent makefile)
 CCSILENT =
@@ -43,8 +43,13 @@ include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
 CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) -I$(FRAMEWORKINCLUDES) $(CCOPTIMISE)
+
 ifeq ($(GCOV), TRUE)
 CCFLAGS += -coverage
+endif
+
+ifeq ($(shell uname -s), Linux)
+CCFLAGS += -lm
 endif
 
 # Get correct srcs variable

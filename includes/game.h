@@ -39,6 +39,6 @@ typedef struct	s_game
 	t_bool		cursoractive;
 }				t_game;
 
-void	loop(t_game *game);
+void			loop(t_game *game);
 
 #endif

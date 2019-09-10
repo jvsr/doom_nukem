@@ -16,7 +16,7 @@
 # include <SDL2/SDL_pixels.h>
 # include "types.h"
 
-UINT32	color_to_rgba(SDL_Color c);
-void	rgba_to_color(SDL_Color *c, Uint32 color);
+t_uint32	color_to_rgba(SDL_Color c);
+void		rgba_to_color(SDL_Color *c, t_uint32 color);
 
 #endif

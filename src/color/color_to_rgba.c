@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include <SDL2/SDL_pixels.h>
+
 #include "types.h"
 
-UINT32	color_to_rgba(SDL_Color c)
+t_uint32	color_to_rgba(SDL_Color c)
 {
-	UINT32	result;
+	t_uint32	result;
 
 	result = 0;
 	result = (c.a << 24) | result;

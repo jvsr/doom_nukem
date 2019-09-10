@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <string.h>
+
 #include "gui.h"
 #include "game.h"
 #include "init.h"
@@ -31,7 +34,7 @@ SDL_Surface	*gettextsurface(t_gui *ui, char *text, t_font fonttype)
 			(int)((float)INIT_HEIGHT * fonttype.size), 32,
 			0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	if (dst == NULL)
-		error_msg("Error Allocating Text Surface", 1);
+		error_msg(strerror(errno), errno);
 	SDL_BlitScaled(fsurface, NULL, dst, NULL);
 	SDL_FreeSurface(fsurface);
 	return (dst);

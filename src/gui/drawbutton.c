@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <string.h>
+
 #include "gui.h"
 #include "sdl_extra.h"
 #include "init.h"
@@ -26,7 +29,7 @@ void		drawbutton(t_gui *ui, t_button *button)
 		(int)((float)INIT_HEIGHT * button->size.y), 32,
 		0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	if (dst == NULL)
-		error_msg("Error Allocating Button Surface", 1);
+		error_msg(strerror(errno), errno);
 	SDL_BlitScaled(button->texture, NULL, dst, NULL);
 	pixel = (SDL_Point){(int)((float)INIT_WIDTH * button->transform.position.x),
 			(int)((float)INIT_HEIGHT * button->transform.position.y)};

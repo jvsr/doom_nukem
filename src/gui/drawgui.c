@@ -11,9 +11,12 @@
 /* ************************************************************************** */
 
 #include "libft/ft_list.h"
+
 #include "gui.h"
 #include "sdl_extra.h"
 #include "game.h"
+
+#include "libft/ft_printf.h"
 
 void			drawgui(t_game *game)
 {

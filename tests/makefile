@@ -29,8 +29,9 @@ include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
 CCFLAGS = -g -I$(INCLUDES) -I$(FRAMEWORKINCLUDES)
+
 ifeq ($(shell uname -s), Linux)
-CCFLAGS += -w
+CCFLAGS += -w -lm
 endif
 
 # Get source files
