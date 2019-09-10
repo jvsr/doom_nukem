@@ -16,7 +16,9 @@
 # include <SDL2/SDL_surface.h>
 # include <SDL2/SDL_pixels.h>
 # include <SDL2/SDL_ttf.h>
+
 # include "libft/ft_bool.h"
+
 # include "coord.h"
 
 # define GUI_NAME "gui"
@@ -67,7 +69,7 @@ typedef struct	s_font
 typedef struct	s_transform
 {
 	t_coord				position;
-	t_coord				size;	
+	t_coord				size;
 	char				*name;
 	t_bool				visible;
 	short				layer;
