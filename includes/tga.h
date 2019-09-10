@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:53:21 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 15:25:19 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include "libft/ft_bool.h"
 
 # if defined __linux__ || defined __APPLE__
-#  include "unistd.h"
+#  include <unistd.h>
 # else
-#  include "io.h"
+#  include <io.h>
 # endif
 
 typedef struct	s_tga
