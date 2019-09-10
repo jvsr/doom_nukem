@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader gui
+SUBLIBS = main color sdl_extra tga_reader gui gui_config
 
 # Executibale name
 NAME = doom-nukem
