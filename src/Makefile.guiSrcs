@@ -26,4 +26,4 @@ SRCS = destroybutton destroyimage destroypanel destroytext newbuttoncolour \
 	destroychildren drawgui drawelem drawtext drawimage getfont gettextsurface \
 	drawbutton addtransformclick gettransformvisible destroyclick checkclick \
 	drawpanel gettransformbyname gettransforminchildren newimagecolour \
-	destroytransformclick
+	destroytransformclick init_gui

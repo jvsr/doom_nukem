@@ -13,6 +13,8 @@
 #include <errno.h>
 #include <SDL2/SDL_ttf.h>
 
+#include "libft/ft_string.h"
+
 #include "gui.h"
 #include "game.h"
 #include "error.h"

@@ -16,7 +16,6 @@
 #include <SDL2/SDL_video.h>
 
 #include "libft/ft_memory.h"
-#include "libft/ft_string.h"
 
 #include "gui.h"
 #include "game.h"
@@ -66,5 +65,6 @@ t_game			*init(void)
 	game = alloc_game();
 	init_window_surface(game);
 	init_game(game);
+	init_gui(game);
 	return (game);
 }
