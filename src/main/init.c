@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 17:18:23 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 13:55:47 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static	void	init_window_surface(t_game *game)
 		error_msg(SDL_GetError(), 1);
 	game->surface = SDL_GetWindowSurface(game->window);
 	game->ui.guisurface = SDL_CreateRGBSurface(0, game->surface->w,
-		game->surface->h, 32, 0, 0, 0, 0);
+		game->surface->h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	game->ui.onclicks = NULL;
 	game->cursoractive = TRUE;
 }

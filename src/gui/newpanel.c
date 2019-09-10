@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:22:33 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 11:04:41 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 13:56:14 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ t_panel		*newpanel(t_guiinfo *guiinfo)
 
 	panel = (t_panel*)ft_memalloc(sizeof(t_panel));
 	if (panel == NULL)
-		error_msg("Error Allocating Panel Elem", 0);
+		error_msg("Error Allocating Panel Elem", 1);
 	ft_memcpy(&panel->transform.position, &guiinfo->position, sizeof(t_coord));
 	ft_memcpy(&panel->size, &guiinfo->size, sizeof(t_coord));
 	panel->transform.name = ft_strdup(guiinfo->name);
 	if(panel->transform.name == NULL)
-		error_msg("Error Allocating Panel Internals", 0);
+		error_msg("Error Allocating Panel Internals", 1);
 	panel->transform.children = NULL;
 	panel->transform.guitype = PANEL;
 	panel->transform.guielem = (void*)panel;

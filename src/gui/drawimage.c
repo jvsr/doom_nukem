@@ -6,13 +6,14 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/02 16:23:52 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 10:47:06 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 13:59:38 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "sdl_extra.h"
 #include "init.h"
+#include "error.h"
 
 void		drawimage(t_gui *ui, t_image *image)
 {
@@ -22,6 +23,8 @@ void		drawimage(t_gui *ui, t_image *image)
 	dst = SDL_CreateRGBSurface(0, (int)((float)INIT_WIDTH * image->size.x),
 			(int)((float)INIT_HEIGHT * image->size.y), 32,
 			0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+	if (dst == NULL)
+		error_msg("Error Allocating Image Surface", 1);
 	SDL_BlitScaled(image->texture, NULL, dst, NULL);
 	pixel = (SDL_Point){(int)((float)INIT_WIDTH * image->transform.position.x),
 			(int)((float)INIT_HEIGHT * image->transform.position.y)};

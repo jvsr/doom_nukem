@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 11:17:37 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 13:56:35 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text, t_font *font,
 
 	btn = (t_button*)ft_memalloc(sizeof(t_button));
 	if (btn == NULL)
-		error_msg("Error Allocating Button Elem", 0);
+		error_msg("Error Allocating Button Elem", 1);
 	btn->texture = SDL_CreateRGBSurface(0, INIT_WIDTH * guiinfo->size.x,
 		INIT_HEIGHT * guiinfo->size.y, 32, 0x00ff0000, 0x0000ff00, 0x000000ff,
 		0xff000000);
@@ -32,7 +32,7 @@ t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text, t_font *font,
 	btn->transform.name = ft_strdup(guiinfo->name);
 	if (btn->text == NULL || btn->transform.name == NULL ||
 		btn->texture == NULL)
-		error_msg("Error Allocating Button Internals", 0);
+		error_msg("Error Allocating Button Internals", 1);
 	sdl_draw_surface_rect(btn->texture, colour, (SDL_Rect){0, 0,
 		btn->texture->w, btn->texture->h});
 	ft_memcpy(&btn->font, font, sizeof(t_font));

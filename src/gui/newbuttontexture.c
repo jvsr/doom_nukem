@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:19:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 11:17:50 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 13:56:31 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ t_button	*newbuttontexture(t_guiinfo *guiinfo, char *text,
 
 	btn = (t_button*)ft_memalloc(sizeof(t_button));
 	if (btn == NULL)
-		error_msg("Error Allocating Button Elem", 0);
+		error_msg("Error Allocating Button Elem", 1);
 	btn->texture = SDL_CreateRGBSurface(0, (int)texture->w,
 		(int)texture->h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	btn->text = ft_strdup(text);
 	btn->transform.name = ft_strdup(guiinfo->name);
 	if (btn->text == NULL || btn->transform.name == NULL ||
 		btn->texture == NULL)
-		error_msg("Error Allocating Button Internals", 0);
+		error_msg("Error Allocating Button Internals", 1);
 	sdl_merge_surface(btn->texture, (SDL_Surface*)texture, (SDL_Point){0, 0});
 	ft_memcpy(&btn->font, font, sizeof(t_font));
 	ft_memcpy(&btn->transform.position, &guiinfo->position, sizeof(t_coord));

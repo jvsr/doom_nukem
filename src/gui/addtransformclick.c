@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 10:40:44 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 11:51:26 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 14:00:51 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void		addtransformclick(t_gui *ui, t_transform *transform,
 		return ;
 	new = ft_lstnew(transform, sizeof(t_transform));
 	if(new == NULL)
-		error_msg("Error Allocating Onclicks", 0);
+		error_msg("Error Allocating Onclicks", 1);
 	ft_lstadd(&ui->onclicks, new);
 }
