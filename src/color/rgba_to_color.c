@@ -13,7 +13,7 @@
 #include <SDL2/SDL_pixels.h>
 #include "types.h"
 
-void	rgba_to_color(SDL_Color *c, UINT32 color)
+void	rgba_to_color(SDL_Color *c, t_uint32 color)
 {
 	c->a = (unsigned char)(color >> 24);
 	c->r = (unsigned char)(color >> 16);

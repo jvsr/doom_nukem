@@ -10,9 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <string.h>
+
 #include "libft/ft_memory.h"
-#include "gui.h"
 #include "libft/ft_string.h"
+
+#include "gui.h"
 #include "error.h"
 
 t_panel		*newpanel(t_guiinfo *guiinfo)
@@ -21,12 +25,12 @@ t_panel		*newpanel(t_guiinfo *guiinfo)
 
 	panel = (t_panel*)ft_memalloc(sizeof(t_panel));
 	if (panel == NULL)
-		error_msg("Error Allocating Panel Elem", 1);
+		error_msg(strerror(errno), errno);
 	ft_memcpy(&panel->transform.position, &guiinfo->position, sizeof(t_coord));
 	ft_memcpy(&panel->size, &guiinfo->size, sizeof(t_coord));
 	panel->transform.name = ft_strdup(guiinfo->name);
-	if(panel->transform.name == NULL)
-		error_msg("Error Allocating Panel Internals", 1);
+	if (panel->transform.name == NULL)
+		error_msg(strerror(errno), errno);
 	panel->transform.children = NULL;
 	panel->transform.guitype = PANEL;
 	panel->transform.guielem = (void*)panel;

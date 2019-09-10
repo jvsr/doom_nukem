@@ -10,11 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <string.h>
+
+#include "libft/ft_memory.h"
+#include "libft/ft_string.h"
+
 #include "gui.h"
 #include "sdl_extra.h"
 #include "error.h"
-#include "libft/ft_memory.h"
-#include "libft/ft_string.h"
 
 t_image		*newimage(t_guiinfo *guiinfo, const SDL_Surface *texture)
 {
@@ -22,12 +26,12 @@ t_image		*newimage(t_guiinfo *guiinfo, const SDL_Surface *texture)
 
 	image = (t_image*)ft_memalloc(sizeof(t_image));
 	if (image == NULL)
-		error_msg("Error Allocating Image Elem", 1);
+		error_msg(strerror(errno), errno);
 	image->texture = SDL_CreateRGBSurface(0, (int)texture->w,
 		(int)texture->h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	image->transform.name = ft_strdup(guiinfo->name);
 	if (image->texture == NULL || image->transform.name == NULL)
-		error_msg("Error Allocating Image Internals", 1);
+		error_msg(strerror(errno), errno);
 	sdl_merge_surface(image->texture, (SDL_Surface*)texture, (SDL_Point){0, 0});
 	ft_memcpy(&image->transform.position, &guiinfo->position, sizeof(t_coord));
 	ft_memcpy(&image->size, &guiinfo->size, sizeof(t_coord));

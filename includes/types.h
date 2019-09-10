@@ -13,7 +13,8 @@
 #ifndef TYPES_H
 # define TYPES_H
 
-#define UINT32	unsigned int
-#define UINT8	unsigned char
+typedef	unsigned char	t_uint8;
+typedef	unsigned short	t_uint16;
+typedef unsigned int	t_uint32;
 
 #endif

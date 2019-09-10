@@ -18,10 +18,10 @@ void		destroytransformclick(t_gui *ui, t_transform *transform)
 {
 	t_list *lst;
 	t_list *pre;
-	
+
 	lst = ui->onclicks;
-	while(lst != NULL && !ft_strequ(((t_transform*)(lst->content))->name,
-		transform->name))
+	while (lst != NULL
+		&& !ft_strequ(((t_transform*)(lst->content))->name, transform->name))
 	{
 		pre = lst;
 		lst = lst->next;

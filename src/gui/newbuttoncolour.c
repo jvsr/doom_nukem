@@ -10,12 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <string.h>
+
+#include "libft/ft_memory.h"
+#include "libft/ft_string.h"
+
 #include "gui.h"
 #include "init.h"
 #include "sdl_extra.h"
 #include "error.h"
-#include "libft/ft_memory.h"
-#include "libft/ft_string.h"
 
 t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text, t_font *font,
 	const SDL_Color colour)
@@ -24,7 +28,7 @@ t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text, t_font *font,
 
 	btn = (t_button*)ft_memalloc(sizeof(t_button));
 	if (btn == NULL)
-		error_msg("Error Allocating Button Elem", 1);
+		error_msg(strerror(errno), errno);
 	btn->texture = SDL_CreateRGBSurface(0, INIT_WIDTH * guiinfo->size.x,
 		INIT_HEIGHT * guiinfo->size.y, 32, 0x00ff0000, 0x0000ff00, 0x000000ff,
 		0xff000000);
@@ -32,7 +36,7 @@ t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text, t_font *font,
 	btn->transform.name = ft_strdup(guiinfo->name);
 	if (btn->text == NULL || btn->transform.name == NULL ||
 		btn->texture == NULL)
-		error_msg("Error Allocating Button Internals", 1);
+		error_msg(strerror(errno), errno);
 	sdl_draw_surface_rect(btn->texture, colour, (SDL_Rect){0, 0,
 		btn->texture->w, btn->texture->h});
 	ft_memcpy(&btn->font, font, sizeof(t_font));

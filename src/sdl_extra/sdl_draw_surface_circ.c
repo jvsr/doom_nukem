@@ -14,12 +14,13 @@
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_surface.h>
+
 #include "shape.h"
 #include "color.h"
 
 void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c)
 {
-	UINT32			color_value;
+	t_uint32		color_value;
 	SDL_Point		cur;
 	const SDL_Point	start = {c.mid.x - c.d / 2, c.mid.y - c.d / 2};
 
