@@ -1,0 +1,10 @@
+main
+  - pos:
+  - dim:
+	- button
+		- name: button1
+		- pos: 10, 10
+		- dim: 80, 10
+sub
+	- button1
+		- text: "try this"
