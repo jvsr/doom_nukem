@@ -36,11 +36,6 @@ static t_game	*alloc_game(void)
 	game = (t_game *)ft_memalloc(sizeof(t_game));
 	if (game == NULL)
 		error_msg(strerror(errno), errno);
-	game->ui.font[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
-	game->ui.font[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
-	game->ui.font[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
-	game->ui.transform.name = ft_strdup(GUI_NAME);
-	game->ui.transform.visible = TRUE;
 	return (game);
 }
 
@@ -55,10 +50,6 @@ static	void	init_window_surface(t_game *game)
 	if (game->window == NULL)
 		error_msg(SDL_GetError(), 1);
 	game->surface = SDL_GetWindowSurface(game->window);
-	game->ui.guisurface = SDL_CreateRGBSurface(0, game->surface->w,
-		game->surface->h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	game->ui.onclicks = NULL;
-	game->cursoractive = TRUE;
 }
 
 static void		init_game(t_game *game)
