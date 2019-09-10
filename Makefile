@@ -57,6 +57,13 @@ SDL2LIB = -L$(FRAMEWORKPATH)/lib -lSDL2
 # SDL2_TTf dependency
 SDL2TTF = -L$(FRAMEWORKPATH)/lib -lSDL2_ttf
 
+# All libs for compilation
+LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF)
+
+ifeq ($(shell uname -s), Linux)
+LIBS += -lm
+endif
+
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
@@ -99,7 +106,7 @@ all: $(NAME)
 $(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -coverage -o $(NAME) $(OBJS) $(LIB) $(SDL2LIB) $(SDL2TTF)
+	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE

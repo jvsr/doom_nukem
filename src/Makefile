@@ -48,10 +48,6 @@ ifeq ($(GCOV), TRUE)
 CCFLAGS += -coverage
 endif
 
-ifeq ($(shell uname -s), Linux)
-CCFLAGS += -lm
-endif
-
 # Get correct srcs variable
 include Makefile.$(SRCFOLDER)Srcs
 
