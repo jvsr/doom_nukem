@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:30:17 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 18:26:42 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@
 typedef struct s_game		t_game;
 typedef struct s_list		t_list;
 
+/*
+** ! Remove
+*/
+	typedef struct s_text		t_text;
+	typedef struct s_image		t_image;
+	typedef struct s_button		t_button;
+/*
+** ! Remove
+*/
+
 typedef	enum	e_fonttype
 {
 	ROBOTO,
@@ -32,12 +42,19 @@ typedef	enum	e_fonttype
 	FONT_AMOUNT
 }				t_fonttype;
 
-typedef enum	e_guielem
+typedef enum	e_guitype
 {
-	BUTTON,
 	TEXT,
 	IMAGE,
+	BUTTON,
 	PANEL
+}				t_guitype;
+
+typedef	union	u_guielem
+{
+	t_text		*text;
+	t_image		*image;
+	t_button	*button;
 }				t_guielem;
 
 typedef struct	s_font
@@ -50,14 +67,22 @@ typedef struct	s_font
 typedef struct	s_transform
 {
 	t_coord				position;
+	t_coord				size;	
 	char				*name;
 	t_bool				visible;
 	short				layer;
-	struct s_transform	*parent;
+/*
+** ! Remove
+*/
 	t_list				*children;
-	t_guielem			guitype;
 	void				*guielem;
+/*
+** ! Remove
+*/
+	t_guitype			guitype;
+	t_guielem			guiele;
 	void				(*onclick)(t_game *, struct s_transform *);
+	struct s_transform	*parent;
 	struct s_transform	*next;
 }				t_transform;
 
@@ -68,36 +93,64 @@ typedef struct	s_text
 	t_font			font;
 }				t_text;
 
-typedef struct	s_buttton
+typedef struct	s_button
 {
 	t_transform		transform;
 	char			*text;
 	t_font			font;
+/*
+** ! Remove
+*/
 	t_coord			size;
+/*
+** ! Remove
+*/
 	SDL_Surface		*texture;
 }				t_button;
 
 typedef struct	s_image
 {
 	t_transform		transform;
+/*
+** ! Remove
+*/
 	t_coord			size;
+/*
+** ! Remove
+*/
 	SDL_Surface		*texture;
 }				t_image;
 
 typedef struct	s_panel
 {
 	t_transform		transform;
-	SDL_Surface		*panel;
+	t_list			*onclicks;
+	t_transform		*children;
+/*
+** ! Remove
+*/
 	t_coord			size;
+/*
+** ! Remove
+*/
+	SDL_Surface		*panel;
+	struct s_panel	*next;
 }				t_panel;
 
 typedef struct	s_gui
 {
-	t_transform	transform;
 	t_bool		redraw;
-	SDL_Surface	*guisurface;
-	TTF_Font	*font[FONT_AMOUNT];
+	t_panel     *panels;
+/*
+** ! Remove
+*/
 	t_list		*onclicks;
+	t_transform	transform;
+	SDL_Surface	*guisurface;
+/*
+** ! Remove
+*/
+	TTF_Font	*font[FONT_AMOUNT];
 }				t_gui;
 
 typedef struct	s_guiinfo
