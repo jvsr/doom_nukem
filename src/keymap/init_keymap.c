@@ -14,6 +14,7 @@
 
 #include "libft/ft_hash.h"
 
+#include "gui.h"
 #include "init.h"
 #include "game.h"
 #include "error.h"
