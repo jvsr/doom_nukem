@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:14:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 18:49:53 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 12:00:02 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 #include "coord.h"
 
-typedef struct	s_sprite
+typedef struct	s_objects
 {
 
-}				t_sprite;
+}				t_object;
 
 typedef struct	s_wall
 {
@@ -43,8 +43,8 @@ typedef struct	s_sector
 ** *	- t_sector*: Array of all sectors
 ** *	- uint16_t: Total number of walls
 ** *	- t_wall*: Array of all walls
-** *	- uint16_t: Total number of sprites
-** *	- t_sprite*: Array of all sprites
+** *	- uint16_t: Total number of objects
+** *	- t_object*: Array of all objects
 */
 
 typedef struct	s_map
@@ -53,8 +53,8 @@ typedef struct	s_map
 	t_sector	*all_sectors;
 	uint16_t	num_wall;
 	t_wall		*all_walls;
-	uint16_t	num_sprite;
-	t_sprite	*all_sprites;
+	uint16_t	num_object;
+	t_object	*all_objects;
 }				t_map;
 
 #endif
