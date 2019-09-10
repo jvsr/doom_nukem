@@ -6,12 +6,12 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/09/04 15:30:52 by ehollidg      ########   odam.nl          #
+#    Updated: 2019/09/04 17:02:30 by ehollidg      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader
+SUBLIBS = main color sdl_extra tga_reader gui
 
 # Executibale name
 NAME = doom-nukem
@@ -54,6 +54,16 @@ FRAMEWORKINCLUDES = $(FRAMEWORKPATH)/include
 # SDL2 dependency
 SDL2LIB = -L$(FRAMEWORKPATH)/lib -lSDL2
 
+# SDL2_TTf dependency
+SDL2TTF = -L$(FRAMEWORKPATH)/lib -lSDL2_ttf
+
+# All libs for compilation
+LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF)
+
+ifeq ($(shell uname -s), Linux)
+LIBS += -lm
+endif
+
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
@@ -87,6 +97,7 @@ export PARENTNAME
 export FRAMEWORKPATH
 export FRAMEWORKINCLUDES
 export SDL2LIB
+export SDL2TTF
 export LIBFT_DISABLE_GCOV
 
 all: $(NAME)
@@ -95,7 +106,7 @@ all: $(NAME)
 $(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -coverage -o $(NAME) $(OBJS) $(LIB) $(SDL2LIB)
+	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE

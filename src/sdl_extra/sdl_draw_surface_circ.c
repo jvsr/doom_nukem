@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 12:58:54 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 13:48:13 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 14:58:56 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_surface.h>
-#include <_types/_uint32_t.h>
 
 #include "shape.h"
 #include "color.h"
 
-void	sdl_surface_draw_circ(SDL_Surface *dst, SDL_Color color, t_circle c)
+void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c)
 {
-	uint32_t		color_value;
+	t_uint32		color_value;
 	SDL_Point		cur;
 	const SDL_Point	start = {c.mid.x - c.d / 2, c.mid.y - c.d / 2};
 

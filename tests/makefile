@@ -17,6 +17,7 @@ PARENTNAME =
 FRAMEWORKPATH =
 FRAMEWORKINCLUDES =
 SDL2LIB =
+SDL2TTF =
 
 # Compile settings
 CCSILENT = FALSE
@@ -28,6 +29,7 @@ include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
 CCFLAGS = -g -I$(INCLUDES) -I$(FRAMEWORKINCLUDES)
+
 ifeq ($(shell uname -s), Linux)
 CCFLAGS += -w
 endif
@@ -44,7 +46,11 @@ LIB = $(LIBPATH)/$(LIBNAME).a
 CRITERIONLIB = -L$(FRAMEWORKPATH)/lib -lcriterion
 
 # All libs for compilation
-LIBS = $(LIB) $(SDL2LIB) $(CRITERIONLIB)
+LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF) $(CRITERIONLIB)
+
+ifeq ($(shell uname -s), Linux)
+LIBS += -lm
+endif
 
 # Header dependency
 HEADERS := $(HEADERS:%=$(INCLUDES)/%)

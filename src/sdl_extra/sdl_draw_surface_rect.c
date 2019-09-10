@@ -6,20 +6,20 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 13:29:50 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 14:58:32 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_surface.h>
-
 #include "color.h"
+#include "types.h"
 
-void	sdl_surface_draw_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect)
+void	sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect)
 {
 	int			*start;
-	Uint32		color_value;
+	t_uint32	color_value;
 	SDL_Point	cur;
 
 	color_value = color_to_rgba(color);

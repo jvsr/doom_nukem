@@ -6,15 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 15:23:56 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 14:47:23 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_surface.h>
-
 #include "libft/ft_memory.h"
-
 #include "color.h"
 
 /*
