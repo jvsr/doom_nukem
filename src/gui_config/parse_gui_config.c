@@ -18,5 +18,8 @@ t_panel	*parse_gui_config(char *state_name, char *file_name)
 {
 	t_panel	*state;
 
+	state = NULL;
+	(void)state_name;
+	(void)file_name;
 	return (state);
 }
