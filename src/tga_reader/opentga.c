@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:05:31 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 14:31:09 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_bool		opentga(t_img *img, char *loc)
 	settgaheader(str, &tga, img);
 	if (tga.img_type == 0)
 	{
-		ft_strdel(str);
+		ft_strdel((char**)&str);
 		return (FALSE);
 	}
 	strtoimg(img, &tga, str);
-	ft_strdel(str);
+	ft_strdel((char**)&str);
 	return (TRUE);
 }
