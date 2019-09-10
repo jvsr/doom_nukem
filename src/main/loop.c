@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:43:38 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 10:50:46 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ void			loop(t_game *game)
 	SDL_Event event;
 
 	game->ui.redraw = TRUE;
-	t_image *image = newimagecolour(&((t_guiinfo){"image", TRUE, 
-	(t_coord){0.2, 0.2}, (t_coord){0.2, 0.2}}), (SDL_Color){255, 255, 255, 255});
-	settransformparent(&image->transform, &game->ui.transform);
 	while (game->state == running)
 	{
 		SDL_FillRect(game->surface, NULL, 0);

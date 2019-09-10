@@ -6,18 +6,18 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:41:12 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/09 18:00:07 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GUI_H
 # define GUI_H
 
-# include "libft/ft_bool.h"
-# include "coord.h"
 # include <SDL2/SDL_surface.h>
 # include <SDL2/SDL_pixels.h>
 # include <SDL2/SDL_ttf.h>
+# include "libft/ft_bool.h"
+# include "coord.h"
 
 # define GUI_NAME "gui"
 
