@@ -13,8 +13,11 @@
 #include "ft_hash.h"
 #include "ft_memory.h"
 
+#include "ft_printf.h"
+
 t_bool	hs_keyequ(const t_hashlist *entry, const void *key, size_t keysize)
 {
+	ft_printf("%d - %d\n", *((size_t *)entry->key), *((size_t *)key));
 	if (entry->keysize != keysize)
 		return (FALSE);
 	return (ft_memequ(entry->key, key, keysize));
