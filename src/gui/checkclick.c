@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 11:39:35 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:22:10 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 15:29:19 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static SDL_Point	getend(t_transform *transform)
 	else if (transform->guitype == TEXT)
 		return ((SDL_Point){((t_text*)transform->guielem)->font.size * INIT_WIDTH,
 		((t_text*)transform->guielem)->font.size * INIT_HEIGHT});
-	else
+	else if (transform->guitype == PANEL)
 		return ((SDL_Point){((t_panel*)transform->guielem)->size.x * INIT_WIDTH,
 		((t_panel*)transform->guielem)->size.y * INIT_HEIGHT});
 	return ((SDL_Point){0, 0});
