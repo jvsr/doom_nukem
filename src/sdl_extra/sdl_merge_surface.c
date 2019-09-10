@@ -6,13 +6,12 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 13:50:19 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 14:47:13 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_surface.h>
-
 #include "libft/ft_memory.h"
 
 /*
@@ -23,7 +22,7 @@
 ** * this function considers the Alpha to be 255
 */
 
-void		sdl_surface_merge(SDL_Surface *dst, SDL_Surface *src,
+void		sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src,
 								SDL_Point start)
 {
 	int			len;

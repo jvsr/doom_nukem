@@ -6,14 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 13:53:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 14:58:45 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_surface.h>
-
 #include "color.h"
 
 static int		calculate_color(int *dst, SDL_Color src)
@@ -44,7 +43,7 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Rect rect, SDL_Point cur)
 	return ((size_t)len);
 }
 
-static void		copy_color(int *dst, Uint32 color, size_t length)
+static void		copy_color(int *dst, t_uint32 color, size_t length)
 {
 	size_t i;
 
@@ -59,8 +58,8 @@ static void		copy_color(int *dst, Uint32 color, size_t length)
 static size_t	merge_pixel(SDL_Surface *dst, SDL_Color color,
 							SDL_Rect rect, SDL_Point cur)
 {
-	size_t	length;
-	Uint32	color_value;
+	size_t		length;
+	t_uint32	color_value;
 
 	dst->userdata = dst->pixels + ((rect.y + cur.y) * dst->pitch)
 					+ (rect.x + cur.x) * 4;

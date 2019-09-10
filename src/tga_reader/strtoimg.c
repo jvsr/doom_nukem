@@ -6,12 +6,11 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/08 21:36:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 15:24:28 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 16:53:57 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_memory.h"
-
 #include "tga.h"
 
 void		strtoimg(t_img *img, t_tga *tga, unsigned char *str)

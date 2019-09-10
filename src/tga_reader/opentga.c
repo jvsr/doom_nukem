@@ -6,15 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 15:24:20 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 14:31:09 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-
-#include "libft/ft_string.h"
-
 #include "tga.h"
+#include "libft/ft_string.h"
 
 static void	settgaheader(unsigned char *str, t_tga *tga, t_img *img)
 {
@@ -31,7 +29,7 @@ static void	settgaheader(unsigned char *str, t_tga *tga, t_img *img)
 	img->pxdepth = str[16];
 }
 
-int			opentga(t_img *img, char *loc)
+t_bool		opentga(t_img *img, char *loc)
 {
 	int				fd;
 	unsigned char	*str;
@@ -39,14 +37,18 @@ int			opentga(t_img *img, char *loc)
 
 	fd = open(loc, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (FALSE);
 	ft_readfile(fd, (char**)&str);
 	close(fd);
 	if (str == NULL)
-		return (0);
+		return (FALSE);
 	settgaheader(str, &tga, img);
 	if (tga.img_type == 0)
-		return (0);
+	{
+		ft_strdel((char**)&str);
+		return (FALSE);
+	}
 	strtoimg(img, &tga, str);
-	return (1);
+	ft_strdel((char**)&str);
+	return (TRUE);
 }

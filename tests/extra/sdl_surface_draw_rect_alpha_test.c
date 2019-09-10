@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 18:55:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 13:54:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/09 17:13:21 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ int	main (void)
 						Time(sdl_merge_surface_alpha(s, src1, (SDL_Point){0, 0}), "surMerAlp2");
 						Time(sdl_merge_surface_alpha(s, src2, (SDL_Point){0, INIT_HEIGHT / 2}), "surMerAlp3");
 						Time(sdl_merge_surface_alpha(s, src4, (SDL_Point){INIT_WIDTH / 2 - 80, INIT_HEIGHT / 2 - 45}), "surMerAlp4");
-						// time(sdl_draw_surface_rect_alpha(s, (t_color){180, 34, 23, 180}, (SDL_Rect){50, 60, 650, 600}), "surDrawRect1");
+						// time(sdl_draw_surface_rect_alpha(s, (SDL_Color){180, 34, 23, 180}, (SDL_Rect){50, 60, 650, 600}), "surDrawRect1");
 						Time(
 							Time(sdl_draw_surface_rect_alpha(s, (SDL_Color){0x33, 0x33, 0x33, 0xDD}, (SDL_Rect){50, 50, 160, 60}), "surDrawRect2");
 							Time(sdl_draw_surface_rect_alpha(s, (SDL_Color){0x33, 0x33, 0x33, 0xDD}, (SDL_Rect){60, 40, 140, 80}), "surDrawRect3");
 							Time(sdl_draw_surface_rect_alpha(s, (SDL_Color){0x99, 0x99, 0x99, 0xDD}, (SDL_Rect){60, 50, 140, 60}), "surDrawRect4");
 						, "button creation");	
 						Time(sdl_draw_surface_rect_alpha(s, (SDL_Color){0x66, 0x66, 0x66, 0x66}, (SDL_Rect){80, 80, INIT_WIDTH / 2 - 35, INIT_HEIGHT / 2 - 50}), "surDrawRect5");
-						// time(sdl_draw_surface_rect_alpha(s, (t_color){180, 34, 23, 180}, (SDL_Rect){50, 60, 650, 600}), "surDrawRect6");
+						// time(sdl_draw_surface_rect_alpha(s, (SDL_Color){180, 34, 23, 180}, (SDL_Rect){50, 60, 650, 600}), "surDrawRect6");
 					, "total");
 				}
 			}

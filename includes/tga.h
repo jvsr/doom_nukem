@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 15:21:35 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/10 15:25:19 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define TGA_H
 
 # include <SDL2/SDL.h>
+# include "libft/ft_bool.h"
 
-# if defined LINUX || defined __APPLE__
-#  include "unistd.h"
+# if defined __linux__ || defined __APPLE__
+#  include <unistd.h>
 # else
-#  include "io.h"
+#  include <io.h>
 # endif
 
 typedef struct	s_tga
@@ -50,7 +51,7 @@ typedef struct	s_mlx
 	t_img	image;
 }				t_mlx;
 
-int				opentga(t_img *img, char *loc);
+t_bool			opentga(t_img *img, char *loc);
 char			reversebyte(char b);
 void			strtoimg(t_img *img, t_tga *tga, unsigned char *str);
 int				pixelfrompos(unsigned char *str, size_t i, t_img *img);
