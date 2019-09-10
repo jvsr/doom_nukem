@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 18:00:07 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 11:47:21 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ typedef struct	s_guiinfo
 void		addtransformclick(t_gui *ui, t_transform *transform,
 								void (*onclick)(t_game *, t_transform *));
 void		checkclick(t_game *game, SDL_Point mpos);
-void		destroybutton(t_gui *ui, t_button *button,
+void		destroybutton(t_gui *ui, t_button **button,
 												const t_bool delchildren);
-void		destroypanel(t_gui *ui, t_panel *panel,
+void		destroypanel(t_gui *ui, t_panel **panel,
 							const t_bool delchildren);
-void		destroytext(t_gui *ui, t_text *text,
+void		destroytext(t_gui *ui, t_text **text,
 							const t_bool delchildren);
-void		destroyimage(t_gui *ui, t_image *image,
+void		destroyimage(t_gui *ui, t_image **image,
 							const t_bool delchildren);
 void		destroychildren(t_gui *ui, t_list *children,
 							const t_bool delchildren);

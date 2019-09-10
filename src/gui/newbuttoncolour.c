@@ -6,37 +6,43 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:35:14 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 11:17:37 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "init.h"
+#include "sdl_extra.h"
+#include "error.h"
 #include "libft/ft_memory.h"
 #include "libft/ft_string.h"
-#include "sdl_extra.h"
 
-t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text,
-			t_font *font, const SDL_Color colour)
+t_button	*newbuttoncolour(t_guiinfo *guiinfo, char *text, t_font *font,
+	const SDL_Color colour)
 {
-	t_button *button;
+	t_button *btn;
 
-	button = (t_button*)ft_memalloc(sizeof(t_button));
-	button->texture = SDL_CreateRGBSurface(0,
-		INIT_WIDTH * guiinfo->size.x, INIT_HEIGHT * guiinfo->size.y,
-		32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	button->text = ft_strdup(text);
-	sdl_draw_surface_rect(button->texture, colour,
-					(SDL_Rect){0, 0, button->texture->w, button->texture->h});
-	ft_memcpy(&button->font, font, sizeof(t_font));
-	ft_memcpy(&button->transform.position, &guiinfo->position, sizeof(t_coord));
-	ft_memcpy(&button->size, &guiinfo->size, sizeof(t_coord));
-	button->transform.name = ft_strdup(guiinfo->name);
-	button->transform.children = NULL;
-	button->transform.guitype = BUTTON;
-	button->transform.guielem = (void*)button;
-	button->transform.onclick = NULL;
-	button->transform.visible = TRUE;
-	button->transform.layer = 0;
-	return (button);
+	btn = (t_button*)ft_memalloc(sizeof(t_button));
+	if (btn == NULL)
+		error_msg("Error Allocating Button Elem", 0);
+	btn->texture = SDL_CreateRGBSurface(0, INIT_WIDTH * guiinfo->size.x,
+		INIT_HEIGHT * guiinfo->size.y, 32, 0x00ff0000, 0x0000ff00, 0x000000ff,
+		0xff000000);
+	btn->text = ft_strdup(text);
+	btn->transform.name = ft_strdup(guiinfo->name);
+	if (btn->text == NULL || btn->transform.name == NULL ||
+		btn->texture == NULL)
+		error_msg("Error Allocating Button Internals", 0);
+	sdl_draw_surface_rect(btn->texture, colour, (SDL_Rect){0, 0,
+		btn->texture->w, btn->texture->h});
+	ft_memcpy(&btn->font, font, sizeof(t_font));
+	ft_memcpy(&btn->transform.position, &guiinfo->position, sizeof(t_coord));
+	ft_memcpy(&btn->size, &guiinfo->size, sizeof(t_coord));
+	btn->transform.children = NULL;
+	btn->transform.guitype = BUTTON;
+	btn->transform.guielem = (void*)btn;
+	btn->transform.onclick = NULL;
+	btn->transform.visible = TRUE;
+	btn->transform.layer = 0;
+	return (btn);
 }

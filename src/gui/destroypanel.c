@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:40:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:21:30 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 11:47:10 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@
 #include "libft/ft_bool.h"
 #include "libft/ft_string.h"
 
-void		destroypanel(t_gui *ui, t_panel *panel,
+void		destroypanel(t_gui *ui, t_panel **panel,
 												const t_bool delchildren)
 {
-	if (panel->transform.onclick != NULL)
-		destroyclick(ui, panel->transform.name);
+	t_panel *pnl;
+
+	pnl = *panel;
+	if (pnl->transform.onclick != NULL)
+		destroyclick(ui, pnl->transform.name);
 	if (delchildren == TRUE)
-		destroychildren(ui, panel->transform.children, TRUE);
-	else if (panel->transform.parent != NULL)
-		ft_lstadd(&panel->transform.parent->children,
-			panel->transform.children);
-	ft_strdel(&panel->transform.name);
-	free(panel);
+		destroychildren(ui, pnl->transform.children, TRUE);
+	else if (pnl->transform.parent != NULL)
+		ft_lstadd(&pnl->transform.parent->children,
+			pnl->transform.children);
+	ft_strdel(&pnl->transform.name);
+	free(pnl);
 	panel = NULL;
 }

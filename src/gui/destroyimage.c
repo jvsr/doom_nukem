@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:48:27 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:21:23 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 11:44:23 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 #include "libft/ft_string.h"
 #include "libft/ft_list.h"
 
-void		destroyimage(t_gui *ui, t_image *image,
+void		destroyimage(t_gui *ui, t_image **image,
 												const t_bool delchildren)
 {
-	if (image->transform.onclick != NULL)
-		destroyclick(ui, image->transform.name);
+	t_image *img;
+
+	img = *image;
+	if (img->transform.onclick != NULL)
+		destroyclick(ui, img->transform.name);
 	if (delchildren == TRUE)
-		destroychildren(ui, image->transform.children, TRUE);
-	else if (image->transform.parent != NULL)
-		ft_lstadd(&image->transform.parent->children,
-			image->transform.children);
-	SDL_FreeSurface(image->texture);
-	ft_strdel(&image->transform.name);
-	free(image);
+		destroychildren(ui, img->transform.children, TRUE);
+	else if (img->transform.parent != NULL)
+		ft_lstadd(&img->transform.parent->children,
+			img->transform.children);
+	SDL_FreeSurface(img->texture);
+	ft_strdel(&img->transform.name);
+	free(img);
 	image = NULL;
 }

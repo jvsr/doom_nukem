@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 11:11:02 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:22:27 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 11:47:42 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void		deletegui(t_gui *ui, t_transform *transform,
 												const t_bool delchildren)
 {
 	if (transform->guitype == BUTTON)
-		destroybutton(ui, (t_button*)transform->guielem, delchildren);
+		destroybutton(ui, (t_button**)&transform->guielem, delchildren);
 	else if (transform->guitype == PANEL)
-		destroypanel(ui, (t_panel*)transform->guielem, delchildren);
+		destroypanel(ui, (t_panel**)&transform->guielem, delchildren);
 	else if (transform->guitype == TEXT)
-		destroytext(ui, (t_text*)transform->guielem, delchildren);
+		destroytext(ui, (t_text**)&transform->guielem, delchildren);
 	else if (transform->guitype == IMAGE)
-		destroyimage(ui, (t_image*)transform->guielem, delchildren);
+		destroyimage(ui, (t_image**)&transform->guielem, delchildren);
 }
 
 void		destroychildren(t_gui *ui, t_list *children,
