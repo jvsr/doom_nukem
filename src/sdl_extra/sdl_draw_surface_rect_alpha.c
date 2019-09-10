@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 14:47:06 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 14:58:45 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void		copy_color(int *dst, Uint32 color, size_t length)
 static size_t	merge_pixel(SDL_Surface *dst, SDL_Color color,
 							SDL_Rect rect, SDL_Point cur)
 {
-	size_t			length;
-	unsigned int	color_value;
+	size_t	length;
+	UINT32	color_value;
 
 	dst->userdata = dst->pixels + ((rect.y + cur.y) * dst->pitch)
 					+ (rect.x + cur.x) * 4;

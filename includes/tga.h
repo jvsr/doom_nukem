@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 16:44:38 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 14:53:21 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define TGA_H
 
 # include <SDL2/SDL.h>
-
-# include <SDL2/SDL.h>
 # include "libft/ft_bool.h"
+
 # if defined __linux__ || defined __APPLE__
 #  include "unistd.h"
 # else

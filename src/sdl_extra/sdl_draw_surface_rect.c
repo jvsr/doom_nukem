@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 12:24:03 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 14:47:01 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 14:58:32 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_surface.h>
 #include "color.h"
+#include "types.h"
 
 void	sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect)
 {
-	int				*start;
-	unsigned int	color_value;
-	SDL_Point		cur;
+	int			*start;
+	UINT32		color_value;
+	SDL_Point	cur;
 
 	color_value = color_to_rgba(color);
 	start = dst->pixels + (rect.y * dst->pitch) + (rect.x * 4);

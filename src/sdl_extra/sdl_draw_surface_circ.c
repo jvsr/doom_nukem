@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 12:58:54 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 14:46:56 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/10 14:58:56 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c)
 {
-	unsigned int	color_value;
+	UINT32			color_value;
 	SDL_Point		cur;
 	const SDL_Point	start = {c.mid.x - c.d / 2, c.mid.y - c.d / 2};
 
