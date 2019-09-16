@@ -31,8 +31,6 @@ static t_bool	is_above(const t_transform *elem, const t_transform *hit)
 	const t_transform	*hit_p = hit->parent.elem;
 	const t_transform	*elem_p = elem->parent.elem;
 
-	if (hit == NULL)
-		return (TRUE);
 	if (elem_p == hit_p)
 		return (elem->layer > hit->layer);
 	else if (elem_p != NULL && elem_p->parent.elem == hit_p)
@@ -50,9 +48,10 @@ static t_bool	check_children(SDL_Point *pos, t_transform *elem,
 		return (FALSE);
 	if (check_children(pos, elem->next, hit))
 		return (TRUE);
-	if (elem->show && is_above(elem, *hit) && is_hit(pos, elem))
+	if (elem->show && is_hit(pos, elem)
+	&& (*hit == NULL || is_above(elem, *hit)))
 	{
-		if (elem->gui_type == ELEM)
+		if (elem->gui_type == PANEL)
 			return (check_children(pos, elem->gui_elem.panel->children, hit));
 		else if (elem->clickable)
 		{

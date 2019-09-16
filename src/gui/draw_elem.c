@@ -14,6 +14,8 @@
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_error.h>
 
+#include "libft/ft_memory.h"
+
 #include "gui.h"
 #include "game.h"
 #include "sdl_extra.h"
@@ -29,7 +31,10 @@ static void	update_pos_dim(t_transform *elem, SDL_Point *pos, SDL_Point *dim)
 	SDL_Point	parent_dim;
 
 	if (elem->parent_type == ELEM)
-		update_pos_dim(elem->parent.elem, &parent_pos, &parent_dim);
+	{
+		ft_memcpy(&parent_pos, &elem->parent.elem->abs_pos, sizeof(SDL_Point));
+		ft_memcpy(&parent_dim, &elem->parent.elem->abs_dim, sizeof(SDL_Point));
+	}
 	else
 	{
 		parent_pos.x = elem->parent.ui->window_surface->w;

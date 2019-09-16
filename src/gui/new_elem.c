@@ -45,7 +45,6 @@ t_transform	*new_elem(const char *name, t_gui_type type)
 	new->redraw = TRUE;
 	new->gui_type = type;
 	new->clickable = (type != PANEL);
-	new->gui_type = -1;
 	new->parent_type = -1;
 	new_gui_elem(type, &new->gui_elem);
 	return (new);
