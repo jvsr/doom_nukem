@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   clickdestroy.c                                     :+:    :+:            */
+/*   new_button.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 11:04:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:38:19 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/10 13:56:35 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <string.h>
+
+#include "libft/ft_memory.h"
+
 #include "gui.h"
-#include <stdlib.h>
-#include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "error.h"
 
-void		destroyclick(t_gui *ui, char *name)
+/*
+** * Gui internal function
+*/
+
+t_button	*new_button(void)
 {
-	t_list *lst;
-	t_list *prev;
+	t_button *button;
 
-	lst = ui->onclicks;
-	prev = NULL;
-	while (lst != NULL && !ft_strcmp(((t_transform*)lst->content)->name, name))
-	{
-		prev = lst;
-		lst = lst->next;
-	}
-	if (lst == NULL)
-		return ;
-	if (prev != NULL)
-		prev->next = lst->next;
-	lst->next = NULL;
-	ft_lstdelone(&lst, NULL);
+	button = (t_button *)ft_memalloc(sizeof(t_button));
+	if (button == NULL)
+		error_msg(strerror(errno), errno);
+	button->draw_method = SCALED;
+	ft_bzero(&button->font, sizeof(t_font));
+	return (button);
 }

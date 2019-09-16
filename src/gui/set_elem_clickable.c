@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transformgetvisible.c                              :+:    :+:            */
+/*   set_elem_clickable.c                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 10:47:41 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:16:29 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/16 16:25:15 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/16 16:25:15 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_string.h"
-#include "gui.h"
 #include "libft/ft_bool.h"
 
-t_bool		gettransformvisible(t_transform *transform)
+#include "gui.h"
+
+void	set_elem_clickable(t_transform *elem, t_bool clickable)
 {
-	while (transform != NULL && !ft_strcmp(transform->name, GUI_NAME))
-	{
-		if (transform->visible == FALSE)
-			return (FALSE);
-		transform = transform->parent;
-	}
-	return (TRUE);
+	elem->clickable = clickable;
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   drawimage.c                                        :+:    :+:            */
+/*   draw_image.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,27 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <string.h>
+#include "libft/ft_memory.h"
 
 #include "gui.h"
-#include "sdl_extra.h"
-#include "init.h"
-#include "error.h"
+#include "color.h"
 
-void		drawimage(t_gui *ui, t_image *image)
+static void	draw_color(t_transform *elem, t_image *image)
 {
-	SDL_Surface *dst;
-	SDL_Point	pixel;
+	size_t			index;
+	int				*color_stream;
+	const Uint32	color_value = color_to_rgba(image->color);
+	const size_t	pixels = elem->surface->w * elem->surface->h;
 
-	dst = SDL_CreateRGBSurface(0, (int)((float)INIT_WIDTH * image->size.x),
-			(int)((float)INIT_HEIGHT * image->size.y), 32,
-			0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	if (dst == NULL)
-		error_msg(strerror(errno), errno);
-	SDL_BlitScaled(image->texture, NULL, dst, NULL);
-	pixel = (SDL_Point){(int)((float)INIT_WIDTH * image->transform.position.x),
-			(int)((float)INIT_HEIGHT * image->transform.position.y)};
-	sdl_merge_surface(ui->guisurface, dst, pixel);
-	SDL_FreeSurface(dst);
+	index = 0;
+	color_stream = (int*)elem->surface->pixels;
+	while (index < pixels)
+	{
+		color_stream[index] = color_value;
+		index++;
+	}
+}
+
+void		draw_image(t_transform *elem)
+{
+	t_image	*image;
+
+	image = elem->gui_elem.image;
+	if (image->draw_method == COLOR)
+		draw_color(elem, image);
 }

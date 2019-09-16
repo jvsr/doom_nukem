@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   settransformparent.c                               :+:    :+:            */
+/*   add_elem_child.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,22 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <string.h>
-
-#include "libft/ft_list.h"
-
 #include "gui.h"
-#include "error.h"
 
-void		settransformparent(t_transform *child, t_transform *parent)
+void		add_elem_child(t_transform *parent, t_transform *child)
 {
-	t_list *new;
-
-	new = ft_lstnew(child, sizeof(child));
-	if (new == NULL)
-		error_msg(strerror(errno), errno);
-	child->parent = parent;
-	ft_lstadd(&parent->children, new);
-	child->layer = (short)ft_lstlen(parent->children);
+	child->parent_type = ELEM;
+	child->parent.elem = parent;
+	add_to_children(&parent->gui_elem.panel->children, child);
+	set_elem_redraw(child);
 }

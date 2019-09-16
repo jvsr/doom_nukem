@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   destroytext.c                                      :+:    :+:            */
+/*   del_text.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,25 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
 #include <stdlib.h>
-#include "libft/ft_list.h"
+
 #include "libft/ft_string.h"
 
-void		destroytext(t_gui *ui, t_text **text, const t_bool delchildren)
-{
-	t_text *txt;
+#include "gui.h"
 
-	txt = *text;
-	if (txt->transform.onclick != NULL)
-		destroyclick(ui, txt->transform.name);
-	ft_strdel(&txt->text);
-	if (delchildren == TRUE)
-		destroychildren(ui, txt->transform.children, TRUE);
-	else if (txt->transform.parent != NULL)
-		ft_lstadd(&txt->transform.parent->children,
-			txt->transform.children);
-	ft_strdel(&txt->transform.name);
-	free(txt);
-	text = NULL;
+/*
+** * Gui internal function
+*/
+
+void		del_text(t_text **text)
+{
+	if (text == NULL || *text == NULL)
+		return ;
+	ft_strdel(&(*text)->text);
+	free(*text);
+	*text = NULL;
 }

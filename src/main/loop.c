@@ -23,22 +23,21 @@ static void		polled(t_game *game, SDL_Event *event)
 		game->state = stopped;
 	else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_ESCAPE)
 		game->state = stopped;
-	else if (game->cursoractive && event->type == SDL_MOUSEBUTTONDOWN
-		&& event->button.button & SDL_BUTTON_LEFT)
-		checkclick(game, (SDL_Point){event->button.x, event->button.y});
+	else if (event->type == SDL_MOUSEBUTTONDOWN
+	&& event->button.button & SDL_BUTTON_LEFT)
+		check_gui_hit(game, (SDL_Point){event->button.x, event->button.y});
 }
 
 void			loop(t_game *game)
 {
-	SDL_Event event;
+	SDL_Event	event;
 
-	game->ui.redraw = TRUE;
 	while (game->state == running)
 	{
 		SDL_FillRect(game->surface, NULL, 0);
 		while (SDL_PollEvent(&event))
 			polled(game, &event);
-		drawgui(game);
+		//drawgui(game);
 		SDL_UpdateWindowSurface(game->window);
 	}
 }

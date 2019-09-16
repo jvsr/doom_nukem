@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   gettextsurface.c                                   :+:    :+:            */
+/*   get_text_surface.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -15,27 +15,40 @@
 
 #include "gui.h"
 #include "game.h"
-#include "init.h"
 #include "error.h"
 
-SDL_Surface	*gettextsurface(t_gui *ui, char *text, t_font fonttype)
+static SDL_Surface	*alloc_surface(char *text, t_font font, TTF_Font *ttf_font)
 {
-	TTF_Font	*font;
+	SDL_Surface	*surface;
+	SDL_Surface	*formatted;
+
+	surface = TTF_RenderText_Solid(ttf_font, text, font.color);
+	if (surface == NULL)
+		error_msg(SDL_GetError(), 1);
+	formatted = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_RGBA4444, 0);
+	if (formatted == NULL)
+		error_msg(SDL_GetError(), 1);
+	SDL_FreeSurface(surface);
+	return (formatted);
+}
+
+SDL_Surface			*get_text_surface(t_game *game, char *text, t_font font)
+{
+	TTF_Font	*ttf_font;
 	SDL_Surface	*surface;
 	SDL_Surface	*dst;
-	SDL_Surface	*fsurface;
 
 	dst = NULL;
-	font = getfont(ui, fonttype.font);
-	surface = TTF_RenderText_Solid(font, text, fonttype.colour);
-	fsurface = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_RGBA4444, 0);
-	SDL_FreeSurface(surface);
-	dst = SDL_CreateRGBSurface(0, (int)((float)INIT_WIDTH * fonttype.size),
-			(int)((float)INIT_HEIGHT * fonttype.size), 32,
+	ttf_font = getfont(game->ui.fonts, font.type);
+	surface = alloc_surface(text, font, ttf_font);
+	dst = SDL_CreateRGBSurface(0,
+			(int)((float)INIT_WIDTH * font.size),
+			(int)((float)INIT_HEIGHT * font.size),
+			32,
 			0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	if (dst == NULL)
-		error_msg(strerror(errno), errno);
-	SDL_BlitScaled(fsurface, NULL, dst, NULL);
-	SDL_FreeSurface(fsurface);
+		error_msg(SDL_GetError(), 1);
+	SDL_BlitScaled(surface, NULL, dst, NULL);
+	SDL_FreeSurface(surface);
 	return (dst);
 }

@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transformgetinchildren.c                           :+:    :+:            */
+/*   is_elem_shown.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/06 11:46:42 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:15:47 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/04 10:47:41 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 14:16:29 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_bool.h"
+
 #include "gui.h"
-#include "libft/ft_list.h"
-#include "libft/ft_string.h"
 
-t_transform	*gettransforminchildren(t_transform *trans, char *name)
+t_bool		is_elem_shown(t_transform *elem)
 {
-	t_list		*lst;
-	t_transform	*ret;
-
-	if (trans == NULL)
-		return (NULL);
-	if (ft_strequ(trans->name, name))
-		return (trans);
-	lst = trans->children;
-	while (lst != NULL)
+	if (elem->show)
+		return (FALSE);
+	while (elem->parent_type == ELEM)
 	{
-		ret = gettransforminchildren(lst->content, name);
-		if (ret != NULL)
-			return (ret);
+		elem = elem->parent.elem;
+		if (elem->show == FALSE)
+			return (FALSE);
 	}
-	return (NULL);
+	return (TRUE);
 }

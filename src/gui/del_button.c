@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   destroybutton.c                                    :+:    :+:            */
+/*   del_button.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,27 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
 #include <stdlib.h>
-#include "libft/ft_list.h"
+#include <SDL2/SDL_video.h>
+
 #include "libft/ft_string.h"
 
-void		destroybutton(t_gui *ui, t_button **button,
-												const t_bool delchildren)
-{
-	t_button *btn;
+#include "gui.h"
 
-	btn = *button;
-	if (btn->transform.onclick != NULL)
-		destroyclick(ui, btn->transform.name);
-	ft_strdel(&btn->text);
-	if (delchildren == TRUE)
-		destroychildren(ui, btn->transform.children, TRUE);
-	else if (btn->transform.parent != NULL)
-		ft_lstadd(&btn->transform.parent->children,
-			btn->transform.children);
-	SDL_FreeSurface(btn->texture);
-	ft_strdel(&btn->transform.name);
-	free(btn);
-	button = NULL;
+/*
+** * Gui internal function
+*/
+
+void		del_button(t_button **button)
+{
+	if (button == NULL || *button == NULL)
+		return ;
+	ft_strdel(&(*button)->text);
+	SDL_FreeSurface((*button)->texture);
+	free(button);
 }

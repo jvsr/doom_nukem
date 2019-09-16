@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fontget.c                                          :+:    :+:            */
+/*   set_elem_pos.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/03 10:38:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:38:52 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/16 16:21:04 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/16 16:21:04 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "libft/ft_memory.h"
 
-TTF_Font	*getfont(t_gui *ui, t_fonttype font)
+#include "gui.h"
+#include "coord.h"
+
+void	set_elem_pos(t_transform *elem, t_coord pos)
 {
-	if (font == ROBOTO)
-		return (ui->font[0]);
-	else
-		return (ui->font[1]);
+	ft_memcpy(&elem->pos, &pos, sizeof(t_coord));
 }

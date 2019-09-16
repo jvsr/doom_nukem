@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   destroypanel.c                                     :+:    :+:            */
+/*   del_panel.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,26 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
 #include <stdlib.h>
-#include "libft/ft_list.h"
-#include "libft/ft_bool.h"
-#include "libft/ft_string.h"
 
-void		destroypanel(t_gui *ui, t_panel **panel,
-												const t_bool delchildren)
+#include "gui.h"
+
+/*
+** * Gui internal function
+*/
+
+static void	remove_children(t_panel *panel)
 {
-	t_panel *pnl;
+	t_transform	*cur;
 
-	pnl = *panel;
-	if (pnl->transform.onclick != NULL)
-		destroyclick(ui, pnl->transform.name);
-	if (delchildren == TRUE)
-		destroychildren(ui, pnl->transform.children, TRUE);
-	else if (pnl->transform.parent != NULL)
-		ft_lstadd(&pnl->transform.parent->children,
-			pnl->transform.children);
-	ft_strdel(&pnl->transform.name);
-	free(pnl);
-	panel = NULL;
+	cur = panel->children;
+	while (cur != NULL)
+	{
+		del_elem(&cur);
+		cur = panel->children;
+	}
+}
+
+void		del_panel(t_panel **panel)
+{
+	if (panel == NULL || *panel == NULL)
+		return ;
+	remove_children(*panel);
+	free(*panel);
+	*panel = NULL;
 }

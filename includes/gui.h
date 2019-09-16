@@ -23,6 +23,7 @@
 
 typedef struct s_game		t_game;
 typedef struct s_gui		t_gui;
+typedef struct s_transform	t_transform;
 typedef struct s_text		t_text;
 typedef struct s_image		t_image;
 typedef struct s_button		t_button;
@@ -159,13 +160,13 @@ void			draw_panel(t_transform *elem);
 TTF_Font		*get_font(TTF_Font **fonts, t_font_type font);
 t_bool			is_elem_shown(t_transform *elem);
 t_transform		*get_elem(t_transform *elem, const char *name);
-t_text			*new_text(t_game *game);
-t_image			*new_image(t_game *game);
-t_button		*new_button(t_game *game);
-t_panel			*new_panel(t_game *game);
+t_text			*new_text(void);
+t_image			*new_image(void);
+t_button		*new_button(void);
+t_panel			*new_panel(void);
 void			add_elem_child(t_transform *parent, t_transform *child);
 void			add_gui_child(t_gui *ui, t_transform *panel);
-t_transform		*new_elem(t_game *game, const char *name, t_gui_type type);
+t_transform		*new_elem(const char *name, t_gui_type type);
 void			add_to_children(t_transform **children, t_transform *child);
 
 #endif

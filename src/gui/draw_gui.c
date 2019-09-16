@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   gettransformbyname.c                               :+:    :+:            */
+/*   draw_gui.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/06 11:27:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:24:12 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 17:33:28 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
-#include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "game.h"
+#include "sdl_extra.h"
 
-t_transform			*gettransformbyname(t_gui *ui, char *name)
+void			draw_gui(t_gui *ui)
 {
-	return (gettransforminchildren(&ui->transform, name));
+	t_transform	*cur;
+
+	cur = ui->children;
+	while (cur != NULL)
+	{
+		draw_elem(cur);
+		cur = cur->next;
+	}
 }

@@ -20,9 +20,9 @@
 
 static void	init_fonts(t_game *game)
 {
-	game->ui.font[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
-	game->ui.font[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
-	game->ui.font[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
+	game->ui.fonts[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
+	game->ui.fonts[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
+	game->ui.fonts[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
 }
 
 void	init_gui(t_game *game)
