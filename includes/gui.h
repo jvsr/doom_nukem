@@ -168,5 +168,7 @@ void			add_elem_child(t_transform *parent, t_transform *child);
 void			add_gui_child(t_gui *ui, t_transform *panel);
 t_transform		*new_elem(const char *name, t_gui_type type);
 void			add_to_children(t_transform **children, t_transform *child);
+void			set_texture_color(SDL_Color *dst, SDL_Color color);
+void			set_texture(SDL_Surface **image, SDL_Surface *texture);
 
 #endif
