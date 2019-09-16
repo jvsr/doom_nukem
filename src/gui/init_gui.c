@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "libft/ft_string.h"
@@ -21,15 +20,9 @@
 
 void	init_gui(t_game *game)
 {
-	game->ui.guisurface = SDL_CreateRGBSurface(0, game->surface->w,
-		game->surface->h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	if (game->window == NULL)
-		error_msg(SDL_GetError(), 1);
-	game->cursoractive = TRUE;
-	game->ui.onclicks = NULL;
-	game->ui.font[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
-	game->ui.font[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
-	game->ui.font[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
-	game->ui.transform.name = ft_strdup(GUI_NAME);
-	game->ui.transform.visible = TRUE;
+	game->ui.window_surface = game->surface;
+	game->ui.fonts[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
+	game->ui.fonts[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
+	game->ui.fonts[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
+	game->ui.children = NULL;
 }
