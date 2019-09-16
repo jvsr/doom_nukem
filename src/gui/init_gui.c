@@ -19,6 +19,13 @@
 #include "game.h"
 #include "error.h"
 
+static void	init_fonts(t_game *game)
+{
+	game->ui.font[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
+	game->ui.font[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
+	game->ui.font[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
+}
+
 void	init_gui(t_game *game)
 {
 	game->ui.guisurface = SDL_CreateRGBSurface(0, game->surface->w,
@@ -27,9 +34,7 @@ void	init_gui(t_game *game)
 		error_msg(SDL_GetError(), 1);
 	game->cursoractive = TRUE;
 	game->ui.onclicks = NULL;
-	game->ui.font[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
-	game->ui.font[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
-	game->ui.font[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
+	init_fonts(game); 
 	game->ui.transform.name = ft_strdup(GUI_NAME);
 	game->ui.transform.visible = TRUE;
 }
