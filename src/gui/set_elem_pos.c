@@ -18,4 +18,5 @@
 void	set_elem_pos(t_transform *elem, t_coord pos)
 {
 	ft_memcpy(&elem->pos, &pos, sizeof(t_coord));
+	set_elem_redraw(elem);
 }

@@ -17,4 +17,5 @@
 void	set_elem_show(t_transform *elem, t_bool show)
 {
 	elem->show = show;
+	set_elem_redraw(elem);
 }

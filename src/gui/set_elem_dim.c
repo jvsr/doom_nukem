@@ -18,4 +18,5 @@
 void	set_elem_dim(t_transform *elem, t_coord dim)
 {
 	ft_memcpy(&elem->dim, &dim, sizeof(t_coord));
+	set_elem_redraw(elem);
 }
