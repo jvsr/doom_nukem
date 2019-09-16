@@ -21,182 +21,151 @@
 
 # include "coord.h"
 
-# define GUI_NAME "gui"
-
 typedef struct s_game		t_game;
-typedef struct s_list		t_list;
+typedef struct s_gui		t_gui;
+typedef struct s_text		t_text;
+typedef struct s_image		t_image;
+typedef struct s_button		t_button;
+typedef struct s_panel		t_panel;
 
-/*
-** ! Remove
-*/
-	typedef struct s_text		t_text;
-	typedef struct s_image		t_image;
-	typedef struct s_button		t_button;
-/*
-** ! Remove
-*/
-
-typedef	enum	e_fonttype
+typedef enum	e_gui_type
 {
-	ROBOTO,
-	MONOF,
-	KARARC,
-	FONT_AMOUNT
-}				t_fonttype;
-
-typedef enum	e_guitype
-{
+	GUI_UNDFINED = -1,
 	TEXT,
 	IMAGE,
 	BUTTON,
 	PANEL
-}				t_guitype;
+}				t_gui_type;
 
-typedef	union	u_guielem
+typedef enum	e_parent_type
+{
+	PARENT_UNDFINED = -1,
+	GUI,
+	ELEM
+}				t_parent_type;
+
+typedef	enum	e_font_type
+{
+	FONT_UNDFINED = -1,
+	ROBOTO,
+	MONOF,
+	KARARC,
+	FONT_AMOUNT
+}				t_font_type;
+
+typedef enum	e_draw_method
+{
+	SCALED,
+	REPEAT,
+	FIXED,
+	CENTERED,
+	COLOR
+}				t_draw_method;
+
+typedef	union	u_gui_elem
 {
 	t_text		*text;
 	t_image		*image;
 	t_button	*button;
-}				t_guielem;
+	t_panel		*panel;
+}				t_gui_elem;
+
+typedef	union	u_parent
+{
+	t_gui		*ui;
+	t_transform	*elem;
+}				t_parent;
 
 typedef struct	s_font
 {
-	t_fonttype	font;
+	t_font_type	type;
 	float		size;
-	SDL_Color	colour;
+	SDL_Color	color;
 }				t_font;
 
 typedef struct	s_transform
 {
-	t_coord				position;
-	t_coord				size;
+	t_coord				pos;
+	t_coord				dim;
+	SDL_Point			abs_pos;
+	SDL_Point			abs_dim;
 	char				*name;
-	t_bool				visible;
+	t_bool				show;
+	t_bool				clickable;
 	short				layer;
-/*
-** ! Remove
-*/
-	t_list				*children;
-	void				*guielem;
-/*
-** ! Remove
-*/
-	t_guitype			guitype;
-	t_guielem			guiele;
+	t_gui_type			gui_type;
+	t_gui_elem			gui_elem;
 	void				(*onclick)(t_game *, struct s_transform *);
-	struct s_transform	*parent;
+	SDL_Surface			*surface;
+	t_bool				redraw;
+	t_parent_type		parent_type;
+	t_parent			parent;
 	struct s_transform	*next;
 }				t_transform;
 
 typedef struct	s_text
 {
-	t_transform		transform;
 	char			*text;
 	t_font			font;
 }				t_text;
 
-typedef struct	s_button
-{
-	t_transform		transform;
-	char			*text;
-	t_font			font;
-/*
-** ! Remove
-*/
-	t_coord			size;
-/*
-** ! Remove
-*/
-	SDL_Surface		*texture;
-}				t_button;
-
 typedef struct	s_image
 {
-	t_transform		transform;
-/*
-** ! Remove
-*/
-	t_coord			size;
-/*
-** ! Remove
-*/
+	t_draw_method	draw_method;
+	SDL_Color		color;
 	SDL_Surface		*texture;
 }				t_image;
 
+typedef struct	s_button
+{
+	char			*text;
+	t_font			font;
+	t_draw_method	draw_method;
+	SDL_Color		color;
+	SDL_Surface		*texture;
+}				t_button;
+
 typedef struct	s_panel
 {
-	t_transform		transform;
-	t_list			*onclicks;
 	t_transform		*children;
-/*
-** ! Remove
-*/
-	t_coord			size;
-/*
-** ! Remove
-*/
-	SDL_Surface		*panel;
-	struct s_panel	*next;
 }				t_panel;
 
 typedef struct	s_gui
 {
-	t_bool		redraw;
-	t_panel     *panels;
-/*
-** ! Remove
-*/
-	t_list		*onclicks;
-	t_transform	transform;
-	SDL_Surface	*guisurface;
-/*
-** ! Remove
-*/
-	TTF_Font	*font[FONT_AMOUNT];
+	SDL_Surface	*window_surface;
+	t_transform	*children;
+	TTF_Font	*fonts[FONT_AMOUNT];
 }				t_gui;
 
-typedef struct	s_guiinfo
-{
-	char		*name;
-	t_bool		visible;
-	t_coord		position;
-	t_coord		size;
-}				t_guiinfo;
-
-void			addtransformclick(t_gui *ui, t_transform *transform,
-								void (*onclick)(t_game *, t_transform *));
-void			checkclick(t_game *game, SDL_Point mpos);
-void			destroybutton(t_gui *ui, t_button **button,
-												const t_bool delchildren);
-void			destroypanel(t_gui *ui, t_panel **panel,
-							const t_bool delchildren);
-void			destroytext(t_gui *ui, t_text **text,
-							const t_bool delchildren);
-void			destroyimage(t_gui *ui, t_image **image,
-							const t_bool delchildren);
-void			destroychildren(t_gui *ui, t_list *children,
-							const t_bool delchildren);
-void			destroyclick(t_gui *ui, char *name);
-void			drawelem(t_gui *ui, t_transform *elem);
-void			drawgui(t_game *game);
-void			drawtext(t_gui *ui, t_text *text);
-void			drawimage(t_gui *ui, t_image *image);
-void			drawbutton(t_gui *ui, t_button *button);
-void			drawpanel(t_gui *ui, t_panel *panel);
-TTF_Font		*getfont(t_gui *ui, t_fonttype font);
-SDL_Surface		*gettextsurface(t_gui *ui, char *text, t_font fonttype);
-t_bool			gettransformvisible(t_transform *transform);
-t_transform		*gettransformbyname(t_gui *ui, char *name);
-t_transform		*gettransforminchildren(t_transform *trans, char *name);
-t_button		*newbuttontexture(t_guiinfo *guiinfo, char *text,
-					t_font *font, const SDL_Surface *texture);
-t_button		*newbuttoncolour(t_guiinfo *guiinfo, char *text,
-					t_font *font, const SDL_Color colour);
-t_text			*newtext(t_guiinfo *guiinfo, char *text, t_font *font);
-t_image			*newimage(t_guiinfo *guiinfo, const SDL_Surface *texture);
-t_image			*newimagecolour(t_guiinfo *guiinfo, SDL_Color colour);
-t_panel			*newpanel(t_guiinfo *guiinfo);
-void			settransformparent(t_transform *child, t_transform *parent);
-void			destroytransformclick(t_gui *ui, t_transform *transform);
+void			set_elem_clickable(t_transform *elem, t_bool clickable);
+void			set_elem_show(t_transform *elem, t_bool show);
+void			set_elem_pos(t_transform *elem, t_coord pos);
+void			set_elem_dim(t_transform *elem, t_coord dim);
+void			remove_elem_parent(t_transform *elem);
+void			set_elem_layer(t_transform *elem, short layer);
+void			set_elem_redraw(t_transform *elem);
+void			del_elem(t_transform **elem);
+void			del_button(t_button **button);
+void			del_image(t_image **image);
+void			del_panel(t_panel **panel);
+void			del_text(t_text **text);
+void			check_gui_hit(t_game *game, SDL_Point pos);
+void			draw_elem(t_transform *elem);
+void			draw_gui(t_gui *ui);
+void			draw_image(t_transform *elem);
+void			draw_text(t_transform *elem);
+void			draw_button(t_transform *elem);
+void			draw_panel(t_transform *elem);
+TTF_Font		*get_font(TTF_Font **fonts, t_font_type font);
+t_bool			is_elem_shown(t_transform *elem);
+t_transform		*get_elem(t_transform *elem, const char *name);
+t_text			*new_text(t_game *game);
+t_image			*new_image(t_game *game);
+t_button		*new_button(t_game *game);
+t_panel			*new_panel(t_game *game);
+void			add_elem_child(t_transform *parent, t_transform *child);
+void			add_gui_child(t_gui *ui, t_transform *panel);
+t_transform		*new_elem(t_game *game, const char *name, t_gui_type type);
+void			add_to_children(t_transform **children, t_transform *child);
 
 #endif
