@@ -23,4 +23,5 @@ FT_SRCS =
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS =	sdl_merge_surface sdl_merge_surface_alpha \
 		sdl_draw_surface_rect sdl_draw_surface_rect_alpha \
-		sdl_draw_surface_circ
+		sdl_draw_surface_circ \
+		sdl_merge_surface_scaled
