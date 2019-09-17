@@ -32,5 +32,5 @@ void			set_elem_layer(t_transform *elem, short layer)
 		add_to_children(&elem->next, elem);
 	else
 		add_to_children(p_children, elem);
-	set_elem_redraw(elem);
+	set_elem_moved(elem);
 }

@@ -99,6 +99,7 @@ typedef struct	s_transform
 	void				(*onclick)(t_game *, struct s_transform *);
 	SDL_Surface			*surface;
 	t_bool				redraw;
+	t_bool				moved;
 	t_parent_type		parent_type;
 	t_parent			parent;
 	struct s_transform	*next;
@@ -138,6 +139,7 @@ typedef struct	s_gui
 	TTF_Font	*fonts[FONT_AMOUNT];
 }				t_gui;
 
+void			set_elem_moved(t_transform *elem);
 void			set_elem_clickable(t_transform *elem, t_bool clickable);
 void			set_elem_show(t_transform *elem, t_bool show);
 void			set_elem_pos(t_transform *elem, t_coord pos);

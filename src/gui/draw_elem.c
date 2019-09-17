@@ -45,14 +45,13 @@ static void	reset_surface(t_transform *elem)
 {
 	if (elem->surface != NULL)
 	{
-		if (elem->abs_dim.x != elem->surface->w
-		|| elem->abs_dim.y != elem->surface->h)
-			SDL_FreeSurface(elem->surface);
-		else
+		if (elem->abs_dim.x == elem->surface->w
+		&& elem->abs_dim.y == elem->surface->h)
 		{
 			sdl_clear_surface(elem->surface);
 			return ;
 		}
+		SDL_FreeSurface(elem->surface);
 	}
 	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
@@ -73,12 +72,13 @@ void		draw_elem(t_transform *elem)
 {
 	SDL_Surface	*dst_surface;
 
-	if (elem->redraw == TRUE)
-	{
+	if (elem->redraw == TRUE || elem->moved == TRUE)
 		update_pos_dim(elem);
+	if (elem->redraw == TRUE
+	|| (elem->moved == TRUE && elem->gui_type == PANEL))
+	{
 		reset_surface(elem);
 		draw_gui_elem(elem);
-		elem->redraw = FALSE;
 	}
 	if (elem->show == FALSE)
 		return ;
@@ -87,4 +87,6 @@ void		draw_elem(t_transform *elem)
 	else
 		dst_surface = elem->parent.ui->window_surface;
 	sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
+	elem->redraw = FALSE;
+	elem->moved = FALSE;
 }
