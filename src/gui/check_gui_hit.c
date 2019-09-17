@@ -68,7 +68,7 @@ void			check_gui_hit(t_game *game, SDL_Point pos)
 	if (game->cursoractive == FALSE)
 		return ;
 	hit = NULL;
-	check_children(&pos, game->ui.children, &hit);
+	check_children(&pos, game->ui->children, &hit);
 	if (hit != NULL)
 		hit->onclick(game, hit);
 }

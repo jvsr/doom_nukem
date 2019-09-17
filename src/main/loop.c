@@ -42,7 +42,7 @@ void			loop(t_game *game)
 	panel = new_elem("panel", PANEL);
 	set_elem_pos(panel, (t_coord){0.5, 0});
 	set_elem_dim(panel, (t_coord){1, 1});
-	add_gui_child(&game->ui, panel);
+	add_gui_child(game->ui, panel);
 
 	t_transform *new;
 	new = new_elem("Image", IMAGE);
@@ -59,7 +59,7 @@ void			loop(t_game *game)
 		SDL_FillRect(game->surface, NULL, 0);
 		while (SDL_PollEvent(&event))
 			polled(game, &event);
-		draw_gui(&game->ui);
+		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);
 	}
 }

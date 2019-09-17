@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "gui.h"
-#include "game.h"
 #include "sdl_extra.h"
 
 void			draw_gui(t_gui *ui)

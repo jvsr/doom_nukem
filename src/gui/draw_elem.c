@@ -17,7 +17,6 @@
 #include "libft/ft_memory.h"
 
 #include "gui.h"
-#include "game.h"
 #include "sdl_extra.h"
 #include "error.h"
 
