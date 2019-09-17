@@ -34,22 +34,26 @@ static void		test_f(t_game *game, t_transform *elem)
 	(void)game;
 }
 
+#include "sdl_extra.h"
+
 void			loop(t_game *game)
 {
 	SDL_Event	event;
 
 	t_transform *panel;
 	panel = new_elem("panel", PANEL);
-	set_elem_pos(panel, (t_coord){0.5, 0});
+	set_elem_pos(panel, (t_coord){0, 0});
 	set_elem_dim(panel, (t_coord){1, 1});
 	add_gui_child(game->ui, panel);
 
 	t_transform *new;
 	new = new_elem("Image", IMAGE);
 	set_texture_color(&new->gui_elem.image->color, (SDL_Color){34, 192, 86, 0});
-	new->gui_elem.image->draw_method = COLOR;
+	new->gui_elem.image->draw_method = -1;
+	new->gui_elem.image->texture = sdl_create_surface_default((SDL_Point){1,1});
+	sdl_fill_surface_color(new->gui_elem.image->texture, (SDL_Color)(SDL_Color){34, 192, 86, 0});
 	set_elem_pos(new, (t_coord){0, 0});
-	set_elem_dim(new, (t_coord){1, 0.4});
+	set_elem_dim(new, (t_coord){1, 0.3});
 	add_elem_child(panel, new);
 	new->clickable = TRUE;
 	new->onclick = test_f;

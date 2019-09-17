@@ -20,4 +20,6 @@ void		draw_image(t_transform *elem)
 	image = elem->gui_elem.image;
 	if (image->draw_method == COLOR)
 		sdl_fill_surface_color(elem->surface, image->color);
+	else
+		sdl_merge_surface_scaled(elem->surface, image->texture);
 }
