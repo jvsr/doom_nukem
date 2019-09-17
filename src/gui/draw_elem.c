@@ -45,10 +45,14 @@ static void	reset_surface(t_transform *elem)
 {
 	if (elem->surface != NULL)
 	{
-		if (elem->abs_dim.x == elem->surface->w
-		&& elem->abs_dim.y == elem->surface->h)
+		if (elem->abs_dim.x != elem->surface->w
+		|| elem->abs_dim.y != elem->surface->h)
+			SDL_FreeSurface(elem->surface);
+		else
+		{
+			sdl_set_surface(elem->surface, (SDL_Color){0, 0, 0, 0});
 			return ;
-		SDL_FreeSurface(elem->surface);
+		}
 	}
 	elem->surface = SDL_CreateRGBSurface(0,
 		elem->abs_dim.x,
