@@ -1,8 +1,8 @@
 {
     "files.associations": {
+		"*.mainSrcs": "makefile",
 		"*.h": "c",
 		"Makefile.*": "makefile",
-		"*.mainSrcs": "makefile",
 		"sdl.h": "c",
 		"error.h": "c",
 		"game.h": "c",
@@ -35,6 +35,7 @@
 		"complex": "c",
 		"iterator": "c",
 		"__locale": "c",
-		"list": "c"
+		"list": "c",
+		"sstream": "c"
 	}
 }

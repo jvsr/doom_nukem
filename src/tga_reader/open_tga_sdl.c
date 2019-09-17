@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tgaopenassdl.c                                     :+:    :+:            */
+/*   open_tga_sdl.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 15:37:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 14:11:20 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 15:58:46 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@
 #include "error.h"
 #include "sdl_extra.h"
 
-SDL_Surface		*tgaopenassdl(char *loc)
+SDL_Surface		*open_tga_sdl(char *file_name)
 {
 	t_img		img;
-	SDL_Surface	*sdl;
+	SDL_Surface	*surface;
 
-	if (!opentga(&img, loc))
-		return (NULL);
-	sdl = sdl_create_surface_default((SDL_Point){img.width, img.height});
-	ft_memcpy(sdl->pixels, img.pixels, img.height * img.width * sizeof(int));
+	img = create_image(file_name);
+	surface = sdl_create_surface_default((SDL_Point){img.width, img.height});
+	ft_memcpy(surface->pixels, img.pixels, img.pitch * img.height);
 	free(img.pixels);
-	return (sdl);
+	return (surface);
 }

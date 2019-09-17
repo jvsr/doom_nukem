@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 18:55:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:56:28 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 16:08:27 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ static int	b8(unsigned char *str, size_t i)
 	return (ret);
 }
 
-int			pixelfrompos(unsigned char *str, size_t i, t_img *img)
+int			pixel_from_pos(unsigned char *str, size_t i, t_img img)
 {
-	if (img->pxdepth == 32)
+	if (img.px_depth == 32)
 		return (b32(str, i));
-	if (img->pxdepth == 24)
+	if (img.px_depth == 24)
 		return (b24(str, i));
-	if (img->pxdepth == 16 || img->pxdepth == 15)
+	if (img.px_depth == 16 || img.px_depth == 15)
 		return (0);
-	if (img->pxdepth == 8)
+	if (img.px_depth == 8)
 		return (b8(str, i));
 	return (0);
 }

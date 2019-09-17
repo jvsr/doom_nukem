@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:02:45 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/17 16:17:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			loop(t_game *game)
 	new = new_elem("Image", IMAGE);
 	set_texture_color(&new->gui_elem.image->color, (SDL_Color){34, 192, 86, 0});
 	new->gui_elem.image->draw_method = -1;
-	new->gui_elem.image->texture = tgaopenassdl("resources/ui/textures/test.tga");
+	new->gui_elem.image->texture = open_tga_sdl("ui/test");
 	set_elem_pos(new, (t_coord){0, 0});
 	set_elem_dim(new, (t_coord){10, 10});
 	add_elem_child(panel, new);

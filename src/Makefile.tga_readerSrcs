@@ -21,4 +21,4 @@ FT_SRCS =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = opentga pixelfrompos strtoimg tgaopenassdl
+SRCS = open_tga_sdl pixel_from_pos str_to_img create_image
