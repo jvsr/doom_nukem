@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:27:37 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 11:44:08 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/17 16:56:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void		del_button(t_button **button)
 		return ;
 	ft_strdel(&(*button)->text);
 	SDL_FreeSurface((*button)->texture);
-	free(button);
+	free(*button);
+	*button = NULL;
 }
