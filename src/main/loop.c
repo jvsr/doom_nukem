@@ -30,11 +30,12 @@ static void		polled(t_game *game, SDL_Event *event)
 
 static void		test_f(t_game *game, t_transform *elem)
 {
-	set_elem_pos(elem, (t_coord){0, elem->pos.y + 0.05});
+	set_elem_pos(elem, (t_coord){elem->pos.x, elem->pos.y + 0.05});
 	(void)game;
 }
 
 #include "sdl_extra.h"
+#include "tga.h"
 
 void			loop(t_game *game)
 {
@@ -50,10 +51,9 @@ void			loop(t_game *game)
 	new = new_elem("Image", IMAGE);
 	set_texture_color(&new->gui_elem.image->color, (SDL_Color){34, 192, 86, 0});
 	new->gui_elem.image->draw_method = -1;
-	new->gui_elem.image->texture = sdl_create_surface_default((SDL_Point){1,1});
-	sdl_fill_surface_color(new->gui_elem.image->texture, (SDL_Color)(SDL_Color){34, 192, 86, 0});
+	new->gui_elem.image->texture = tgaopenassdl("resources/ui/textures/test.tga");
 	set_elem_pos(new, (t_coord){0, 0});
-	set_elem_dim(new, (t_coord){1, 0.3});
+	set_elem_dim(new, (t_coord){10, 10});
 	add_elem_child(panel, new);
 	new->clickable = TRUE;
 	new->onclick = test_f;
