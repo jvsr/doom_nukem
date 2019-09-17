@@ -82,13 +82,15 @@ void		draw_elem(t_transform *elem)
 {
 	SDL_Surface	*dst_surface;
 
-	if (elem->redraw == TRUE && elem->show == TRUE)
+	if (elem->redraw == TRUE)
 	{
 		update_pos_dim(elem);
 		reset_surface(elem);
 		draw_gui_elem(elem);
 		elem->redraw = FALSE;
 	}
+	if (elem->show == FALSE)
+		return ;
 	if (elem->parent_type == ELEM)
 		dst_surface = elem->parent.elem->surface;
 	else
