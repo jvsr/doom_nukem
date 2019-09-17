@@ -25,33 +25,32 @@
 ** * Gui internal function
 */
 
-static void	update_pos_dim(t_transform *elem, SDL_Point *pos, SDL_Point *dim)
+static void	update_pos_dim(t_transform *elem)
 {
-	SDL_Point	parent_pos;
 	SDL_Point	parent_dim;
 
 	if (elem->parent_type == ELEM)
-	{
-		ft_memcpy(&parent_pos, &elem->parent.elem->abs_pos, sizeof(SDL_Point));
 		ft_memcpy(&parent_dim, &elem->parent.elem->abs_dim, sizeof(SDL_Point));
-	}
 	else
 	{
-		parent_pos.x = elem->parent.ui->window_surface->w;
-		parent_pos.y = elem->parent.ui->window_surface->h;
 		parent_dim.x = elem->parent.ui->window_surface->w;
 		parent_dim.y = elem->parent.ui->window_surface->h;
 	}
-	pos->x = parent_pos.x * elem->pos.x;
-	pos->y = parent_pos.y * elem->pos.y;
-	dim->x = parent_dim.x * elem->dim.x;
-	dim->y = parent_dim.y * elem->dim.y;
+	elem->abs_pos.x = parent_dim.x * elem->pos.x;
+	elem->abs_pos.y = parent_dim.y * elem->pos.y;
+	elem->abs_dim.x = parent_dim.x * elem->dim.x;
+	elem->abs_dim.y = parent_dim.y * elem->dim.y;
 }
 
 static void	reset_surface(t_transform *elem)
 {
 	if (elem->surface != NULL)
+	{
+		if (elem->abs_dim.x == elem->surface->w
+		&& elem->abs_dim.y == elem->surface->h)
+			return ;
 		SDL_FreeSurface(elem->surface);
+	}
 	elem->surface = SDL_CreateRGBSurface(0,
 		elem->abs_dim.x,
 		elem->abs_dim.y,
@@ -82,7 +81,7 @@ void		draw_elem(t_transform *elem)
 
 	if (elem->redraw == TRUE && elem->show == TRUE)
 	{
-		update_pos_dim(elem, &elem->abs_pos, &elem->abs_dim);
+		update_pos_dim(elem);
 		reset_surface(elem);
 		draw_gui_elem(elem);
 		elem->redraw = FALSE;
