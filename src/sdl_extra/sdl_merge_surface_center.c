@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/17 17:16:18 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 17:25:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,9 @@ void	sdl_merge_surface_center(SDL_Surface *dst, SDL_Surface *src)
 {
 	const SDL_Point	start = {(dst->w - src->w) / 2, (dst->h - src->h) / 2};
 
-	sdl_merge_surface(dst, src, start);	
+	printf("%d, %d\n", src->w, src->h);
+	printf("%d, %d\n", dst->w, dst->h);
+	printf("%d, %d\n", start.x, start.y);
+
+	sdl_merge_surface(dst, src, start);
 }

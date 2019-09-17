@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 14:47:13 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/17 18:15:35 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,28 @@ void		sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src,
 		{
 			len = src->w;
 			if (start.x + len > dst->w)
+			{
+				// printf("Len: %d\n", len);
 				len -= start.x + len - dst->w;
+			}
+			if (start.y >= 0)
+			{
 			ft_memcpy(
 				dst->pixels + ((start.y + cur.y) * dst->w + start.x) * 4,
-				src->pixels + cur.y * src->w * 4,
+				src->pixels + (cur.y * src->w) * 4,
 				len * 4);
+			}
+			else
+			{
+			len += start.x;
+			printf("Len: %d\n", len);
+			ft_memcpy(
+				dst->pixels + (cur.y * dst->w) * 4,
+				src->pixels + ((-start.y + cur.y) * src->w - start.x) * 4,
+				len * 4);
+			}
 		}
 		cur.y++;
 	}
+	// exit(1);
 }
