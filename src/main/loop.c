@@ -23,7 +23,7 @@ static void		polled(t_game *game, SDL_Event *event)
 		game->state = stopped;
 	else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_ESCAPE)
 		game->state = stopped;
-	else if (event->type == SDL_MOUSEBUTTONDOWN
+	else if (game->cursoractive && event->type == SDL_MOUSEBUTTONDOWN
 	&& event->button.button & SDL_BUTTON_LEFT)
 		check_gui_hit(game, (SDL_Point){event->button.x, event->button.y});
 }
