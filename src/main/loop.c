@@ -30,7 +30,7 @@ static void		polled(t_game *game, SDL_Event *event)
 
 static void		test_f(t_game *game, t_transform *elem)
 {
-	set_elem_pos(elem, (t_coord){0, 0.5});
+	set_elem_pos(elem, (t_coord){0, elem->pos.y + 0.05});
 	(void)game;
 }
 
@@ -49,7 +49,7 @@ void			loop(t_game *game)
 	set_texture_color(&new->gui_elem.image->color, (SDL_Color){34, 192, 86, 0});
 	new->gui_elem.image->draw_method = COLOR;
 	set_elem_pos(new, (t_coord){0, 0});
-	set_elem_dim(new, (t_coord){1, 0.5});
+	set_elem_dim(new, (t_coord){1, 0.4});
 	add_elem_child(panel, new);
 	new->clickable = TRUE;
 	new->onclick = test_f;
