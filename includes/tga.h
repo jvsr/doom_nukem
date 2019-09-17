@@ -42,15 +42,6 @@ typedef struct	s_img
 	unsigned int	*pixels;
 }				t_img;
 
-typedef struct	s_mlx
-{
-	void	*mlx;
-	void	*win;
-	void	*img_pt;
-	void	*img_add;
-	t_img	image;
-}				t_mlx;
-
 t_bool			opentga(t_img *img, char *loc);
 char			reversebyte(char b);
 void			strtoimg(t_img *img, t_tga *tga, unsigned char *str);
