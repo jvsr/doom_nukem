@@ -28,6 +28,6 @@ int	open_gui_config(const char *file_name)
 	ft_strcat(full_path, ".ui.yml");
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
-		error_msg(strerror(errno), errno);
+		error_msg(strerror(errno), errno, "Failed to open ui config");
 	return (fd);
 }

@@ -53,7 +53,7 @@ static void	add_token(t_token **start, const int indent,
 	save = *start;
 	new = (t_token*)ft_memalloc(sizeof(t_token));
 	if (new == NULL)
-		error_msg(strerror(errno), errno);
+		error_msg(strerror(errno), errno, "Failed to alloc Token");
 	new->indent = indent;
 	new->token = ft_strdup(&line[i]);
 	new->next = NULL;

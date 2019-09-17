@@ -28,7 +28,7 @@ t_button	*new_button(void)
 
 	button = (t_button *)ft_memalloc(sizeof(t_button));
 	if (button == NULL)
-		error_msg(strerror(errno), errno);
+		error_msg(strerror(errno), errno, "Failed to alloc button");
 	button->draw_method = SCALED;
 	ft_bzero(&button->font, sizeof(t_font));
 	return (button);

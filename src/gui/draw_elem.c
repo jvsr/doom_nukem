@@ -59,7 +59,7 @@ static void	reset_surface(t_transform *elem)
 		0x000000ff,
 		0xff000000);
 	if (elem->surface == NULL)
-		error_msg(SDL_GetError(), 1);
+		error_msg(SDL_GetError(), 1, "Failed to alloc new surface");
 }
 
 static void	draw_gui_elem(t_transform *elem)

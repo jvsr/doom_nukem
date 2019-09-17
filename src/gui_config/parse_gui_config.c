@@ -32,9 +32,9 @@ static void	set_state_gui_config(const int fd, const char *state_name)
 		ret = ft_getnextline(fd, &line);
 	}
 	if (ret == -1)
-		error_msg(strerror(errno), errno);
+		error_msg(strerror(errno), errno, "");
 	else if (ret == 0)
-		error_msg("Could not find corresponding gui state", 1);
+		error_msg("Could not find corresponding gui state", 1, "");
 	free(line);
 }
 
