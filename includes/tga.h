@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 16:11:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 16:23:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef struct	s_img
 }				t_img;
 
 SDL_Surface		*open_tga_sdl(char *file_name);
-t_img			create_image(const char *file_name);
+void			create_image(const char *file_name, t_img *img);
 char			reversebyte(char b);
-void			str_to_img(t_img img, t_tga *tga, unsigned char *str);
-int				pixel_from_pos(unsigned char *str, size_t i, t_img img);
+void			str_to_img(t_img *img, t_tga *tga, unsigned char *str);
+int				pixel_from_pos(unsigned char *str, size_t i, t_img *img);
 
 #endif

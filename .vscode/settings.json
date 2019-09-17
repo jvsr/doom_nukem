@@ -36,6 +36,14 @@
 		"iterator": "c",
 		"__locale": "c",
 		"list": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"bitset": "c",
+		"slist": "c",
+		"__split_buffer": "c",
+		"__tree": "c",
+		"initializer_list": "c",
+		"map": "c",
+		"utility": "c",
+		"vector": "c"
 	}
 }

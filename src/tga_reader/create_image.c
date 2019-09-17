@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 16:13:39 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 16:34:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@ static void	set_tga_header(unsigned char *str, t_tga *tga, t_img *img)
 	img->width = (str[13] << 8) | str[12];
 	img->height = (str[15] << 8) | str[14];
 	img->px_depth = str[16];
+	img->pitch = img->width * sizeof(unsigned int);
 }
 
-t_img		create_image(const char *file_name)
+void		create_image(const char *file_name, t_img *img)
 {
 	int				fd;
-	unsigned char	*file_stream;
 	t_tga			tga;
-	t_img			img;
+	unsigned char	*file_stream;
 
 	fd = open_tga_file(file_name);
 	ft_readfile(fd, (char**)&file_stream);
 	if (file_stream == NULL)
 		error_msg(strerror(errno), errno, "Failed to read tga file");
 	close(fd);
-	set_tga_header(file_stream, &tga, &img);
+	set_tga_header(file_stream, &tga, img);
 	if (tga.img_type == 0)
 	{
 		ft_strdel((char**)&file_stream);
@@ -68,5 +68,4 @@ t_img		create_image(const char *file_name)
 	}
 	str_to_img(img, &tga, file_stream);
 	ft_strdel((char**)&file_stream);
-	return (img);
 }

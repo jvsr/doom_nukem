@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   pixelfrompos.c                                     :+:    :+:            */
+/*   pixel_from_pos.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 18:55:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 16:08:27 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 16:22:55 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ static int	b8(unsigned char *str, size_t i)
 	return (ret);
 }
 
-int			pixel_from_pos(unsigned char *str, size_t i, t_img img)
+int			pixel_from_pos(unsigned char *str, size_t i, t_img *img)
 {
-	if (img.px_depth == 32)
+	if (img->px_depth == 32)
 		return (b32(str, i));
-	if (img.px_depth == 24)
+	if (img->px_depth == 24)
 		return (b24(str, i));
-	if (img.px_depth == 16 || img.px_depth == 15)
+	if (img->px_depth == 16 || img->px_depth == 15)
 		return (0);
-	if (img.px_depth == 8)
+	if (img->px_depth == 8)
 		return (b8(str, i));
 	return (0);
 }
