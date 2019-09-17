@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 17:23:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 16:44:19 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/17 14:13:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@
 
 typedef struct s_circle	t_circle;
 
-void	sdl_set_surface(SDL_Surface *surface, SDL_Color color);
-void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c);
-void	sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect);
-void	sdl_draw_surface_rect_alpha(SDL_Surface *dst, SDL_Color color,
+SDL_Surface	*sdl_create_surface_default(SDL_Point size);
+void		sdl_create_surface_default(SDL_Surface *surface);
+void		sdl_set_surface(SDL_Surface *surface, SDL_Color color);
+void		sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color,
+									t_circle c);
+void		sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color,
 									SDL_Rect rect);
-void	sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src, SDL_Point start);
-void	sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src,
+void		sdl_draw_surface_rect_alpha(SDL_Surface *dst, SDL_Color color,
+									SDL_Rect rect);
+void		sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src,
+									SDL_Point start);
+void		sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src,
 								SDL_Point start);
 
 #endif

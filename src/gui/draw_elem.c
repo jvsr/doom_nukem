@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 17:28:28 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:23:24 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/17 14:09:39 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,7 @@ static void	reset_surface(t_transform *elem)
 			return ;
 		}
 	}
-	elem->surface = SDL_CreateRGBSurface(0,
-		elem->abs_dim.x,
-		elem->abs_dim.y,
-		32,
-		0x00ff0000,
-		0x0000ff00,
-		0x000000ff,
-		0xff000000);
-	if (elem->surface == NULL)
-		error_msg(SDL_GetError(), 1, "Failed to alloc new surface");
+	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
 
 static void	draw_gui_elem(t_transform *elem)
