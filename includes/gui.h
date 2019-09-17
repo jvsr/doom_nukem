@@ -77,13 +77,6 @@ typedef	union	u_parent
 	t_transform	*elem;
 }				t_parent;
 
-typedef struct	s_font
-{
-	t_font_type	type;
-	float		size;
-	SDL_Color	color;
-}				t_font;
-
 typedef struct	s_transform
 {
 	t_coord				pos;
@@ -107,8 +100,10 @@ typedef struct	s_transform
 
 typedef struct	s_text
 {
-	char			*text;
-	t_font			font;
+	char		*str;
+	float		size;
+	SDL_Color	color;
+	t_font_type	font_type;
 }				t_text;
 
 typedef struct	s_image
@@ -120,16 +115,13 @@ typedef struct	s_image
 
 typedef struct	s_button
 {
-	char			*text;
-	t_font			font;
-	t_draw_method	draw_method;
-	SDL_Color		color;
-	SDL_Surface		*texture;
+	t_text		text;
+	t_image		image;
 }				t_button;
 
 typedef struct	s_panel
 {
-	t_transform		*children;
+	t_transform	*children;
 }				t_panel;
 
 typedef struct	s_gui
@@ -155,10 +147,10 @@ void			del_text(t_text **text);
 void			check_gui_hit(t_game *game, SDL_Point pos);
 void			draw_elem(t_transform *elem);
 void			draw_gui(t_gui *ui);
-void			draw_image(t_transform *elem);
-void			draw_text(t_transform *elem);
-void			draw_button(t_transform *elem);
-void			draw_panel(t_transform *elem);
+void			draw_image(SDL_Surface *dst, t_image *image);
+void			draw_text(SDL_Surface *dst, t_text *text);
+void			draw_button(SDL_Surface *dst, t_button *button);
+void			draw_panel(SDL_Surface *dst, t_panel *panel);
 TTF_Font		*get_font(TTF_Font **fonts, t_font_type font);
 t_bool			is_elem_shown(t_transform *elem);
 t_transform		*get_elem(t_transform *elem, const char *name);
@@ -170,7 +162,8 @@ void			add_elem_child(t_transform *parent, t_transform *child);
 void			add_gui_child(t_gui *ui, t_transform *panel);
 t_transform		*new_elem(const char *name, t_gui_type type);
 void			add_to_children(t_transform **children, t_transform *child);
-void			set_texture_color(SDL_Color *dst, SDL_Color color);
-void			set_texture(SDL_Surface **image, SDL_Surface *texture);
+void			set_image_color(t_image *image, SDL_Color color);
+void			set_image_texture(t_image *image, SDL_Surface *texture);
+void			set_image_draw_method(t_image *image, t_draw_method method);
 
 #endif

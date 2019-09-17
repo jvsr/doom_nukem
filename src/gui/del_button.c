@@ -25,8 +25,8 @@ void		del_button(t_button **button)
 {
 	if (button == NULL || *button == NULL)
 		return ;
-	ft_strdel(&(*button)->text);
-	SDL_FreeSurface((*button)->texture);
+	ft_strdel(&(*button)->text.str);
+	SDL_FreeSurface((*button)->image.texture);
 	free(*button);
 	*button = NULL;
 }

@@ -25,7 +25,8 @@ static void	draw_children(t_transform *child)
 	}
 }
 
-void		draw_panel(t_transform *elem)
+void		draw_panel(SDL_Surface *dst, t_panel *panel)
 {
-	draw_children(elem->gui_elem.panel->children);
+	draw_children(panel->children);
+	(void)dst;
 }

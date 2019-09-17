@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   set_texture_color.c                                :+:    :+:            */
+/*   set_image_draw_method.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_memory.h"
-
 #include "gui.h"
 
-void	set_texture_color(SDL_Color *dst, SDL_Color color)
+void	set_image_draw_method(t_image *image, t_draw_method method)
 {
-	ft_memcpy(dst, &color, sizeof(SDL_Color));
+	image->draw_method = method;
 }

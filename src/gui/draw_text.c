@@ -11,17 +11,21 @@
 /* ************************************************************************** */
 
 #include "gui.h"
-#include "sdl_extra.h"
-#include "init.h"
 
-void				drawtext(t_gui *ui, t_text *text)
+// void				drawtext(t_gui *ui, t_text *text)
+// {
+// 	SDL_Surface *srf;
+// 	SDL_Point	pixel;
+
+// 	srf = gettextsurface(ui, text->text, text->font);
+// 	pixel = (SDL_Point){(int)((float)INIT_WIDTH * text->transform.position.x),
+// 			(int)((float)INIT_HEIGHT * text->transform.position.y)};
+// 	sdl_merge_surface(ui->guisurface, srf, pixel);
+// 	SDL_FreeSurface(srf);
+// }
+
+void		draw_text(SDL_Surface *dst, t_text *text)
 {
-	SDL_Surface *srf;
-	SDL_Point	pixel;
-
-	srf = gettextsurface(ui, text->text, text->font);
-	pixel = (SDL_Point){(int)((float)INIT_WIDTH * text->transform.position.x),
-			(int)((float)INIT_HEIGHT * text->transform.position.y)};
-	sdl_merge_surface(ui->guisurface, srf, pixel);
-	SDL_FreeSurface(srf);
+	(void)text;
+	(void)dst;
 }

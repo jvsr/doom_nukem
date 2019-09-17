@@ -58,14 +58,14 @@ static void	reset_surface(t_transform *elem)
 
 static void	draw_gui_elem(t_transform *elem)
 {
-	// if (elem->gui_type == TEXT)
-	// 	draw_text(elem);
-	if (elem->gui_type == IMAGE)
-		draw_image(elem);
-	// else if (elem->gui_type == BUTTON)
-	// 	draw_button(elem);
+	if (elem->gui_type == TEXT)
+		draw_text(elem->surface, elem->gui_elem.text);
+	else if (elem->gui_type == IMAGE)
+		draw_image(elem->surface, elem->gui_elem.image);
+	else if (elem->gui_type == BUTTON)
+		draw_button(elem->surface, elem->gui_elem.button);
 	else if (elem->gui_type == PANEL)
-		draw_panel(elem);
+		draw_panel(elem->surface, elem->gui_elem.panel);
 }
 
 void		draw_elem(t_transform *elem)

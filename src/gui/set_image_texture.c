@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   set_texture.c                                      :+:    :+:            */
+/*   set_image_texture.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -12,7 +12,7 @@
 
 #include "gui.h"
 
-void	set_texture(SDL_Surface **image, SDL_Surface *texture)
+void	set_image_texture(t_image *image, SDL_Surface *texture)
 {
-	*image = texture;
+	image->texture = texture;
 }

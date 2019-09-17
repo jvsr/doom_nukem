@@ -49,9 +49,9 @@ void			loop(t_game *game)
 
 	t_transform *new;
 	new = new_elem("Image", IMAGE);
-	set_texture_color(&new->gui_elem.image->color, (SDL_Color){34, 192, 86, 0});
-	new->gui_elem.image->draw_method = -1;
-	new->gui_elem.image->texture = open_tga_sdl("ui/test");
+	set_image_draw_method(new->gui_elem.image, -1);
+	set_image_color(new->gui_elem.image, (SDL_Color){34, 192, 86, 0});
+	set_image_texture(new->gui_elem.image, open_tga_sdl("ui/test"));
 	set_elem_pos(new, (t_coord){0, 0});
 	set_elem_dim(new, (t_coord){10, 10});
 	add_elem_child(panel, new);
