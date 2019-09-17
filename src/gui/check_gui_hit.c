@@ -48,8 +48,7 @@ static t_bool	check_children(SDL_Point *pos, t_transform *elem,
 		return (FALSE);
 	if (check_children(pos, elem->next, hit))
 		return (TRUE);
-	if (elem->show && is_hit(pos, elem)
-	&& (*hit == NULL || is_above(elem, *hit)))
+	if (is_hit(pos, elem) && (*hit == NULL || is_above(elem, *hit)))
 	{
 		if (elem->gui_type == PANEL)
 			return (check_children(pos, elem->gui_elem.panel->children, hit));
