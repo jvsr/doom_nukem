@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 17:28:28 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 14:09:39 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 14:18:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	reset_surface(t_transform *elem)
 			SDL_FreeSurface(elem->surface);
 		else
 		{
-			sdl_set_surface(elem->surface, (SDL_Color){0, 0, 0, 0});
+			sdl_clear_surface(elem->surface);
 			return ;
 		}
 	}
