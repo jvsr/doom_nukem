@@ -19,7 +19,8 @@
 
 typedef struct s_circle	t_circle;
 
-void	sdl_set_surface(SDL_Surface *surface, SDL_Color color);
+void	sdl_merge_surface_scaled(SDL_Surface *dst, SDL_Surface *src);
+void	sdl_fill_surface_color(SDL_Surface *surface, SDL_Color color);
 void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c);
 void	sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color, SDL_Rect rect);
 void	sdl_draw_surface_rect_alpha(SDL_Surface *dst, SDL_Color color,

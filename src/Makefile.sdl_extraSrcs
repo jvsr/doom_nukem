@@ -25,4 +25,4 @@ SRCS =	sdl_merge_surface sdl_merge_surface_alpha \
 		sdl_draw_surface_rect sdl_draw_surface_rect_alpha \
 		sdl_draw_surface_circ \
 		sdl_merge_surface_scaled \
-		sdl_set_surface
+		sdl_fill_surface_color
