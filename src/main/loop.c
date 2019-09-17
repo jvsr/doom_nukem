@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 17:18:55 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 17:21:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void			loop(t_game *game)
 
 	t_transform *new;
 	new = new_elem("Image", IMAGE);
-	set_texture_color(&new->gui_elem.image->color, (SDL_Color){34, 192, 86, 0});
-	new->gui_elem.image->draw_method = CENTERED;
-	new->gui_elem.image->texture = open_tga_sdl("ui/test");
+	set_image_draw_method(new->gui_elem.image, CENTERED);
+	set_image_color(new->gui_elem.image, (SDL_Color){34, 192, 86, 0});
+	set_image_texture(new->gui_elem.image, open_tga_sdl("ui/test"));
 	set_elem_pos(new, (t_coord){-.5, -.5});
 	set_elem_dim(new, (t_coord){2, 2});
 	add_elem_child(panel, new);

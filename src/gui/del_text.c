@@ -24,7 +24,7 @@ void		del_text(t_text **text)
 {
 	if (text == NULL || *text == NULL)
 		return ;
-	ft_strdel(&(*text)->text);
+	ft_strdel(&(*text)->str);
 	free(*text);
 	*text = NULL;
 }
