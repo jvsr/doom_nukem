@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 17:23:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/17 14:18:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 17:02:25 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void		sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src,
 void		sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src,
 								SDL_Point start);
 void		sdl_merge_surface_scaled(SDL_Surface *dst, SDL_Surface *src);
+void		sdl_merge_surface_center(SDL_Surface *dst, SDL_Surface *src);
 
 #endif
