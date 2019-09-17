@@ -12,7 +12,9 @@
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_surface.h>
+
 #include "libft/ft_memory.h"
+
 #include "color.h"
 
 /*
