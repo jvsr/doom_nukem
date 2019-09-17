@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_set_surface.c                                  :+:    :+:            */
+/*   sdl_fill_surface_color.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -15,7 +15,7 @@
 
 #include "color.h"
 
-void	sdl_set_surface(SDL_Surface *surface, SDL_Color color)
+void	sdl_fill_surface_color(SDL_Surface *surface, SDL_Color color)
 {
 	size_t			index;
 	int				*color_stream;

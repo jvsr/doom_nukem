@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_draw_surface_texture_scaled.c                  :+:    :+:            */
+/*   sdl_merge_surface_scaled.c                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -18,12 +18,12 @@
 void	sdl_merge_surface_scaled(SDL_Surface *dst, SDL_Surface *src)
 {
 	SDL_Point		cur;
-	int				*dst_stream = (int*)dst->pixels;
-	const int		*src_stream = (int*)src->pixels;
-	const t_coord	ratio = {(float)src->w / (float)dst->h,
-							(float)src->h / (float)dst->w};
+	int				*dst_stream;
+	const int		*src_stream = (int *)src->pixels;
+	const t_coord	ratio = {(float)src->w / dst->h, (float)src->h / dst->w};
 
 	cur.y = 0;
+	dst_stream = (int *)dst->pixels;
 	while (cur.y < dst->h)
 	{
 		cur.x = 0;
