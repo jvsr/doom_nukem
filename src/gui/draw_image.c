@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/02 16:23:52 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 17:20:35 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 17:21:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ void		draw_image(SDL_Surface *dst, t_image *image)
 	else if (image->draw_method == SCALED)
 		sdl_merge_surface_scaled(dst, image->texture);
 	else if (image->draw_method == CENTERED)
-		sdl_merge_surface_center(dst image->texture);
+		sdl_merge_surface_center(dst, image->texture);
 }
