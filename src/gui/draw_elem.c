@@ -99,7 +99,10 @@ void			draw_elem(t_transform *elem)
 		dst_surface = elem->parent.elem->surface;
 	else
 		dst_surface = elem->parent.ui->window_surface;
-	sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
+	if (elem->has_alpha)
+		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->abs_pos);
+	else
+		sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
 }
