@@ -22,13 +22,14 @@
 ** * Gui internal function
 */
 
-t_button	*new_button(void)
+t_button	*new_button(t_gui *ui)
 {
 	t_button *button;
 
 	button = (t_button *)ft_memalloc(sizeof(t_button));
 	if (button == NULL)
 		error_msg(strerror(errno), errno, "Failed to alloc button");
-	button->image.draw_method = SCALED;
+	button->text = new_text(ui);
+	button->image = new_image();
 	return (button);
 }

@@ -36,26 +36,29 @@ static void		test_f(t_game *game, t_transform *elem)
 
 #include "sdl_extra.h"
 #include "tga.h"
+#include "libft/ft_string.h"
 
 void			loop(t_game *game)
 {
 	SDL_Event	event;
 
 	t_transform *panel;
-	panel = new_elem("panel", PANEL);
+	panel = new_elem(game->ui, "panel", PANEL);
 	set_elem_pos(panel, (t_coord){0, 0});
 	set_elem_dim(panel, (t_coord){1, 1});
 	add_gui_child(game->ui, panel);
 
 	t_transform *new;
-	new = new_elem("Image", IMAGE);
-	set_image_draw_method(new->gui_elem.image, CENTERED);
-	set_image_color(new->gui_elem.image, (SDL_Color){34, 192, 86, 0});
-	set_image_texture(new->gui_elem.image, open_tga_sdl("ui/test"));
-	set_elem_pos(new, (t_coord){-.5, -.5});
-	set_elem_dim(new, (t_coord){2, 2});
-	// set_elem_pos(new, (t_coord){0, 0});
-	// set_elem_dim(new, (t_coord){1, 1});
+	new = new_elem(game->ui, "Text", TEXT);
+	new->gui_elem.text->str = ft_strdup("abcdefghil Hello world! Hello world! Hello world! 1234567890");
+	// new = new_elem(game->ui, "Image", IMAGE);
+	// set_image_draw_method(new->gui_elem.image, CENTERED);
+	// set_image_color(new->gui_elem.image, (SDL_Color){34, 192, 86, 0});
+	// set_image_texture(new->gui_elem.image, open_tga_sdl("ui/test"));
+	// set_elem_pos(new, (t_coord){-.5, -.5});
+	// set_elem_dim(new, (t_coord){2, 2});
+	set_elem_pos(new, (t_coord){0, 0});
+	set_elem_dim(new, (t_coord){1, 1});
 	add_elem_child(panel, new);
 	new->clickable = TRUE;
 	new->onclick = test_f;

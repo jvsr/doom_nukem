@@ -18,6 +18,6 @@
 
 void		draw_button(SDL_Surface *dst, t_button *button)
 {
-	draw_image(dst, &button->image);
-	draw_text(dst, &button->text);
+	draw_image(dst, button->image);
+	draw_text(dst, button->text);
 }

@@ -15,12 +15,12 @@
 
 void		draw_image(SDL_Surface *dst, t_image *image)
 {
-	if (image->draw_method == COLOR)
-		sdl_fill_surface_color(dst, image->color);
+	if (image->draw_method == SCALED)
+		sdl_merge_surface_scaled(dst, image->texture);
 	else if (image->draw_method == FIXED)
 		sdl_merge_surface(dst, image->texture, (SDL_Point){0, 0});
-	else if (image->draw_method == SCALED)
-		sdl_merge_surface_scaled(dst, image->texture);
 	else if (image->draw_method == CENTERED)
 		sdl_merge_surface_center(dst, image->texture);
+	else if (image->draw_method == COLOR)
+		sdl_fill_surface_color(dst, image->color);
 }

@@ -19,19 +19,19 @@
 #include "gui.h"
 #include "error.h"
 
-static void	new_gui_elem(t_gui_type type, t_gui_elem *gui_elem)
+static void	new_gui_elem(t_gui *ui, t_gui_type type, t_gui_elem *gui_elem)
 {
 	if (type == TEXT)
-		gui_elem->text = new_text();
+		gui_elem->text = new_text(ui);
 	else if (type == IMAGE)
 		gui_elem->image = new_image();
 	else if (type == BUTTON)
-		gui_elem->button = new_button();
+		gui_elem->button = new_button(ui);
 	else if (type == PANEL)
 		gui_elem->panel = new_panel();
 }
 
-t_transform	*new_elem(const char *name, t_gui_type type)
+t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)
 {
 	t_transform	*new;
 
@@ -46,6 +46,6 @@ t_transform	*new_elem(const char *name, t_gui_type type)
 	new->gui_type = type;
 	new->clickable = (type != PANEL);
 	new->parent_type = -1;
-	new_gui_elem(type, &new->gui_elem);
+	new_gui_elem(ui, type, &new->gui_elem);
 	return (new);
 }

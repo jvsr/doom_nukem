@@ -12,6 +12,7 @@
 
 #include <errno.h>
 #include <string.h>
+#include <SDL2/SDL_video.h>
 
 #include "libft/ft_memory.h"
 
@@ -22,12 +23,17 @@
 ** * Gui internal function
 */
 
-t_text			*new_text(void)
+t_text			*new_text(t_gui *ui)
 {
 	t_text *text;
 
 	text = (t_text *)ft_memalloc(sizeof(t_text));
 	if (text == NULL)
 		error_msg(strerror(errno), errno, "Failed to alloc text");
+	text->draw_method = CENTERED;
+	text->fonts = ui->fonts;
+	text->font_type = ROBOTO;
+	text->size = 1;
+	text->color = (SDL_Color){255, 255, 255, 0};
 	return (text);
 }

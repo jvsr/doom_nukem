@@ -100,10 +100,12 @@ typedef struct	s_transform
 
 typedef struct	s_text
 {
-	char		*str;
-	float		size;
-	SDL_Color	color;
-	t_font_type	font_type;
+	t_draw_method	draw_method;
+	char			*str;
+	float			size;
+	SDL_Color		color;
+	t_font_type		font_type;
+	TTF_Font		**fonts;
 }				t_text;
 
 typedef struct	s_image
@@ -115,8 +117,8 @@ typedef struct	s_image
 
 typedef struct	s_button
 {
-	t_text		text;
-	t_image		image;
+	t_text		*text;
+	t_image		*image;
 }				t_button;
 
 typedef struct	s_panel
@@ -152,11 +154,11 @@ void			draw_image(SDL_Surface *dst, t_image *image);
 void			draw_text(SDL_Surface *dst, t_text *text);
 void			draw_button(SDL_Surface *dst, t_button *button);
 void			draw_panel(SDL_Surface *dst, t_panel *panel);
-t_text			*new_text(void);
+t_text			*new_text(t_gui *ui);
 t_image			*new_image(void);
 t_panel			*new_panel(void);
-t_button		*new_button(void);
-t_transform		*new_elem(const char *name, t_gui_type type);
+t_button		*new_button(t_gui *ui);
+t_transform		*new_elem(t_gui *ui, const char *name, t_gui_type type);
 TTF_Font		*get_font(TTF_Font **fonts, t_font_type font);
 t_transform		*get_elem(t_transform *elem, const char *name);
 void			add_gui_child(t_gui *ui, t_transform *panel);
