@@ -23,7 +23,7 @@ FT_SRCS =
 SRCS = add_elem_child add_gui_child add_to_children check_gui_hit \
 	del_button del_elem del_image del_panel del_text draw_button draw_elem \
 	draw_gui draw_image draw_panel draw_text get_elem get_font init_gui \
-	is_elem_shown new_button new_elem new_image new_panel new_text \
+	get_elem_shown new_button new_elem new_image new_panel new_text \
 	del_elem_child set_elem_clickable set_elem_dim set_elem_layer \
 	set_elem_moved set_elem_pos set_elem_redraw set_elem_show set_image_color \
 	set_image_texture set_image_draw_method del_gui_children del_gui_child \

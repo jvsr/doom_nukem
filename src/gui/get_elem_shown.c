@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   is_elem_shown.c                                    :+:    :+:            */
+/*   get_elem_shown.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -14,7 +14,7 @@
 
 #include "gui.h"
 
-t_bool		is_elem_shown(t_transform *elem)
+t_bool		get_elem_shown(t_transform *elem)
 {
 	if (elem->show)
 		return (FALSE);
