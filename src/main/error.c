@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+
 #include "libft/ft_printf.h"
 
 void	error_msg(const char *error_msg, int error_code, const char *msg)
