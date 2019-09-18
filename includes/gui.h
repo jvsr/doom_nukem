@@ -93,6 +93,7 @@ typedef struct	s_transform
 	SDL_Surface			*surface;
 	t_bool				redraw;
 	t_bool				moved;
+	t_bool				has_alpha;
 	t_parent_type		parent_type;
 	t_parent			parent;
 	struct s_transform	*next;
