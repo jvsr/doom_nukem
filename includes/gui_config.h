@@ -22,8 +22,9 @@ typedef	struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-t_token		*lex_gui_config(const int fd);
-int			open_gui_config(const char *file_name);
-t_panel		*parse_gui_config(const char *state_name, const char *file_name);
+t_token			*lex_gui_config(const int fd);
+int				open_gui_config(const char *file_name);
+t_panel			*parse_gui_config(const char *state_name,
+									const char *file_name);
 
 #endif

@@ -26,8 +26,7 @@ SDL_Surface	*sdl_create_surface_default(SDL_Point size)
 		0x00FF0000,
 		0x0000FF00,
 		0x000000FF,
-		0xFF000000
-	);
+		0xFF000000);
 	if (new == NULL)
 		error_msg(SDL_GetError(), 1, "Failed to alloc new surface");
 	return (new);

@@ -24,7 +24,21 @@
 ** * Gui internal function
 */
 
-static void	update_pos_dim(t_transform *elem)
+static t_bool	child_moved(t_transform *elem)
+{
+	t_transform	*cur;
+
+	cur = elem->gui_elem.panel->children;
+	while (cur != NULL)
+	{
+		if (cur->moved == TRUE)
+			return (TRUE);
+		cur = cur->next;
+	}
+	return (FALSE);
+}
+
+static void		update_pos_dim(t_transform *elem)
 {
 	SDL_Point	parent_dim;
 
@@ -41,7 +55,7 @@ static void	update_pos_dim(t_transform *elem)
 	elem->abs_dim.y = parent_dim.y * elem->dim.y;
 }
 
-static void	reset_surface(t_transform *elem)
+static void		reset_surface(t_transform *elem)
 {
 	if (elem->surface != NULL)
 	{
@@ -56,7 +70,7 @@ static void	reset_surface(t_transform *elem)
 	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
 
-static void	draw_gui_elem(t_transform *elem)
+static void		draw_gui_elem(t_transform *elem)
 {
 	if (elem->gui_type == TEXT)
 		draw_text(elem->surface, elem->gui_elem.text);
@@ -68,14 +82,13 @@ static void	draw_gui_elem(t_transform *elem)
 		draw_panel(elem->surface, elem->gui_elem.panel);
 }
 
-void		draw_elem(t_transform *elem)
+void			draw_elem(t_transform *elem)
 {
 	SDL_Surface	*dst_surface;
 
 	if (elem->redraw == TRUE || elem->moved == TRUE)
 		update_pos_dim(elem);
-	if (elem->redraw == TRUE
-	|| (elem->moved == TRUE && elem->gui_type == PANEL))
+	if (elem->redraw == TRUE || (elem->gui_type == PANEL && child_moved(elem)))
 	{
 		reset_surface(elem);
 		draw_gui_elem(elem);

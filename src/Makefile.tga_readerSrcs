@@ -6,8 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = tga
-HEADERS := $(HEADERS:%=%.h)
+HEADERS = tga error sdl_extra
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=

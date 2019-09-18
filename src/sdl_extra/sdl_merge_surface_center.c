@@ -27,9 +27,5 @@ void	sdl_merge_surface_center(SDL_Surface *dst, SDL_Surface *src)
 {
 	const SDL_Point	start = {(dst->w - src->w) / 2, (dst->h - src->h) / 2};
 
-	printf("%d, %d\n", src->w, src->h);
-	printf("%d, %d\n", dst->w, dst->h);
-	printf("%d, %d\n", start.x, start.y);
-
 	sdl_merge_surface(dst, src, start);
 }

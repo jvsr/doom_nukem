@@ -29,6 +29,5 @@ t_text			*new_text(void)
 	text = (t_text *)ft_memalloc(sizeof(t_text));
 	if (text == NULL)
 		error_msg(strerror(errno), errno, "Failed to alloc text");
-	ft_bzero(&text->font, sizeof(t_font));
 	return (text);
 }

@@ -30,7 +30,8 @@ void	sdl_merge_surface_scaled(SDL_Surface *dst, SDL_Surface *src)
 		while (cur.x < dst->w)
 		{
 			dst_stream[cur.y * dst->w + cur.x] = \
-			src_stream[(int)(cur.y * ratio.y) * src->w + (int)(cur.x * ratio.x)];
+			src_stream[(int)(cur.y * ratio.y) * src->w +
+			(int)(cur.x * ratio.x)];
 			cur.x++;
 		}
 		cur.y++;

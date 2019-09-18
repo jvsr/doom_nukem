@@ -6,8 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS =
-HEADERS := $(HEADERS:%=%.h)
+HEADERS = gui game coord error sdl_extra
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=
@@ -27,4 +26,4 @@ SRCS = add_elem_child add_gui_child add_to_children check_gui_hit \
 	is_elem_shown new_button new_elem new_image new_panel new_text \
 	remove_elem_parent set_elem_clickable set_elem_dim set_elem_layer \
 	set_elem_moved set_elem_pos set_elem_redraw set_elem_show set_image_color \
-	set_image_texture set_image_draw_method
+	set_image_texture set_image_draw_method del_gui_children

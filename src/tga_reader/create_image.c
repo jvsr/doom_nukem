@@ -21,7 +21,7 @@
 
 static int	open_tga_file(const char *file_name)
 {
-	int 	fd;
+	int		fd;
 	char	full_path[PATH_MAX];
 
 	ft_strcpy(full_path, "./resources/textures/");

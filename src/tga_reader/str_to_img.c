@@ -20,11 +20,11 @@
 
 void		str_to_img(t_img *img, t_tga *tga, unsigned char *str)
 {
-	size_t i;
-	size_t j;
-	size_t max;
-	const size_t tga_header_size = 19;
-	const size_t pitch = img->px_depth / 8;
+	size_t			i;
+	size_t			j;
+	size_t			max;
+	const size_t	tga_header_size = 19;
+	const size_t	pitch = img->px_depth / 8;
 
 	i = tga_header_size + tga->id_len;
 	if (tga->clr_map_type == 2)
