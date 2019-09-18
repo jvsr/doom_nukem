@@ -99,8 +99,6 @@ void			draw_elem(t_transform *elem)
 		dst_surface = elem->parent.elem->surface;
 	else
 		dst_surface = elem->parent.ui->window_surface;
-	if (elem->gui_type != PANEL)
-		printf("abs:pos: %d, %d\n", elem->abs_pos.x, elem->abs_pos.y);
 	sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
 	elem->redraw = FALSE;
 	elem->moved = FALSE;

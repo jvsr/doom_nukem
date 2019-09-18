@@ -12,9 +12,17 @@
 
 #include <SDL2/SDL_rect.h>
 
+#include "libft/ft_character.h"
+#include "libft/ft_string.h"
+
 #include "gui.h"
 #include "sdl_extra.h"
 #include "error.h"
+
+static t_bool		is_empty_str(const char *str)
+{
+	return (str[ft_strislen(str, &ft_isspace)] == '\0');
+}
 
 static SDL_Surface	*render_text(const char *str, SDL_Color *color,
 								TTF_Font *font)
@@ -48,6 +56,8 @@ void				draw_text(SDL_Surface *dst, t_text *text)
 	SDL_Surface	*rendered_text;
 	SDL_Surface	*scaled_text;
 
+	if (text->str == NULL || is_empty_str(text->str))
+		return ;
 	font = get_font(text->fonts, text->font_type);
 	rendered_text = render_text(text->str, &text->color, font);
 	if (text->draw_method == SCALED)
