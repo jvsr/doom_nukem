@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 17:21:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 17:41:55 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void			loop(t_game *game)
 	set_image_texture(new->gui_elem.image, open_tga_sdl("ui/test"));
 	set_elem_pos(new, (t_coord){-.5, -.5});
 	set_elem_dim(new, (t_coord){2, 2});
+	// set_elem_pos(new, (t_coord){0, 0});
+	// set_elem_dim(new, (t_coord){1, 1});
 	add_elem_child(panel, new);
 	new->clickable = TRUE;
 	new->onclick = test_f;

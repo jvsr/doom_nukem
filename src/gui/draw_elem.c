@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 17:28:28 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 14:18:32 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/17 18:58:26 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void			draw_elem(t_transform *elem)
 		dst_surface = elem->parent.elem->surface;
 	else
 		dst_surface = elem->parent.ui->window_surface;
+	if (elem->gui_type != PANEL)
+		printf("abs:pos: %d, %d\n", elem->abs_pos.x, elem->abs_pos.y);
 	sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
