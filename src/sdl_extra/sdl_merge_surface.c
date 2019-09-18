@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/17 18:15:35 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/18 14:46:36 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,43 +23,59 @@
 ** * this function considers the Alpha to be 255
 */
 
+static void	calc_offset_dst(SDL_Point *offset, SDL_Point start)
+{
+	if (start.y <= 0)
+		offset->y = 0;
+	else
+		offset->y = start.y;
+	if (start.x <= 0)
+		offset->x = 0;
+	else
+		offset->x = start.x;
+}
+
+static void	calc_offset_src(SDL_Point *offset, SDL_Point start)
+{
+	if (start.y > 0)
+		offset->y = 0;
+	else
+		offset->y = start.y * -1;
+	if (start.x > 0)
+		offset->x = 0;
+	else
+		offset->x = start.x * -1;
+}
+
 void		sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src,
 								SDL_Point start)
 {
 	int			len;
 	SDL_Point	cur;
+	SDL_Point	offset_dst;
+	SDL_Point	offset_src;
 
+	calc_offset_dst(&offset_dst, start);
+	calc_offset_src(&offset_src, start);
+	len = src->w - offset_src.x;
+	if (len > dst->w - offset_dst.x)
+		len = dst->w - offset_dst.x;
+	printf("offset:dst: x: %d, y: %d\n", offset_dst.x, offset_dst.y);
+	printf("offset:src: x: %d, y: %d\n", offset_src.x, offset_src.y);
+	printf("len: %d\n", len);
 	cur.y = 0;
 	while (cur.y < src->h)
 	{
-		if (start.y + cur.y > dst->h - 1)
+		if (offset_dst.y + cur.y > dst->h - 1)
 			break ;
-		else if (start.y + cur.y >= 0)
+		else if (offset_dst.y + cur.y >= 0)
 		{
-			len = src->w;
-			if (start.x + len > dst->w)
-			{
-				// printf("Len: %d\n", len);
-				len -= start.x + len - dst->w;
-			}
-			if (start.y >= 0)
-			{
 			ft_memcpy(
-				dst->pixels + ((start.y + cur.y) * dst->w + start.x) * 4,
-				src->pixels + (cur.y * src->w) * 4,
-				len * 4);
-			}
-			else
-			{
-			len += start.x;
-			printf("Len: %d\n", len);
-			ft_memcpy(
-				dst->pixels + (cur.y * dst->w) * 4,
-				src->pixels + ((-start.y + cur.y) * src->w - start.x) * 4,
-				len * 4);
-			}
+				dst->pixels + ((cur.y + offset_dst.y) * dst->w + offset_dst.x) * 4,
+				src->pixels + ((cur.y + offset_src.y) * src->w + offset_src.x) * 4,
+				len * 4
+			);
 		}
 		cur.y++;
 	}
-	// exit(1);
 }
