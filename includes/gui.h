@@ -139,6 +139,7 @@ void			set_elem_dim(t_transform *elem, t_coord dim);
 void			remove_elem_parent(t_transform *elem);
 void			set_elem_layer(t_transform *elem, short layer);
 void			set_elem_redraw(t_transform *elem);
+void			del_gui_children(t_gui *ui);
 void			del_elem(t_transform **elem);
 void			del_button(t_button **button);
 void			del_image(t_image **image);
