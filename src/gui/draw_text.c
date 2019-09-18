@@ -28,16 +28,11 @@ static SDL_Surface	*render_text(const char *str, TTF_Font *font,
 								SDL_Color *color)
 {
 	SDL_Surface	*text;
-	SDL_Surface	*formatted;
 
-	text = TTF_RenderText_Shaded(font, str, *color, (SDL_Color){0, 0, 0, 0});
+	text = TTF_RenderText_Blended(font, str, *color);
 	if (text == NULL)
 		error_msg(SDL_GetError(), 1, "Failed to render text");
-	formatted = SDL_ConvertSurfaceFormat(text, SDL_PIXELFORMAT_RGBA32, 0);
-	if (formatted == NULL)
-		error_msg(SDL_GetError(), 1, "Failed to format text");
-	SDL_FreeSurface(text);
-	return (formatted);
+	return (text);
 }
 
 static SDL_Surface	*scale_text(SDL_Surface *text, float size)
@@ -46,7 +41,7 @@ static SDL_Surface	*scale_text(SDL_Surface *text, float size)
 	SDL_Surface		*scaled;
 
 	scaled = sdl_create_surface_default(scaled_size);
-	sdl_merge_surface_alpha_scaled(scaled, text);
+	sdl_merge_surface_scaled(scaled, text);
 	return (scaled);
 }
 
@@ -56,11 +51,10 @@ static void			merge_text(SDL_Surface *dst, t_text *text,
 	SDL_Surface	*scaled_text;
 
 	scaled_text = scale_text(rendered_text, text->size);
-	sdl_fill_surface_color(dst, text->bg_color);
 	if (text->draw_method == FIXED)
-		sdl_merge_surface(dst, scaled_text, (SDL_Point){0, 0});
+		sdl_merge_surface_alpha(dst, scaled_text, (SDL_Point){0, 0});
 	else if (text->draw_method == CENTERED)
-		sdl_merge_surface_center(dst, scaled_text);
+		sdl_merge_surface_alpha_center(dst, scaled_text);
 	SDL_FreeSurface(scaled_text);
 }
 

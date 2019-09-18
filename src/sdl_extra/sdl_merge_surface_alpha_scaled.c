@@ -40,6 +40,7 @@ static int		calculate_color(int *dst, int *src)
 	cdst.r = cdst.r * (1 - op) + csrc.r * op;
 	cdst.g = cdst.g * (1 - op) + csrc.g * op;
 	cdst.b = cdst.b * (1 - op) + csrc.b * op;
+	//printf("op: %f, csrc.a: %d\n", op, csrc.a);
 	return (color_to_rgba(cdst));
 }
 

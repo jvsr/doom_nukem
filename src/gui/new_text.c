@@ -34,7 +34,6 @@ t_text			*new_text(t_gui *ui)
 	text->fonts = ui->fonts;
 	text->font_type = ROBOTO;
 	text->size = 1;
-	text->color = (SDL_Color){255, 255, 255, 255};
-	text->bg_color = (SDL_Color){0, 0, 0, 0};
+	text->color = (SDL_Color){255, 255, 255, 0};
 	return (text);
 }

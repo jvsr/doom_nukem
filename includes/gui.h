@@ -105,7 +105,6 @@ typedef struct	s_text
 	char			*str;
 	float			size;
 	SDL_Color		color;
-	SDL_Color		bg_color;
 	t_font_type		font_type;
 	TTF_Font		**fonts;
 }				t_text;
