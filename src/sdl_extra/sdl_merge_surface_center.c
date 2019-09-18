@@ -27,5 +27,5 @@ void	sdl_merge_surface_center(SDL_Surface *dst, SDL_Surface *src)
 {
 	const SDL_Point	start = {(dst->w - src->w) / 2, (dst->h - src->h) / 2};
 
-	sdl_merge_surface(dst, src, start);	
+	sdl_merge_surface(dst, src, start);
 }
