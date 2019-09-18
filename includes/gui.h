@@ -148,6 +148,10 @@ void			del_text(t_text **text);
 void			del_image(t_image **image);
 void			del_panel(t_panel **panel);
 void			del_elem(t_transform **elem);
+void			del_elem_child(t_transform *elem, const char *name);
+void			del_gui_child(t_gui *ui, const char *name);
+void			del_child(t_transform **children, const char *name);
+void			del_gui_children(t_gui *ui);
 void			del_button(t_button **button);
 void			draw_elem(t_transform *elem);
 void			draw_gui(t_gui *ui);
@@ -165,8 +169,8 @@ t_transform		*get_elem(t_transform *elem, const char *name);
 void			add_gui_child(t_gui *ui, t_transform *panel);
 void			add_elem_child(t_transform *parent, t_transform *child);
 t_bool			is_elem_shown(t_transform *elem);
-void			remove_elem_parent(t_transform *elem);
 void			check_gui_hit(t_game *game, SDL_Point pos);
 void			add_to_children(t_transform **children, t_transform *child);
+void			remove_elem_parent(t_transform *elem);
 
 #endif

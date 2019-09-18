@@ -18,7 +18,7 @@ void	set_elem_redraw(t_transform *elem)
 
 	cur = elem;
 	elem->redraw = TRUE;
-	if (elem->parent_type == -1)
+	if (elem->parent_type == PARENT_UNDFINED)
 		return ;
 	while (cur->parent_type == ELEM)
 	{

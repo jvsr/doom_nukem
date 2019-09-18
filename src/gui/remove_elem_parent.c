@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_string.h"
-
 #include "gui.h"
 
 void	remove_elem_parent(t_transform *elem)
@@ -26,7 +24,7 @@ void	remove_elem_parent(t_transform *elem)
 	else
 		children = &elem->parent.ui->children;
 	cur = *children;
-	while (cur != NULL && ft_strequ(cur->name, elem->name) == FALSE)
+	while (cur != NULL && cur != elem)
 	{
 		prv = cur;
 		cur = cur->next;
@@ -37,4 +35,6 @@ void	remove_elem_parent(t_transform *elem)
 		*children = cur->next;
 	else
 		prv->next = cur->next;
+	elem->parent.elem = NULL;
+	elem->parent_type = PARENT_UNDFINED;
 }

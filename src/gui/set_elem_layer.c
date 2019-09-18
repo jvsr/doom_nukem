@@ -19,7 +19,7 @@ void			set_elem_layer(t_transform *elem, short layer)
 	short		old_layer;
 	t_transform	**p_children;
 
-	if (elem->parent_type == -1 || elem->layer == layer)
+	if (elem->parent_type == PARENT_UNDFINED || elem->layer == layer)
 		return ;
 	if (elem->parent_type == ELEM)
 		p_children = &elem->parent.elem->gui_elem.panel->children;
