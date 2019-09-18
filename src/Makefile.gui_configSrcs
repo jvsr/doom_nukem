@@ -20,4 +20,4 @@ FT_SRCS =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = parse_gui_config open_gui_config lex_gui_config
+SRCS = analyze_gui_config open_gui_config lex_gui_config

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 16:03:27 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/16 16:13:08 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/18 20:14:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,75 +19,81 @@
 #include "error.h"
 #include "gui_config.h"
 
-static int	calc_indent(const char *line, int *indent)
+static void		add_token(t_token **tokens, t_token *new)
 {
-	size_t	i;
-	t_bool	space;
+	static t_token	*last = NULL;
 
-	i = 0;
-	space = FALSE;
-	while (line[i] == ' ' || line[i] == '\t')
-	{
-		if (space == TRUE)
-		{
-			(*indent)++;
-			space = FALSE;
-		}
-		else if (line[i] == ' ')
-			space = TRUE;
-		else if (line[i] == '\t')
-			(*indent)++;
-		i++;
-	}
-	if (space == TRUE)
-		i--;
-	return (i);
+	if (last == NULL)
+		*tokens = new;
+	else
+		last->next = new;
+	last = new;
 }
 
-static void	add_token(t_token **start, const int indent,
-						const size_t i, const char *line)
+static t_token	*create_token(t_token_type type, const char *file,
+								size_t *index, size_t content_size)
 {
-	t_token	*new;
-	t_token	*save;
+	t_token *token;
 
-	save = *start;
-	new = (t_token*)ft_memalloc(sizeof(t_token));
-	if (new == NULL)
+	token = (t_token*)ft_memalloc(sizeof(t_token));
+	if (token == NULL)
 		error_msg(strerror(errno), errno, "Failed to alloc Token");
-	new->indent = indent;
-	new->token = ft_strdup(&line[i]);
-	new->next = NULL;
-	if (*start == NULL)
-		*start = new;
 	else
 	{
-		while (save->next)
-			save = save->next;
-		save->next = new;
+		token->type = type;
+		token->token = ft_strndup(&file[*index], content_size);
+		token->next = NULL;
+		*index += content_size;
 	}
+	return (token);
+}
+
+static void		check_newline(t_token **tokens, const char *file, size_t *index)
+{
+	t_token			*new;
+	const size_t	content_size = 1;
+
+	new = create_token(NEWLINE, file, index, content_size);
+	add_token(tokens, new);
+	// while (file[index] == ' ' || file[index] '\t')
+	// 	check_indent()
+}
+
+static void		check_dash(t_token **tokens, const char *file, size_t *index)
+{
+	t_token			*new;
+	const size_t	content_size = 1;
+
+	new = create_token(DASH, file, index, content_size);
+	add_token(tokens, new);
+}
+
+static t_token	*create_tokens(const char *file)
+{
+	size_t	index;
+	t_token	*tokens;
+
+	index = 0;
+	tokens = NULL;
+	while(file[index]) 
+	{
+		if (file[index] == '-')
+			check_dash(&tokens, file, &index);
+		if (file[index] == '\n')
+			check_newline(&tokens, file, &index);
+	}
+	return (tokens);
 }
 
 t_token	*lex_gui_config(const int fd)
 {
 	int		ret;
-	char	*line;
-	int		indent;
-	size_t	i;
+	char	*file;
 	t_token	*tokens;
 
-	line = NULL;
-	tokens = NULL;
-	ret = ft_getnextline(fd, &line);
-	while (ret > 0)
-	{
-		indent = 0;
-		i = calc_indent(line, &indent);
-		if (indent == 0)
-			break ;
-		add_token(&tokens, indent, i, line);
-		free(line);
-		ret = ft_getnextline(fd, &line);
-	}
-	free(line);
+	ft_readfile(fd, &file);
+	if (file == NULL)
+		error_msg(sterror(errno), errno, "Failed to read the gui config file");
+	tokens = create_tokens(file);
 	return (tokens);
 }

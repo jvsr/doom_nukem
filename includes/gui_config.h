@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 12:14:58 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/16 16:12:16 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/18 17:15:59 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,25 @@
 
 typedef struct s_panel	t_panel;
 
+typedef enum	e_token_type
+{
+	ID,
+	NUM,
+	PLAIN,
+	DASH,
+	COLON,
+	COMMA,
+	INDENT,
+	DETENT,
+	QUOTE,
+	DQUOTE,
+	SPACE,
+	NEWLINE
+}				t_token_type;
+
 typedef	struct	s_token
 {
-	size_t			indent;
+	t_token_type	type;
 	char			*token;
 	struct s_token	*next;
 }				t_token;
