@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/18 14:46:36 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/18 14:50:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ void		sdl_merge_surface(SDL_Surface *dst, SDL_Surface *src,
 	len = src->w - offset_src.x;
 	if (len > dst->w - offset_dst.x)
 		len = dst->w - offset_dst.x;
-	printf("offset:dst: x: %d, y: %d\n", offset_dst.x, offset_dst.y);
-	printf("offset:src: x: %d, y: %d\n", offset_src.x, offset_src.y);
-	printf("len: %d\n", len);
 	cur.y = 0;
 	while (cur.y < src->h)
 	{
