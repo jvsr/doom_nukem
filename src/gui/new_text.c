@@ -12,7 +12,7 @@
 
 #include <errno.h>
 #include <string.h>
-#include <SDL2/SDL_video.h>
+#include <SDL2/SDL_pixels.h>
 
 #include "libft/ft_memory.h"
 

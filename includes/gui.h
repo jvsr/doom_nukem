@@ -85,14 +85,14 @@ typedef struct	s_transform
 	SDL_Point			abs_dim;
 	char				*name;
 	t_bool				show;
-	t_bool				clickable;
 	short				layer;
 	t_gui_type			gui_type;
 	t_gui_elem			gui_elem;
-	void				(*onclick)(t_game *, struct s_transform *);
-	SDL_Surface			*surface;
-	t_bool				redraw;
+	void				(*onclick)(t_game *, t_transform *);
+	t_bool				clickable;
 	t_bool				moved;
+	t_bool				redraw;
+	SDL_Surface			*surface;
 	t_bool				has_alpha;
 	t_parent_type		parent_type;
 	t_parent			parent;
@@ -144,6 +144,18 @@ void			set_elem_clickable(t_transform *elem, t_bool clickable);
 void			set_image_color(t_image *image, SDL_Color color);
 void			set_image_texture(t_image *image, SDL_Surface *texture);
 void			set_image_draw_method(t_image *image, t_draw_method method);
+void			set_elem_text_str(t_transform *elem, const char *str);
+void			set_elem_text_size(t_transform *elem, float size);
+void			set_elem_text_color(t_transform *elem, SDL_Color color);
+void			set_elem_text_font(t_transform *elem, t_font_type font);
+void			set_elem_text_draw_method(t_transform *elem,
+											t_draw_method draw_method);
+void			set_elem_image_texture(t_transform *elem, SDL_Surface *texture);
+void			set_elem_image_color(t_transform *elem, SDL_Color color);
+void			set_elem_image_draw_method(t_transform *elem,
+											t_draw_method draw_method);
+void			set_elem_onclick(t_transform *elem,
+								void (*onclick)(t_game *, t_transform *));
 void			del_text(t_text **text);
 void			del_image(t_image **image);
 void			del_panel(t_panel **panel);
