@@ -50,17 +50,16 @@ void			loop(t_game *game)
 
 	t_transform *new;
 	new = new_elem(game->ui, "Text", TEXT);
-	new->gui_elem.text->str = ft_strdup("abcdefghil Hello world! Hello world! Hello world! 1234567890");
-	// new = new_elem(game->ui, "Image", IMAGE);
+	new->gui_elem.text->str = ft_strdup("Hello world!");
+	new->gui_elem.text->bg_color = (SDL_Color){34, 192, 86, 0};
+	new->gui_elem.text->draw_method = SCALED;
 	// set_image_draw_method(new->gui_elem.image, CENTERED);
 	// set_image_color(new->gui_elem.image, (SDL_Color){34, 192, 86, 0});
 	// set_image_texture(new->gui_elem.image, open_tga_sdl("ui/test"));
-	// set_elem_pos(new, (t_coord){-.5, -.5});
-	// set_elem_dim(new, (t_coord){2, 2});
 	set_elem_pos(new, (t_coord){0, 0});
-	set_elem_dim(new, (t_coord){1, 1});
+	set_elem_dim(new, (t_coord){0.5, 0.5});
 	add_elem_child(panel, new);
-	new->clickable = TRUE;
+	set_elem_clickable(new, TRUE);
 	new->onclick = test_f;
 
 	while (game->state == running)
