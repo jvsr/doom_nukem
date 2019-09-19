@@ -23,6 +23,7 @@ void	set_elem_image_color(t_transform *elem, SDL_Color color)
 	else
 		image = elem->gui_elem.button->image;
 	image->color = color;
-	elem->has_alpha = (color.a != 0);
+	image->draw_method = COLOR;
+	elem->has_alpha = (color.a != 255);
 	set_elem_redraw(elem);
 }
