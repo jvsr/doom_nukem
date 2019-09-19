@@ -29,4 +29,5 @@ SRCS =	sdl_merge_surface sdl_merge_surface_alpha \
 		sdl_merge_surface_alpha_center \
 		sdl_create_surface_default \
 		sdl_clear_surface \
-		sdl_fill_surface_color
+		sdl_fill_surface_color \
+		sdl_has_surface_alpha
