@@ -77,7 +77,7 @@ typedef	union	u_parent
 	t_transform	*elem;
 }				t_parent;
 
-typedef struct	s_transform
+struct			s_transform
 {
 	t_coord				pos;
 	t_coord				dim;
@@ -97,9 +97,9 @@ typedef struct	s_transform
 	t_parent_type		parent_type;
 	t_parent			parent;
 	struct s_transform	*next;
-}				t_transform;
+};
 
-typedef struct	s_text
+struct			s_text
 {
 	t_draw_method	draw_method;
 	char			*str;
@@ -107,32 +107,32 @@ typedef struct	s_text
 	SDL_Color		color;
 	t_font_type		font_type;
 	TTF_Font		**fonts;
-}				t_text;
+};
 
-typedef struct	s_image
+struct			s_image
 {
 	t_draw_method	draw_method;
 	SDL_Color		color;
 	SDL_Surface		*texture;
-}				t_image;
+};
 
-typedef struct	s_button
+struct			s_button
 {
 	t_text		*text;
 	t_image		*image;
-}				t_button;
+};
 
-typedef struct	s_panel
+struct			s_panel
 {
 	t_transform	*children;
-}				t_panel;
+};
 
-typedef struct	s_gui
+struct			s_gui
 {
 	SDL_Surface	*window_surface;
 	t_transform	*children;
 	TTF_Font	*fonts[FONT_AMOUNT];
-}				t_gui;
+};
 
 void			set_elem_moved(t_transform *elem);
 void			set_elem_redraw(t_transform *elem);
@@ -141,9 +141,6 @@ void			set_elem_dim(t_transform *elem, t_coord dim);
 void			set_elem_show(t_transform *elem, t_bool show);
 void			set_elem_layer(t_transform *elem, short layer);
 void			set_elem_clickable(t_transform *elem, t_bool clickable);
-void			set_image_color(t_image *image, SDL_Color color);
-void			set_image_texture(t_image *image, SDL_Surface *texture);
-void			set_image_draw_method(t_image *image, t_draw_method method);
 void			set_elem_text_str(t_transform *elem, const char *str);
 void			set_elem_text_size(t_transform *elem, float size);
 void			set_elem_text_color(t_transform *elem, SDL_Color color);
@@ -178,7 +175,8 @@ t_button		*new_button(t_gui *ui);
 t_transform		*new_elem(t_gui *ui, const char *name, t_gui_type type);
 t_bool			get_elem_shown(t_transform *elem);
 TTF_Font		*get_font(TTF_Font **fonts, t_font_type font);
-t_transform		*get_elem(t_transform *elem, const char *name);
+t_transform		*get_elem_child(t_transform *elem, const char *name);
+t_transform		*get_gui_child(t_gui *ui, const char *name);
 void			add_gui_child(t_gui *ui, t_transform *panel);
 void			add_elem_child(t_transform *parent, t_transform *child);
 void			check_gui_hit(t_game *game, SDL_Point pos);

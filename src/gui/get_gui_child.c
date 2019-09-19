@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_elem.c                                         :+:    :+:            */
+/*   get_gui_child.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,25 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_string.h"
-
 #include "gui.h"
 
-t_transform		*get_elem(t_transform *elem, const char *name)
+t_transform		*get_gui_child(t_gui *ui, const char *name)
 {
 	t_transform	*found;
 	t_transform	*cur;
 
-	if (ft_strequ(elem->name, name))
-		return (elem);
-	cur = elem;
 	found = NULL;
+	cur = ui->children;
 	while (cur != NULL)
 	{
-		if (ft_strequ(cur->name, name))
-			return (cur);
-		if (cur->gui_type == PANEL)
-			found = get_elem(cur->gui_elem.panel->children, name);
+		found = get_elem_child(cur, name);
 		if (found != NULL)
 			return (found);
 		cur = cur->next;

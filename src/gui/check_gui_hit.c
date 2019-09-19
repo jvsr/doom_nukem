@@ -67,6 +67,6 @@ void			check_gui_hit(t_game *game, SDL_Point pos)
 
 	hit = NULL;
 	check_children(&pos, game->ui->children, &hit);
-	if (hit != NULL)
+	if (hit != NULL && hit->onclick != NULL)
 		hit->onclick(game, hit);
 }

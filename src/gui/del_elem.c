@@ -33,7 +33,8 @@ void		del_elem(t_transform **elem)
 {
 	if (elem == NULL || *elem == NULL)
 		return ;
-	remove_elem_parent(*elem);
+	if ((*elem)->parent_type != PARENT_UNDFINED)
+		remove_elem_parent(*elem);
 	ft_strdel(&(*elem)->name);
 	del_gui_elem(*elem);
 	if ((*elem)->surface != NULL)

@@ -23,6 +23,5 @@ void	set_elem_text_color(t_transform *elem, SDL_Color color)
 	else
 		text = elem->gui_elem.button->text;
 	text->color = color;
-	elem->has_alpha = (color.a != 0);
 	set_elem_redraw(elem);
 }

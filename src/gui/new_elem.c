@@ -44,6 +44,7 @@ t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)
 	new->show = TRUE;
 	new->redraw = TRUE;
 	new->gui_type = type;
+	new->has_alpha = (type == TEXT);
 	new->clickable = (type != PANEL);
 	new->parent_type = -1;
 	new_gui_elem(ui, type, &new->gui_elem);

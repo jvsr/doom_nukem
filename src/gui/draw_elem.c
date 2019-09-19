@@ -79,7 +79,10 @@ static void		draw_gui_elem(t_transform *elem)
 	else if (elem->gui_type == BUTTON)
 		draw_button(elem->surface, elem->gui_elem.button);
 	else if (elem->gui_type == PANEL)
+	{
 		draw_panel(elem->surface, elem->gui_elem.panel);
+		elem->has_alpha = sdl_has_surface_alpha(elem->surface);
+	}
 }
 
 void			draw_elem(t_transform *elem)
@@ -99,7 +102,7 @@ void			draw_elem(t_transform *elem)
 		dst_surface = elem->parent.elem->surface;
 	else
 		dst_surface = elem->parent.ui->window_surface;
-	if (elem->has_alpha)
+	if (elem->gui_type == TEXT || elem->has_alpha)
 		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->abs_pos);
 	else
 		sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
