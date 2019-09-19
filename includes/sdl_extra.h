@@ -17,6 +17,8 @@
 # include <SDL2/SDL_pixels.h>
 # include <SDL2/SDL_surface.h>
 
+# include "libft/ft_bool.h"
+
 typedef struct s_circle	t_circle;
 
 SDL_Surface	*sdl_create_surface_default(SDL_Point size);
@@ -36,5 +38,6 @@ void		sdl_merge_surface_scaled(SDL_Surface *dst, SDL_Surface *src);
 void		sdl_merge_surface_center(SDL_Surface *dst, SDL_Surface *src);
 void		sdl_merge_surface_alpha_scaled(SDL_Surface *dst, SDL_Surface *src);
 void		sdl_merge_surface_alpha_center(SDL_Surface *dst, SDL_Surface *src);
+t_bool		sdl_has_surface_alpha(SDL_Surface *surface);
 
 #endif
