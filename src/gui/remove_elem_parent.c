@@ -35,6 +35,5 @@ void	remove_elem_parent(t_transform *elem)
 		*children = cur->next;
 	else
 		prv->next = cur->next;
-	elem->parent.elem = NULL;
 	elem->parent_type = PARENT_UNDFINED;
 }
