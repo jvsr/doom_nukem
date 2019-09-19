@@ -16,6 +16,7 @@
 #include "libft/ft_string.h"
 
 #include "gui.h"
+#include "lex.h"
 #include "error.h"
 #include "gui_config.h"
 
