@@ -35,7 +35,7 @@ static int		calculate_color(int *dst, int *src)
 	rgba_to_color(&cdst, *dst);
 	rgba_to_color(&csrc, *src);
 	op = (float)csrc.a / maxalpha;
-	cdst.a = maxalpha;
+	cdst.a = csrc.a;
 	cdst.r = cdst.r * (1 - op) + csrc.r * op;
 	cdst.g = cdst.g * (1 - op) + csrc.g * op;
 	cdst.b = cdst.b * (1 - op) + csrc.b * op;
