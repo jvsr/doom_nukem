@@ -14,8 +14,6 @@
 
 #include "libft/ft_memory.h"
 
-#include "error.h"
-
 void	sdl_clear_surface(SDL_Surface *surface)
 {
 	ft_bzero(surface->pixels, surface->pitch * surface->h);
