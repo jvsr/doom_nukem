@@ -77,7 +77,7 @@ typedef	union	u_parent
 	t_transform	*elem;
 }				t_parent;
 
-typedef struct	s_transform
+struct			s_transform
 {
 	t_coord				pos;
 	t_coord				dim;
@@ -97,9 +97,9 @@ typedef struct	s_transform
 	t_parent_type		parent_type;
 	t_parent			parent;
 	struct s_transform	*next;
-}				t_transform;
+};
 
-typedef struct	s_text
+struct			s_text
 {
 	t_draw_method	draw_method;
 	char			*str;
@@ -107,32 +107,32 @@ typedef struct	s_text
 	SDL_Color		color;
 	t_font_type		font_type;
 	TTF_Font		**fonts;
-}				t_text;
+};
 
-typedef struct	s_image
+struct			s_image
 {
 	t_draw_method	draw_method;
 	SDL_Color		color;
 	SDL_Surface		*texture;
-}				t_image;
+};
 
-typedef struct	s_button
+struct			s_button
 {
 	t_text		*text;
 	t_image		*image;
-}				t_button;
+};
 
-typedef struct	s_panel
+struct			s_panel
 {
 	t_transform	*children;
-}				t_panel;
+};
 
-typedef struct	s_gui
+struct			s_gui
 {
 	SDL_Surface	*window_surface;
 	t_transform	*children;
 	TTF_Font	*fonts[FONT_AMOUNT];
-}				t_gui;
+};
 
 void			set_elem_moved(t_transform *elem);
 void			set_elem_redraw(t_transform *elem);
