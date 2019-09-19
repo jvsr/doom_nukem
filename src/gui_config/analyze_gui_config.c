@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 17:45:11 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/18 16:46:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/19 12:36:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_panel		*analyze_gui_config(const char *state_name, const char *file_name)
 
 	result = NULL;
 	tokens = lex_gui_config(fd);
+	(void)state_name;
 	close(fd);
 	return (result);
 }
