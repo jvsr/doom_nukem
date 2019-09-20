@@ -89,6 +89,7 @@ struct			s_transform
 	t_gui_type			gui_type;
 	t_gui_elem			gui_elem;
 	void				(*onclick)(t_game *, t_transform *);
+	void				*user_data;
 	t_bool				clickable;
 	t_bool				moved;
 	t_bool				redraw;
@@ -141,6 +142,7 @@ void			set_elem_dim(t_transform *elem, t_coord dim);
 void			set_elem_show(t_transform *elem, t_bool show);
 void			set_elem_layer(t_transform *elem, short layer);
 void			set_elem_clickable(t_transform *elem, t_bool clickable);
+void			set_elem_user_data(t_transform *elem, void *user_data);
 void			set_elem_text_str(t_transform *elem, const char *str);
 void			set_elem_text_size(t_transform *elem, float size);
 void			set_elem_text_color(t_transform *elem, SDL_Color color);
@@ -152,7 +154,7 @@ void			set_elem_image_color(t_transform *elem, SDL_Color color);
 void			set_elem_image_draw_method(t_transform *elem,
 											t_draw_method draw_method);
 void			set_elem_onclick(t_transform *elem,
-								void (*onclick)(t_game *, t_transform *));
+									void (*onclick)(t_game *, t_transform *));
 void			del_text(t_text **text);
 void			del_image(t_image **image);
 void			del_panel(t_panel **panel);
