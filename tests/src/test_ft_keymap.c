@@ -39,11 +39,15 @@ Test(init_keymap, null, .signal=SIGSEGV)
 
 Test(init_keymap, succsess)
 {
-	t_game *game;
+	t_game 		*game;
 
 	game = (t_game *)ft_memalloc(sizeof(t_game));
 	init_keymap(game);
+
 	cr_assert(game->keymap != NULL);
+	cr_assert(game->keymap->size == INIT_KEYMAP_SIZE);
+	cr_assert(game->keymap->f == INIT_KEYMAP_ALGO);
+	cr_assert(game->keymap->arr != NULL);
 }
 
 /*
@@ -52,10 +56,10 @@ Test(init_keymap, succsess)
 
 Test(get_keymap, null, .signal=SIGSEGV)
 {
-	get_keymap(NULL, 0);
+	get_keymap(NULL, 1);
 }
 
-Test(get_keymap, null_keystate)
+Test(get_keymap, not_monitored)
 {
 	t_keystate	state;
 	t_hashmap	*keymap;
@@ -71,7 +75,7 @@ Test(get_keymap, first_key)
 	t_keystate	state;
 	t_hashmap	*keymap;
 
-	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(3, INIT_KEYMAP_ALGO);
 
 	key = 21;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(3));
@@ -89,7 +93,7 @@ Test(get_keymap, middle_key)
 	t_keystate	state;
 	t_hashmap	*keymap;
 
-	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(3, INIT_KEYMAP_ALGO);
 
 	key = 8;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(1));
@@ -110,7 +114,7 @@ Test(get_keymap, last_key)
 	t_keystate	state;
 	t_hashmap	*keymap;
 
-	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(3, INIT_KEYMAP_ALGO);
 
 	key = 1;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(12));
@@ -122,9 +126,24 @@ Test(get_keymap, last_key)
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(36));
 
 	state = get_keymap(keymap, 123);
+	print_keymap(keymap);
 	cr_assert(state == 36);
 }
 
 /*
-** ---------------------------------get_keymap----------------------------------
+** ---------------------------------set_keymap----------------------------------
 */
+
+Test(set_keymap, null, .signal=SIGSEGV)
+{
+	set_keymap(NULL, 1, 3);
+}
+
+// Test(set_keymap, not_monitored)
+// {
+// 	t_hashmap	*keymap;
+
+// 	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
+// 	set_keymap(keymap, 42, 0);
+// 	cr_assert(state == 0);
+// }
