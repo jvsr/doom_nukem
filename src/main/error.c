@@ -15,7 +15,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "libft/ft_printf.h"
 
-void	error_msg(const char *msg, int error_code)
+_Noreturn void	error_msg(const char *msg, int error_code)
 {
 	ft_dprintf(2, "Error(%d): %s\n", error_code, msg);
 	SDL_Quit();
