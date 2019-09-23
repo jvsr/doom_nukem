@@ -22,7 +22,7 @@
 
 typedef	struct s_game		t_game;
 typedef	struct s_hashmap	t_hashmap;
-typedef	char				t_keystate;
+typedef	unsigned char		t_keystate;
 
 /*
 ** t_keypair is only used for keymapprint which is a debug func
