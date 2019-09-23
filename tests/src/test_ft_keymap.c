@@ -19,6 +19,15 @@
 #include "game.h"
 #include "init.h"
 
+static t_keystate	*new_state(t_keystate state)
+{
+	t_keystate	*new_state;
+
+	new_state = (t_keystate *)ft_memalloc(sizeof(t_keystate));
+	*new_state = state;
+	return (new_state);
+}
+
 /*
 ** ---------------------------------init_keymap---------------------------------
 */
@@ -46,31 +55,54 @@ Test(get_keymap, null, .signal=SIGSEGV)
 	get_keymap(NULL, 0);
 }
 
-// Test(get_keymap, null_keystate)
-// {
-// 	t_keystate	state;
-// 	t_hashmap	*keymap;
+Test(get_keymap, null_keystate)
+{
+	t_keystate	state;
+	t_hashmap	*keymap;
 
-// 	keymap = ft_hashmapnew(5, INIT_KEYMAP_ALGO);
-// 	state = get_keymap(keymap, 42);
-// 	cr_assert(state == 0);
-// }
+	keymap = ft_hashmapnew(5, INIT_KEYMAP_ALGO);
+	state = get_keymap(keymap, 42);
+	cr_assert(state == 0);
+}
 
-// Test(get_keymap, first_key)
-// {
-// 	SDL_Keycode	key;
-// 	t_keystate	state;
-// 	t_hashmap	*keymap;
+Test(get_keymap, first_key)
+{
+	SDL_Keycode	key;
+	t_keystate	state;
+	t_hashmap	*keymap;
 
-// 	keymap = ft_hashmapnew(3, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
 
-// 	key = 21;
-// 	state = 3;
-// 	ft_hashmapadd(keymap, &key, sizeof(key), &state);
+	key = 21;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(3));
 
-// 	state = get_keymap(keymap, 21);
-// 	cr_assert(state == 3);
-// }
+	key = 12;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(6));
+
+	state = get_keymap(keymap, 21);
+	cr_assert(state == 3);
+}
+
+Test(get_keymap, middle_key)
+{
+	SDL_Keycode	key;
+	t_keystate	state;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
+
+	key = 8;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(1));
+
+	key = 16;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(10));
+
+	key = 24;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(20));
+
+	state = get_keymap(keymap, 16);
+	cr_assert(state == 10);
+}
 
 Test(get_keymap, last_key)
 {
@@ -81,18 +113,18 @@ Test(get_keymap, last_key)
 	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
 
 	key = 1;
-	state = 3;
-	ft_hashmapadd(keymap, &key, sizeof(key), &state);
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(12));
 
-	key = 2;
-	state = 1;
-	ft_hashmapadd(keymap, &key, sizeof(key), &state);
+	key = 12;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(24));
 
-	key = 3;
-	state = 2;
-	ft_hashmapadd(keymap, &key, sizeof(key), &state);
+	key = 123;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(36));
 
-	state = get_keymap(keymap, 1);
-	ft_putnum(state);
-	cr_assert(state == 3);
+	state = get_keymap(keymap, 123);
+	cr_assert(state == 36);
 }
+
+/*
+** ---------------------------------get_keymap----------------------------------
+*/
