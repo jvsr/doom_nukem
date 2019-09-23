@@ -18,7 +18,7 @@
 #include "game.h"
 #include "keymap.h"
 
-static void		checkquit(t_game *game, SDL_Event event)
+static void		check_quit(t_game *game, SDL_Event event)
 {
 	if (event.type == SDL_QUIT)
 		game->state = stopped;
@@ -29,7 +29,15 @@ static void		checkquit(t_game *game, SDL_Event event)
 		checkclick(game, (SDL_Point){event.button.x, event.button.y});
 }
 
-static void		keymap(t_game *game, SDL_Event event)
+static void		check_click(t_game *game, SDL_Event event)
+{
+	if (game->cursoractive == FALSE || event.type != SDL_MOUSEBUTTONDOWN)
+		return ;
+	if (event.button.button & SDL_BUTTON_LEFT)
+		checkclick(game, (SDL_Point){event.button.x, event.button.y});
+}
+
+static void		manage_keymap(t_game *game, SDL_Event event)
 {
 	if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
 		toggle_keymap(game->keymap, event.key.keysym.sym, TRUE);
@@ -53,8 +61,9 @@ void			loop(t_game *game)
 		SDL_FillRect(game->surface, NULL, 0);
 		while (SDL_PollEvent(&event))
 		{
-			checkquit(game, event);
-			keymap(game, event);
+			check_quit(game, event);
+			check_click(game, event);
+			manage_keymap(game, event);
 		}
 		drawgui(game);
 		SDL_UpdateWindowSurface(game->window);
