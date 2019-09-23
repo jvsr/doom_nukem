@@ -150,13 +150,77 @@ Test(set_keystate, null, .signal=SIGSEGV)
 Test(set_keystate, not_monitored)
 {
 	SDL_Keycode	key;
-
+	t_keystate	*value;
 	t_hashmap	*keymap;
 
-	key = 42;
 	keymap = ft_hashmapnew(1, test_hash_algo);
-	set_keystate(keymap, key, 0);
 
-	// value = ft_hashmapget(keymap, &key, sizeof(key));
-	// cr_assert();
+	key = 42;
+	set_keystate(keymap, key, 12);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == 12);
+}
+
+Test(set_keystate, add_last)
+{
+	SDL_Keycode	key;
+	t_keystate	*value;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(3, test_hash_algo);
+
+	key = 33;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(64));
+
+	key = 333;
+	set_keystate(keymap, key, 124);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == 124);
+}
+
+Test(set_keystate, replace)
+{
+	SDL_Keycode	key;
+	t_keystate	*value;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(1, test_hash_algo);
+
+	key = 1;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(0));
+
+	key = 2;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(0));
+
+	key = 1;
+	set_keystate(keymap, key, 244);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == 244);
+}
+
+Test(set_keystate, replace_middle)
+{
+	SDL_Keycode	key;
+	t_keystate	*value;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(2, test_hash_algo);
+
+	key = 1;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(0));
+
+	key = 11;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(0));
+
+	key = 111;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(0));
+
+	key = 11;
+	set_keystate(keymap, key, 122);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == 122);
 }
