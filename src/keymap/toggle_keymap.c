@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-
 #include "libft/ft_hash.h"
 #include "libft/ft_memory.h"
 
-#include "error.h"
 #include "keymap.h"
 
 /*
@@ -32,9 +29,7 @@ t_bool	toggle_keymap(const t_hashmap *keymap, SDL_Keycode key, t_bool pressed)
 
 	current = ft_hashmapget(keymap, &key, sizeof(key));
 	if (current == NULL)
-		current = (t_keystate *)ft_memalloc(sizeof(t_keystate));
-	if (current == NULL)
-		error_msg(strerror(errno), errno);
+		current = new_keystate();
 	if (pressed == TRUE)
 	{
 		*current |= KEY_HELDDOWN;

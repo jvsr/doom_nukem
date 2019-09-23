@@ -10,13 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-
 #include "libft/ft_hash.h"
-#include "libft/ft_memory.h"
 
 #include "keymap.h"
-#include "error.h"
 
 /*
 ** * set_keymap will take the keymap, keysym and a state.
@@ -30,9 +26,7 @@ t_bool	set_keymap(const t_hashmap *keymap, SDL_Keycode key, t_keystate state)
 
 	current = ft_hashmapget(keymap, &key, sizeof(key));
 	if (current == NULL)
-		current = (t_keystate *)ft_memalloc(sizeof(t_keystate));
-	if (current == NULL)
-		error_msg(strerror(errno), errno);
+		current = new_keystate();
 	*current = state;
 	return (ft_hashmapadd(keymap, &key, sizeof(key), current));
 }

@@ -27,12 +27,14 @@ typedef	char				t_keystate;
 /*
 ** t_keypair is only used for keymapprint which is a debug func
 */
+
 typedef struct	s_keypair
 {
 	const char	*name;
 	SDL_Keycode	key;
 }				t_keypair;
 
+t_keystate		*new_keystate(void);
 void			reset_keymap(const t_hashmap *keymap);
 void			clear_keymap(const t_hashmap *keymap);
 void			print_keymap(const t_hashmap *keymap);
