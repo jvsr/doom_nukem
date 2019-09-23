@@ -19,6 +19,15 @@
 #include "game.h"
 #include "init.h"
 
+static size_t		test_hash_algo(const void *key, size_t key_size)
+{
+	SDL_Keycode	temp;
+
+	(void)key_size;
+	temp = *((SDL_Keycode *)key);
+	return (temp % 10);
+}
+
 static t_keystate	*new_state(t_keystate state)
 {
 	t_keystate	*new_state;
@@ -64,7 +73,7 @@ Test(get_keystate, not_monitored)
 	t_keystate	state;
 	t_hashmap	*keymap;
 
-	keymap = ft_hashmapnew(5, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(5, test_hash_algo);
 	state = get_keystate(keymap, 42);
 	cr_assert(state == 0);
 }
@@ -75,12 +84,12 @@ Test(get_keystate, first_key)
 	t_keystate	state;
 	t_hashmap	*keymap;
 
-	keymap = ft_hashmapnew(3, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(3, test_hash_algo);
 
 	key = 21;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(3));
 
-	key = 12;
+	key = 11;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(6));
 
 	state = get_keystate(keymap, 21);
@@ -93,18 +102,18 @@ Test(get_keystate, middle_key)
 	t_keystate	state;
 	t_hashmap	*keymap;
 
-	keymap = ft_hashmapnew(3, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(3, test_hash_algo);
 
 	key = 8;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(1));
 
-	key = 16;
+	key = 18;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(10));
 
-	key = 24;
+	key = 28;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(100));
 
-	state = get_keystate(keymap, 16);
+	state = get_keystate(keymap, 18);
 	cr_assert(state == 10);
 }
 
@@ -114,20 +123,19 @@ Test(get_keystate, last_key)
 	t_keystate	state;
 	t_hashmap	*keymap;
 
-	keymap = ft_hashmapnew(3, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(3, test_hash_algo);
 
-	key = 1;
-	ft_hashmapadd(keymap, &key, sizeof(key), new_state(12));
+	key = 2;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(4));
 
-	key = 12;
-	ft_hashmapadd(keymap, &key, sizeof(key), new_state(24));
+	key = 202;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(8));
 
-	key = 123;
-	ft_hashmapadd(keymap, &key, sizeof(key), new_state(36));
+	key = 20302;
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(16));
 
-	state = get_keystate(keymap, 123);
-	print_keymap(keymap);
-	cr_assert(state == 36);
+	state = get_keystate(keymap, 20302);
+	cr_assert(state == 16);
 }
 
 /*
@@ -146,7 +154,7 @@ Test(set_keystate, not_monitored)
 	t_hashmap	*keymap;
 
 	key = 42;
-	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
+	keymap = ft_hashmapnew(1, test_hash_algo);
 	set_keystate(keymap, key, 0);
 
 	// value = ft_hashmapget(keymap, &key, sizeof(key));
