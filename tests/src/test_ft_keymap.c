@@ -224,3 +224,27 @@ Test(set_keystate, replace_middle)
 	value = ft_hashmapget(keymap, &key, sizeof(key));
 	cr_assert(*value == 122);
 }
+
+/*
+** -------------------------------toggle_keystate-------------------------------
+*/
+
+Test(toggle_keystate, null, .signal=SIGSEGV)
+{
+	toggle_keystate(NULL, 1, FALSE);
+}
+
+Test(toggle_keystate, not_monitored)
+{
+	SDL_Keycode	key;
+	t_keystate	*value;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(1, test_hash_algo);
+
+	key = 25;
+	toggle_keystate(keymap, key, TRUE);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == 3);
+}
