@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_keymap.c                                       :+:    :+:            */
+/*   set_keystate.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 15:14:43 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/03 13:51:26 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/03 13:52:01 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 #include "keymap.h"
 
 /*
-** * get_keymap will take the keymap and a keysym code.
-** * It will then retrieve the state of the key.
-** * If the key isn't monitored this function returns a state of 0.
+** * set_keystate will take the keymap, keysym and a state.
+** * It will then set the state of the key to the given state.
+** * If the key isnt monitored yet it will add the key to the monitored keys.
 */
 
-t_keystate	get_keymap(const t_hashmap *keymap, SDL_Keycode key)
+t_bool	set_keystate(const t_hashmap *keymap, SDL_Keycode key, t_keystate state)
 {
-	t_keystate	*value;
+	t_keystate	*current;
 
-	value = ft_hashmapget(keymap, &key, sizeof(key));
-	if (value == NULL)
-		return (0);
-	return (*value);
+	current = (t_keystate *)ft_hashmapget(keymap, &key, sizeof(key));
+	if (current == NULL)
+		current = new_keystate();
+	*current = state;
+	return (ft_hashmapadd(keymap, &key, sizeof(key), current));
 }

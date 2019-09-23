@@ -51,25 +51,25 @@ Test(init_keymap, succsess)
 }
 
 /*
-** ---------------------------------get_keymap----------------------------------
+** --------------------------------get_keystate---------------------------------
 */
 
-Test(get_keymap, null, .signal=SIGSEGV)
+Test(get_keystate, null, .signal=SIGSEGV)
 {
-	get_keymap(NULL, 1);
+	get_keystate(NULL, 1);
 }
 
-Test(get_keymap, not_monitored)
+Test(get_keystate, not_monitored)
 {
 	t_keystate	state;
 	t_hashmap	*keymap;
 
 	keymap = ft_hashmapnew(5, INIT_KEYMAP_ALGO);
-	state = get_keymap(keymap, 42);
+	state = get_keystate(keymap, 42);
 	cr_assert(state == 0);
 }
 
-Test(get_keymap, first_key)
+Test(get_keystate, first_key)
 {
 	SDL_Keycode	key;
 	t_keystate	state;
@@ -83,11 +83,11 @@ Test(get_keymap, first_key)
 	key = 12;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(6));
 
-	state = get_keymap(keymap, 21);
+	state = get_keystate(keymap, 21);
 	cr_assert(state == 3);
 }
 
-Test(get_keymap, middle_key)
+Test(get_keystate, middle_key)
 {
 	SDL_Keycode	key;
 	t_keystate	state;
@@ -102,13 +102,13 @@ Test(get_keymap, middle_key)
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(10));
 
 	key = 24;
-	ft_hashmapadd(keymap, &key, sizeof(key), new_state(20));
+	ft_hashmapadd(keymap, &key, sizeof(key), new_state(100));
 
-	state = get_keymap(keymap, 16);
+	state = get_keystate(keymap, 16);
 	cr_assert(state == 10);
 }
 
-Test(get_keymap, last_key)
+Test(get_keystate, last_key)
 {
 	SDL_Keycode	key;
 	t_keystate	state;
@@ -125,25 +125,30 @@ Test(get_keymap, last_key)
 	key = 123;
 	ft_hashmapadd(keymap, &key, sizeof(key), new_state(36));
 
-	state = get_keymap(keymap, 123);
+	state = get_keystate(keymap, 123);
 	print_keymap(keymap);
 	cr_assert(state == 36);
 }
 
 /*
-** ---------------------------------set_keymap----------------------------------
+** --------------------------------set_keystate---------------------------------
 */
 
-Test(set_keymap, null, .signal=SIGSEGV)
+Test(set_keystate, null, .signal=SIGSEGV)
 {
-	set_keymap(NULL, 1, 3);
+	set_keystate(NULL, 1, 3);
 }
 
-// Test(set_keymap, not_monitored)
-// {
-// 	t_hashmap	*keymap;
+Test(set_keystate, not_monitored)
+{
+	SDL_Keycode	key;
 
-// 	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
-// 	set_keymap(keymap, 42, 0);
-// 	cr_assert(state == 0);
-// }
+	t_hashmap	*keymap;
+
+	key = 42;
+	keymap = ft_hashmapnew(1, INIT_KEYMAP_ALGO);
+	set_keystate(keymap, key, 0);
+
+	// value = ft_hashmapget(keymap, &key, sizeof(key));
+	// cr_assert();
+}

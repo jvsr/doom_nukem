@@ -1,6 +1,7 @@
 {
     "files.associations": {
 		"*.h": "c",
-        "Makefile.*": "makefile"
-    }
+		"Makefile.*": "makefile",
+		"iterator": "c"
+	}
 }

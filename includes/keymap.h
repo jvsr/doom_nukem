@@ -38,11 +38,11 @@ t_keystate		*new_keystate(void);
 void			reset_keymap(const t_hashmap *keymap);
 void			clear_keymap(const t_hashmap *keymap);
 void			print_keymap(const t_hashmap *keymap);
-t_keystate		get_keymap(const t_hashmap *keymap, SDL_Keycode key);
-void			set_keymap_all(const t_hashmap *keymap, t_keystate state);
-t_bool			toggle_keymap(const t_hashmap *keymap, SDL_Keycode key,
+t_keystate		get_keystate(const t_hashmap *keymap, SDL_Keycode key);
+void			set_keystate_all(const t_hashmap *keymap, t_keystate state);
+t_bool			toggle_keystate(const t_hashmap *keymap, SDL_Keycode key,
 					t_bool pressed);
-t_bool			set_keymap(const t_hashmap *keymap, SDL_Keycode key,
+t_bool			set_keystate(const t_hashmap *keymap, SDL_Keycode key,
 					t_keystate state);
 
 #endif

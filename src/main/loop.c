@@ -40,13 +40,13 @@ static void		check_click(t_game *game, SDL_Event event)
 static void		manage_keymap(t_game *game, SDL_Event event)
 {
 	if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
-		toggle_keymap(game->keymap, event.key.keysym.sym, TRUE);
+		toggle_keystate(game->keymap, event.key.keysym.sym, TRUE);
 	else if (event.type == SDL_KEYUP && event.key.repeat == 0)
-		toggle_keymap(game->keymap, event.key.keysym.sym, FALSE);
+		toggle_keystate(game->keymap, event.key.keysym.sym, FALSE);
 	else if (event.type == SDL_MOUSEBUTTONDOWN)
-		toggle_keymap(game->keymap, event.button.button, TRUE);
+		toggle_keystate(game->keymap, event.button.button, TRUE);
 	else if (event.type == SDL_MOUSEBUTTONUP)
-		toggle_keymap(game->keymap, event.button.button, FALSE);
+		toggle_keystate(game->keymap, event.button.button, FALSE);
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKQUOTE)
 		print_keymap(game->keymap);
 }

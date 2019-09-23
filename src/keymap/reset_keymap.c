@@ -21,5 +21,5 @@
 
 void	reset_keymap(const t_hashmap *keymap)
 {
-	set_keymap_all(keymap, 0);
+	set_keystate_all(keymap, 0);
 }
