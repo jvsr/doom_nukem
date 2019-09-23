@@ -290,8 +290,8 @@ static const char	*getname(void *key)
 
 void				print_keymap(const t_hashmap *keymap)
 {
-	const char		*name;
 	size_t			i;
+	size_t			pos;
 	t_hashlist		*current;
 	t_keystate		value;
 
@@ -299,14 +299,16 @@ void				print_keymap(const t_hashmap *keymap)
 	ft_putline(" Keymap ");
 	while (i < keymap->size)
 	{
+		pos = 0;
 		current = keymap->arr[i];
 		while (current != NULL)
 		{
-			name = getname(current->key);
 			value = *((t_keystate *)current->value);
-			ft_printf("Name: %s - held: %d toggled: %d\n", name,
-				(value & KEY_HELDDOWN) == KEY_HELDDOWN,
-				(value & KEY_TOGGLED) == KEY_TOGGLED);
+			ft_printf("Name: %s - state: %hhd (List pos: %zu)\n",
+				getname(current->key),
+				value,
+				pos);
+			pos++;
 			current = current->next;
 		}
 		i++;
