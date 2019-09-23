@@ -304,7 +304,7 @@ void				print_keymap(const t_hashmap *keymap)
 		while (current != NULL)
 		{
 			value = *((t_keystate *)current->value);
-			ft_printf("Name: %s - state: %hhd (List pos: %zu)\n",
+			ft_printf("Name: %s - state: %hhu (List pos: %zu)\n",
 				getname(current->key),
 				value,
 				pos);
