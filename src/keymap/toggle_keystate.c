@@ -20,7 +20,7 @@
 ** * It will then based on the current state of the key change the state.
 ** * If the key is being pressed it toggles the toggle and sets helddown to 1.
 ** * if the key is not being pressed it sets helddown to 0.
-** * If the key isnt monitored yet it will add the key to the monitored keys.
+** * If the key isn't monitored yet it will add the key to the monitored keys.
 */
 
 t_bool	toggle_keystate(const t_hashmap *keymap, SDL_Keycode key,

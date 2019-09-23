@@ -16,7 +16,7 @@
 
 /*
 ** * clear_keymap will take the keymap.
-** * It will then detete all monitored keys.
+** * It will then delete all monitored keys.
 */
 
 void	clear_keymap(const t_hashmap *keymap)

@@ -17,7 +17,7 @@
 /*
 ** * set_keystate will take the keymap, keysym and a state.
 ** * It will then set the state of the key to the given state.
-** * If the key isnt monitored yet it will add the key to the monitored keys.
+** * If the key isn't monitored yet it will add the key to the monitored keys.
 */
 
 t_bool	set_keystate(const t_hashmap *keymap, SDL_Keycode key, t_keystate state)
