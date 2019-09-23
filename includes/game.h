@@ -15,6 +15,8 @@
 
 # include <SDL2/SDL.h>
 
+# include "gui.h"
+
 typedef struct s_gui		t_gui;
 typedef struct s_level		t_level;
 typedef struct s_player		t_player;
