@@ -13,6 +13,7 @@
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_surface.h>
+
 #include "color.h"
 
 static int		calculate_color(int *dst, SDL_Color src)
@@ -23,7 +24,7 @@ static int		calculate_color(int *dst, SDL_Color src)
 
 	rgba_to_color(&cdst, *dst);
 	op = (float)src.a / maxalpha;
-	cdst.a = maxalpha;
+	cdst.a = src.a;
 	cdst.r = cdst.r * (1 - op) + src.r * op;
 	cdst.g = cdst.g * (1 - op) + src.g * op;
 	cdst.b = cdst.b * (1 - op) + src.b * op;
