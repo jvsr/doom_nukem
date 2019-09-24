@@ -12,7 +12,7 @@
 
 #include "gametime.h"
 
-long		get_gametime(t_time *time)
+t_uint64		get_gametime(t_time *time)
 {
-	return ((long)(((double)(clock() - time->start)) / CLOCKS_PER_MILLI));
+	return ((t_uint64)(((double)(clock() - *time)) / CLOCKS_PER_MILLI));
 }

@@ -40,7 +40,7 @@ typedef struct	s_game
 	t_player	*player;
 	t_hashmap	*keymap;
 	t_bool		cursoractive;
-	t_time		time;
+	t_time		starttime;
 }				t_game;
 
 void			loop(t_game *game);

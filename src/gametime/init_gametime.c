@@ -14,5 +14,5 @@
 
 void		init_gametime(t_time *time)
 {
-	time->start = clock();
+	*time = clock();
 }

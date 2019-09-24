@@ -57,7 +57,7 @@ static	void	init_window_surface(t_game *game)
 static void		init_game(t_game *game)
 {
 	game->state = running;
-	init_gametime(&game->time);
+	init_gametime(&game->starttime);
 	game->cursoractive = TRUE;
 }
 

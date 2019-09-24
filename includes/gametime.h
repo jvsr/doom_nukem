@@ -14,14 +14,13 @@
 # define GAMETIME_H
 
 # include <time.h>
+# include "types.h"
+
 # define CLOCKS_PER_MILLI (CLOCKS_PER_SEC / 1000)
 
-typedef struct	s_time
-{
-	clock_t		start;
-}				t_time;
+typedef clock_t t_time;
 
 void		init_gametime(t_time *time);
-long		get_gametime(t_time *time);
+t_uint64	get_gametime(t_time *time);
 
 #endif
