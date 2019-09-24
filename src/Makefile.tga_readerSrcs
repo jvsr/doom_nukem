@@ -6,8 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = tga
-HEADERS := $(HEADERS:%=%.h)
+HEADERS = tga error sdl_extra
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=
@@ -21,4 +20,4 @@ FT_SRCS =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = opentga pixelfrompos strtoimg tgaopenassdl
+SRCS = open_tga_sdl pixel_from_pos str_to_img create_image

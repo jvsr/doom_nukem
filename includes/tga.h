@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 15:25:19 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/17 16:23:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,29 @@
 
 typedef struct	s_tga
 {
-	unsigned char	idlen;
+	unsigned char	id_len;
 	unsigned char	clr_map_type;
 	unsigned char	img_type;
-	unsigned short	cmpos;
-	unsigned short	cmlen;
-	unsigned short	cmsize;
+	unsigned short	cm_pos;
+	unsigned short	cm_len;
+	unsigned short	cm_size;
 }				t_tga;
 
 typedef struct	s_img
 {
-	unsigned char	pxdepth;
-	unsigned short	xorigin;
-	unsigned short	yorigin;
+	unsigned short	x_origin;
+	unsigned short	y_origin;
 	unsigned short	width;
 	unsigned short	height;
+	unsigned char	px_depth;
 	unsigned int	*pixels;
+	unsigned int	pitch;
 }				t_img;
 
-typedef struct	s_mlx
-{
-	void	*mlx;
-	void	*win;
-	void	*img_pt;
-	void	*img_add;
-	t_img	image;
-}				t_mlx;
-
-t_bool			opentga(t_img *img, char *loc);
+SDL_Surface		*open_tga_sdl(char *file_name);
+void			create_image(const char *file_name, t_img *img);
 char			reversebyte(char b);
-void			strtoimg(t_img *img, t_tga *tga, unsigned char *str);
-int				pixelfrompos(unsigned char *str, size_t i, t_img *img);
-SDL_Surface		*tgaopenassdl(char *loc);
+void			str_to_img(t_img *img, t_tga *tga, unsigned char *str);
+int				pixel_from_pos(unsigned char *str, size_t i, t_img *img);
 
 #endif
