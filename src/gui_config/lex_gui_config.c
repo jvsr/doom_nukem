@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 16:03:27 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/19 17:27:48 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 13:51:55 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "libft/ft_memory.h"
 #include "libft/ft_string.h"
 #include "libft/ft_character.h"
+
+#include "libft/ft_printf.h" //
 
 #include "lex.h"
 #include "error.h"
@@ -37,6 +39,8 @@ static t_token	*create_tokens(const char *file)
 			lex_check_eol(&tokens, file, &index);
 		else if (ft_isalnum(file[index]))
 			lex_check_alnum(&tokens, file, &index);
+		else if (file[index] == ' ')
+			lex_check_space(&tokens, file, &index);
 		else
 			error_msg("Lexing error:", 19, "Unrecognized character");
 	}

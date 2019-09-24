@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/19 12:34:15 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/19 18:18:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 13:09:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef enum	e_token_type
 	NUM,
 	PLAIN,
 	DASH,
+	SLASH,
 	COLON,
 	COMMA,
 	INDENT,
@@ -26,6 +27,8 @@ typedef enum	e_token_type
 	NODENT,
 	QUOTE,
 	DQUOTE,
+	OBRACKET,
+	CBRACKET,
 	SPACE,
 	CR,
 	LF,
@@ -46,6 +49,7 @@ void	lex_add_token(t_token **tokens, t_token *new);
 void	lex_set_token_value(t_token *token, const char *const file,
 							size_t *const index, const size_t content_size);
 void	lex_check_dash(t_token **tokens, const char *file, size_t *index);
+void	lex_check_space(t_token **tokens, const char *file, size_t *index);
 void	lex_check_eol(t_token **tokens, const char *file, size_t *index);
 void	lex_check_indent(t_token **tokens, const char *file, size_t *index);
 void	lex_check_alnum(t_token **tokens, const char *file, size_t *index);

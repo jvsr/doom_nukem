@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 17:45:11 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/19 12:36:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 12:51:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,6 @@
 #include "lex.h"
 #include "error.h"
 #include "gui_config.h"
-
-// static void	set_state_gui_config(const int fd, const char *state_name)
-// {
-// 	int		ret;
-// 	char	*line;
-
-// 	line = NULL;
-// 	ret = ft_getnextline(fd, &line);
-// 	while (ret > 0 && ft_strequ(line, state_name) == FALSE)
-// 	{
-// 		free(line);
-// 		ret = ft_getnextline(fd, &line);
-// 	}
-// 	if (ret == -1)
-// 		error_msg(strerror(errno), errno, "");
-// 	else if (ret == 0)
-// 		error_msg("Could not find corresponding gui state", 1, "");
-// 	free(line);
-// }
 
 t_panel		*analyze_gui_config(const char *state_name, const char *file_name)
 {
