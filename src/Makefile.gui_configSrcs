@@ -1,0 +1,33 @@
+# $(PARENTNAME) = Name of parent folder
+# $(SUBLIB) = Name of outputfile
+# $(SRCFOLDER) = Name of the folder which holds the sources
+# $(INCLUDES) = Path to the includes folder
+# $(MAKEINCLUDES) = Path to the makefile includes folder
+# $(CCFLAGS) = All the flags that will be used to compile
+
+# Headers libary is dependent on (relative to $(INCLUDES))
+HEADERS = gui error gui_config
+
+# Additions to the compile flags (-Wall -Wextra -Werror allready included)
+CCFLAGS +=
+
+# Source file prefix
+PREFIX =
+
+# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with ft_ and sufixed with .c
+FT_SRCS =
+
+# All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+SRCS = analyze_gui_config \
+		open_gui_config \
+		lex_gui_config \
+		lex_check_eol \
+		lex_check_dash \
+		lex_check_alnum \
+		lex_check_space \
+		lex_check_indent \
+		lex_add_token \
+		lex_create_token \
+		lex_set_token_value

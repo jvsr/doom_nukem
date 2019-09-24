@@ -19,5 +19,6 @@
 typedef struct s_game	t_game;
 
 t_game	*init(void);
+void	init_gui(t_game *game);
 
 #endif

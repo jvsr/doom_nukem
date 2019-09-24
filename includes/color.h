@@ -14,6 +14,7 @@
 # define COLOR_H
 
 # include <SDL2/SDL_pixels.h>
+
 # include "types.h"
 
 t_uint32	color_to_rgba(SDL_Color c);
