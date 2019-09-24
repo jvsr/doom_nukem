@@ -14,5 +14,7 @@
 
 t_uint64		get_gametime(t_time *time)
 {
-	return ((t_uint64)(((double)(clock() - *time)) / CLOCKS_PER_MILLI));
+	const long double timepassed = (clock() - *time);
+
+	return ((t_uint64)(timepassed / CLOCKS_PER_MILLI));
 }
