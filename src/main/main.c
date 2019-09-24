@@ -29,7 +29,9 @@ static int	destroy(t_game *game)
 int			main(void)
 {
 	t_game *game;
+	t_bool isloaded;
 
+	isloaded = TRUE;
 	game = init();
 	loop(game);
 	return (destroy(game));
