@@ -12,7 +12,7 @@
 
 #include <errno.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "keymap.h"
 #include "error.h"
@@ -28,6 +28,6 @@ t_keystate	*new_keystate(void)
 
 	new = (t_keystate *)ft_memalloc(sizeof(t_keystate));
 	if (new == NULL)
-		error_msg(strerror(errno), errno);
+		error_msg(strerror(errno), errno, "Failed to alloc keystate");
 	return (new);
 }

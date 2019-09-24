@@ -30,5 +30,5 @@ void	init_keymap(t_game *game)
 {
 	game->keymap = ft_hashmapnew(INIT_KEYMAP_SIZE, INIT_KEYMAP_ALGO);
 	if (game->keymap == NULL)
-		error_msg(strerror(errno), errno);
+		error_msg(strerror(errno), errno, "Failed to alloc keymap");
 }

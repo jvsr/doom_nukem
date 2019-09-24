@@ -12,9 +12,9 @@
 
 #include <SDL2/SDL_mouse.h>
 
-#include "libft/ft_string.h"
 #include "libft/ft_printf.h"
 #include "libft/ft_hash.h"
+#include "libft/ft_str.h"
 
 #include "keymap.h"
 

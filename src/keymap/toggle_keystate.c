@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft/ft_hash.h"
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "keymap.h"
 
