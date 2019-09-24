@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 16:03:27 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 13:51:55 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 14:23:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,15 @@ static t_token	*create_tokens(const char *file)
 			lex_check_alnum(&tokens, file, &index);
 		else if (file[index] == ' ')
 			lex_check_space(&tokens, file, &index);
+		else if (file[index] == ':')
+			lex_check_colon(&tokens, file, &index);
+		else if (file[index] == ',')
+			lex_check_comma(&tokens, file, &index);
+		else if (file[index] == '\"' || file[index] == '\'')
+			lex_check_quote(&tokens, file, &index);
 		else
-			error_msg("Lexing error:", 19, "Unrecognized character");
+			error_msg("Lexing error:", 19,
+				ft_strformat("Unrecognized character '%c'", file[index]));
 	}
 	return (tokens);
 }

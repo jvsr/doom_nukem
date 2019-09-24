@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 13:51:37 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 14:10:48 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void			loop(t_game *game)
 {
 	SDL_Event	event;
 
+	analyze_gui_config("main", "mainmenu");
 	while (game->state == running)
 	{
 		SDL_FillRect(game->surface, NULL, 0);
