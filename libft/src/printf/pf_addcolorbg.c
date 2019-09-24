@@ -16,10 +16,10 @@ void	pf_addcolorbg(t_info *info, int color)
 {
 	if (color < 0 || color > 255)
 	{
-		pf_addtobuff(info, "\e[49m\e[K", 8);
+		pf_addtobuff(info, "\033[49m\033[K", 8);
 		return ;
 	}
-	pf_addtobuff(info, "\e[48;5;", 7);
+	pf_addtobuff(info, "\033[48;5;", 7);
 	pf_addnum(info, color);
 	pf_addtobuff(info, "m", 1);
 }

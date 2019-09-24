@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:02:45 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 13:51:37 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,14 @@ static void		check_quit(t_game *game, SDL_Event event)
 		game->state = stopped;
 	else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		game->state = stopped;
-	else if (game->cursoractive && event.type == SDL_MOUSEBUTTONDOWN
-		&& event.button.button & SDL_BUTTON_LEFT)
-		checkclick(game, (SDL_Point){event.button.x, event.button.y});
 }
 
-static void		check_click(t_game *game, SDL_Event event)
+static void		check_ui_click(t_game *game, SDL_Event event)
 {
 	if (game->cursoractive == FALSE || event.type != SDL_MOUSEBUTTONDOWN)
 		return ;
 	if (event.button.button & SDL_BUTTON_LEFT)
-		checkclick(game, (SDL_Point){event.button.x, event.button.y});
+		check_gui_hit(game, (SDL_Point){event.button.x, event.button.y});
 }
 
 static void		manage_keymap(t_game *game, SDL_Event event)
@@ -53,19 +50,18 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 
 void			loop(t_game *game)
 {
-	SDL_Event event;
+	SDL_Event	event;
 
-	game->ui.redraw = TRUE;
 	while (game->state == running)
 	{
 		SDL_FillRect(game->surface, NULL, 0);
 		while (SDL_PollEvent(&event))
 		{
 			check_quit(game, event);
-			check_click(game, event);
+			check_ui_click(game, event);
 			manage_keymap(game, event);
 		}
-		drawgui(game);
+		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);
 	}
 }

@@ -12,7 +12,9 @@
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_surface.h>
-#include "libft/ft_memory.h"
+
+#include "libft/ft_mem.h"
+
 #include "color.h"
 
 /*
@@ -33,7 +35,7 @@ static int		calculate_color(int *dst, int *src)
 	rgba_to_color(&cdst, *dst);
 	rgba_to_color(&csrc, *src);
 	op = (float)csrc.a / maxalpha;
-	cdst.a = maxalpha;
+	cdst.a = csrc.a;
 	cdst.r = cdst.r * (1 - op) + csrc.r * op;
 	cdst.g = cdst.g * (1 - op) + csrc.g * op;
 	cdst.b = cdst.b * (1 - op) + csrc.b * op;
@@ -56,18 +58,6 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 	return ((size_t)len);
 }
 
-static void		copy_color(int *dst, int color, size_t length)
-{
-	size_t i;
-
-	i = 0;
-	while (i < length)
-	{
-		dst[i] = color;
-		i++;
-	}
-}
-
 static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
 							SDL_Point start, SDL_Point cur)
 {
@@ -79,7 +69,7 @@ static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
 					+ (start.x + cur.x) * 4;
 	color = calculate_color(dst->userdata, src->userdata);
 	length = calculate_length(dst, src, start, cur);
-	copy_color((int*)dst->userdata, color, length);
+	ft_memset4((int*)dst->userdata, color, length);
 	return (length);
 }
 

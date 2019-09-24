@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "ft_float.h"
-#include "ft_memory.h"
-#include "ft_character.h"
-#include "ft_string.h"
-#include "ft_number.h"
+#include "ft_mem.h"
+#include "ft_char.h"
+#include "ft_str.h"
+#include "ft_num.h"
 
 static void	setdecimals(long double value, char *decimals, size_t n)
 {
@@ -47,8 +47,8 @@ static void	setdecimals(long double value, char *decimals, size_t n)
 
 t_bool		ft_putdouble_fd(long double value, size_t n, int fd)
 {
-	char		decimals[MAX_DOUBLE_PRECISION + 1];
-	long long	num;
+	char	decimals[MAX_DOUBLE_PRECISION + 1];
+	t_int64	num;
 
 	ft_bzero(decimals, MAX_DOUBLE_PRECISION + 1);
 	if (n > MAX_DOUBLE_PRECISION)
@@ -59,7 +59,7 @@ t_bool		ft_putdouble_fd(long double value, size_t n, int fd)
 			return (FALSE);
 		value *= -1;
 	}
-	num = (long long)value;
+	num = (t_int64)value;
 	value -= num;
 	setdecimals(value, decimals, n);
 	if (ft_putnum_fd(num + (n == 0 && decimals[0] >= '5'), fd) == FALSE)

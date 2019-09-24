@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_character.h"
+#include "ft_char.h"
 
 /*
 ** TYPES: (% followed by:)

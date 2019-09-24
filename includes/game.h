@@ -15,7 +15,7 @@
 
 # include <SDL2/SDL.h>
 
-# include "gui.h"
+# include "libft/ft_bool.h"
 
 typedef struct s_gui		t_gui;
 typedef struct s_level		t_level;
@@ -34,7 +34,7 @@ typedef struct	s_game
 	t_state		state;
 	SDL_Window	*window;
 	SDL_Surface	*surface;
-	t_gui		ui;
+	t_gui		*ui;
 	t_level		*level;
 	t_player	*player;
 	t_hashmap	*keymap;

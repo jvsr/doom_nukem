@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
 t_list			*ft_lstnew(void *content, size_t content_size)
 {

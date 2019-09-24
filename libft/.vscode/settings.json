@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"*.h": "c",
+		"Makefile.*": "makefile",
 		"Makefile*": "makefile",
 		"__functional_base": "c",
 		"__locale": "c",
@@ -10,6 +11,11 @@
 		"string": "c",
 		"system_error": "c",
 		"vector": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"random": "c",
+		"array": "c",
+		"deque": "c",
+		"iterator": "c",
+		"string_view": "c"
 	}
 }

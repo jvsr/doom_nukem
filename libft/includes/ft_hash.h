@@ -13,8 +13,9 @@
 #ifndef FT_HASH_H
 # define FT_HASH_H
 
-# include "ft_bool.h"
 # include <string.h>
+
+# include "ft_bool.h"
 
 typedef struct	s_hashlist
 {

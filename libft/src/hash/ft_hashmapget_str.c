@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_hash.h"
-#include "ft_string.h"
+#include "ft_str.h"
 
 void	*ft_hashmapget_str(const t_hashmap *map, const char *key)
 {

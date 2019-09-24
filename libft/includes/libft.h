@@ -14,18 +14,18 @@
 # define FT_LIBFT_H
 
 # include "ft_bool.h"
-# include "ft_character.h"
+# include "ft_char.h"
 # include "ft_color.h"
 # include "ft_float.h"
 # include "ft_hash.h"
 # include "ft_list.h"
-# include "ft_memory.h"
-# include "ft_number.h"
-# include "ft_numberarray.h"
-# include "ft_string.h"
-# include "ft_stringarray.h"
-# include "ft_terminal.h"
-# include "ft_unsignednumber.h"
+# include "ft_mem.h"
+# include "ft_num.h"
+# include "ft_numarr.h"
+# include "ft_str.h"
+# include "ft_strarr.h"
+# include "ft_term.h"
+# include "ft_unum.h"
 # include "ft_utf8.h"
 
 #endif

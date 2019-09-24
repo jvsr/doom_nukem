@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader gui keymap
+SUBLIBS = main color sdl_extra tga_reader gui gui_config keymap
 
 # Executibale name
 NAME = doom-nukem
@@ -20,7 +20,7 @@ PARENTNAME = $(NAME)
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
-CCOPTIMISE =
+CCOPTIMISE = -O1
 
 # Gcov settings
 GCOV = FALSE

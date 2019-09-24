@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_bool.h"
-#include "ft_string.h"
+#include "ft_str.h"
 
 t_bool	ft_putbool_fd(t_bool boolean, int fd)
 {

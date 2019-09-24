@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_memory.h"
-#include "ft_string.h"
+#include "ft_mem.h"
+#include "ft_str.h"
 
 static t_info	*freeret(t_info **info)
 {

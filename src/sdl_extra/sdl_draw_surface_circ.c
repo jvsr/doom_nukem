@@ -20,12 +20,11 @@
 
 void	sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color, t_circle c)
 {
-	t_uint32		color_value;
 	SDL_Point		cur;
+	const t_uint32	color_value = color_to_rgba(color);
 	const SDL_Point	start = {c.mid.x - c.d / 2, c.mid.y - c.d / 2};
 
 	cur.y = 0;
-	color_value = color_to_rgba(color);
 	while (cur.y < (int)c.d)
 	{
 		if (start.y + cur.y >= 0)
