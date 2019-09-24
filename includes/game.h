@@ -14,6 +14,7 @@
 # define GAME_H
 
 # include <SDL2/SDL.h>
+# include "gametime.h"
 
 typedef struct s_gui		t_gui;
 typedef struct s_level		t_level;
@@ -37,6 +38,7 @@ typedef struct	s_game
 	t_player	*player;
 	t_hashmap	*keymap;
 	t_bool		cursoractive;
+	t_time		time;
 }				t_game;
 
 void			loop(t_game *game);
