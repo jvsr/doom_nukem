@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/09 16:53:03 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 17:17:21 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			main(void)
 
 	isloaded = TRUE;
 	game = init();
+	splash(game, &isloaded);
 	loop(game);
 	return (destroy(game));
 }
