@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_color.h"
-#include "ft_string.h"
-#include "ft_stringarray.h"
+#include "ft_str.h"
+#include "ft_strarr.h"
 
 char	*ft_colorstr(int color)
 {

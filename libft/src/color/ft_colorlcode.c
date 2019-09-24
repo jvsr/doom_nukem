@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "ft_color.h"
-#include "ft_string.h"
-#include "ft_stringarray.h"
+#include "ft_str.h"
+#include "ft_strarr.h"
 
-ssize_t		ft_colorlcode(const char *str)
+int		ft_colorlcode(const char *str)
 {
 	char	**colors;
 	size_t	i;

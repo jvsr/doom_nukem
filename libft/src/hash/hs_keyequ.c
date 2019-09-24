@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_hash.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
 t_bool	hs_keyequ(const t_hashlist *entry, const void *key, size_t keysize)
 {

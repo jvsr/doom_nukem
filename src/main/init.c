@@ -15,8 +15,8 @@
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
 
-#include "libft/ft_memory.h"
-#include "libft/ft_string.h"
+#include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "game.h"

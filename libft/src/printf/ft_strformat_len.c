@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_string.h"
-#include "ft_memory.h"
+#include "ft_str.h"
+#include "ft_mem.h"
 
 static char		*joinlst(t_info *info)
 {

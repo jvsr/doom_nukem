@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft/ft_list.h"
 #include "libft/ft_bool.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 void		destroypanel(t_gui *ui, t_panel **panel,
 												const t_bool delchildren)

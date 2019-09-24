@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   clickdestroy.c                                     :+:    :+:            */
+/*   destroyclick.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -13,7 +13,7 @@
 #include "gui.h"
 #include <stdlib.h>
 #include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 void		destroyclick(t_gui *ui, char *name)
 {

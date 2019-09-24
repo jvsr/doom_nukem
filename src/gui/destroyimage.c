@@ -12,7 +12,7 @@
 
 #include "gui.h"
 #include <stdlib.h>
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 #include "libft/ft_list.h"
 
 void		destroyimage(t_gui *ui, t_image **image,

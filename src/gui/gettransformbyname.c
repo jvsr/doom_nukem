@@ -12,7 +12,7 @@
 
 #include "gui.h"
 #include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 t_transform			*gettransformbyname(t_gui *ui, char *name)
 {

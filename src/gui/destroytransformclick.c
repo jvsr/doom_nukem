@@ -12,13 +12,14 @@
 
 #include "gui.h"
 #include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 void		destroytransformclick(t_gui *ui, t_transform *transform)
 {
 	t_list *lst;
 	t_list *pre;
 
+	pre = NULL;
 	lst = ui->onclicks;
 	while (lst != NULL
 		&& !ft_strequ(((t_transform*)(lst->content))->name, transform->name))

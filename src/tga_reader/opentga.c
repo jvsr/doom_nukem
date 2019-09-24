@@ -12,7 +12,7 @@
 
 #include <fcntl.h>
 #include "tga.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 static void	settgaheader(unsigned char *str, t_tga *tga, t_img *img)
 {

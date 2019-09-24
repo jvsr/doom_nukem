@@ -13,7 +13,7 @@
 #include "gui.h"
 #include <stdlib.h>
 #include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 void		destroytext(t_gui *ui, t_text **text, const t_bool delchildren)
 {

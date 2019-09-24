@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transformgetinchildren.c                           :+:    :+:            */
+/*   gettransforminchildren.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -12,7 +12,7 @@
 
 #include "gui.h"
 #include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 t_transform	*gettransforminchildren(t_transform *trans, char *name)
 {

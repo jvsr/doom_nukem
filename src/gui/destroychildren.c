@@ -12,7 +12,7 @@
 
 #include "gui.h"
 #include "libft/ft_list.h"
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 void		deletegui(t_gui *ui, t_transform *transform,
 												const t_bool delchildren)

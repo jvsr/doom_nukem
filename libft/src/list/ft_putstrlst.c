@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
-#include "ft_string.h"
+#include "ft_str.h"
 
 t_bool	ft_putstrlst(const t_list *lst)
 {

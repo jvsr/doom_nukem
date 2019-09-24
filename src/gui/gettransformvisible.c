@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transformgetvisible.c                              :+:    :+:            */
+/*   gettransformvisible.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 #include "gui.h"
 #include "libft/ft_bool.h"
 
