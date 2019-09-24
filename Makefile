@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader gui time
+SUBLIBS = main color sdl_extra tga_reader gui gametime
 
 # Executibale name
 NAME = doom-nukem
