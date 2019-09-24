@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <limits.h>
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 #include "error.h"
 

@@ -13,7 +13,7 @@
 #include <errno.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "gui.h"
 #include "game.h"

@@ -12,8 +12,8 @@
 
 #include <SDL2/SDL_rect.h>
 
-#include "libft/ft_character.h"
-#include "libft/ft_string.h"
+#include "libft/ft_char.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "sdl_extra.h"
