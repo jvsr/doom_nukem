@@ -12,7 +12,7 @@
 
 #include <stddef.h>
 
-#include "libft/ft_character.h"
+#include "libft/ft_char.h"
 
 #include "lex.h"
 

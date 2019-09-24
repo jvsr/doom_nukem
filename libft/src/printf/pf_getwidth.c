@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_character.h"
-#include "ft_number.h"
+#include "ft_char.h"
+#include "ft_num.h"
 
 size_t	pf_getwidth(t_info *info, const char *str)
 {

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <SDL2/SDL_video.h>
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 

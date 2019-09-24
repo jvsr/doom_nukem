@@ -14,7 +14,7 @@
 #include <string.h>
 #include <SDL2/SDL_pixels.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "gui.h"
 #include "error.h"

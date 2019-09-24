@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 

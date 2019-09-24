@@ -12,11 +12,11 @@
 
 #include "ft_list.h"
 
-void	ft_lstinsert(t_list *head, const t_list *lst)
+void	ft_lstinsert(t_list *head, t_list *lst)
 {
 	t_list	*lstlast;
 
 	lstlast = ft_lstlast(lst);
 	lstlast->next = head->next;
-	head->next = (t_list *)lst;
+	head->next = lst;
 }

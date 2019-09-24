@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_utf8.h"
-#include "ft_character.h"
+#include "ft_char.h"
 
 t_bool	ft_pututf8_fd(t_wchar c, int fd)
 {

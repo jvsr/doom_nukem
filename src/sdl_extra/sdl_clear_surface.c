@@ -12,7 +12,7 @@
 
 #include <SDL2/SDL_surface.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 void	sdl_clear_surface(SDL_Surface *surface)
 {

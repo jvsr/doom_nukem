@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_character.h"
-#include "ft_string.h"
-#include "ft_number.h"
+#include "ft_char.h"
+#include "ft_str.h"
+#include "ft_num.h"
 
-static size_t	getrgb(const char *str, t_color *rgb)
+static size_t	getrgb(const char *str, t_uint8 *rgb)
 {
 	size_t	i;
 	size_t	totallen;
@@ -38,11 +38,11 @@ static size_t	getrgb(const char *str, t_color *rgb)
 	return (2 + totallen);
 }
 
-static size_t	addcolorrgb(t_info *info, t_bool bck, size_t len, t_color *rgb)
+static size_t	addcolorrgb(t_info *info, t_bool bck, size_t len, t_uint8 *rgb)
 {
-	t_color	r;
-	t_color	g;
-	t_color	b;
+	t_uint8	r;
+	t_uint8	g;
+	t_uint8	b;
 
 	r = rgb[0];
 	g = rgb[1];
@@ -54,7 +54,7 @@ static size_t	addcolorrgb(t_info *info, t_bool bck, size_t len, t_color *rgb)
 	return (2 + len + bck);
 }
 
-static size_t	addcolor(t_info *info, t_bool bck, size_t len, t_color color)
+static size_t	addcolor(t_info *info, t_bool bck, size_t len, int color)
 {
 	if (bck)
 		pf_addcolorbg(info, color);
@@ -65,7 +65,7 @@ static size_t	addcolor(t_info *info, t_bool bck, size_t len, t_color color)
 
 size_t			pf_formatcolor(t_info *info, const char *str)
 {
-	t_color	rgb[3];
+	t_uint8	rgb[3];
 	char	*colorstr;
 	int		color;
 	size_t	len;
@@ -85,7 +85,7 @@ size_t			pf_formatcolor(t_info *info, const char *str)
 	len = (colorstr != NULL) ? ft_strlen(colorstr) : 0;
 	ft_strdel(&colorstr);
 	if (color != -1 && str[bck + len] == '}')
-		return (addcolor(info, bck, len, (t_color)color));
+		return (addcolor(info, bck, len, color));
 	len = getrgb(&str[bck], rgb);
 	if (len != 0 && str[bck + len] == '}')
 		return (addcolorrgb(info, bck, len, rgb));

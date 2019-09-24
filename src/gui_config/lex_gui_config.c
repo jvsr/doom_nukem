@@ -14,9 +14,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "libft/ft_memory.h"
-#include "libft/ft_string.h"
-#include "libft/ft_character.h"
+#include "libft/ft_mem.h"
+#include "libft/ft_str.h"
+#include "libft/ft_char.h"
 
 #include "libft/ft_printf.h" //
 

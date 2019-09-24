@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
-t_list	*ft_lstfindadd_content(t_list *lst, void *content, size_t size)
+t_list	*ft_lstfindadd_content(t_list *lst, const void *content, size_t size)
 {
 	t_list	*newlst;
 

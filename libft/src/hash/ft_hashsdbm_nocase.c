@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_hash.h"
-#include "ft_character.h"
+#include "ft_char.h"
 
 size_t	ft_hashsdbm_nocase(const void *key, size_t size)
 {

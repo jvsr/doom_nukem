@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_string.h"
+#include "ft_str.h"
 #include <unistd.h>
 
 static ssize_t	freeret(t_info *info)

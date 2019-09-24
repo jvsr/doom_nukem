@@ -13,13 +13,15 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include <stdlib.h>
+# include <string.h>
+# include <stdarg.h>
+
+# include "ft_types.h"
 # include "ft_bool.h"
 # include "ft_list.h"
 # include "ft_color.h"
 # include "ft_utf8.h"
-# include <stdlib.h>
-# include <string.h>
-# include <stdarg.h>
 
 /*
 ** TYPES: (% followed by:)
@@ -157,8 +159,8 @@ void			pf_addwchar(t_info *info, t_wchar c);
 void			pf_addwcharstr(t_info *info, const t_wchar *str, size_t n);
 void			pf_addcolor(t_info *info, int color);
 void			pf_addcolorbg(t_info *info, int color);
-void			pf_addrgbcolor(t_info *info, t_color r, t_color g, t_color b);
-void			pf_addrgbcolorbg(t_info *info, t_color r, t_color g, t_color b);
+void			pf_addrgbcolor(t_info *info, t_uint8 r, t_uint8 g, t_uint8 b);
+void			pf_addrgbcolorbg(t_info *info, t_uint8 r, t_uint8 g, t_uint8 b);
 
 /*
 ** --------------------------------Is Functions---------------------------------

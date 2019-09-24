@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_hash.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
 t_hashmap		*ft_hashmapnew(size_t size, size_t (*f)(const void *, size_t))
 {

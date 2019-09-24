@@ -12,7 +12,7 @@
 
 #include "ft_list.h"
 
-t_list	*ft_lstunlink(t_list *head, const t_list *lst)
+t_list	*ft_lstunlink(t_list *head, t_list *lst)
 {
 	t_list	*current;
 
@@ -22,5 +22,5 @@ t_list	*ft_lstunlink(t_list *head, const t_list *lst)
 	if (current == NULL)
 		return (NULL);
 	current->next = lst->next;
-	return ((t_list *)lst);
+	return (lst);
 }

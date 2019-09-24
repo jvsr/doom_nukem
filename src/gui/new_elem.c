@@ -13,8 +13,8 @@
 #include <errno.h>
 #include <string.h>
 
-#include "libft/ft_memory.h"
-#include "libft/ft_string.h"
+#include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "error.h"

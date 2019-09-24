@@ -11,24 +11,11 @@
 /* ************************************************************************** */
 
 #include "ft_color.h"
-#include "ft_memory.h"
 
-t_color		*ft_colorhextorgba(t_color color)
+void	ft_colorhextorgba(t_color *color, t_uint32 hex)
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-	t_color			*rgba;
-
-	rgba = (t_color *)ft_memalloc(4);
-	r = color;
-	g = color >> 8;
-	b = color >> 16;
-	a = color >> 24;
-	rgba[0] = r;
-	rgba[1] = g;
-	rgba[2] = b;
-	rgba[3] = a;
-	return (rgba);
+	color->a = (t_uint8)(hex >> 24);
+	color->r = (t_uint8)(hex >> 16);
+	color->g = (t_uint8)(hex >> 8);
+	color->b = (t_uint8)(hex);
 }
