@@ -21,6 +21,7 @@
 #include "game.h"
 #include "init.h"
 #include "error.h"
+#include "gametime.h"
 
 static void		init_sdl(void)
 {
@@ -56,6 +57,7 @@ static	void	init_window_surface(t_game *game)
 static void		init_game(t_game *game)
 {
 	game->state = running;
+	init_gametime(&game->starttime);
 	game->cursoractive = TRUE;
 }
 
