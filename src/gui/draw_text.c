@@ -6,14 +6,14 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 17:27:05 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 10:44:35 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:19:30 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_rect.h>
 
-#include "libft/ft_character.h"
-#include "libft/ft_string.h"
+#include "libft/ft_char.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "sdl_extra.h"

@@ -6,14 +6,14 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/11 15:21:28 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/11 15:21:28 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:16:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <SDL2/SDL_video.h>
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 

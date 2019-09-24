@@ -6,14 +6,14 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 20:21:45 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/10 20:21:45 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:20:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "gui.h"
 #include "game.h"

@@ -6,13 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/19 17:40:09 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 13:42:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:22:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-#include "libft/ft_character.h"
+#include "libft/ft_char.h"
 
 #include "lex.h"
 

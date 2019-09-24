@@ -13,8 +13,9 @@
 #ifndef FT_FLOAT_H
 # define FT_FLOAT_H
 
-# include "ft_bool.h"
 # include <string.h>
+
+# include "ft_bool.h"
 
 # define MAX_DOUBLE_PRECISION 10
 

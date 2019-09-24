@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 16:34:32 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:15:34 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <limits.h>
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 #include "tga.h"
 #include "error.h"

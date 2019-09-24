@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 13:55:47 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:24:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "game.h"
 #include "init.h"
 #include "error.h"
+#include "gametime.h"
 
 static void		init_sdl(void)
 {
@@ -56,6 +57,7 @@ static	void	init_window_surface(t_game *game)
 static void		init_game(t_game *game)
 {
 	game->state = running;
+	init_gametime(&game->starttime);
 	game->cursoractive = TRUE;
 }
 

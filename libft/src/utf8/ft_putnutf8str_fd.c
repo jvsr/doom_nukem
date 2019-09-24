@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_utf8.h"
-#include "ft_string.h"
+#include "ft_str.h"
 
 t_bool	ft_putnutf8str_fd(const t_wchar *str, size_t n, int fd)
 {

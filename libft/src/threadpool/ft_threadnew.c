@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_threadpool.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 #include <stdlib.h>
 
 static void	*runfnc(void *param)

@@ -6,15 +6,15 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/19 12:33:52 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/19 16:11:27 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:22:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <stdlib.h>
 
-#include "libft/ft_string.h"
-#include "libft/ft_memory.h"
+#include "libft/ft_str.h"
+#include "libft/ft_mem.h"
 
 #include "lex.h"
 #include "error.h"

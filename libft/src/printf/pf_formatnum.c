@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_number.h"
+#include "ft_num.h"
 
 void		pf_formatnum(t_info *info)
 {

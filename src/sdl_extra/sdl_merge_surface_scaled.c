@@ -6,11 +6,11 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 17:36:32 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/17 14:33:44 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:24:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "gui.h"
 #include "coord.h"

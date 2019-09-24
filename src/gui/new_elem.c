@@ -6,15 +6,15 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/11 20:26:12 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/11 20:26:12 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:20:23 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <string.h>
 
-#include "libft/ft_memory.h"
-#include "libft/ft_string.h"
+#include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "error.h"

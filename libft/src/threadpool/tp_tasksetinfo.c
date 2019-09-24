@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_threadpool.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
 t_task	*tp_tasksetinfo(t_task *task, void (*f)(), size_t count, va_list params)
 {

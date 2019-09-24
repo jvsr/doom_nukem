@@ -6,14 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/18 15:40:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:24:38 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_surface.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "color.h"
 #include "coord.h"
@@ -61,18 +61,6 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 	return ((size_t)len);
 }
 
-static void		copy_color(int *dst, int color, size_t length)
-{
-	size_t i;
-
-	i = 0;
-	while (i < length)
-	{
-		dst[i] = color;
-		i++;
-	}
-}
-
 static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src, SDL_Point cur)
 {
 	int				color;
@@ -85,7 +73,7 @@ static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src, SDL_Point cur)
 								+ (cur.x) * 4;
 	color = calculate_color(dst->userdata, src->userdata);
 	length = calculate_length(dst, src, ratio, cur);
-	copy_color((int*)dst->userdata, color, length);
+	ft_memset4(dst->userdata, color, length);
 	return (length);
 }
 

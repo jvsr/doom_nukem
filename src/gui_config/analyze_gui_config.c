@@ -6,14 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 17:45:11 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 14:07:50 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:22:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <unistd.h>
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "lex.h"

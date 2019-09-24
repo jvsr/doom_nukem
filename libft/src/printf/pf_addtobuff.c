@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 #include <unistd.h>
 
 static t_bool	addtolst(t_info *info)

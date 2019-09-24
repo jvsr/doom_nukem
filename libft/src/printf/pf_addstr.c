@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_string.h"
+#include "ft_str.h"
 
 size_t		pf_addstr(t_info *info, const char *str)
 {

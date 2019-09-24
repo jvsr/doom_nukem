@@ -6,13 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:44:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 10:57:14 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:16:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "libft/ft_string.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 

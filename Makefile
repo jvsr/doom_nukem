@@ -6,12 +6,12 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/09/04 17:02:30 by ehollidg      ########   odam.nl          #
+#    Updated: 2019/09/24 15:14:22 by jvisser       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader gui gui_config
+SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config
 
 # Executibale name
 NAME = doom-nukem
@@ -20,7 +20,7 @@ PARENTNAME = $(NAME)
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
-CCOPTIMISE =
+CCOPTIMISE = -O1
 
 # Gcov settings
 GCOV = FALSE

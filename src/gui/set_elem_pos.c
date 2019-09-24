@@ -6,11 +6,11 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 16:21:04 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/16 16:21:04 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:22:02 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "gui.h"
 #include "coord.h"

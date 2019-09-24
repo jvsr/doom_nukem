@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
 static t_list	*freeret(t_list *lst)
 {

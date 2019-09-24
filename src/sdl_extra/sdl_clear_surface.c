@@ -6,13 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/17 13:54:06 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/17 14:18:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:25:23 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_surface.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 void	sdl_clear_surface(SDL_Surface *surface)
 {

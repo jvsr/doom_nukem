@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
-#include "ft_string.h"
-#include "ft_number.h"
-#include "ft_character.h"
+#include "ft_str.h"
+#include "ft_num.h"
+#include "ft_char.h"
 
 t_bool	ft_putnumlst(const t_list *lst)
 {

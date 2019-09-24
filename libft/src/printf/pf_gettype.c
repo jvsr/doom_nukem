@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_character.h"
+#include "ft_char.h"
 
 int		pf_gettype(t_info *info, const char *str)
 {

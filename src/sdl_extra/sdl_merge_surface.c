@@ -6,14 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 16:55:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/18 14:50:14 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:24:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_surface.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 /*
 ** * Surface merge will take two surfaces and a starting pixel.
