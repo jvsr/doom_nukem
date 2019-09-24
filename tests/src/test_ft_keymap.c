@@ -246,5 +246,40 @@ Test(toggle_keystate, not_monitored)
 	toggle_keystate(keymap, key, TRUE);
 
 	value = ft_hashmapget(keymap, &key, sizeof(key));
-	cr_assert(*value == 3);
+	cr_assert(*value == (KEY_HELDDOWN | KEY_TOGGLED));
+}
+
+Test(toggle_keystate, monitored)
+{
+	SDL_Keycode	key;
+	t_keystate	*value;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(3, test_hash_algo);
+
+	key = 606;
+	set_keystate(keymap, key, KEY_HELDDOWN | KEY_TOGGLED);
+
+	toggle_keystate(keymap, key, FALSE);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == KEY_TOGGLED);
+}
+
+
+Test(toggle_keystate, toggle_off)
+{
+	SDL_Keycode	key;
+	t_keystate	*value;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(3, test_hash_algo);
+
+	key = 606;
+	set_keystate(keymap, key, KEY_TOGGLED);
+
+	toggle_keystate(keymap, key, TRUE);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == KEY_HELDDOWN);
 }
