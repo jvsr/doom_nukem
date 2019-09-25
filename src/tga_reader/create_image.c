@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 14:40:18 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 15:49:00 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	open_tga_file(const char *file_name)
 	int		fd;
 	char	full_path[PATH_MAX];
 
-	ft_strcpy(full_path, "./resources/textures/");
+	ft_strcpy(full_path, TEXTURE_PATH);
 	ft_strcat(full_path, file_name);
 	ft_strcat(full_path, ".tga");
 	fd = open(full_path, O_RDONLY);

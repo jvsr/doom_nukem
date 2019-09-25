@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 14:39:57 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 15:57:35 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # else
 #  include <io.h>
 # endif
+
+# define TEXTURE_PATH "./resources/textures/"
 
 typedef struct	s_tga
 {

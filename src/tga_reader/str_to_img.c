@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/08 21:36:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 15:22:57 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 15:51:13 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ static void	bottomleft(t_img *img, t_tga *tga, unsigned char *str)
 	min = tga_header_size + tga->id_len;
 	if (tga->clr_map_type == 2)
 		min += tga->cm_len * (tga->cm_size / 4);
-	img->pixels = (unsigned int*)ft_memalloc(sizeof(unsigned int) *
-				(img->height * img->width));
-	if (img->pixels == NULL)
-		error_msg(strerror(errno), errno, "Failed to allocate tga pixels");
 	i = (img->height * img->width * pitch) + min - pitch;
 	j = 0;
 	while (min < i)
@@ -52,10 +48,6 @@ static void	topleft(t_img *img, t_tga *tga, unsigned char *str)
 	i = tga_header_size + tga->id_len;
 	if (tga->clr_map_type == 2)
 		i += tga->cm_len * (tga->cm_size / 4);
-	img->pixels = (unsigned int*)ft_memalloc(sizeof(unsigned int) *
-				(img->height * img->width));
-	if (img->pixels == NULL)
-		error_msg(strerror(errno), errno, "Failed to allocate tga pixels");
 	max = (img->height * img->width * pitch) + i;
 	j = 0;
 	while (i < max)
@@ -68,6 +60,10 @@ static void	topleft(t_img *img, t_tga *tga, unsigned char *str)
 
 void		str_to_img(t_img *img, t_tga *tga, unsigned char *str)
 {
+	img->pixels = (unsigned int*)ft_memalloc(sizeof(unsigned int) *
+		(img->height * img->width));
+	if (img->pixels == NULL)
+		error_msg(strerror(errno), errno, "Failed to allocate tga pixels");
 	if ((img->origin & 0x20) == 0)
 		bottomleft(img, tga, str);
 	else
