@@ -10,13 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "libft/ft_printf.h"
 
-void	error_msg(const char *error_msg, int error_code, const char *msg)
+_Noreturn void	error_msg_sdl(int error_code, const char *msg)
+{
+	error_msg(SDL_GetError(), error_code, msg);
+}
+
+_Noreturn void	error_msg_errno(const char *msg)
+{
+	error_msg(strerror(errno), errno, msg);
+}
+
+_Noreturn void	error_msg(const char *error_msg, int error_code, const char *msg)
 {
 	ft_dprintf(2, "doom-nukem: Error(%d) - %s (%s)\n",
 	error_code, msg, error_msg);
