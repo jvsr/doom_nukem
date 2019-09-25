@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/24 16:46:17 by euan           #+#    #+#                */
-/*   Updated: 2019/09/25 15:22:32 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 15:38:42 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	fadein(t_game *game, SDL_Surface *splash)
 	}
 }
 
-void	splash(t_game *game, t_bool *finished)
+void	splash(t_game *game, t_bool *finished, char *loc)
 {
 	SDL_Surface *splash;
 	t_uint64	now;
 
 	sdl_clear_surface(game->surface);
-	splash = open_tga_sdl("splash/splash");
+	splash = open_tga_sdl(loc);
 	sdl_set_surface_alpha(splash, 0);
 	fadein(game, splash);
 	now = get_gametime(&game->starttime);
