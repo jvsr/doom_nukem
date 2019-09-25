@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 13:51:37 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/25 15:22:13 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
 
-#include "gui_config.h" //
+#include "gui_config.h"
 #include "gui.h"
 #include "game.h"
 

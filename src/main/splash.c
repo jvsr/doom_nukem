@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/24 16:46:17 by euan           #+#    #+#                */
-/*   Updated: 2019/09/25 14:46:24 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 15:22:32 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	fadeout(t_game *game, SDL_Surface *splash)
 		if (frametime - now == 0)
 			alpha = 255;
 		else
-			alpha = 255 * (1.0 - ((double) (frametime - now) / 2000));
+			alpha = 255 * (1.0 - ((double)(frametime - now) / 2000));
 		sdl_set_surface_alpha(splash, alpha);
 		sdl_clear_surface(game->surface);
 		sdl_merge_surface_alpha_scaled(game->surface, splash);
@@ -54,7 +54,7 @@ void	fadein(t_game *game, SDL_Surface *splash)
 		if (frametime - now == 0)
 			alpha = 0;
 		else
-			alpha = 255 * ((double) (frametime - now) / 2000);
+			alpha = 255 * ((double)(frametime - now) / 2000);
 		sdl_set_surface_alpha(splash, alpha);
 		sdl_clear_surface(game->surface);
 		sdl_merge_surface_alpha_scaled(game->surface, splash);
