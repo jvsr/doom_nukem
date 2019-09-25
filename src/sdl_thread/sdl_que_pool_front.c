@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/17 21:13:06 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:48:37 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/25 15:34:15 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ t_bool			sdl_que_pool_front(t_pool *pool, void (*f)(),
 	atomic_store(&(pool->state), state);
 	return (task != NULL);
 }
-
