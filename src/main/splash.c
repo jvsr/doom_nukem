@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/24 16:46:17 by euan           #+#    #+#                */
-/*   Updated: 2019/09/24 17:45:55 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 13:11:45 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ void	splash(t_game *game, t_bool *finished)
 {
 	SDL_Surface *splash;
 	t_uint64	now;
-	
+
 	sdl_clear_surface(game->surface);
 	splash = open_tga_sdl("splash/splash");
 	sdl_set_surface_alpha(splash, 0);
 	fadein(game, splash);
 	now = get_gametime(&game->starttime);
-	while (*finished == FALSE || get_gametime(&game->starttime) - now < 2000);
+	while (*finished == FALSE || get_gametime(&game->starttime) - now < 3000)
+		SDL_PollEvent(NULL);
 	fadeout(game, splash);
 	SDL_FreeSurface(splash);
 }
