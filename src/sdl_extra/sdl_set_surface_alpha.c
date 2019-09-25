@@ -14,13 +14,13 @@
 #include "types.h"
 #include "libft/ft_mem.h"
 
-static void		set_alpha(t_uint32 *pixel, t_uint32 zero_mask, t_uint32 value)
+static void	set_alpha(t_uint32 *pixel, t_uint32 zero_mask, t_uint32 value)
 {
 	*pixel &= zero_mask;
 	*pixel |= value;
 }
 
-static void		set_alpha32(long long *pixel, t_uint64 zero_mask, t_uint64 value)
+static void	set_alpha32(long long *pixel, t_uint64 zero_mask, t_uint64 value)
 {
 	*pixel &= zero_mask;
 	*pixel |= value;
@@ -48,7 +48,7 @@ static void		roll32(SDL_Surface *surface, t_uint64 zero_mask,
 	*index = step * 2;
 }
 
-void			sdl_set_surface_alpha(SDL_Surface *surface, t_uint8 alpha)
+void		sdl_set_surface_alpha(SDL_Surface *surface, t_uint8 alpha)
 {
 	const t_uint32	zero_mask = ~(surface->format->Amask);
 	const size_t	px_size = surface->w * surface->h;
