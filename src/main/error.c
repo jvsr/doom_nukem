@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -23,4 +24,14 @@ void	error_msg(const char *error_msg, int error_code, const char *msg)
 	TTF_Quit();
 	SDL_Quit();
 	exit(error_code);
+}
+
+void	error_msg_errno(const char *msg)
+{
+	error_msg(strerror(errno), errno, msg);
+}
+
+void	error_msg_sdl(int error_code, const char *msg)
+{
+	error_msg(SDL_GetError(), error_code, msg);
 }
