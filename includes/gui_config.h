@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 12:14:58 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 13:14:27 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/25 15:41:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define GUI_CONFIG_H
 
 typedef struct s_panel	t_panel;
+typedef struct s_token	t_token;
 
-int				open_gui_config(const char *file_name);
-t_panel			*analyze_gui_config(const char *state_name,
-									const char *file_name);
+int			open_gui_config(const char *file_name);
+t_panel		*analyze_gui_config(const char *state_name, const char *file_name);
+t_token		*lex_gui_config(const int fd);
+void		parse_gui_config(const t_token *tokens, const char *state_name);
 
 #endif

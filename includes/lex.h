@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/19 12:34:15 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 15:14:08 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/25 15:37:15 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef	struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-t_token	*lex_gui_config(const int fd);
 t_token	*lex_create_token(t_token_type type, const size_t token_amount);
 void	lex_add_token(t_token **tokens, t_token *new);
 void	lex_set_token_value(t_token *token, const char *const file,

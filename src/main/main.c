@@ -33,7 +33,7 @@ int			main(void)
 
 	isloaded = TRUE;
 	game = init();
-	splash(game, &isloaded, "splash/splash");
+	// splash(game, &isloaded, "splash/splash");
 	loop(game);
 	return (destroy(game));
 }

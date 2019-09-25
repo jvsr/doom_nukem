@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:06:16 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 13:56:09 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 12:34:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string.h>
 #include <SDL2/SDL_pixels.h>
 
-#include "libft/ft_memory.h"
+#include "libft/ft_mem.h"
 
 #include "gui.h"
 #include "error.h"
