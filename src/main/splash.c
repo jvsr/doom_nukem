@@ -39,12 +39,13 @@ static void		fade(t_game *game, SDL_Surface *splash,
 	t_uint8		alpha;
 	t_uint64	now;
 	t_uint64	frametime;
+	SDL_Event	temp;
 
 	now = get_gametime(&game->starttime);
 	frametime = now;
 	while (frametime - now < 2000)
 	{
-		SDL_PollEvent(NULL);
+		SDL_PollEvent(&temp);
 		alpha = alpha_func((double)(frametime - now));
 		sdl_set_surface_alpha(splash, alpha);
 		sdl_clear_surface(game->surface);
@@ -52,12 +53,14 @@ static void		fade(t_game *game, SDL_Surface *splash,
 		SDL_UpdateWindowSurface(game->window);
 		frametime = get_gametime(&game->starttime);
 	}
+	(void)temp;
 }
 
 void			splash(t_game *game, t_bool *finished, char *loc)
 {
 	SDL_Surface *splash;
 	t_uint64	now;
+	SDL_Event	temp;
 
 	sdl_clear_surface(game->surface);
 	splash = open_tga_sdl(loc);
@@ -65,7 +68,8 @@ void			splash(t_game *game, t_bool *finished, char *loc)
 	fade(game, splash, fadein);
 	now = get_gametime(&game->starttime);
 	while (*finished == FALSE || get_gametime(&game->starttime) - now < 3000)
-		SDL_PollEvent(NULL);
+		SDL_PollEvent(&temp);
 	fade(game, splash, fadeout);
 	SDL_FreeSurface(splash);
+	(void)temp;
 }
