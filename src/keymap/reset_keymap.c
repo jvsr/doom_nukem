@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_ft_main.c                                     :+:    :+:            */
+/*   reset_keymap.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/16 15:12:17 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/06 14:57:23 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/09 17:48:09 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/09 17:48:09 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include "gui.h"
-#include "game.h"
-#include "init.h"
+#include "libft/ft_hash.h"
+
+#include "keymap.h"
 
 /*
-** ------------------------------------init-------------------------------------
+** * reset_keymap will take the keymap.
+** * It will then reset the state of every monitored key to 0.
 */
 
-Test(inits, null) {
-	t_game	*game = init();
-	cr_assert(game->state == running);
-	SDL_DestroyWindow(game->window);
+void	reset_keymap(const t_hashmap *keymap)
+{
+	set_keystate_all(keymap, 0);
 }

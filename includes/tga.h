@@ -36,7 +36,7 @@ typedef struct	s_tga
 
 typedef struct	s_img
 {
-	unsigned char	origin;	
+	unsigned char	origin;
 	unsigned short	x_origin;
 	unsigned short	y_origin;
 	unsigned short	width;

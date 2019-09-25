@@ -70,5 +70,6 @@ t_game			*init(void)
 	init_window_surface(game);
 	init_game(game);
 	init_gui(game);
+	init_keymap(game);
 	return (game);
 }

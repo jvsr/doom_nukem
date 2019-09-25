@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_ft_main.c                                     :+:    :+:            */
+/*   new_keystate.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/16 15:12:17 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/06 14:57:23 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/23 13:30:33 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/23 13:30:33 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include "gui.h"
-#include "game.h"
-#include "init.h"
+#include <errno.h>
+
+#include "libft/ft_mem.h"
+
+#include "keymap.h"
+#include "error.h"
 
 /*
-** ------------------------------------init-------------------------------------
+** * (Internal function)
+** * allocates memory for a keystate so it can be safely stored in the hashmap.
 */
 
-Test(inits, null) {
-	t_game	*game = init();
-	cr_assert(game->state == running);
-	SDL_DestroyWindow(game->window);
+t_keystate	*new_keystate(void)
+{
+	t_keystate	*new;
+
+	new = (t_keystate *)ft_memalloc(sizeof(t_keystate));
+	if (new == NULL)
+		error_msg_errno("Failed to alloc keystate");
+	return (new);
 }

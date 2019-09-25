@@ -14,9 +14,10 @@
 # define GAME_H
 
 # include <SDL2/SDL.h>
-# include "gametime.h"
 
 # include "libft/ft_bool.h"
+
+# include "gametime.h"
 
 typedef struct s_gui		t_gui;
 typedef struct s_level		t_level;
@@ -43,7 +44,7 @@ typedef struct	s_game
 	t_time		starttime;
 }				t_game;
 
-void		loop(t_game *game);
-void		splash(t_game *game, t_bool *finished, char *loc);
+void			loop(t_game *game);
+void			splash(t_game *game, t_bool *finished, char *loc);
 
 #endif
