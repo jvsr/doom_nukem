@@ -50,7 +50,6 @@ doomtest
 *.su
 *.idb
 *.pdb
-personal.h
 
 # Kernel Module Compile Results
 *.mod*
@@ -60,3 +59,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Other
+personal.h
