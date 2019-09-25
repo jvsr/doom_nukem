@@ -25,5 +25,5 @@ SRCS =	merge_surface merge_surface_alpha \
 		merge_surface_scaled merge_surface_alpha_scaled \
 		merge_surface_center merge_surface_alpha_center \
 		create_surface_default clear_surface \
-		fill_surface_color has_surface_alpha
+		fill_surface_color has_surface_alpha set_surface_alpha
 SRCS := $(SRCS:%=sdl_%)

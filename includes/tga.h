@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 16:23:57 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/25 15:57:35 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #  include <io.h>
 # endif
 
+# define TEXTURE_PATH "./resources/textures/"
+
 typedef struct	s_tga
 {
 	unsigned char	id_len;
@@ -34,6 +36,7 @@ typedef struct	s_tga
 
 typedef struct	s_img
 {
+	unsigned char	origin;	
 	unsigned short	x_origin;
 	unsigned short	y_origin;
 	unsigned short	width;
