@@ -283,3 +283,119 @@ Test(toggle_keystate, toggle_off)
 	value = ft_hashmapget(keymap, &key, sizeof(key));
 	cr_assert(*value == KEY_HELDDOWN);
 }
+
+Test(toggle_keystate, all_off)
+{
+	SDL_Keycode	key;
+	t_keystate	*value;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(3, test_hash_algo);
+
+	key = 505;
+	set_keystate(keymap, key, KEY_HELDDOWN);
+
+	toggle_keystate(keymap, key, FALSE);
+
+	value = ft_hashmapget(keymap, &key, sizeof(key));
+	cr_assert(*value == 0);
+}
+
+/*
+** ------------------------------set_keystate_all-------------------------------
+*/
+
+Test(set_keystate_all, null, .signal=SIGSEGV)
+{
+	set_keystate_all(NULL, 2);
+}
+
+Test(set_keystate_all, nothing_monitored)
+{
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(5, test_hash_algo);
+
+	set_keystate_all(keymap, 42);
+}
+
+Test(set_keystate_all, set_multipale)
+{
+	size_t		i;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(4, test_hash_algo);
+
+	for (int i = 0; i < 10; i++)
+		set_keystate(keymap, i, KEY_HELDDOWN | KEY_TOGGLED);
+
+	set_keystate_all(keymap, 42);
+	for (int i = 0; i < 10; i++)
+		cr_assert(get_keystate(keymap, i) == 42);
+}
+
+/*
+** --------------------------------reset_keymap---------------------------------
+*/
+
+Test(reset_keymap, null, .signal=SIGSEGV)
+{
+	reset_keymap(NULL);
+}
+
+Test(reset_keymap, nothing_monitored)
+{
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(6, test_hash_algo);
+
+	reset_keymap(keymap);
+}
+
+Test(reset_keymap, set_multipale)
+{
+	size_t		i;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(7, test_hash_algo);
+
+	for (int i = 0; i < 9; i++)
+		set_keystate(keymap, i, 42);
+
+	reset_keymap(keymap);
+	for (int i = 0; i < 9; i++)
+		cr_assert(get_keystate(keymap, i) == 0);
+}
+
+/*
+** --------------------------------clear_keymap---------------------------------
+*/
+
+Test(clear_keymap, null, .signal=SIGSEGV)
+{
+	clear_keymap(NULL);
+}
+
+Test(clear_keymap, nothing_monitored)
+{
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(5, test_hash_algo);
+
+	clear_keymap(keymap);
+}
+
+Test(clear_keymap, reset_multipale)
+{
+	size_t		i;
+	t_hashmap	*keymap;
+
+	keymap = ft_hashmapnew(8, test_hash_algo);
+
+	for (int i = 0; i < 12; i++)
+		set_keystate(keymap, i, 42);
+
+	clear_keymap(keymap);
+	for (int i = 0; i < keymap->size; i++)
+		cr_assert(keymap->arr[i] == NULL);
+}
