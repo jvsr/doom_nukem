@@ -23,7 +23,7 @@
 ** * It will then print the state of every monitored key.
 */
 
-static const t_keypair	g_keytable[] = {
+const t_keypair	g_keytable[] = {
 	(const t_keypair){"UNKNOWN", SDLK_UNKNOWN},
 
 	(const t_keypair){"BUTTON_LEFT", SDL_BUTTON_LEFT},
@@ -274,43 +274,49 @@ static const t_keypair	g_keytable[] = {
 static const char	*getname(void *key)
 {
 	const size_t	size = sizeof(g_keytable) / sizeof(t_keypair);
-	SDL_Keycode		*sdlk;
+	SDL_Keycode		*sdl_key;
 	size_t			i;
 
 	i = 0;
-	sdlk = key;
+	sdl_key = key;
 	while (i < size)
 	{
-		if (g_keytable[i].key == *sdlk)
+		if (g_keytable[i].key == *sdl_key)
 			return (g_keytable[i].name);
 		i++;
 	}
 	return (NULL);
 }
 
+static void			print_list(t_hashlist *lst)
+{
+	size_t			pos;
+	t_hashlist		*cur;
+	t_keystate		value;
+
+	pos = 0;
+	cur = lst;
+	while (cur != NULL)
+	{
+		value = *((t_keystate *)cur->value);
+		ft_printf("Name: %s - state: %hhu (List pos: %zu)\n",
+			getname(cur->key),
+			value,
+			pos);
+		pos++;
+		cur = cur->next;
+	}
+}
+
 void				print_keymap(const t_hashmap *keymap)
 {
 	size_t			i;
-	size_t			pos;
-	t_hashlist		*current;
-	t_keystate		value;
 
 	i = 0;
 	ft_putline(" Keymap ");
 	while (i < keymap->size)
 	{
-		pos = 0;
-		current = keymap->arr[i];
-		while (current != NULL)
-		{
-			value = *((t_keystate *)current->value);
-			ft_printf("Name: %s - state: %hhu (List pos: %zu)\n",
-				getname(current->key),
-				value,
-				pos);
-			pos++;
-			current = current->next;
-		}
+		print_list(keymap->arr[i]);
 		i++;
 	}
 	ft_putline("");
