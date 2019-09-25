@@ -28,6 +28,6 @@ t_keystate	*new_keystate(void)
 
 	new = (t_keystate *)ft_memalloc(sizeof(t_keystate));
 	if (new == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc keystate");
+		error_msg_errno("Failed to alloc keystate");
 	return (new);
 }
