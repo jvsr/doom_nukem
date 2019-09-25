@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   sdl_join_pool.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/27 14:35:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/08/27 15:13:06 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/04/17 22:45:56 by pholster       #+#    #+#                */
+/*   Updated: 2019/08/21 21:47:03 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "sdl_thread.h"
 
-void	error_msg_errno(const char *msg);
-void	error_msg_sdl(int error_code, const char *msg);
-void	error_msg(const char *error_msg, int error_code, const char *msg);
-
-#endif
+void		sdl_join_pool(const t_pool *pool)
+{
+	if (pool == NULL)
+		return ;
+	while (sdl_done_pool(pool) == FALSE)
+		;
+}
