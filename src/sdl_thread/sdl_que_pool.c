@@ -12,6 +12,10 @@
 
 #include "sdl_thread.h"
 
+/*
+** * Thread internal function
+*/
+
 t_bool		sdl_que_pool(t_pool *pool, t_bool priority, t_task *task)
 {
 	if (pool->terminating)
