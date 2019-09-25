@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 15:49:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/17 16:23:57 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/25 14:39:57 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_tga
 
 typedef struct	s_img
 {
+	unsigned char	origin;	
 	unsigned short	x_origin;
 	unsigned short	y_origin;
 	unsigned short	width;
