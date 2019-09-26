@@ -13,42 +13,33 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-typedef enum	e_state
-{
-	IDLE_state,
-	DASH_state,
-	SPACE_state,
-	ID_state,
-	COLON_state,
-	NUM_state,
-	NEWLINE_state,
-	COLON_SPACE_state,
-	MAX_STATES,
-}				t_state;
 
-typedef enum	e_event
-{
-	idle_handler,
-	dash_handler,
-	space_handler,
-	id_handler,
-	colon_handler,
-	num_handler,
-	newline_handler,
-	colon_space_handler,
-	wildcard_handler,
-	MAX_EVENTS,
-}				t_event;
+#include "gui.h"
+#include "coord.h"
+#include "SDL2/SDL_pixels.h"
 
-// t_state	(*state_table[MAX_STATES][MAX_EVENTS]) = {
-// 	{NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL},
-// 	{dash_space_event_handler, id_event_handler},
-// 	{id_event_handler, colon_event_handler},
-// 	{colon_event_handler, colon_space_event_handler, EMPTY, newline_handler, colon_wildcard_handler, NULL},
-// 	{space_event_handler, colon_space_event_handler, EMPTY, newline_handler, colon_wildcard_handler},
-// 	{NULL,},
-// 	{},
-// 	{},
-// };
+typedef	struct parse_info
+{
+	char				*name;
+	t_gui_type			type;
+	t_coord				pos;
+	t_coord				dim;
+	char				*img;
+	SDL_Color			color;
+	t_draw_method		draw_method;
+	char				*text;
+	SDL_Color			text_color;
+	float				text_size;
+	t_font_type			text_font;
+	t_draw_method		text_draw_method;
+	char				*onclick;
+	short				layer;
+	t_bool				clickable;
+	t_bool				show;
+	struct parse_info	*child;
+	struct parse_info	*next;
+}				t_parse_info;
+
+t_parse_info *parse_info = NULL;
 
 #endif
