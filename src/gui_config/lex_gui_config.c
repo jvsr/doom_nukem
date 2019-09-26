@@ -43,8 +43,12 @@ static t_token	*create_tokens(const char *file)
 			lex_check_space(&tokens, file, &index);
 		else if (file[index] == ':')
 			lex_check_colon(&tokens, file, &index);
+		else if (file[index] == '#')
+			lex_check_hash(&tokens, file, &index);
 		else if (file[index] == ',')
 			lex_check_comma(&tokens, file, &index);
+		else if (file[index] == '.')
+			lex_check_period(&tokens, file, &index);
 		else if (file[index] == '\"' || file[index] == '\'')
 			lex_check_quote(&tokens, file, &index);
 		else

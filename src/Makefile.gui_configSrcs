@@ -25,12 +25,14 @@ SRCS = analyze_gui_config \
 		lex_gui_config \
 		lex_check_eol \
 		lex_check_dash \
+		lex_check_hash \
 		lex_check_alnum \
 		lex_check_space \
 		lex_check_colon \
 		lex_check_comma \
 		lex_check_quote \
 		lex_check_indent \
+		lex_check_period \
 		lex_add_token \
 		lex_create_token \
 		lex_set_token_value \

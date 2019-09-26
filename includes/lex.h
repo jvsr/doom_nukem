@@ -21,9 +21,11 @@ typedef enum	e_token_type
 	NUM,
 	PLAIN,
 	DASH,
+	HASH,
 	SLASH,
 	COLON,
 	COMMA,
+	PERIOD,
 	INDENT,
 	DEDENT,
 	NODENT,
@@ -50,12 +52,14 @@ void	lex_add_token(t_token **tokens, t_token *new);
 void	lex_set_token_value(t_token *token, const char *const file,
 							size_t *const index, const size_t content_size);
 void	lex_check_dash(t_token **tokens, const char *file, size_t *index);
+void	lex_check_hash(t_token **tokens, const char *file, size_t *index);
 void	lex_check_space(t_token **tokens, const char *file, size_t *index);
 void	lex_check_colon(t_token **tokens, const char *file, size_t *index);
 void	lex_check_comma(t_token **tokens, const char *file, size_t *index);
 void	lex_check_quote(t_token **tokens, const char *file, size_t *index);
 void	lex_check_eol(t_token **tokens, const char *file, size_t *index);
 void	lex_check_indent(t_token **tokens, const char *file, size_t *index);
+void	lex_check_period(t_token **tokens, const char *file, size_t *index);
 void	lex_check_alnum(t_token **tokens, const char *file, size_t *index);
 
 #endif
