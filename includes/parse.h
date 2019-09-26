@@ -40,6 +40,4 @@ typedef	struct parse_info
 	struct parse_info	*next;
 }				t_parse_info;
 
-t_parse_info *parse_info = NULL;
-
 #endif

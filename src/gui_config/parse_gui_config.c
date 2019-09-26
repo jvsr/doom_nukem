@@ -74,8 +74,7 @@ void	next_token(t_token **token)
 
 void	create_first_panel(void)
 {
-	parse_info = ft_memalloc(sizeof(t_parse_info));
-	start = parse_info;
+	return ;
 }
 
 int	entry_state(t_token *token, t_parse_info *parse_info)
@@ -206,7 +205,7 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 	// 	tokens = tokens->next;
 	// }
 	cur_state = entry;
-	parse_info = NULL;
+	parse_info = (t_parse_info*)ft_memalloc(sizeof(t_parse_info));
 	while(1) {
 		ft_printf("curToken: |%s|\n", tokens->token);
 		ft_printf("curState: |%d|\n", cur_state);
