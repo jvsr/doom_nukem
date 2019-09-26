@@ -60,5 +60,7 @@ void		resume_sounds(t_audio_manager *man, t_sounds sound);
 void		fade_in_music(t_audio_manager *man, t_music music, int time);
 void		fade_out_music(int time);
 void		effect_all_sounds(int(*func)(int));
+void		set_music_volume(float volume);
+void		set_sound_volume(float volume);
 
 #endif
