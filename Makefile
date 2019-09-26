@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread
+SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
+			audio
 
 # Executibale name
 NAME = doom-nukem
@@ -57,8 +58,11 @@ SDL2LIB = -L$(FRAMEWORKPATH)/lib -lSDL2
 # SDL2_TTf dependency
 SDL2TTF = -L$(FRAMEWORKPATH)/lib -lSDL2_ttf
 
+# SDL2_TTf dependency
+SDL2MIX = -L$(FRAMEWORKPATH)/lib -lSDL2_mixer
+
 # All libs for compilation
-LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF)
+LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF) $(SDL2MIX)
 
 ifeq ($(shell uname -s), Linux)
 LIBS += -lm
@@ -98,6 +102,7 @@ export FRAMEWORKPATH
 export FRAMEWORKINCLUDES
 export SDL2LIB
 export SDL2TTF
+export SDL2MIX
 export LIBFT_DISABLE_GCOV
 
 all: $(NAME)

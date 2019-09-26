@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "libft/ft_printf.h"
 
@@ -22,6 +23,7 @@ void	error_msg(const char *error_msg, int error_code, const char *msg)
 	ft_dprintf(2, "doom-nukem: Error(%d) - %s (%s)\n",
 	error_code, msg, error_msg);
 	TTF_Quit();
+	Mix_Quit();
 	SDL_Quit();
 	exit(error_code);
 }

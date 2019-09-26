@@ -18,6 +18,7 @@ FRAMEWORKPATH =
 FRAMEWORKINCLUDES =
 SDL2LIB =
 SDL2TTF =
+SDL2MIX =
 
 # Input values for compile (From parrent makefile)
 CCSILENT =
