@@ -16,6 +16,7 @@
 
 #include "libft/ft_str.h"
 
+#include "lex.h"
 #include "error.h"
 
 int	open_gui_config(const char *file_name)
@@ -23,7 +24,7 @@ int	open_gui_config(const char *file_name)
 	int		fd;
 	char	full_path[PATH_MAX];
 
-	ft_strcpy(full_path, "./resources/config/ui/");
+	ft_strcpy(full_path, UI_CONFIG_PATH);
 	ft_strcat(full_path, file_name);
 	ft_strcat(full_path, ".ui.yml");
 	fd = open(full_path, O_RDONLY);

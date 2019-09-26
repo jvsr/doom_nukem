@@ -13,6 +13,8 @@
 #ifndef LEX_H
 # define LEX_H
 
+# define UI_CONFIG_PATH "./resources/config/ui/"
+
 typedef enum	e_token_type
 {
 	ID,
