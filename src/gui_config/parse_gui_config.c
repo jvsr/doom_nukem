@@ -21,23 +21,25 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_printf.h"
 
-int	entry_state(t_token*, t_parse_info*);
-int	dash_state(t_token*, t_parse_info*);
-int	space_state(t_token*, t_parse_info*);
-int	id_state(t_token*, t_parse_info*);
-int	first_id_state(t_token*, t_parse_info*);
-int	colon_name_state(t_token*, t_parse_info*);
-int	error_state(t_token*, t_parse_info*);
-int	exit_state(t_token*, t_parse_info*);
+int	entry_state(t_token*, t_parse_info**);
+int	dash_state(t_token*, t_parse_info**);
+int	space_state(t_token*, t_parse_info**);
+int	id_state(t_token*, t_parse_info**);
+int	colon_name_state(t_token*, t_parse_info**);
+int	error_state(t_token*, t_parse_info**);
+int	exit_state(t_token*, t_parse_info**);
 
-int (*state[])(t_token*, t_parse_info*) = {
+int (*state[])(t_token*, t_parse_info**) = {
 	entry_state,	dash_state,			space_state,	id_state,
-	first_id_state,	colon_name_state,	error_state,	exit_state};
+	colon_name_state,	error_state,	exit_state
+																	};
 enum state_code {
 	entry,			dash,				space,			id,
-	first_id,		colon_name,			error,			end};
-
-enum return_code { ok, repeat, fail, special, eof };
+	colon_name,			error,			end
+																	};
+enum return_code {
+	ok,		repeat,	fail,	special,	eof,	type,
+											 						};
 
 struct s_transition
 {
@@ -53,10 +55,8 @@ const struct s_transition transition_table[] = {
 	{dash, fail, error},
 	{space, ok, id},
 	{space, fail, error},
-	{id, special, first_id},
+	{id, type, colon_name},
 	{id, fail, error},
-	{first_id, ok, colon_name},
-	{first_id, fail, error},
 	{colon_name, fail, error},
 };
 
@@ -64,20 +64,21 @@ t_parse_info	*start;
 
 void	next_token(t_token **token)
 {
-	// ft_printf("tokenAmount: |%d|\n", (*token)->token_amount);
-	if ((*token)->token_amount == 1 || (*token)->type == ID
-	|| (*token)->type == NUM || (*token)->type == PLAIN)
+	if ((*token)->token_amount == 1
+	|| (*token)->type == ID
+	|| (*token)->type == NUM
+	|| (*token)->type == PLAIN)
 		*token = (*token)->next;
 	else
 		(*token)->token_amount -= 1;
 }
 
-void	create_first_panel(void)
+void	create_panel(t_parse_info **parse_info)
 {
-	return ;
+	(*parse_info)->type = PANEL;
 }
 
-int	entry_state(t_token *token, t_parse_info *parse_info)
+int	entry_state(t_token *token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
@@ -89,65 +90,53 @@ int	entry_state(t_token *token, t_parse_info *parse_info)
 	return (rc);
 }
 
-int	dash_state(t_token *token, t_parse_info *parse_info)
+int	dash_state(t_token *token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
 	if (token->next && token->next->type == SPACE)
-	{
-		next_token(&token);
 		rc = ok;
-	}
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	space_state(t_token *token, t_parse_info *parse_info)
+int	space_state(t_token *token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
-	if (token->type == ID)
+	if (token->next && token->next->type == ID)
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	first_id_state(t_token *token, t_parse_info *parse_info)
-{
-	enum return_code	rc;
-
-	(void)parse_info;
-	create_first_panel();
-	if (token->type == COLON)
-		rc = ok;
-	else
-		rc = fail;
-	return (rc);
-}
-
-int	id_state(t_token* token, t_parse_info *parse_info)
+int	id_state(t_token* token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 	static t_bool		first = TRUE;
 
 	(void)parse_info;
-	if (first == TRUE)
+	if (token->next && token->next->type == COLON)
 	{
-		rc = special;
-		first = FALSE;
+		if (first == TRUE)
+		{
+			create_panel(parse_info);
+			rc = type;
+			first = FALSE;
+		}
+		else
+			rc = ok;
 	}
-	else if (token->type == COLON)
-		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	colon_name_state(t_token *token, t_parse_info *parse_info)
+int	colon_name_state(t_token *token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
@@ -159,7 +148,7 @@ int	colon_name_state(t_token *token, t_parse_info *parse_info)
 	return (rc);
 }
 
-int	error_state(t_token* token, t_parse_info *parse_info)
+int	error_state(t_token* token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
@@ -170,7 +159,7 @@ int	error_state(t_token* token, t_parse_info *parse_info)
 	return (rc);
 }
 
-int	exit_state(t_token* token, t_parse_info *parse_info)
+int	exit_state(t_token* token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
@@ -199,7 +188,7 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
     enum return_code	rc;
     enum state_code		cur_state;
 	t_parse_info		*parse_info;
-    int					(* state_fun)(t_token*, t_parse_info*);
+    int					(* state_fun)(t_token*, t_parse_info**);
 
 	// while (tokens) {
 	// 	tokens = tokens->next;
@@ -210,9 +199,11 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 		ft_printf("curToken: |%s|\n", tokens->token);
 		ft_printf("curState: |%d|\n", cur_state);
 		state_fun = state[cur_state];
-		rc = state_fun(tokens, parse_info);
+		rc = state_fun(tokens, &parse_info);
 		if (cur_state == end)
 			break ;
+		if (cur_state != entry)
+			next_token(&tokens);
 		cur_state = lookup_state(cur_state, rc);
 	}
 
