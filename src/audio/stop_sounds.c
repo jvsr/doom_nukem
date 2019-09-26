@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   halt_sounds.c                                      :+:    :+:            */
+/*   stop_sounds.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -13,7 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-void	halt_sounds(t_audio_manager *man, t_sounds sound)
+void	stop_sounds(t_audio_manager *man, t_sounds sound)
 {
 	effect_sounds(man, sound, Mix_HaltChannel);
 }

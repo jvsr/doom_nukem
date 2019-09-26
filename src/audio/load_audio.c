@@ -51,9 +51,11 @@ void		load_audio(t_game *game)
 {
 	int support;
 
+	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
+		!= 0)
+		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
 	support = Mix_Init(MIX_INIT_MP3);
-	if (!(support & MIX_INIT_MP3) || Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS,
-											AUDIO_CHANNELS, AUDIO_BUFFER) != 0)
+	if (!(support & MIX_INIT_MP3))
 		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
 	loadeffects(game);
 	loadmusic(game);

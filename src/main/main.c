@@ -16,6 +16,7 @@
 
 #include "game.h"
 #include "init.h"
+#include "audio.h"
 
 static int	destroy(t_game *game)
 {
@@ -33,6 +34,8 @@ int			main(void)
 
 	isloaded = TRUE;
 	game = init();
+	load_audio(game);
+	play_music(game->a_manager, MUSIC_ASKING_QUESTIONS);
 	splash(game, &isloaded, "splash/splash");
 	loop(game);
 	return (destroy(game));

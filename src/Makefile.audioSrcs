@@ -24,4 +24,4 @@ SRCS = load_audio get_chunk_from_wav pause_music play_music resume_music \
 		stop_music play_sound stop_all_sounds pause_all_sounds \
 		resume_all_sounds play_sound_repeat pause_sounds resume_sounds \
 		effect_sounds fade_in_music fade_out_music effect_all_sounds \
-		set_music_volume set_sound_volume
+		set_music_volume set_sound_volume stop_sounds
