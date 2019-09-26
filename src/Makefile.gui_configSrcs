@@ -34,4 +34,5 @@ SRCS = analyze_gui_config \
 		lex_add_token \
 		lex_create_token \
 		lex_set_token_value \
-		parse_gui_config
+		parse_gui_config \
+		exec_gui_config
