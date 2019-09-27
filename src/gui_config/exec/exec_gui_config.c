@@ -14,11 +14,10 @@
 #include "parse.h"
 #include "gui.h"
 
-t_transform		*exec_gui_config(t_parse_info *parse_info)
+t_transform		*exec_gui_config(t_gui *ui, t_parse_info *parse_info)
 {
 	t_transform	*panel;
 
-	panel = exec_new_elem(parse_info);
-	(void)parse_info;
+	panel = exec_new_elem(ui, parse_info);
 	return (panel);
 }

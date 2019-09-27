@@ -13,8 +13,10 @@
 #include "parse.h"
 #include "gui.h"
 
-t_transform	*exec_new_elem(t_parse_info *parse_info)
+t_transform	*exec_new_elem(t_gui *ui, t_parse_info *parse_info)
 {
-	(void)parse_info;
-	return(NULL);
+	t_transform	*elem;
+
+	elem = new_elem(ui, parse_info->name, parse_info->type);
+	return(elem);
 }
