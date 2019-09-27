@@ -36,8 +36,8 @@ typedef struct	s_parse_info
 	short				layer;
 	t_bool				clickable;
 	t_bool				show;
-	struct parse_info	*child;
-	struct parse_info	*next;
+	struct s_parse_info	*child;
+	struct s_parse_info	*next;
 }				t_parse_info;
 
 #endif
