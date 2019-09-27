@@ -30,7 +30,7 @@ GCOVSILENT =
 GCOVFLAGS =
 
 # Own names
-SRCFOLDER = $(SUBLIB:%.a=%)
+SRCFOLDER = $(SUBLIB:%.content=%)
 NAME = $(FOLDER)/$(SUBLIB)
 
 # Misc setup
@@ -83,8 +83,7 @@ all: $(NAME)
 # Create $(NAME)
 $(NAME): $(COMPILE_FILES)
 	@$(call FNC_PRINT_EQUAL,$(PARENTNAME)-$(SRCFOLDER),$(SUBLIB))
-	@rm -f $(NAME)
-	@ar rcs $(NAME) $(OBJS)
+	@echo $(OBJS:%=\\n%) > $(NAME)
 
 # Run gcov
 gcovreport: $(NAME)

@@ -67,15 +67,14 @@ endif
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
-SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.a)
+SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.content)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
 # Function - Get all objects of sublibs
-SEDESCAPE = $(1:src/$(SUBLIBSPATH)/%.a=src\/%\/)
-GETOBJS = $(shell ar -t $(1) | grep '\.o' | sed 's/^/$(call SEDESCAPE,$(1))/g')
+GETOBJS = $(shell cat $(1) | grep '\.o' | sed 's/^/src\//g')
 OBJS = $(foreach DIR,$(SUBLIBS),$(call GETOBJS,$(DIR)))
 
 # Function - Clean all sublib .a
@@ -125,7 +124,7 @@ $(LIB): FORCE
 	@$(MAKE) -s -e -C $(LIBPATH)
 
 # Compile $(SUBLIBS)
-src/$(SUBLIBSPATH)/%.a: src/$(SUBLIBSPATH) FORCE
+src/$(SUBLIBSPATH)/%.content: src/$(SUBLIBSPATH) FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
 
 # Create $(SUBLIBSPATH) if it doesnt exsist
