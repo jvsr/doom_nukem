@@ -92,7 +92,7 @@ gcovreport: $(NAME)
 # Compile .o or .gcno if $(GCOV)==TRUE
 %.o %.gcno: %.c $(HEADERS)
 ifeq ($(CCSILENT), FALSE)
-	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(shell basename $@))
+	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(@:$(SRCFOLDER)/%=%))
 endif
 	@rm -f $(<:.c=.o)
 	@$(CC) $(CCFLAGS) -o $(<:.c=.o) -c $<
