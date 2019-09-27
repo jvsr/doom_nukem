@@ -15,6 +15,10 @@
 #include "game.h"
 #include "init.h"
 
+/*
+** ------------------------------------init-------------------------------------
+*/
+
 Test(inits, null) {
 	t_game	*game = init();
 	cr_assert(game->state == running);
