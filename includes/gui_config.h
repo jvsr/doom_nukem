@@ -13,14 +13,14 @@
 #ifndef GUI_CONFIG_H
 # define GUI_CONFIG_H
 
-typedef struct s_panel		t_panel;
 typedef struct s_token		t_token;
+typedef struct s_transform	t_transform;
 typedef struct s_parse_info	t_parse_info;
 
 int			open_gui_config(const char *file_name);
-t_panel		*analyze_gui_config(const char *state_name, const char *file_name);
+t_transform	*analyze_gui_config(const char *state_name, const char *file_name);
 t_token		*lex_gui_config(const int fd);
 void		parse_gui_config(const t_token *tokens, const char *state_name);
-t_panel		*exec_gui_config(t_parse_info *parse_info);
+t_transform	*exec_gui_config(t_parse_info *parse_info);
 
 #endif

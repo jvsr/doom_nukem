@@ -20,9 +20,9 @@
 #include "error.h"
 #include "gui_config.h"
 
-t_panel		*analyze_gui_config(const char *state_name, const char *file_name)
+t_transform	*analyze_gui_config(const char *state_name, const char *file_name)
 {
-	t_panel		*result;
+	t_transform	*result;
 	t_token		*tokens;
 	const int	fd = open_gui_config(file_name);
 
