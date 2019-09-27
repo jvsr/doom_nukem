@@ -18,7 +18,7 @@
 #include "coord.h"
 #include "SDL2/SDL_pixels.h"
 
-typedef	struct parse_info
+typedef struct	s_parse_info
 {
 	char				*name;
 	t_gui_type			type;
