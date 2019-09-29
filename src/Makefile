@@ -52,10 +52,11 @@ endif
 include Makefile.$(SRCFOLDER)Srcs
 
 # Dependency prefix
-HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
-HEADERS := $(sort $(HEADERS))
-SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
+SRCS := $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
 SRCS := $(sort $(SRCS))
+HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
+HEADERS += `bash get_headers.bash $(INCLUDES) "$(SRCS)"`
+HEADERS := $(shell echo "$(HEADERS)" | sort -u)
 
 # Compile dependencys
 OBJS = $(SRCS:.c=.o)
