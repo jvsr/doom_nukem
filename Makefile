@@ -126,12 +126,8 @@ $(LIB): FORCE
 	@$(MAKE) -s -e -C $(LIBPATH)
 
 # Compile $(SUBLIBS)
-src/$(SUBLIBSPATH)/%.a: src/$(SUBLIBSPATH) FORCE
+src/$(SUBLIBSPATH)/%.a: FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
-
-# Create $(SUBLIBSPATH) if it doesnt exsist
-src/$(SUBLIBSPATH):
-	@mkdir src/$(SUBLIBSPATH)
 
 # Clean all non .a files
 clean:
@@ -157,4 +153,4 @@ re: fclean $(NAME)
 
 FORCE: ;
 
-.PHONY: all test clean fclean re
+.PHONY: all test clean fclean re FORCE
