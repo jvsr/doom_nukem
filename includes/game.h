@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/09 17:44:13 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 15:40:53 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <SDL2/SDL.h>
 
 # include "libft/ft_bool.h"
+
+# include "gametime.h"
 
 typedef struct s_gui		t_gui;
 typedef struct s_level		t_level;
@@ -39,8 +41,10 @@ typedef struct	s_game
 	t_player	*player;
 	t_hashmap	*keymap;
 	t_bool		cursoractive;
+	t_time		starttime;
 }				t_game;
 
 void			loop(t_game *game);
+void			splash(t_game *game, t_bool *finished, char *loc);
 
 #endif

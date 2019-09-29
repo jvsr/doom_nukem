@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 13:55:47 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 13:00:07 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "game.h"
 #include "init.h"
 #include "error.h"
+#include "gametime.h"
 
 static void		init_sdl(void)
 {
@@ -56,6 +57,7 @@ static	void	init_window_surface(t_game *game)
 static void		init_game(t_game *game)
 {
 	game->state = running;
+	init_gametime(&game->starttime);
 	game->cursoractive = TRUE;
 }
 
@@ -68,5 +70,6 @@ t_game			*init(void)
 	init_window_surface(game);
 	init_game(game);
 	init_gui(game);
+	init_keymap(game);
 	return (game);
 }
