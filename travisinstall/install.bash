@@ -15,4 +15,4 @@ EOD
 
 brew install pkg-config
 brew install --build-from-source "$LOCATION/sdl2_mixer"
-brew link sdl2_mixer
+brew link sdl2_mixer flac opus mpg123 pkg-config libmodplug libvorbis
