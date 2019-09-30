@@ -33,6 +33,10 @@ t_parse_info		*new_parse_info(void)
 	parse_info->type = GUI_UNDFINED;
 	parse_info->dim = (t_coord){1, 1};
 	parse_info->draw_method = DRAW_METHOD_UNDFINED;
+	parse_info->text_color = (SDL_Color){255, 255, 255, 255};
 	parse_info->text_size = 1;
+	parse_info->text_font = FONT_UNDFINED;
+	parse_info->text_draw_method = DRAW_METHOD_UNDFINED;
+	parse_info->show = TRUE;
 	return (parse_info);
 }
