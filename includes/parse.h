@@ -13,10 +13,10 @@
 #ifndef PARSE_H
 # define PARSE_H
 
+# include <SDL2/SDL_pixels.h>
 
-#include "gui.h"
-#include "coord.h"
-#include "SDL2/SDL_pixels.h"
+# include "gui.h"
+# include "coord.h"
 
 typedef struct	s_parse_info
 {
@@ -39,5 +39,8 @@ typedef struct	s_parse_info
 	struct s_parse_info	*child;
 	struct s_parse_info	*next;
 }				t_parse_info;
+
+t_parse_info	*new_parse_info(void);
+void			del_parse_info(t_parse_info **parse_info);
 
 #endif

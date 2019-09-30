@@ -24,6 +24,10 @@ EXEC_SRCS = exec_gui_config \
 		exec_new_elem
 EXEC_SRCS := $(EXEC_SRCS:%=exec/%)
 
+PARSE_SRCS = new_parse_info \
+		del_parse_info
+PARSE_SRCS := $(PARSE_SRCS:%=parse/%)
+
 SRCS = analyze_gui_config \
 		open_gui_config \
 		lex_gui_config \
@@ -41,4 +45,5 @@ SRCS = analyze_gui_config \
 		lex_create_token \
 		lex_set_token_value \
 		parse_gui_config \
-		$(EXEC_SRCS)
+		$(EXEC_SRCS) \
+		$(PARSE_SRCS)

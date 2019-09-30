@@ -56,6 +56,7 @@ typedef	enum	e_font_type
 
 typedef enum	e_draw_method
 {
+	DRAW_METHOD_UNDFINED = -1,
 	SCALED,
 	REPEAT,
 	FIXED,
