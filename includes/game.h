@@ -44,7 +44,7 @@ typedef struct	s_game
 	t_audio_manager	*a_manager;
 }				t_game;
 
-void		loop(t_game *game);
-void		splash(t_game *game, t_bool *finished, char *loc);
+void			loop(t_game *game);
+void			splash(t_game *game, t_bool *finished, char *loc);
 
 #endif
