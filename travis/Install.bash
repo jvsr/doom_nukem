@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SELF_LOCATION=`echo "$PWD/$0" | rev | cut -d"/" -f 2- | rev`
+
 function linuxInstall {
 	sudo add-apt-repository -y ppa:snaipewastaken/ppa
 	sudo apt-get update
@@ -15,9 +17,10 @@ function osxInstall {
 	brew install SDL2
 	brew install SDL2_ttf
 	brew install snaipe/soft/criterion
-	bash osx/installMixer.bash
+	bash $SELF_LOCATION/osx/installMixer.bash
 }
 
+echo $SELF_LOCATION
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
 	echo "Error: Not running travis"
 elif [[ $TRAVIS_OS_NAME == "linux" ]]; then
