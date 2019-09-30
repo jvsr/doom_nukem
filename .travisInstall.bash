@@ -6,6 +6,8 @@ function linuxInstall {
 	sudo apt-get install -y libsdl2-dev
 	sudo apt-get install -y libsdl2-ttf-dev
 	sudo apt-get install -y criterion-dev
+	sudo apt-get install -y libmodplug-dev libvorbis-dev libmpg123-dev
+	sudo apt-get install -y libflac-dev libopus-dev libsdl2-mixer-dev
 }
 
 function osxInstall {
@@ -13,6 +15,7 @@ function osxInstall {
 	brew install SDL2
 	brew install SDL2_ttf
 	brew install snaipe/soft/criterion
+	bash travisinstall/install.bash
 }
 
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then

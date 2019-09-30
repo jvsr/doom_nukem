@@ -21,7 +21,7 @@ static void	loadeffects(t_game *game)
 	size_t	index;
 
 	files = (char *[]){
-		"explosion.wav", ""
+		"explosion.wav"
 	};
 	index = 0;
 	while (index < SOUND_COUNT)
@@ -37,12 +37,12 @@ static void	loadmusic(t_game *game)
 	size_t	index;
 
 	files = (char *[]){
-		"asking_questions.wav", ""
+		"asking_questions.mp3"
 	};
 	index = 0;
 	while (index < SOUND_COUNT)
 	{
-		game->a_manager->effects[index] = get_chunk_from_wav(files[index]);
+		game->a_manager->tracks[index] = get_music_from_mp3(files[index]);
 		index++;
 	}
 }
@@ -54,7 +54,7 @@ void		load_audio(t_game *game)
 	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
 		!= 0)
 		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
-	support = Mix_Init(MIX_INIT_MP3);
+	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
 	if (!(support & MIX_INIT_MP3))
 		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
 	loadeffects(game);

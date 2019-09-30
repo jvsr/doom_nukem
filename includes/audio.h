@@ -20,8 +20,8 @@ typedef struct s_game		t_game;
 # define AUDIO_FREQ 22050
 # define AUDIO_CHANNELS 2
 # define AUDIO_BUFFER 4096
-# define SOUND_EFFECT_LOC "/resources/sounds/effects/"
-# define MUSIC_LOC "/resources/sounds/music/"
+# define SOUND_EFFECT_LOC "./resources/sounds/effects/"
+# define MUSIC_LOC "./resources/sounds/music/"
 
 typedef enum	e_music
 {
@@ -43,6 +43,7 @@ typedef struct	s_audio_manager
 
 void		load_audio(t_game *game);
 Mix_Chunk	*get_chunk_from_wav(char *file);
+Mix_Music	*get_music_from_mp3(char *file);
 void		play_music(t_audio_manager *man, t_music music);
 void		pause_music(void);
 void		resume_music(void);
