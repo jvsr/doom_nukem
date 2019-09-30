@@ -17,8 +17,7 @@ function UpdateXcode {
 	# rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 }
 
-echo $SELF_LOCATION
-# UpdateXcode
-# brew install pkg-config
-# brew install --build-from-source "$SELF_LOCATION/sdl2_mixer.rb"
-# brew link sdl2_mixer flac opus mpg123 pkg-config libmodplug libvorbis
+UpdateXcode
+brew install pkg-config
+brew install --build-from-source "$SELF_LOCATION/sdl2_mixer.rb"
+brew link sdl2_mixer flac opus mpg123 pkg-config libmodplug libvorbis
