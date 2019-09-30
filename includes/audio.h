@@ -37,13 +37,13 @@ typedef enum	e_sounds
 
 typedef struct	s_audio_manager
 {
-	Mix_Music	*tracks[MUSIC_COUNT];
-	Mix_Chunk	*effects[SOUND_COUNT];
+	t_mix_music	*tracks[MUSIC_COUNT];
+	t_mix_chunk	*effects[SOUND_COUNT];
 }				t_audio_manager;
 
 void			load_audio(t_game *game);
-Mix_Chunk		*get_chunk_from_wav(char *file);
-Mix_Music		*get_music_from_mp3(char *file);
+t_mix_chunk		*get_chunk_from_wav(char *file);
+t_mix_music		*get_music_from_mp3(char *file);
 void			play_music(t_audio_manager *man, t_music music);
 void			pause_music(void);
 void			resume_music(void);

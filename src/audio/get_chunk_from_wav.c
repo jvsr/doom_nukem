@@ -15,10 +15,10 @@
 #include "audio.h"
 #include "error.h"
 
-Mix_Chunk	*get_chunk_from_wav(char *file)
+t_mix_chunk	*get_chunk_from_wav(char *file)
 {
 	char		*str;
-	Mix_Chunk	*chunk;
+	t_mix_chunk	*chunk;
 
 	str = ft_strjoin(SOUND_EFFECT_LOC, file);
 	chunk = Mix_LoadWAV(str);

@@ -15,7 +15,7 @@
 
 void	effect_sounds(t_audio_manager *man, t_sounds sound, int (*func)(int))
 {
-	Mix_Chunk	*chunk;
+	t_mix_chunk	*chunk;
 	int			index;
 
 	chunk = man->effects[sound];
