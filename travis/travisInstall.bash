@@ -15,7 +15,7 @@ function osxInstall {
 	brew install SDL2
 	brew install SDL2_ttf
 	brew install snaipe/soft/criterion
-	bash osx/InstallMixer.bash
+	bash osx/installMixer.bash
 }
 
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
