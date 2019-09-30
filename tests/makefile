@@ -56,8 +56,7 @@ endif
 SRCS := $(SRCS:%=src/test_ft_%.c)
 SRCS := $(sort $(SRCS))
 HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
-HEADERS += `bash ../src/get_headers.bash $(INCLUDES) "$(SRCS)"`
-HEADERS := $(shell echo "$(HEADERS)" | sort -u)
+HEADERS += $(shell bash ../src/get_headers.bash $(INCLUDES) "$(SRCS)")
 
 TESTOBJS = $(SRCS:.c=.o)
 LIBOBJS = $(filter-out ../src/main/main.o, $(OBJS))

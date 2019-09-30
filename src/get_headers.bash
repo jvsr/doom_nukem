@@ -12,15 +12,13 @@
 
 #!/bin/bash
 
+INCLUDES_PATH=$1
 TARGET_FILES=$2
 
-#Includes and Src path (dont trail with /)
-INCLUDES_PATH=$1
 ALL_INCLUDES=""
 for FILE in $TARGET_FILES; do
 	INCLUDES=`cat $FILE | grep "#include \""`
-	INCLUDES=`echo "$INCLUDES" | cut -d" " -f2 | sed 's/\"//g'`
-	INCLUDES=`echo "$INCLUDES" | sed "s,^,$INCLUDES_PATH/,g"`
+	INCLUDES=`echo "$INCLUDES" | cut -d'"' -f2 | sed "s,^,$INCLUDES_PATH/,g"`
 
 	if [[ $ALL_INCLUDES == "" ]]; then
 		ALL_INCLUDES=$INCLUDES
@@ -30,4 +28,4 @@ for FILE in $TARGET_FILES; do
 done
 
 ALL_INCLUDES=`echo -e "$ALL_INCLUDES" | sort -u`
-echo -e "$ALL_INCLUDES"
+echo "$ALL_INCLUDES"
