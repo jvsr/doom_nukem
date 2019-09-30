@@ -20,7 +20,6 @@ function osxInstall {
 	bash $SELF_LOCATION/osx/installMixer.bash
 }
 
-echo $SELF_LOCATION
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
 	echo "Error: Not running travis"
 elif [[ $TRAVIS_OS_NAME == "linux" ]]; then
