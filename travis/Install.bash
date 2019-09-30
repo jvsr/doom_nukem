@@ -1,6 +1,11 @@
 #!/bin/bash
 
-SELF_LOCATION=`echo "$PWD/$0" | rev | cut -d"/" -f 2- | rev`
+if [[ $0 =~ $PWD ]]; then
+	SELF_LOCATION=$0
+else
+	SELF_LOCATION="$PWD/$0"
+fi
+SELF_LOCATION=`echo "$SELF_LOCATION" | rev | cut -d"/" -f 2- | rev`
 
 function linuxInstall {
 	sudo add-apt-repository -y ppa:snaipewastaken/ppa
@@ -20,6 +25,7 @@ function osxInstall {
 	bash $SELF_LOCATION/osx/installMixer.bash
 }
 
+bash $SELF_LOCATION/osx/installMixer.bash
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
 	echo "Error: Not running travis"
 elif [[ $TRAVIS_OS_NAME == "linux" ]]; then
