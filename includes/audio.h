@@ -53,7 +53,7 @@ void		play_sound_repeat(t_audio_manager *man, t_sounds sound, int times);
 void		stop_all_sounds(void);
 void		pause_all_sounds(void);
 void		resume_all_sounds(void);
-void		effect_sounds(t_audio_manager *man, t_sounds sound,
+void		effect_sounds(t_audio_manager *man, t_sounds sound, 
 				int (*func)(int));
 void		pause_sounds(t_audio_manager *man, t_sounds sound);
 void		stop_sounds(t_audio_manager *man, t_sounds sound);
@@ -63,5 +63,6 @@ void		fade_out_music(int time);
 void		effect_all_sounds(int(*func)(int));
 void		set_music_volume(float volume);
 void		set_sound_volume(float volume);
+void		free_audio(t_game *game);
 
 #endif

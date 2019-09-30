@@ -39,9 +39,6 @@ static t_game	*alloc_game(void)
 	game = (t_game *)ft_memalloc(sizeof(t_game));
 	if (game == NULL)
 		error_msg(strerror(errno), errno, "Failed to alloc game");
-	game->a_manager = (t_audio_manager*)ft_memalloc(sizeof(t_audio_manager));
-	if (game->a_manager == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc audio manager");
 	return (game);
 }
 

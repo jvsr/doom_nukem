@@ -2,6 +2,7 @@
     "files.associations": {
 		"*.h": "c",
 		"Makefile.*": "makefile",
-		"iterator": "c"
+		"iterator": "c",
+		"cerrno": "c"
 	}
 }
