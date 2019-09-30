@@ -99,7 +99,8 @@ ifneq ($(wildcard $(NAME)),)
 endif
 
 # Recompile
-re: fclean $(NAME)
+re: fclean
+	$(MAKE)
 
 FORCE: ;
 

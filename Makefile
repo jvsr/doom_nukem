@@ -149,7 +149,8 @@ endif
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
 
 # Recompile
-re: fclean $(NAME)
+re: fclean
+	$(MAKE)
 
 FORCE: ;
 
