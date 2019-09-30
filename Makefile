@@ -55,10 +55,10 @@ FRAMEWORKINCLUDES = $(FRAMEWORKPATH)/include
 # SDL2 dependency
 SDL2LIB = -L$(FRAMEWORKPATH)/lib -lSDL2
 
-# SDL2_TTf dependency
+# SDL2_TTF dependency
 SDL2TTF = -L$(FRAMEWORKPATH)/lib -lSDL2_ttf
 
-# SDL2_TTf dependency
+# SDL2_Mix dependency
 SDL2MIX = -L$(FRAMEWORKPATH)/lib -lSDL2_mixer
 
 # All libs for compilation
@@ -158,7 +158,7 @@ endif
 
 # Recompile
 re:
-	$(MAKE) fclean 
+	$(MAKE) fclean
 	$(MAKE) $(NAME)
 
 FORCE: ;
