@@ -22,10 +22,10 @@ matrix:
   fast_finish: true
 
 install:
-  - bash travis/install.bash
+  - bash ./travis/install.bash
 
 script:
-  - bash travis/run.bash
+  - bash ./travis/run.bash
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -X gcov
