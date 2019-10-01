@@ -5,6 +5,9 @@ function linuxRun {
 }
 
 function osxRun {
+	SwitchAudioSource -s "Soundflower (2ch)" -t input
+	SwitchAudioSource -s "Soundflower (2ch)" -t output
+
 	make test GCOV=TRUE
 }
 
