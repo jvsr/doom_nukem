@@ -13,16 +13,10 @@
 #!/bin/bash
 
 function linuxRun {
-	# pacmd load-module module-null-sink sink_name=game_sink sink_properties=device.description=Game-Sink
-	echo `pacmd list-sinks`
-
 	xvfb-run --server-args="-screen 0 1920x1080x24" make test GCOV=TRUE
 }
 
 function osxRun {
-	SwitchAudioSource -s "Soundflower (2ch)" -t input
-	SwitchAudioSource -s "Soundflower (2ch)" -t output
-
 	make test GCOV=TRUE
 }
 

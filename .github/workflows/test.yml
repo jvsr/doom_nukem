@@ -1,4 +1,4 @@
-name: Doom-Nukem Test
+name: Doom-Nukem Master test
 on: [push]
 
 jobs:

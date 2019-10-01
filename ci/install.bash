@@ -28,7 +28,6 @@ function linuxInstall {
 
 	sudo apt-get install -y libmodplug-dev libvorbis-dev libmpg123-dev
 	sudo apt-get install -y libflac-dev libopus-dev libsdl2-mixer-dev
-	sudo apt-get install -y pulseaudio
 }
 
 function osxInstall {
@@ -38,7 +37,6 @@ function osxInstall {
 	brew install snaipe/soft/criterion
 
 	bash $SELF_LOCATION/osx/installMixer.bash
-	brew install Caskroom/cask/soundflower switchaudio-osx
 }
 
 function generalInstall {
