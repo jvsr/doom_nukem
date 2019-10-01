@@ -25,8 +25,8 @@ void	init_audio(t_game *game)
 		error_msg(SDL_GetError(), 1, "Failed to allocate Audio Manager");
 	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
 		!= 0)
-		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
+		error_msg_sdl(1, "Failed to open Audio Mixer");
 	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
 	if (!(support & MIX_INIT_MP3))
-		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
+		error_msg_sdl(1, "Failed to init Audio Mixer");
 }
