@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    install.bash                                       :+:    :+:             #
+#                                                      +:+                     #
+#    By: pholster <pholster@student.codam.nl>         +#+                      #
+#                                                    +#+                       #
+#    Created: 2019/10/01 16:19:45 by pholster       #+#    #+#                 #
+#    Updated: 2019/10/01 16:19:45 by pholster      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 #!/bin/bash
 
 if [[ $0 =~ $PWD ]]; then
@@ -30,11 +42,10 @@ function osxInstall {
 }
 
 OS_NAME=`uname -s`
-echo $OS_NAME
 if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
-elif [[ $OS_NAME == "linux" ]]; then
+elif [[ $OS_NAME == "Linux" ]]; then
 	linuxInstall
 elif [[ $OS_NAME == "Darwin" ]]; then
 	osxInstall
