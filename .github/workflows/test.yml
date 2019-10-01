@@ -3,11 +3,13 @@ on: [push]
 
 jobs:
   build:
-    name: ${{ matrix.os }}
+    name: Test on ${{ matrix.os }}
     timeout-minutes: 10
     runs-on: ${{ matrix.os }}
     env:
+      GITHUB_OS_NAME: ${{ matrix.os }}
       CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
+
     strategy:
       fail-fast: false
       matrix:
@@ -15,9 +17,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+
       - name: install dependencies
         run: bash ci/install.bash
+
       - name: compile and run test
         run: make test GCOV=TRUE
+
       - name: upload coverage tot codecov.io
         run: bash <(curl -s https://codecov.io/bash) -X gcov

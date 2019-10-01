@@ -29,6 +29,8 @@ function osxInstall {
 	brew install Caskroom/cask/soundflower switchaudio-osx
 }
 
+echo $GITHUB_OS_NAME
+echo $GITHUB
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
 	echo "Error: Not running travis"
 	exit 1
