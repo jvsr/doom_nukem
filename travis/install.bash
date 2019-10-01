@@ -22,6 +22,8 @@ function osxInstall {
 	brew install SDL2
 	brew install SDL2_ttf
 	brew install snaipe/soft/criterion
+
+	brew install switchaudio-osx
 	bash $SELF_LOCATION/osx/installMixer.bash
 }
 
