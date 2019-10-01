@@ -13,10 +13,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: install
+      - name: install dependencies
         run: bash ./ci/install.bash
-      - name: make test
+      - name: compile and run test
         run: make test GCOV=TRUE
-      - name: upload coverage tot codecov.io macOS
-        needs:
+      - name: upload coverage tot codecov.io
         run: bash <(curl -s https://codecov.io/bash) -X gcov
