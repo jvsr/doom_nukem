@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: install dependencies
-        run: bash ./ci/install.bash
+        run: bash ci/install.bash
       - name: compile and run test
         run: make test GCOV=TRUE
       - name: upload coverage tot codecov.io

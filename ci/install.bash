@@ -31,10 +31,12 @@ function osxInstall {
 
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
 	echo "Error: Not running travis"
+	exit 1
 elif [[ $TRAVIS_OS_NAME == "linux" ]]; then
 	linuxInstall
 elif [[ $TRAVIS_OS_NAME == "osx" ]]; then
 	osxInstall
 else
 	echo "Error: OS is not supported"
+	exit 1
 fi
