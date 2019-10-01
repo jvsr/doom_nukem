@@ -17,7 +17,10 @@ function UpdateXcode {
 	# rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 }
 
-UpdateXcode
+if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
+	UpdateXcode
+fi
+
 brew install pkg-config
-brew install --build-from-source "$SELF_LOCATION/sdl2_mixer.rb"
+brew install --build-from-source "$SELF_LOCATION/sdl2_mixer"
 brew link sdl2_mixer flac opus mpg123 pkg-config libmodplug libvorbis
