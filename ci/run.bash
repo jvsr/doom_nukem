@@ -1,5 +1,7 @@
 #!/bin/bash
 
+OS_NAME=`uname -s`
+
 function linuxRun {
 	xvfb-run --server-args="-screen 0 1920x1080x24" make test GCOV=TRUE
 }
@@ -14,9 +16,9 @@ function osxRun {
 if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
-elif [[ $GITHUB_OS_NAME == "linux" ]]; then
+elif [[ $OS_NAME == "linux" ]]; then
 	linuxRun
-elif [[ $GITHUB_OS_NAME == "osx" ]]; then
+elif [[ $OS_NAME == "Darwin" ]]; then
 	osxRun
 else
 	echo "Error: OS is not supported"

@@ -10,11 +10,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macOS-10.14, ubuntu-18.04]
-        os-name: [osx, linux]
+        os: [macOS-latest, ubuntu-latest]
 
     env:
-      GITHUB_OS_NAME: ${{ matrix.os-name }}
       CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
 
     steps:
@@ -22,6 +20,6 @@ jobs:
       - name: install dependencies
         run: bash ci/install.bash
       - name: compile and run test
-        run: make test GCOV=TRUE
+        run: bash ci/run.bash
       - name: upload coverage tot codecov.io
         run: bash <(curl -s https://codecov.io/bash) -X gcov

@@ -6,6 +6,7 @@ else
 	SELF_LOCATION="$PWD/$0"
 fi
 SELF_LOCATION=`echo "$SELF_LOCATION" | rev | cut -d"/" -f 2- | rev`
+OS_NAME=`uname -s`
 
 function linuxInstall {
 	sudo add-apt-repository -y ppa:snaipewastaken/ppa
@@ -32,9 +33,9 @@ function osxInstall {
 if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
-elif [[ $GITHUB_OS_NAME == "linux" ]]; then
+elif [[ $OS_NAME == "linux" ]]; then
 	linuxInstall
-elif [[ $GITHUB_OS_NAME == "osx" ]]; then
+elif [[ $OS_NAME == "Darwin" ]]; then
 	osxInstall
 else
 	echo "Error: OS is not supported"
