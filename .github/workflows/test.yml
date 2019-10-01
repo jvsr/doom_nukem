@@ -2,7 +2,7 @@ name: Doom-Nukem Test
 on: [push]
 
 jobs:
-  build:
+  macos:
     name: Test on macos-latest
     runs-on: macos-latest
     timeout-minutes: 20
@@ -28,7 +28,7 @@ jobs:
       - name: upload coverage tot codecov.io
         run: bash <(curl -s https://codecov.io/bash) -X gcov
 
-  build:
+  linux:
     name: Test on ubuntu-latest
     runs-on: ubuntu-latest
     timeout-minutes: 20
