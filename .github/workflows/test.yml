@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macOS-10.14, ubuntu-18.04]
+        os: [macos-latest, ubuntu-latest]
 
     env:
       CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
