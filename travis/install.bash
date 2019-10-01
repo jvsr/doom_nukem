@@ -25,7 +25,7 @@ function osxInstall {
 	brew install snaipe/soft/criterion
 
 	bash $SELF_LOCATION/osx/installMixer.bash
-	brew install switchaudio-osx
+	brew install Caskroom/cask/soundflower switchaudio-osx
 }
 
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
