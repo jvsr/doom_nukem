@@ -21,8 +21,8 @@ jobs:
       - name: install dependencies
         run: bash ci/install.bash
 
-      - name: norminette+
-        run: bash ci/norminette+.bash
+      - name: norminettePlus
+        run: bash ci/norminettePlus.bash
 
       - name: compile and run test
         run: bash ci/run.bash
