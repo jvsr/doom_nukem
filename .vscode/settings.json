@@ -1,6 +1,7 @@
 {
     "files.associations": {
 		"*.h": "c",
+		"sdl2_mixer": "ruby",
 		"Makefile.*": "makefile",
 		"iterator": "c",
 		"cerrno": "c"
