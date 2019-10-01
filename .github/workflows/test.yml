@@ -4,16 +4,17 @@ on: [push]
 jobs:
   build:
     name: Test on ${{ matrix.os }}
-    timeout-minutes: 10
+    # timeout-minutes: 10
     runs-on: ${{ matrix.os }}
-    env:
-      GITHUB_OS_NAME: ${{ matrix.os }}
-      CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
 
     strategy:
       fail-fast: false
       matrix:
         os: [macOS-10.14, ubuntu-18.04]
+
+    env:
+      GITHUB_OS_NAME: ${{ matrix.os }}
+      CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
 
     steps:
       - uses: actions/checkout@v1
