@@ -13,6 +13,7 @@ function linuxInstall {
 	sudo apt-get install -y libsdl2-dev
 	sudo apt-get install -y libsdl2-ttf-dev
 	sudo apt-get install -y criterion-dev
+
 	sudo apt-get install -y libmodplug-dev libvorbis-dev libmpg123-dev
 	sudo apt-get install -y libflac-dev libopus-dev libsdl2-mixer-dev
 }
@@ -23,8 +24,8 @@ function osxInstall {
 	brew install SDL2_ttf
 	brew install snaipe/soft/criterion
 
-	brew install switchaudio-osx
 	bash $SELF_LOCATION/osx/installMixer.bash
+	brew install switchaudio-osx
 }
 
 if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
