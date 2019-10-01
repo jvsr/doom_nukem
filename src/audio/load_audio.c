@@ -50,17 +50,6 @@ static void	loadmusic(t_game *game)
 
 void		load_audio(t_game *game)
 {
-	int support;
-
-	game->a_manager = (t_audio_manager*)ft_memalloc(sizeof(t_audio_manager));
-	if (game->a_manager == NULL)
-		error_msg(SDL_GetError(), 1, "Failed to allocate Audio Manager");
-	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
-		!= 0)
-		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
-	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
-	if (!(support & MIX_INIT_MP3))
-		error_msg(SDL_GetError(), 1, "Failed to init Audio Mixer");
 	loadeffects(game);
 	loadmusic(game);
 }

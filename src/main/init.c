@@ -70,6 +70,7 @@ t_game			*init(void)
 	game = alloc_game();
 	init_window_surface(game);
 	init_game(game);
+	init_audio(game);
 	init_gui(game);
 	init_keymap(game);
 	return (game);

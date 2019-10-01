@@ -65,5 +65,6 @@ void			effect_all_sounds(int(*func)(int));
 void			set_music_volume(float volume);
 void			set_sound_volume(float volume);
 void			free_audio(t_game *game);
+void			init_audio(t_game *game);
 
 #endif
