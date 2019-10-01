@@ -18,7 +18,7 @@ FRAMEWORKPATH =
 FRAMEWORKINCLUDES =
 SDL2LIB =
 SDL2TTF =
-SDL2MIX = 
+SDL2MIX =
 
 # Compile settings
 CCSILENT = FALSE
@@ -100,7 +100,8 @@ ifneq ($(wildcard $(NAME)),)
 endif
 
 # Recompile
-re: fclean $(NAME)
+re: fclean
+	$(MAKE)
 
 FORCE: ;
 
