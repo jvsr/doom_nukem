@@ -4,8 +4,8 @@ on: [push]
 jobs:
   build:
     name: Test on ${{ matrix.os }}
-    timeout-minutes: 15
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
 
     strategy:
       fail-fast: false
