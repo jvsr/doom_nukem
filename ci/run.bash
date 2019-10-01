@@ -11,12 +11,12 @@ function osxRun {
 	make test GCOV=TRUE
 }
 
-if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
+if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
-elif [[ $TRAVIS_OS_NAME == "linux" ]]; then
+elif [[ $GITHUB_OS_NAME == "linux" ]]; then
 	linuxRun
-elif [[ $TRAVIS_OS_NAME == "osx" ]]; then
+elif [[ $GITHUB_OS_NAME == "osx" ]]; then
 	osxRun
 else
 	echo "Error: OS is not supported"

@@ -29,14 +29,12 @@ function osxInstall {
 	brew install Caskroom/cask/soundflower switchaudio-osx
 }
 
-echo $GITHUB_OS_NAME
-echo $GITHUB
-if [ -z $TRAVIS ] || [[ $TRAVIS != true ]]; then
+if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
-elif [[ $TRAVIS_OS_NAME == "linux" ]]; then
+elif [[ $GITHUB_OS_NAME == "linux" ]]; then
 	linuxInstall
-elif [[ $TRAVIS_OS_NAME == "osx" ]]; then
+elif [[ $GITHUB_OS_NAME == "osx" ]]; then
 	osxInstall
 else
 	echo "Error: OS is not supported"
