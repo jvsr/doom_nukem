@@ -1,0 +1,22 @@
+name: Doom-Nukem Test
+on: [push]
+
+jobs:
+	build:
+		name: ${{ matrix.os }}
+		runs-on: ${{ matrix.os }}
+		env:
+			CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
+		strategy:
+			matrix:
+				os: [macOS-10.14, ubuntu-18.04]
+        
+		steps:
+			- uses: actions/checkout@v1
+			- name: install
+				run: bash ./ci/install.bash
+			- name: make test
+				run: make test GCOV=TRUE
+			- name: upload coverage tot codecov.io macOS
+				needs: 
+				run: bash <(curl -s https://codecov.io/bash) -X gcov
