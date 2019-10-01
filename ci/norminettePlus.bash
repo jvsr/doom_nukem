@@ -13,8 +13,14 @@
 #!/bin/bash
 
 function norm {
-	python ~/norminette+/run.py $1 | grep --color=never -E "(Error|Warning: [^N])" -B 1
+	local NORM=`python ~/norminette+/run.py $1 | grep --color=never -E "(Error: [^N])" -B 1`
+
+	if [[ $NORM != "" ]]; then
+		echo "$NORM"
+		exit 1
+	fi
 }
 
 norm "`find . -name "Makefile"`"
 norm "`find src -name "*.c"`"
+exit 0
