@@ -21,8 +21,9 @@
 static int	destroy(t_game *game)
 {
 	SDL_DestroyWindow(game->window);
-	SDL_Quit();
+	Mix_Quit();
 	TTF_Quit();
+	SDL_Quit();
 	exit(0);
 	return (0);
 }

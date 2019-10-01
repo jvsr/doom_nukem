@@ -18,6 +18,8 @@
 
 #include "libft/ft_printf.h"
 
+#include "audio.h"
+
 void	error_msg(const char *error_msg, int error_code, const char *msg)
 {
 	ft_dprintf(2, "doom-nukem: Error(%d) - %s (%s)\n",
