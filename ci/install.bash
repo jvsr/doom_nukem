@@ -6,7 +6,6 @@ else
 	SELF_LOCATION="$PWD/$0"
 fi
 SELF_LOCATION=`echo "$SELF_LOCATION" | rev | cut -d"/" -f 2- | rev`
-OS_NAME=`uname -s`
 
 function linuxInstall {
 	sudo add-apt-repository -y ppa:snaipewastaken/ppa
@@ -30,6 +29,8 @@ function osxInstall {
 	brew install Caskroom/cask/soundflower switchaudio-osx
 }
 
+OS_NAME=`uname -s`
+echo $OS_NAME
 if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-OS_NAME=`uname -s`
-
 function linuxRun {
 	xvfb-run --server-args="-screen 0 1920x1080x24" make test GCOV=TRUE
 }
@@ -13,6 +11,7 @@ function osxRun {
 	make test GCOV=TRUE
 }
 
+OS_NAME=`uname -s`
 if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
