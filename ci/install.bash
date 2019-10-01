@@ -28,7 +28,7 @@ function linuxInstall {
 
 	sudo apt-get install -y libmodplug-dev libvorbis-dev libmpg123-dev
 	sudo apt-get install -y libflac-dev libopus-dev libsdl2-mixer-dev
-	sudo apt-get install -y libpulse-dev
+	sudo apt-get install -y pulseaudio
 }
 
 function osxInstall {
