@@ -49,9 +49,15 @@ OS_NAME=`uname -s`
 if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
+<<<<<<< HEAD
 # elif [[ $OS_NAME == "Linux" ]]; then
 # 	linuxInstall
 # 	generalInstall
+=======
+elif [[ $OS_NAME == "Linux" ]]; then
+	linuxInstall
+	generalInstall
+>>>>>>> parent of 3c87f33... allow linux to fail and test it
 elif [[ $OS_NAME == "Darwin" ]]; then
 	osxInstall
 	generalInstall

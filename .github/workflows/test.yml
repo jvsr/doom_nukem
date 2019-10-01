@@ -2,13 +2,21 @@ name: Doom-Nukem Test
 on: [push]
 
 jobs:
+<<<<<<< HEAD
   macos:
     name: Test on macos-latest
     runs-on: macos-latest
+=======
+  build:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+>>>>>>> parent of 3c87f33... allow linux to fail and test it
     timeout-minutes: 20
 
     strategy:
       fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
 
     env:
       CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
@@ -27,6 +35,7 @@ jobs:
 
       - name: upload coverage tot codecov.io
         run: bash <(curl -s https://codecov.io/bash) -X gcov
+<<<<<<< HEAD
 
   linux:
     name: Test on ubuntu-latest
@@ -58,3 +67,5 @@ jobs:
       - name: upload coverage tot codecov.io
         run: bash <(curl -s https://codecov.io/bash) -X gcov
         continue-on-error: true
+=======
+>>>>>>> parent of 3c87f33... allow linux to fail and test it
