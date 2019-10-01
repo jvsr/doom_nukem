@@ -49,12 +49,12 @@ OS_NAME=`uname -s`
 if [ -z $GITHUB_ACTION ]; then
 	echo "Error: Not running travis"
 	exit 1
-elif [[ $OS_NAME == "Linux" ]]; then
-	linuxInstall
-	generalInstall
-# elif [[ $OS_NAME == "Darwin" ]]; then
-# 	osxInstall
+# elif [[ $OS_NAME == "Linux" ]]; then
+# 	linuxInstall
 # 	generalInstall
+elif [[ $OS_NAME == "Darwin" ]]; then
+	osxInstall
+	generalInstall
 else
 	echo "Error: OS is not supported"
 	exit 1
