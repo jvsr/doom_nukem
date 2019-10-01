@@ -15,7 +15,7 @@
 #include "audio.h"
 #include "error.h"
 
-static void	free_music(t_mix_music *musics[MUSIC_COUNT])
+static void	free_music(Mix_Music *musics[MUSIC_COUNT])
 {
 	size_t i;
 
@@ -27,7 +27,7 @@ static void	free_music(t_mix_music *musics[MUSIC_COUNT])
 	}
 }
 
-static void	free_sound(t_mix_chunk *chunks[SOUND_COUNT])
+static void	free_sound(Mix_Chunk *chunks[SOUND_COUNT])
 {
 	size_t i;
 

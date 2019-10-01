@@ -15,10 +15,10 @@
 #include "audio.h"
 #include "error.h"
 
-t_mix_music	*get_music_from_mp3(char *file)
+Mix_Music	*get_music_from_mp3(char *file)
 {
 	char		*str;
-	t_mix_music	*track;
+	Mix_Music	*track;
 
 	str = ft_strjoin(MUSIC_LOC, file);
 	track = Mix_LoadMUS(str);

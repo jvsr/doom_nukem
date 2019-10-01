@@ -13,15 +13,15 @@
 #ifndef AUDIO_H
 # define AUDIO_H
 
-typedef struct _Mix_Music	t_mix_music;
-typedef struct Mix_Chunk	t_mix_chunk;
-typedef struct s_game		t_game;
+# include <SDL2/SDL_mixer.h>
 
 # define AUDIO_FREQ 22050
 # define AUDIO_CHANNELS 2
 # define AUDIO_BUFFER 4096
 # define SOUND_EFFECT_LOC "./resources/sounds/effects/"
 # define MUSIC_LOC "./resources/sounds/music/"
+
+typedef struct s_game		t_game;
 
 typedef enum	e_music
 {
@@ -37,13 +37,13 @@ typedef enum	e_sounds
 
 typedef struct	s_audio_manager
 {
-	t_mix_music	*tracks[MUSIC_COUNT];
-	t_mix_chunk	*effects[SOUND_COUNT];
+	Mix_Music	*tracks[MUSIC_COUNT];
+	Mix_Chunk	*effects[SOUND_COUNT];
 }				t_audio_manager;
 
 void			load_audio(t_game *game);
-t_mix_chunk		*get_chunk_from_wav(char *file);
-t_mix_music		*get_music_from_mp3(char *file);
+Mix_Chunk		*get_chunk_from_wav(char *file);
+Mix_Music		*get_music_from_mp3(char *file);
 void			play_music(t_audio_manager *man, t_music music);
 void			pause_music(void);
 void			resume_music(void);
