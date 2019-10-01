@@ -52,9 +52,9 @@ if [ -z $GITHUB_ACTION ]; then
 elif [[ $OS_NAME == "Linux" ]]; then
 	linuxInstall
 	generalInstall
-elif [[ $OS_NAME == "Darwin" ]]; then
-	osxInstall
-	generalInstall
+# elif [[ $OS_NAME == "Darwin" ]]; then
+# 	osxInstall
+# 	generalInstall
 else
 	echo "Error: OS is not supported"
 	exit 1
