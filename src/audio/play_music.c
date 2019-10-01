@@ -13,7 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-void		play_music(t_audio_manager *man, t_music music)
+void		play_music(t_audio_man *man, t_music music)
 {
 	Mix_HaltMusic();
 	Mix_PlayMusic(man->tracks[music], -1);

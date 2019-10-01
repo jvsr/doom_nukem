@@ -20,8 +20,8 @@ void	init_audio(t_game *game)
 {
 	int support;
 
-	game->a_manager = (t_audio_manager*)ft_memalloc(sizeof(t_audio_manager));
-	if (game->a_manager == NULL)
+	game->audio_man = (t_audio_man*)ft_memalloc(sizeof(t_audio_man));
+	if (game->audio_man == NULL)
 		error_msg(SDL_GetError(), 1, "Failed to allocate Audio Manager");
 	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
 		!= 0)

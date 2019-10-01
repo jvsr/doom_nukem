@@ -13,7 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-void	stop_sounds(t_audio_manager *man, t_sounds sound)
+void	stop_sounds(t_audio_man *man, t_sounds sound)
 {
 	effect_sounds(man, sound, Mix_HaltChannel);
 }

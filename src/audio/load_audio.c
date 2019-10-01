@@ -27,7 +27,7 @@ static void	loadeffects(t_game *game)
 	index = 0;
 	while (index < SOUND_COUNT)
 	{
-		game->a_manager->effects[index] = get_chunk_from_wav(files[index]);
+		game->audio_man->effects[index] = get_chunk_from_wav(files[index]);
 		index++;
 	}
 }
@@ -43,7 +43,7 @@ static void	loadmusic(t_game *game)
 	index = 0;
 	while (index < SOUND_COUNT)
 	{
-		game->a_manager->tracks[index] = get_music_from_mp3(files[index]);
+		game->audio_man->tracks[index] = get_music_from_mp3(files[index]);
 		index++;
 	}
 }

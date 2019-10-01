@@ -35,31 +35,31 @@ typedef enum	e_sounds
 	SOUND_COUNT
 }				t_sounds;
 
-typedef struct	s_audio_manager
+typedef struct	s_audio_man
 {
 	Mix_Music	*tracks[MUSIC_COUNT];
 	Mix_Chunk	*effects[SOUND_COUNT];
-}				t_audio_manager;
+}				t_audio_man;
 
 void			load_audio(t_game *game);
 Mix_Chunk		*get_chunk_from_wav(char *file);
 Mix_Music		*get_music_from_mp3(char *file);
-void			play_music(t_audio_manager *man, t_music music);
+void			play_music(t_audio_man *man, t_music music);
 void			pause_music(void);
 void			resume_music(void);
 void			stop_music(void);
-void			play_sound(t_audio_manager *man, t_sounds sound);
-void			play_sound_repeat(t_audio_manager *man, t_sounds sound,
+void			play_sound(t_audio_man *man, t_sounds sound);
+void			play_sound_repeat(t_audio_man *man, t_sounds sound,
 					int times);
 void			stop_all_sounds(void);
 void			pause_all_sounds(void);
 void			resume_all_sounds(void);
-void			effect_sounds(t_audio_manager *man, t_sounds sound,
+void			effect_sounds(t_audio_man *man, t_sounds sound,
 					int (*func)(int));
-void			pause_sounds(t_audio_manager *man, t_sounds sound);
-void			stop_sounds(t_audio_manager *man, t_sounds sound);
-void			resume_sounds(t_audio_manager *man, t_sounds sound);
-void			fade_in_music(t_audio_manager *man, t_music music, int time);
+void			pause_sounds(t_audio_man *man, t_sounds sound);
+void			stop_sounds(t_audio_man *man, t_sounds sound);
+void			resume_sounds(t_audio_man *man, t_sounds sound);
+void			fade_in_music(t_audio_man *man, t_music music, int time);
 void			fade_out_music(int time);
 void			effect_all_sounds(int(*func)(int));
 void			set_music_volume(float volume);

@@ -41,8 +41,8 @@ static void	free_sound(Mix_Chunk *chunks[SOUND_COUNT])
 
 void		free_audio(t_game *game)
 {
-	free_music(game->a_manager->tracks);
-	free_sound(game->a_manager->effects);
-	free(game->a_manager);
-	game->a_manager = NULL;
+	free_music(game->audio_man->tracks);
+	free_sound(game->audio_man->effects);
+	free(game->audio_man);
+	game->audio_man = NULL;
 }

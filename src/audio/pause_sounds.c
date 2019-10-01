@@ -19,7 +19,7 @@ static int	pause(int index)
 	return (0);
 }
 
-void		pause_sounds(t_audio_manager *man, t_sounds sound)
+void		pause_sounds(t_audio_man *man, t_sounds sound)
 {
 	effect_sounds(man, sound, pause);
 }

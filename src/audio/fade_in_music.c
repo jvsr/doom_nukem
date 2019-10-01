@@ -13,7 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-void		fade_in_music(t_audio_manager *man, t_music music, int time)
+void		fade_in_music(t_audio_man *man, t_music music, int time)
 {
 	Mix_FadeInMusic(man->tracks[music], -1, time);
 }
