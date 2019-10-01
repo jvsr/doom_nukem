@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include <SDL2/SDL_mixer.h>
+#include "audio.h"
 
 void	set_sound_volume(float volume)
 {
 	int i;
 
 	i = 0;
-	while (i < 16)
+	while (i < AUDIO_MAX_CHUNKS)
 	{
 		Mix_Volume(i, MIX_MAX_VOLUME * volume);
 		i++;

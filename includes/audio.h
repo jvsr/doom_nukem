@@ -15,8 +15,9 @@
 
 # include <SDL2/SDL_mixer.h>
 
-# define AUDIO_FREQ 22050
-# define AUDIO_CHANNELS 2
+# define AUDIO_MAX_CHUNKS MIX_CHANNELS
+# define AUDIO_FREQ MIX_DEFAULT_FREQUENCY
+# define AUDIO_CHANNELS MIX_DEFAULT_CHANNELS
 # define AUDIO_BUFFER 4096
 # define SOUND_EFFECT_LOC "./resources/sounds/effects/"
 # define MUSIC_LOC "./resources/sounds/music/"

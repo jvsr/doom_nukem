@@ -20,7 +20,7 @@ void	effect_sounds(t_audio_man *man, t_sounds sound, int (*func)(int))
 
 	chunk = man->effects[sound];
 	index = 0;
-	while (index < 16)
+	while (index < AUDIO_MAX_CHUNKS)
 	{
 		if (Mix_GetChunk(index) != NULL && Mix_GetChunk(index) == chunk)
 			func(index);

@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "audio.h"
+
 void	effect_all_sounds(int (*func)(int))
 {
 	int	index;
 
 	index = 0;
-	while (index < 16)
+	while (index < AUDIO_MAX_CHUNKS)
 	{
 		func(index);
 		index++;
