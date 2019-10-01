@@ -13,6 +13,9 @@
 #!/bin/bash
 
 function linuxRun {
+	pacmd load-module module-null-sink sink_name=game_sink sink_properties=device.description=Game-Sink
+	echo `pacmd list-sinks | grep name:`
+
 	xvfb-run --server-args="-screen 0 1920x1080x24" make test GCOV=TRUE
 }
 
