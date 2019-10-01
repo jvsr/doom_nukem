@@ -18,6 +18,7 @@ FRAMEWORKPATH =
 FRAMEWORKINCLUDES =
 SDL2LIB =
 SDL2TTF =
+SDL2MIX =
 
 # Compile settings
 CCSILENT = FALSE
@@ -46,7 +47,7 @@ LIB = $(LIBPATH)/$(LIBNAME).a
 CRITERIONLIB = -L$(FRAMEWORKPATH)/lib -lcriterion
 
 # All libs for compilation
-LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF) $(CRITERIONLIB)
+LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF) $(SDL2MIX) $(CRITERIONLIB)
 
 ifeq ($(shell uname -s), Linux)
 LIBS += -lm

@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include <SDL2/SDL_surface.h>
-#include "types.h"
+
 #include "libft/ft_mem.h"
+
+#include "types.h"
 
 static void	set_alpha(t_uint32 *pixel, t_uint32 zero_mask, t_uint32 value)
 {
@@ -26,7 +28,7 @@ static void	set_alpha32(long long *pixel, t_uint64 zero_mask, t_uint64 value)
 	*pixel |= value;
 }
 
-static void		roll32(SDL_Surface *surface, t_uint64 zero_mask,
+static void	roll32(SDL_Surface *surface, t_uint64 zero_mask,
 	t_uint64 value_mask, size_t *index)
 {
 	const t_uint64	d_zero = zero_mask | (zero_mask << 32);
