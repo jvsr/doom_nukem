@@ -13,7 +13,7 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-#include "gui.h"
+# include "gui.h"
 
 typedef struct s_gui		t_gui;
 typedef struct s_transform	t_transform;
