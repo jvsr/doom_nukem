@@ -10,9 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "libft/ft_str.h"
+
 #include "exec.h"
 #include "parse.h"
 #include "gui.h"
+
+static void		prefix_name(char **name, char *prefix)
+{
+	char *result;
+
+	result = ft_strjoin_var(3, prefix, "_", *name);
+	free(*name);
+	*name = result;
+}
 
 static void		exec_children(t_gui *ui, t_parse_info *child,
 								t_transform *parent)
@@ -23,6 +34,7 @@ static void		exec_children(t_gui *ui, t_parse_info *child,
 	while (child != NULL)
 	{
 		next = child->next;
+		prefix_name(&child->name, parent->name);
 		elem = exec_new_elem(ui, child);
 		if (elem->gui_type == PANEL)
 			exec_children(ui, child->child, elem);
