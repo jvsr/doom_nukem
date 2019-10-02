@@ -36,7 +36,7 @@ static t_task	*pass_to_thread(t_task *task, t_pool *pool)
 static t_task	*collect_task(t_pool *pool)
 {
 	char	state;
-	t_task 	*task;
+	t_task	*task;
 
 	if (pool->suspended)
 		return (NULL);
