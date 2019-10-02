@@ -60,6 +60,18 @@ static t_onclick	*get_onclick(char *onclick)
 	return (NULL);
 }
 
+static void			set_gui_info(t_transform *elem, t_parse_info *parse_info)
+{
+	(void)parse_info;
+	(void)elem;
+	// if (elem->gui_type == TEXT)
+	// 	exec_set_gui_text(elem, parse_info);
+	// else if (elem->gui_type == IMAGE)
+	// 	exec_set_gui_image(elem, parse_info);
+	// else if (elem->gui_type == BUTTON)
+	// 	exec_set_gui_button(elem, parse_info);
+}
+
 t_transform			*exec_new_elem(t_gui *ui, t_parse_info *parse_info)
 {
 	t_transform	*elem;
@@ -71,5 +83,6 @@ t_transform			*exec_new_elem(t_gui *ui, t_parse_info *parse_info)
 	set_elem_layer(elem, parse_info->layer);
 	set_elem_clickable(elem, parse_info->clickable);
 	set_elem_show(elem, parse_info->show);
+	set_gui_info(elem, parse_info);
 	return (elem);
 }
