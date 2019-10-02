@@ -15,8 +15,6 @@
 
 # include "gui.h"
 
-typedef struct s_gui		t_gui;
-typedef struct s_transform	t_transform;
 typedef struct s_parse_info	t_parse_info;
 
 typedef struct	s_onclickpair
