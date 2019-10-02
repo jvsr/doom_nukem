@@ -53,7 +53,7 @@ void			loop(t_game *game)
 {
 	SDL_Event	event;
 
-	analyze_gui_config("main", "mainmenu");
+	analyze_gui_config(game->ui, "main", "mainmenu");
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
