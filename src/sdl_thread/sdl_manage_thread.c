@@ -59,7 +59,7 @@ int				sdl_manage_thread(void *param)
 		if (pool->tracktime == TRUE)
 			start = clock();
 		if (get_task(pool, self, &(self->task)) == TRUE)
-			sdl_complete_task(pool, self, &(self->task), &waittime);
+			sdl_complete_task(pool, self, self->task, &waittime);
 		else if (pool->tracktime == TRUE)
 			waittime += (float)(clock() - start) / CLOCKS_PER_SEC;
 	}
