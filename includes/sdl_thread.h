@@ -41,6 +41,7 @@ typedef struct	s_thread
 	size_t			number;
 	SDL_Thread		*thread;
 	struct s_pool	*pool;
+	t_task			*task;
 	t_state			state;
 }				t_thread;
 
@@ -54,13 +55,16 @@ typedef struct	s_pool
 	t_bool			terminating;
 	t_bool			suspended;
 	size_t			size;
+	t_bool			centralised;
+	SDL_Thread		*manager;
 }				t_pool;
 
 /*
 ** ------------------------------"Face" Functions-------------------------------
 */
 
-t_pool			*sdl_new_pool(size_t size, t_bool tracktime);
+t_pool			*sdl_new_pool(size_t size,
+										t_bool tracktime, t_bool centralised);
 void			sdl_del_pool(t_pool **pool);
 void			sdl_join_pool(const t_pool *pool);
 t_bool			sdl_done_pool(const t_pool *pool);
@@ -76,12 +80,16 @@ SDL_Thread		*sdl_new_thread(const char *name, void (*f)(),
 */
 
 int				sdl_manage_thread(void *param);
+int				sdl_manage_thread_central(void *param);
+int				sdl_manage_thread_worker(void *param);
 t_bool			sdl_que_pool(t_pool *pool, t_bool priority, t_task *task);
 
 /*
 ** -------------------------------Task Functions--------------------------------
 */
 
+void			sdl_complete_task(t_pool *pool, t_thread *self, t_task *task,
+							float *waittime);
 t_bool			sdl_run_task(const t_task *task);
 t_task			*sdl_new_task(void (*f)(), size_t param_count, va_list params);
 

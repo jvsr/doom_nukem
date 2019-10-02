@@ -16,7 +16,8 @@
 #include "sdl_thread.h"
 #include "error.h"
 
-static SDL_Thread	*alloc_thread(size_t number, t_thread *thread)
+static SDL_Thread	*alloc_thread(size_t number,
+										t_thread *thread, t_bool centralised)
 {
 	SDL_Thread	*sdl_thread;
 	char		*name;
@@ -24,7 +25,10 @@ static SDL_Thread	*alloc_thread(size_t number, t_thread *thread)
 	name = ft_strformat("Pool-Thread %zu", number);
 	if (name == NULL)
 		error_msg_errno("Failed to alloc thread name");
-	sdl_thread = SDL_CreateThread(&sdl_manage_thread, name, thread);
+	if (!centralised)
+		sdl_thread = SDL_CreateThread(&sdl_manage_thread, name, thread);
+	else
+		sdl_thread = SDL_CreateThread(&sdl_manage_thread_worker, name, thread);
 	if (thread == NULL)
 		error_msg_sdl(1, "Failed to alloc pool thread");
 	free(name);
@@ -41,7 +45,7 @@ static t_thread		*new_thread(t_pool *pool, size_t number)
 	thread->number = number;
 	thread->state = IDLE;
 	thread->pool = pool;
-	thread->thread = alloc_thread(number, thread);
+	thread->thread = alloc_thread(number, thread, pool->centralised);
 	return (thread);
 }
 
@@ -58,15 +62,23 @@ static void			alloc_threads(t_pool *pool, size_t size)
 	pool->suspended = FALSE;
 }
 
-static void			set_default(t_pool *pool, size_t size, t_bool tracktime)
+static void			set_default(t_pool *pool,
+							size_t size, t_bool tracktime, t_bool centralised)
 {
 	pool->size = size;
 	pool->state = ACTIVE;
 	pool->suspended = TRUE;
 	pool->tracktime = tracktime;
+	pool->centralised = centralised;
+	if (centralised)
+		pool->manager = SDL_CreateThread(sdl_manage_thread_central,
+															"Manager", pool);
+	else
+		pool->manager = NULL;
 }
 
-t_pool				*sdl_new_pool(size_t size, t_bool tracktime)
+t_pool				*sdl_new_pool(size_t size,
+										t_bool tracktime, t_bool centralised)
 {
 	t_pool		*pool;
 
@@ -76,7 +88,7 @@ t_pool				*sdl_new_pool(size_t size, t_bool tracktime)
 	pool->threads = (t_thread **)ft_memalloc(sizeof(t_thread *) * size);
 	if (pool->threads == NULL)
 		error_msg_errno("Failed to alloc thread array");
-	set_default(pool, size, tracktime);
+	set_default(pool, size, tracktime, centralised);
 	alloc_threads(pool, size);
 	return (pool);
 }

@@ -40,6 +40,8 @@ void		sdl_del_pool(t_pool **pool)
 		return ;
 	current = (*pool)->size;
 	(*pool)->terminating = TRUE;
+	if ((*pool)->centralised)
+		SDL_WaitThread((*pool)->manager, NULL);
 	while (current > 0)
 	{
 		current--;
