@@ -15,12 +15,15 @@
 #include "exec.h"
 #include "parse.h"
 #include "gui.h"
+#include "error.h"
 
 static void		prefix_name(char **name, char *prefix)
 {
 	char *result;
 
 	result = ft_strjoin_var(3, prefix, "_", *name);
+	if (result == NULL)
+		error_msg_errno("Failed to prefix elem name");
 	free(*name);
 	*name = result;
 }
