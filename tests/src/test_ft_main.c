@@ -19,7 +19,7 @@
 ** ------------------------------------init-------------------------------------
 */
 
-Test(inits, null, .disabled = true) { //Disabled till virtual audio is fixed
+Test(inits, null, .disabled = true) { //Disabled until virtual audio
 	t_game	*game = init();
 	cr_assert(game->state == running);
 	SDL_DestroyWindow(game->window);
