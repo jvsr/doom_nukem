@@ -66,7 +66,7 @@ static void	lex_check_lf(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(CR, token_amount);
+	new = lex_create_token(LF, token_amount);
 	lex_set_token_value(new, file, index, content_size);
 	lex_add_token(tokens, new);
 	lex_check_indent(tokens, file, index);

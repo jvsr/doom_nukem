@@ -8,6 +8,7 @@
       - draw_method: centered
       - texture: splash/splash.tga
       - dim: 1, 0.2
+
     - button: b_missions
       - pos: 0.85, 0.25
       - dim: 0.7, 0.15

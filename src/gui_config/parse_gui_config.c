@@ -28,22 +28,25 @@ int	id_state(t_token*, t_parse_info**);
 int	colon_name_state(t_token*, t_parse_info**);
 int	space_name_state(t_token*, t_parse_info**);
 int	name_state(t_token*, t_parse_info**);
-int	newline_state(t_token*, t_parse_info**);
+int	newline_name_state(t_token*, t_parse_info**);
+int	indent_state(t_token*, t_parse_info**);
 int	error_state(t_token*, t_parse_info**);
 int	exit_state(t_token*, t_parse_info**);
 
 int (*state[])(t_token*, t_parse_info**) = {
-	entry_state,	dash_state,			space_state,	id_state,
+	entry_state,		dash_state,			space_state,	id_state,
 	colon_name_state,	space_name_state,	name_state,
-	newline_state,	error_state,	exit_state
+	newline_name_state,	indent_state,
+	error_state,		exit_state
 																	};
 enum state_code {
-	entry,			dash,				space,			id,
-	colon_name,			space_name,			name,		
-	newline,		error,			end
+	entry,				dash,				space,			id,
+	colon_name,			space_name,			name,
+	newline_name,		indent,
+	error,				end
 																	};
 enum return_code {
-	ok,		repeat,	fail,	special,	eof,	type,
+	ok,		repeat,	fail,	special,	eot,	eof,	type,
 											 						};
 
 struct s_transition
@@ -66,9 +69,14 @@ const struct s_transition transition_table[] = {
 	{colon_name, fail, error},
 	{space_name, ok, name},
 	{space_name, fail, error},
-	{name, ok, newline},
+	{name, ok, newline_name},
 	{name, fail, error},
-	{newline, fail, error},
+	{newline_name, repeat, newline_name},
+	{newline_name, ok, indent},
+	{newline_name, eot, end},
+	{newline_name, fail, error},
+	{indent, ok, dash},
+	{indent, fail, error},
 };
 
 void	next_token(t_token **token)
@@ -90,6 +98,37 @@ void	set_type(t_parse_info **parse_info, t_gui_type type)
 void	set_name(t_parse_info **parse_info, const char *name)
 {
 	(*parse_info)->name = ft_strdup(name);
+}
+
+int		set_rc_id(const char *id)
+{
+	enum return_code	rc;
+
+	if (ft_strequ(id, "image"))
+		rc = ok;
+	else
+		rc = fail;
+	return (rc);
+}
+
+int		get_type(const char *type)
+{
+	if (ft_strequ(type, "image"))
+		return (IMAGE);
+	else if (ft_strequ(type, "panel"))
+		return (PANEL);
+	else if (ft_strequ(type, "button"))
+		return (BUTTON);
+	return (PANEL);
+}
+
+t_bool	check_type(const char *type)
+{
+	if (ft_strequ(type, "image")
+	|| ft_strequ(type, "panel")
+	|| ft_strequ(type, "button"))
+		return (TRUE);
+	return (FALSE);
 }
 
 int	entry_state(t_token *token, t_parse_info **parse_info)
@@ -135,14 +174,14 @@ int	id_state(t_token* token, t_parse_info **parse_info)
 
 	if (token->next && token->next->type == COLON)
 	{
-		if (first == TRUE)
+		if (check_type(token->token) || first == TRUE)
 		{
-			set_type(parse_info, PANEL);
+			set_type(parse_info, get_type(token->token));
 			rc = type;
 			first = FALSE;
 		}
 		else
-			rc = ok;
+			rc = set_rc_id(token->token);
 	}
 	else
 		rc = fail;
@@ -179,6 +218,7 @@ int	name_state(t_token *token, t_parse_info **parse_info)
 	enum return_code	rc;
 
 	set_name(parse_info, token->token);
+	printf("%u|", token->next->type);
 	if (token->next
 	&& (token->next->type == LF || token->next->type == CRLF))
 		rc = ok;
@@ -187,13 +227,33 @@ int	name_state(t_token *token, t_parse_info **parse_info)
 	return (rc);
 }
 
-int	newline_state(t_token *token, t_parse_info **parse_info)
+int	newline_name_state(t_token *token, t_parse_info **parse_info)
 {
 	enum return_code rc;
 
 	(void)parse_info;
-	(void)token;
-	rc = fail;
+	if (token->token_amount > 1)
+		rc = repeat;
+	else if (token->next && token->next->type == INDENT)
+		rc = ok;
+	else if (token->next && token->next->type == NODENT)
+		rc = fail;
+	else if (token->next && token->next->type == DEDENT)
+		rc = eot;
+	else
+		rc = fail;
+	return (rc);
+}
+
+int	indent_state(t_token *token, t_parse_info **parse_info)
+{
+	enum return_code rc;
+
+	(void)parse_info;
+	if (token->next && token->next->type == DASH)
+		rc = ok;
+	else
+		rc = fail;
 	return (rc);
 }
 
@@ -214,7 +274,7 @@ int	exit_state(t_token* token, t_parse_info **parse_info)
 
 	(void)parse_info;
 	(void)token;
-	rc = fail;
+	rc = ok;
 	return (rc);
 }
 

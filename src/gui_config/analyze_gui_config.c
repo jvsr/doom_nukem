@@ -17,18 +17,21 @@
 
 #include "gui.h"
 #include "lex.h"
+#include "parse.h"
 #include "error.h"
 #include "gui_config.h"
 
 t_transform	*analyze_gui_config(const char *state_name, const char *file_name)
 {
-	t_transform	*result;
-	t_token		*tokens;
+	t_transform		*result;
+	t_token			*tokens;
+	t_parse_info	*parse_info;
 	const int	fd = open_gui_config(file_name);
 
 	result = NULL;
 	tokens = lex_gui_config(fd);
-	parse_gui_config(tokens, state_name);
+	parse_info = parse_gui_config(tokens, state_name);
+	// result = exec_gui_config(NULL, parse_info);
 	close(fd);
 	return (result);
 }
