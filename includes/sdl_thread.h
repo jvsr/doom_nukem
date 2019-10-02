@@ -21,12 +21,12 @@
 
 # define TRACK_TIME FALSE
 
-typedef	enum	e_state
+typedef	enum	e_thread_state
 {
 	IDLE,
 	ACTIVE,
 	LOCKED
-}				t_state;
+}				t_thread_state;
 
 typedef struct	s_task
 {
@@ -42,7 +42,7 @@ typedef struct	s_thread
 	SDL_Thread		*thread;
 	struct s_pool	*pool;
 	t_task			*task;
-	t_state			state;
+	t_thread_state	state;
 }				t_thread;
 
 typedef struct	s_pool
