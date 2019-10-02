@@ -13,10 +13,22 @@
 #ifndef EXEC_H
 # define EXEC_H
 
+# include "gui.h"
+
 typedef struct s_gui		t_gui;
 typedef struct s_transform	t_transform;
 typedef struct s_parse_info	t_parse_info;
 
-t_transform	*exec_new_elem(t_gui *ui, t_parse_info *parse_info);
+typedef struct	s_onclickpair
+{
+	const char	*name;
+	t_onclick	*f;
+}				t_onclickpair;
+
+t_transform		*exec_new_elem(t_gui *ui, t_parse_info *parse_info);
+void			exec_set_gui_text(t_transform *elem, t_parse_info *parse_info);
+void			exec_set_gui_image(t_transform *elem, t_parse_info *parse_info);
+void			exec_set_gui_button(t_transform *elem,
+					t_parse_info *parse_info);
 
 #endif
