@@ -33,7 +33,7 @@ typedef void	(t_onclick)(t_game *, t_transform *);
 
 typedef enum	e_gui_type
 {
-	GUI_UNDFINED = -1,
+	GUI_UNDEFINED = -1,
 	TEXT,
 	IMAGE,
 	BUTTON,
@@ -42,14 +42,14 @@ typedef enum	e_gui_type
 
 typedef enum	e_parent_type
 {
-	PARENT_UNDFINED = -1,
+	PARENT_UNDEFINED = -1,
 	GUI,
 	ELEM
 }				t_parent_type;
 
 typedef	enum	e_font_type
 {
-	FONT_UNDFINED = -1,
+	FONT_UNDEFINED = -1,
 	ROBOTO,
 	MONOF,
 	KARARC,
@@ -58,12 +58,13 @@ typedef	enum	e_font_type
 
 typedef enum	e_draw_method
 {
-	DRAW_METHOD_UNDFINED = -1,
+	DRAW_METHOD_UNDEFINED = -1,
 	SCALED,
 	REPEAT,
 	FIXED,
 	CENTERED,
-	COLOR
+	COLOR,
+	DRAW_METHOD_AMOUNT
 }				t_draw_method;
 
 typedef	union	u_gui_elem
