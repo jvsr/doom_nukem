@@ -29,6 +29,8 @@ typedef struct s_image		t_image;
 typedef struct s_button		t_button;
 typedef struct s_panel		t_panel;
 
+typedef void	(t_onclick)(t_game *, t_transform *);
+
 typedef enum	e_gui_type
 {
 	GUI_UNDFINED = -1,
@@ -89,7 +91,7 @@ struct			s_transform
 	short				layer;
 	t_gui_type			gui_type;
 	t_gui_elem			gui_elem;
-	void				(*onclick)(t_game *, t_transform *);
+	t_onclick			*onclick;
 	void				*user_data;
 	t_bool				clickable;
 	t_bool				moved;
@@ -154,8 +156,7 @@ void			set_elem_image_texture(t_transform *elem, SDL_Surface *texture);
 void			set_elem_image_color(t_transform *elem, SDL_Color color);
 void			set_elem_image_draw_method(t_transform *elem,
 											t_draw_method draw_method);
-void			set_elem_onclick(t_transform *elem,
-									void (*onclick)(t_game *, t_transform *));
+void			set_elem_onclick(t_transform *elem, t_onclick *onclick);
 void			del_text(t_text **text);
 void			del_image(t_image **image);
 void			del_panel(t_panel **panel);
