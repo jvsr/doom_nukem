@@ -1,0 +1,37 @@
+name: Doom-Nukem Master test
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    env:
+      CODECOV_TOKEN: a725e35c-a6da-400e-a56f-ae7b630fc3b2
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: install dependencies
+        run: bash ci/install.bash
+
+      - name: norminettePlus
+        run: bash ci/norminettePlus.bash
+
+      - name: compile and run test
+        run: bash ci/run.bash
+
+      - name: upload coverage tot codecov.io
+        run: bash <(curl -s https://codecov.io/bash) -X gcov
