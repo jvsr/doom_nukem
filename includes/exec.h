@@ -25,10 +25,9 @@ typedef struct	s_onclickpair
 	t_onclick	*f;
 }				t_onclickpair;
 
-t_transform		*exec_new_elem(t_gui *ui, t_parse_info *parse_info);
-void			exec_set_gui_text(t_transform *elem, t_parse_info *parse_info);
-void			exec_set_gui_image(t_transform *elem, t_parse_info *parse_info);
-void			exec_set_gui_button(t_transform *elem,
-					t_parse_info *parse_info);
+t_transform		*exec_new_elem(t_gui *ui, t_parse_info *elem_info);
+void			exec_set_gui_text(t_transform *elem, t_parse_info *elem_info);
+void			exec_set_gui_image(t_transform *elem, t_parse_info *elem_info);
+void			exec_set_gui_button(t_transform *elem, t_parse_info *elem_info);
 
 #endif
