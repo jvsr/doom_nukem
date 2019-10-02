@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <time.h>
+
 #include "libft/ft_printf.h"
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"

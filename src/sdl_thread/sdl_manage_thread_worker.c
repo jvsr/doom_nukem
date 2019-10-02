@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_manage_tread_worker.c                          :+:    :+:            */
+/*   sdl_manage_thread_worker.c                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -9,6 +9,8 @@
 /*   Updated: 2019/10/01 15:02:28 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <time.h>
 
 #include "libft/ft_printf.h"
 #include "libft/ft_mem.h"
