@@ -18,7 +18,7 @@ void	set_elem_moved(t_transform *elem)
 
 	cur = elem;
 	elem->moved = TRUE;
-	if (elem->parent_type == PARENT_UNDFINED)
+	if (elem->parent_type == PARENT_UNDEFINED)
 		return ;
 	while (cur->parent_type == ELEM)
 	{

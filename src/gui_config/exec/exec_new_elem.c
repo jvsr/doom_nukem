@@ -15,30 +15,6 @@
 #include "exec.h"
 #include "parse.h"
 
-/*
-** * typedef struct	s_parse_info
-** * {
-** * 	char				*name;
-** * 	t_gui_type			type;
-** * 	t_coord				pos;
-** * 	t_coord				dim;
-** * 	char				*img;
-** * 	SDL_Color			color;
-** * 	t_draw_method		draw_method;
-** * 	char				*text;
-** * 	SDL_Color			text_color;
-** * 	float				text_size;
-** * 	t_font_type			text_font;
-** * 	t_draw_method		text_draw_method;
-** * 	char				*onclick;
-** * 	short				layer;
-** * 	t_bool				clickable;
-** * 	t_bool				show;
-** * 	struct parse_info	*child;
-** * 	struct parse_info	*next;
-** * }				t_parse_info;
-*/
-
 const t_onclickpair	g_onclicks[] = {
 	{"button_menu_missions", NULL},
 	{"button_menu_options", NULL},
@@ -62,14 +38,12 @@ static t_onclick	*get_onclick(char *onclick)
 
 static void			set_gui_info(t_transform *elem, t_parse_info *elem_info)
 {
-	(void)elem_info;
-	(void)elem;
-	// if (elem->gui_type == TEXT)
-	// 	exec_set_gui_text(elem, elem_info);
-	// else if (elem->gui_type == IMAGE)
-	// 	exec_set_gui_image(elem, elem_info);
-	// else if (elem->gui_type == BUTTON)
-	// 	exec_set_gui_button(elem, elem_info);
+	if (elem->gui_type == TEXT)
+		exec_set_gui_text(elem, elem_info);
+	else if (elem->gui_type == IMAGE)
+		exec_set_gui_image(elem, elem_info);
+	else if (elem->gui_type == BUTTON)
+		exec_set_gui_button(elem, elem_info);
 }
 
 t_transform			*exec_new_elem(t_gui *ui, t_parse_info *elem_info)

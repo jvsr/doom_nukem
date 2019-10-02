@@ -32,6 +32,6 @@ void	del_child(t_transform **children, const char *name)
 		*children = cur->next;
 	else
 		prv->next = cur->next;
-	cur->parent_type = PARENT_UNDFINED;
+	cur->parent_type = PARENT_UNDEFINED;
 	del_elem(&cur);
 }
