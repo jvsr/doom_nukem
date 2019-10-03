@@ -25,7 +25,7 @@ static t_gui	*alloc_ui(void)
 
 	ui = (t_gui *)ft_memalloc(sizeof(t_gui));
 	if (ui == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc UI");
+		error_msg_errno("Failed to alloc UI");
 	return (ui);
 }
 

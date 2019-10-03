@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <SDL2/SDL_mixer.h>
 #include "libft/ft_mem.h"
 #include "game.h"
@@ -22,11 +23,11 @@ void	init_audio(t_game *game)
 
 	game->audio_man = (t_audio_man*)ft_memalloc(sizeof(t_audio_man));
 	if (game->audio_man == NULL)
-		error_msg(SDL_GetError(), 1, "Failed to allocate Audio Manager");
+		error_msg_errno("Failed to allocate Audio Manager");
 	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
 		!= 0)
-		error_msg_sdl(1, "Failed to open Audio Mixer");
+		error_msg_sdl(EIO, "Failed to open Audio Mixer");
 	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
 	if (!(support & MIX_INIT_MP3))
-		error_msg_sdl(1, "Failed to init Audio Mixer");
+		error_msg_sdl(EIO, "Failed to init Audio Mixer");
 }
