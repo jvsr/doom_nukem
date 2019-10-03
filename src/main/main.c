@@ -19,16 +19,6 @@
 #include "init.h"
 #include "audio.h"
 
-static int	destroy(t_game *game)
-{
-	SDL_DestroyWindow(game->window);
-	Mix_Quit();
-	TTF_Quit();
-	SDL_Quit();
-	exit(0);
-	return (0);
-}
-
 int			main(void)
 {
 	t_game *game;
@@ -38,5 +28,5 @@ int			main(void)
 	game = init();
 	splash(game, &isloaded, "splash/splash");
 	loop(game);
-	return (destroy(game));
+	return (quit(game));
 }
