@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <stdlib.h>
 
 #include "libft/ft_mem.h"
@@ -41,6 +42,6 @@ SDL_Thread		*sdl_new_thread(const char *name, void (*f)(),
 	va_end(params);
 	thread = SDL_CreateThread(&run_fnc, name, (void *)task);
 	if (thread == NULL)
-		error_msg_sdl(1, "Failed to alloc new thread");
+		error_msg_sdl(ENOMEM, "Failed to alloc new thread");
 	return (thread);
 }
