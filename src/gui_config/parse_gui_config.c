@@ -21,19 +21,19 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_printf.h"
 
-int	entry_state(t_token*, t_parse_info**);
-int	dash_state(t_token*, t_parse_info**);
-int	space_state(t_token*, t_parse_info**);
-int	id_state(t_token*, t_parse_info**);
-int	colon_name_state(t_token*, t_parse_info**);
-int	space_name_state(t_token*, t_parse_info**);
-int	name_state(t_token*, t_parse_info**);
-int	newline_name_state(t_token*, t_parse_info**);
-int	indent_state(t_token*, t_parse_info**);
-int	error_state(t_token*, t_parse_info**);
-int	exit_state(t_token*, t_parse_info**);
+int	entry_state(t_token**, t_parse_info**);
+int	dash_state(t_token**, t_parse_info**);
+int	space_state(t_token**, t_parse_info**);
+int	id_state(t_token**, t_parse_info**);
+int	colon_name_state(t_token**, t_parse_info**);
+int	space_name_state(t_token**, t_parse_info**);
+int	name_state(t_token**, t_parse_info**);
+int	newline_name_state(t_token**, t_parse_info**);
+int	indent_state(t_token**, t_parse_info**);
+int	error_state(t_token**, t_parse_info**);
+int	exit_state(t_token**, t_parse_info**);
 
-int (*state[])(t_token*, t_parse_info**) = {
+int (*state[])(t_token**, t_parse_info**) = {
 	entry_state,		dash_state,			space_state,	id_state,
 	colon_name_state,	space_name_state,	name_state,
 	newline_name_state,	indent_state,
@@ -131,144 +131,164 @@ t_bool	check_type(const char *type)
 	return (FALSE);
 }
 
-int	entry_state(t_token *token, t_parse_info **parse_info)
+void	create_next(t_parse_info **parse_info)
+{
+	t_parse_info *new;
+
+	new = new_parse_info();
+	(*parse_info)->next = new;
+}
+
+int	entry_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
-	if (token->type == DASH)
+	if ((*token)->type == DASH)
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	dash_state(t_token *token, t_parse_info **parse_info)
+int	dash_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
-	if (token->next && token->next->type == SPACE)
+	if ((*token)->next && (*token)->next->type == SPACE)
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	space_state(t_token *token, t_parse_info **parse_info)
+int	space_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
-	if (token->next && token->next->type == ID)
+	if ((*token)->next && (*token)->next->type == ID)
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	id_state(t_token* token, t_parse_info **parse_info)
+int	id_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 	static t_bool		first = TRUE;
 
-	if (token->next && token->next->type == COLON)
+	if ((*token)->next && (*token)->next->type == COLON)
 	{
-		if (check_type(token->token) || first == TRUE)
+		if (check_type((*token)->token) || first == TRUE)
 		{
-			set_type(parse_info, get_type(token->token));
+			if (first != TRUE)
+			{
+				first = TRUE;
+				create_next(parse_info);
+				id_state(token, &(*parse_info)->next);
+			}
+			set_type(parse_info, get_type((*token)->token));
 			rc = type;
 			first = FALSE;
 		}
+		// else if (check_attr((*token)->token))
+		// 	rc = get_attr((*token)->token);
 		else
-			rc = set_rc_id(token->token);
+			rc = set_rc_id((*token)->token);
 	}
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	colon_name_state(t_token *token, t_parse_info **parse_info)
+int	colon_name_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
-	if (token->next && token->next->type == SPACE)
+	if ((*token)->next && (*token)->next->type == SPACE)
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	space_name_state(t_token *token, t_parse_info **parse_info)
+int	space_name_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
-	if (token->next
-	&& (token->next->type == ID || token->next->type == PLAIN))
+	if ((*token)->next
+	&& ((*token)->next->type == ID || (*token)->next->type == PLAIN))
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	name_state(t_token *token, t_parse_info **parse_info)
+int	name_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
-	set_name(parse_info, token->token);
-	printf("%u|", token->next->type);
-	if (token->next
-	&& (token->next->type == LF || token->next->type == CRLF))
+	set_name(parse_info, (*token)->token);
+	printf("%u|", (*token)->next->type);
+	if ((*token)->next
+	&& ((*token)->next->type == LF || (*token)->next->type == CRLF))
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	newline_name_state(t_token *token, t_parse_info **parse_info)
+int	newline_name_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code rc;
 
 	(void)parse_info;
-	if (token->token_amount > 1)
+	if ((*token)->token_amount > 1)
 		rc = repeat;
-	else if (token->next && token->next->type == INDENT)
+	else if ((*token)->next && (*token)->next->type == INDENT)
 		rc = ok;
-	else if (token->next && token->next->type == NODENT)
-		rc = fail;
-	else if (token->next && token->next->type == DEDENT)
+	else if ((*token)->next && (*token)->next->type == NODENT)
 		rc = eot;
+	else if ((*token)->next && (*token)->next->type == DEDENT)
+	{
+		rc = eot;
+		(*token)->next->type = NODENT;
+		(*token)->next->token_amount++;
+	}
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	indent_state(t_token *token, t_parse_info **parse_info)
+int	indent_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code rc;
 
 	(void)parse_info;
-	if (token->next && token->next->type == DASH)
+	if ((*token)->next && (*token)->next->type == DASH)
 		rc = ok;
 	else
 		rc = fail;
 	return (rc);
 }
 
-int	error_state(t_token* token, t_parse_info **parse_info)
+int	error_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
 	(void)parse_info;
 	error_msg("Failed to parse", 20,
-		ft_strformat("Unrecognized token \"%s\" in parser", token->token));
+		ft_strformat("Unrecognized token \"%s\" in parser", (*token)->token));
 	rc = fail;
 	return (rc);
 }
 
-int	exit_state(t_token* token, t_parse_info **parse_info)
+int	exit_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
@@ -297,7 +317,7 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 	enum return_code	rc;
 	enum state_code		cur_state;
 	t_parse_info		*parse_info;
-	int					(* state_fun)(t_token*, t_parse_info**);
+	int					(* state_fun)(t_token**, t_parse_info**);
 
 	// while (tokens) {
 	// 	tokens = tokens->next;
@@ -308,7 +328,7 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 		ft_printf("curToken: |%s|\n", tokens->token);
 		ft_printf("curState: |%d|\n", cur_state);
 		state_fun = state[cur_state];
-		rc = state_fun(tokens, &parse_info);
+		rc = state_fun(&tokens, &parse_info);
 		if (cur_state == end)
 			break ;
 		if (cur_state != entry)
