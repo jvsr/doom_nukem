@@ -28,7 +28,7 @@ t_image		*new_image(void)
 
 	image = (t_image *)ft_memalloc(sizeof(t_image));
 	if (image == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc image");
+		error_msg_errno("Failed to alloc image");
 	image->draw_method = SCALED;
 	return (image);
 }

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_music_from_mp3.c                               :+:    :+:            */
+/*   error_msg.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/30 14:18:24 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/30 14:18:24 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/03 13:34:48 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/03 13:34:48 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <stdlib.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
-#include "libft/ft_str.h"
-#include "audio.h"
-#include "error.h"
 
-Mix_Music	*get_music_from_mp3(char *file)
+#include "libft/ft_printf.h"
+
+void	error_msg(const char *error_msg, int error_code, const char *msg)
 {
-	char		*str;
-	Mix_Music	*track;
-
-	str = ft_strjoin(MUSIC_LOC, file);
-	track = Mix_LoadMUS(str);
-	if (track == NULL)
-		error_msg_sdl(ENOENT, "Missing Sound");
-	ft_strdel(&str);
-	return (track);
+	ft_dprintf(2, "doom-nukem: Error(%d) - %s (%s)\n",
+	error_code, msg, error_msg);
+	TTF_Quit();
+	Mix_Quit();
+	SDL_Quit();
+	exit(error_code);
 }

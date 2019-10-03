@@ -28,7 +28,7 @@ t_button	*new_button(t_gui *ui)
 
 	button = (t_button *)ft_memalloc(sizeof(t_button));
 	if (button == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc button");
+		error_msg_errno("Failed to alloc button");
 	button->text = new_text(ui);
 	button->image = new_image();
 	return (button);

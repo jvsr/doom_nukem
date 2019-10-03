@@ -37,10 +37,10 @@ t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)
 
 	new = (t_transform *)ft_memalloc(sizeof(t_transform));
 	if (new == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc transform surface");
+		error_msg_errno("Failed to alloc transform surface");
 	new->name = ft_strdup(name);
 	if (new->name == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc transform name");
+		error_msg_errno("Failed to alloc transform name");
 	new->show = TRUE;
 	new->redraw = TRUE;
 	new->gui_type = type;

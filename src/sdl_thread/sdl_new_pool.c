@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+
 #include "libft/ft_printf.h"
 #include "libft/ft_mem.h"
 
@@ -30,7 +32,7 @@ static SDL_Thread	*alloc_thread(size_t number,
 	else
 		sdl_thread = SDL_CreateThread(&sdl_manage_thread_worker, name, thread);
 	if (thread == NULL)
-		error_msg_sdl(1, "Failed to alloc pool thread");
+		error_msg_sdl(ENOMEM, "Failed to alloc pool thread");
 	free(name);
 	return (sdl_thread);
 }

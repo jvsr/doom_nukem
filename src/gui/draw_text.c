@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <SDL2/SDL_rect.h>
 
 #include "libft/ft_char.h"
@@ -31,7 +32,7 @@ static SDL_Surface	*render_text(const char *str, TTF_Font *font,
 
 	text = TTF_RenderText_Blended(font, str, *color);
 	if (text == NULL)
-		error_msg(SDL_GetError(), 1, "Failed to render text");
+		error_msg_sdl(ENOMEM, "Failed to render text");
 	return (text);
 }
 

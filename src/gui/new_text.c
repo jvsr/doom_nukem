@@ -29,7 +29,7 @@ t_text			*new_text(t_gui *ui)
 
 	text = (t_text *)ft_memalloc(sizeof(t_text));
 	if (text == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc text");
+		error_msg_errno("Failed to alloc text");
 	text->draw_method = CENTERED;
 	text->fonts = ui->fonts;
 	text->font_type = ROBOTO;

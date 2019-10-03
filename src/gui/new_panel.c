@@ -28,6 +28,6 @@ t_panel		*new_panel(void)
 
 	panel = (t_panel *)ft_memalloc(sizeof(t_panel));
 	if (panel == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc panel");
+		error_msg_errno("Failed to alloc panel");
 	return (panel);
 }
