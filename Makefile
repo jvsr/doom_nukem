@@ -18,6 +18,9 @@ SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
 NAME = doom-nukem
 PARENTNAME = $(NAME)
 
+# Get Headers Script
+GET_HEADERS = libft/src/get_headers
+
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
@@ -108,10 +111,14 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(LIB) $(SUBLIBS)
+$(NAME): $(GET_HEADERS) $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
+
+# Create Get Headers Script
+$(GET_HEADERS):
+	@make -C libft/.get_headers
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE
@@ -134,7 +141,7 @@ src/$(SUBLIBSPATH)/%.a: FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
 
 # Clean all non .a files
-clean:
+clean: $(GET_HEADERS)
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif

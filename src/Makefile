@@ -56,7 +56,7 @@ include Makefile.$(SRCFOLDER)Srcs
 SRCS := $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
 SRCS := $(sort $(SRCS))
 HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
-HEADERS += $(shell bash get_headers.bash $(INCLUDES) "$(SRCS)")
+HEADERS += $(shell ./../libft/src/get_headers $(INCLUDES) $(SRCS))
 
 # Compile dependencys
 OBJS = $(SRCS:.c=.o)

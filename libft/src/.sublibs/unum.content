@@ -1,0 +1,9 @@
+
+unum/ft_putunum.o 
+unum/ft_putunum_base.o 
+unum/ft_putunum_base_fd.o 
+unum/ft_putunum_cbase.o 
+unum/ft_putunum_cbase_fd.o 
+unum/ft_putunum_fd.o 
+unum/ft_unumlen.o 
+unum/ft_unumlen_base.o

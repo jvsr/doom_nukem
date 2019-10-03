@@ -1,0 +1,12 @@
+
+threadpool/ft_pooldel.o 
+threadpool/ft_pooldone.o 
+threadpool/ft_pooljoin.o 
+threadpool/ft_poolnew.o 
+threadpool/ft_poolqueback.o 
+threadpool/ft_poolquefront.o 
+threadpool/ft_threadnew.o 
+threadpool/tp_addtoque.o 
+threadpool/tp_taskrunfnc.o 
+threadpool/tp_tasksetinfo.o 
+threadpool/tp_threadmanager.o

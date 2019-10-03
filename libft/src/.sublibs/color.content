@@ -1,0 +1,7 @@
+
+color/ft_colorcode.o 
+color/ft_colorhextorgba.o 
+color/ft_colorlcode.o 
+color/ft_colorncode.o 
+color/ft_colorrgbatohex.o 
+color/ft_colorstr.o

@@ -1,31 +1,28 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    get_headers.bash                                   :+:    :+:             #
+#    makefile                                           :+:    :+:             #
 #                                                      +:+                     #
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2019/09/29 14:12:35 by pholster       #+#    #+#                 #
-#    Updated: 2019/09/29 14:12:35 by pholster      ########   odam.nl          #
+#    Created: 2019/10/03 00:30:28 by pholster       #+#    #+#                 #
+#    Updated: 2019/10/03 00:30:28 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-#!/bin/bash
+NAME = ../src/get_headers
+SRC = get_headers sort_headers
+SRC := $(SRC:%=%.c)
 
-INCLUDES_PATH=$1
-TARGET_FILES=$2
+all: $(NAME)
 
-ALL_INCLUDES=""
-for FILE in $TARGET_FILES; do
-	INCLUDES=`cat $FILE | grep "#include \""`
-	INCLUDES=`echo "$INCLUDES" | cut -d'"' -f2 | sed "s,^,$INCLUDES_PATH/,g"`
+$(NAME):
+	@gcc -o $(NAME) $(SRC)
 
-	if [[ $ALL_INCLUDES == "" ]]; then
-		ALL_INCLUDES=$INCLUDES
-	else
-		ALL_INCLUDES=$ALL_INCLUDES"\n"$INCLUDES
-	fi
-done
+clean:
 
-ALL_INCLUDES=`echo -e "$ALL_INCLUDES" | sort -u`
-echo "$ALL_INCLUDES"
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean
+	@$(MAKE)
