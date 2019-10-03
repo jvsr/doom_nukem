@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_character.h"
-#include "ft_string.h"
-#include "ft_number.h"
+#include "ft_char.h"
+#include "ft_str.h"
+#include "ft_num.h"
 
 static size_t	addprefix(t_info *info, char *str, size_t n)
 {

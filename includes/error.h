@@ -13,6 +13,8 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-void	error_msg(const char *msg, int error_code);
+void	error_msg_errno(const char *msg);
+void	error_msg_sdl(int error_code, const char *msg);
+void	error_msg(const char *error_msg, int error_code, const char *msg);
 
 #endif

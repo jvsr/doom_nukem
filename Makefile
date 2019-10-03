@@ -6,12 +6,13 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/09/09 13:17:28 by jvisser       ########   odam.nl          #
+#    Updated: 2019/09/06 16:13:13 by pholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader map
+SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
+			audio keymap
 
 # Executibale name
 NAME = doom-nukem
@@ -20,7 +21,7 @@ PARENTNAME = $(NAME)
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
-CCOPTIMISE =
+CCOPTIMISE = -O1
 
 # Gcov settings
 GCOV = FALSE
@@ -53,6 +54,19 @@ FRAMEWORKINCLUDES = $(FRAMEWORKPATH)/include
 
 # SDL2 dependency
 SDL2LIB = -L$(FRAMEWORKPATH)/lib -lSDL2
+
+# SDL2_TTF dependency
+SDL2TTF = -L$(FRAMEWORKPATH)/lib -lSDL2_ttf
+
+# SDL2_Mix dependency
+SDL2MIX = -L$(FRAMEWORKPATH)/lib -lSDL2_mixer
+
+# All libs for compilation
+LIBS = $(LIB) $(SDL2LIB) $(SDL2TTF) $(SDL2MIX)
+
+ifeq ($(shell uname -s), Linux)
+LIBS += -lm
+endif
 
 # Sublib info
 SUBLIBSPATH = .sublibs
@@ -87,6 +101,8 @@ export PARENTNAME
 export FRAMEWORKPATH
 export FRAMEWORKINCLUDES
 export SDL2LIB
+export SDL2TTF
+export SDL2MIX
 export LIBFT_DISABLE_GCOV
 
 all: $(NAME)
@@ -95,7 +111,7 @@ all: $(NAME)
 $(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -coverage -o $(NAME) $(OBJS) $(LIB) $(SDL2LIB)
+	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE
@@ -141,7 +157,8 @@ endif
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
 
 # Recompile
-re: fclean $(NAME)
+re: fclean
+	$(MAKE)
 
 FORCE: ;
 

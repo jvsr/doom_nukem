@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_hash.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
 static t_hashlist	*newlst(const void *key, size_t keysize, void *value)
 {

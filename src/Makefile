@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/27 13:38:18 by ehollidg      ########   odam.nl          #
+#    Updated: 2019/08/29 14:04:57 by ehollidg      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ PARENTNAME =
 FRAMEWORKPATH =
 FRAMEWORKINCLUDES =
 SDL2LIB =
+SDL2TTF =
+SDL2MIX =
 
 # Input values for compile (From parrent makefile)
 CCSILENT =
@@ -42,6 +44,7 @@ include $(MAKEINCLUDES)/Makefile.color
 
 # Compile flags
 CCFLAGS = -g $(CCSTRICT) -I$(INCLUDES) -I$(FRAMEWORKINCLUDES) $(CCOPTIMISE)
+
 ifeq ($(GCOV), TRUE)
 CCFLAGS += -coverage
 endif
@@ -50,7 +53,7 @@ endif
 include Makefile.$(SRCFOLDER)Srcs
 
 # Dependency prefix
-HEADERS := $(HEADERS:%=$(INCLUDES)/%)
+HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
 HEADERS := $(sort $(HEADERS))
 SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
 SRCS := $(sort $(SRCS))
@@ -107,7 +110,8 @@ endif
 fclean: clean
 
 # Recompile
-re: clean all
+re: fclean
+	$(MAKE)
 
 FORCE: ;
 

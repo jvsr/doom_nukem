@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_character.h"
-#include "ft_string.h"
+#include "ft_char.h"
+#include "ft_str.h"
 
 size_t		pf_commands(t_info *info, const char *str)
 {
@@ -21,17 +21,17 @@ size_t		pf_commands(t_info *info, const char *str)
 	len = ft_strislen(str, &ft_isdigit);
 	if (*str == ']')
 	{
-		pf_addtobuff(info, "\e[0m", 5);
+		pf_addtobuff(info, "\033[0m", 5);
 		return (2);
 	}
 	if (ft_strnequ_nocase(str, "clr]", 4))
 	{
-		pf_addtobuff(info, "\e[1;1H\e[2J\n", 12);
+		pf_addtobuff(info, "\033[1;1H\033[2J\n", 12);
 		return (5);
 	}
 	if (len != 0 && str[len] == ']')
 	{
-		pf_addtobuff(info, "\e[", 3);
+		pf_addtobuff(info, "\033[", 3);
 		pf_addtobuff(info, str, len);
 		pf_addtobuff(info, "m", 1);
 		return (2 + len);

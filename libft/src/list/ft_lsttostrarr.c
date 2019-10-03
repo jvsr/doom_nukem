@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
-#include "ft_string.h"
-#include "ft_stringarray.h"
+#include "ft_str.h"
+#include "ft_strarr.h"
 
 static char	**freeret(char **arr)
 {
@@ -20,7 +20,7 @@ static char	**freeret(char **arr)
 	return (NULL);
 }
 
-char		**ft_lsttostrarr(const t_list *lst)
+char		**ft_lsttostrarr(t_list *lst)
 {
 	t_list	*current;
 	char	**arr;
@@ -35,7 +35,7 @@ char		**ft_lsttostrarr(const t_list *lst)
 	arr = ft_strarrnew(len);
 	if (arr == NULL)
 		return (NULL);
-	current = (t_list *)lst;
+	current = lst;
 	while (current != NULL)
 	{
 		str = ft_strdup((char *)current->content);

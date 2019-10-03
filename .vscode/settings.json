@@ -1,30 +1,11 @@
 {
     "files.associations": {
-        "*.mainSrcs": "makefile",
-        "sdl.h": "c",
-        "error.h": "c",
-        "game.h": "c",
-        "libft.h": "c",
-        "init.h": "c",
-        "locale": "c",
-        "string": "c",
-        "time.h": "c",
-        "coord.h": "c",
-        "color.h": "c",
-        "Makefile*": "makefile",
-        "criterion.h": "c",
-        "ios": "c",
-        "test.h": "c",
-        "tga.h": "c",
-        "unistd.h": "c",
-        "io.h": "c",
-        "sdl_pixels.h": "c",
-        "sdl_surface.h": "c",
-        "sdl_rect.h": "c",
-        "stdint.h": "c",
-        "_uint32_t.h": "c",
-        "sdl_keycode.h": "c",
-        "sdl_video.h": "c",
-        "errno.h": "c"
-    }
+		"*.h": "c",
+		"Makefile.*": "makefile",
+		"sdl2_mixer": "ruby",
+		"iterator": "c",
+		"cerrno": "c",
+		"locale": "c",
+		"string": "c"
+	}
 }

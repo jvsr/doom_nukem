@@ -12,13 +12,13 @@
 
 #include "ft_color.h"
 
-t_color		ft_colorrgbatohex(t_color r, t_color g, t_color b, t_color a)
+t_uint32		ft_colorrgbatohex(t_color rgba)
 {
-	t_color	color;
+	t_uint32	hex;
 
-	color = r;
-	color |= ((long long)g << 8);
-	color |= ((long long)b << 16);
-	color |= ((long long)a << 24);
-	return (color);
+	hex = (t_uint32)(rgba.a << 24);
+	hex |= (t_uint32)(rgba.r << 16);
+	hex |= (t_uint32)(rgba.g << 8);
+	hex |= (t_uint32)rgba.b;
+	return (hex);
 }

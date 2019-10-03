@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
-#include "ft_memory.h"
+#include "ft_mem.h"
 
 t_bool		ft_lstsortstrac(const t_list *sortlst, const t_list *lst)
 {
