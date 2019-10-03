@@ -51,7 +51,7 @@ static	void	init_window_surface(t_game *game)
 		INIT_HEIGHT,
 		SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MOUSE_FOCUS);
 	if (game->window == NULL)
-		error_msg_sdl(1, "Failed to alloc game window");
+		error_msg_sdl(ENOMEM, "Failed to alloc game window");
 	game->surface = SDL_GetWindowSurface(game->window);
 }
 

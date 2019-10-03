@@ -20,4 +20,4 @@ FT_SRCS =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = main init error loop splash quit
+SRCS = main init error_msg loop splash quit error_msg_sdl error_msg_errno
