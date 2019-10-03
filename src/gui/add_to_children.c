@@ -24,7 +24,7 @@ static void	duplicate_error(const char *name)
 {
 	const char	*msg = ft_strformat("Failed to add '%s'", name);
 
-	error_msg("Elem name allready in use", EPERM, msg);
+	error_msg("Elem name already in use", EPERM, msg);
 }
 
 static void	check_duplicate(t_transform *cur, const char *name)
