@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   quit.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/25 15:39:48 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/03 12:49:32 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/03 12:49:32 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@
 #include "init.h"
 #include "audio.h"
 
-int			main(void)
+int		quit(t_game *game)
 {
-	t_game *game;
-	t_bool isloaded;
-
-	isloaded = TRUE;
-	game = init();
-	splash(game, &isloaded, "splash/splash");
-	loop(game);
-	return (quit(game));
+	SDL_DestroyWindow(game->window);
+	Mix_Quit();
+	TTF_Quit();
+	SDL_Quit();
+	exit(0);
+	return (0);
 }
