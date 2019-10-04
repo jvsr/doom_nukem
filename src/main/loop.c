@@ -53,7 +53,8 @@ void			loop(t_game *game)
 {
 	SDL_Event	event;
 
-	analyze_gui_config(game->ui, "main", "mainmenu");
+	t_transform *panel = analyze_gui_config(game->ui, "main", "mainmenu");
+	add_gui_child(game->ui, panel);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))

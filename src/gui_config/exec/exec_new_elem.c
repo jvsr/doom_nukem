@@ -26,6 +26,8 @@ static t_onclick	*get_onclick(char *onclick)
 	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
 	size_t			i;
 
+	if (onclick == NULL)
+		return (NULL);
 	i = 0;
 	while (i < size)
 	{

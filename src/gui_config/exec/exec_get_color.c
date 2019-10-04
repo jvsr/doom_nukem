@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_mem.h"
 #include "libft/ft_char.h"
 #include "libft/ft_str.h"
 
@@ -30,11 +29,12 @@ void			exec_get_color(SDL_Color *color, char *color_string)
 {
 	const size_t	len = ft_strlen(color_string);
 
-	ft_bzero(color, sizeof(SDL_Color));
 	ft_strtoupper(color_string);
 	color->r = convert_2(&color_string[0]);
 	color->g = convert_2(&color_string[2]);
 	color->b = convert_2(&color_string[4]);
 	if (len == 8)
 		color->a = convert_2(&color_string[6]);
+	else
+		color->a = 255;
 }

@@ -1,6 +1,6 @@
 - main: main
   - image: background
-    - color: #007033
+    - color: #00703F
   - panel: menu
     - pos: 0.75, 0.9
     - dim: 0.5, 0.8
