@@ -262,13 +262,14 @@ int	id_state(t_token **token, t_parse_info **parse_info)
 	{
 		if (check_type((*token)->token) || first == TRUE)
 		{
+			ft_putstr("INFIRST\n");
 			if (first != TRUE)
 			{
 				first = TRUE;
 				create_next(parse_info);
-				ft_putstr("IN");
+				ft_putstr("IN\n");
 				id_state(token, &(*parse_info)->next);
-				ft_putstr("OUT");
+				ft_putstr("OUT\n");
 			}
 			set_type(parse_info, get_type((*token)->token));
 			rc = type;
