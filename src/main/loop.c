@@ -14,6 +14,8 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
 
+#include "libft/ft_char.h"
+
 #include "gui_config.h"
 #include "gui.h"
 #include "game.h"
@@ -54,6 +56,8 @@ void			loop(t_game *game)
 	SDL_Event	event;
 
 	t_transform *panel = analyze_gui_config(game->ui, "main", "mainmenu");
+	ft_putchar('\n');
+	print_elem(panel, TRUE);
 	add_gui_child(game->ui, panel);
 	while (game->state == running)
 	{
