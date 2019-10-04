@@ -26,7 +26,7 @@ function updateXcode {
 		awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n'`
 	softwareupdate -i "$PROD" --verbose
 
-	# rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+	rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 }
 
 if [ -z $GITHUB_ACTION ]; then
@@ -35,5 +35,5 @@ fi
 
 brew install pkg-config
 brew install libmodplug libvorbis mpg123 flac opus
-brew install --build-from-source "$SELF_LOCATION/sdl2_mixer.rb"
+brew reinstall --build-from-source "$SELF_LOCATION/sdl2_mixer.rb"
 brew link sdl2_mixer flac opus mpg123 pkg-config libmodplug libvorbis
