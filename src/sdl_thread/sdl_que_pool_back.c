@@ -16,7 +16,7 @@
 
 #include "sdl_thread.h"
 
-static void		get_lock(t_pool *pool, t_state *state)
+static void		get_lock(t_pool *pool, t_thread_state *state)
 {
 	*state = atomic_exchange(&(pool->state), LOCKED);
 	while (*state == LOCKED)
@@ -26,9 +26,9 @@ static void		get_lock(t_pool *pool, t_state *state)
 t_bool			sdl_que_pool_back(t_pool *pool, void (*f)(),
 									size_t param_count, ...)
 {
-	va_list		params;
-	t_state		state;
-	t_task		*task;
+	va_list				params;
+	t_thread_state		state;
+	t_task				*task;
 
 	if (param_count > 4 || pool->terminating)
 		return (FALSE);

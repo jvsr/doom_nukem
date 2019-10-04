@@ -63,7 +63,7 @@ void		str_to_img(t_img *img, t_tga *tga, unsigned char *str)
 	img->pixels = (unsigned int*)ft_memalloc(sizeof(unsigned int) *
 		(img->height * img->width));
 	if (img->pixels == NULL)
-		error_msg(strerror(errno), errno, "Failed to allocate tga pixels");
+		error_msg_errno("Failed to allocate tga pixels");
 	if ((img->origin & 0x20) == 0)
 		bottomleft(img, tga, str);
 	else

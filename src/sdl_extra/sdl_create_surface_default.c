@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_surface.h>
 
@@ -28,6 +29,6 @@ SDL_Surface	*sdl_create_surface_default(SDL_Point size)
 		0x000000FF,
 		0xFF000000);
 	if (new == NULL)
-		error_msg(SDL_GetError(), 1, "Failed to alloc new surface");
+		error_msg_sdl(ENOMEM, "Failed to alloc new surface");
 	return (new);
 }

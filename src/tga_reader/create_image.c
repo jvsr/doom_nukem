@@ -29,7 +29,7 @@ static int	open_tga_file(const char *file_name)
 	ft_strcat(full_path, ".tga");
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
-		error_msg(strerror(errno), errno, "Failed to open tga file");
+		error_msg_errno("Failed to open tga file");
 	return (fd);
 }
 
@@ -59,13 +59,13 @@ void		create_image(const char *file_name, t_img *img)
 	fd = open_tga_file(file_name);
 	ft_readfile(fd, (char**)&file_stream);
 	if (file_stream == NULL)
-		error_msg(strerror(errno), errno, "Failed to read tga file");
+		error_msg_errno("Failed to read tga file");
 	close(fd);
 	set_tga_header(file_stream, &tga, img);
 	if (tga.img_type == 0)
 	{
 		ft_strdel((char**)&file_stream);
-		error_msg("Invalid tga format", 1, "");
+		error_msg("Invalid tga format", EPERM, "Failed to read file");
 	}
 	str_to_img(img, &tga, file_stream);
 	ft_strdel((char**)&file_stream);
