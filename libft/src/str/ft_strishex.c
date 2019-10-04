@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isdigitstr.c                                    :+:    :+:            */
+/*   ft_ishexstr.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -13,13 +13,10 @@
 #include "ft_str.h"
 #include "ft_char.h"
 
-t_bool		ft_isdigitstr(const char *str)
+t_bool		ft_strishex(const char *str)
 {
 	size_t	len;
 
-	len = 0;
-	if (str[0] == '+' || str[0] == '-')
-		len++;
-	len += ft_strislen(&str[len], &ft_isdigit);
+	len = ft_strislen(str, &ft_ishex);
 	return (str[len] == '\0');
 }
