@@ -145,7 +145,7 @@ typedef struct	s_level
 	t_coord		player_start_pos;
 	t_uint16	player_start_angle;
 	t_enemy		**all_enemy; //Keep linked list to allow spawning while in level
-	t_uint8		num_sector;
+	t_uint16	num_sector;
 	t_sector	**all_sector;
 	t_uint16	num_wall;
 	t_wall		**all_wall;
