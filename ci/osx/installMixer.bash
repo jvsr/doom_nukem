@@ -34,5 +34,6 @@ if [ -z $GITHUB_ACTION ]; then
 fi
 
 brew install pkg-config
-brew install --build-from-source "$SELF_LOCATION/sdl2_mixer"
+brew install libmodplug libvorbis mpg123 flac opus
+brew install --build-from-source "$SELF_LOCATION/sdl2_mixer.rb"
 brew link sdl2_mixer flac opus mpg123 pkg-config libmodplug libvorbis
