@@ -100,7 +100,7 @@ endif
 
 # Recompile
 re: fclean
-	$(MAKE)
+	@$(MAKE)
 
 FORCE: ;
 

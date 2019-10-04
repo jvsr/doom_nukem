@@ -112,7 +112,7 @@ fclean: clean
 
 # Recompile
 re: fclean
-	$(MAKE)
+	@$(MAKE)
 
 FORCE: ;
 
