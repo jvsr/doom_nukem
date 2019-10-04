@@ -19,7 +19,8 @@ PREFIX =
 # These will be automaticly prefixed with ft_ and sufixed with .c
 FT_SRCS = chrdin chrdindex chrin chrinbytes chrindex chrnin chrsetbytes \
 	chrtostr getchar isalnum isalpha isascii isblank isdigit islower isprint \
-	isspace isupper putchar putchar_fd putnchar putnchar_fd tolower toupper
+	isspace isupper putchar putchar_fd putnchar putnchar_fd tolower toupper \
+	ishex
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c

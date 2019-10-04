@@ -52,6 +52,7 @@ char			*ft_strtolower(char *str);
 char			*ft_strtoupper(char *str);
 char			*ft_strtrim(const char *str);
 t_bool			ft_isdigitstr(const char *str);
+t_bool			ft_ishexstr(const char *str);
 int				ft_strcmp_nocase(const char *str1, const char *str2);
 int				ft_strcmp(const char *str1, const char *str2);
 int				ft_strncmp_nocase(const char *str1, const char *str2, size_t n);

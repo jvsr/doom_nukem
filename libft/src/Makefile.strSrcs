@@ -25,7 +25,7 @@ FT_SRCS = getnextdline getnextline isdigitstr putendl putendl_fd puterror \
 	strmap strmapi strmatch strmatchlen strmatchlen_nocase strncat strncmp \
 	strncmp_nocase strncpy strndup strnequ strnequ_nocase strnew strnin \
 	strnindex strnlen strnstr strrchr strreplace strrev strsplit strstr strsub \
-	strtolower strtoupper strtrim wrddcount
+	strtolower strtoupper strtrim wrddcount ishexstr
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c

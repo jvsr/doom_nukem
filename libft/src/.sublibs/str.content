@@ -2,6 +2,7 @@
 str/ft_getnextdline.o 
 str/ft_getnextline.o 
 str/ft_isdigitstr.o 
+str/ft_ishexstr.o 
 str/ft_putendl.o 
 str/ft_putendl_fd.o 
 str/ft_puterror.o 

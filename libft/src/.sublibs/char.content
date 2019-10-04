@@ -13,6 +13,7 @@ char/ft_isalpha.o
 char/ft_isascii.o 
 char/ft_isblank.o 
 char/ft_isdigit.o 
+char/ft_ishex.o 
 char/ft_islower.o 
 char/ft_isprint.o 
 char/ft_isspace.o 
