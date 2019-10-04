@@ -143,7 +143,6 @@ ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif
 	@$(SUBLIBS_CLEAN)
-	@$(MAKE) -s -e -C $(LIBPATH) clean
 
 # Clean all .a files
 fclean: clean
@@ -154,11 +153,22 @@ ifneq ($(FCLEAN),)
 	@$(call FNC_PRINT_DEL,$(NAME),fclean $(FCLEAN:src/$(SUBLIBSPATH)/%=%))
 	@rm -f $(NAME) $(SUBLIBS)
 endif
+
+# Clean $(LIB)
+lib_clean:
+	@$(MAKE) -s -e -C $(LIBPATH) clean
+
+# Fclean $(LIB)
+lib_fclean: lib_clean
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
 
-# Recompile
+# Recompile only the project
 re: fclean
-	$(MAKE)
+	@$(MAKE)
+
+# Recompile the $(LIB) and project
+re_all: lib_fclean fclean
+	@$(MAKE)
 
 FORCE: ;
 
