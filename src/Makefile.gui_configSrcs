@@ -21,6 +21,7 @@ FT_SRCS =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 EXEC_SRCS = exec_gui_config \
+		exec_get_color \
 		exec_new_elem \
 		exec_set_gui_text \
 		exec_set_gui_image \

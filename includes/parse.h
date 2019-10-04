@@ -16,6 +16,7 @@
 # include <SDL2/SDL_pixels.h>
 
 # include "gui.h"
+# include "types.h"
 # include "coord.h"
 
 typedef struct	s_parse_info
@@ -25,10 +26,10 @@ typedef struct	s_parse_info
 	t_coord				pos;
 	t_coord				dim;
 	char				*img;
-	SDL_Color			color;
+	char				*color;
 	t_draw_method		draw_method;
 	char				*text;
-	SDL_Color			text_color;
+	char				*text_color;
 	float				text_size;
 	t_font_type			text_font;
 	t_draw_method		text_draw_method;

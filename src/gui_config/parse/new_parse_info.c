@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "parse.h"
 #include "error.h"
@@ -33,7 +34,7 @@ t_parse_info		*new_parse_info(void)
 	parse_info->type = GUI_UNDEFINED;
 	parse_info->dim = (t_coord){1, 1};
 	parse_info->draw_method = DRAW_METHOD_UNDEFINED;
-	parse_info->text_color = (SDL_Color){255, 255, 255, 255};
+	parse_info->text_color = ft_strdup("FFFFFFFF");
 	parse_info->text_size = 1;
 	parse_info->text_font = FONT_UNDEFINED;
 	parse_info->text_draw_method = DRAW_METHOD_UNDEFINED;
