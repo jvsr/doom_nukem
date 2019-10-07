@@ -29,12 +29,11 @@ static void	convert_channel(char *dst, t_uint8 channel)
 char		*color_to_hex(SDL_Color c, t_bool include_alpha)
 {
 	char	*hex;
-	size_t	len;
 
-	len = 6;
 	if (include_alpha == FALSE)
-		len += 2;
-	hex = ft_strnew(len);
+		hex = ft_strnew(6);
+	else
+		hex = ft_strnew(8);
 	if (hex == NULL)
 		error_msg_errno("Failed to alloc hex");
 	convert_channel(&hex[0], c.r);
