@@ -18,6 +18,7 @@
 #include "game.h"
 #include "init.h"
 #include "audio.h"
+#include "serializer.h"
 
 int			main(void)
 {
@@ -25,6 +26,8 @@ int			main(void)
 	t_bool isloaded;
 
 	isloaded = TRUE;
+
+	write_struct("help.txt", "sup", 3);
 	game = init();
 	splash(game, &isloaded, "splash/splash");
 	loop(game);
