@@ -17,6 +17,7 @@
 #include "tga.h"
 #include "exec.h"
 #include "parse.h"
+#include "color.h"
 #include "error.h"
 
 static void	validate(t_parse_info *elem_info)
@@ -35,7 +36,7 @@ void		exec_set_gui_image(t_transform *elem, t_parse_info *elem_info)
 	SDL_Color	color;
 
 	validate(elem_info);
-	exec_get_color(&color, elem_info->color);
+	hex_to_color(&color, elem_info->color);
 	set_elem_image_color(elem, color);
 	if (elem_info->img != NULL)
 		set_elem_image_texture(elem, open_tga_sdl(elem_info->img));

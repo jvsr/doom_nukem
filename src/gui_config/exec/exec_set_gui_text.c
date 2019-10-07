@@ -16,6 +16,7 @@
 #include "gui.h"
 #include "exec.h"
 #include "parse.h"
+#include "color.h"
 #include "error.h"
 
 static void	validate(t_parse_info *elem_info)
@@ -36,7 +37,7 @@ void		exec_set_gui_text(t_transform *elem, t_parse_info *elem_info)
 	SDL_Color	text_color;
 
 	validate(elem_info);
-	exec_get_color(&text_color, elem_info->text_color);
+	hex_to_color(&text_color, elem_info->text_color);
 	set_elem_text_str(elem, elem_info->text);
 	set_elem_text_color(elem, text_color);
 	set_elem_text_size(elem, elem_info->text_size);
