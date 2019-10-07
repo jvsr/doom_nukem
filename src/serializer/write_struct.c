@@ -13,6 +13,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "libft/ft_bool.h"
+#include "libft/ft_printf.h"
+#include "error.h"
 
 t_bool	write_struct(char *loc,void *obj, size_t size)
 {
