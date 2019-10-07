@@ -21,9 +21,8 @@ static void	convert_channel(char *dst, t_uint8 channel)
 {
 	const char	*base_str = "0123456789ABCDEF";
 
+	dst[0] = base_str[(channel / 16)];
 	dst[1] = base_str[(channel % 16)];
-	channel /= 16;
-	dst[0] = base_str[(channel % 16)];
 }
 
 char		*color_to_hex(SDL_Color c, t_bool include_alpha)
