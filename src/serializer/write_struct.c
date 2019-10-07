@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <fcntl.h>
-#include "serializer.h"
+#include "libft/ft_bool.h"
 
-t_bool	write_struct(char *loc, char *obj, size_t size)
+t_bool	write_struct(char *loc,void *obj, size_t size)
 {
-	int id;
+	int fd;
 
-	id = open(loc, O_RDONLY);
-	if (id != -1)
-		return FALSE;
-	id = creat(loc, O_CREAT|O_WRONLY|O_TRUNC);
-	write(id, obj, size);
-	close(id);
+	fd = open(loc, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+	if (fd == -1)
+		error_msg_errno(ft_strformat("Failed to open %s", loc));
+	if (write(fd, obj, size) == -1)
+		error_msg_errno(ft_strformat("Failed to write to %s", loc));
+	close(fd);
 	return TRUE;
 }

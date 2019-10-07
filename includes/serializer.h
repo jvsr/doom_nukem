@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include "libft/ft_bool.h"
 
-t_bool	write_struct(char *loc, char *obj, size_t size);
+t_bool			write_struct(char *loc,void *obj, size_t size);
+unsigned char	*read_struct(char *loc);
 
 #endif
