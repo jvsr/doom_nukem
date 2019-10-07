@@ -27,6 +27,12 @@ typedef union	u_convert
 	unsigned char	*stream;
 }				t_convert;
 
+typedef struct 	s_binary
+{
+	unsigned char	*content;
+	unsigned char	*header;
+}				t_binary;
+
 t_bool			write_struct(char *loc,void *obj, size_t size);
 unsigned char	*read_struct(char *loc);
 void			add_type(unsigned char **bytes,
