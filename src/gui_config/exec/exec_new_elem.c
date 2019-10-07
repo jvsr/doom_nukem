@@ -15,29 +15,6 @@
 #include "exec.h"
 #include "parse.h"
 
-const t_onclickpair	g_onclicks[] = {
-	{"button_menu_missions", NULL},
-	{"button_menu_options", NULL},
-	{"button_menu_quit", NULL},
-};
-
-static t_onclick	*get_onclick(char *onclick)
-{
-	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
-	size_t			i;
-
-	if (onclick == NULL)
-		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		if (ft_strequ_nocase(onclick, g_onclicks[i].name))
-			return (g_onclicks[i].f);
-		i++;
-	}
-	return (NULL);
-}
-
 static void			set_gui_info(t_transform *elem, t_parse_info *elem_info)
 {
 	if (elem->gui_type == TEXT)
@@ -55,7 +32,7 @@ t_transform			*exec_new_elem(t_gui *ui, t_parse_info *elem_info)
 	elem = new_elem(ui, elem_info->name, elem_info->type);
 	set_elem_pos(elem, elem_info->pos);
 	set_elem_dim(elem, elem_info->dim);
-	set_elem_onclick(elem, get_onclick(elem_info->onclick));
+	set_elem_onclick(elem, get_onclick_f(elem_info->onclick));
 	set_elem_layer(elem, elem_info->layer);
 	set_elem_clickable(elem, elem_info->clickable);
 	set_elem_show(elem, elem_info->show);
