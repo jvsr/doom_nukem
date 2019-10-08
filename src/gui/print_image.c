@@ -12,10 +12,15 @@
 
 #include "libft/ft_printf.h"
 
+#include "color.h"
 #include "gui.h"
 
 void	print_image(t_image *image)
 {
-	ft_printf("Image:\n  Draw method: %s\n",
-	get_draw_method_name(image->draw_method));
+	char	*color_hex;
+
+	color_hex = color_to_hex(image->color, TRUE);
+	ft_printf("Image:\n  Color: %s\n  Draw method: %s\n",
+	color_hex, get_draw_method_name(image->draw_method));
+	free(color_hex);
 }
