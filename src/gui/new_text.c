@@ -25,7 +25,8 @@
 
 t_text			*new_text(t_gui *ui)
 {
-	t_text *text;
+	t_text 		*text;
+	SDL_Color	color;
 
 	text = (t_text *)ft_memalloc(sizeof(t_text));
 	if (text == NULL)
@@ -34,6 +35,7 @@ t_text			*new_text(t_gui *ui)
 	text->fonts = ui->fonts;
 	text->font_type = ROBOTO;
 	text->size = 1;
-	text->color = (SDL_Color){255, 255, 255, 0};
+	color = (SDL_Color){255, 255, 255, 0};
+	ft_memcpy(&text->color, &color, sizeof(SDL_Color));
 	return (text);
 }
