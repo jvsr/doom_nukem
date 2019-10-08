@@ -51,5 +51,5 @@ t_gui_type		get_gui_type_value(char *name)
 			return (g_gui_types[i].value);
 		i++;
 	}
-	return (GUI_UNDEFINED);
+	return (PANEL);
 }

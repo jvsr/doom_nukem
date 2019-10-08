@@ -52,7 +52,7 @@ void	lex_check_indent(t_token **tokens, const char *const file,
 	else if (token_amount < previous_indent)
 		new = lex_create_token(DEDENT, previous_indent - token_amount);
 	else
-		new = lex_create_token(NODENT, 0);
+		new = lex_create_token(NODENT, 1);
 	previous_indent = token_amount;
 	lex_set_token_value(new, file, index, content_size);
 	lex_add_token(tokens, new);

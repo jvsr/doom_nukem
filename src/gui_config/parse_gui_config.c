@@ -25,35 +25,43 @@ int	entry_state(t_token**, t_parse_info**);
 int	dash_state(t_token**, t_parse_info**);
 int	space_state(t_token**, t_parse_info**);
 int	id_state(t_token**, t_parse_info**);
+
 int	colon_name_state(t_token**, t_parse_info**);
 int	colon_color_state(t_token**, t_parse_info**);
+int	colon_pos_state(t_token**, t_parse_info**);
+
 int	space_name_state(t_token**, t_parse_info**);
 int	space_color_state(t_token**, t_parse_info**);
+int	space_pos_state(t_token**, t_parse_info**);
+
 int	hash_color_state(t_token**, t_parse_info**);
 int	hex_color_state(t_token**, t_parse_info**);
 int	newline_attr_state(t_token**, t_parse_info**);
 int	name_state(t_token**, t_parse_info**);
 int	newline_name_state(t_token**, t_parse_info**);
 int	indent_state(t_token**, t_parse_info**);
+int	padding_state(t_token**, t_parse_info**);
 int	error_state(t_token**, t_parse_info**);
 int	exit_state(t_token**, t_parse_info**);
 
 int (*state[])(t_token**, t_parse_info**) = {
 	entry_state,		dash_state,			space_state,		id_state,
-	colon_name_state,	colon_color_state,	space_name_state,	space_color_state,
+	colon_name_state,	colon_color_state,	colon_pos_state,
+	space_name_state,	space_color_state,	space_pos_state,
 	hash_color_state,	hex_color_state,	newline_attr_state,	name_state,
-	newline_name_state,	indent_state,
-	error_state,		exit_state
+	newline_name_state,	indent_state,		padding_state,
+	error_state,		exit_state,
 																	};
 enum state_code {
 	entry,				dash,				space,				id,
-	colon_name,			colon_color, 		space_name,			space_color,
+	colon_name,			colon_color, 		colon_pos,
+	space_name,			space_color,		space_pos,
 	hash_color,			hex_color,			newline_attr,		name,
-	newline_name,		indent,
-	error,				end
+	newline_name,		indent,				padding,
+	error,				end,
 																	};
 enum return_code {
-	ok,			repeat,		fail,	special,	eot,	eof,	type,
+	ok,			repeat,		fail,	special,	eot,	eot2,	eof,	type,
 	pos,		dim,		color,	text,		text_draw_method,
 	texture,	draw_method,		layer,		onclick,
 											 						};
@@ -77,16 +85,22 @@ const struct s_transition transition_table[] = {
 
 	{id, type, colon_name},
 	{id, color, colon_color},
+	{id, pos, colon_pos},
 	{id, fail, error},
 
 	{colon_name, ok, space_name},
 	{colon_name, fail, error},
-
 	{colon_color, ok, space_color},
 	{colon_color, fail, error},
+	{colon_pos, ok, space_pos},
+	{colon_pos, fail, error},
 
+	{space_name, ok, name},
+	{space_name, fail, error},
 	{space_color, ok, hash_color},
 	{space_color, fail, error},
+	// {space_pos, ok, pos_x},
+	{space_pos, fail, error},
 
 	{hash_color, ok, hex_color},
 	{hash_color, fail, error},
@@ -94,25 +108,23 @@ const struct s_transition transition_table[] = {
 	{hex_color, ok, newline_attr},
 	{hex_color, fail, error},
 
-	{space_name, ok, name},
-	{space_name, fail, error},
-
 	{name, ok, newline_name},
 	{name, fail, error},
 
 	{newline_name, repeat, newline_name},
-	{newline_name, ok, indent},
+	{newline_name, ok, padding},
 	{newline_name, eot, end},
 	{newline_name, fail, error},
 
 	{newline_attr, repeat, newline_attr},
-	{newline_attr, ok, error},
+	{newline_attr, ok, end},
 	{newline_attr, eot, end},
 	{newline_attr, fail, error},
 
 	{indent, ok, dash},
 	{indent, fail, error},
-};
+	{padding, ok, dash},
+	{padding, fail, error},};
 
 void	next_token(t_token **token)
 {
@@ -129,12 +141,10 @@ void	set_type(t_parse_info **parse_info, t_gui_type type)
 {
 	(*parse_info)->type = type;
 }
-
 void	set_name(t_parse_info **parse_info, const char *name)
 {
 	(*parse_info)->name = ft_strdup(name);
 }
-
 void	set_color(t_parse_info **parse_info, const char *color)
 {
 	(*parse_info)->color = ft_strdup(color);
@@ -159,7 +169,6 @@ t_bool	check_type(const char *type)
 		return (TRUE);
 	return (FALSE);
 }
-
 t_bool	check_attr(const char *type)
 {
 	if (ft_strequ(type, "pos")
@@ -198,12 +207,15 @@ int		get_attr(const char *type)
 	return (fail);
 }
 
-void	create_next(t_parse_info **parse_info)
+void	create_child(t_parse_info **parse_info)
 {
-	t_parse_info *new;
+	t_parse_info *child;
 
-	new = new_parse_info();
-	(*parse_info)->next = new;
+	child = new_parse_info();
+	child->parent = (*parse_info);
+	if((*parse_info)->child)
+		child->next = (*parse_info)->child;
+	(*parse_info)->child = child;
 }
 
 int	entry_state(t_token **token, t_parse_info **parse_info)
@@ -251,21 +263,20 @@ int	id_state(t_token **token, t_parse_info **parse_info)
 	{
 		if (check_type((*token)->token) || first == TRUE)
 		{
-			ft_putstr("INFIRST\n");
-			if (first != TRUE)
+			if (first == FALSE)
 			{
-				first = TRUE;
-				create_next(parse_info);
-				ft_putstr("IN\n");
-				id_state(token, &(*parse_info)->next);
-				ft_putstr("OUT\n");
+				create_child(parse_info);
+				(*parse_info) = (*parse_info)->child;
 			}
+			else
+				first = FALSE;
 			set_type(parse_info, get_gui_type_value((*token)->token));
 			rc = type;
-			first = FALSE;
 		}
 		else if (check_attr((*token)->token))
+		{
 			rc = get_attr((*token)->token);
+		}
 		else
 			rc = set_rc_id((*token)->token);
 	}
@@ -293,6 +304,10 @@ int	colon_color_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+int	colon_pos_state(t_token **token, t_parse_info **parse_info)
+{
+	return (colon_state(token, parse_info));
+}
 
 t_bool	is_newline(t_token_type type)
 {
@@ -313,8 +328,18 @@ int	space_name_state(t_token **token, t_parse_info **parse_info)
 		rc = fail;
 	return (rc);
 }
-
 int	space_color_state(t_token **token, t_parse_info **parse_info)
+{
+	enum return_code	rc;
+
+	(void)parse_info;
+	if ((*token)->next && (*token)->next->type == HASH)
+		rc = ok;
+	else
+		rc = fail;
+	return (rc);
+}
+int	space_pos_state(t_token **token, t_parse_info **parse_info)
 {
 	enum return_code	rc;
 
@@ -377,12 +402,15 @@ int	newline_name_state(t_token **token, t_parse_info **parse_info)
 	else if ((*token)->next && (*token)->next->type == INDENT)
 		rc = ok;
 	else if ((*token)->next && (*token)->next->type == NODENT)
-		rc = eot;
+	{
+		(*parse_info) = (*parse_info)->parent;
+		rc = ok;
+	}
 	else if ((*token)->next && (*token)->next->type == DEDENT)
 	{
-		rc = eot;
-		(*token)->next->type = NODENT;
-		(*token)->next->token_amount++;
+		(*parse_info) = (*parse_info)->parent;
+		(*parse_info) = (*parse_info)->parent;
+		rc = ok;
 	}
 	else
 		rc = fail;
@@ -401,7 +429,22 @@ int	newline_attr_state(t_token **token, t_parse_info **parse_info)
 	else if ((*token)->next && (*token)->next->type == NODENT)
 		rc = ok;
 	else if ((*token)->next && (*token)->next->type == DEDENT)
-		rc = eot;
+	{
+		(*parse_info) = (*parse_info)->parent;
+		rc = ok;
+	}
+	else
+		rc = fail;
+	return (rc);
+}
+
+int	padding_state(t_token **token, t_parse_info **parse_info)
+{
+	enum return_code rc;
+
+	(void)parse_info;
+	if ((*token)->next && (*token)->next->type == DASH)
+		rc = ok;
 	else
 		rc = fail;
 	return (rc);
@@ -461,14 +504,10 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 	t_parse_info		*parse_info;
 	int					(* state_fun)(t_token**, t_parse_info**);
 
-	// while (tokens) {
-	// 	tokens = tokens->next;
-	// }
 	cur_state = entry;
 	parse_info = new_parse_info();
 	while(1) {
-		ft_printf("curToken: |%s|\n", tokens->token);
-		ft_printf("curState: |%d|\n", cur_state);
+		ft_printf("%.2d - \'%s\', %d\n", cur_state, tokens->token, tokens->token_amount);
 		state_fun = state[cur_state];
 		rc = state_fun(&tokens, &parse_info);
 		if (cur_state == end)

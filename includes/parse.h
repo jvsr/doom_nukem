@@ -39,6 +39,7 @@ typedef struct	s_parse_info
 	t_bool				show;
 	struct s_parse_info	*child;
 	struct s_parse_info	*next;
+	struct s_parse_info	*parent;
 }				t_parse_info;
 
 t_parse_info	*new_parse_info(void);
