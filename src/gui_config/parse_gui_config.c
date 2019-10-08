@@ -160,17 +160,6 @@ t_bool	check_type(const char *type)
 	return (FALSE);
 }
 
-int		get_type(const char *type)
-{
-	if (ft_strequ(type, "image"))
-		return (IMAGE);
-	else if (ft_strequ(type, "panel"))
-		return (PANEL);
-	else if (ft_strequ(type, "button"))
-		return (BUTTON);
-	return (PANEL);
-}
-
 t_bool	check_attr(const char *type)
 {
 	if (ft_strequ(type, "pos")
@@ -271,7 +260,7 @@ int	id_state(t_token **token, t_parse_info **parse_info)
 				id_state(token, &(*parse_info)->next);
 				ft_putstr("OUT\n");
 			}
-			set_type(parse_info, get_type((*token)->token));
+			set_type(parse_info, get_gui_type_value((*token)->token));
 			rc = type;
 			first = FALSE;
 		}

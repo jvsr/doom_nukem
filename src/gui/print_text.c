@@ -16,8 +16,8 @@
 
 void	print_text(t_text *text)
 {
-	ft_printf("Text:\n  Str: %s\n  Size: %.2f\n\
-  Draw method: %d\n  Font type: %d\n",
-	text->str, text->size,
-	text->draw_method, text->font_type);
+	ft_printf("Text:\n  Str: %s\n  Size: %.2f\n  \
+Draw method: %s\n  Font type: %s\n",
+	text->str, text->size, get_draw_method_name(text->draw_method),
+	get_font_type_name(text->font_type));
 }

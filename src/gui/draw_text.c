@@ -66,7 +66,7 @@ void				draw_text(SDL_Surface *dst, t_text *text)
 
 	if (text->str == NULL || is_empty_str(text->str))
 		return ;
-	font = get_font(text->fonts, text->font_type);
+	font = text->fonts[text->font_type];
 	rendered_text = render_text(text->str, font, &text->color);
 	if (text->draw_method != SCALED)
 		merge_text(dst, text, rendered_text);

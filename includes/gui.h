@@ -145,6 +145,12 @@ typedef struct	s_onclickpair
 	t_onclick	*f;
 }				t_onclickpair;
 
+typedef struct	s_matchpair
+{
+	const char	*name;
+	int			value;
+}				t_matchpair;
+
 void			set_elem_moved(t_transform *elem);
 void			set_elem_redraw(t_transform *elem);
 void			set_elem_pos(t_transform *elem, t_coord pos);
@@ -188,8 +194,14 @@ t_bool			get_elem_shown(t_transform *elem);
 TTF_Font		*get_font(TTF_Font **fonts, t_font_type font);
 t_transform		*get_elem_child(t_transform *elem, const char *name);
 t_transform		*get_gui_child(t_gui *ui, const char *name);
-t_onclick		*get_onclick_f(char *name);
 const char		*get_onclick_name(t_onclick *onclick);
+t_onclick		*get_onclick_f(char *name);
+const char		*get_draw_method_name(t_draw_method draw_method);
+t_draw_method	get_draw_method_value(char *name);
+const char		*get_font_type_name(t_font_type font_type);
+t_font_type		get_font_type_value(char *name);
+const char		*get_gui_type_name(t_gui_type gui_type);
+t_gui_type		get_gui_type_value(char *name);
 void			add_gui_child(t_gui *ui, t_transform *panel);
 void			add_elem_child(t_transform *parent, t_transform *child);
 void			check_gui_hit(t_game *game, SDL_Point pos);

@@ -27,12 +27,12 @@ typedef struct	s_parse_info
 	t_coord				dim;
 	char				*img;
 	char				*color;
-	t_draw_method		draw_method;
+	char				*draw_method;
 	char				*text;
 	char				*text_color;
 	float				text_size;
-	t_font_type			text_font;
-	t_draw_method		text_draw_method;
+	char				*text_font;
+	char				*text_draw_method;
 	char				*onclick;
 	short				layer;
 	t_bool				clickable;

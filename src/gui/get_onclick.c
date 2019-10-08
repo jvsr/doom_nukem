@@ -21,23 +21,6 @@ const t_onclickpair	g_onclicks[] = {
 	{"button_menu_quit", NULL},
 };
 
-t_onclick	*get_onclick_f(char *name)
-{
-	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
-	size_t			i;
-
-	if (name == NULL)
-		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		if (ft_strequ_nocase(name, g_onclicks[i].name))
-			return (g_onclicks[i].f);
-		i++;
-	}
-	return (NULL);
-}
-
 const char	*get_onclick_name(t_onclick *onclick)
 {
 	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
@@ -50,6 +33,23 @@ const char	*get_onclick_name(t_onclick *onclick)
 	{
 		if (ft_memequ(onclick, g_onclicks[i].f, sizeof(t_onclick)))
 			return (g_onclicks[i].name);
+		i++;
+	}
+	return (NULL);
+}
+
+t_onclick	*get_onclick_f(char *name)
+{
+	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
+	size_t			i;
+
+	if (name == NULL)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		if (ft_strequ_nocase(name, g_onclicks[i].name))
+			return (g_onclicks[i].f);
 		i++;
 	}
 	return (NULL);

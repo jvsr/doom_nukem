@@ -16,6 +16,6 @@
 
 void	print_image(t_image *image)
 {
-	ft_printf("Image:\n  Draw method: %d\n",
-	image->draw_method);
+	ft_printf("Image:\n  Draw method: %s\n",
+	get_draw_method_name(image->draw_method));
 }
