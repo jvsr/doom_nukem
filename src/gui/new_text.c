@@ -25,7 +25,7 @@
 
 t_text			*new_text(t_gui *ui)
 {
-	t_text 		*text;
+	t_text		*text;
 	SDL_Color	color;
 
 	text = (t_text *)ft_memalloc(sizeof(t_text));
