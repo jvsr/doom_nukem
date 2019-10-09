@@ -31,7 +31,8 @@ const char	*get_onclick_name(t_onclick *onclick)
 	i = 0;
 	while (i < size)
 	{
-		if (ft_memequ(onclick, g_onclicks[i].f, sizeof(t_onclick)))
+		if (g_onclicks[i].f != NULL &&
+		ft_memequ(onclick, g_onclicks[i].f, sizeof(t_onclick)))
 			return (g_onclicks[i].name);
 		i++;
 	}
