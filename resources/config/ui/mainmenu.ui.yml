@@ -1,6 +1,7 @@
 - main: main
   - image: test
   - image: background
+    - onclick: button_menu_options
     - color: #badda5
   - panel: menu
     - pos: 0.75, 0.9
