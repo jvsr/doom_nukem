@@ -157,7 +157,7 @@ void	set_name(t_parse_info **parse_info, const char *name)
 	ft_strdel(&(*parse_info)->name);
 	(*parse_info)->name = ft_strdup(name);
 	if ((*parse_info)->name == NULL)
-		error_msg_errno(ft_strformat("Failed to alloc name in '%s'", name));
+		error_msg_errno(ft_strformat("Failed to alloc name in %s", name));
 }
 void	set_color(t_parse_info **parse_info, const char *color)
 {
@@ -170,7 +170,7 @@ void	set_onclick(t_parse_info **parse_info, const char *onclick)
 	ft_strdel(&(*parse_info)->onclick);
 	(*parse_info)->onclick = ft_strdup(onclick);
 	if ((*parse_info)->onclick == NULL)
-		error_msg_errno(ft_strformat("Failed to alloc onclick in '%s'", name));
+		error_msg_errno(ft_strformat("Failed to alloc onclick in %s", name));
 }
 
 int		set_rc_id(const char *id)

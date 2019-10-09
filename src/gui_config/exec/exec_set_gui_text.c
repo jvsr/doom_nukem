@@ -30,7 +30,7 @@ static void	validate(t_parse_info *elem_info,
 	else if (elem_info->text_font && font_type == FONT_UNDEFINED)
 		msg = ft_strformat("Invalid text font in %s", elem_info->name);
 	if (ft_strequ(msg, "") == FALSE)
-		error_msg_errno(msg);
+		error_msg_errno(msg); //Dont use errno
 }
 
 void		exec_set_gui_text(t_transform *elem, t_parse_info *elem_info)

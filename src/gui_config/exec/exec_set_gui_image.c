@@ -28,7 +28,7 @@ static void	validate(t_parse_info *elem_info, t_draw_method draw_method)
 	if (elem_info->draw_method && draw_method == DRAW_METHOD_UNDEFINED)
 		msg = ft_strformat("Invalid image draw method in %s", elem_info->name);
 	if (ft_strequ(msg, "") == FALSE)
-		error_msg_errno(msg);
+		error_msg_errno(msg); //Dont use errno
 }
 
 void		exec_set_gui_image(t_transform *elem, t_parse_info *elem_info)
