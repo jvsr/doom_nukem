@@ -36,6 +36,7 @@ t_parse_info		*new_parse_info(void)
 	parse_info->color = ft_strdup("FFFFFFFF");
 	parse_info->text_color = ft_strdup("FFFFFFFF");
 	parse_info->text_size = 1;
+	parse_info->clickable = TRUE;
 	parse_info->show = TRUE;
 	return (parse_info);
 }
