@@ -13,6 +13,8 @@
 #ifndef PARSE_H
 # define PARSE_H
 
+# include <limits.h>
+
 # include <SDL2/SDL_pixels.h>
 
 # include "gui.h"
@@ -25,7 +27,7 @@ typedef struct	s_parse_info
 	t_gui_type			type;
 	t_coord				pos;
 	t_coord				dim;
-	char				*img;
+	char				texture[PATH_MAX];
 	char				*color;
 	char				*draw_method;
 	char				*text;

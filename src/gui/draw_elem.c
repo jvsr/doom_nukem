@@ -70,6 +70,8 @@ static void		reset_surface(t_transform *elem)
 	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
 
+#include "libft/ft_printf.h"
+
 static void		draw_gui_elem(t_transform *elem)
 {
 	if (elem->gui_type == TEXT)
@@ -81,6 +83,7 @@ static void		draw_gui_elem(t_transform *elem)
 	else if (elem->gui_type == PANEL)
 	{
 		draw_panel(elem->surface, elem->gui_elem.panel);
+		ft_printf("checking panel '%s' alhpa\n", elem->name);
 		elem->has_alpha = sdl_has_surface_alpha(elem->surface);
 	}
 }

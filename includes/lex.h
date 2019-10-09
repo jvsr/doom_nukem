@@ -37,6 +37,7 @@ typedef enum	e_token_type
 	CR,
 	LF,
 	CRLF,
+	EOC,
 }				t_token_type;
 
 typedef	struct	s_token

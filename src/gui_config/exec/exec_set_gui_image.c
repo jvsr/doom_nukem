@@ -40,8 +40,9 @@ void		exec_set_gui_image(t_transform *elem, t_parse_info *elem_info)
 	validate(elem_info, draw_method);
 	hex_to_color(&color, elem_info->color);
 	set_elem_image_color(elem, color);
-	if (elem_info->img != NULL)
-		set_elem_image_texture(elem, open_tga_sdl(elem_info->img));
+	if (elem_info->texture[0] != '\0')
+		set_elem_image_texture(elem, open_tga_sdl(elem_info->texture));
 	if (draw_method != DRAW_METHOD_UNDEFINED)
 		set_elem_image_draw_method(elem, draw_method);
+
 }
