@@ -10,10 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_printf.h"
 #include "libft/ft_str.h"
 
 #include "exec.h"
+#include "error.h"
 #include "parse.h"
+
+static void	validate(t_parse_info *elem_info, t_onclick *onclick)
+{
+	char	*msg;
+
+	msg = "";
+	(void)onclick;
+	(void)elem_info;
+	// if (elem_info->onclick && onclick == NULL)
+	// 	msg = ft_strformat("Invalid elem onclick in %s", elem_info->name);
+	if (ft_strequ(msg, "") == FALSE)
+		error_msg_errno(msg); //Dont use errno
+}
 
 static void			set_gui_info(t_transform *elem, t_parse_info *elem_info)
 {
@@ -27,12 +42,15 @@ static void			set_gui_info(t_transform *elem, t_parse_info *elem_info)
 
 t_transform			*exec_new_elem(t_gui *ui, t_parse_info *elem_info)
 {
+	t_onclick	*onclick;
 	t_transform	*elem;
 
+	onclick = get_onclick_f(elem_info->onclick);
+	validate(elem_info, onclick);
 	elem = new_elem(ui, elem_info->name, elem_info->type);
 	set_elem_pos(elem, elem_info->pos);
 	set_elem_dim(elem, elem_info->dim);
-	set_elem_onclick(elem, get_onclick_f(elem_info->onclick));
+	set_elem_onclick(elem, onclick);
 	set_elem_layer(elem, elem_info->layer);
 	set_elem_clickable(elem, elem_info->clickable);
 	set_elem_show(elem, elem_info->show);
