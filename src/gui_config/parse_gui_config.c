@@ -383,9 +383,8 @@ int	space_onclick_state(t_token **token, t_parse_info **parse_info)
 	enum return_code	rc;
 
 	(void)parse_info;
-	if ((*token)->next == NULL)
-		return (fail);
-	if ((*token)->next->type == ID || (*token)->next->type == PLAIN)
+	if ((*token)->next
+	&& ((*token)->next->type == ID || (*token)->next->type == PLAIN))
 		rc = ok;
 	else
 		rc = fail;
