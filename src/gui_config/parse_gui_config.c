@@ -29,10 +29,12 @@ int	id_state(t_token**, t_parse_info**);
 int	colon_name_state(t_token**, t_parse_info**);
 int	colon_color_state(t_token**, t_parse_info**);
 int	colon_pos_state(t_token**, t_parse_info**);
+int	colon_onclick_state(t_token**, t_parse_info**);
 
 int	space_name_state(t_token**, t_parse_info**);
 int	space_color_state(t_token**, t_parse_info**);
 int	space_pos_state(t_token**, t_parse_info**);
+int	space_onclick_state(t_token**, t_parse_info**);
 
 int	hash_color_state(t_token**, t_parse_info**);
 int	hex_color_state(t_token**, t_parse_info**);
@@ -41,27 +43,28 @@ int	name_state(t_token**, t_parse_info**);
 int	newline_name_state(t_token**, t_parse_info**);
 int	indent_state(t_token**, t_parse_info**);
 int	padding_state(t_token**, t_parse_info**);
+int	onclick_state(t_token**, t_parse_info**);
 int	error_state(t_token**, t_parse_info**);
 int	exit_state(t_token**, t_parse_info**);
 
 int (*state[])(t_token**, t_parse_info**) = {
 	entry_state,		dash_state,			space_state,		id_state,
-	colon_name_state,	colon_color_state,	colon_pos_state,
-	space_name_state,	space_color_state,	space_pos_state,
+	colon_name_state,	colon_color_state,	colon_pos_state,	colon_onclick_state,
+	space_name_state,	space_color_state,	space_pos_state,	space_onclick_state,
 	hash_color_state,	hex_color_state,	newline_attr_state,	name_state,
-	newline_name_state,	indent_state,		padding_state,
+	newline_name_state,	indent_state,		padding_state,		onclick_state,
 	error_state,		exit_state,
 																	};
 enum state_code {
 	entry,				dash,				space,				id,
-	colon_name,			colon_color, 		colon_pos,
-	space_name,			space_color,		space_pos,
+	colon_name,			colon_color, 		colon_pos,			colon_onclick,
+	space_name,			space_color,		space_pos,			space_onclick,
 	hash_color,			hex_color,			newline_attr,		name,
-	newline_name,		indent,				padding,
+	newline_name,		indent,				padding,			plain_onclick,
 	error,				end,
 																	};
 enum return_code {
-	ok,			repeat,		fail,	special,	eot,	eot2,	eof,	type,
+	ok,			repeat,		fail,	special,	eot,	eof,	type,
 	pos,		dim,		color,	text,		text_draw_method,
 	texture,	draw_method,		layer,		onclick,
 											 						};
@@ -86,6 +89,7 @@ const struct s_transition transition_table[] = {
 	{id, type, colon_name},
 	{id, color, colon_color},
 	{id, pos, colon_pos},
+	{id, onclick, colon_onclick},
 	{id, fail, error},
 
 	{colon_name, ok, space_name},
@@ -94,6 +98,8 @@ const struct s_transition transition_table[] = {
 	{colon_color, fail, error},
 	{colon_pos, ok, space_pos},
 	{colon_pos, fail, error},
+	{colon_onclick, ok, space_onclick},
+	{colon_onclick, fail, error},
 
 	{space_name, ok, name},
 	{space_name, fail, error},
@@ -101,12 +107,17 @@ const struct s_transition transition_table[] = {
 	{space_color, fail, error},
 	// {space_pos, ok, pos_x},
 	{space_pos, fail, error},
+	{space_onclick, ok, plain_onclick},
+	{space_onclick, fail, error},
 
 	{hash_color, ok, hex_color},
 	{hash_color, fail, error},
 
 	{hex_color, ok, newline_attr},
 	{hex_color, fail, error},
+
+	{plain_onclick, ok, newline_attr},
+	{plain_onclick, fail, error},
 
 	{name, ok, newline_name},
 	{name, fail, error},
@@ -143,11 +154,23 @@ void	set_type(t_parse_info **parse_info, t_gui_type type)
 }
 void	set_name(t_parse_info **parse_info, const char *name)
 {
+	ft_strdel(&(*parse_info)->name);
 	(*parse_info)->name = ft_strdup(name);
+	if ((*parse_info)->name == NULL)
+		error_msg_errno(ft_strformat("Failed to alloc name in '%s'", name));
 }
 void	set_color(t_parse_info **parse_info, const char *color)
 {
-	(*parse_info)->color = ft_strdup(color);
+	ft_strcpy((*parse_info)->color, color);
+}
+void	set_onclick(t_parse_info **parse_info, const char *onclick)
+{
+	const char	*name = (*parse_info)->name;
+
+	ft_strdel(&(*parse_info)->onclick);
+	(*parse_info)->onclick = ft_strdup(onclick);
+	if ((*parse_info)->onclick == NULL)
+		error_msg_errno(ft_strformat("Failed to alloc onclick in '%s'", name));
 }
 
 int		set_rc_id(const char *id)
@@ -296,6 +319,7 @@ int	colon_state(t_token **token, t_parse_info **parse_info)
 		rc = fail;
 	return (rc);
 }
+
 int	colon_name_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
@@ -305,6 +329,10 @@ int	colon_color_state(t_token **token, t_parse_info **parse_info)
 	return (colon_state(token, parse_info));
 }
 int	colon_pos_state(t_token **token, t_parse_info **parse_info)
+{
+	return (colon_state(token, parse_info));
+}
+int	colon_onclick_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
@@ -350,6 +378,17 @@ int	space_pos_state(t_token **token, t_parse_info **parse_info)
 		rc = fail;
 	return (rc);
 }
+int	space_onclick_state(t_token **token, t_parse_info **parse_info)
+{
+	enum return_code	rc;
+
+	(void)parse_info;
+	if ((*token)->next && (*token)->next->type == PLAIN)
+		rc = ok;
+	else
+		rc = fail;
+	return (rc);
+}
 
 int	hash_color_state(t_token **token, t_parse_info **parse_info)
 {
@@ -384,6 +423,19 @@ int	name_state(t_token **token, t_parse_info **parse_info)
 	enum return_code	rc;
 
 	set_name(parse_info, (*token)->token);
+	if ((*token)->next
+	&& is_newline((*token)->next->type))
+		rc = ok;
+	else
+		rc = fail;
+	return (rc);
+}
+
+int	onclick_state(t_token **token, t_parse_info **parse_info)
+{
+	enum return_code	rc;
+
+	set_onclick(parse_info, (*token)->token);
 	if ((*token)->next
 	&& is_newline((*token)->next->type))
 		rc = ok;
