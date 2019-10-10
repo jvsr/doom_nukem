@@ -32,9 +32,9 @@ typedef struct	s_parse_info
 	char				*draw_method; //done
 	char				*text; //done
 	char				*text_color; //done
-	float				text_size;
-	char				*text_font;
-	char				*text_draw_method;
+	float				text_size; //done
+	char				*text_font; //done
+	char				*text_draw_method; //done
 	char				*onclick; //done
 	short				layer; //done
 	t_bool				clickable; //done

@@ -15,10 +15,12 @@
 
 #include "gui.h"
 
+
+#include "game.h"
 void coolio(struct s_game *fakka, struct s_transform *you) {
 	(void)fakka;
 	(void)you;
-	printf("help\n");
+	quit(fakka);
 }
 
 const t_onclickpair	g_onclicks[] = {

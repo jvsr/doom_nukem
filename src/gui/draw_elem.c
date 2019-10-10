@@ -85,10 +85,6 @@ static void		draw_gui_elem(t_transform *elem)
 	}
 }
 
-#  include "libft/ft_printf.h"
-#  include "libft/ft_str.h"
-#  include "libft/ft_mem.h"
-
 void			draw_elem(t_transform *elem)
 {
 	SDL_Surface	*dst_surface;
@@ -106,18 +102,8 @@ void			draw_elem(t_transform *elem)
 		dst_surface = elem->parent.elem->surface;
 	else
 		dst_surface = elem->parent.ui->window_surface;
-	if (ft_strequ(elem->name, "main_b_missions"))
-	{
-		ft_putbytes(&elem->surface->pixels[0], 4);
-		ft_putbytes(&dst_surface->pixels[0], 4);
-		ft_printf("\nmerge_with pannel: %d\n", (elem->gui_type == TEXT || elem->has_alpha));
-	}
 	if (elem->gui_type == TEXT || elem->has_alpha)
-	{
-		ft_putbytes(&dst_surface->pixels[0], 4);
 		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->abs_pos);
-		ft_putbytes(&dst_surface->pixels[0], 4);
-	}
 	else
 		sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
 

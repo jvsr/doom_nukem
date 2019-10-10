@@ -37,10 +37,13 @@ t_return_code	colon_pos_state(t_token**, t_parse_info**);
 t_return_code	colon_dim_state(t_token**, t_parse_info**);
 t_return_code	colon_onclick_state(t_token**, t_parse_info**);
 t_return_code	colon_show_state(t_token**, t_parse_info**);
+t_return_code	colon_text_size_state(t_token**, t_parse_info**);
 t_return_code	colon_clickable_state(t_token**, t_parse_info**);
 t_return_code	colon_layer_state(t_token**, t_parse_info**);
 t_return_code	colon_draw_method_state(t_token**, t_parse_info**);
 t_return_code	colon_text_color_state(t_token**, t_parse_info**);
+t_return_code	colon_text_font_state(t_token**, t_parse_info**);
+t_return_code	colon_text_draw_method_state(t_token**, t_parse_info**);
 t_return_code	colon_texture_state(t_token**, t_parse_info**);
 
 t_return_code	space_name_state(t_token**, t_parse_info**);
@@ -50,11 +53,18 @@ t_return_code	space_pos_state(t_token**, t_parse_info**);
 t_return_code	space_dim_state(t_token**, t_parse_info**);
 t_return_code	space_onclick_state(t_token**, t_parse_info**);
 t_return_code	space_show_state(t_token**, t_parse_info**);
+t_return_code	space_text_size_state(t_token**, t_parse_info**);
 t_return_code	space_clickable_state(t_token**, t_parse_info**);
 t_return_code	space_layer_state(t_token**, t_parse_info**);
 t_return_code	space_draw_method_state(t_token**, t_parse_info**);
 t_return_code	space_text_color_state(t_token**, t_parse_info**);
+t_return_code	space_text_font_state(t_token**, t_parse_info**);
+t_return_code	space_text_draw_method_state(t_token**, t_parse_info**);
 t_return_code	space_texture_state(t_token**, t_parse_info**);
+
+t_return_code 	text_size_int_state(t_token**, t_parse_info**);
+t_return_code 	text_size_period_state(t_token**, t_parse_info**);
+t_return_code 	text_size_float_state(t_token**, t_parse_info**);
 
 t_return_code	dquote_start_text_state(t_token**, t_parse_info**);
 t_return_code	dquote_end_text_state(t_token**, t_parse_info**);
@@ -88,6 +98,7 @@ t_return_code	hex_color_state(t_token**, t_parse_info**);
 t_return_code	hash_text_color_state(t_token**, t_parse_info**);
 t_return_code	hex_text_color_state(t_token**, t_parse_info**);
 
+t_return_code	str_text_font_state(t_token**, t_parse_info**);
 t_return_code	newline_attr_state(t_token**, t_parse_info**);
 t_return_code	name_state(t_token**, t_parse_info**);
 t_return_code	newline_name_state(t_token**, t_parse_info**);
@@ -95,6 +106,7 @@ t_return_code	indent_state(t_token**, t_parse_info**);
 t_return_code	padding_state(t_token**, t_parse_info**);
 t_return_code	str_onclick_state(t_token**, t_parse_info**);
 t_return_code	str_draw_method_state(t_token**, t_parse_info**);
+t_return_code	str_text_draw_method_state(t_token**, t_parse_info**);
 t_return_code	bool_show_state(t_token**, t_parse_info**);
 t_return_code	bool_clickable_state(t_token**, t_parse_info**);
 t_return_code	num_layer_state(t_token**, t_parse_info**);
@@ -106,19 +118,20 @@ t_return_code		(*state[])(t_token**, t_parse_info**) =
 	entry_state,		dash_state,			space_state,		id_state,
 	colon_name_state,	colon_color_state,	colon_text_state,	colon_pos_state,	colon_dim_state,	colon_onclick_state,
 	space_name_state,	space_color_state,	space_text_state,	space_pos_state,	space_dim_state,	space_onclick_state,
-	colon_show_state,	colon_clickable_state,					colon_layer_state,
-	space_show_state,	space_clickable_state,					space_layer_state,
+	colon_show_state,	colon_clickable_state,					colon_layer_state,	colon_text_font_state,	colon_text_size_state,
+	space_show_state,	space_clickable_state,					space_layer_state,	space_text_font_state,	space_text_size_state,
 	colon_texture_state,colon_draw_method_state,				colon_text_color_state,
 	space_texture_state,space_draw_method_state,				space_text_color_state,
 	dquote_start_text_state,	dquote_end_text_state,			text_text_state,
+	text_size_int_state,	text_size_period_state, text_size_float_state,
 	pos_x_int_state,	pos_x_period_state,	pos_x_float_state,
 	pos_comma_state,	pos_space_state,
-	pos_y_int_state,	pos_y_period_state,	pos_y_float_state,
-	dim_x_int_state,	dim_x_period_state,	dim_x_float_state,
+	pos_y_int_state,	pos_y_period_state,	pos_y_float_state,	colon_text_draw_method_state,
+	dim_x_int_state,	dim_x_period_state,	dim_x_float_state,	space_text_draw_method_state,
 	dim_comma_state,	dim_space_state,
 	dim_y_int_state,	dim_y_period_state,	dim_y_float_state,
-	bool_show_state,	bool_clickable_state,					num_layer_state,
-	hash_color_state,	hex_color_state,	newline_attr_state,	name_state,
+	bool_show_state,	bool_clickable_state,					num_layer_state,	str_text_font_state,
+	hash_color_state,	hex_color_state,	newline_attr_state,	name_state,			str_text_draw_method_state,
 	hash_text_color_state,					hex_text_color_state,
 	newline_name_state,	indent_state,		padding_state,		str_onclick_state,
 	str_texture_state,	period_texture_state, id_texture_state,	str_draw_method_state,
@@ -129,19 +142,20 @@ enum				e_state_code
 	entry,				dash,				space,				id,
 	colon_name,			colon_color, 		colon_text,			colon_pos,			colon_dim,			colon_onclick,
 	space_name,			space_color,		space_text,			space_pos,			space_dim,			space_onclick,
-	colon_show,			colon_clickable,	colon_layer,
-	space_show,			space_clickable,	space_layer,
+	colon_show,			colon_clickable,						colon_layer,		colon_text_font,	colon_text_size,
+	space_show,			space_clickable,						space_layer,		space_text_font,	space_text_size,
 	colon_texture,		colon_draw_method,						colon_text_color,
 	space_texture,		space_draw_method,						space_text_color,
 	dquote_start_text,			dquote_end_text,				text_text,
+	text_size_int,		text_size_period,	text_size_float,
 	pos_x_int,			pos_x_period,		pos_x_float,
 	pos_comma,			pos_space,
-	pos_y_int,			pos_y_period,		pos_y_float,
-	dim_x_int,			dim_x_period,		dim_x_float,
+	pos_y_int,			pos_y_period,		pos_y_float,		colon_text_draw_method,
+	dim_x_int,			dim_x_period,		dim_x_float,		space_text_draw_method,
 	dim_comma,			dim_space,
 	dim_y_int,			dim_y_period,		dim_y_float,
-	bool_show,			bool_clickable,							num_layer,
-	hash_color,			hex_color,			newline_attr,		name,
+	bool_show,			bool_clickable,							num_layer,			str_text_font,
+	hash_color,			hex_color,			newline_attr,		name,				str_text_draw_method,
 	hash_text_color,						hex_text_color,
 	newline_name,		indent,				padding,			str_onclick,
 	str_texture,		period_texture,		id_texture,			str_draw_method,
@@ -181,6 +195,9 @@ const t_transition	g_transition_table[] =
 	{id, dim, colon_dim},
 	{id, onclick, colon_onclick},
 	{id, show, colon_show},
+	{id, text_size, colon_text_size},
+	{id, text_font, colon_text_font},
+	{id, text_draw_method, colon_text_draw_method},
 	{id, clickable, colon_clickable},
 	{id, layer, colon_layer},
 	{id, texture, colon_texture},
@@ -195,6 +212,10 @@ const t_transition	g_transition_table[] =
 	{colon_text, fail, error},
 	{colon_text_color, ok, space_text_color},
 	{colon_text_color, fail, error},
+	{colon_text_font, ok, space_text_font},
+	{colon_text_font, fail, error},
+	{colon_text_draw_method, ok, space_text_draw_method},
+	{colon_text_draw_method, fail, error},
 	{colon_pos, ok, space_pos},
 	{colon_pos, fail, error},
 	{colon_dim, ok, space_dim},
@@ -203,6 +224,8 @@ const t_transition	g_transition_table[] =
 	{colon_onclick, fail, error},
 	{colon_show, ok, space_show},
 	{colon_show, fail, error},
+	{colon_text_size, ok, space_text_size},
+	{colon_text_size, fail, error},
 	{colon_clickable, ok, space_clickable},
 	{colon_clickable, fail, error},
 	{colon_layer, ok, space_layer},
@@ -220,6 +243,10 @@ const t_transition	g_transition_table[] =
 	{space_text, fail, error},
 	{space_text_color, ok, hash_text_color},
 	{space_text_color, fail, error},
+	{space_text_font, ok, str_text_font},
+	{space_text_font, fail, error},
+	{space_text_draw_method, ok, str_text_draw_method},
+	{space_text_draw_method, fail, error},
 	{space_pos, ok, pos_x_int},
 	{space_pos, fail, error},
 	{space_dim, ok, dim_x_int},
@@ -228,6 +255,8 @@ const t_transition	g_transition_table[] =
 	{space_onclick, fail, error},
 	{space_show, ok, bool_show},
 	{space_show, fail, error},
+	{space_text_size, ok, text_size_int},
+	{space_text_size, fail, error},
 	{space_clickable, ok, bool_clickable},
 	{space_clickable, fail, error},
 	{space_layer, ok, num_layer},
@@ -236,6 +265,13 @@ const t_transition	g_transition_table[] =
 	{space_draw_method, fail, error},
 	{space_texture, ok, str_texture},
 	{space_texture, fail, error},
+
+	{text_size_int, ok, text_size_period},
+	{text_size_int, fail, error},
+	{text_size_period, ok, text_size_float},
+	{text_size_period, fail, error},
+	{text_size_float, ok, newline_attr},
+	{text_size_float, fail, error},
 
 	{dquote_start_text, ok, dquote_end_text},
 	{dquote_start_text, fail, text_text},
@@ -257,9 +293,9 @@ const t_transition	g_transition_table[] =
 	{str_texture, ok, period_texture},
 	{str_texture, fail, error},
 	{period_texture, ok, id_texture},
-	{str_texture, fail, error},
+	{period_texture, fail, error},
 	{id_texture, ok, newline_attr},
-	{str_texture, fail, error},
+	{id_texture, fail, error},
 
 	{pos_x_int, ok, pos_x_period},
 	{pos_x_int, fail, error},
@@ -305,8 +341,14 @@ const t_transition	g_transition_table[] =
 	{hex_text_color, ok, newline_attr},
 	{hex_text_color, fail, error},
 
+	{str_text_font, ok, newline_attr},
+	{str_text_font, fail, error},
+
 	{str_draw_method, ok, newline_attr},
 	{str_draw_method, fail, error},
+
+	{str_text_draw_method, ok, newline_attr},
+	{str_text_draw_method, fail, error},
 
 	{str_onclick, ok, newline_attr},
 	{str_onclick, fail, error},
@@ -363,20 +405,21 @@ t_return_code	check_next(t_token **token, t_token_type type)
 	return (fail);
 }
 
-t_return_code	check_next_hex(t_token **token)
-{
-	const t_token_type	type = get_next_token_type(token);
-
-	if ((type == NUM || type == PLAIN) && ft_strishex((*token)->next->token))
-		return (ok);
-	return (fail);
-}
-
 t_return_code	check_next_str(t_token **token)
 {
 	const t_token_type	type = get_next_token_type(token);
 
 	if (type == ID || type == PLAIN)
+		return (ok);
+	return (fail);
+}
+
+t_return_code	check_next_hex(t_token **token)
+{
+	const t_token_type	type = get_next_token_type(token);
+
+	if ((type == NUM || check_next_str(token) == ok)
+	&& ft_strishex((*token)->next->token))
 		return (ok);
 	return (fail);
 }
@@ -415,7 +458,16 @@ void	set_draw_method(t_parse_info **parse_info, const char *draw_method)
 	ft_strdel(&(*parse_info)->draw_method);
 	(*parse_info)->draw_method = ft_strdup(draw_method);
 	if ((*parse_info)->draw_method == NULL)
-		error_msg_errno(ft_strformat("Failed to alloc onclick in %s", name));
+		error_msg_errno(ft_strformat("Failed to alloc draw method in %s", name));
+}
+void	set_text_draw_method(t_parse_info **parse_info, const char *text_draw_method)
+{
+	const char	*name = (*parse_info)->name;
+
+	ft_strdel(&(*parse_info)->text_draw_method);
+	(*parse_info)->text_draw_method = ft_strdup(text_draw_method);
+	if ((*parse_info)->text_draw_method == NULL)
+		error_msg_errno(ft_strformat("Failed to alloc text draw method in %s", name));
 }
 void	set_onclick(t_parse_info **parse_info, const char *onclick)
 {
@@ -425,6 +477,15 @@ void	set_onclick(t_parse_info **parse_info, const char *onclick)
 	(*parse_info)->onclick = ft_strdup(onclick);
 	if ((*parse_info)->onclick == NULL)
 		error_msg_errno(ft_strformat("Failed to alloc onclick in %s", name));
+}
+void	set_text_font(t_parse_info **parse_info, const char *text_font)
+{
+	const char	*name = (*parse_info)->name;
+
+	ft_strdel(&(*parse_info)->text_font);
+	(*parse_info)->text_font = ft_strdup(text_font);
+	if ((*parse_info)->text_font == NULL)
+		error_msg_errno(ft_strformat("Failed to alloc text font in %s", name));
 }
 void	set_show(t_parse_info **parse_info, const char *show)
 {
@@ -447,6 +508,18 @@ void	set_layer(t_parse_info **parse_info, const char *layer)
 void	set_texture(t_parse_info **parse_info, const char *texture)
 {
 	ft_strcpy((*parse_info)->texture, texture);
+}
+void	set_text_size_int(t_parse_info **parse_info, const char *x_int)
+{
+	const int	x = ft_atoi(x_int);
+
+	(*parse_info)->text_size = x;
+}
+void	set_text_size_float(t_parse_info **parse_info, const char *x_float)
+{
+	const int	x = ft_atoi(x_float);
+
+	(*parse_info)->text_size += (float)x / (ft_pow(10, ft_strlen(x_float)));
 }
 void	set_pos_x_int(t_parse_info **parse_info, const char *x_int)
 {
@@ -668,6 +741,10 @@ t_return_code	colon_draw_method_state(t_token **token, t_parse_info **parse_info
 {
 	return (colon_state(token, parse_info));
 }
+t_return_code	colon_text_draw_method_state(t_token **token, t_parse_info **parse_info)
+{
+	return (colon_state(token, parse_info));
+}
 t_return_code	colon_onclick_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
@@ -685,6 +762,14 @@ t_return_code	colon_layer_state(t_token **token, t_parse_info **parse_info)
 	return (colon_state(token, parse_info));
 }
 t_return_code	colon_texture_state(t_token **token, t_parse_info **parse_info)
+{
+	return (colon_state(token, parse_info));
+}
+t_return_code	colon_text_font_state(t_token **token, t_parse_info **parse_info)
+{
+	return (colon_state(token, parse_info));
+}
+t_return_code	colon_text_size_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
@@ -739,6 +824,16 @@ t_return_code	space_clickable_state(t_token **token, t_parse_info **parse_info)
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+t_return_code	space_text_draw_method_state(t_token **token, t_parse_info **parse_info)
+{
+	(void)parse_info;
+	return (check_next_str(token));
+}
+t_return_code	space_text_font_state(t_token **token, t_parse_info **parse_info)
+{
+	(void)parse_info;
+	return (check_next_str(token));
+}
 t_return_code	space_layer_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
@@ -748,6 +843,27 @@ t_return_code	space_texture_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next_str(token));
+}
+t_return_code	space_text_size_state(t_token **token, t_parse_info **parse_info)
+{
+	(void)parse_info;
+	return (check_next(token, NUM));
+}
+
+t_return_code	text_size_int_state(t_token **token, t_parse_info **parse_info)
+{
+	set_text_size_int(parse_info, (*token)->token);
+	return (check_next(token, PERIOD));
+}
+t_return_code	text_size_period_state(t_token **token, t_parse_info **parse_info)
+{
+	(void)parse_info;
+	return (check_next(token, NUM));
+}
+t_return_code	text_size_float_state(t_token **token, t_parse_info **parse_info)
+{
+	set_text_size_float(parse_info, (*token)->token);
+	return (check_next_newline(token));
 }
 
 t_return_code	dquote_start_text_state(t_token **token, t_parse_info **parse_info)
@@ -938,9 +1054,21 @@ t_return_code	str_draw_method_state(t_token **token, t_parse_info **parse_info)
 	return (check_next_newline(token));
 }
 
+t_return_code	str_text_draw_method_state(t_token **token, t_parse_info **parse_info)
+{
+	set_text_draw_method(parse_info, (*token)->token);
+	return (check_next_newline(token));
+}
+
 t_return_code	str_onclick_state(t_token **token, t_parse_info **parse_info)
 {
 	set_onclick(parse_info, (*token)->token);
+	return (check_next_newline(token));
+}
+
+t_return_code	str_text_font_state(t_token **token, t_parse_info **parse_info)
+{
+	set_text_font(parse_info, (*token)->token);
 	return (check_next_newline(token));
 }
 

@@ -20,10 +20,6 @@
 #include "sdl_extra.h"
 #include "error.h"
 
-#  include "libft/ft_mem.h"
-#  include "libft/ft_printf.h"
-#  include "sdl_extra.h"
-
 static t_bool		is_empty_str(const char *str)
 {
 	return (str[ft_strislen(str, &ft_isspace)] == '\0');
@@ -35,18 +31,6 @@ static SDL_Surface	*render_text(const char *str, TTF_Font *font,
 	SDL_Surface	*text;
 
 	text = TTF_RenderText_Blended(font, str, *color);
-	ft_putbytes(&text->pixels[0], sizeof(t_uint32));
-	ft_printf("\nTTF_RenderText_Blended: %d\n", sdl_has_surface_alpha(text));
-
-	// t_uint32	*color_stream = text->pixels;
-	// int	i = 0;
-	// while (i < (text->pitch * text->h))
-	// {
-	// 	ft_putbytes(&color_stream[i], 4);
-	// 	if ((color_stream[i] & 0xFF000000) != 0)
-	// 		ft_printf("Has alpha\n");
-	// 	i++;
-	// }
 	if (text == NULL)
 		error_msg_sdl(ENOMEM, "Failed to render text");
 	return (text);
@@ -59,8 +43,6 @@ static SDL_Surface	*scale_text(SDL_Surface *text, float size)
 
 	scaled = sdl_create_surface_default(scaled_size);
 	sdl_merge_surface_scaled(scaled, text);
-	ft_putbytes(&scaled->pixels[0], sizeof(t_uint32));
-	ft_printf("\nsdl_merge_surface_scaled: %d\n", sdl_has_surface_alpha(scaled));
 	return (scaled);
 }
 
@@ -70,12 +52,10 @@ static void			merge_text(SDL_Surface *dst, t_text *text,
 	SDL_Surface	*scaled_text;
 
 	scaled_text = scale_text(rendered_text, text->size);
-	ft_putbytes(&scaled_text->pixels[0], sizeof(t_uint32));
 	if (text->draw_method == FIXED)
 		sdl_merge_surface_alpha(dst, scaled_text, (SDL_Point){0, 0});
 	else if (text->draw_method == CENTERED)
 		sdl_merge_surface_alpha_center(dst, scaled_text);
-	ft_printf("\n");
 	SDL_FreeSurface(scaled_text);
 }
 
@@ -84,7 +64,7 @@ void				draw_text(SDL_Surface *dst, t_text *text)
 	TTF_Font	*font;
 	SDL_Surface	*rendered_text;
 
-	if (text->str == NULL || is_empty_str(text->str))
+	if (text->color.a == 0 || text->str == NULL || is_empty_str(text->str))
 		return ;
 	font = text->fonts[text->font_type];
 	rendered_text = render_text(text->str, font, &text->color);
@@ -92,7 +72,5 @@ void				draw_text(SDL_Surface *dst, t_text *text)
 		merge_text(dst, text, rendered_text);
 	else
 		sdl_merge_surface_alpha_scaled(dst, rendered_text);
-	ft_putbytes(&dst->pixels[0], sizeof(t_uint32));
-	ft_printf("\nmerge_text: %d\n", sdl_has_surface_alpha(dst));
 	SDL_FreeSurface(rendered_text);
 }

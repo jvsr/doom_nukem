@@ -51,6 +51,8 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		print_keymap(game->keymap);
 }
 
+#include "personal.h"
+
 void			loop(t_game *game)
 {
 	SDL_Event	event;
@@ -58,7 +60,7 @@ void			loop(t_game *game)
 	t_transform *panel = analyze_gui_config(game->ui, "main", "mainmenu");
 	ft_putchar('\n');
 	add_gui_child(game->ui, panel);
-	print_elem(panel, TRUE);
+	// print_elem(panel, TRUE);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
