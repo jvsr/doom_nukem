@@ -23,22 +23,22 @@
 
 typedef struct	s_parse_info
 {
-	char				*name;
-	t_gui_type			type;
-	t_coord				pos;
-	t_coord				dim;
-	char				texture[PATH_MAX];
-	char				*color;
+	char				*name; //done
+	t_gui_type			type; //done
+	t_coord				pos; //done
+	t_coord				dim; //done
+	char				texture[PATH_MAX]; //done
+	char				*color; //done
 	char				*draw_method;
 	char				*text;
 	char				*text_color;
 	float				text_size;
 	char				*text_font;
 	char				*text_draw_method;
-	char				*onclick;
-	short				layer;
-	t_bool				clickable;
-	t_bool				show;
+	char				*onclick; //done
+	short				layer; //done
+	t_bool				clickable; //done
+	t_bool				show; //done
 	struct s_parse_info	*child;
 	struct s_parse_info	*next;
 	struct s_parse_info	*parent;
