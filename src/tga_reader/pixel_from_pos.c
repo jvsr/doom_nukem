@@ -27,7 +27,8 @@ static int	b24(unsigned char *str, size_t i)
 {
 	unsigned int	ret;
 
-	ret = str[i + 1] << 16;
+	ret = 0xFF << 24;
+	ret |= str[i + 1] << 16;
 	ret |= str[i] << 8;
 	ret |= str[i + 2];
 	return (ret);

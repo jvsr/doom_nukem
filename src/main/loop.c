@@ -51,8 +51,6 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		print_keymap(game->keymap);
 }
 
-#include "tga.h"
-
 void			loop(t_game *game)
 {
 	SDL_Event	event;
