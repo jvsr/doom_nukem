@@ -8,7 +8,8 @@
     - pos: 0.25, 0.1
     - dim: 0.5, 0.8
     - image: i_logo
-      - texture: splash/splash.tga
+      - texture: ui/test.tga
+      - draw_method: scaled
       - dim: 1.0, 1.0
     - button: b_missions
       - pos: 0.15, 0.25
@@ -24,4 +25,5 @@
       - pos: 0.15, 0.65
       - dim: 0.7, 0.15
       - color: #d16c41
+      - text: "Quit now"
       - onclick: button_menu_quit

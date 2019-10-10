@@ -17,6 +17,7 @@
 const t_matchpair	g_gui_types[] = {
 	{"GUI_UNDEFINED", GUI_UNDEFINED},
 	{"TEXT", TEXT},
+	{"TEXT_BLOCK", TEXT},
 	{"IMAGE", IMAGE},
 	{"BUTTON", BUTTON},
 	{"PANEL", PANEL},

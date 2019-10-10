@@ -29,9 +29,9 @@ typedef struct	s_parse_info
 	t_coord				dim; //done
 	char				texture[PATH_MAX]; //done
 	char				*color; //done
-	char				*draw_method;
-	char				*text;
-	char				*text_color;
+	char				*draw_method; //done
+	char				*text; //done
+	char				*text_color; //done
 	float				text_size;
 	char				*text_font;
 	char				*text_draw_method;
@@ -44,7 +44,8 @@ typedef struct	s_parse_info
 	struct s_parse_info	*parent;
 }				t_parse_info;
 
-t_parse_info	*new_parse_info(void);
+t_parse_info	*new_parse_info(void
+	);
 void			del_parse_info(t_parse_info **parse_info);
 
 #endif

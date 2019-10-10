@@ -70,8 +70,6 @@ static void		reset_surface(t_transform *elem)
 	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
 
-#include "libft/ft_printf.h"
-
 static void		draw_gui_elem(t_transform *elem)
 {
 	if (elem->gui_type == TEXT)
@@ -83,10 +81,13 @@ static void		draw_gui_elem(t_transform *elem)
 	else if (elem->gui_type == PANEL)
 	{
 		draw_panel(elem->surface, elem->gui_elem.panel);
-		ft_printf("checking panel '%s' alhpa\n", elem->name);
 		elem->has_alpha = sdl_has_surface_alpha(elem->surface);
 	}
 }
+
+#  include "libft/ft_printf.h"
+#  include "libft/ft_str.h"
+#  include "libft/ft_mem.h"
 
 void			draw_elem(t_transform *elem)
 {
@@ -105,10 +106,21 @@ void			draw_elem(t_transform *elem)
 		dst_surface = elem->parent.elem->surface;
 	else
 		dst_surface = elem->parent.ui->window_surface;
+	if (ft_strequ(elem->name, "main_b_missions"))
+	{
+		ft_putbytes(&elem->surface->pixels[0], 4);
+		ft_putbytes(&dst_surface->pixels[0], 4);
+		ft_printf("\nmerge_with pannel: %d\n", (elem->gui_type == TEXT || elem->has_alpha));
+	}
 	if (elem->gui_type == TEXT || elem->has_alpha)
+	{
+		ft_putbytes(&dst_surface->pixels[0], 4);
 		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->abs_pos);
+		ft_putbytes(&dst_surface->pixels[0], 4);
+	}
 	else
 		sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
+
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
 }

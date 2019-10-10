@@ -44,13 +44,13 @@ static void	lex_check_id(t_token **tokens, const char *file, size_t *index)
 
 	token_amount = 0;
 	content_size = 0;
-	while (ft_isalpha(file[*index + content_size]))
+	while (ft_isalpha(file[*index + content_size])
+	|| file[*index + content_size] == '_')
 	{
 		token_amount++;
 		content_size++;
 	}
 	if (ft_isdigit(file[*index + content_size])
-	|| file[*index + content_size] == '_'
 	|| file[*index + content_size] == '/')
 		lex_check_plain(tokens, file, index);
 	else
