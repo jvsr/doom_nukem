@@ -437,20 +437,24 @@ void	set_type(t_parse_info **parse_info, t_gui_type type)
 {
 	(*parse_info)->type = type;
 }
+
 void	set_name(t_parse_info **parse_info, const char *name)
 {
 	(*parse_info)->name = ft_strdup(name);
 	if ((*parse_info)->name == NULL)
 		error_msg_errno(ft_strformat("Failed to alloc name in %s", name));
 }
+
 void	set_color(t_parse_info **parse_info, const char *color)
 {
 	ft_strcpy((*parse_info)->color, color);
 }
+
 void	set_text_color(t_parse_info **parse_info, const char *text_color)
 {
 	ft_strcpy((*parse_info)->text_color, text_color);
 }
+
 void	set_draw_method(t_parse_info **parse_info, const char *draw_method)
 {
 	const char	*name = (*parse_info)->name;
@@ -460,6 +464,7 @@ void	set_draw_method(t_parse_info **parse_info, const char *draw_method)
 	if ((*parse_info)->draw_method == NULL)
 		error_msg_errno(ft_strformat("Failed to alloc draw method in %s", name));
 }
+
 void	set_text_draw_method(t_parse_info **parse_info, const char *text_draw_method)
 {
 	const char	*name = (*parse_info)->name;
@@ -469,6 +474,7 @@ void	set_text_draw_method(t_parse_info **parse_info, const char *text_draw_metho
 	if ((*parse_info)->text_draw_method == NULL)
 		error_msg_errno(ft_strformat("Failed to alloc text draw method in %s", name));
 }
+
 void	set_onclick(t_parse_info **parse_info, const char *onclick)
 {
 	const char	*name = (*parse_info)->name;
@@ -478,6 +484,7 @@ void	set_onclick(t_parse_info **parse_info, const char *onclick)
 	if ((*parse_info)->onclick == NULL)
 		error_msg_errno(ft_strformat("Failed to alloc onclick in %s", name));
 }
+
 void	set_text_font(t_parse_info **parse_info, const char *text_font)
 {
 	const char	*name = (*parse_info)->name;
@@ -487,58 +494,68 @@ void	set_text_font(t_parse_info **parse_info, const char *text_font)
 	if ((*parse_info)->text_font == NULL)
 		error_msg_errno(ft_strformat("Failed to alloc text font in %s", name));
 }
+
 void	set_show(t_parse_info **parse_info, const char *show)
 {
 	const int	show_value = ft_atoi(show);
 
 	(*parse_info)->show = show_value;
 }
+
 void	set_clickable(t_parse_info **parse_info, const char *clickable)
 {
 	const int	clickable_value = ft_atoi(clickable);
 
 	(*parse_info)->clickable = clickable_value;
 }
+
 void	set_layer(t_parse_info **parse_info, const char *layer)
 {
 	const int	layer_value = ft_atoi(layer);
 
 	(*parse_info)->layer = layer_value;
 }
+
 void	set_texture(t_parse_info **parse_info, const char *texture)
 {
 	ft_strcpy((*parse_info)->texture, texture);
 }
+
 void	set_text_size_int(t_parse_info **parse_info, const char *x_int)
 {
 	const int	x = ft_atoi(x_int);
 
 	(*parse_info)->text_size = x;
 }
+
 void	set_text_size_float(t_parse_info **parse_info, const char *x_float)
 {
 	const int	x = ft_atoi(x_float);
 
 	(*parse_info)->text_size += (float)x / (ft_pow(10, ft_strlen(x_float)));
 }
+
 void	set_pos_x_int(t_parse_info **parse_info, const char *x_int)
 {
 	const int	x = ft_atoi(x_int);
 
 	(*parse_info)->pos.x = x;
 }
+
 void	set_pos_x_float(t_parse_info **parse_info, const char *x_float)
 {
 	const int	x = ft_atoi(x_float);
 
 	(*parse_info)->pos.x += (float)x / (ft_pow(10, ft_strlen(x_float)));
 }
+
 void	set_pos_y_int(t_parse_info **parse_info, const char *y_int)
 {
 	const int	y = ft_atoi(y_int);
 
 	(*parse_info)->pos.y = y;
 }
+
 void	set_pos_y_float(t_parse_info **parse_info, const char *y_float)
 {
 	const int	y = ft_atoi(y_float);
@@ -552,18 +569,21 @@ void	set_dim_x_int(t_parse_info **parse_info, const char *x_int)
 
 	(*parse_info)->dim.x = x;
 }
+
 void	set_dim_x_float(t_parse_info **parse_info, const char *x_float)
 {
 	const int	x = ft_atoi(x_float);
 
 	(*parse_info)->dim.x += (float)x / (ft_pow(10, ft_strlen(x_float)));
 }
+
 void	set_dim_y_int(t_parse_info **parse_info, const char *y_int)
 {
 	const int	y = ft_atoi(y_int);
 
 	(*parse_info)->dim.y = y;
 }
+
 void	set_dim_y_float(t_parse_info **parse_info, const char *y_float)
 {
 	const int	y = ft_atoi(y_float);
@@ -588,6 +608,7 @@ t_bool	check_type(const char *type)
 		return (TRUE);
 	return (FALSE);
 }
+
 t_bool	check_attr(const char *type)
 {
 	if (ft_strequ(type, "pos")
@@ -717,58 +738,72 @@ t_return_code	colon_name_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_color_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_text_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_text_color_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_pos_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_dim_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_draw_method_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_text_draw_method_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_onclick_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_show_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_clickable_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_layer_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_texture_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_text_font_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
 }
+
 t_return_code	colon_text_size_state(t_token **token, t_parse_info **parse_info)
 {
 	return (colon_state(token, parse_info));
@@ -779,71 +814,85 @@ t_return_code	space_name_state(t_token **token, t_parse_info **parse_info)
 	(void)parse_info;
 	return (check_next_str(token));
 }
+
 t_return_code	space_color_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, HASH));
 }
+
 t_return_code	space_text_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, DQUOTE));
 }
+
 t_return_code	space_text_color_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, HASH));
 }
+
 t_return_code	space_pos_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	space_dim_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	space_draw_method_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next_str(token));
 }
+
 t_return_code	space_onclick_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next_str(token));
 }
+
 t_return_code	space_show_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	space_clickable_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	space_text_draw_method_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next_str(token));
 }
+
 t_return_code	space_text_font_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next_str(token));
 }
+
 t_return_code	space_layer_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	space_texture_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next_str(token));
 }
+
 t_return_code	space_text_size_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
@@ -855,11 +904,13 @@ t_return_code	text_size_int_state(t_token **token, t_parse_info **parse_info)
 	set_text_size_int(parse_info, (*token)->token);
 	return (check_next(token, PERIOD));
 }
+
 t_return_code	text_size_period_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	text_size_float_state(t_token **token, t_parse_info **parse_info)
 {
 	set_text_size_float(parse_info, (*token)->token);
@@ -871,11 +922,13 @@ t_return_code	dquote_start_text_state(t_token **token, t_parse_info **parse_info
 	(*parse_info)->text = ft_strnew(0);
 	return(check_next(token, DQUOTE));
 }
+
 t_return_code	dquote_end_text_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return(check_next_newline(token));
 }
+
 t_return_code	text_text_state(t_token **token, t_parse_info **parse_info)
 {
 	t_return_code	rc;
@@ -927,36 +980,43 @@ t_return_code	pos_x_int_state(t_token **token, t_parse_info **parse_info)
 	set_pos_x_int(parse_info, (*token)->token);
 	return (check_next(token, PERIOD));
 }
+
 t_return_code	pos_x_period_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	pos_x_float_state(t_token **token, t_parse_info **parse_info)
 {
 	set_pos_x_float(parse_info, (*token)->token);
 	return (check_next(token, COMMA));
 }
+
 t_return_code	pos_comma_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, SPACE));
 }
+
 t_return_code	pos_space_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	pos_y_int_state(t_token **token, t_parse_info **parse_info)
 {
 	set_pos_y_int(parse_info, (*token)->token);
 	return (check_next(token, PERIOD));
 }
+
 t_return_code	pos_y_period_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	pos_y_float_state(t_token **token, t_parse_info **parse_info)
 {
 	set_pos_y_float(parse_info, (*token)->token);
@@ -968,36 +1028,43 @@ t_return_code	dim_x_int_state(t_token **token, t_parse_info **parse_info)
 	set_dim_x_int(parse_info, (*token)->token);
 	return (check_next(token, PERIOD));
 }
+
 t_return_code	dim_x_period_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	dim_x_float_state(t_token **token, t_parse_info **parse_info)
 {
 	set_dim_x_float(parse_info, (*token)->token);
 	return (check_next(token, COMMA));
 }
+
 t_return_code	dim_comma_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, SPACE));
 }
+
 t_return_code	dim_space_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	dim_y_int_state(t_token **token, t_parse_info **parse_info)
 {
 	set_dim_y_int(parse_info, (*token)->token);
 	return (check_next(token, PERIOD));
 }
+
 t_return_code	dim_y_period_state(t_token **token, t_parse_info **parse_info)
 {
 	(void)parse_info;
 	return (check_next(token, NUM));
 }
+
 t_return_code	dim_y_float_state(t_token **token, t_parse_info **parse_info)
 {
 	set_dim_y_float(parse_info, (*token)->token);
