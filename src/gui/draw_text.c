@@ -64,10 +64,10 @@ void				draw_text(SDL_Surface *dst, t_text *text)
 	TTF_Font	*font;
 	SDL_Surface	*rendered_text;
 
-	if (text->color.a == 0 || text->str == NULL || is_empty_str(text->str))
+	if (text->color.a == 0 || text->text == NULL || is_empty_str(text->text))
 		return ;
 	font = text->fonts[text->font_type];
-	rendered_text = render_text(text->str, font, &text->color);
+	rendered_text = render_text(text->text, font, &text->color);
 	if (text->draw_method != SCALED)
 		merge_text(dst, text, rendered_text);
 	else

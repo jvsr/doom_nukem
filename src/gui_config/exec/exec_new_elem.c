@@ -17,17 +17,15 @@
 #include "error.h"
 #include "parse.h"
 
-static void	validate(t_parse_info *elem_info, t_onclick *onclick)
+static void			validate(t_parse_info *elem_info, t_onclick *onclick)
 {
 	char	*msg;
 
 	msg = "";
-	(void)onclick;
-	(void)elem_info;
-	// if (elem_info->onclick && onclick == NULL)
-	// 	msg = ft_strformat("Invalid elem onclick in %s", elem_info->name);
+	if (elem_info->onclick && onclick == NULL)
+		msg = ft_strformat("Invalid elem onclick in %s", elem_info->name);
 	if (ft_strequ(msg, "") == FALSE)
-		error_msg_errno(msg); //Dont use errno
+		error_msg("Executer validation error", 21, msg);
 }
 
 static void			set_gui_info(t_transform *elem, t_parse_info *elem_info)

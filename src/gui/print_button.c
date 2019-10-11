@@ -10,13 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_printf.h"
-
 #include "gui.h"
 
 void	print_button(t_button *button)
 {
-	ft_printf("Button:\n");
 	print_text(button->text);
 	print_image(button->image);
 }

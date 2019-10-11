@@ -28,7 +28,7 @@ void		print_panel(t_panel *panel, t_bool print_children)
 	t_transform	*cur;
 
 	cur = panel->children;
-	ft_printf("Panel:\n  Children:\n");
+	ft_printf("%{cyan}Children:%{}\n");
 	if (print_children == TRUE)
 	{
 		put_children(cur);

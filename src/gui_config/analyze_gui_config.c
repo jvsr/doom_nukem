@@ -31,9 +31,8 @@ t_transform	*analyze_gui_config(t_gui *ui, const char *state_name,
 
 	result = NULL;
 	tokens = lex_gui_config(fd);
-	parse_info = parse_gui_config(tokens, state_name);
-	// (void)ui;
-	result = exec_gui_config(ui, parse_info);
 	close(fd);
+	parse_info = parse_gui_config(tokens, state_name);
+	result = exec_gui_config(ui, parse_info);
 	return (result);
 }

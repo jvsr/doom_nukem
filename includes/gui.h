@@ -107,7 +107,7 @@ struct			s_transform
 struct			s_text
 {
 	t_draw_method	draw_method;
-	char			*str;
+	char			*text;
 	float			size;
 	SDL_Color		color;
 	t_font_type		font_type;

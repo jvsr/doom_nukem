@@ -15,19 +15,10 @@
 
 #include "gui.h"
 
-
-#include "game.h"
-void coolio(struct s_game *fakka, struct s_transform *you) {
-	(void)fakka;
-	(void)you;
-	quit(fakka);
-}
-
 const t_onclickpair	g_onclicks[] = {
 	{"button_menu_missions", NULL},
 	{"button_menu_options", NULL},
 	{"button_menu_quit", NULL},
-	{"onclick", coolio},
 };
 
 const char	*get_onclick_name(t_onclick *onclick)

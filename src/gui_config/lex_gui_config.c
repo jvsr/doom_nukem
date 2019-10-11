@@ -17,8 +17,7 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
 #include "libft/ft_char.h"
-
-#include "libft/ft_printf.h" //
+#include "libft/ft_printf.h"
 
 #include "lex.h"
 #include "error.h"
@@ -31,7 +30,7 @@ static t_token	*create_tokens(const char *file)
 
 	index = 0;
 	tokens = NULL;
-	while(file[index])
+	while (file[index])
 	{
 		if (file[index] == '-')
 			lex_check_dash(&tokens, file, &index);
@@ -58,7 +57,7 @@ static t_token	*create_tokens(const char *file)
 	return (tokens);
 }
 
-t_token	*lex_gui_config(const int fd)
+t_token			*lex_gui_config(const int fd)
 {
 	char	*file;
 	t_token	*tokens;

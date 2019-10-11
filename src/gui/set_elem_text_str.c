@@ -22,6 +22,6 @@ void	set_elem_text_str(t_transform *elem, const char *str)
 		text = elem->gui_elem.text;
 	else
 		text = elem->gui_elem.button->text;
-	text->str = ft_strdup(str);
+	text->text = ft_strdup(str);
 	set_elem_redraw(elem);
 }

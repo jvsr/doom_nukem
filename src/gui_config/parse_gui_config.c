@@ -1150,7 +1150,7 @@ t_return_code	error_state(t_token **token, t_parse_info **parse_info)
 
 	(void)parse_info;
 	if (*token)
-		message = ft_strformat("Unrecognized token \"%s\" in parser", (*token)->token);
+		message = ft_strformat("Unrecognized token '%s' in parser", (*token)->token);
 	else
 		message = ft_strdup("Reached unexpected EOF");
 	error_msg("Failed to parse", 20, message);
@@ -1175,8 +1175,8 @@ t_state_code	lookup_state(t_state_code curstate, t_return_code rc) {
 			return (g_transition_table[i].dst_state);
 		i++;
 	}
-	error_msg("Unkown state", 1,
-	ft_strformat("Undefined transition from %d with rc: '%d'", curstate, rc)); // use better error code
+	error_msg("Unkown state", 20,
+	ft_strformat("Undefined transition from %d with rc: '%d'", curstate, rc));
 	return (-1);
 }
 
@@ -1189,10 +1189,8 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 
 	cur_state = entry;
 	parse_info = new_parse_info();
-	while(1)
+	while (1)
 	{
-		if (tokens)
-			ft_printf("%.2d - \'%s\', %d\n", cur_state, tokens->token, tokens->token_amount);
 		state_fun = state[cur_state];
 		rc = state_fun(&tokens, &parse_info);
 		if (cur_state == end)
