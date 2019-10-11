@@ -15,15 +15,12 @@
       - pos: 0.15, 0.25
       - dim: 0.7, 0.15
       - color: #d0e1f9
-      - onclick: button_menu_missions
     - button: b_options
       - pos: 0.15, 0.45
       - dim: 0.7, 0.15
-      - text_color: #E3CD81FF
-      - text_font: KARARC
+      - text_color: #E3CD81
       - text: "Quit now"
       - color: #d0e1f9
-      - onclick: button_menu_options
     - button: b_quit
       - pos: 0.15, 0.65
       - dim: 0.7, 0.15
@@ -32,4 +29,3 @@
       - text_font: KARARC
       - text: "Quit now"
       - text_size: 1.2
-      - onclick: button_menu_quit
