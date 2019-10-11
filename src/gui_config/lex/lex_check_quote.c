@@ -47,10 +47,10 @@ static void	lex_check_squote(t_token **tokens, const char *file, size_t *index)
 	}
 	new = lex_create_token(SQUOTE, token_amount);
 	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);	
+	lex_add_token(tokens, new);
 }
 
-void	lex_check_quote(t_token **tokens, const char *file, size_t *index)
+void		lex_check_quote(t_token **tokens, const char *file, size_t *index)
 {
 	if (file[*index] == '\"')
 		lex_check_dquote(tokens, file, index);

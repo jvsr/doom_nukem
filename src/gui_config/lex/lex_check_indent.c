@@ -36,7 +36,8 @@ static void	calculate_amount_size(const char *file, const size_t *index,
 			return ;
 	}
 }
-void	lex_check_indent(t_token **tokens, const char *const file,
+
+void		lex_check_indent(t_token **tokens, const char *const file,
 							size_t *const index)
 {
 	t_token			*new;

@@ -15,6 +15,8 @@
 
 # define UI_CONFIG_PATH "./resources/config/ui/"
 
+# include <sys/types.h>
+
 typedef enum	e_token_type
 {
 	ID,

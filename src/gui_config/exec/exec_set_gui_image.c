@@ -44,5 +44,4 @@ void		exec_set_gui_image(t_transform *elem, t_parse_info *elem_info)
 		set_elem_image_texture(elem, open_tga_sdl(elem_info->texture));
 	if (draw_method != DRAW_METHOD_UNDEFINED)
 		set_elem_image_draw_method(elem, draw_method);
-
 }

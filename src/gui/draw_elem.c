@@ -106,7 +106,6 @@ void			draw_elem(t_transform *elem)
 		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->abs_pos);
 	else
 		sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
-
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
 }

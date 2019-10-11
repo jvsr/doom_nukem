@@ -20,20 +20,7 @@ FT_SRCS =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-EXEC_SRCS = exec_gui_config \
-		exec_new_elem \
-		exec_set_gui_text \
-		exec_set_gui_image \
-		exec_set_gui_button
-EXEC_SRCS := $(EXEC_SRCS:%=exec/%)
-
-PARSE_SRCS = new_parse_info \
-		del_parse_info
-PARSE_SRCS := $(PARSE_SRCS:%=parse/%)
-
-SRCS = analyze_gui_config \
-		open_gui_config \
-		lex_gui_config \
+LEX_SRCS = lex_gui_config \
 		lex_check_eol \
 		lex_check_dash \
 		lex_check_hash \
@@ -46,7 +33,56 @@ SRCS = analyze_gui_config \
 		lex_check_period \
 		lex_add_token \
 		lex_create_token \
-		lex_set_token_value \
-		parse_gui_config \
-		$(EXEC_SRCS) \
-		$(PARSE_SRCS)
+		lex_set_token_value
+LEX_SRCS := $(LEX_SRCS:%=lex/%)
+
+PARSE_SRCS = new_parse_info \
+		del_parse_info \
+		get_attr \
+		get_next \
+		entry_state \
+		dash_state \
+		space_state \
+		newline_state \
+		id_state \
+		name_state \
+		error_state \
+		check_next \
+		padding_state \
+		onclick_state \
+		clickable_state \
+		text_font_state \
+		text_draw_method_state \
+		draw_method_state \
+		exit_state \
+		texture_state \
+		color_state \
+		layer_state \
+		text_color_state \
+		show_state \
+		text_state \
+		text_size_int_state \
+		text_size_float_state \
+		pos_state \
+		pos_x_state \
+		pos_split_state \
+		pos_y_state \
+		dim_state \
+		dim_x_state \
+		dim_split_state \
+		dim_y_state \
+		parse_gui_config
+PARSE_SRCS := $(PARSE_SRCS:%=parse/%)
+
+EXEC_SRCS = exec_gui_config \
+		exec_new_elem \
+		exec_set_gui_text \
+		exec_set_gui_image \
+		exec_set_gui_button
+EXEC_SRCS := $(EXEC_SRCS:%=exec/%)
+
+SRCS = analyze_gui_config \
+		open_gui_config \
+		$(LEX_SRCS) \
+		$(PARSE_SRCS) \
+		$(EXEC_SRCS)

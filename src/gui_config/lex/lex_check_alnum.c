@@ -86,7 +86,7 @@ static void	lex_check_num(t_token **tokens, const char *file, size_t *index)
 	}
 }
 
-void	lex_check_alnum(t_token **tokens, const char *file, size_t *index)
+void		lex_check_alnum(t_token **tokens, const char *file, size_t *index)
 {
 	if (ft_isalpha(file[*index]))
 		lex_check_id(tokens, file, index);
