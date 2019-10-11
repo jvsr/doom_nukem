@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include "libft/ft_bool.h"
 
+typedef struct s_list	t_list;
+
 typedef union	u_convert
 {
 	char			c;
@@ -46,6 +48,7 @@ void			add_long(long l, t_binary *bin);
 void			add_float(float f, t_binary *bin);
 void			add_double(double d, t_binary *bin);
 void			add_string(char *string, t_binary *bin);
+void			add_list_gen(t_list *lst, t_binary *bin);
 unsigned char	read_char(unsigned char *bytes);
 short			read_short(unsigned char *bytes);
 int				read_int(unsigned char *bytes);
@@ -53,6 +56,8 @@ long			read_long(unsigned char *bytes);
 float			read_float(unsigned char *bytes);
 double			read_double(unsigned char *bytes);
 char			*read_string(unsigned char *header, unsigned char *bytes);
+t_list			*read_list_gen(unsigned char *header, unsigned char *bytes,
+						size_t header_pos, size_t d_size);
 void			finish_bin(t_binary *bin);
 
 #endif

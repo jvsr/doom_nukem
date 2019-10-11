@@ -16,14 +16,12 @@
 
 char	*read_string(unsigned char *header, unsigned char *bytes)
 {
-	long	loc;
 	long	size;
 	char	*string;
 	long	i;
 
-	loc = read_long(header);
 	size = read_long(header + sizeof(long));
-	string = (char*)ft_memalloc(size);
+	string = ft_strnew(size);
 	i = 0;
 	while (i < size)
 	{
