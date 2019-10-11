@@ -1252,14 +1252,14 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 	t_return_code	rc;
 	t_state_code	cur_state;
 	t_parse_info	*parse_info;
-	t_return_code	(* state_fun)(t_token**, t_parse_info**);
+	t_return_code	(*state_fnc)(t_token**, t_parse_info**);
 
 	cur_state = entry;
 	parse_info = new_parse_info();
 	while (1)
 	{
-		state_fun = state[cur_state];
-		rc = state_fun(&tokens, &parse_info);
+		state_fnc = state[cur_state];
+		rc = state_fnc(&tokens, &parse_info);
 		if (cur_state == end)
 			break ;
 		if (cur_state != entry)
