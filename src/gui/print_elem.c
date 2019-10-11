@@ -36,5 +36,6 @@ Has_alpha: %d\nClickable: %hhd\nOnclick: %s\n",
 	elem->pos.x, elem->pos.y, elem->dim.x, elem->dim.y,
 	elem->has_alpha, elem->clickable, get_onclick_name(elem->onclick));
 	print_gui_elem(elem, print_children);
-	ft_putchar('\n');
+	if (elem->next != NULL)
+		ft_putchar('\n');
 }

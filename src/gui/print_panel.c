@@ -29,14 +29,15 @@ void		print_panel(t_panel *panel, t_bool print_children)
 
 	cur = panel->children;
 	ft_printf("%{cyan}Children:%{}\n");
-	if (print_children == TRUE)
+	if (print_children == FALSE)
 	{
+		while (cur != NULL)
+		{
+			ft_printf("\t%s\n", cur->name);
+			cur = cur->next;
+		}
+	}
+	else
 		put_children(cur);
-		return ;
-	}
-	while (cur != NULL)
-	{
-		ft_printf("\t%s\n", cur->name);
-		cur = cur->next;
-	}
+	ft_printf("%{red}End of children%{}\n");
 }
