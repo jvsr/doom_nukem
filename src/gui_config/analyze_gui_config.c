@@ -21,8 +21,7 @@
 #include "error.h"
 #include "gui_config.h"
 
-t_transform	*analyze_gui_config(t_gui *ui, const char *state_name,
-				const char *file_name)
+t_transform	*analyze_gui_config(t_gui *ui, const char *file_name)
 {
 	t_transform		*result;
 	t_token			*tokens;
@@ -32,7 +31,7 @@ t_transform	*analyze_gui_config(t_gui *ui, const char *state_name,
 	result = NULL;
 	tokens = lex_gui_config(fd);
 	close(fd);
-	parse_info = parse_gui_config(tokens, state_name);
+	parse_info = parse_gui_config(tokens);
 	result = exec_gui_config(ui, parse_info);
 	return (result);
 }

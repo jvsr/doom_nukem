@@ -1,4 +1,4 @@
-- main: main
+- panel: main
   - image: background
     - show: 1
     - clickable: 0

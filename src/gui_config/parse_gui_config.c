@@ -1247,7 +1247,7 @@ t_state_code	lookup_state(t_state_code curstate, t_return_code rc) {
 	return (-1);
 }
 
-t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
+t_parse_info	*parse_gui_config(t_token *tokens)
 {
 	t_return_code	rc;
 	t_state_code	cur_state;
@@ -1266,7 +1266,5 @@ t_parse_info	*parse_gui_config(t_token *tokens, const char *state_name)
 			next_token(&tokens);
 		cur_state = lookup_state(cur_state, rc);
 	}
-
 	return(parse_info);
-	(void)state_name;
 }
