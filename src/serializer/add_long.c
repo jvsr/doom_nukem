@@ -12,10 +12,10 @@
 
 #include "serializer.h"
 
-void		add_long(unsigned char **bytes, size_t *b_size, long l)
+void		add_long(long l, t_binary *bin)
 {
 	t_convert con;
 
 	con.l = l;
-	add_type(bytes, b_size, &con, sizeof(l));
+	add_type(&bin->content, &bin->c_size, &con, sizeof(l));
 }

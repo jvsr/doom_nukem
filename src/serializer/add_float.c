@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "serializer.h"
+#include <stdio.h>
 
-void		add_float(unsigned char **bytes, size_t *b_size, float f)
+void		add_float(float f, t_binary *bin)
 {
 	t_convert con;
 
 	con.f = f;
-	add_type(bytes, b_size, &con, sizeof(f));
+	add_type(&bin->content, &bin->c_size, &con, sizeof(f));
 }

@@ -12,10 +12,10 @@
 
 #include "serializer.h"
 
-void		add_short(unsigned char **bytes, size_t *b_size, short s)
+void		add_short(short s, t_binary *bin)
 {
 	t_convert con;
 
 	con.s = s;
-	add_type(bytes, b_size, &con, sizeof(s));
+	add_type(&bin->content, &bin->c_size, &con, sizeof(s));
 }

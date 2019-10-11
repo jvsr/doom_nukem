@@ -12,10 +12,10 @@
 
 #include "serializer.h"
 
-void	add_int(unsigned char **bytes, size_t *b_size, int i)
+void	add_int(int i, t_binary *bin)
 {
 	t_convert con;
 
 	con.i = i;
-	add_type(bytes, b_size, &con, sizeof(i));
+	add_type(&bin->content, &bin->c_size, &con, sizeof(i));
 }

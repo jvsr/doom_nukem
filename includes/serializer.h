@@ -31,17 +31,28 @@ typedef struct 	s_binary
 {
 	unsigned char	*content;
 	unsigned char	*header;
+	size_t			c_size;
+	size_t			h_size;
 }				t_binary;
 
 t_bool			write_struct(char *loc,void *obj, size_t size);
 unsigned char	*read_struct(char *loc);
 void			add_type(unsigned char **bytes,
 								size_t *b_size, t_convert *val, size_t v_size);
-void			add_char(unsigned char **bytes, size_t *b_size, char c);
-void			add_short(unsigned char **bytes, size_t *b_size, short s);
-void			add_int(unsigned char **bytes, size_t *b_size, int i);
-void			add_long(unsigned char **bytes, size_t *b_size, long l);
-void			add_float(unsigned char **bytes, size_t *b_size, float f);
-void			add_double(unsigned char **bytes, size_t *b_size, double d);
+void			add_char(char c, t_binary *bin);
+void			add_short(short s, t_binary *bin);
+void			add_int(int i, t_binary *bin);
+void			add_long(long l, t_binary *bin);
+void			add_float(float f, t_binary *bin);
+void			add_double(double d, t_binary *bin);
+void			add_string(char *string, t_binary *bin);
+unsigned char	read_char(unsigned char *bytes);
+short			read_short(unsigned char *bytes);
+int				read_int(unsigned char *bytes);
+long			read_long(unsigned char *bytes);
+float			read_float(unsigned char *bytes);
+double			read_double(unsigned char *bytes);
+char			*read_string(unsigned char *header, unsigned char *bytes);
+void			finish_bin(t_binary *bin);
 
 #endif

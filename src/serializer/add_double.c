@@ -12,10 +12,10 @@
 
 #include "serializer.h"
 
-void		add_double(unsigned char **bytes, size_t *b_size, double d)
+void		add_double(double d, t_binary *bin)
 {
 	t_convert con;
 
 	con.d = d;
-	add_type(bytes, b_size, &con, sizeof(d));
+	add_type(&bin->content, &bin->c_size, &con, sizeof(d));
 }
