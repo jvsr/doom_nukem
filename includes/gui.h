@@ -81,6 +81,7 @@ struct			s_transform
 {
 	t_coord				pos;
 	t_coord				dim;
+	SDL_Point			rel_pos;
 	SDL_Point			abs_pos;
 	SDL_Point			abs_dim;
 	char				*name;
@@ -181,8 +182,8 @@ t_transform		*get_elem_child(t_transform *elem, const char *name);
 t_transform		*get_gui_child(t_gui *ui, const char *name);
 void			add_gui_child(t_gui *ui, t_transform *panel);
 void			add_elem_child(t_transform *parent, t_transform *child);
-void			check_gui_hit(t_game *game, SDL_Point pos);
 void			add_to_children(t_transform **children, t_transform *child);
 void			remove_elem_parent(t_transform *elem);
+t_transform		*check_gui_hit(t_game *game, SDL_Point pos);
 
 #endif
