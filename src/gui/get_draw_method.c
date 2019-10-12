@@ -14,7 +14,7 @@
 
 #include "gui.h"
 
-const t_matchpair	g_draw_methods[] = {
+static const t_matchpair	g_draw_methods[] = {
 	{"DRAW_METHOD_UNDEFINED", DRAW_METHOD_UNDEFINED},
 	{"SCALED", SCALED},
 	{"REPEAT", REPEAT},

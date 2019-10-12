@@ -16,8 +16,9 @@
 # include "parse.h"
 
 typedef	struct s_token	t_token;
+typedef t_return_code	(t_state_fnc)(t_token**, t_parse_info**);
 
-t_return_code	(*g_state[])(t_token**, t_parse_info**) =
+static t_state_fnc		*g_state[] =
 {
 	entry_state,
 
@@ -117,7 +118,7 @@ t_return_code	(*g_state[])(t_token**, t_parse_info**) =
 	exit_state,
 };
 
-typedef enum		e_state_code
+typedef enum				e_state_code
 {
 	entry,
 
@@ -215,16 +216,16 @@ typedef enum		e_state_code
 
 	error,
 	end,
-}					t_state_code;
+}							t_state_code;
 
-typedef struct		s_transition
+typedef struct				s_transition
 {
-	t_state_code	src_state;
-	t_return_code	ret_code;
-	t_state_code	dst_state;
-}					t_transition;
+	const t_state_code	src_state;
+	const t_return_code	ret_code;
+	const t_state_code	dst_state;
+}							t_transition;
 
-t_transition	g_transition_table[] =
+static const t_transition	g_transition_table[] =
 {
 	{entry, ok, dash},
 	{entry, fail, error},

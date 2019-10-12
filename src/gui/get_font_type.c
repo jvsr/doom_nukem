@@ -14,7 +14,7 @@
 
 #include "gui.h"
 
-const t_matchpair	g_font_types[] = {
+static const t_matchpair	g_font_types[] = {
 	{"FONT_UNDEFINED", FONT_UNDEFINED},
 	{"ROBOTO", ROBOTO},
 	{"MONOF", MONOF},

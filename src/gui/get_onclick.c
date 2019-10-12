@@ -15,7 +15,7 @@
 
 #include "gui.h"
 
-const t_onclickpair	g_onclicks[] = {
+static const t_onclickpair	g_onclicks[] = {
 	{"button_menu_missions", NULL},
 	{"button_menu_options", NULL},
 	{"button_menu_quit", NULL},
