@@ -43,8 +43,7 @@ static t_transform	*check_children(SDL_Point *pos, t_transform *elem)
 		else if (elem->clickable)
 			return (elem);
 	}
-	else
-		return (NULL);
+	return (NULL);
 }
 
 t_transform		*check_gui_hit(t_game *game, SDL_Point pos)
