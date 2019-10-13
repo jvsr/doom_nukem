@@ -90,8 +90,8 @@ typedef	struct	s_info
 	ssize_t	var_len;
 	t_type	var_type;
 	int		var_base;
-	t_bool	iszero;
-	t_bool	isnegative;
+	t_bool	is_zero;
+	t_bool	is_negative;
 	char	*buff;
 	t_list	*buff_list;
 	size_t	buff_len;

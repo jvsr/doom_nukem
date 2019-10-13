@@ -92,6 +92,8 @@ size_t			ft_wrddcount(const char *str, const char *dlm);
 ssize_t			ft_getnextdline(int fd, char **line, char dlm);
 ssize_t			ft_getnextline(int fd, char **line);
 ssize_t			ft_readfile(int fd, char **str);
+char			*ft_strformat(const char *format, ...);
+char			*ft_strformat_len(size_t *len, const char *format, ...);
 char			*ft_strreplace(const char *str, const char *find,
 					const char *replace);
 

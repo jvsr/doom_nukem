@@ -22,14 +22,12 @@
 
 #include "get_headers.h"
 
-t_header	*g_prv = NULL;
-t_header	*g_head = NULL;
-
-static void	add_header(char *line)
+static void	add_header(char *line, t_header **head)
 {
-	char		*dup;
-	t_header	*header;
-	size_t		offset;
+	static t_header	*prv = NULL;
+	char			*dup;
+	t_header		*header;
+	size_t			offset;
 
 	dup = strdup(&line[10]);
 	if (dup == NULL)
@@ -41,14 +39,14 @@ static void	add_header(char *line)
 		exit(1);
 	header->name = dup;
 	header->next = NULL;
-	if (g_head == NULL)
-		g_head = header;
+	if (*head == NULL)
+		*head = header;
 	else
-		g_prv->next = header;
-	g_prv = header;
+		prv->next = header;
+	prv = header;
 }
 
-static void	get_headers(FILE *file)
+static void	get_headers(FILE *file, t_header **head)
 {
 	ssize_t	len;
 	char	*line;
@@ -59,7 +57,7 @@ static void	get_headers(FILE *file)
 	while (len > 0)
 	{
 		if (strncmp(line, "#include \"", 10) == 0)
-			add_header(line);
+			add_header(line, head);
 		len = 0;
 		free(line);
 		line = NULL;
@@ -67,7 +65,7 @@ static void	get_headers(FILE *file)
 	}
 }
 
-static void	read_files(int argc, char **argv)
+static void	read_files(int argc, char **argv, t_header **head)
 {
 	size_t	i;
 	FILE	*file;
@@ -81,18 +79,18 @@ static void	read_files(int argc, char **argv)
 			dprintf(2, "Error(%d): %s - %s\n", errno, argv[2], strerror(errno));
 			exit(errno);
 		}
-		get_headers(file);
+		get_headers(file, head);
 		fclose(file);
 		i++;
 	}
 }
 
-static void	remove_duplicates(void)
+static void	remove_duplicates(t_header **head)
 {
 	t_header	*cur;
 	t_header	*next;
 
-	cur = g_head;
+	cur = *head;
 	while (cur != NULL)
 	{
 		next = cur->next;
@@ -108,21 +106,25 @@ static void	remove_duplicates(void)
 
 int			main(int argc, char **argv)
 {
-	char	*includes_path;
+	char		*includes_path;
+	t_header	*head;
 
 	argc--;
+	head = NULL;
 	if (argc == 0)
 		dprintf(2, "Error: provide includes path and c files\n");
 	if (argc == 0 || argc == 1)
 		exit(1);
 	includes_path = argv[1];
-	read_files(argc, argv);
-	sort_headers(&g_head);
-	remove_duplicates();
-	while (g_head != NULL)
+	read_files(argc, argv, &head);
+	if (head == NULL)
+		return (0);
+	sort_headers(&head);
+	remove_duplicates(&head);
+	while (head != NULL)
 	{
-		printf("%s/%s\n", includes_path, g_head->name);
-		g_head = g_head->next;
+		printf("%s/%s\n", includes_path, head->name);
+		head = head->next;
 	}
 	return (0);
 }

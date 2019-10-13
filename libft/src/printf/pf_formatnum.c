@@ -18,9 +18,9 @@ void		pf_formatnum(t_info *info)
 	intmax_t	num;
 
 	num = pf_overflowsigned(info);
-	info->iszero = (num == 0);
-	info->isnegative = (num < 0);
-	info->var_len = ft_numlen(num) - info->isnegative;
+	info->is_zero = (num == 0);
+	info->is_negative = (num < 0);
+	info->var_len = ft_numlen(num) - info->is_negative;
 	pf_formatpad(info);
 	if (info->precision == 0 && num == 0)
 	{
