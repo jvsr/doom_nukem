@@ -29,6 +29,8 @@ t_list	*read_list_gen(unsigned char *header, unsigned char *bytes,
 	*header_pos += 8;
 	list = ft_lstnew(ft_memalloc(d_size), d_size);
 	ft_memcpy(list->content, bytes, d_size);
+	if (*(header + sizeof(long)) != detect_endian())
+		swap_bytes(list->content, d_size);
 	if (size != (long)d_size)
 		ft_lstaddbck(&list,
 			read_list_gen(header, bytes + d_size, header_pos, d_size));
