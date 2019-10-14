@@ -14,7 +14,7 @@
 
 t_endian		detect_endian(void)
 {
-	const static int	i = 1;
+	const int	i = 1;
 
 	if (*((unsigned char*)&i) == 1)
 		return (ENDIAN_LITTLE);
