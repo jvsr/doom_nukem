@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 17:26:08 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 13:56:19 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:20:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_image		*new_image(void)
 
 	image = (t_image *)ft_memalloc(sizeof(t_image));
 	if (image == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc image");
+		error_msg_errno("Failed to alloc image");
 	image->draw_method = SCALED;
 	return (image);
 }

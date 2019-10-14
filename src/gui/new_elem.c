@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/11 20:26:12 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/11 20:26:12 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:20:23 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,17 @@ t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)
 
 	new = (t_transform *)ft_memalloc(sizeof(t_transform));
 	if (new == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc transform surface");
+		error_msg_errno("Failed to alloc transform surface");
 	new->name = ft_strdup(name);
 	if (new->name == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc transform name");
+		error_msg_errno("Failed to alloc transform name");
 	new->show = TRUE;
 	new->redraw = TRUE;
 	new->gui_type = type;
 	new->has_alpha = (type == TEXT);
 	new->clickable = (type != PANEL);
 	new->parent_type = -1;
+	ft_memcpy(&new->dim, &(t_coord){1, 1}, sizeof(t_coord));
 	new_gui_elem(ui, type, &new->gui_elem);
 	return (new);
 }

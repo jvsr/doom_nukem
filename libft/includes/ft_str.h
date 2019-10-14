@@ -57,6 +57,7 @@ int				ft_strcmp(const char *str1, const char *str2);
 int				ft_strncmp_nocase(const char *str1, const char *str2, size_t n);
 int				ft_strncmp(const char *str1, const char *str2, size_t n);
 size_t			ft_strdlen(const char *str, const char *dlm);
+size_t			ft_strishex(const char *str);
 size_t			ft_strislen(const char *str, t_bool (*f)(char));
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *str);

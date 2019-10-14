@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/08 21:36:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 15:51:13 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 17:18:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		str_to_img(t_img *img, t_tga *tga, unsigned char *str)
 	img->pixels = (unsigned int*)ft_memalloc(sizeof(unsigned int) *
 		(img->height * img->width));
 	if (img->pixels == NULL)
-		error_msg(strerror(errno), errno, "Failed to allocate tga pixels");
+		error_msg_errno("Failed to allocate tga pixels");
 	if ((img->origin & 0x20) == 0)
 		bottomleft(img, tga, str);
 	else

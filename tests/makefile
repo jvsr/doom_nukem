@@ -77,7 +77,7 @@ $(NAME): $(TESTOBJS) $(LIB)
 # Compile .o
 %.o: %.c $(HEADERS)
 ifeq ($(CCSILENT), FALSE)
-	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(NAME),$(shell basename $<))
+	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(NAME),$(@:src/%=%))
 endif
 	@$(CC) $(CCFLAGS) -o $@ -c $<
 
@@ -101,7 +101,7 @@ endif
 
 # Recompile
 re: fclean
-	$(MAKE)
+	@$(MAKE)
 
 FORCE: ;
 

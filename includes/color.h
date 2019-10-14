@@ -15,9 +15,13 @@
 
 # include <SDL2/SDL_pixels.h>
 
+# include "libft/ft_bool.h"
+
 # include "types.h"
 
 t_uint32	color_to_rgba(SDL_Color c);
-void		rgba_to_color(SDL_Color *c, t_uint32 color);
+char		*color_to_hex(SDL_Color c, t_bool include_alpha);
+void		rgba_to_color(SDL_Color *c, t_uint32 rgba);
+void		hex_to_color(SDL_Color *c, char *hex);
 
 #endif

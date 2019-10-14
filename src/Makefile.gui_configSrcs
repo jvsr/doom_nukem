@@ -6,7 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = gui error gui_config
+HEADERS = gui error gui_config lex parse exec transition_table
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=
@@ -20,14 +20,71 @@ FT_SRCS =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+LEX_SRCS = lex_gui_config \
+		add_lex_token \
+		check_lex_alnum \
+		check_lex_colon \
+		check_lex_comma \
+		check_lex_dash \
+		check_lex_eol \
+		check_lex_hash \
+		check_lex_indent \
+		check_lex_period \
+		check_lex_quote \
+		check_lex_space \
+		create_lex_token \
+		set_lex_token_value
+LEX_SRCS := $(LEX_SRCS:%=lex/%)
+
+PARSE_SRCS = new_parse_info \
+		check_next \
+		check_type \
+		clickable_state \
+		color_state \
+		dash_state \
+		del_parse_info \
+		dim_split_state \
+		dim_state \
+		dim_x_state \
+		dim_y_state \
+		draw_method_state \
+		entry_state \
+		error_state \
+		exit_state \
+		get_attr \
+		get_next \
+		id_state \
+		layer_state \
+		name_state \
+		new_parse_manager \
+		newline_state \
+		onclick_state \
+		padding_state \
+		pos_split_state \
+		pos_state \
+		pos_x_state \
+		pos_y_state \
+		show_state \
+		space_state \
+		text_color_state \
+		text_draw_method_state \
+		text_font_state \
+		text_size_float_state \
+		text_size_int_state \
+		text_state \
+		texture_state \
+		parse_gui_config
+PARSE_SRCS := $(PARSE_SRCS:%=parse/%)
+
+EXEC_SRCS = exec_gui_config \
+		new_exec_elem \
+		set_exec_gui_image \
+		set_exec_gui_text \
+		set_exec_gui_button
+EXEC_SRCS := $(EXEC_SRCS:%=exec/%)
+
 SRCS = analyze_gui_config \
 		open_gui_config \
-		lex_gui_config \
-		lex_check_eol \
-		lex_check_dash \
-		lex_check_alnum \
-		lex_check_space \
-		lex_check_indent \
-		lex_add_token \
-		lex_create_token \
-		lex_set_token_value
+		$(LEX_SRCS) \
+		$(PARSE_SRCS) \
+		$(EXEC_SRCS)

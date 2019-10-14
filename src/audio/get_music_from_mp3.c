@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <SDL2/SDL_mixer.h>
 #include "libft/ft_str.h"
 #include "audio.h"
@@ -23,7 +24,7 @@ Mix_Music	*get_music_from_mp3(char *file)
 	str = ft_strjoin(MUSIC_LOC, file);
 	track = Mix_LoadMUS(str);
 	if (track == NULL)
-		error_msg_sdl(1, "Missing Sound");
+		error_msg_sdl(ENOENT, "Missing Sound");
 	ft_strdel(&str);
 	return (track);
 }

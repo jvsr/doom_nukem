@@ -1,9 +1,14 @@
 {
     "files.associations": {
+		"*.mainSrcs": "makefile",
 		"*.h": "c",
-		"sdl2_mixer": "ruby",
 		"Makefile.*": "makefile",
+		"sdl2_mixer": "ruby",
 		"iterator": "c",
-		"cerrno": "c"
+		"cerrno": "c",
+		"__locale": "c",
+		"functional": "c",
+		"typeinfo": "c",
+		"ios": "c"
 	}
 }

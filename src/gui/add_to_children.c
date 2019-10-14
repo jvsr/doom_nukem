@@ -6,13 +6,13 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 15:52:19 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/16 15:52:19 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:17:40 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include "libft/ft_str.h"
 #include "libft/ft_printf.h"
-
 #include "gui.h"
 #include "error.h"
 
@@ -24,7 +24,7 @@ static void	duplicate_error(const char *name)
 {
 	const char	*msg = ft_strformat("Failed to add '%s'", name);
 
-	error_msg("Elem name allready in use", 1, msg);
+	error_msg("Elem name already in use", EPERM, msg);
 }
 
 static void	check_duplicate(t_transform *cur, const char *name)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_check.c                                        :+:    :+:            */
+/*   check_lex_dash.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -14,7 +14,7 @@
 
 #include "lex.h"
 
-void	lex_check_dash(t_token **tokens, const char *file, size_t *index)
+void	check_lex_dash(t_token **tokens, const char *file, size_t *index)
 {
 	t_token	*new;
 	size_t	token_amount;
@@ -27,7 +27,7 @@ void	lex_check_dash(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(DASH, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
+	new = create_lex_token(DASH, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }

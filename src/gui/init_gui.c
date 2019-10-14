@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 20:21:45 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/10 20:21:45 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:20:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_gui	*alloc_ui(void)
 
 	ui = (t_gui *)ft_memalloc(sizeof(t_gui));
 	if (ui == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc UI");
+		error_msg_errno("Failed to alloc UI");
 	return (ui);
 }
 
