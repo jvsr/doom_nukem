@@ -15,40 +15,35 @@
 #include "lex.h"
 #include "parse.h"
 
-t_return_code	colon_text_state(t_token **token, t_parse_info **parse_info)
+t_return_code	colon_text_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_text_state(t_token **token, t_parse_info **parse_info)
+t_return_code	space_text_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, DQUOTE));
+	return (check_next(manager->token, DQUOTE));
 }
 
-t_return_code	dquote_start_text_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	dquote_start_text_state(t_parse_manager *manager)
 {
-	(*parse_info)->text = ft_strnew(0);
-	return (check_next(token, DQUOTE));
+	manager->parse_info->text = ft_strnew(0);
+	return (check_next(manager->token, DQUOTE));
 }
 
-t_return_code	dquote_end_text_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	dquote_end_text_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next_newline(token));
+	return (check_next_newline(manager->token));
 }
 
-t_return_code	text_text_state(t_token **token, t_parse_info **parse_info)
+t_return_code	text_text_state(t_parse_manager *manager)
 {
 	t_return_code	rc;
 
-	ft_strappend(&(*parse_info)->text, (*token)->token);
-	if (check_next(token, DQUOTE) == ok)
+	ft_strappend(&manager->parse_info->text, manager->token->token);
+	if (check_next(manager->token, DQUOTE) == ok)
 		rc = ok;
-	else if (get_next_token_type(token) == EOC)
+	else if (get_next_token_type(manager->token) == EOC)
 		rc = fail;
 	else
 		rc = repeat;

@@ -14,41 +14,41 @@
 
 #include "parse.h"
 
-static t_return_code	get_text_attr(const char *type)
+static t_return_code	get_text_attr(const char *attr)
 {
-	if (ft_strequ(type, "text"))
+	if (ft_strequ(attr, "text"))
 		return (text);
-	else if (ft_strequ(type, "text_color"))
+	else if (ft_strequ(attr, "text_color"))
 		return (text_color);
-	else if (ft_strequ(type, "text_font"))
+	else if (ft_strequ(attr, "text_font"))
 		return (text_font);
-	else if (ft_strequ(type, "text_size"))
+	else if (ft_strequ(attr, "text_size"))
 		return (text_size);
-	else if (ft_strequ(type, "text_draw_method"))
+	else if (ft_strequ(attr, "text_draw_method"))
 		return (text_draw_method);
 	return (fail);
 }
 
-t_return_code			get_attr(const char *type)
+t_return_code			get_attr(const char *attr)
 {
-	if (ft_strequ(type, "pos"))
+	if (ft_strequ(attr, "pos"))
 		return (pos);
-	else if (ft_strequ(type, "dim"))
+	else if (ft_strequ(attr, "dim"))
 		return (dim);
-	else if (ft_strequ(type, "layer"))
+	else if (ft_strequ(attr, "layer"))
 		return (layer);
-	else if (ft_strequ(type, "onclick"))
+	else if (ft_strequ(attr, "onclick"))
 		return (onclick);
-	else if (ft_strequ(type, "clickable"))
+	else if (ft_strequ(attr, "clickable"))
 		return (clickable);
-	else if (ft_strequ(type, "show"))
+	else if (ft_strequ(attr, "show"))
 		return (show);
-	else if (ft_strequ(type, "texture"))
+	else if (ft_strequ(attr, "texture"))
 		return (texture);
-	else if (ft_strequ(type, "color"))
+	else if (ft_strequ(attr, "color"))
 		return (color);
-	else if (ft_strequ(type, "draw_method"))
+	else if (ft_strequ(attr, "draw_method"))
 		return (draw_method);
 	else
-		return (get_text_attr(type));
+		return (get_text_attr(attr));
 }

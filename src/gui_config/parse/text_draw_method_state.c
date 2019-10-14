@@ -17,35 +17,30 @@
 #include "parse.h"
 #include "error.h"
 
-static void		set_text_draw_method(t_parse_info **parse_info,
+static void		set_text_draw_method(t_parse_info *parse_info,
 								const char *text_draw_method)
 {
-	const char	*name = (*parse_info)->name;
+	const char	*name = parse_info->name;
 
-	ft_strdel(&(*parse_info)->text_draw_method);
-	(*parse_info)->text_draw_method = ft_strdup(text_draw_method);
-	if ((*parse_info)->text_draw_method == NULL)
+	ft_strdel(&parse_info->text_draw_method);
+	parse_info->text_draw_method = ft_strdup(text_draw_method);
+	if (parse_info->text_draw_method == NULL)
 		error_msg_errno(
 			ft_strformat("Failed to alloc text draw method in %s", name));
 }
 
-t_return_code	colon_text_draw_method_state(t_token **token,
-												t_parse_info **parse_info)
+t_return_code	colon_text_draw_method_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_text_draw_method_state(t_token **token,
-												t_parse_info **parse_info)
+t_return_code	space_text_draw_method_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next_str(token));
+	return (check_next_str(manager->token));
 }
 
-t_return_code	str_text_draw_method_state(t_token **token,
-					t_parse_info **parse_info)
+t_return_code	str_text_draw_method_state(t_parse_manager *manager)
 {
-	set_text_draw_method(parse_info, (*token)->token);
-	return (check_next_newline(token));
+	set_text_draw_method(manager->parse_info, manager->token->token);
+	return (check_next_newline(manager->token));
 }

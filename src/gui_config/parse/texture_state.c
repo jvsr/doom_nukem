@@ -15,34 +15,31 @@
 #include "lex.h"
 #include "parse.h"
 
-t_return_code	colon_texture_state(t_token **token, t_parse_info **parse_info)
+t_return_code	colon_texture_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_texture_state(t_token **token, t_parse_info **parse_info)
+t_return_code	space_texture_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next_str(token));
+	return (check_next_str(manager->token));
 }
 
-t_return_code	str_texture_state(t_token **token, t_parse_info **parse_info)
+t_return_code	str_texture_state(t_parse_manager *manager)
 {
-	ft_strcpy((*parse_info)->texture, (*token)->token);
-	return (check_next(token, PERIOD));
+	ft_strcpy(manager->parse_info->texture, manager->token->token);
+	return (check_next(manager->token, PERIOD));
 }
 
-t_return_code	period_texture_state(t_token **token, t_parse_info **parse_info)
+t_return_code	period_texture_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	if (check_next(token, ID) == ok && ft_strequ((*token)->next->token, "tga"))
+	if (check_next(manager->token, ID) == ok
+	&& ft_strequ(manager->token->next->token, "tga"))
 		return (ok);
 	return (fail);
 }
 
-t_return_code	tga_texture_state(t_token **token, t_parse_info **parse_info)
+t_return_code	tga_texture_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next_newline(token));
+	return (check_next_newline(manager->token));
 }

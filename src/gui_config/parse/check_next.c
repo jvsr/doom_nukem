@@ -15,14 +15,14 @@
 #include "lex.h"
 #include "parse.h"
 
-t_return_code	check_next(t_token **token, t_token_type type)
+t_return_code	check_next(t_token *token, t_token_type type)
 {
 	if (get_next_token_type(token) == type)
 		return (ok);
 	return (fail);
 }
 
-t_return_code	check_next_str(t_token **token)
+t_return_code	check_next_str(t_token *token)
 {
 	const t_token_type	type = get_next_token_type(token);
 
@@ -31,17 +31,17 @@ t_return_code	check_next_str(t_token **token)
 	return (fail);
 }
 
-t_return_code	check_next_hex(t_token **token)
+t_return_code	check_next_hex(t_token *token)
 {
 	const t_token_type	type = get_next_token_type(token);
 
 	if ((type == NUM || check_next_str(token) == ok)
-	&& ft_strishex((*token)->next->token))
+	&& ft_strishex(token->next->token))
 		return (ok);
 	return (fail);
 }
 
-t_return_code	check_next_newline(t_token **token)
+t_return_code	check_next_newline(t_token *token)
 {
 	const t_token_type	type = get_next_token_type(token);
 

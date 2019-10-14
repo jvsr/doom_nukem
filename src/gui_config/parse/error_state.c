@@ -17,16 +17,15 @@
 #include "error.h"
 #include "parse.h"
 
-t_return_code	error_state(t_token **token, t_parse_info **parse_info)
+t_return_code	error_state(t_parse_manager *manager)
 {
 	const char		*message;
 
-	(void)parse_info;
-	if (*token)
-		message = ft_strformat("Unrecognized token '%s' in parser",
-								(*token)->token);
-	else
+	if (manager->token == NULL)
 		message = ft_strdup("Reached unexpected EOF");
+	else
+		message = ft_strformat("Line %zu: Unrecognized token '%s' in parser",
+								manager->line, manager->token->token);
 	error_msg("Failed to parse", 20, message);
 	return (fail);
 }

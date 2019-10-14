@@ -39,7 +39,7 @@ const char	*get_onclick_name(t_onclick *onclick)
 	return (NULL);
 }
 
-t_onclick	*get_onclick_f(char *name)
+t_onclick	*get_onclick_f(const char *name)
 {
 	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
 	size_t			i;

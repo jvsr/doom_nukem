@@ -13,14 +13,12 @@
 #include "lex.h"
 #include "parse.h"
 
-t_return_code	colon_dim_state(t_token **token, t_parse_info **parse_info)
+t_return_code	colon_dim_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_dim_state(t_token **token, t_parse_info **parse_info)
+t_return_code	space_dim_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, NUM));
+	return (check_next(manager->token, NUM));
 }

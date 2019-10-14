@@ -36,7 +36,7 @@ const char		*get_font_type_name(t_font_type font_type)
 	return (NULL);
 }
 
-t_font_type		get_font_type_value(char *name)
+t_font_type		get_font_type_value(const char *name)
 {
 	const size_t	size = sizeof(g_font_types) / sizeof(t_matchpair);
 	size_t			i;

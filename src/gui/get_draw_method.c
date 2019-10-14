@@ -38,7 +38,7 @@ const char		*get_draw_method_name(t_draw_method draw_method)
 	return (NULL);
 }
 
-t_draw_method	get_draw_method_value(char *name)
+t_draw_method	get_draw_method_value(const char *name)
 {
 	const size_t	size = sizeof(g_draw_methods) / sizeof(t_matchpair);
 	size_t			i;

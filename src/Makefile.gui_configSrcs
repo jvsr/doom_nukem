@@ -47,6 +47,7 @@ PARSE_SRCS = new_parse_info \
 		id_state \
 		name_state \
 		error_state \
+		check_type \
 		check_next \
 		padding_state \
 		onclick_state \
@@ -71,6 +72,7 @@ PARSE_SRCS = new_parse_info \
 		dim_x_state \
 		dim_split_state \
 		dim_y_state \
+		new_parse_manager \
 		parse_gui_config
 PARSE_SRCS := $(PARSE_SRCS:%=parse/%)
 

@@ -38,7 +38,7 @@ const char		*get_gui_type_name(t_gui_type gui_type)
 	return (NULL);
 }
 
-t_gui_type		get_gui_type_value(char *name)
+t_gui_type		get_gui_type_value(const char *name)
 {
 	const size_t	size = sizeof(g_gui_types) / sizeof(t_matchpair);
 	size_t			i;
@@ -52,5 +52,5 @@ t_gui_type		get_gui_type_value(char *name)
 			return (g_gui_types[i].value);
 		i++;
 	}
-	return (PANEL);
+	return (GUI_UNDEFINED);
 }

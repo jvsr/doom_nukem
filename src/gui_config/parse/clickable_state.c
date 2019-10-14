@@ -15,29 +15,25 @@
 #include "lex.h"
 #include "parse.h"
 
-static void		set_clickable(t_parse_info **parse_info, const char *clickable)
+static void		set_clickable(t_parse_info *parse_info, const char *clickable)
 {
 	const int	clickable_value = ft_atoi(clickable);
 
-	(*parse_info)->clickable = clickable_value;
+	parse_info->clickable = clickable_value;
 }
 
-t_return_code	colon_clickable_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	colon_clickable_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_clickable_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	space_clickable_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, NUM));
+	return (check_next(manager->token, NUM));
 }
 
-t_return_code	bool_clickable_state(t_token **token, t_parse_info **parse_info)
+t_return_code	bool_clickable_state(t_parse_manager *manager)
 {
-	set_clickable(parse_info, (*token)->token);
-	return (check_next_newline(token));
+	set_clickable(manager->parse_info, manager->token->token);
+	return (check_next_newline(manager->token));
 }

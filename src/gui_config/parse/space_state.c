@@ -13,8 +13,11 @@
 #include "lex.h"
 #include "parse.h"
 
-t_return_code	space_state(t_token **token, t_parse_info **parse_info)
+t_return_code	space_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, ID));
+	if (check_next(manager->token, ID) == ok
+	&& (get_attr(manager->token->next->token) != fail
+	|| check_type(manager->token->next->token) != fail))
+		return (ok);
+	return (fail);
 }

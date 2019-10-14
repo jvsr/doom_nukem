@@ -16,34 +16,33 @@
 #include "lex.h"
 #include "parse.h"
 
-static void		set_dim_y_int(t_parse_info **parse_info, const char *y_int)
+static void		set_dim_y_int(t_parse_info *parse_info, const char *y_int)
 {
 	const int	y = ft_atoi(y_int);
 
-	(*parse_info)->dim.y = y;
+	parse_info->dim.y = y;
 }
 
-static void		set_dim_y_float(t_parse_info **parse_info, const char *y_float)
+static void		set_dim_y_float(t_parse_info *parse_info, const char *y_float)
 {
 	const int	y = ft_atoi(y_float);
 
-	(*parse_info)->dim.y += (float)y / (ft_pow(10, ft_strlen(y_float)));
+	parse_info->dim.y += (float)y / (ft_pow(10, ft_strlen(y_float)));
 }
 
-t_return_code	dim_y_int_state(t_token **token, t_parse_info **parse_info)
+t_return_code	dim_y_int_state(t_parse_manager *manager)
 {
-	set_dim_y_int(parse_info, (*token)->token);
-	return (check_next(token, PERIOD));
+	set_dim_y_int(manager->parse_info, manager->token->token);
+	return (check_next(manager->token, PERIOD));
 }
 
-t_return_code	dim_y_period_state(t_token **token, t_parse_info **parse_info)
+t_return_code	dim_y_period_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, NUM));
+	return (check_next(manager->token, NUM));
 }
 
-t_return_code	dim_y_float_state(t_token **token, t_parse_info **parse_info)
+t_return_code	dim_y_float_state(t_parse_manager *manager)
 {
-	set_dim_y_float(parse_info, (*token)->token);
-	return (check_next_newline(token));
+	set_dim_y_float(manager->parse_info, manager->token->token);
+	return (check_next_newline(manager->token));
 }

@@ -15,40 +15,34 @@
 #include "lex.h"
 #include "parse.h"
 
-static void		set_text_color(t_parse_info **parse_info,
+static void		set_text_color(t_parse_info *parse_info,
 										const char *text_color)
 {
-	ft_strcpy((*parse_info)->text_color, text_color);
+	ft_strcpy(parse_info->text_color, text_color);
 }
 
-t_return_code	colon_text_color_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	colon_text_color_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_text_color_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	space_text_color_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, HASH));
+	return (check_next(manager->token, HASH));
 }
 
-t_return_code	hash_text_color_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	hash_text_color_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	if (check_next_hex(token) == ok
-	&& ((*token)->next->token_amount == 6 || (*token)->next->token_amount == 8))
+	if (check_next_hex(manager->token) == ok
+	&& (manager->token->next->token_amount == 6
+	|| manager->token->next->token_amount == 8))
 		return (ok);
 	else
 		return (fail);
 }
 
-t_return_code	hex_text_color_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	hex_text_color_state(t_parse_manager *manager)
 {
-	set_text_color(parse_info, (*token)->token);
-	return (check_next_newline(token));
+	set_text_color(manager->parse_info, manager->token->token);
+	return (check_next_newline(manager->token));
 }

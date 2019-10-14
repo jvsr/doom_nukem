@@ -16,7 +16,7 @@
 # include "parse.h"
 
 typedef	struct s_token	t_token;
-typedef t_return_code	(t_state_fnc)(t_token**, t_parse_info**);
+typedef t_return_code	(t_state_fnc)(t_parse_manager *);
 
 static t_state_fnc		*g_state[] =
 {

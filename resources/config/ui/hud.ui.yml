@@ -1,32 +1,5 @@
 - panel: hud
+  - pos: 0.85, 0.0
+  - dim: 0.15, 1.0
   - image: background
-    - show: 1
-    - clickable: 0
-    - color: #faf0e655
-  - panel: menu
-    - panel:
-    - pos: 0.25, 0.1
-    - dim: 0.5, 0.8
-    - image: i_logo
-      - texture: splash/splash.tga
-      - draw_method: scaled
-      - dim: 1.0, 1.0
-
-    - button: b_missions
-      - pos: 0.15, 0.25
-      - dim: 0.7, 0.15
-      - color: #d0e1f9
-    - button: b_options
-      - pos: 0.15, 0.45
-      - dim: 0.7, 0.15
-      - text_color: #E3CD81
-      - text: "Quit now"
-      - color: #d0e1f9
-    - button: b_quit
-      - pos: 0.15, 0.65
-      - dim: 0.7, 0.15
-      - color: #d0e1f9FF
-      - text_color: #E3CD81FF
-      - text_font: KARARC
-      - text: "Quit now"
-      - text_size: 1.2
+    - texture: splash/splash.tga

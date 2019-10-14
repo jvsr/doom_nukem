@@ -15,27 +15,25 @@
 #include "lex.h"
 #include "parse.h"
 
-static void		set_show(t_parse_info **parse_info, const char *show)
+static void		set_show(t_parse_info *parse_info, const char *show)
 {
 	const int	show_value = ft_atoi(show);
 
-	(*parse_info)->show = show_value;
+	parse_info->show = show_value;
 }
 
-t_return_code	colon_show_state(t_token **token, t_parse_info **parse_info)
+t_return_code	colon_show_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_show_state(t_token **token, t_parse_info **parse_info)
+t_return_code	space_show_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, NUM));
+	return (check_next(manager->token, NUM));
 }
 
-t_return_code	bool_show_state(t_token **token, t_parse_info **parse_info)
+t_return_code	bool_show_state(t_parse_manager *manager)
 {
-	set_show(parse_info, (*token)->token);
-	return (check_next_newline(token));
+	set_show(manager->parse_info, manager->token->token);
+	return (check_next_newline(manager->token));
 }

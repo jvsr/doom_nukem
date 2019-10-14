@@ -15,29 +15,25 @@
 #include "lex.h"
 #include "parse.h"
 
-static void		set_text_size_int(t_parse_info **parse_info, const char *x_int)
+static void		set_text_size_int(t_parse_info *parse_info, const char *x_int)
 {
 	const int	x = ft_atoi(x_int);
 
-	(*parse_info)->text_size = x;
+	parse_info->text_size = x;
 }
 
-t_return_code	colon_text_size_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	colon_text_size_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, SPACE));
+	return (check_next(manager->token, SPACE));
 }
 
-t_return_code	space_text_size_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	space_text_size_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, NUM));
+	return (check_next(manager->token, NUM));
 }
 
-t_return_code	text_size_int_state(t_token **token, t_parse_info **parse_info)
+t_return_code	text_size_int_state(t_parse_manager *manager)
 {
-	set_text_size_int(parse_info, (*token)->token);
-	return (check_next(token, PERIOD));
+	set_text_size_int(manager->parse_info, manager->token->token);
+	return (check_next(manager->token, PERIOD));
 }

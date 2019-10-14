@@ -13,12 +13,11 @@
 #include "lex.h"
 #include "parse.h"
 
-t_return_code	entry_state(t_token **token, t_parse_info **parse_info)
+t_return_code	entry_state(t_parse_manager *manager)
 {
 	t_return_code	rc;
 
-	(void)parse_info;
-	if ((*token)->type == DASH)
+	if (manager->token->type == DASH)
 		rc = ok;
 	else
 		rc = fail;

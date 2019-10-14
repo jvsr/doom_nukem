@@ -16,24 +16,21 @@
 #include "lex.h"
 #include "parse.h"
 
-static void		set_text_size_float(t_parse_info **parse_info,
+static void		set_text_size_float(t_parse_info *parse_info,
 										const char *x_float)
 {
 	const int	x = ft_atoi(x_float);
 
-	(*parse_info)->text_size += (float)x / (ft_pow(10, ft_strlen(x_float)));
+	parse_info->text_size += (float)x / (ft_pow(10, ft_strlen(x_float)));
 }
 
-t_return_code	text_size_period_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	text_size_period_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	return (check_next(token, NUM));
+	return (check_next(manager->token, NUM));
 }
 
-t_return_code	text_size_float_state(t_token **token,
-										t_parse_info **parse_info)
+t_return_code	text_size_float_state(t_parse_manager *manager)
 {
-	set_text_size_float(parse_info, (*token)->token);
-	return (check_next_newline(token));
+	set_text_size_float(manager->parse_info, manager->token->token);
+	return (check_next_newline(manager->token));
 }

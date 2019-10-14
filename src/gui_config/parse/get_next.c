@@ -13,18 +13,18 @@
 #include "lex.h"
 #include "parse.h"
 
-t_token_type	get_next_token_type(t_token **token)
+t_token_type	get_next_token_type(t_token *token)
 {
-	if ((*token)->token_amount == 1
-	|| (*token)->type == ID
-	|| (*token)->type == NUM
-	|| (*token)->type == PLAIN)
+	if (token->token_amount == 1
+	|| token->type == ID
+	|| token->type == NUM
+	|| token->type == PLAIN)
 	{
-		if ((*token)->next)
-			return ((*token)->next->type);
+		if (token->next)
+			return (token->next->type);
 		else
 			return (EOC);
 	}
 	else
-		return ((*token)->type);
+		return (token->type);
 }

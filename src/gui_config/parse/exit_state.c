@@ -13,9 +13,8 @@
 #include "lex.h"
 #include "parse.h"
 
-t_return_code	exit_state(t_token **token, t_parse_info **parse_info)
+t_return_code	exit_state(t_parse_manager *manager)
 {
-	(void)parse_info;
-	(void)token;
+	(void)manager;
 	return (ok);
 }

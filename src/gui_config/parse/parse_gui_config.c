@@ -21,11 +21,17 @@
 
 static void			next_token(t_token **token)
 {
+	t_token	*cur;
+
+	cur = *token;
 	if ((*token)->token_amount == 1
 	|| (*token)->type == ID
 	|| (*token)->type == NUM
 	|| (*token)->type == PLAIN)
-		*token = (*token)->next;
+	{
+		*token = cur->next;
+		free(cur);
+	}
 	else
 		(*token)->token_amount -= 1;
 }
@@ -52,20 +58,23 @@ t_parse_info		*parse_gui_config(t_token *tokens)
 {
 	t_return_code	rc;
 	t_state_code	cur_state;
+	t_parse_manager	*manager;
 	t_parse_info	*parse_info;
-	t_return_code	(*state_fnc)(t_token**, t_parse_info**);
+	t_return_code	(*state_fnc)(t_parse_manager *);
 
 	cur_state = entry;
-	parse_info = new_parse_info();
+	manager = new_parse_manager(tokens);
 	while (1)
 	{
 		state_fnc = g_state[cur_state];
-		rc = state_fnc(&tokens, &parse_info);
+		rc = state_fnc(manager);
 		if (cur_state == end)
 			break ;
 		if (cur_state != entry)
-			next_token(&tokens);
+			next_token(&manager->token);
 		cur_state = lookup_state(cur_state, rc);
 	}
+	parse_info = manager->parse_info;
+	free(manager);
 	return (parse_info);
 }
