@@ -26,8 +26,6 @@ int			main(void)
 	t_bool isloaded;
 
 	isloaded = TRUE;
-
-	write_struct("help.txt", "sup", 3);
 	game = init();
 	splash(game, &isloaded, "splash/splash");
 	loop(game);
