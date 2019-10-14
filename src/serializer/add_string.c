@@ -20,10 +20,10 @@ void		add_string(char *string, t_binary *bin)
 	t_convert	con;
 
 	s_size = ft_strlen(string);
-	con.l = (t_uint64)bin->c_size;
-	add_type(&bin->header, &bin->h_size, &con, sizeof(long));
+	con.l = bin->c_size;
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
 	con.l = s_size;
-	add_type(&bin->header, &bin->h_size, &con, sizeof(long));
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
 	i = 0;
 	while (i < s_size)
 	{

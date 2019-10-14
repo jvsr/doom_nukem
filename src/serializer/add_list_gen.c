@@ -33,15 +33,15 @@ void		add_list_gen(t_list *lst, t_binary *bin)
 	t_uint64	pre_h_size;
 	t_uint64	pre_c_size;
 
-	con.l = (t_uint64)bin->c_size;
-	add_type(&bin->header, &bin->h_size, &con, sizeof(long));
+	con.l = bin->c_size;
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
 	pre_h_size = bin->h_size;
 	con.l = 0;
-	add_type(&bin->header, &bin->h_size, &con, sizeof(long));
-	pre_c_size = (t_uint64)bin->c_size;
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
+	pre_c_size = bin->c_size;
 	add_lst_data(&bin->content, &bin->c_size, lst->content, lst->content_size);
 	if (lst->next != NULL)
 		add_list_gen(lst->next, bin);
-	pre_c_size = (t_uint64)bin->c_size - pre_c_size;
-	ft_memcpy(bin->header + pre_h_size, &pre_c_size, sizeof(long));
+	pre_c_size = bin->c_size - pre_c_size;
+	ft_memcpy(bin->header + pre_h_size, &pre_c_size, sizeof(t_uint64));
 }

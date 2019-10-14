@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "types.h"
 
-void	swap_bytes(void *v_bytes, size_t size)
+void	swap_bytes(void *v_bytes, t_uint64 size)
 {
-	size_t	i;
-	char	tmp;
-	char	*bytes;
+	t_uint64	i;
+	char		tmp;
+	char		*bytes;
 
 	i = 0;
 	bytes = v_bytes;

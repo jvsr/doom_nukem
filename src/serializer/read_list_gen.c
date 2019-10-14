@@ -15,12 +15,12 @@
 #include "serializer.h"
 #include "error.h"
 
-t_list	*read_list_gen(t_binary_read *bin_r, size_t d_size)
+t_list	*read_list_gen(t_binary_read *bin_r, t_uint64 d_size)
 {
-	long	size;
-	t_list	*list;
+	t_uint64	size;
+	t_list		*list;
 
-	bin_r->header_pos += sizeof(long);
+	bin_r->header_pos += sizeof(t_uint64);
 	size = read_header(bin_r);
 	list = ft_lstnew(ft_memalloc(d_size), d_size);
 	if (list == NULL)
@@ -29,7 +29,7 @@ t_list	*read_list_gen(t_binary_read *bin_r, size_t d_size)
 	bin_r->content_pos += d_size;
 	if (bin_r->endian != detect_endian())
 		swap_bytes(list->content, d_size);
-	if (size != (long)d_size)
+	if (size != d_size)
 		ft_lstaddbck(&list, read_list_gen(bin_r, d_size));
 	else
 		list->next = NULL;

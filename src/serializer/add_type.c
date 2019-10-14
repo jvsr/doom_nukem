@@ -13,14 +13,14 @@
 #include "libft/ft_mem.h"
 #include "serializer.h"
 
-void	add_type(unsigned char **bytes,
-								size_t *b_size, t_convert *val, size_t v_size)
+void	add_type(unsigned char **bytes, t_uint64 *b_size, t_convert *val,
+			t_uint64 v_size)
 {
 	unsigned char *n_bytes;
 
 	n_bytes = ft_memalloc(*b_size + v_size);
 	ft_memcpy(n_bytes, *bytes, *b_size);
-	ft_memcpy(n_bytes + (unsigned long)*b_size, val, v_size);
+	ft_memcpy(n_bytes + (t_uint64)*b_size, val, v_size);
 	ft_memdel((void**)bytes);
 	*bytes = n_bytes;
 	*b_size += v_size;
