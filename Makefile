@@ -74,6 +74,10 @@ SUBLIBS := $(sort $(SUBLIBS))
 SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.a)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
+# Resource Folders
+DATAPATH = resources/data
+DATAPATH := $(DATAPATH)/map $(DATAPATH)/map/custom $(DATAPATH)/map/campaign
+
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
@@ -108,7 +112,7 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(LIB) $(SUBLIBS)
+$(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
@@ -124,6 +128,10 @@ ifeq ($(GCOV), TRUE)
 	@$(SUBLIBS_GCOV)
 endif
 endif
+
+# Create required $(DATAPATH)
+$(DATAPATH): 
+	@mkdir -p $(DATAPATH)
 
 # Compile $(LIB)
 $(LIB): FORCE

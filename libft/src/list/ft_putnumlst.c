@@ -17,11 +17,11 @@
 
 t_bool	ft_putnumlst(const t_list *lst)
 {
-	intmax_t	*n;
+	int	*n;
 
 	if (lst == NULL)
 		return (ft_putstr(NULL));
-	n = (intmax_t *)lst->content;
+	n = (int *)lst->content;
 	if (ft_putnum(*n) == FALSE)
 		return (FALSE);
 	if (ft_putchar('\n') == FALSE)

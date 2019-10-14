@@ -40,7 +40,7 @@ static void	int_type(t_info *info)
 	else if (info->length == 'l' || info->length == 'z')
 		info->var_type = LONG;
 	else if (info->length == 'j')
-		info->var_type = INT_MAX;
+		info->var_type = MAX_INT;
 	else
 		info->var_type = INT;
 }

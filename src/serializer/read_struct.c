@@ -12,6 +12,7 @@
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <limits.h>
 #include "libft/ft_printf.h"
 #include "libft/ft_bool.h"
 #include "libft/ft_str.h"
@@ -22,13 +23,16 @@ unsigned char		*read_struct(const char *loc)
 {
 	int				fd;
 	unsigned char	*file_stream;
+	char			full_path[PATH_MAX];
 
-	fd = open(loc, O_RDONLY);
+	ft_strcpy(full_path, INIT_PATH);
+	ft_strcat(full_path, loc);
+	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
-		error_msg_errno(ft_strformat("Failed to open %s", loc));
+		error_msg_errno(ft_strformat("Failed to open %s", full_path));
 	ft_readfile(fd, (char**)&file_stream);
 	if (file_stream == NULL)
-		error_msg_errno(ft_strformat("Failed to read %s", loc));
+		error_msg_errno(ft_strformat("Failed to read %s", full_path));
 	close(fd);
 	return (file_stream);
 }
