@@ -15,7 +15,7 @@
 #include "gui.h"
 #include "game.h"
 
-static t_bool	is_hit(SDL_Point *pos, t_transform *elem)
+static t_bool		is_hit(SDL_Point *pos, t_transform *elem)
 {
 	SDL_Point	bottom_right;
 
@@ -23,50 +23,30 @@ static t_bool	is_hit(SDL_Point *pos, t_transform *elem)
 	bottom_right.y = elem->abs_pos.y + elem->abs_dim.y;
 	if (pos->x >= elem->abs_pos.x && pos->x <= bottom_right.x)
 		return (pos->y >= elem->abs_pos.y && pos->y <= bottom_right.y);
-	return (FALSE);
-}
-
-static t_bool	is_above(const t_transform *elem, const t_transform *hit)
-{
-	const t_transform	*hit_p = hit->parent.elem;
-	const t_transform	*elem_p = elem->parent.elem;
-
-	if (elem_p == hit_p)
-		return (elem->layer > hit->layer);
-	else if (elem_p != NULL && elem_p->parent.elem == hit_p)
-		return (elem_p->layer > hit->layer);
-	else if (hit_p != NULL && elem_p == hit_p->parent.elem)
-		return (elem->layer > hit_p->layer);
 	else
-		return (is_above(elem_p, hit_p));
+		return (FALSE);
 }
 
-static t_bool	check_children(SDL_Point *pos, t_transform *elem,
-								t_transform **hit)
+static t_transform	*check_children(SDL_Point *pos, t_transform *elem)
 {
+	t_transform	*next_hit;
+
 	if (elem == NULL)
-		return (FALSE);
-	if (check_children(pos, elem->next, hit))
-		return (TRUE);
-	if (is_hit(pos, elem) && (*hit == NULL || is_above(elem, *hit)))
+		return (NULL);
+	next_hit = check_children(pos, elem->next);
+	if (next_hit != NULL)
+		return (next_hit);
+	if (is_hit(pos, elem))
 	{
 		if (elem->gui_type == PANEL)
-			return (check_children(pos, elem->gui_elem.panel->children, hit));
+			return (check_children(pos, elem->gui_elem.panel->children));
 		else if (elem->clickable)
-		{
-			*hit = elem;
-			return (TRUE);
-		}
+			return (elem);
 	}
-	return (FALSE);
+	return (NULL);
 }
 
-void			check_gui_hit(t_game *game, SDL_Point pos)
+t_transform		*check_gui_hit(t_game *game, SDL_Point pos)
 {
-	t_transform *hit;
-
-	hit = NULL;
-	check_children(&pos, game->ui->children, &hit);
-	if (hit != NULL && hit->onclick != NULL)
-		hit->onclick(game, hit);
+	return (check_children(&pos, game->ui->children));
 }
