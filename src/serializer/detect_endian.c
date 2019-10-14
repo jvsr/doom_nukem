@@ -15,11 +15,9 @@
 t_endian		detect_endian(void)
 {
 	unsigned int	i;
-	unsigned char	*check;
 
 	i = 1;
-	check = (unsigned char*)&i;
-	if (*check == 1)
+	if (*((unsigned char*)&i) == 1)
 		return (ENDIAN_LITTLE);
 	return (ENDIAN_BIG);
 }

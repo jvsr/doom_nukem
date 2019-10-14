@@ -15,6 +15,7 @@
 #include "libft/ft_mem.h"
 #include "serializer.h"
 #include "types.h"
+#include "error.h"
 
 t_list	*read_list_gen(unsigned char *header, unsigned char *bytes,
 						size_t *header_pos, size_t d_size)
@@ -28,6 +29,8 @@ t_list	*read_list_gen(unsigned char *header, unsigned char *bytes,
 	size = read_long(header + *header_pos, *(header + sizeof(long)));
 	*header_pos += 8;
 	list = ft_lstnew(ft_memalloc(d_size), d_size);
+	if (list == NULL)
+		error_msg_errno("Unable To allocate list");
 	ft_memcpy(list->content, bytes, d_size);
 	if (*(header + sizeof(long)) != detect_endian())
 		swap_bytes(list->content, d_size);

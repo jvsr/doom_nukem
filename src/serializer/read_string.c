@@ -14,6 +14,7 @@
 #include "libft/ft_str.h"
 #include "serializer.h"
 #include "types.h"
+#include "error.h"
 
 char	*read_string(unsigned char *header,
 									unsigned char *bytes, size_t *header_pos)
@@ -25,6 +26,8 @@ char	*read_string(unsigned char *header,
 	size = read_long(header + *header_pos + sizeof(long),
 			*(header + sizeof(long)));
 	string = ft_strnew(size);
+	if (string == NULL)
+		error_msg_errno("Unable to allocate string");
 	i = 0;
 	while (i < size)
 	{
