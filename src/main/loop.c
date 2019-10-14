@@ -29,10 +29,16 @@ static void		check_quit(t_game *game, SDL_Event event)
 
 static void		check_ui_click(t_game *game, SDL_Event event)
 {
+	t_transform	*hit;
+
 	if (game->cursoractive == FALSE || event.type != SDL_MOUSEBUTTONDOWN)
 		return ;
 	if (event.button.button & SDL_BUTTON_LEFT)
-		check_gui_hit(game, (SDL_Point){event.button.x, event.button.y});
+	{
+		hit = check_gui_hit(game, (SDL_Point){event.button.x, event.button.y});
+		if (hit != NULL && hit->onclick != NULL)
+			hit->onclick(game, hit);
+	}
 }
 
 static void		manage_keymap(t_game *game, SDL_Event event)

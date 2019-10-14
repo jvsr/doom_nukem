@@ -41,18 +41,25 @@ static t_bool	child_moved(t_transform *elem)
 static void		update_pos_dim(t_transform *elem)
 {
 	SDL_Point	parent_dim;
+	SDL_Point	parent_pos;
 
 	if (elem->parent_type == ELEM)
+	{
+		ft_memcpy(&parent_pos, &elem->parent.elem->abs_pos, sizeof(SDL_Point));
 		ft_memcpy(&parent_dim, &elem->parent.elem->abs_dim, sizeof(SDL_Point));
+	}
 	else
 	{
+		ft_memcpy(&parent_pos, &(SDL_Point){0, 0}, sizeof(SDL_Point));
 		parent_dim.x = elem->parent.ui->window_surface->w;
 		parent_dim.y = elem->parent.ui->window_surface->h;
 	}
-	elem->abs_pos.x = parent_dim.x * elem->pos.x;
-	elem->abs_pos.y = parent_dim.y * elem->pos.y;
+	elem->rel_pos.x = parent_dim.x * elem->pos.x;
+	elem->rel_pos.y = parent_dim.y * elem->pos.y;
 	elem->abs_dim.x = parent_dim.x * elem->dim.x;
 	elem->abs_dim.y = parent_dim.y * elem->dim.y;
+	elem->abs_pos.x = parent_pos.x + elem->rel_pos.x;
+	elem->abs_pos.y = parent_pos.y + elem->rel_pos.y;
 }
 
 static void		reset_surface(t_transform *elem)
@@ -103,9 +110,9 @@ void			draw_elem(t_transform *elem)
 	else
 		dst_surface = elem->parent.ui->window_surface;
 	if (elem->gui_type == TEXT || elem->has_alpha)
-		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->abs_pos);
+		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->rel_pos);
 	else
-		sdl_merge_surface(dst_surface, elem->surface, elem->abs_pos);
+		sdl_merge_surface(dst_surface, elem->surface, elem->rel_pos);
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
 }
