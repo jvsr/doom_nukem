@@ -17,11 +17,10 @@
 
 t_list	*read_list_gen(t_binary_read *bin_r, size_t d_size)
 {
-	long	loc;
 	long	size;
 	t_list	*list;
 
-	loc = read_header(bin_r);
+	bin_r->header_pos += sizeof(long);
 	size = read_header(bin_r);
 	list = ft_lstnew(ft_memalloc(d_size), d_size);
 	if (list == NULL)
