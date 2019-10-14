@@ -10,9 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_mem.h"
 #include "serializer.h"
+#include "types.h"
 
-short		read_short(unsigned char *bytes)
+short		read_short(unsigned char *bytes, t_endian endian)
 {
-	return ((short)*bytes | (short)*(bytes + 1) << 8);
+	short s;
+
+	ft_memcpy(&s, bytes, sizeof(s));
+	if (endian == detect_endian())
+		return (s);
+	swap_bytes(&s, sizeof(s));
+	return (s);
 }

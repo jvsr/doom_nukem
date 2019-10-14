@@ -11,11 +11,16 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
+#include "serializer.h"
+#include "types.h"
 
-double	read_double(unsigned char *bytes)
+double	read_double(unsigned char *bytes, t_endian endian)
 {
 	double d;
 
 	ft_memcpy(&d, bytes, sizeof(double));
+	if (endian == detect_endian())
+		return (d);
+	swap_bytes(&d, sizeof(d));
 	return (d);
 }

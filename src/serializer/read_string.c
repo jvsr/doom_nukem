@@ -13,6 +13,7 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
 #include "serializer.h"
+#include "types.h"
 
 char	*read_string(unsigned char *header,
 									unsigned char *bytes, size_t *header_pos)
@@ -21,7 +22,8 @@ char	*read_string(unsigned char *header,
 	char	*string;
 	long	i;
 
-	size = read_long(header + *header_pos + sizeof(long));
+	size = read_long(header + *header_pos + sizeof(long),
+			*(header + sizeof(long)));
 	string = ft_strnew(size);
 	i = 0;
 	while (i < size)

@@ -51,16 +51,17 @@ void			add_double(double d, t_binary *bin);
 void			add_string(char *string, t_binary *bin);
 void			add_list_gen(t_list *lst, t_binary *bin);
 unsigned char	read_char(unsigned char *bytes);
-short			read_short(unsigned char *bytes);
-int				read_int(unsigned char *bytes);
-long			read_long(unsigned char *bytes);
-float			read_float(unsigned char *bytes);
-double			read_double(unsigned char *bytes);
+short			read_short(unsigned char *bytes, t_endian endian);
+int				read_int(unsigned char *bytes, t_endian endian);
+long			read_long(unsigned char *bytes, t_endian endian);
+float			read_float(unsigned char *bytes, t_endian endian);
+double			read_double(unsigned char *bytes, t_endian endian);
 char			*read_string(unsigned char *header,
 									unsigned char *bytes, size_t *header_pos);
 t_list			*read_list_gen(unsigned char *header, unsigned char *bytes,
 						size_t *header_pos, size_t d_size);
 void			finish_bin(t_binary *bin);
 t_endian		detect_endian(void);
+void			swap_bytes(void *v_bytes, size_t size);
 
 #endif

@@ -10,10 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_mem.h"
 #include "serializer.h"
+#include "types.h"
 
-int			read_int(unsigned char *bytes)
+int			read_int(unsigned char *bytes, t_endian endian)
 {
-	return ((int)*bytes | (int)*(bytes + 1) << 8 | (int)*(bytes + 2) << 16 |
-		(int)*(bytes + 3) << 24);
+	int i;
+
+	ft_memcpy(&i, bytes, sizeof(int));
+	if (endian == detect_endian())
+		return (i);
+	swap_bytes(&i, sizeof(i));
+	return (i);
 }

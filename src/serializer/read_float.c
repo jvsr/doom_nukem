@@ -11,11 +11,16 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
+#include "serializer.h"
+#include "types.h"
 
-float		read_float(unsigned char *bytes)
+float		read_float(unsigned char *bytes, t_endian endian)
 {
 	float f;
 
 	ft_memcpy(&f, bytes, sizeof(float));
+	if (endian == detect_endian())
+		return (f);
+	swap_bytes(&f, sizeof(f));
 	return (f);
 }
