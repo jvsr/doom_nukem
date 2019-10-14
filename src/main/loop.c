@@ -16,7 +16,6 @@
 
 #include "libft/ft_char.h"
 
-#include "gui_config.h"
 #include "gui.h"
 #include "game.h"
 #include "keymap.h"
