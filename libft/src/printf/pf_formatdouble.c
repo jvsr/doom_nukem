@@ -72,8 +72,8 @@ static void	formatdouble(t_info *info)
 
 	value = va_arg(info->args, double);
 	info->var_len = ft_numlen((long)value) + info->precision;
-	info->isnegative = (value < 0);
-	info->iszero = (value == 0);
+	info->is_negative = (value < 0);
+	info->is_zero = (value == 0);
 	pf_formatpad(info);
 	adddouble(info, value, info->precision);
 }
@@ -84,8 +84,8 @@ static void	formatldouble(t_info *info)
 
 	value = va_arg(info->args, long double);
 	info->var_len = ft_numlen((long)value) + info->precision;
-	info->isnegative = (value < 0);
-	info->iszero = (value == 0);
+	info->is_negative = (value < 0);
+	info->is_zero = (value == 0);
 	pf_formatpad(info);
 	adddouble(info, value, info->precision);
 }
