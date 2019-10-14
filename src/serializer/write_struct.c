@@ -14,9 +14,10 @@
 #include <fcntl.h>
 #include "libft/ft_bool.h"
 #include "libft/ft_printf.h"
+#include "serializer.h"
 #include "error.h"
 
-t_bool	write_struct(char *loc, void *obj, size_t size)
+t_bool	write_struct(char *loc, t_binary *bin)
 {
 	int fd;
 
@@ -24,7 +25,7 @@ t_bool	write_struct(char *loc, void *obj, size_t size)
 				S_IWGRP);
 	if (fd == -1)
 		error_msg_errno(ft_strformat("Failed to open %s", loc));
-	if (write(fd, obj, size) == -1)
+	if (write(fd, bin->content, bin->c_size) == -1)
 		error_msg_errno(ft_strformat("Failed to write to %s", loc));
 	close(fd);
 	return (TRUE);

@@ -33,12 +33,13 @@ typedef union	u_convert
 typedef struct	s_binary
 {
 	unsigned char	*content;
-	unsigned char	*header;
 	size_t			c_size;
+	unsigned char	*header;
 	size_t			h_size;
 }				t_binary;
 
-t_bool			write_struct(char *loc, void *obj, size_t size);
+t_bool			write_struct(char *loc, t_binary *bin);
+void			del_binary(t_binary **bin);
 unsigned char	*read_struct(char *loc);
 void			add_type(unsigned char **bytes,
 								size_t *b_size, t_convert *val, size_t v_size);
@@ -63,5 +64,6 @@ t_list			*read_list_gen(unsigned char *header, unsigned char *bytes,
 void			finish_bin(t_binary *bin);
 t_endian		detect_endian(void);
 void			swap_bytes(void *v_bytes, size_t size);
+t_binary		*new_binary(void);
 
 #endif
