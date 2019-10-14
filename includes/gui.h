@@ -85,6 +85,7 @@ struct			s_transform
 {
 	t_coord				pos;
 	t_coord				dim;
+	SDL_Point			rel_pos;
 	SDL_Point			abs_pos;
 	SDL_Point			abs_dim;
 	char				*name;
@@ -204,7 +205,6 @@ const char		*get_gui_type_name(t_gui_type gui_type);
 t_gui_type		get_gui_type_value(const char *name);
 void			add_gui_child(t_gui *ui, t_transform *panel);
 void			add_elem_child(t_transform *parent, t_transform *child);
-void			check_gui_hit(t_game *game, SDL_Point pos);
 void			add_to_children(t_transform **children, t_transform *child);
 void			remove_elem_parent(t_transform *elem);
 void			print_elem(t_transform *elem, t_bool print_children);
@@ -212,5 +212,6 @@ void			print_text(t_text *text);
 void			print_image(t_image *image);
 void			print_button(t_button *button);
 void			print_panel(t_panel *panel, t_bool print_children);
+t_transform		*check_gui_hit(t_game *game, SDL_Point pos);
 
 #endif
