@@ -14,13 +14,14 @@
 #include "libft/ft_str.h"
 #include "serializer.h"
 
-char	*read_string(unsigned char *header, unsigned char *bytes)
+char	*read_string(unsigned char *header,
+									unsigned char *bytes, size_t *header_pos)
 {
 	long	size;
 	char	*string;
 	long	i;
 
-	size = read_long(header + sizeof(long));
+	size = read_long(header + *header_pos + sizeof(long));
 	string = ft_strnew(size);
 	i = 0;
 	while (i < size)
@@ -28,5 +29,6 @@ char	*read_string(unsigned char *header, unsigned char *bytes)
 		string[i] = *(bytes + i);
 		i++;
 	}
+	*header_pos += 2 * sizeof(long);
 	return (string);
 }

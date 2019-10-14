@@ -10,21 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
 #include "serializer.h"
 
 t_list	*read_list_gen(unsigned char *header, unsigned char *bytes,
-						size_t header_pos, size_t d_size)
+						size_t *header_pos, size_t d_size)
 {
 	long	loc;
 	long	size;
 	t_list	*list;
 
-	loc = read_long(header + header_pos);
-	header_pos += 8;
-	size = read_long(header + header_pos);
-	header_pos += 8;
+	loc = read_long(header + *header_pos);
+	*header_pos += 8;
+	size = read_long(header + *header_pos);
+	*header_pos += 8;
 	list = ft_lstnew(ft_memalloc(d_size), d_size);
 	ft_memcpy(list->content, bytes, d_size);
 	if (size != (long)d_size)

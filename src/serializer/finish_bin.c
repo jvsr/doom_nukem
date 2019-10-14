@@ -12,17 +12,21 @@
 
 #include "libft/ft_mem.h"
 #include "serializer.h"
+#include "types.h"
 
 void		finish_bin(t_binary *bin)
 {
 	long			l;
 	unsigned char	*arg;
+	unsigned char	type;
 
+	type = (unsigned char)detect_endian();
 	l = (long)bin->h_size;
-	l += sizeof(long);
-	arg = ft_memalloc(sizeof(long) + bin->h_size + bin->c_size);
-	ft_memcpy(arg, &l, sizeof(long));
-	ft_memcpy(arg + sizeof(long), bin->header, bin->h_size);
+	l += sizeof(l) + sizeof(type);
+	arg = ft_memalloc(sizeof(l) + sizeof(type) + bin->h_size + bin->c_size);
+	ft_memcpy(arg, &l, sizeof(l));
+	ft_memcpy(arg + sizeof(l), &type, sizeof(type));
+	ft_memcpy(arg + sizeof(l) + sizeof(type), bin->header, bin->h_size);
 	ft_memcpy(arg + l, bin->content, bin->c_size);
 	ft_memdel((void**)&(bin->content));
 	bin->content = arg;

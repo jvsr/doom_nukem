@@ -17,6 +17,7 @@
 # include "libft/ft_bool.h"
 
 typedef struct s_list	t_list;
+typedef enum e_endian	t_endian;
 
 typedef union	u_convert
 {
@@ -55,9 +56,11 @@ int				read_int(unsigned char *bytes);
 long			read_long(unsigned char *bytes);
 float			read_float(unsigned char *bytes);
 double			read_double(unsigned char *bytes);
-char			*read_string(unsigned char *header, unsigned char *bytes);
+char			*read_string(unsigned char *header,
+									unsigned char *bytes, size_t *header_pos);
 t_list			*read_list_gen(unsigned char *header, unsigned char *bytes,
-						size_t header_pos, size_t d_size);
+						size_t *header_pos, size_t d_size);
 void			finish_bin(t_binary *bin);
+t_endian		detect_endian(void);
 
 #endif
