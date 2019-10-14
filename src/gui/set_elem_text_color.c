@@ -12,6 +12,8 @@
 
 #include <SDL2/SDL_pixels.h>
 
+#include "libft/ft_mem.h"
+
 #include "gui.h"
 
 void	set_elem_text_color(t_transform *elem, SDL_Color color)
@@ -22,6 +24,6 @@ void	set_elem_text_color(t_transform *elem, SDL_Color color)
 		text = elem->gui_elem.text;
 	else
 		text = elem->gui_elem.button->text;
-	text->color = color;
+	ft_memcpy(&text->color, &color, sizeof(SDL_Color));
 	set_elem_redraw(elem);
 }

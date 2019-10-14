@@ -12,6 +12,8 @@
 
 #include <SDL2/SDL_pixels.h>
 
+#include "libft/ft_mem.h"
+
 #include "gui.h"
 
 void	set_elem_image_color(t_transform *elem, SDL_Color color)
@@ -22,8 +24,8 @@ void	set_elem_image_color(t_transform *elem, SDL_Color color)
 		image = elem->gui_elem.image;
 	else
 		image = elem->gui_elem.button->image;
-	image->color = color;
 	image->draw_method = COLOR;
 	elem->has_alpha = (color.a != 255);
+	ft_memcpy(&image->color, &color, sizeof(SDL_Color));
 	set_elem_redraw(elem);
 }

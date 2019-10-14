@@ -12,8 +12,7 @@
 
 #include "gui.h"
 
-void	set_elem_onclick(t_transform *elem,
-			void (*onclick)(t_game *, t_transform *))
+void	set_elem_onclick(t_transform *elem, t_onclick *onclick)
 {
 	elem->onclick = onclick;
 }

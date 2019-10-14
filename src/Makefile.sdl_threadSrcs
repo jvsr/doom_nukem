@@ -12,7 +12,7 @@ HEADERS = sdl_thread error
 CCFLAGS +=
 
 # Source file prefix
-PREFIX =
+PREFIX = sdl_
 
 # All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with ft_ and sufixed with .c
@@ -23,4 +23,3 @@ FT_SRCS =
 SRCS = del_pool done_pool join_pool manage_thread new_pool new_task new_thread \
 	manage_thread_worker que_pool_back que_pool_front que_pool run_task \
 	manage_thread_central complete_task
-SRCS := $(SRCS:%=sdl_%)

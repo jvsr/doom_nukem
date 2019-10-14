@@ -31,7 +31,7 @@ GCOVSILENT =
 GCOVFLAGS =
 
 # Own names
-SRCFOLDER = $(SUBLIB:%.a=%)
+SRCFOLDER = $(SUBLIB:%.content=%)
 NAME = $(FOLDER)/$(SUBLIB)
 
 # Misc setup
@@ -84,8 +84,7 @@ all: $(NAME)
 # Create $(NAME)
 $(NAME): $(COMPILE_FILES)
 	@$(call FNC_PRINT_EQUAL,$(PARENTNAME)-$(SRCFOLDER),$(SUBLIB))
-	@rm -f $(NAME)
-	@ar rcs $(NAME) $(OBJS)
+	@echo $(OBJS:%=\\n%) > $(NAME)
 
 # Run gcov
 gcovreport: $(NAME)
@@ -94,12 +93,12 @@ gcovreport: $(NAME)
 # Compile .o or .gcno if $(GCOV)==TRUE
 %.o %.gcno: %.c $(HEADERS)
 ifeq ($(CCSILENT), FALSE)
-	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(shell basename $@))
+	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(@:$(SRCFOLDER)/%=%))
 endif
 	@rm -f $(<:.c=.o)
 	@$(CC) $(CCFLAGS) -o $(<:.c=.o) -c $<
 
-# Clean all non .a files
+# Clean all non .content files
 clean:
 ifneq ($(wildcard $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)),)
 	@$(call FNC_PRINT_MIN,$(PARENTNAME)-$(SRCFOLDER),clean)
