@@ -61,4 +61,5 @@ Mkfile.old
 dkms.conf
 
 # Other
+*.content
 personal.h

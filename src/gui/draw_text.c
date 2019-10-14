@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 17:27:05 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 10:44:35 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:19:30 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void				draw_text(SDL_Surface *dst, t_text *text)
 	TTF_Font	*font;
 	SDL_Surface	*rendered_text;
 
-	if (text->str == NULL || is_empty_str(text->str))
+	if (text->color.a == 0 || text->text == NULL || is_empty_str(text->text))
 		return ;
-	font = get_font(text->fonts, text->font_type);
-	rendered_text = render_text(text->str, font, &text->color);
+	font = text->fonts[text->font_type];
+	rendered_text = render_text(text->text, font, &text->color);
 	if (text->draw_method != SCALED)
 		merge_text(dst, text, rendered_text);
 	else

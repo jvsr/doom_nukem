@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/18 15:40:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:24:38 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		calculate_color(int *dst, int *src)
 	rgba_to_color(&cdst, *dst);
 	rgba_to_color(&csrc, *src);
 	op = (float)csrc.a / maxalpha;
-	cdst.a = csrc.a;
+	cdst.a -= cdst.a * ((float)csrc.a / maxalpha);
 	cdst.r = cdst.r * (1 - op) + csrc.r * op;
 	cdst.g = cdst.g * (1 - op) + csrc.g * op;
 	cdst.b = cdst.b * (1 - op) + csrc.b * op;

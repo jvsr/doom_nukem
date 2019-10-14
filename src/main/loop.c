@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 15:22:13 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 17:18:06 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
 
-#include "gui_config.h"
+#include "libft/ft_char.h"
+
 #include "gui.h"
 #include "game.h"
 #include "keymap.h"

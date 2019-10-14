@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_add_token.c                                    :+:    :+:            */
+/*   error_state.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/19 12:33:42 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/19 12:39:41 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/11 16:20:33 by jvisser        #+#    #+#                */
+/*   Updated: 2019/10/11 16:20:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft/ft_str.h"
+#include "libft/ft_printf.h"
 
 #include "lex.h"
+#include "error.h"
+#include "parse.h"
 
-void	lex_add_token(t_token **tokens, t_token *new)
+t_return_code	error_state(t_parse_manager *manager)
 {
-	static t_token	*last = NULL;
+	const char		*message;
 
-	if (last == NULL)
-		*tokens = new;
+	if (manager->token == NULL)
+		message = ft_strdup("Reached unexpected EOF");
 	else
-		last->next = new;
-	last = new;
+		message = ft_strformat("Line %zu: Unrecognized token '%s' in parser",
+								manager->line, manager->token->token);
+	error_msg("Failed to parse", 20, message);
+	return (fail);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_check_eol.c                                    :+:    :+:            */
+/*   check_lex_eol.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -14,7 +14,7 @@
 
 #include "lex.h"
 
-static void	lex_check_crlf(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_crlf(t_token **tokens, const char *file, size_t *index)
 {
 	t_token		*new;
 	size_t		token_amount;
@@ -28,13 +28,13 @@ static void	lex_check_crlf(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size += 2;
 	}
-	new = lex_create_token(CRLF, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
-	lex_check_indent(tokens, file, index);
+	new = create_lex_token(CRLF, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
+	check_lex_indent(tokens, file, index);
 }
 
-static void	lex_check_cr(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_cr(t_token **tokens, const char *file, size_t *index)
 {
 	t_token		*new;
 	size_t		token_amount;
@@ -47,12 +47,12 @@ static void	lex_check_cr(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(CR, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
+	new = create_lex_token(CR, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }
 
-static void	lex_check_lf(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_lf(t_token **tokens, const char *file, size_t *index)
 {
 	t_token		*new;
 	size_t		token_amount;
@@ -66,21 +66,21 @@ static void	lex_check_lf(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(CR, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
-	lex_check_indent(tokens, file, index);
+	new = create_lex_token(LF, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
+	check_lex_indent(tokens, file, index);
 }
 
-void		lex_check_eol(t_token **tokens, const char *file, size_t *index)
+void		check_lex_eol(t_token **tokens, const char *file, size_t *index)
 {
 	if (file[*index] == '\r')
 	{
 		if (file[*index + 1] == '\n')
-			lex_check_crlf(tokens, file, index);
+			check_lex_crlf(tokens, file, index);
 		else
-			lex_check_cr(tokens, file, index);
+			check_lex_cr(tokens, file, index);
 	}
 	else
-		lex_check_lf(tokens, file, index);
+		check_lex_lf(tokens, file, index);
 }

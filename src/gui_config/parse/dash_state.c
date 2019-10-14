@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_font.c                                         :+:    :+:            */
+/*   dash_state.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/03 10:38:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:38:52 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/11 16:57:59 by jvisser        #+#    #+#                */
+/*   Updated: 2019/10/11 16:57:59 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "lex.h"
+#include "parse.h"
 
-TTF_Font	*get_font(TTF_Font **fonts, t_font_type font)
+t_return_code	dash_state(t_parse_manager *manager)
 {
-	return (fonts[font]);
+	return (check_next(manager->token, SPACE));
 }

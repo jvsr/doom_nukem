@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_create_token.c                                 :+:    :+:            */
+/*   add_lex_token.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/19 12:33:52 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/19 16:11:27 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/19 12:33:42 by jvisser        #+#    #+#                */
+/*   Updated: 2019/09/19 12:39:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <stdlib.h>
-
-#include "libft/ft_str.h"
-#include "libft/ft_mem.h"
+#include <stddef.h>
 
 #include "lex.h"
-#include "error.h"
 
-t_token	*lex_create_token(t_token_type type, const size_t token_amount)
+void	add_lex_token(t_token **tokens, t_token *new)
 {
-	t_token *token;
+	static t_token	*last = NULL;
 
-	token = (t_token*)ft_memalloc(sizeof(t_token));
-	if (token == NULL)
-		error_msg(strerror(errno), errno, "Failed to alloc Token");
+	if (last == NULL)
+		*tokens = new;
 	else
-	{
-		token->type = type;
-		token->token_amount = token_amount;
-		token->next = NULL;
-	}
-	return (token);
+		last->next = new;
+	last = new;
 }

@@ -46,7 +46,7 @@ static t_transform	*check_children(SDL_Point *pos, t_transform *elem)
 	return (NULL);
 }
 
-t_transform		*check_gui_hit(t_game *game, SDL_Point pos)
+t_transform			*check_gui_hit(t_game *game, SDL_Point pos)
 {
 	return (check_children(&pos, game->ui->children));
 }
