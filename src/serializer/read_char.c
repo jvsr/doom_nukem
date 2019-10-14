@@ -12,7 +12,11 @@
 
 #include "serializer.h"
 
-unsigned char	read_char(unsigned char *bytes)
+unsigned char	read_char(t_binary_read *bin_r)
 {
-	return (*bytes);
+	unsigned char c;
+
+	c = *(bin_r->bytes + bin_r->content_pos);
+	bin_r->content_pos += sizeof(char);
+	return (c);
 }

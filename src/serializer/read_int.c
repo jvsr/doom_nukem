@@ -12,14 +12,14 @@
 
 #include "libft/ft_mem.h"
 #include "serializer.h"
-#include "types.h"
 
-int			read_int(unsigned char *bytes, t_endian endian)
+int			read_int(t_binary_read *bin_r)
 {
 	int i;
 
-	ft_memcpy(&i, bytes, sizeof(int));
-	if (endian == detect_endian())
+	ft_memcpy(&i, bin_r->bytes + bin_r->content_pos, sizeof(int));
+	bin_r->content_pos += sizeof(int);
+	if (bin_r->endian == detect_endian())
 		return (i);
 	swap_bytes(&i, sizeof(i));
 	return (i);

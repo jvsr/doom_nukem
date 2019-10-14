@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include "libft/ft_bool.h"
+# include "types.h"
 
 typedef struct s_list	t_list;
 typedef enum e_endian	t_endian;
@@ -38,9 +39,21 @@ typedef struct	s_binary
 	size_t			h_size;
 }				t_binary;
 
-t_bool			write_struct(char *loc, t_binary *bin);
+typedef struct	s_binary_read
+{
+	unsigned char	*bytes;
+	size_t			header_pos;
+	size_t			content_pos;
+	size_t			header_size;
+	t_endian		endian;
+}				t_binary_read;
+
+t_binary		*new_binary(void);
 void			del_binary(t_binary **bin);
-unsigned char	*read_struct(char *loc);
+t_binary_read	*new_binary_read(const char *loc);
+void			del_binary_read(t_binary_read **bin_r);
+t_bool			write_struct(char *loc, t_binary *bin);
+unsigned char	*read_struct(const char *loc);
 void			add_type(unsigned char **bytes,
 								size_t *b_size, t_convert *val, size_t v_size);
 void			add_char(char c, t_binary *bin);
@@ -51,19 +64,17 @@ void			add_float(float f, t_binary *bin);
 void			add_double(double d, t_binary *bin);
 void			add_string(char *string, t_binary *bin);
 void			add_list_gen(t_list *lst, t_binary *bin);
-unsigned char	read_char(unsigned char *bytes);
-short			read_short(unsigned char *bytes, t_endian endian);
-int				read_int(unsigned char *bytes, t_endian endian);
-long			read_long(unsigned char *bytes, t_endian endian);
-float			read_float(unsigned char *bytes, t_endian endian);
-double			read_double(unsigned char *bytes, t_endian endian);
-char			*read_string(unsigned char *header,
-									unsigned char *bytes, size_t *header_pos);
-t_list			*read_list_gen(unsigned char *header, unsigned char *bytes,
-						size_t *header_pos, size_t d_size);
+unsigned char	read_char(t_binary_read *bin_r);
+short			read_short(t_binary_read *bin_r);
+int				read_int(t_binary_read *bin_r);
+long			read_long(t_binary_read *bin_r);
+float			read_float(t_binary_read *bin_r);
+double			read_double(t_binary_read *bin_r);
+char			*read_string(t_binary_read *bin_r);
+t_list			*read_list_gen(t_binary_read *bin_r, size_t d_size);
 void			finish_bin(t_binary *bin);
 t_endian		detect_endian(void);
+long			read_header(t_binary_read *bin_r);
 void			swap_bytes(void *v_bytes, size_t size);
-t_binary		*new_binary(void);
 
 #endif

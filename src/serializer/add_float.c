@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "serializer.h"
-#include <stdio.h>
 
 void		add_float(float f, t_binary *bin)
 {

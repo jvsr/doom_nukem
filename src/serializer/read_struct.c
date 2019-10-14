@@ -15,9 +15,10 @@
 #include "libft/ft_printf.h"
 #include "libft/ft_bool.h"
 #include "libft/ft_str.h"
+#include "serializer.h"
 #include "error.h"
 
-unsigned char		*read_struct(char *loc)
+unsigned char		*read_struct(const char *loc)
 {
 	int				fd;
 	unsigned char	*file_stream;

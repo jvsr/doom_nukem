@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 void	swap_bytes(void *v_bytes, size_t size)
 {

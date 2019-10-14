@@ -10,33 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
 #include "serializer.h"
-#include "types.h"
 #include "error.h"
 
-t_list	*read_list_gen(unsigned char *header, unsigned char *bytes,
-						size_t *header_pos, size_t d_size)
+t_list	*read_list_gen(t_binary_read *bin_r, size_t d_size)
 {
 	long	loc;
 	long	size;
 	t_list	*list;
 
-	loc = read_long(header + *header_pos, *(header + sizeof(long)));
-	*header_pos += 8;
-	size = read_long(header + *header_pos, *(header + sizeof(long)));
-	*header_pos += 8;
+	loc = read_header(bin_r);
+	size = read_header(bin_r);
 	list = ft_lstnew(ft_memalloc(d_size), d_size);
 	if (list == NULL)
 		error_msg_errno("Unable To allocate list");
-	ft_memcpy(list->content, bytes, d_size);
-	if (*(header + sizeof(long)) != detect_endian())
+	ft_memcpy(list->content, bin_r->bytes + bin_r->content_pos, d_size);
+	bin_r->content_pos += d_size;
+	if (bin_r->endian != detect_endian())
 		swap_bytes(list->content, d_size);
 	if (size != (long)d_size)
-		ft_lstaddbck(&list,
-			read_list_gen(header, bytes + d_size, header_pos, d_size));
+		ft_lstaddbck(&list, read_list_gen(bin_r, d_size));
 	else
 		list->next = NULL;
 	return (list);

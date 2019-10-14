@@ -12,7 +12,6 @@
 
 #include "libft/ft_mem.h"
 #include "serializer.h"
-#include "types.h"
 
 void		finish_bin(t_binary *bin)
 {
