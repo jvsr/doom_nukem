@@ -21,6 +21,8 @@ void		draw_image(SDL_Surface *dst, t_image *image)
 		sdl_merge_surface(dst, image->texture, (SDL_Point){0, 0});
 	else if (image->draw_method == CENTERED)
 		sdl_merge_surface_center(dst, image->texture);
+	else if (image->draw_method == REPEAT)
+		sdl_merge_surface_repeat(dst, image->texture);
 	else if (image->draw_method == COLOR)
 		sdl_fill_surface_color(dst, image->color);
 }
