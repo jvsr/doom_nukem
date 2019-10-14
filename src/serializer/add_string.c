@@ -15,14 +15,14 @@
 
 void		add_string(char *string, t_binary *bin)
 {
-	size_t		s_size;
-	size_t		i;
+	t_uint64	s_size;
+	t_uint64	i;
 	t_convert	con;
 
 	s_size = ft_strlen(string);
-	con.l = (long)bin->c_size;
+	con.l = (t_uint64)bin->c_size;
 	add_type(&bin->header, &bin->h_size, &con, sizeof(long));
-	con.l = (long)s_size;
+	con.l = s_size;
 	add_type(&bin->header, &bin->h_size, &con, sizeof(long));
 	i = 0;
 	while (i < s_size)
