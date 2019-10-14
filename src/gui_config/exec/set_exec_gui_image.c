@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   exec_set_gui_text.c                                :+:    :+:            */
+/*   set_exec_gui_image.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -14,40 +14,34 @@
 #include "libft/ft_printf.h"
 
 #include "gui.h"
+#include "tga.h"
 #include "exec.h"
 #include "parse.h"
 #include "color.h"
 #include "error.h"
 
-static void	validate(t_parse_info *elem_info,
-						t_draw_method draw_method, t_font_type font_type)
+static void	validate(t_parse_info *elem_info, t_draw_method draw_method)
 {
 	char	*msg;
 
 	msg = "";
-	if (elem_info->text_draw_method && draw_method == DRAW_METHOD_UNDEFINED)
-		msg = ft_strformat("Invalid text draw method in %s", elem_info->name);
-	else if (elem_info->text_font && font_type == FONT_UNDEFINED)
-		msg = ft_strformat("Invalid text font in %s", elem_info->name);
+	if (elem_info->draw_method && draw_method == DRAW_METHOD_UNDEFINED)
+		msg = ft_strformat("Invalid image draw method in %s", elem_info->name);
 	if (ft_strequ(msg, "") == FALSE)
 		error_msg("Executer validation error", 21, msg);
 }
 
-void		exec_set_gui_text(t_transform *elem, t_parse_info *elem_info)
+void		set_exec_gui_image(t_transform *elem, t_parse_info *elem_info)
 {
 	SDL_Color		color;
 	t_draw_method	draw_method;
-	t_font_type		font_type;
 
-	font_type = get_font_type_value(elem_info->text_font);
-	draw_method = get_draw_method_value(elem_info->text_draw_method);
-	validate(elem_info, draw_method, font_type);
-	hex_to_color(&color, elem_info->text_color);
-	set_elem_text_str(elem, elem_info->text);
-	set_elem_text_color(elem, color);
-	set_elem_text_size(elem, elem_info->text_size);
-	if (font_type != FONT_UNDEFINED)
-		set_elem_text_font(elem, font_type);
+	draw_method = get_draw_method_value(elem_info->draw_method);
+	validate(elem_info, draw_method);
+	hex_to_color(&color, elem_info->color);
+	set_elem_image_color(elem, color);
+	if (elem_info->texture[0] != '\0')
+		set_elem_image_texture(elem, open_tga_sdl(elem_info->texture));
 	if (draw_method != DRAW_METHOD_UNDEFINED)
-		set_elem_text_draw_method(elem, draw_method);
+		set_elem_image_draw_method(elem, draw_method);
 }

@@ -77,10 +77,10 @@ PARSE_SRCS = new_parse_info \
 PARSE_SRCS := $(PARSE_SRCS:%=parse/%)
 
 EXEC_SRCS = exec_gui_config \
-		exec_new_elem \
-		exec_set_gui_image \
-		exec_set_gui_text \
-		exec_set_gui_button
+		new_exec_elem \
+		set_exec_gui_image \
+		set_exec_gui_text \
+		set_exec_gui_button
 EXEC_SRCS := $(EXEC_SRCS:%=exec/%)
 
 SRCS = analyze_gui_config \

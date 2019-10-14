@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   exec_set_gui_button.c                              :+:    :+:            */
+/*   set_exec_gui_button.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -12,8 +12,8 @@
 
 #include "exec.h"
 
-void	exec_set_gui_button(t_transform *elem, t_parse_info *elem_info)
+void	set_exec_gui_button(t_transform *elem, t_parse_info *elem_info)
 {
-	exec_set_gui_text(elem, elem_info);
-	exec_set_gui_image(elem, elem_info);
+	set_exec_gui_text(elem, elem_info);
+	set_exec_gui_image(elem, elem_info);
 }

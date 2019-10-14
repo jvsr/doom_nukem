@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   exec_new_elem.c                                    :+:    :+:            */
+/*   new_exec_elem.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -31,14 +31,14 @@ static void			validate(t_parse_info *elem_info, t_onclick *onclick)
 static void			set_gui_info(t_transform *elem, t_parse_info *elem_info)
 {
 	if (elem->gui_type == TEXT)
-		exec_set_gui_text(elem, elem_info);
+		set_exec_gui_text(elem, elem_info);
 	else if (elem->gui_type == IMAGE)
-		exec_set_gui_image(elem, elem_info);
+		set_exec_gui_image(elem, elem_info);
 	else if (elem->gui_type == BUTTON)
-		exec_set_gui_button(elem, elem_info);
+		set_exec_gui_button(elem, elem_info);
 }
 
-t_transform			*exec_new_elem(t_gui *ui, t_parse_info *elem_info)
+t_transform			*new_exec_elem(t_gui *ui, t_parse_info *elem_info)
 {
 	t_onclick	*onclick;
 	t_transform	*elem;

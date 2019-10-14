@@ -38,7 +38,7 @@ static void		exec_children(t_gui *ui, t_parse_info *child,
 	{
 		next = child->next;
 		prefix_name(&child->name, parent->name);
-		elem = exec_new_elem(ui, child);
+		elem = new_exec_elem(ui, child);
 		if (elem->gui_type == PANEL)
 			exec_children(ui, child->child, elem);
 		add_elem_child(parent, elem);
@@ -51,7 +51,7 @@ t_transform		*exec_gui_config(t_gui *ui, t_parse_info *parse_info)
 {
 	t_transform		*panel;
 
-	panel = exec_new_elem(ui, parse_info);
+	panel = new_exec_elem(ui, parse_info);
 	exec_children(ui, parse_info->child, panel);
 	del_parse_info(&parse_info);
 	return (panel);
