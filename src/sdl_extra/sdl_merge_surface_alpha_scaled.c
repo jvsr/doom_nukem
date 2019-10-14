@@ -26,23 +26,6 @@
 ** * this function considers the Alpha to be 255
 */
 
-static int		calculate_color(int *dst, int *src)
-{
-	float		op;
-	SDL_Color	cdst;
-	SDL_Color	csrc;
-	const int	maxalpha = 255;
-
-	rgba_to_color(&cdst, *dst);
-	rgba_to_color(&csrc, *src);
-	op = (float)csrc.a / maxalpha;
-	cdst.a -= cdst.a * ((float)csrc.a / maxalpha);
-	cdst.r = cdst.r * (1 - op) + csrc.r * op;
-	cdst.g = cdst.g * (1 - op) + csrc.g * op;
-	cdst.b = cdst.b * (1 - op) + csrc.b * op;
-	return (color_to_rgba(cdst));
-}
-
 static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 								t_coord ratio, SDL_Point cur)
 {
