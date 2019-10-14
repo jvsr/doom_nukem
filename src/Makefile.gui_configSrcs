@@ -21,19 +21,19 @@ FT_SRCS =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 LEX_SRCS = lex_gui_config \
-		lex_add_token \
-		lex_check_alnum \
-		lex_check_colon \
-		lex_check_comma \
-		lex_check_dash \
-		lex_check_eol \
-		lex_check_hash \
-		lex_check_indent \
-		lex_check_period \
-		lex_check_quote \
-		lex_check_space \
-		lex_create_token \
-		lex_set_token_value
+		add_lex_token \
+		check_lex_alnum \
+		check_lex_colon \
+		check_lex_comma \
+		check_lex_dash \
+		check_lex_eol \
+		check_lex_hash \
+		check_lex_indent \
+		check_lex_period \
+		check_lex_quote \
+		check_lex_space \
+		create_lex_token \
+		set_lex_token_value
 LEX_SRCS := $(LEX_SRCS:%=lex/%)
 
 PARSE_SRCS = new_parse_info \
