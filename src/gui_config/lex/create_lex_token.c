@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_create_token.c                                 :+:    :+:            */
+/*   create_lex_token.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -19,7 +19,7 @@
 #include "lex.h"
 #include "error.h"
 
-t_token	*lex_create_token(t_token_type type, const size_t token_amount)
+t_token	*create_lex_token(t_token_type type, const size_t token_amount)
 {
 	t_token *token;
 

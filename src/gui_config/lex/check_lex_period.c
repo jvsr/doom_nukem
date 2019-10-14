@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_check_comma.c                                  :+:    :+:            */
+/*   check_lex_period.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/19 12:33:49 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 14:19:24 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/26 17:37:29 by jvisser        #+#    #+#                */
+/*   Updated: 2019/09/26 17:37:29 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "lex.h"
 
-void	lex_check_comma(t_token **tokens, const char *file, size_t *index)
+void	check_lex_period(t_token **tokens, const char *file, size_t *index)
 {
 	t_token	*new;
 	size_t	token_amount;
@@ -22,12 +22,12 @@ void	lex_check_comma(t_token **tokens, const char *file, size_t *index)
 
 	token_amount = 0;
 	content_size = 0;
-	while (file[*index + content_size] == ',')
+	while (file[*index + content_size] == '.')
 	{
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(COMMA, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
+	new = create_lex_token(PERIOD, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }

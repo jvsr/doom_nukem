@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_add_token.c                                    :+:    :+:            */
+/*   add_lex_token.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -14,7 +14,7 @@
 
 #include "lex.h"
 
-void	lex_add_token(t_token **tokens, t_token *new)
+void	add_lex_token(t_token **tokens, t_token *new)
 {
 	static t_token	*last = NULL;
 

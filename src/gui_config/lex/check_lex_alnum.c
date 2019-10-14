@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_check_alnum.c                                  :+:    :+:            */
+/*   check_lex_alnum.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -16,7 +16,7 @@
 
 #include "lex.h"
 
-static void	lex_check_plain(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_plain(t_token **tokens, const char *file, size_t *index)
 {
 	t_token	*new;
 	size_t	token_amount;
@@ -31,12 +31,12 @@ static void	lex_check_plain(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(PLAIN, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
+	new = create_lex_token(PLAIN, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }
 
-static void	lex_check_id(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_id(t_token **tokens, const char *file, size_t *index)
 {
 	t_token	*new;
 	size_t	token_amount;
@@ -52,16 +52,16 @@ static void	lex_check_id(t_token **tokens, const char *file, size_t *index)
 	}
 	if (ft_isdigit(file[*index + content_size])
 	|| file[*index + content_size] == '/')
-		lex_check_plain(tokens, file, index);
+		check_lex_plain(tokens, file, index);
 	else
 	{
-		new = lex_create_token(ID, token_amount);
-		lex_set_token_value(new, file, index, content_size);
-		lex_add_token(tokens, new);
+		new = create_lex_token(ID, token_amount);
+		set_lex_token_value(new, file, index, content_size);
+		add_lex_token(tokens, new);
 	}
 }
 
-static void	lex_check_num(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_num(t_token **tokens, const char *file, size_t *index)
 {
 	t_token	*new;
 	size_t	token_amount;
@@ -77,19 +77,19 @@ static void	lex_check_num(t_token **tokens, const char *file, size_t *index)
 	if (ft_isalpha(file[*index + content_size])
 	|| file[*index + content_size] == '_'
 	|| file[*index + content_size] == '/')
-		lex_check_plain(tokens, file, index);
+		check_lex_plain(tokens, file, index);
 	else
 	{
-		new = lex_create_token(NUM, token_amount);
-		lex_set_token_value(new, file, index, content_size);
-		lex_add_token(tokens, new);
+		new = create_lex_token(NUM, token_amount);
+		set_lex_token_value(new, file, index, content_size);
+		add_lex_token(tokens, new);
 	}
 }
 
-void		lex_check_alnum(t_token **tokens, const char *file, size_t *index)
+void		check_lex_alnum(t_token **tokens, const char *file, size_t *index)
 {
 	if (ft_isalpha(file[*index]))
-		lex_check_id(tokens, file, index);
+		check_lex_id(tokens, file, index);
 	else
-		lex_check_num(tokens, file, index);
+		check_lex_num(tokens, file, index);
 }

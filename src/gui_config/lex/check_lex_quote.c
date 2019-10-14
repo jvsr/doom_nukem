@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_check_quote.c                                  :+:    :+:            */
+/*   check_lex_quote.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -14,7 +14,7 @@
 
 #include "lex.h"
 
-static void	lex_check_dquote(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_dquote(t_token **tokens, const char *file, size_t *index)
 {
 	t_token	*new;
 	size_t	token_amount;
@@ -27,12 +27,12 @@ static void	lex_check_dquote(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(DQUOTE, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
+	new = create_lex_token(DQUOTE, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }
 
-static void	lex_check_squote(t_token **tokens, const char *file, size_t *index)
+static void	check_lex_squote(t_token **tokens, const char *file, size_t *index)
 {
 	t_token	*new;
 	size_t	token_amount;
@@ -45,15 +45,15 @@ static void	lex_check_squote(t_token **tokens, const char *file, size_t *index)
 		token_amount++;
 		content_size++;
 	}
-	new = lex_create_token(SQUOTE, token_amount);
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
+	new = create_lex_token(SQUOTE, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }
 
-void		lex_check_quote(t_token **tokens, const char *file, size_t *index)
+void		check_lex_quote(t_token **tokens, const char *file, size_t *index)
 {
 	if (file[*index] == '\"')
-		lex_check_dquote(tokens, file, index);
+		check_lex_dquote(tokens, file, index);
 	else
-		lex_check_squote(tokens, file, index);
+		check_lex_squote(tokens, file, index);
 }

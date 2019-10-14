@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_set_token_value.c                              :+:    :+:            */
+/*   check_lex_colon.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/19 16:16:50 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 15:23:42 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/19 12:33:49 by jvisser        #+#    #+#                */
+/*   Updated: 2019/09/24 14:10:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-#include "libft/ft_str.h"
-
 #include "lex.h"
 
-void	lex_set_token_value(t_token *token, const char *const file,
-							size_t *const index, const size_t content_size)
+void	check_lex_colon(t_token **tokens, const char *file, size_t *index)
 {
-	token->token = ft_strndup(&file[*index], content_size);
-	*index += content_size;
+	t_token	*new;
+	size_t	token_amount;
+	size_t	content_size;
+
+	token_amount = 0;
+	content_size = 0;
+	while (file[*index + content_size] == ':')
+	{
+		token_amount++;
+		content_size++;
+	}
+	new = create_lex_token(COLON, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }

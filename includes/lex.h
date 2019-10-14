@@ -50,19 +50,19 @@ typedef	struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-t_token			*lex_create_token(t_token_type type, const size_t token_amount);
-void			lex_add_token(t_token **t, t_token *new);
-void			lex_set_token_value(t_token *t, const char *const file,
+t_token			*create_lex_token(t_token_type type, const size_t token_amount);
+void			add_lex_token(t_token **t, t_token *new);
+void			set_lex_token_value(t_token *t, const char *const file,
 								size_t *const index, const size_t content_size);
-void			lex_check_dash(t_token **t, const char *file, size_t *index);
-void			lex_check_hash(t_token **t, const char *file, size_t *index);
-void			lex_check_space(t_token **t, const char *file, size_t *index);
-void			lex_check_colon(t_token **t, const char *file, size_t *index);
-void			lex_check_comma(t_token **t, const char *file, size_t *index);
-void			lex_check_quote(t_token **t, const char *file, size_t *index);
-void			lex_check_eol(t_token **t, const char *file, size_t *index);
-void			lex_check_indent(t_token **t, const char *file, size_t *index);
-void			lex_check_period(t_token **t, const char *file, size_t *index);
-void			lex_check_alnum(t_token **t, const char *file, size_t *index);
+void			check_lex_dash(t_token **t, const char *file, size_t *index);
+void			check_lex_hash(t_token **t, const char *file, size_t *index);
+void			check_lex_space(t_token **t, const char *file, size_t *index);
+void			check_lex_colon(t_token **t, const char *file, size_t *index);
+void			check_lex_comma(t_token **t, const char *file, size_t *index);
+void			check_lex_quote(t_token **t, const char *file, size_t *index);
+void			check_lex_eol(t_token **t, const char *file, size_t *index);
+void			check_lex_indent(t_token **t, const char *file, size_t *index);
+void			check_lex_period(t_token **t, const char *file, size_t *index);
+void			check_lex_alnum(t_token **t, const char *file, size_t *index);
 
 #endif
