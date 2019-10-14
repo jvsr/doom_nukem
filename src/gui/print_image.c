@@ -20,7 +20,7 @@ void	print_image(t_image *image)
 	char	*color_hex;
 
 	color_hex = color_to_hex(image->color, TRUE);
-	ft_printf("Color: %s\nDraw method: %s\n",
-	color_hex, get_draw_method_name(image->draw_method));
+	ft_printf("Texture: %p\nColor: %s\nDraw method: %s\n",
+		image->texture, color_hex, get_draw_method_name(image->draw_method));
 	free(color_hex);
 }
