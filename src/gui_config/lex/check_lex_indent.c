@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_check_indent.c                                 :+:    :+:            */
+/*   check_lex_indent.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -36,7 +36,8 @@ static void	calculate_amount_size(const char *file, const size_t *index,
 			return ;
 	}
 }
-void	lex_check_indent(t_token **tokens, const char *const file,
+
+void		check_lex_indent(t_token **tokens, const char *const file,
 							size_t *const index)
 {
 	t_token			*new;
@@ -48,12 +49,12 @@ void	lex_check_indent(t_token **tokens, const char *const file,
 	content_size = 0;
 	calculate_amount_size(file, index, &token_amount, &content_size);
 	if (token_amount > previous_indent)
-		new = lex_create_token(INDENT, token_amount - previous_indent);
+		new = create_lex_token(INDENT, token_amount - previous_indent);
 	else if (token_amount < previous_indent)
-		new = lex_create_token(DEDENT, previous_indent - token_amount);
+		new = create_lex_token(DEDENT, previous_indent - token_amount);
 	else
-		new = lex_create_token(NODENT, 0);
+		new = create_lex_token(NODENT, 1);
 	previous_indent = token_amount;
-	lex_set_token_value(new, file, index, content_size);
-	lex_add_token(tokens, new);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 17:06:16 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 13:56:09 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 12:34:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 
 t_text			*new_text(t_gui *ui)
 {
-	t_text *text;
+	t_text		*text;
+	SDL_Color	color;
 
 	text = (t_text *)ft_memalloc(sizeof(t_text));
 	if (text == NULL)
@@ -34,6 +35,7 @@ t_text			*new_text(t_gui *ui)
 	text->fonts = ui->fonts;
 	text->font_type = ROBOTO;
 	text->size = 1;
-	text->color = (SDL_Color){255, 255, 255, 0};
+	color = (SDL_Color){255, 255, 255, 0};
+	ft_memcpy(&text->color, &color, sizeof(SDL_Color));
 	return (text);
 }

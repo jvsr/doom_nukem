@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 16:03:27 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/24 13:51:55 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/09/24 15:23:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,36 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
 #include "libft/ft_char.h"
-
-#include "libft/ft_printf.h" //
+#include "libft/ft_printf.h"
 
 #include "lex.h"
 #include "error.h"
 #include "gui_config.h"
+
+static void		create_token(const char *file, t_token **tokens, size_t *index)
+{
+	if (file[*index] == '-')
+		check_lex_dash(tokens, file, index);
+	else if (file[*index] == '\n' || file[*index] == '\r')
+		check_lex_eol(tokens, file, index);
+	else if (ft_isalnum(file[*index]))
+		check_lex_alnum(tokens, file, index);
+	else if (file[*index] == ' ')
+		check_lex_space(tokens, file, index);
+	else if (file[*index] == ':')
+		check_lex_colon(tokens, file, index);
+	else if (file[*index] == '#')
+		check_lex_hash(tokens, file, index);
+	else if (file[*index] == ',')
+		check_lex_comma(tokens, file, index);
+	else if (file[*index] == '.')
+		check_lex_period(tokens, file, index);
+	else if (file[*index] == '\"' || file[*index] == '\'')
+		check_lex_quote(tokens, file, index);
+	else
+		error_msg("Lexing error:", 19,
+			ft_strformat("Unrecognized character '%c'", file[*index]));
+}
 
 static t_token	*create_tokens(const char *file)
 {
@@ -31,23 +55,12 @@ static t_token	*create_tokens(const char *file)
 
 	index = 0;
 	tokens = NULL;
-	while(file[index])
-	{
-		if (file[index] == '-')
-			lex_check_dash(&tokens, file, &index);
-		else if (file[index] == '\n' || file[index] == '\r')
-			lex_check_eol(&tokens, file, &index);
-		else if (ft_isalnum(file[index]))
-			lex_check_alnum(&tokens, file, &index);
-		else if (file[index] == ' ')
-			lex_check_space(&tokens, file, &index);
-		else
-			error_msg("Lexing error:", 19, "Unrecognized character");
-	}
+	while (file[index])
+		create_token(file, &tokens, &index);
 	return (tokens);
 }
 
-t_token	*lex_gui_config(const int fd)
+t_token			*lex_gui_config(const int fd)
 {
 	char	*file;
 	t_token	*tokens;

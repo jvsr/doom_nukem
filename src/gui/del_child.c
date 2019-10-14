@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 11:50:04 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/16 11:50:04 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:17:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	del_child(t_transform **children, const char *name)
 		*children = cur->next;
 	else
 		prv->next = cur->next;
-	cur->parent_type = PARENT_UNDFINED;
+	cur->parent_type = PARENT_UNDEFINED;
 	del_elem(&cur);
 }

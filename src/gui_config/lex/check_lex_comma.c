@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_set_token_value.c                              :+:    :+:            */
+/*   check_lex_comma.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/19 16:16:50 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/19 18:17:57 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/19 12:33:49 by jvisser        #+#    #+#                */
+/*   Updated: 2019/09/24 14:19:24 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-#include "libft/ft_str.h"
-
 #include "lex.h"
 
-void	lex_set_token_value(t_token *token, const char *const file,
-							size_t *const index, const size_t content_size)
+void	check_lex_comma(t_token **tokens, const char *file, size_t *index)
 {
-	token->token = ft_strndup(&file[*index], content_size);
-	*index += content_size;
+	t_token	*new;
+	size_t	token_amount;
+	size_t	content_size;
+
+	token_amount = 0;
+	content_size = 0;
+	while (file[*index + content_size] == ',')
+	{
+		token_amount++;
+		content_size++;
+	}
+	new = create_lex_token(COMMA, token_amount);
+	set_lex_token_value(new, file, index, content_size);
+	add_lex_token(tokens, new);
 }

@@ -12,7 +12,7 @@ HEADERS = sdl_extra error color shape types gui
 CCFLAGS +=
 
 # Source file prefix
-PREFIX =
+PREFIX = sdl_
 
 # All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with ft_ and sufixed with .c
@@ -26,4 +26,3 @@ SRCS =	merge_surface merge_surface_alpha \
 		merge_surface_center merge_surface_alpha_center \
 		create_surface_default clear_surface \
 		fill_surface_color has_surface_alpha set_surface_alpha
-SRCS := $(SRCS:%=sdl_%)
