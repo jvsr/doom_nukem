@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 15:49:00 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/25 17:18:17 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <limits.h>
 
 #include "libft/ft_str.h"
+#include "libft/ft_printf.h"
 
 #include "tga.h"
 #include "error.h"
@@ -29,7 +30,8 @@ static int	open_tga_file(const char *file_name)
 	ft_strcat(full_path, ".tga");
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
-		error_msg_errno("Failed to open tga file");
+		error_msg_errno(ft_strformat("Failed to open %s%s.tga",
+			TEXTURE_PATH, file_name));
 	return (fd);
 }
 
@@ -59,7 +61,8 @@ void		create_image(const char *file_name, t_img *img)
 	fd = open_tga_file(file_name);
 	ft_readfile(fd, (char**)&file_stream);
 	if (file_stream == NULL)
-		error_msg_errno("Failed to read tga file");
+		error_msg_errno(ft_strformat("Failed to read %s%s.tga",
+			TEXTURE_PATH, file_name));
 	close(fd);
 	set_tga_header(file_stream, &tga, img);
 	if (tga.img_type == 0)
