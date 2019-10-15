@@ -12,7 +12,7 @@
 
 # Sublib folder names
 SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
-			audio keymap
+			audio keymap serializer
 
 # Executibale name
 NAME = doom-nukem
@@ -74,6 +74,10 @@ SUBLIBS := $(sort $(SUBLIBS))
 SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.content)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
+# Resource Folders
+DATAPATH = resources/data
+DATAPATH := $(DATAPATH)/map $(DATAPATH)/map/custom $(DATAPATH)/map/campaign
+
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
@@ -107,7 +111,7 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(LIB) $(SUBLIBS)
+$(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
@@ -123,6 +127,10 @@ ifeq ($(GCOV), TRUE)
 	@$(SUBLIBS_GCOV)
 endif
 endif
+
+# Create required $(DATAPATH)
+$(DATAPATH): 
+	@mkdir -p $(DATAPATH)
 
 # Compile $(LIB)
 $(LIB): FORCE
