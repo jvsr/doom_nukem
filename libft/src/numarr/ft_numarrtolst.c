@@ -30,7 +30,7 @@ t_list			*ft_numarrtolst(const intmax_t *arr, size_t len)
 
 	i = 0;
 	num = arr[i];
-	returnlst = ft_lstnew_dup(&num, sizeof(intmax_t));
+	returnlst = ft_lstnew_dup(&num, (sizeof(intmax_t) * ft_numlen(num)));
 	if (returnlst == NULL)
 		return (NULL);
 	prvlst = returnlst;
@@ -38,7 +38,7 @@ t_list			*ft_numarrtolst(const intmax_t *arr, size_t len)
 	{
 		i++;
 		num = arr[i];
-		newlst = ft_lstnew_dup(&num, sizeof(intmax_t));
+		newlst = ft_lstnew_dup(&num, (sizeof(intmax_t) * ft_numlen(num)));
 		if (newlst == NULL)
 			return (freeret(&returnlst));
 		prvlst->next = newlst;

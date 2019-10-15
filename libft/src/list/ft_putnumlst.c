@@ -15,26 +15,14 @@
 #include "ft_num.h"
 #include "ft_char.h"
 
-static t_bool	put_content(void *content, size_t size)
+t_bool	ft_putnumlst(const t_list *lst)
 {
-	if (size == sizeof(char))
-		return (ft_putnum(*((char *)content)));
-	else if (size == sizeof(short))
-		return (ft_putnum(*((short *)content)));
-	else if (size == sizeof(int))
-		return (ft_putnum(*((int *)content)));
-	else if (size == sizeof(long))
-		return (ft_putnum(*((long *)content)));
-	else
-		return (ft_putnum(*((intmax_t *)content)));
-	return (FALSE);
-}
+	intmax_t	*n;
 
-t_bool			ft_putnumlst(const t_list *lst)
-{
 	if (lst == NULL)
 		return (ft_putstr(NULL));
-	if (put_content(lst->content, lst->content_size) == FALSE)
+	n = (intmax_t *)lst->content;
+	if (ft_putnum(*n) == FALSE)
 		return (FALSE);
 	if (ft_putchar('\n') == FALSE)
 		return (FALSE);
