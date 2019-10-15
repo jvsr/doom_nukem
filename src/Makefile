@@ -31,7 +31,7 @@ GCOVSILENT =
 GCOVFLAGS =
 
 # Own names
-SRCFOLDER = $(SUBLIB:%.a=%)
+SRCFOLDER = $(SUBLIB:%.content=%)
 NAME = $(FOLDER)/$(SUBLIB)
 
 # Misc setup
@@ -53,10 +53,10 @@ endif
 include Makefile.$(SRCFOLDER)Srcs
 
 # Dependency prefix
-HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
-HEADERS := $(sort $(HEADERS))
-SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
+SRCS := $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
 SRCS := $(sort $(SRCS))
+HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
+HEADERS += $(shell ./../libft/src/get_headers $(INCLUDES) $(SRCS))
 
 # Compile dependencys
 OBJS = $(SRCS:.c=.o)
@@ -84,8 +84,7 @@ all: $(NAME)
 # Create $(NAME)
 $(NAME): $(COMPILE_FILES)
 	@$(call FNC_PRINT_EQUAL,$(PARENTNAME)-$(SRCFOLDER),$(SUBLIB))
-	@rm -f $(NAME)
-	@ar rcs $(NAME) $(OBJS)
+	@echo $(OBJS:%=\\n%) > $(NAME)
 
 # Run gcov
 gcovreport: $(NAME)
@@ -94,12 +93,12 @@ gcovreport: $(NAME)
 # Compile .o or .gcno if $(GCOV)==TRUE
 %.o %.gcno: %.c $(HEADERS)
 ifeq ($(CCSILENT), FALSE)
-	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(shell basename $@))
+	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(@:$(SRCFOLDER)/%=%))
 endif
 	@rm -f $(<:.c=.o)
 	@$(CC) $(CCFLAGS) -o $(<:.c=.o) -c $<
 
-# Clean all non .a files
+# Clean all non .content files
 clean:
 ifneq ($(wildcard $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)),)
 	@$(call FNC_PRINT_MIN,$(PARENTNAME)-$(SRCFOLDER),clean)
@@ -115,4 +114,4 @@ re: fclean
 
 FORCE: ;
 
-.PHONY: gcovreport all clean re
+.PHONY: gcovreport all clean fclean re FORCE

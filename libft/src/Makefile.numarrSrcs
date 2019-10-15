@@ -6,7 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = $(SRCFOLDER) list bool char types str num
+HEADERS =
 HEADERS := $(HEADERS:%=ft_%)
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)

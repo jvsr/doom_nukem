@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/28 19:02:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 14:47:23 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:24:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@
 ** * this function considers the Alpha to be 255
 */
 
-static int		calculate_color(int *dst, int *src)
-{
-	float		op;
-	SDL_Color	cdst;
-	SDL_Color	csrc;
-	const int	maxalpha = 255;
-
-	rgba_to_color(&cdst, *dst);
-	rgba_to_color(&csrc, *src);
-	op = (float)csrc.a / maxalpha;
-	cdst.a = csrc.a;
-	cdst.r = cdst.r * (1 - op) + csrc.r * op;
-	cdst.g = cdst.g * (1 - op) + csrc.g * op;
-	cdst.b = cdst.b * (1 - op) + csrc.b * op;
-	return (color_to_rgba(cdst));
-}
-
 static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 								SDL_Point start, SDL_Point cur)
 {
@@ -58,16 +41,21 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 	return ((size_t)len);
 }
 
+static t_uint32	mix_color_wrapper(t_uint32 *dst_data, t_uint32 *src_data)
+{
+	return (mix_color(*dst_data, *src_data));
+}
+
 static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src,
 							SDL_Point start, SDL_Point cur)
 {
-	int		color;
-	size_t	length;
+	size_t		length;
+	t_uint32	color;
 
 	src->userdata = src->pixels + cur.y * src->pitch + cur.x * 4;
 	dst->userdata = dst->pixels + (start.y + cur.y) * dst->pitch
 					+ (start.x + cur.x) * 4;
-	color = calculate_color(dst->userdata, src->userdata);
+	color = mix_color_wrapper(dst->userdata, src->userdata);
 	length = calculate_length(dst, src, start, cur);
 	ft_memset4((int*)dst->userdata, color, length);
 	return (length);

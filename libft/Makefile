@@ -19,6 +19,9 @@ NAME = libft.a
 BASENAME = $(NAME:%.a=%)
 PARENTNAME = $(BASENAME)
 
+# Get Headers Script
+GET_HEADERS = src/get_headers
+
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
@@ -30,10 +33,6 @@ GCOV = FALSE
 GCOVSILENT = TRUE
 GCOVFLAGS = -f -b -c
 LIBFT_DISABLE_GCOV = FALSE
-
-# Libft info
-LIBPATH =
-LIB =
 
 # Mafile includes
 MAKEINCLUDES = includes/
@@ -47,24 +46,23 @@ TEST = $(TESTPATH)/$(TESTNAME)
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
-SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.a)
+SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.content)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
 # Function - Get all objects of sublibs
-SEDESCAPE = $(1:src/$(SUBLIBSPATH)/%.a=src\/%\/)
-GETOBJS = $(shell ar -t $(1) | grep '\.o' | sed 's/^/$(call SEDESCAPE,$(1))/g')
+GETOBJS = $(shell cat $(1) | grep '\.o' | sed 's,^,src/,g')
 OBJS = $(foreach DIR,$(SUBLIBS),$(call GETOBJS,$(DIR)))
 
-# Function - Clean all sublib .a
+# Function - Clean all sublib .content
 CLEANSUBLIB = $(SUBLIBMAKE) SUBLIB=$(1:src/$(SUBLIBSPATH)/%=%) clean &&
-SUBLIBS_CLEAN = $(foreach DIR,$(SUBLIBS),$(call CLEANSUBLIB,$(DIR))) :
+SUBLIBS_CLEAN := $(foreach DIR,$(SUBLIBS),$(call CLEANSUBLIB,$(DIR))) :
 
-# Function - Clean all sublib .a
+# Function - Clean all sublib .content
 GCOVSUBLIB = $(SUBLIBMAKE) SUBLIB=$(1:src/$(SUBLIBSPATH)/%=%) gcovreport &&
-SUBLIBS_GCOV = $(foreach DIR,$(SUBLIBS),$(call GCOVSUBLIB,$(DIR))) :
+SUBLIBS_GCOV := $(foreach DIR,$(SUBLIBS),$(call GCOVSUBLIB,$(DIR))) :
 
 # Export vars to sublib makefile
 export GCOV
@@ -79,10 +77,14 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(SUBLIBS) $(LIB)
+$(NAME): $(GET_HEADERS) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(BASENAME),$(NAME))
 	@rm -f $(NAME)
-	@ar rcs $(NAME) $(OBJS) $(LIB)
+	@ar rcs $(NAME) $(OBJS)
+
+# Create Get Headers Script
+$(GET_HEADERS):
+	@make -C .get_headers
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(NAME) FORCE
@@ -96,27 +98,18 @@ ifeq ($(GCOV)_$(LIBFT_DISABLE_GCOV), TRUE_FALSE)
 endif
 endif
 
-# Compile $(LIB)
-$(LIB): FORCE
-	@$(MAKE) -s -e -C $(LIBPATH)
-
 # Compile $(SUBLIBS)
-src/$(SUBLIBSPATH)/%.a: src/$(SUBLIBSPATH) FORCE
+src/$(SUBLIBSPATH)/%.content: FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
 
-# Create $(SUBLIBSPATH) if it doesnt exsist
-src/$(SUBLIBSPATH):
-	@mkdir src/$(SUBLIBSPATH)
-
-# Clean all non .a files
-clean:
+# Clean all non .content files
+clean: $(GET_HEADERS)
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif
 	@$(SUBLIBS_CLEAN)
-	#@$(MAKE) -s -e -C $(LIBPATH) clean
 
-# Clean all .a files
+# Clean all .content files
 fclean: clean
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) fclean
@@ -125,11 +118,11 @@ ifneq ($(FCLEAN),)
 	@$(call FNC_PRINT_DEL,$(BASENAME),fclean $(FCLEAN:src/$(SUBLIBSPATH)/%=%))
 	@rm -f $(NAME) $(SUBLIBS)
 endif
-	#@$(MAKE) -s -e -C $(LIBPATH) fclean
 
-# \1ecompile
-re: fclean $(NAME)
+# Recompile
+re: fclean
+	@$(MAKE)
 
 FORCE: ;
 
-.PHONY: all test clean fclean re
+.PHONY: all test clean fclean re FORCE

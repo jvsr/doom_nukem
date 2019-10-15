@@ -6,17 +6,13 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = sdl_extra error color shape types gui
+HEADERS =
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=
 
 # Source file prefix
-PREFIX =
-
-# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
-# These will be automaticly prefixed with ft_ and sufixed with .c
-FT_SRCS =
+PREFIX = sdl_
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
@@ -24,6 +20,6 @@ SRCS =	merge_surface merge_surface_alpha \
 		draw_surface_rect draw_surface_rect_alpha draw_surface_circ \
 		merge_surface_scaled merge_surface_alpha_scaled \
 		merge_surface_center merge_surface_alpha_center \
+		merge_surface_repeat merge_surface_alpha_repeat \
 		create_surface_default clear_surface \
 		fill_surface_color has_surface_alpha set_surface_alpha
-SRCS := $(SRCS:%=sdl_%)

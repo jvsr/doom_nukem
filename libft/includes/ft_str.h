@@ -51,7 +51,8 @@ char			*ft_strsub(const char *str, size_t start, size_t len);
 char			*ft_strtolower(char *str);
 char			*ft_strtoupper(char *str);
 char			*ft_strtrim(const char *str);
-t_bool			ft_isdigitstr(const char *str);
+t_bool			ft_strisdigit(const char *str);
+t_bool			ft_strishex(const char *str);
 int				ft_strcmp_nocase(const char *str1, const char *str2);
 int				ft_strcmp(const char *str1, const char *str2);
 int				ft_strncmp_nocase(const char *str1, const char *str2, size_t n);
@@ -91,6 +92,8 @@ size_t			ft_wrddcount(const char *str, const char *dlm);
 ssize_t			ft_getnextdline(int fd, char **line, char dlm);
 ssize_t			ft_getnextline(int fd, char **line);
 ssize_t			ft_readfile(int fd, char **str);
+char			*ft_strformat(const char *format, ...);
+char			*ft_strformat_len(size_t *len, const char *format, ...);
 char			*ft_strreplace(const char *str, const char *find,
 					const char *replace);
 

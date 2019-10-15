@@ -20,7 +20,7 @@ void			set_elem_layer(t_transform *elem, short layer)
 	t_transform			**p_children;
 	const t_parent_type	last_type = elem->parent_type;
 
-	if (elem->parent_type == PARENT_UNDFINED || elem->layer == layer)
+	if (elem->parent_type == PARENT_UNDEFINED || elem->layer == layer)
 	{
 		elem->layer = layer;
 		return ;

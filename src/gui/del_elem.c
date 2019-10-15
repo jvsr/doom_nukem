@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/11 15:21:28 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/11 15:21:28 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:16:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		del_elem(t_transform **elem)
 {
 	if (elem == NULL || *elem == NULL)
 		return ;
-	if ((*elem)->parent_type != PARENT_UNDFINED)
+	if ((*elem)->parent_type != PARENT_UNDEFINED)
 		remove_elem_parent(*elem);
 	ft_strdel(&(*elem)->name);
 	del_gui_elem(*elem);

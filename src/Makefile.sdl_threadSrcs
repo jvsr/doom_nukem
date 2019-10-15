@@ -6,21 +6,16 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = sdl_thread error
+HEADERS =
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=
 
 # Source file prefix
-PREFIX =
-
-# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
-# These will be automaticly prefixed with ft_ and sufixed with .c
-FT_SRCS =
+PREFIX = sdl_
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = del_pool done_pool join_pool manage_thread new_pool new_task new_thread \
 	manage_thread_worker que_pool_back que_pool_front que_pool run_task \
 	manage_thread_central complete_task
-SRCS := $(SRCS:%=sdl_%)

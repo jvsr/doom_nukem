@@ -18,10 +18,10 @@ void		pf_formatunum(t_info *info)
 	uintmax_t	num;
 
 	num = pf_overflowunsigned(info);
-	info->iszero = (num == 0);
+	info->is_zero = (num == 0);
 	info->var_len = ft_unumlen_base(num, info->var_base);
 	pf_formatpad(info);
-	if (info->precision >= 0 && info->iszero)
+	if (info->precision >= 0 && info->is_zero)
 	{
 		if (info->precision > 0 ||
 			(info->type == 'o' && PF_FLAG_HASH))

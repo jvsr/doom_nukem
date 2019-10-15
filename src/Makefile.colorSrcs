@@ -6,7 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = init types
+HEADERS =
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=
@@ -14,10 +14,6 @@ CCFLAGS +=
 # Source file prefix
 PREFIX =
 
-# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
-# These will be automaticly prefixed with ft_ and sufixed with .c
-FT_SRCS =
-
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = rgba_to_color color_to_rgba
+SRCS = rgba_to_color color_to_rgba hex_to_color color_to_hex mix_color

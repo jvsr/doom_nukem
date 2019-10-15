@@ -29,5 +29,5 @@ int		ft_strcmp_nocase(const char *str1, const char *str2)
 		temp_a = ft_tolower(str1[i + 1]);
 		i++;
 	}
-	return (0);
+	return (ft_tolower(str2[i]));
 }

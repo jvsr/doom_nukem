@@ -14,10 +14,10 @@
 
 #include "types.h"
 
-void	rgba_to_color(SDL_Color *c, t_uint32 color)
+void	rgba_to_color(SDL_Color *c, t_uint32 rgba)
 {
-	c->a = (unsigned char)(color >> 24);
-	c->r = (unsigned char)(color >> 16);
-	c->g = (unsigned char)(color >> 8);
-	c->b = (unsigned char)(color);
+	c->a = (unsigned char)(rgba >> 24);
+	c->r = (unsigned char)(rgba >> 16);
+	c->g = (unsigned char)(rgba >> 8);
+	c->b = (unsigned char)(rgba);
 }

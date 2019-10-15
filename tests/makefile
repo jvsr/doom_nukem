@@ -53,13 +53,12 @@ ifeq ($(shell uname -s), Linux)
 LIBS += -lm
 endif
 
-# Header dependency
-HEADERS := $(HEADERS:%=$(INCLUDES)/%)
-HEADERS := $(sort $(HEADERS))
-
 # Dependency prefix
 SRCS := $(SRCS:%=src/test_ft_%.c)
 SRCS := $(sort $(SRCS))
+HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
+HEADERS += $(shell ./../libft/src/get_headers $(INCLUDES) $(SRCS))
+
 TESTOBJS = $(SRCS:.c=.o)
 LIBOBJS = $(filter-out ../src/main/main.o, $(OBJS))
 
@@ -77,7 +76,7 @@ $(NAME): $(TESTOBJS) $(LIB)
 # Compile .o
 %.o: %.c $(HEADERS)
 ifeq ($(CCSILENT), FALSE)
-	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(NAME),$(shell basename $<))
+	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(NAME),$(@:src/%=%))
 endif
 	@$(CC) $(CCFLAGS) -o $@ -c $<
 
@@ -105,4 +104,4 @@ re: fclean
 
 FORCE: ;
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re FORCE

@@ -28,6 +28,6 @@ void	pf_infosetdefault(t_info *info)
 	PF_FLAG_PLUS = FALSE;
 	PF_FLAG_SPACE = FALSE;
 	PF_FLAG_APOST = FALSE;
-	info->iszero = FALSE;
-	info->isnegative = FALSE;
+	info->is_zero = FALSE;
+	info->is_negative = FALSE;
 }

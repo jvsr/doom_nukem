@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/18 17:05:26 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/18 17:05:26 by pholster      ########   odam.nl         */
+/*   Updated: 2019/09/24 15:22:09 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	set_elem_text_str(t_transform *elem, const char *str)
 		text = elem->gui_elem.text;
 	else
 		text = elem->gui_elem.button->text;
-	text->str = ft_strdup(str);
+	text->text = ft_strdup(str);
 	set_elem_redraw(elem);
 }

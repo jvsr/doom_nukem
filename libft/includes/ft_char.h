@@ -35,6 +35,7 @@ t_bool		ft_isalpha(char c);
 t_bool		ft_isascii(char c);
 t_bool		ft_isblank(char c);
 t_bool		ft_isdigit(char c);
+t_bool		ft_ishex(char c);
 t_bool		ft_islower(char c);
 t_bool		ft_isprint(char c);
 t_bool		ft_isspace(char c);

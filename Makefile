@@ -12,11 +12,14 @@
 
 # Sublib folder names
 SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
-			audio keymap
+			audio keymap serializer
 
 # Executibale name
 NAME = doom-nukem
 PARENTNAME = $(NAME)
+
+# Get Headers Script
+GET_HEADERS = libft/src/get_headers
 
 # Compile settings
 CCSILENT = FALSE
@@ -71,24 +74,27 @@ endif
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
-SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.a)
+SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.content)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
+
+# Resource Folders
+DATAPATH = resources/data
+DATAPATH := $(DATAPATH)/map $(DATAPATH)/map/custom $(DATAPATH)/map/campaign
 
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
 # Function - Get all objects of sublibs
-SEDESCAPE = $(1:src/$(SUBLIBSPATH)/%.a=src\/%\/)
-GETOBJS = $(shell ar -t $(1) | grep '\.o' | sed 's/^/$(call SEDESCAPE,$(1))/g')
+GETOBJS = $(shell cat $(1) | grep '\.o' | sed 's/^/src\//g')
 OBJS = $(foreach DIR,$(SUBLIBS),$(call GETOBJS,$(DIR)))
 
-# Function - Clean all sublib .a
+# Function - Clean all sublib .content
 CLEANSUBLIB = $(SUBLIBMAKE) SUBLIB=$(1:src/$(SUBLIBSPATH)/%=%) clean &&
-SUBLIBS_CLEAN = $(foreach DIR,$(SUBLIBS),$(call CLEANSUBLIB,$(DIR))) :
+SUBLIBS_CLEAN := $(foreach DIR,$(SUBLIBS),$(call CLEANSUBLIB,$(DIR))) :
 
-# Function - Clean all sublib .a
+# Function - Clean all sublib .content
 GCOVSUBLIB = $(SUBLIBMAKE) SUBLIB=$(1:src/$(SUBLIBSPATH)/%=%) gcovreport &&
-SUBLIBS_GCOV = $(foreach DIR,$(SUBLIBS),$(call GCOVSUBLIB,$(DIR))) :
+SUBLIBS_GCOV := $(foreach DIR,$(SUBLIBS),$(call GCOVSUBLIB,$(DIR))) :
 
 # Export vars to sublib makefile
 export GCOV
@@ -108,10 +114,14 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(LIB) $(SUBLIBS)
+$(NAME): $(DATAPATH) $(GET_HEADERS) $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
+
+# Create Get Headers Script
+$(GET_HEADERS):
+	@make -C libft/.get_headers
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE
@@ -125,26 +135,30 @@ ifeq ($(GCOV), TRUE)
 endif
 endif
 
+# Create required $(DATAPATH)
+$(DATAPATH):
+	@mkdir -p $(DATAPATH)
+
 # Compile $(LIB)
 $(LIB): FORCE
 	@$(MAKE) -s -e -C $(LIBPATH)
 
 # Compile $(SUBLIBS)
-src/$(SUBLIBSPATH)/%.a: src/$(SUBLIBSPATH) FORCE
+src/$(SUBLIBSPATH)/%.content: src/$(SUBLIBSPATH) FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
 
 # Create $(SUBLIBSPATH) if it doesnt exsist
 src/$(SUBLIBSPATH):
 	@mkdir src/$(SUBLIBSPATH)
 
-# Clean all non .a files
-clean:
+# Clean all non .content files
+clean: $(GET_HEADERS)
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif
 	@$(SUBLIBS_CLEAN)
 
-# Clean all .a files
+# Clean all .content files
 fclean: clean
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) fclean
@@ -172,4 +186,4 @@ re_all: lib_fclean fclean
 
 FORCE: ;
 
-.PHONY: all test clean fclean re
+.PHONY: all test clean fclean re FORCE

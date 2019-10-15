@@ -18,7 +18,7 @@ intmax_t	pf_overflowsigned(t_info *info)
 		return (va_arg(info->args, long));
 	if (info->var_type == LONG_LONG)
 		return (va_arg(info->args, long long));
-	if (info->var_type == INT_MAX)
+	if (info->var_type == MAX_INT)
 		return (va_arg(info->args, intmax_t));
 	if (info->var_type == CHAR_I)
 		return ((char)va_arg(info->args, int));

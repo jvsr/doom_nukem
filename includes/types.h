@@ -18,4 +18,10 @@ typedef	unsigned short		t_uint16;
 typedef unsigned int		t_uint32;
 typedef unsigned long int	t_uint64;
 
+typedef enum				e_endian
+{
+	ENDIAN_BIG,
+	ENDIAN_LITTLE
+}							t_endian;
+
 #endif
