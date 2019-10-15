@@ -18,5 +18,7 @@ long		read_header(t_binary_read *bin_r)
 
 	l = *(bin_r->bytes + bin_r->header_pos);
 	bin_r->header_pos += sizeof(long);
+	if (bin_r->endian != detect_endian())
+		swap_bytes(&l, sizeof(l));
 	return (l);
 }

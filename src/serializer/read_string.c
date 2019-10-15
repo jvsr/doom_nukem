@@ -26,6 +26,6 @@ char	*read_string(t_binary_read *bin_r)
 	if (string == NULL)
 		error_msg_errno("Unable to allocate string");
 	ft_memcpy(string, bin_r->bytes + bin_r->content_pos, size);
-	bin_r->content_pos += sizeof(char) * size;
+	bin_r->content_pos += size;
 	return (string);
 }
