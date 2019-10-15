@@ -53,10 +53,10 @@ endif
 include Makefile.$(SRCFOLDER)Srcs
 
 # Dependency prefix
-HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
-HEADERS := $(sort $(HEADERS))
-SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
+SRCS := $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
 SRCS := $(sort $(SRCS))
+HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
+HEADERS += $(shell ./../libft/src/get_headers $(INCLUDES) $(SRCS))
 
 # Compile dependencys
 OBJS = $(SRCS:.c=.o)
@@ -114,4 +114,4 @@ re: fclean
 
 FORCE: ;
 
-.PHONY: gcovreport all clean re
+.PHONY: gcovreport all clean fclean re FORCE
