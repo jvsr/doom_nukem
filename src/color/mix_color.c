@@ -14,15 +14,15 @@
 
 #include "color.h"
 
-int	calculate_color(int *dst, int *src)
+t_uint32	mix_color(t_uint32 dst, t_uint32 src)
 {
 	float		op;
 	SDL_Color	cdst;
 	SDL_Color	csrc;
 	const int	maxalpha = 255;
 
-	rgba_to_color(&cdst, *dst);
-	rgba_to_color(&csrc, *src);
+	rgba_to_color(&cdst, dst);
+	rgba_to_color(&csrc, src);
 	op = (float)csrc.a / maxalpha;
 	cdst.a -= (cdst.a - csrc.a) * ((float)csrc.a / maxalpha);
 	cdst.r = cdst.r * (1 - op) + csrc.r * op;

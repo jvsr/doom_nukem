@@ -44,17 +44,22 @@ static size_t	calculate_length(SDL_Surface *dst, SDL_Surface *src,
 	return ((size_t)len);
 }
 
+static t_uint32	mix_color_wrapper(t_uint32 *dst_data, t_uint32 *src_data)
+{
+	return (mix_color(*dst_data, *src_data));
+}
+
 static int		merge_pixel(SDL_Surface *dst, SDL_Surface *src, SDL_Point cur)
 {
-	int				color;
 	size_t			length;
+	t_uint32		color;
 	const t_coord	ratio = {(float)src->w / dst->w, (float)src->h / dst->h};
 
 	src->userdata = src->pixels + (int)(cur.y * ratio.y) * src->pitch
 								+ (int)(cur.x * ratio.x) * 4;
 	dst->userdata = dst->pixels + (cur.y) * dst->pitch
 								+ (cur.x) * 4;
-	color = calculate_color(dst->userdata, src->userdata);
+	color = mix_color_wrapper(dst->userdata, src->userdata);
 	length = calculate_length(dst, src, ratio, cur);
 	ft_memset4(dst->userdata, color, length);
 	return (length);
