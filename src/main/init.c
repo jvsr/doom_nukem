@@ -23,6 +23,7 @@
 #include "error.h"
 #include "gametime.h"
 #include "audio.h"
+#include "tga.h"
 
 static void		init_sdl(void)
 {
@@ -53,6 +54,7 @@ static	void	init_window_surface(t_game *game)
 	if (game->window == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc game window");
 	game->surface = SDL_GetWindowSurface(game->window);
+	SDL_SetWindowIcon(game->window, open_tga_sdl("splash/icon"));
 }
 
 static void		init_game(t_game *game)
