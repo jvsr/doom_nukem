@@ -58,7 +58,7 @@
 typedef enum	e_type
 {
 	INT,
-	INT_MAX,
+	MAX_INT,
 	SHORT,
 	LONG,
 	DOUBLE,
@@ -72,7 +72,7 @@ typedef enum	e_type
 	LONG_LONG,
 	LONG_DOUBLE,
 	U_INT,
-	U_INT_MAX,
+	MAX_U_INT,
 	U_SHORT,
 	U_LONG,
 	U_LONG_LONG,
