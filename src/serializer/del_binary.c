@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   del_binary.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:55:04 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/14 16:06:27 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/14 16:06:27 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "libft/ft_mem.h"
+#include "serializer.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+void	del_binary(t_binary **bin)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
-
-#endif
+	ft_memdel((void**)&(*bin)->content);
+	ft_memdel((void**)&(*bin)->header);
+	ft_memdel((void**)bin);
+	*bin = NULL;
+}

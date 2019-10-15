@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   add_string.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:55:04 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/11 15:05:43 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/11 15:05:43 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "libft/ft_str.h"
+#include "serializer.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+void		add_string(char *string, t_binary *bin)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
+	t_uint64	s_size;
+	t_uint64	i;
+	t_convert	con;
 
-#endif
+	s_size = ft_strlen(string);
+	con.l = bin->c_size;
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
+	con.l = s_size;
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
+	i = 0;
+	while (i < s_size)
+	{
+		add_char(string[i], bin);
+		i++;
+	}
+}

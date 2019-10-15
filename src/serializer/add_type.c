@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   add_type.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:55:04 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/07 14:48:46 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/07 14:48:46 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "libft/ft_mem.h"
+#include "serializer.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+void	add_type(unsigned char **bytes, t_uint64 *b_size, t_convert *val,
+			t_uint64 v_size)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
+	unsigned char *n_bytes;
 
-#endif
+	n_bytes = ft_memalloc(*b_size + v_size);
+	ft_memcpy(n_bytes, *bytes, *b_size);
+	ft_memcpy(n_bytes + *b_size, val, v_size);
+	ft_memdel((void**)bytes);
+	*bytes = n_bytes;
+	*b_size += v_size;
+}

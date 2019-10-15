@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   read_int.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:55:04 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/11 14:00:12 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/11 14:00:12 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "libft/ft_mem.h"
+#include "serializer.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+int			read_int(t_binary_read *bin_r)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
+	int i;
 
-#endif
+	ft_memcpy(&i, bin_r->bytes + bin_r->content_pos, sizeof(int));
+	bin_r->content_pos += sizeof(int);
+	if (bin_r->endian == detect_endian())
+		return (i);
+	swap_bytes(&i, sizeof(i));
+	return (i);
+}

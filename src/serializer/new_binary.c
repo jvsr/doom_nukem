@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   new_binary.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:55:04 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/14 16:01:47 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/14 16:01:47 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "libft/ft_mem.h"
+#include "serializer.h"
+#include "error.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+t_binary	*new_binary(void)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
+	t_binary *bin;
 
-#endif
+	bin = (t_binary*)ft_memalloc(sizeof(t_binary));
+	if (bin == NULL)
+		error_msg_errno("Unable to allocate binary stream");
+	bin->content = NULL;
+	bin->header = NULL;
+	bin->c_size = 0;
+	bin->h_size = 0;
+	return (bin);
+}
