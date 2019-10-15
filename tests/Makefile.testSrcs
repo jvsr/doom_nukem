@@ -5,7 +5,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to includes or .)
-HEADERS = init.h
+HEADERS =
 
 # Additions to the compile flags
 CCFLAGS +=
