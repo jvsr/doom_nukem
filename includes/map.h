@@ -33,12 +33,12 @@ typedef	struct	s_player
 	t_pickup	**all_pickup;
 	t_coord		pos;
 	t_rect		view;
-	t_uni8		detection_area;
+	t_uint8		detection_area;
 }				t_player;
 
 typedef struct	s_enemy
 {
-	t_uint16	hp
+	t_uint16	hp;
 	t_uint8		fireate;
 	t_uint8		damage;
 	float		speed;
