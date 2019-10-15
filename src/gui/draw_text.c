@@ -56,6 +56,8 @@ static void			merge_text(SDL_Surface *dst, t_text *text,
 		sdl_merge_surface_alpha(dst, scaled_text, (SDL_Point){0, 0});
 	else if (text->draw_method == CENTERED)
 		sdl_merge_surface_alpha_center(dst, scaled_text);
+	else if (text->draw_method == REPEAT)
+		sdl_merge_surface_alpha_repeat(dst, scaled_text);
 	SDL_FreeSurface(scaled_text);
 }
 

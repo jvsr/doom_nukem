@@ -37,8 +37,11 @@ void		sdl_merge_surface_alpha(SDL_Surface *dst, SDL_Surface *src,
 								SDL_Point start);
 void		sdl_merge_surface_scaled(SDL_Surface *dst, SDL_Surface *src);
 void		sdl_merge_surface_center(SDL_Surface *dst, SDL_Surface *src);
+void		sdl_merge_surface_repeat(SDL_Surface *dst, SDL_Surface *src);
 void		sdl_merge_surface_alpha_scaled(SDL_Surface *dst, SDL_Surface *src);
 void		sdl_merge_surface_alpha_center(SDL_Surface *dst, SDL_Surface *src);
+void		sdl_merge_surface_alpha_repeat(SDL_Surface *dst, SDL_Surface *src);
+
 t_bool		sdl_has_surface_alpha(SDL_Surface *surface);
 void		sdl_set_surface_alpha(SDL_Surface *surface, t_uint8 alpha);
 

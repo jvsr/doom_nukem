@@ -18,7 +18,7 @@
 
 #include "color.h"
 
-static int		calculate_color(int *dst, SDL_Color src)
+static int		calculate_color_special(int *dst, SDL_Color src)
 {
 	float		op;
 	SDL_Color	cdst;
@@ -54,7 +54,7 @@ static size_t	merge_pixel(SDL_Surface *dst, SDL_Color color,
 
 	dst->userdata = dst->pixels + ((rect.y + cur.y) * dst->pitch)
 					+ (rect.x + cur.x) * 4;
-	color_value = calculate_color(dst->userdata, color);
+	color_value = calculate_color_special(dst->userdata, color);
 	length = calculate_length(dst, rect, cur);
 	ft_memset4(dst->userdata, color_value, length);
 	return (length);
