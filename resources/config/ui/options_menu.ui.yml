@@ -1,13 +1,19 @@
 - panel: options
-  - pos: 0.2, 0.3
-  - dim: 0.6, 0.65
+  - pos: 0.25, 0.05
+  - dim: 0.5, 0.9
   - layer: 1
   - image: background
-    - color: #720612
+    - color: #260206
+  - text_block: sensitivity
+  - text_block: volume
+  - text_block: fov
+  - text_block: resolution
+  - text_block: resolutiontype
+  - text_block: controls
   - button: quit
-    - pos: 0.1, 0.7125
-    - dim: 0.8, 0.15
-    - text: "Quit"
+    - pos: 0.1, 0.9
+    - dim: 0.8, 0.08
+    - text: "Return"
     - text_color: #260206
     - text_draw_method: centered
     - onclick: button_menu_quit

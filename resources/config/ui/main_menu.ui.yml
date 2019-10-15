@@ -1,4 +1,4 @@
-- panel: main
+- panel: mainmenu
   - image: background
     - color: #bb0a1e
   - image: logo

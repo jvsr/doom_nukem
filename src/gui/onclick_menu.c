@@ -20,9 +20,7 @@ void	button_menu_options(t_game *game, t_transform *gui)
 
 	(void)gui;
 	options_menu = analyze_gui_config(game->ui, "options_menu");
-	t_transform *mainmenu = get_gui_child(game->ui, "main");
-	add_elem_child(mainmenu, options_menu);
-	print_elem(mainmenu, TRUE);
+	add_elem_child(get_gui_child(game->ui, "mainmenu"), options_menu);
 }
 
 void	button_menu_quit(t_game *game, t_transform *gui)
