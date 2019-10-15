@@ -6,14 +6,14 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = $(SRCFOLDER) types bool list color utf8 num char str mem unum
+HEADERS =
 HEADERS := $(HEADERS:%=ft_%)
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
 CCFLAGS +=
 
 # Source file prefix
-PREFIX = pf
+PREFIX = pf_
 
 # All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with ft_ and sufixed with .c

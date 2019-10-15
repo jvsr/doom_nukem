@@ -62,4 +62,5 @@ dkms.conf
 
 # Other
 *.content
+get_headers
 personal.h

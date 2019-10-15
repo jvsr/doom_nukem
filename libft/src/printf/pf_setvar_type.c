@@ -56,7 +56,7 @@ static void	uint_type(t_info *info)
 	else if (info->length == 'l')
 		info->var_type = U_LONG;
 	else if (info->length == 'j')
-		info->var_type = U_INT_MAX;
+		info->var_type = MAX_U_INT;
 	else if (info->length == 'z')
 		info->var_type = SIZE_T;
 	else

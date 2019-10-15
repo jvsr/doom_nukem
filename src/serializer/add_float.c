@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isdigitstr.c                                    :+:    :+:            */
+/*   add_float.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/02/03 16:07:33 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:30:12 by pholster      ########   odam.nl         */
+/*   Created: 2019/10/07 15:38:13 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/07 15:38:13 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_str.h"
-#include "ft_char.h"
+#include "serializer.h"
 
-t_bool		ft_isdigitstr(const char *str)
+void		add_float(float f, t_binary *bin)
 {
-	size_t	len;
+	t_convert con;
 
-	len = 0;
-	if (str[0] == '+' || str[0] == '-')
-		len++;
-	len += ft_strislen(&str[len], &ft_isdigit);
-	return (str[len] == '\0');
+	con.f = f;
+	add_type(&bin->content, &bin->c_size, &con, sizeof(f));
 }
