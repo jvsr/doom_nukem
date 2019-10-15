@@ -18,7 +18,6 @@
 #include "game.h"
 #include "init.h"
 #include "audio.h"
-#include "serializer.h"
 
 int			main(void)
 {

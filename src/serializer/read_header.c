@@ -17,6 +17,6 @@ long		read_header(t_binary_read *bin_r)
 	long l;
 
 	l = *(bin_r->bytes + bin_r->header_pos);
-	bin_r->header_pos += 8;
+	bin_r->header_pos += sizeof(long);
 	return (l);
 }

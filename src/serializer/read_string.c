@@ -19,19 +19,13 @@ char	*read_string(t_binary_read *bin_r)
 {
 	long	size;
 	char	*string;
-	long	i;
 
 	bin_r->header_pos += sizeof(long);
 	size = read_header(bin_r);
 	string = ft_strnew(size);
 	if (string == NULL)
 		error_msg_errno("Unable to allocate string");
-	i = 0;
-	while (i < size)
-	{
-		string[i] = *(bin_r->bytes + bin_r->content_pos + i);
-		i++;
-	}
+	ft_memcpy(string, bin_r->bytes + bin_r->content_pos, size);
 	bin_r->content_pos += sizeof(char) * size;
 	return (string);
 }

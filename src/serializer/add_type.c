@@ -20,7 +20,7 @@ void	add_type(unsigned char **bytes, t_uint64 *b_size, t_convert *val,
 
 	n_bytes = ft_memalloc(*b_size + v_size);
 	ft_memcpy(n_bytes, *bytes, *b_size);
-	ft_memcpy(n_bytes + (t_uint64)*b_size, val, v_size);
+	ft_memcpy(n_bytes + *b_size, val, v_size);
 	ft_memdel((void**)bytes);
 	*bytes = n_bytes;
 	*b_size += v_size;
