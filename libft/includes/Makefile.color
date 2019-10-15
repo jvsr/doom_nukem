@@ -1,4 +1,4 @@
-#Define's for easy color use
+# Define's for easy color use
 COLOR_DEFUALT := $(shell printf "\033[39m")
 COLOR_BLACK := $(shell printf "\033[38;5;0m")
 COLOR_RED := $(shell printf "\033[38;5;1m")
@@ -21,7 +21,7 @@ PRINT_DEL := $(shell printf '$(COLOR_BRIGHT_YELLOW)[ ~ ]$(COLOR_DEFUALT)')
 PRINT_PLUS := $(shell printf '$(COLOR_GREEN)[ + ]$(COLOR_DEFUALT)')
 PRINT_EQUAL := $(shell printf '$(COLOR_BRIGHT_CYAN)[ = ]$(COLOR_DEFUALT)')
 
-#Functions for easy terminal printing
+# Functions for easy terminal printing
 FNC_PRINT_MIN = printf '$(PRINT_MIN) $(1): $(2)\n'
 FNC_PRINT_DEL = printf '$(PRINT_DEL) $(1): $(2)\n'
 FNC_PRINT_PLUS = printf '$(PRINT_PLUS) $(1): $(2)\n'

@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   pf_formatnum.c                                     :+:    :+:            */
+/*   get_headers.h                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/03/16 17:46:23 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:27:09 by pholster      ########   odam.nl         */
+/*   Created: 2019/10/03 00:34:48 by pholster       #+#    #+#                */
+/*   Updated: 2019/10/03 00:34:48 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "ft_num.h"
+#ifndef GET_HEADERS_H
+# define GET_HEADERS_H
 
-void		pf_formatnum(t_info *info)
+typedef struct	s_header
 {
-	intmax_t	num;
+	char			*name;
+	struct s_header	*next;
+}				t_header;
 
-	num = pf_overflowsigned(info);
-	info->is_zero = (num == 0);
-	info->is_negative = (num < 0);
-	info->var_len = ft_numlen(num) - info->is_negative;
-	pf_formatpad(info);
-	if (info->precision == 0 && num == 0)
-	{
-		if (info->width != -1)
-			pf_addnstr(info, " ", 1);
-		return ;
-	}
-	pf_addnum(info, num);
-}
+void			sort_headers(t_header **head);
+
+#endif

@@ -6,7 +6,7 @@
 # $(CCFLAGS) = All the flags that will be used to compile
 
 # Headers libary is dependent on (relative to $(INCLUDES))
-HEADERS = $(SRCFOLDER) bool mem list char types strarr
+HEADERS =
 HEADERS := $(HEADERS:%=ft_%)
 
 # Additions to the compile flags (-Wall -Wextra -Werror allready included)
@@ -17,7 +17,7 @@ PREFIX =
 
 # All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with ft_ and sufixed with .c
-FT_SRCS = getnextdline getnextline isdigitstr putendl putendl_fd puterror \
+FT_SRCS = getnextdline getnextline strisdigit putendl putendl_fd puterror \
 	putline putline_fd putnstr putnstr_fd putstr putstr_fd readfile strappend \
 	strcat strchr strclr strcmp strcmp_nocase strcpy strdel strdlen strdsplit \
 	strdtrim strdup strequ strequ_nocase strfldnew strfldvalid strin strindex \

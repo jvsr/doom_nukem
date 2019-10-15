@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isdigitstr.c                                    :+:    :+:            */
+/*   ft_strisdigit.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -13,7 +13,7 @@
 #include "ft_str.h"
 #include "ft_char.h"
 
-t_bool		ft_isdigitstr(const char *str)
+t_bool		ft_strisdigit(const char *str)
 {
 	size_t	len;
 

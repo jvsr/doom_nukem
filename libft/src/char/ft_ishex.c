@@ -3,21 +3,19 @@
 /*                                                        ::::::::            */
 /*   ft_ishex.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/04 14:58:59 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/04 14:58:59 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/04 15:01:34 by pholster       #+#    #+#                */
+/*   Updated: 2019/10/04 15:01:34 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_bool.h"
 #include "ft_char.h"
 
-t_bool	ft_ishex(char c)
+t_bool		ft_ishex(char c)
 {
-	if (ft_isdigit(c)
-	|| (c >= 'a' && c <= 'f')
-	|| (c >= 'A' && c <= 'F'))
+	if (ft_isdigit(c))
 		return (TRUE);
-	return (FALSE);
+	c = ft_tolower(c);
+	return (c >= 'a' && c <= 'f');
 }

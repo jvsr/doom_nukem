@@ -14,5 +14,5 @@
 
 t_bool	pf_ispositiveint(const t_info *info)
 {
-	return (pf_issignint(info) && info->isnegative == FALSE);
+	return (pf_issignint(info) && info->is_negative == FALSE);
 }

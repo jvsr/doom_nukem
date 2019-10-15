@@ -47,7 +47,7 @@ static void		addzero(t_info *info, intmax_t len, intmax_t space, char *prfx)
 	prelen = ft_strlen(prfx);
 	c = (pf_iszeropad(info)) ? '0' : ' ';
 	len = len - ft_max(0, space);
-	if (info->var_type == VOID || info->iszero == FALSE)
+	if (info->var_type == VOID || info->is_zero == FALSE)
 		len -= addprefix(info, prfx, prelen);
 	else if (ft_tolower(prfx[1]) != 'x' && info->type != 'o')
 		len -= addprefix(info, prfx, prelen);
@@ -57,7 +57,7 @@ static void		addzero(t_info *info, intmax_t len, intmax_t space, char *prfx)
 
 static char		*getprefix(t_info *info)
 {
-	if (info->isnegative)
+	if (info->is_negative)
 		return ("-");
 	if (PF_FLAG_PLUS && pf_ispositiveint(info))
 		return ("+");
@@ -66,7 +66,7 @@ static char		*getprefix(t_info *info)
 	if ((PF_FLAG_HASH && ft_chrin("xX", info->type))
 		|| info->var_type == VOID)
 		return ((info->type == 'X') ? "0X" : "0x");
-	if (PF_FLAG_HASH && info->type == 'o' && info->iszero == FALSE &&
+	if (PF_FLAG_HASH && info->type == 'o' && info->is_zero == FALSE &&
 		info->precision <= info->var_len)
 		return ("0");
 	return ("");
@@ -87,7 +87,7 @@ void			pf_formatpad(t_info *info)
 	else
 		len = ft_max(0, info->width) - info->var_len;
 	space = ft_max(0, info->width) - ft_max(info->var_len, info->precision);
-	if (info->var_type == VOID || info->iszero == FALSE)
+	if (info->var_type == VOID || info->is_zero == FALSE)
 		space -= prelen;
 	else if (ft_tolower(prfx[1]) != 'x' && info->type != 'o')
 		space -= prelen;
