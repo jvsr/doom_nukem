@@ -129,7 +129,7 @@ endif
 endif
 
 # Create required $(DATAPATH)
-$(DATAPATH): 
+$(DATAPATH):
 	@mkdir -p $(DATAPATH)
 
 # Compile $(LIB)
