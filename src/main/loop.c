@@ -19,6 +19,7 @@
 #include "gui.h"
 #include "game.h"
 #include "keymap.h"
+#include "renderer.h"
 
 static void		check_quit(t_game *game, SDL_Event event)
 {
@@ -68,6 +69,7 @@ void			loop(t_game *game)
 			check_ui_click(game, event);
 			manage_keymap(game, event);
 		}
+		render_3d(NULL);
 		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);
 	}
