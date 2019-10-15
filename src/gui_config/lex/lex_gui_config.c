@@ -57,6 +57,7 @@ static t_token	*create_tokens(const char *file)
 	tokens = NULL;
 	while (file[index])
 		create_token(file, &tokens, &index);
+	add_lex_token(&tokens, NULL);
 	return (tokens);
 }
 

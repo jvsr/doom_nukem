@@ -27,4 +27,5 @@ SRCS = add_elem_child add_gui_child add_to_children check_gui_hit \
 	set_elem_text_color set_elem_text_font set_elem_image_draw_method \
 	set_elem_image_color set_elem_image_texture get_gui_child print_elem \
 	set_elem_user_data print_text print_image print_button print_panel \
-	get_onclick get_draw_method get_font_type get_gui_type
+	get_onclick get_draw_method get_font_type get_gui_type \
+	onclick_menu

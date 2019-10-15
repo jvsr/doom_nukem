@@ -1,0 +1,13 @@
+- panel: options
+  - pos: 0.2, 0.3
+  - dim: 0.6, 0.65
+  - layer: 1
+  - image: background
+    - color: #720612
+  - button: quit
+    - pos: 0.1, 0.7125
+    - dim: 0.8, 0.15
+    - text: "Quit"
+    - text_color: #260206
+    - text_draw_method: centered
+    - onclick: button_menu_quit

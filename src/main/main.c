@@ -10,22 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_video.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
 
 #include "game.h"
 #include "init.h"
-#include "audio.h"
+#include "sdl_thread.h"
 
 int			main(void)
 {
 	t_game *game;
 	t_bool isloaded;
 
-	isloaded = TRUE;
+	isloaded = FALSE;
 	game = init();
+	sdl_new_thread("mainmenu", init_main_menu, 2, game, &isloaded);
 	splash(game, &isloaded, "splash/splash");
 	loop(game);
 	return (quit(game));

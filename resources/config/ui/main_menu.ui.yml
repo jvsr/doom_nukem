@@ -1,0 +1,33 @@
+- panel: main
+  - image: background
+    - color: #bb0a1e
+  - image: logo
+    - pos: 0.35, 0.05
+    - dim: 0.3, 0.225
+    - texture: splash/splash.tga
+    - draw_method: scaled
+  - panel: menu
+    - pos: 0.15, 0.3
+    - dim: 0.7, 0.65
+    - image: background
+      - color: #720612
+    - button: mapselect
+      - pos: 0.1, 0.1375
+      - dim: 0.8, 0.15
+      - text: "Select Map"
+      - text_color: #260206
+      - text_draw_method: centered
+    - button: options
+      - pos: 0.1, 0.4250
+      - dim: 0.8, 0.15
+      - text: "Options"
+      - text_color: #260206
+      - text_draw_method: centered
+      - onclick: button_menu_options
+    - button: quit
+      - pos: 0.1, 0.7125
+      - dim: 0.8, 0.15
+      - text: "Quit"
+      - text_color: #260206
+      - text_draw_method: centered
+      - onclick: button_menu_quit

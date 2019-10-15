@@ -14,11 +14,12 @@
 #include "libft/ft_str.h"
 
 #include "gui.h"
+#include "onclick.h"
 
 static const t_onclickpair	g_onclicks[] = {
 	{"button_menu_missions", NULL},
-	{"button_menu_options", NULL},
-	{"button_menu_quit", NULL},
+	{"button_menu_options", button_menu_options},
+	{"button_menu_quit", button_menu_quit},
 };
 
 const char	*get_onclick_name(t_onclick *onclick)
