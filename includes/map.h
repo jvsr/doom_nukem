@@ -18,23 +18,16 @@
 
 # define WALL_TEXTURE_SIDES	2
 # define ENEMY_MOVE_ANGLES	6
-# define ANIM_FRAMES	5
 
-typedef	struct	s_player
+typedef	t_uint64	t_time64;
+
+typedef struct	s_anim
 {
-	t_uint16	hp;
-	float		speed;
-	t_bool		crouched;
-	t_weapon	*cur_weapon;
-	t_weapon	**all_weapon;
-
-	t_uint16	*fov;
-	t_uint16	angle;
-	t_pickup	**all_pickup;
-	t_coord		pos;
-	t_rect		view;
-	t_uint8		detection_area;
-}				t_player;
+	SDL_Surface	**texture;
+	t_time64	duration;
+	size_t		frame_count;
+	size_t		frame;
+}				t_anim;
 
 typedef struct	s_enemy
 {
@@ -46,13 +39,13 @@ typedef struct	s_enemy
 	enum		type;
 	t_rect		view;
 
-	SDL_Surface *death_texutre;
-	enum 		death_sound;
+	t_anim		*death_texutre;
+	t_sound 	death_sound;
 
-	enum		anim_state;
-	SDL_Surface *move_anim[ENEMY_MOVE_ANGLES][ANIM_FRAMES];
-	SDL_Surface *attack_texure;
-	t_sound		*shoot_sound;
+	t_anim		*move_anim[ENEMY_MOVE_ANGLES];
+	t_anim		*death_anim;
+	t_anim		*attack_texure;
+	t_sound		shoot_sound;
 
 	char			*name;
 	t_coord			pos;
@@ -62,16 +55,16 @@ typedef struct	s_enemy
 
 typedef	struct	s_weapon
 {
-	t_uint64	last_shot;
-	t_unit8		damage;
-	t_uint16	max_ammo;
-	t_uint16	cur_ammo;
-	t_uint8		fireate;
+	t_time64		last_shot;
+	t_unit8			damage;
+	t_uint16		max_ammo;
+	t_uint16		cur_ammo;
+	t_uint8			fireate;
 
-	enum		anim_state;
-	SDL_Surface	*texutre;
-	SDL_Surface	*shoot_anim[ANIM_FRAMES];
-	t_sound		*shoot_sound;
+	t_anim			*shoot_anim;
+	t_anim			*move_anim;
+	t_sound			shoot_sound;
+	struct s_weapon	next;
 }				t_weapon;
 
 typedef struct	s_interaction
@@ -83,7 +76,7 @@ typedef struct	s_interaction
 typedef	struct	s_win_args
 {
 	t_uint16	win_mask;
-	t_uint64	time;
+	t_time64	time;
 	t_uint16	kill_count;
 	t_sector	*end_sector;
 	t_enemy		*boss;
@@ -141,10 +134,10 @@ typedef struct	s_sector
 typedef struct	s_level
 {
 	*f			init;
-	t_win_args	*win_args;
+	t_win_args	*win_arg;
 	t_coord		player_start_pos;
 	t_uint16	player_start_angle;
-	t_enemy		**all_enemy; //Keep linked list to allow spawning while in level
+	t_enemy		*all_enemy; //Keep linked list to allow spawning while in level
 	t_uint16	num_sector;
 	t_sector	**all_sector;
 	t_uint16	num_wall;

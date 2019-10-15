@@ -13,19 +13,25 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-#include <_types/_uint8_t.h>
-#include <_types/_uint32_t.h>
+# include <_types/_uint8_t.h>
+# include <_types/_uint32_t.h>
 
-#include "coord.h"
+# include "coord.h"
 
-typedef struct	s_player
+typedef	struct	s_player
 {
-	t_vec		pos;
-    uint32_t    ang;
-	uint8_t		cur_sector;
-	uint8_t		hp;
-	uint8_t		ammo;
-	uint8_t		attk;
+	t_uint16	hp;
+	float		speed;
+	t_bool		crouched;
+	t_weapon	*cur_weapon;
+	t_weapon	*all_weapon; //Keep list to allow adding mid game
+
+	t_uint16	*fov;
+	t_uint16	angle;
+	t_pickup	**all_pickup;
+	t_coord		pos;
+	t_rect		view;
+	t_uint8		detection_area;
 }				t_player;
 
 #endif
