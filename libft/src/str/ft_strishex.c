@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strishex.c                                      :+:    :+:            */
+/*   ft_ishexstr.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/04 14:56:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/04 14:56:57 by jvisser       ########   odam.nl         */
+/*   Created: 2019/02/03 16:07:33 by pholster       #+#    #+#                */
+/*   Updated: 2019/08/21 21:30:12 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_bool.h"
+#include "ft_str.h"
 #include "ft_char.h"
 
-t_bool	ft_strishex(const char *str)
+t_bool		ft_strishex(const char *str)
 {
-	while (*str)
-	{
-		if (ft_ishex(*str) == FALSE)
-			return (FALSE);
-		str++;
-	}
-	return (TRUE);
+	size_t	len;
+
+	len = ft_strislen(str, &ft_ishex);
+	return (str[len] == '\0');
 }
