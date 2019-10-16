@@ -20,6 +20,7 @@
 #include "libft/ft_mem.h"
 
 #include "game.h"
+#include "setting.h"
 #include "init.h"
 #include "error.h"
 #include "gametime.h"
@@ -49,8 +50,8 @@ static	void	init_window_surface(t_game *game)
 	game->window = SDL_CreateWindow("Doom Nukem",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		game->settings->resolution.x,
-		game->settings->resolution.y,
+		game->setting->resolution.x,
+		game->setting->resolution.y,
 		SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MOUSE_FOCUS);
 	if (game->window == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc game window");
@@ -67,18 +68,18 @@ static void		init_game(t_game *game)
 
 static void		init_settings(t_game *game)
 {
-	t_settings	*settings;
+	t_setting	*setting;
 
-	settings = (t_settings *)ft_memalloc(sizeof(t_settings));
-	if (settings == NULL)
+	setting = (t_setting *)ft_memalloc(sizeof(t_setting));
+	if (setting == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc settings");
-	settings->sensitivity = 0.6;
-	settings->volume = 0.8;
-	settings->fov = 75;
-	settings->resolution.x = 1080;
-	settings->resolution.y = 720;
-	settings->resolution_type = windowed;
-	game->settings = settings;
+	setting->sensitivity = 0.6;
+	setting->volume = 0.8;
+	setting->fov = 75;
+	setting->resolution.x = 1080;
+	setting->resolution.y = 720;
+	setting->resolution_type = windowed;
+	game->setting = setting;
 }
 
 t_game			*init(void)
