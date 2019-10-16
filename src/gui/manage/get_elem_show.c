@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   add_gui_child.c                                    :+:    :+:            */
+/*   get_elem_show.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 11:02:33 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 15:28:34 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/04 10:47:41 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 14:16:29 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_bool.h"
+
 #include "gui.h"
 
-void		add_gui_child(t_gui *ui, t_transform *panel)
+t_bool		get_elem_show(t_transform *elem)
 {
-	panel->parent_type = GUI;
-	panel->parent.ui = ui;
-	add_to_children(&ui->children, panel);
-	set_elem_redraw(panel);
+	if (elem->show)
+		return (FALSE);
+	while (elem->parent_type == ELEM)
+	{
+		elem = elem->parent.elem;
+		if (elem->show == FALSE)
+			return (FALSE);
+	}
+	return (TRUE);
 }

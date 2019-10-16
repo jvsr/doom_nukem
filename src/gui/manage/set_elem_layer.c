@@ -12,7 +12,7 @@
 
 #include "libft/ft_bool.h"
 
-#include "gui.h"
+#include "gui_internal.h"
 
 void			set_elem_layer(t_transform *elem, short layer)
 {

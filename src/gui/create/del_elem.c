@@ -15,7 +15,7 @@
 
 #include "libft/ft_str.h"
 
-#include "gui.h"
+#include "gui_internal.h"
 
 static void	del_gui_elem(t_transform *elem)
 {

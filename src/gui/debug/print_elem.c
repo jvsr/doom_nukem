@@ -13,7 +13,7 @@
 #include "libft/ft_char.h"
 #include "libft/ft_printf.h"
 
-#include "gui.h"
+#include "gui_internal.h"
 
 static void	print_gui_elem(t_transform *elem, t_bool print_children)
 {

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   del_elem_child.c                                   :+:    :+:            */
+/*   draw_gui.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/16 11:50:04 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/16 11:50:04 by pholster      ########   odam.nl         */
+/*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 17:33:28 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
+#include "sdl_extra.h"
 
-void	del_elem_child(t_transform *elem, const char *name)
+void			draw_gui(t_gui *ui)
 {
-	del_child(&elem->gui_elem.panel->children, name);
+	t_transform	*cur;
+
+	cur = ui->children;
+	while (cur != NULL)
+	{
+		draw_elem(cur);
+		cur = cur->next;
+	}
 }

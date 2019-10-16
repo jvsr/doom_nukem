@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_button.c                                     :+:    :+:            */
+/*   draw_button.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/04 17:51:36 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/04 17:51:36 by pholster      ########   odam.nl         */
+/*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/10 13:58:51 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
-void	print_button(t_button *button)
+/*
+** * Gui internal function
+*/
+
+void		draw_button(SDL_Surface *dst, t_button *button)
 {
-	print_text(button->text);
-	print_image(button->image);
+	draw_image(dst, button->image);
+	draw_text(dst, button->text);
 }

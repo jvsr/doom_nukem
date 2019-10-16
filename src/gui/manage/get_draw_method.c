@@ -12,7 +12,7 @@
 
 #include "libft/ft_str.h"
 
-#include "gui.h"
+#include "gui_internal.h"
 
 static const t_matchpair	g_draw_methods[] = {
 	{"DRAW_METHOD_UNDEFINED", DRAW_METHOD_UNDEFINED},
