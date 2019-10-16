@@ -53,6 +53,7 @@ char			*ft_strtoupper(char *str);
 char			*ft_strtrim(const char *str);
 t_bool			ft_strisdigit(const char *str);
 t_bool			ft_strishex(const char *str);
+t_bool			ft_strisempty(const char *str);
 int				ft_strcmp_nocase(const char *str1, const char *str2);
 int				ft_strcmp(const char *str1, const char *str2);
 int				ft_strncmp_nocase(const char *str1, const char *str2, size_t n);
