@@ -14,14 +14,17 @@
 # define GAME_H
 
 # include <SDL2/SDL.h>
+
 # include "libft/ft_bool.h"
+
 # include "gametime.h"
 
 typedef struct s_gui			t_gui;
 typedef struct s_level			t_level;
 typedef struct s_player			t_player;
 typedef struct s_hashmap		t_hashmap;
-typedef struct s_audio_man	t_audio_man;
+typedef struct s_audio_man		t_audio_man;
+typedef struct s_setting		t_setting;
 
 typedef	enum	e_state
 {
@@ -42,7 +45,7 @@ typedef struct	s_game
 	t_bool			cursoractive;
 	t_time			starttime;
 	t_audio_man		*audio_man;
-	t_settings		*settings;
+	t_setting		*setting;
 }				t_game;
 
 void			loop(t_game *game);

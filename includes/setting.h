@@ -44,7 +44,7 @@ typedef struct	s_setting
 	t_uint16			fov;
 	SDL_Point			resolution;
 	t_resolution_type	resolution_type;
-	t_controls			controls;
+	t_control			controls;
 }				t_setting;
 
 #endif
