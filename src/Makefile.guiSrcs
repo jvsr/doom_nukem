@@ -86,4 +86,5 @@ SRCS = init_gui \
 		$(CREATE_SRCS) \
 		$(DEBUG_SRCS) \
 		$(DRAW_SRCS) \
-		$(MANAGE_SRCS)
+		$(MANAGE_SRCS) \
+		$(ONCLICK_SRCS)
