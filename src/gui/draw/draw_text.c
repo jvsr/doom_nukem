@@ -33,6 +33,7 @@ static SDL_Surface	*render_text(const char *str, TTF_Font *font,
 	text = TTF_RenderText_Blended(font, str, *color);
 	if (text == NULL)
 		error_msg_sdl(ENOMEM, "Failed to render text");
+	sdl_set_surface_color(text, *color);
 	return (text);
 }
 

@@ -13,8 +13,8 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
 
-#include "gui.h"
 #include "onclick.h"
+#include "gui_internal.h"
 
 static const t_onclickpair	g_onclicks[] = {
 	{"mainmenu_missions", NULL},

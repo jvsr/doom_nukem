@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 #include "sdl_extra.h"
 
 void			draw_gui(t_gui *ui)

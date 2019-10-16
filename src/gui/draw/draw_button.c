@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
 /*
 ** * Gui internal function
