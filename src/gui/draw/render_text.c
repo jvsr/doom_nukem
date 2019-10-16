@@ -16,6 +16,7 @@
 
 #include "libft/ft_mem.h"
 
+#include "gui_internal.h"
 #include "sdl_extra.h"
 #include "error.h"
 
