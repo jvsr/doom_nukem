@@ -10,7 +10,7 @@
     - pos: 0.15, 0.275
     - dim: 0.7, 0.7
     - image: background
-      - color: #720612
+      - texture: ui/border1x1.tga
     - button: mapselect
       - pos: 0.125, 0.1375
       - dim: 0.75, 0.15

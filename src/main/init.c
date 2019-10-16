@@ -75,8 +75,8 @@ static void		init_settings(t_game *game)
 	settings->sensitivity = 0.6;
 	settings->volume = 0.8;
 	settings->fov = 75;
-	settings->resolution.x = 1080;
-	settings->resolution.y = 720;
+	settings->resolution.x = INIT_WIDTH;
+	settings->resolution.y = INIT_HEIGHT;
 	settings->resolution_type = windowed;
 	game->settings = settings;
 }
