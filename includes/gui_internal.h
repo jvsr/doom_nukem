@@ -15,6 +15,8 @@
 
 # include "gui.h"
 
+# define TEXT_ALPHA_ROUND	0x30
+
 typedef struct	s_onclickpair
 {
 	const char	*name;
@@ -46,5 +48,6 @@ void			draw_image(SDL_Surface *dst, t_image *image);
 void			draw_text(SDL_Surface *dst, t_text *text);
 void			draw_button(SDL_Surface *dst, t_button *button);
 void			draw_panel(SDL_Surface *dst, t_panel *panel);
+SDL_Surface		*render_text(const char *str, TTF_Font *font, SDL_Color *color);
 
 #endif

@@ -10,32 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
 #include <SDL2/SDL_rect.h>
 
-#include "libft/ft_char.h"
 #include "libft/ft_str.h"
 
-#include "gui.h"
+#include "gui_internal.h"
 #include "sdl_extra.h"
 #include "error.h"
 
-static t_bool		is_empty_str(const char *str)
-{
-	return (str[ft_strislen(str, &ft_isspace)] == '\0');
-}
-
-static SDL_Surface	*render_text(const char *str, TTF_Font *font,
-								SDL_Color *color)
-{
-	SDL_Surface	*text;
-
-	text = TTF_RenderText_Blended(font, str, *color);
-	if (text == NULL)
-		error_msg_sdl(ENOMEM, "Failed to render text");
-	sdl_set_surface_color(text, *color);
-	return (text);
-}
+/*
+** * Gui internal function
+*/
 
 static SDL_Surface	*scale_text(SDL_Surface *text, float size)
 {
@@ -67,7 +52,7 @@ void				draw_text(SDL_Surface *dst, t_text *text)
 	TTF_Font	*font;
 	SDL_Surface	*rendered_text;
 
-	if (text->color.a == 0 || text->text == NULL || is_empty_str(text->text))
+	if (text->color.a == 0 || text->text == NULL || ft_strisempty(text->text))
 		return ;
 	font = text->fonts[text->font_type];
 	rendered_text = render_text(text->text, font, &text->color);
