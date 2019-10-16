@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   del_gui_children.c                                 :+:    :+:            */
+/*   add_gui_child.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/18 11:26:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/18 11:26:25 by pholster      ########   odam.nl         */
+/*   Created: 2019/08/29 11:02:33 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/24 15:28:34 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
-void	del_gui_children(t_gui *ui)
+void		add_gui_child(t_gui *ui, t_transform *panel)
 {
-	t_transform	*cur;
-	t_transform	*next;
-
-	cur = ui->children;
-	while (cur != NULL)
-	{
-		next = cur->next;
-		del_elem(&cur);
-		cur = next;
-	}
-	ui->children = NULL;
+	panel->parent_type = GUI;
+	panel->parent.ui = ui;
+	add_to_children(&ui->children, panel);
+	set_elem_redraw(panel);
 }

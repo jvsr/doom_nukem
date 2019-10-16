@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_button.c                                      :+:    :+:            */
+/*   del_gui_child.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 13:58:51 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/16 11:50:04 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/16 11:50:04 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
-/*
-** * Gui internal function
-*/
-
-void		draw_button(SDL_Surface *dst, t_button *button)
+void	del_gui_child(t_gui *ui, const char *name)
 {
-	draw_image(dst, button->image);
-	draw_text(dst, button->text);
+	del_child(&ui->children, name);
 }

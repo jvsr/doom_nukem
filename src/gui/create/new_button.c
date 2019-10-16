@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_gui.c                                         :+:    :+:            */
+/*   new_button.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:33:28 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/24 15:20:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
-#include "sdl_extra.h"
+#include <errno.h>
+#include <string.h>
 
-void			draw_gui(t_gui *ui)
+#include "libft/ft_mem.h"
+
+#include "gui_internal.h"
+#include "error.h"
+
+/*
+** * Gui internal function
+*/
+
+t_button	*new_button(t_gui *ui)
 {
-	t_transform	*cur;
+	t_button *button;
 
-	cur = ui->children;
-	while (cur != NULL)
-	{
-		draw_elem(cur);
-		cur = cur->next;
-	}
+	button = (t_button *)ft_memalloc(sizeof(t_button));
+	if (button == NULL)
+		error_msg_errno("Failed to alloc button");
+	button->text = new_text(ui);
+	button->image = new_image();
+	return (button);
 }

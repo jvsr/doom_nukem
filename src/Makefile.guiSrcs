@@ -16,15 +16,70 @@ PREFIX =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = add_elem_child add_gui_child add_to_children check_gui_hit \
-	del_button del_elem del_image del_panel del_text draw_button draw_elem \
-	draw_gui draw_image draw_panel draw_text get_elem_child init_gui \
-	get_elem_shown new_button new_elem new_image new_panel new_text \
-	del_elem_child set_elem_clickable set_elem_dim set_elem_layer \
-	set_elem_moved set_elem_pos set_elem_redraw set_elem_show del_gui_children \
-	del_gui_child remove_elem_parent del_child set_elem_onclick \
-	set_elem_text_draw_method set_elem_text_str set_elem_text_size \
-	set_elem_text_color set_elem_text_font set_elem_image_draw_method \
-	set_elem_image_color set_elem_image_texture get_gui_child print_elem \
-	set_elem_user_data print_text print_image print_button print_panel \
-	get_onclick get_draw_method get_font_type get_gui_type
+CREATE_SRCS = new_elem \
+		del_elem \
+		new_button \
+		del_button \
+		new_image \
+		del_image \
+		new_text \
+		del_text \
+		new_panel \
+		del_panel
+CREATE_SRCS := $(CREATE_SRCS:%=create/%)
+
+DEBUG_SRCS = print_elem \
+		print_button \
+		print_image \
+		print_text \
+		print_panel
+DEBUG_SRCS := $(DEBUG_SRCS:%=debug/%)
+
+DRAW_SRCS = draw_gui \
+		draw_elem \
+		draw_button \
+		draw_image \
+		draw_text \
+		draw_panel
+DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
+
+MANAGE_SRCS = add_gui_child \
+		add_elem_child \
+		add_to_children \
+		remove_elem_parent \
+		del_gui_child \
+		del_elem_child \
+		del_gui_children \
+		del_child \
+		get_gui_child \
+		get_elem_child \
+		get_gui_type \
+		get_draw_method \
+		get_elem_show \
+		get_font_type \
+		get_onclick \
+		set_elem_clickable \
+		set_elem_dim \
+		set_elem_image_color \
+		set_elem_image_draw_method \
+		set_elem_image_texture \
+		set_elem_layer \
+		set_elem_moved \
+		set_elem_onclick \
+		set_elem_pos \
+		set_elem_redraw \
+		set_elem_show \
+		set_elem_text_color \
+		set_elem_text_draw_method \
+		set_elem_text_font \
+		set_elem_text_size \
+		set_elem_text_str \
+		set_elem_user_data
+MANAGE_SRCS := $(MANAGE_SRCS:%=manage/%)
+
+SRCS = init_gui \
+		check_gui_hit \
+		$(CREATE_SRCS) \
+		$(DEBUG_SRCS) \
+		$(DRAW_SRCS) \
+		$(MANAGE_SRCS)

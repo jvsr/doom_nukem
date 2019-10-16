@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_panel.c                                       :+:    :+:            */
+/*   add_elem_child.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 13:58:51 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/08/29 11:02:33 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/24 15:28:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
-/*
-** * Gui internal function
-*/
-
-static void	draw_children(t_transform *child)
+void		add_elem_child(t_transform *parent, t_transform *child)
 {
-	while (child != NULL)
-	{
-		draw_elem(child);
-		child = child->next;
-	}
-}
-
-void		draw_panel(SDL_Surface *dst, t_panel *panel)
-{
-	draw_children(panel->children);
-	(void)dst;
+	child->parent_type = ELEM;
+	child->parent.elem = parent;
+	add_to_children(&parent->gui_elem.panel->children, child);
+	set_elem_redraw(child);
 }

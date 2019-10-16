@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_elem_shown.c                                   :+:    :+:            */
+/*   del_gui_children.c                                 :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 10:47:41 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:16:29 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/18 11:26:25 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/18 11:26:25 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_bool.h"
+#include "gui_internal.h"
 
-#include "gui.h"
-
-t_bool		get_elem_shown(t_transform *elem)
+void	del_gui_children(t_gui *ui)
 {
-	if (elem->show)
-		return (FALSE);
-	while (elem->parent_type == ELEM)
+	t_transform	*cur;
+	t_transform	*next;
+
+	cur = ui->children;
+	while (cur != NULL)
 	{
-		elem = elem->parent.elem;
-		if (elem->show == FALSE)
-			return (FALSE);
+		next = cur->next;
+		del_elem(&cur);
+		cur = next;
 	}
-	return (TRUE);
+	ui->children = NULL;
 }
