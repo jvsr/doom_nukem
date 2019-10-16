@@ -22,7 +22,7 @@ static void	set_alpha(t_uint32 *pixel, t_uint32 zero_mask, t_uint32 value)
 	*pixel |= value;
 }
 
-static void	set_alpha32(long long *pixel, t_uint64 zero_mask, t_uint64 value)
+static void	set_alpha32(t_uint64 *pixel, t_uint64 zero_mask, t_uint64 value)
 {
 	*pixel &= zero_mask;
 	*pixel |= value;
@@ -34,12 +34,12 @@ static void	roll32(SDL_Surface *surface, t_uint64 zero_mask,
 	const t_uint64	d_zero = zero_mask | (zero_mask << 32);
 	const t_uint64	d_val = value_mask | (value_mask << 32);
 	const size_t	d_size = (surface->w * surface->h) / 2;
-	long long		*d_pixels;
+	t_uint64		*d_pixels;
 	size_t			step;
 
-	d_pixels = (long long *)surface->pixels;
+	d_pixels = (t_uint64 *)surface->pixels;
 	step = 0;
-	while (step + 4 < d_size)
+	while ((step + 4) < d_size)
 	{
 		set_alpha32(&d_pixels[step], d_zero, d_val);
 		set_alpha32(&d_pixels[step + 1], d_zero, d_val);
