@@ -14,6 +14,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "setting.h"
 #include "gui_config.h"
 
 static char	*get_resolutiontype(t_resolution_type resolution_type)
@@ -33,16 +34,16 @@ void		mainmenu_options(t_game *game, t_transform *gui)
 	(void)gui;
 	options_menu = analyze_gui_config(game->ui, "options_menu");
 	set_elem_text_str(get_elem_child(options_menu, "cursensitivity"),
-		ft_strformat("%.1f", game->settings->sensitivity));
+		ft_strformat("%.1f", game->setting->sensitivity));
 	set_elem_text_str(get_elem_child(options_menu, "curvolume"),
-		ft_strformat("%.1f", game->settings->volume));
+		ft_strformat("%.1f", game->setting->volume));
 	set_elem_text_str(get_elem_child(options_menu, "curfov"),
-		ft_strformat("%d", game->settings->fov));
+		ft_strformat("%d", game->setting->fov));
 	set_elem_text_str(get_elem_child(options_menu, "curresolution"),
-		ft_strformat("%d x %d", game->settings->resolution.x,
-			game->settings->resolution.y));
+		ft_strformat("%d x %d", game->setting->resolution.x,
+			game->setting->resolution.y));
 	set_elem_text_str(get_elem_child(options_menu, "curresolutiontype"),
-		get_resolutiontype(game->settings->resolution_type));
+		get_resolutiontype(game->setting->resolution_type));
 	add_elem_child(get_gui_child(game->ui, "mainmenu"), options_menu);
 }
 
