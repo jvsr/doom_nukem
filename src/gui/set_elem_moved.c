@@ -23,6 +23,6 @@ void	set_elem_moved(t_transform *elem)
 	while (cur->parent_type == ELEM)
 	{
 		cur->parent.elem->moved = TRUE;
-		cur = elem->parent.elem;
+		cur = cur->parent.elem;
 	}
 }

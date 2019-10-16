@@ -23,6 +23,6 @@ void	set_elem_redraw(t_transform *elem)
 	while (cur->parent_type == ELEM)
 	{
 		cur->parent.elem->redraw = TRUE;
-		cur = elem->parent.elem;
+		cur = cur->parent.elem;
 	}
 }
