@@ -39,6 +39,7 @@ DRAW_SRCS = draw_gui \
 		draw_elem \
 		draw_button \
 		draw_image \
+		render_text \
 		draw_text \
 		draw_panel
 DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
