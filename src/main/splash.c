@@ -40,7 +40,7 @@ static void		fade(t_game *game, SDL_Surface *splash,
 	t_uint64		now;
 	t_uint64		frametime;
 	SDL_Event		temp;
-	const t_uint64	duration = 500;
+	const t_uint64	duration = 1500;
 
 	now = get_gametime(&game->starttime);
 	frametime = now;
@@ -68,7 +68,7 @@ void			splash(t_game *game, t_bool *finished, char *loc)
 	sdl_set_surface_alpha(splash, 0);
 	fade(game, splash, fadein);
 	now = get_gametime(&game->starttime);
-	while (*finished == FALSE || get_gametime(&game->starttime) - now < 1000)
+	while (*finished == FALSE || get_gametime(&game->starttime) - now < 3000)
 		SDL_PollEvent(&temp);
 	fade(game, splash, fadeout);
 	SDL_FreeSurface(splash);

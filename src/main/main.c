@@ -16,7 +16,7 @@
 #include "init.h"
 #include "sdl_thread.h"
 
-int			main(void)
+int	main(void)
 {
 	t_game *game;
 	t_bool isloaded;

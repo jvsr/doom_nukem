@@ -17,16 +17,16 @@
 #include "gui.h"
 #include "error.h"
 
-static void		prefix_name(char **name, char *prefix)
-{
-	char *result;
+// static void		prefix_name(char **name, char *prefix)
+// {
+// 	char *result;
 
-	result = ft_strjoin_var(3, prefix, "_", *name);
-	if (result == NULL)
-		error_msg_errno("Failed to prefix elem name");
-	free(*name);
-	*name = result;
-}
+// 	result = ft_strjoin_var(3, prefix, "_", *name);
+// 	if (result == NULL)
+// 		error_msg_errno("Failed to prefix elem name");
+// 	free(*name);
+// 	*name = result;
+// }
 
 static void		exec_children(t_gui *ui, t_parse_info *child,
 								t_transform *parent)
@@ -37,7 +37,7 @@ static void		exec_children(t_gui *ui, t_parse_info *child,
 	while (child != NULL)
 	{
 		next = child->next;
-		prefix_name(&child->name, parent->name);
+		// prefix_name(&child->name, parent->name);
 		elem = new_exec_elem(ui, child);
 		if (elem->gui_type == PANEL)
 			exec_children(ui, child->child, elem);

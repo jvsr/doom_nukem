@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
@@ -48,8 +49,8 @@ static	void	init_window_surface(t_game *game)
 	game->window = SDL_CreateWindow("Doom Nukem",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		INIT_WIDTH,
-		INIT_HEIGHT,
+		game->settings->resolution.x,
+		game->settings->resolution.y,
 		SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MOUSE_FOCUS);
 	if (game->window == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc game window");
@@ -64,12 +65,29 @@ static void		init_game(t_game *game)
 	game->cursoractive = TRUE;
 }
 
+static void		init_settings(t_game *game)
+{
+	t_settings	*settings;
+
+	settings = (t_settings *)ft_memalloc(sizeof(t_settings));
+	if (settings == NULL)
+		error_msg_sdl(ENOMEM, "Failed to alloc settings");
+	settings->sensitivity = 0.6;
+	settings->volume = 0.8;
+	settings->fov = 75;
+	settings->resolution.x = 1080;
+	settings->resolution.y = 720;
+	settings->resolution_type = windowed;
+	game->settings = settings;
+}
+
 t_game			*init(void)
 {
 	t_game *game;
 
 	init_sdl();
 	game = alloc_game();
+	init_settings(game);
 	init_window_surface(game);
 	init_game(game);
 	init_audio(game);

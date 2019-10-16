@@ -1,19 +1,95 @@
 - panel: options
-  - pos: 0.25, 0.05
-  - dim: 0.5, 0.9
   - layer: 1
-  - image: background
-    - color: #260206
-  - text_block: sensitivity
-  - text_block: volume
-  - text_block: fov
-  - text_block: resolution
-  - text_block: resolutiontype
-  - text_block: controls
-  - button: quit
-    - pos: 0.1, 0.9
-    - dim: 0.8, 0.08
-    - text: "Return"
-    - text_color: #260206
-    - text_draw_method: centered
-    - onclick: button_menu_quit
+  - image: overlay
+    - color: #26020699
+    - layer: 1
+  - panel: menu
+    - pos: 0.25, 0.05
+    - dim: 0.5, 0.9
+    - layer: 2
+    - image: background
+      - texture: ui/border5x9.tga
+    - text_block: sensitivity
+      - pos: 0.1, 0.03
+      - dim: 0.8, 0.08
+      - text_size: 0.6
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - text: "Sensitivity"
+    - text_block: cursensitivity
+      - pos: 0.4, 0.1
+      - dim: 0.2, 0.08
+      - text_size: 0.6
+      - text_font: neckromancer
+    - image: sensitivityleft
+      - pos: 0.3, 0.1
+      - dim: 0.2, 0.2
+      - texture: ui/arrow_left.tga
+    - image: sensitivityright
+      - pos: 0.5, 0.1
+      - dim: 0.2, 0.2
+      - texture: ui/arrow_right.tga
+    - text_block: volume
+      - pos: 0.1, 0.17
+      - dim: 0.8, 0.08
+      - text_size: 0.6
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - text: "Volume"
+    - text_block: curvolume
+      - pos: 0.4, 0.24
+      - dim: 0.2, 0.08
+      - text_size: 0.6
+      - text_font: neckromancer
+    - text_block: fov
+      - pos: 0.1, 0.32
+      - dim: 0.8, 0.08
+      - text_size: 0.6
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - text: "FOV"
+    - text_block: curfov
+      - pos: 0.4, 0.39
+      - dim: 0.2, 0.08
+      - text_size: 0.6
+      - text_font: neckromancer
+    - text_block: resolution
+      - pos: 0.1, 0.47
+      - dim: 0.8, 0.08
+      - text_size: 0.6
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - text: "Resolution"
+    - text_block: curresolution
+      - pos: 0.3, 0.54
+      - dim: 0.4, 0.08
+      - text_size: 0.6
+      - text_font: neckromancer
+    - text_block: resolutiontype
+      - pos: 0.1, 0.62
+      - dim: 0.8, 0.08
+      - text_size: 0.6
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - text: "Resolution Type"
+    - text_block: curresolutiontype
+      - pos: 0.3, 0.69
+      - dim: 0.4, 0.08
+      - text_size: 0.6
+      - text_font: neckromancer
+    - button: controls
+      - pos: 0.1, 0.78
+      - dim: 0.8, 0.08
+      - text_size: 0.6
+      - text: "Controls"
+      - text_font: foulfiend
+      - text_color: #300206
+    - button: return
+      - pos: 0.1, 0.88
+      - dim: 0.8, 0.08
+      - text_size: 0.6
+      - text: "Return"
+      - text_font: foulfiend
+      - text_color: #300206
+      - text_draw_method: centered
+      - onclick: options_return

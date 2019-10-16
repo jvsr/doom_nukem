@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   onclick_menu.c                                     :+:    :+:            */
+/*   options.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/15 17:02:43 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/15 17:02:43 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/16 14:27:39 by jvisser        #+#    #+#                */
+/*   Updated: 2019/10/16 14:27:39 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,10 @@
 #include "game.h"
 #include "gui_config.h"
 
-void	button_menu_options(t_game *game, t_transform *gui)
+void	options_return(t_game *game, t_transform *gui)
 {
-	t_transform	*options_menu;
-
+	t_transform	*mainmenu;
 	(void)gui;
-	options_menu = analyze_gui_config(game->ui, "options_menu");
-	add_elem_child(get_gui_child(game->ui, "mainmenu"), options_menu);
-}
-
-void	button_menu_quit(t_game *game, t_transform *gui)
-{
-	(void)gui;
-	quit(game);
+	mainmenu = get_gui_child(game->ui, "mainmenu");
+	del_elem_child(mainmenu, "options");
 }

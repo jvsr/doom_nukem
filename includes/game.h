@@ -30,6 +30,24 @@ typedef	enum	e_state
 	stopped
 }				t_state;
 
+
+typedef enum    e_resolution_type
+{
+    windowed,
+    fullscreen,
+    fullscreen_windowed
+}                t_resolution_type;
+
+typedef    struct    s_settings
+{
+    float               sensitivity;
+    float               volume;
+    t_uint16           	fov;
+    SDL_Point           resolution;
+    t_resolution_type   resolution_type;
+    // t_keytable            controls;
+}                t_settings;
+
 typedef struct	s_game
 {
 	t_state			state;
@@ -42,6 +60,7 @@ typedef struct	s_game
 	t_bool			cursoractive;
 	t_time			starttime;
 	t_audio_man		*audio_man;
+	t_settings		*settings;
 }				t_game;
 
 void			loop(t_game *game);

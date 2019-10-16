@@ -13,7 +13,12 @@
 #ifndef ONCLICK_H
 # define ONCLICK_H
 
-void	button_menu_options(t_game *game, t_transform *gui);
-void	button_menu_quit(t_game *game, t_transform *gui);
+typedef struct s_game		t_game;
+typedef struct s_transform	t_transform;
+
+void	mainmenu_options(t_game *game, t_transform *gui);
+void	mainmenu_quit(t_game *game, t_transform *gui);
+
+void	options_return(t_game *game, t_transform *gui);
 
 #endif
