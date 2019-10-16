@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   settings.h                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/10/16 19:19:06 by pholster       #+#    #+#                */
+/*   Updated: 2019/10/16 19:19:06 by pholster      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SETTINGS_H
+# define SETTINGS_H
+
+# include <SDL2/SDL.h>
+# include <SDL2/SDL_keycode.h>
+
+# include "types.h"
+
+typedef enum	e_resolution_type
+{
+	windowed,
+	fullscreen,
+	fullscreen_windowed
+}				t_resolution_type;
+
+typedef struct	s_control
+{
+	SDL_Keycode	shoot;
+	SDL_Keycode	interact;
+	SDL_Keycode	jump;
+	SDL_Keycode	crouch;
+	SDL_Keycode	forward;
+	SDL_Keycode	backward;
+	SDL_Keycode	left;
+	SDL_Keycode	right;
+}				t_control;
+
+typedef struct	s_setting
+{
+	float				sensitivity;
+	float				volume;
+	t_uint16			fov;
+	SDL_Point			resolution;
+	t_resolution_type	resolution_type;
+	t_controls			controls;
+}				t_setting;
+
+#endif

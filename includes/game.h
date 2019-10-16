@@ -30,24 +30,6 @@ typedef	enum	e_state
 	stopped
 }				t_state;
 
-
-typedef enum    e_resolution_type
-{
-    windowed,
-    fullscreen,
-    fullscreen_windowed
-}                t_resolution_type;
-
-typedef    struct    s_settings
-{
-    float               sensitivity;
-    float               volume;
-    t_uint16           	fov;
-    SDL_Point           resolution;
-    t_resolution_type   resolution_type;
-    // t_keytable            controls;
-}                t_settings;
-
 typedef struct	s_game
 {
 	t_state			state;
