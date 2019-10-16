@@ -16,6 +16,10 @@ PREFIX =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+ONCLICK_SRCS = mainmenu \
+				options
+ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
+
 SRCS = add_elem_child add_gui_child add_to_children check_gui_hit \
 	del_button del_elem del_image del_panel del_text draw_button draw_elem \
 	draw_gui draw_image draw_panel draw_text get_elem_child init_gui \
@@ -28,4 +32,4 @@ SRCS = add_elem_child add_gui_child add_to_children check_gui_hit \
 	set_elem_image_color set_elem_image_texture get_gui_child print_elem \
 	set_elem_user_data print_text print_image print_button print_panel \
 	get_onclick get_draw_method get_font_type get_gui_type \
-	onclick_menu
+	$(ONCLICK_SRCS)

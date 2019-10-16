@@ -17,9 +17,11 @@
 #include "onclick.h"
 
 static const t_onclickpair	g_onclicks[] = {
-	{"button_menu_missions", NULL},
-	{"button_menu_options", button_menu_options},
-	{"button_menu_quit", button_menu_quit},
+	{"mainmenu_missions", NULL},
+	{"mainmenu_options", mainmenu_options},
+	{"mainmenu_quit", mainmenu_quit},
+
+	{"options_return", options_return},
 };
 
 const char	*get_onclick_name(t_onclick *onclick)

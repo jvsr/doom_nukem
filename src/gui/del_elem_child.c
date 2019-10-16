@@ -15,4 +15,5 @@
 void	del_elem_child(t_transform *elem, const char *name)
 {
 	del_child(&elem->gui_elem.panel->children, name);
+	set_elem_redraw(elem);
 }

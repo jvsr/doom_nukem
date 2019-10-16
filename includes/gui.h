@@ -21,6 +21,8 @@
 
 # include "coord.h"
 
+# define FONT_PATH "resources/fonts/"
+
 typedef struct s_game		t_game;
 typedef struct s_gui		t_gui;
 typedef struct s_transform	t_transform;
@@ -53,6 +55,8 @@ typedef	enum	e_font_type
 	ROBOTO,
 	MONOF,
 	KARARC,
+	FOULFIEND,
+	NECKROMANCER,
 	FONT_AMOUNT
 }				t_font_type;
 
