@@ -22,19 +22,18 @@
 ** * Gui internal function
 */
 
-static SDL_Surface	*scale_text(SDL_Surface *text, float size, t_gui *ui)
+static SDL_Surface	*scale_text(SDL_Surface *text, float size,
+								SDL_Point abs_dim)
 {
-	const int	width = ui->window_surface->w;
-	const int	height = ui->window_surface->w;
 	SDL_Surface	*scaled;
 	float		scaled_size;
 	SDL_Point	text_size;
 
-	if (width < height)
-		scaled_size = width / TEXT_RATIO_WIDTH;
+	if (abs_dim.x < abs_dim.y)
+		scaled_size = abs_dim.x * TEXT_SIZE_RATIO;
 	else
-		scaled_size = height / TEXT_RATIO_HEIGHT;
-	scaled_size = size * scaled_size;
+		scaled_size = abs_dim.y * TEXT_SIZE_RATIO;
+	scaled_size *= size;
 	text_size.x = text->w * scaled_size;
 	text_size.y = text->h * scaled_size;
 	scaled = sdl_create_surface_default(text_size);
@@ -53,7 +52,7 @@ static void			merge_text(SDL_Surface *dst, t_text *text,
 		sdl_merge_surface_alpha_repeat(dst, scaled_text);
 }
 
-void				draw_text(SDL_Surface *dst, t_text *text, t_gui *ui)
+void				draw_text(SDL_Surface *dst, t_text *text, SDL_Point abs_dim)
 {
 	TTF_Font	*font;
 	SDL_Surface	*rendered_text;
@@ -63,7 +62,7 @@ void				draw_text(SDL_Surface *dst, t_text *text, t_gui *ui)
 		return ;
 	font = text->fonts[text->font_type];
 	rendered_text = render_text(text->text, font, &text->color);
-	scaled_text = scale_text(rendered_text, text->size, ui);
+	scaled_text = scale_text(rendered_text, text->size, abs_dim);
 	SDL_FreeSurface(rendered_text);
 	if (text->draw_method != SCALED)
 		merge_text(dst, text, scaled_text);

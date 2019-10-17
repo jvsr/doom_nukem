@@ -16,16 +16,16 @@
 ** * Gui internal function
 */
 
-static void	draw_children(t_transform *child, t_gui *ui)
+static void	draw_children(t_transform *child)
 {
 	while (child != NULL)
 	{
-		draw_elem(child, ui);
+		draw_elem(child);
 		child = child->next;
 	}
 }
 
-void		draw_panel(t_panel *panel, t_gui *ui)
+void		draw_panel(t_panel *panel)
 {
-	draw_children(panel->children, ui);
+	draw_children(panel->children);
 }

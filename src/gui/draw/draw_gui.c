@@ -20,7 +20,7 @@ void			draw_gui(t_gui *ui)
 	cur = ui->children;
 	while (cur != NULL)
 	{
-		draw_elem(cur, ui);
+		draw_elem(cur);
 		cur = cur->next;
 	}
 }
