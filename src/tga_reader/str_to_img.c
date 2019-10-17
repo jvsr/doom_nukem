@@ -53,7 +53,7 @@ static void	bottomleft(t_img *img, t_tga *tga, unsigned char *str)
 	while (min < i)
 	{
 		img->pixels[j] = pixel_from_pos(str, i, img);
-		i += pitch; 
+		i += pitch;
 		if ((i - min) % (img->width * pitch) == 0)
 			i -= (img->width * pitch) * 2;
 		j++;
@@ -81,7 +81,7 @@ static void	topleft(t_img *img, t_tga *tga, unsigned char *str)
 	}
 }
 
-static void topright(t_img *img, t_tga *tga, unsigned char *str)
+static void	topright(t_img *img, t_tga *tga, unsigned char *str)
 {
 	size_t			i;
 	size_t			j;
@@ -89,7 +89,6 @@ static void topright(t_img *img, t_tga *tga, unsigned char *str)
 	size_t			min;
 	const size_t	pitch = img->px_depth / 8;
 
-	printf("tr\n");
 	min = 19 + tga->id_len;
 	if (tga->clr_map_type == 2)
 		min += tga->cm_len * (tga->cm_size / 4);
