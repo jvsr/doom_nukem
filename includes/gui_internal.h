@@ -16,8 +16,7 @@
 # include "gui.h"
 
 # define TEXT_ALPHA_ROUND	0x30
-# define TEXT_RATIO_WIDTH	1280
-# define TEXT_RATIO_HEIGHT	720
+# define TEXT_SIZE_RATIO	0.015
 
 typedef struct	s_onclickpair
 {
@@ -45,11 +44,12 @@ void			print_button(t_button *button);
 void			print_panel(t_panel *panel, t_bool print_children);
 void			add_to_children(t_transform **children, t_transform *child);
 void			del_child(t_transform **children, const char *name);
-void			draw_elem(t_transform *elem, t_gui *ui);
+void			draw_elem(t_transform *elem);
 void			draw_image(SDL_Surface *dst, t_image *image);
-void			draw_text(SDL_Surface *dst, t_text *text, t_gui *ui);
-void			draw_button(SDL_Surface *dst, t_button *button, t_gui *ui);
-void			draw_panel(t_panel *panel, t_gui *ui);
+void			draw_text(SDL_Surface *dst, t_text *text, SDL_Point abs_dim);
+void			draw_button(SDL_Surface *dst, t_button *button,
+							SDL_Point abs_dim);
+void			draw_panel(t_panel *panel);
 SDL_Surface		*render_text(const char *str, TTF_Font *font, SDL_Color *color);
 
 #endif
