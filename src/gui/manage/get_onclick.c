@@ -21,6 +21,12 @@ static const t_onclickpair	g_onclicks[] = {
 	{"mainmenu_options", mainmenu_options},
 	{"mainmenu_quit", mainmenu_quit},
 
+	{"options_sensitivity_up", options_sensitivity_up},
+	{"options_sensitivity_down", options_sensitivity_down},
+	{"options_volume_up", options_volume_up},
+	{"options_volume_down", options_volume_down},
+	{"options_fov_up", options_fov_up},
+	{"options_fov_down", options_fov_down},
 	{"options_return", options_return},
 };
 
@@ -34,8 +40,7 @@ const char	*get_onclick_name(t_onclick *onclick)
 	i = 0;
 	while (i < size)
 	{
-		if (g_onclicks[i].f != NULL &&
-		ft_memequ(onclick, g_onclicks[i].f, sizeof(t_onclick)))
+		if (g_onclicks[i].f != NULL && onclick == g_onclicks[i].f)
 			return (g_onclicks[i].name);
 		i++;
 	}

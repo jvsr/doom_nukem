@@ -17,7 +17,8 @@ PREFIX =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 ONCLICK_SRCS = mainmenu \
-				options
+				options \
+				settings
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \

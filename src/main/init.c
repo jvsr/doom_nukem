@@ -73,7 +73,7 @@ static void		init_settings(t_game *game)
 	setting = (t_setting *)ft_memalloc(sizeof(t_setting));
 	if (setting == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc settings");
-	setting->sensitivity = 0.6;
+	setting->sensitivity = 1.0;
 	setting->volume = 0.8;
 	setting->fov = 75;
 	setting->resolution.x = INIT_WIDTH;

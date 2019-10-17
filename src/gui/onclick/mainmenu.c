@@ -14,6 +14,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "onclick.h"
 #include "setting.h"
 #include "gui_config.h"
 
@@ -33,10 +34,10 @@ void		mainmenu_options(t_game *game, t_transform *gui)
 
 	(void)gui;
 	options_menu = analyze_gui_config(game->ui, "options_menu");
-	set_elem_text_str(get_elem_child(options_menu, "cursensitivity"),
-		ft_strformat("%.1f", game->setting->sensitivity));
+	set_sensitivity(game->setting, options_menu);
+	set_volume(game->setting, options_menu);
 	set_elem_text_str(get_elem_child(options_menu, "curvolume"),
-		ft_strformat("%.1f", game->setting->volume));
+		ft_strformat("%.f", game->setting->volume * 100));
 	set_elem_text_str(get_elem_child(options_menu, "curfov"),
 		ft_strformat("%d", game->setting->fov));
 	set_elem_text_str(get_elem_child(options_menu, "curresolution"),

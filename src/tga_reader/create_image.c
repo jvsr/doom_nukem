@@ -65,7 +65,6 @@ void		create_image(const char *file_name, t_img *img)
 			TEXTURE_PATH, file_name));
 	close(fd);
 	set_tga_header(file_stream, &tga, img);
-	printf("org: %c", img->origin);
 	if (tga.img_type == 0)
 	{
 		ft_strdel((char**)&file_stream);
