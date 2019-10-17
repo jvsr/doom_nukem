@@ -17,24 +17,24 @@
       - text_color: #EAEAEA
       - text: "Sensitivity"
     - text_block: cursensitivity
-      - pos: 0.4, 0.1
+      - pos: 0.4, 0.095
       - dim: 0.2, 0.08
-      - text_size: 0.5
+      - text_size: 0.6
       - text_font: neckromancer
     - button: sensitivityleft
-      - pos: 0.39, 0.11
-      - dim: 0.05, 0.05
+      - pos: 0.42, 0.117
+      - dim: 0.03, 0.0335
       - texture: ui/arrow_left.tga
       - onclick: options_sensitivity_down
     - button: sensitivityright
-      - pos: 0.56, 0.11
-      - dim: 0.05, 0.05
+      - pos: 0.55, 0.117
+      - dim: 0.03, 0.0335
       - texture: ui/arrow_right.tga
       - onclick: options_sensitivity_up
     - text_block: volume
       - pos: 0.1, 0.17
       - dim: 0.8, 0.08
-      - text_size: 0.6
+      - text_size: 0.5
       - text_font: foulfiend
       - text_color: #EAEAEA
       - text: "Volume"
@@ -81,7 +81,7 @@
     - text_block: curresolution
       - pos: 0.3, 0.54
       - dim: 0.4, 0.08
-      - text_size: 0.5
+      - text_size: 0.6
       - text_font: neckromancer
     - text_block: resolutiontype
       - pos: 0.1, 0.62
@@ -93,7 +93,7 @@
     - text_block: curresolutiontype
       - pos: 0.3, 0.69
       - dim: 0.4, 0.08
-      - text_size: 0.5
+      - text_size: 0.6
       - text_font: neckromancer
     - button: controls
       - pos: 0.1, 0.78
