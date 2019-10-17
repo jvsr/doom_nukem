@@ -49,7 +49,7 @@ static void	set_tga_header(unsigned char *str, t_tga *tga, t_img *img)
 	img->height = (str[15] << 8) | str[14];
 	img->px_depth = str[16];
 	img->origin = str[17];
-	img->pitch = img->width * sizeof(unsigned int);
+	img->pitch = img->width * (img->px_depth / 8);
 }
 
 void		create_image(const char *file_name, t_img *img)

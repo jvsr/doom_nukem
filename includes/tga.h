@@ -23,6 +23,7 @@
 # endif
 
 # define TEXTURE_PATH "./resources/textures/"
+# define TGA_HEADER_SIZE 18
 
 typedef struct	s_tga
 {

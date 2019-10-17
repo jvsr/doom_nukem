@@ -25,7 +25,7 @@ SDL_Surface		*open_tga_sdl(char *file_name)
 
 	create_image(file_name, &img);
 	surface = sdl_create_surface_default((SDL_Point){img.width, img.height});
-	ft_memcpy(surface->pixels, img.pixels, img.pitch * img.height);
+	ft_memcpy(surface->pixels, img.pixels, (img.width * img.height) * 4 );
 	free(img.pixels);
 	return (surface);
 }
