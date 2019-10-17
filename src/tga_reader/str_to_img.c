@@ -12,7 +12,9 @@
 
 #include <errno.h>
 #include <stdlib.h>
+
 #include "libft/ft_mem.h"
+
 #include "tga.h"
 #include "error.h"
 
@@ -46,15 +48,15 @@ static void	bottomleft(t_img *img, t_tga *tga, unsigned char *str)
 	min = TGA_HEADER_SIZE + tga->id_len;
 	if (tga->clr_map_type == 2)
 		min += tga->cm_len * (tga->cm_size / 4);
-	i = (img->height * img->width * pitch) + min - (img->width * pitch) - pitch;
+	i = ((img->height - 1) * img->width * pitch) + min;
 	j = 0;
-	while (min < i)
+	while (j != img->width * img->height)
 	{
 		img->pixels[j] = pixel_from_pos(str, i, img);
 		i += pitch;
-		if ((i - min) % (img->width * pitch) == 0)
-			i -= (img->width * pitch) * 2;
 		j++;
+		if (j != 0 && j % img->width == 0)
+			i -= (img->width * pitch) * 2;
 	}
 }
 
@@ -108,12 +110,12 @@ void		str_to_img(t_img *img, t_tga *tga, unsigned char *str)
 		(img->height * img->width));
 	if (img->pixels == NULL)
 		error_msg_errno("Failed to allocate tga pixels");
-	if ((img->origin & 0x18) == 0)
+	if ((img->origin & 0x30) == 0x00)
 		bottomleft(img, tga, str);
-	else if ((img->origin & 0x18) == 0x08)
+	else if ((img->origin & 0x30) == 0x10)
 		bottomright(img, tga, str);
-	else if ((img->origin & 0x18) == 0x10)
-		topright(img, tga, str);
-	else
+	else if ((img->origin & 0x30) == 0x20)
 		topleft(img, tga, str);
+	else
+		topright(img, tga, str);
 }
