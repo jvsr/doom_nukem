@@ -13,7 +13,7 @@
 #ifndef INIT_H
 # define INIT_H
 
-# define INIT_WIDTH	1080
+# define INIT_WIDTH	1280
 # define INIT_HEIGHT 720
 # define INIT_KEYMAP_SIZE 20
 # define INIT_KEYMAP_ALGO ft_hashdjb2a
