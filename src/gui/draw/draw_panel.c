@@ -16,17 +16,16 @@
 ** * Gui internal function
 */
 
-static void	draw_children(t_transform *child)
+static void	draw_children(t_transform *child, t_gui *ui)
 {
 	while (child != NULL)
 	{
-		draw_elem(child);
+		draw_elem(child, ui);
 		child = child->next;
 	}
 }
 
-void		draw_panel(SDL_Surface *dst, t_panel *panel)
+void		draw_panel(t_panel *panel, t_gui *ui)
 {
-	draw_children(panel->children);
-	(void)dst;
+	draw_children(panel->children, ui);
 }

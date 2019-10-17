@@ -16,8 +16,8 @@
 ** * Gui internal function
 */
 
-void		draw_button(SDL_Surface *dst, t_button *button)
+void		draw_button(SDL_Surface *dst, t_button *button, t_gui *ui)
 {
 	draw_image(dst, button->image);
-	draw_text(dst, button->text);
+	draw_text(dst, button->text, ui);
 }

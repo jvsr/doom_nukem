@@ -77,22 +77,22 @@ static void		reset_surface(t_transform *elem)
 	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
 
-static void		draw_gui_elem(t_transform *elem)
+static void		draw_gui_elem(t_transform *elem, t_gui *ui)
 {
 	if (elem->gui_type == TEXT)
-		draw_text(elem->surface, elem->gui_elem.text);
+		draw_text(elem->surface, elem->gui_elem.text, ui);
 	else if (elem->gui_type == IMAGE)
 		draw_image(elem->surface, elem->gui_elem.image);
 	else if (elem->gui_type == BUTTON)
-		draw_button(elem->surface, elem->gui_elem.button);
+		draw_button(elem->surface, elem->gui_elem.button, ui);
 	else if (elem->gui_type == PANEL)
 	{
-		draw_panel(elem->surface, elem->gui_elem.panel);
+		draw_panel(elem->gui_elem.panel, ui);
 		elem->has_alpha = sdl_has_surface_alpha(elem->surface);
 	}
 }
 
-void			draw_elem(t_transform *elem)
+void			draw_elem(t_transform *elem, t_gui *ui)
 {
 	SDL_Surface	*dst_surface;
 
@@ -101,14 +101,14 @@ void			draw_elem(t_transform *elem)
 	if (elem->redraw == TRUE || (elem->gui_type == PANEL && child_moved(elem)))
 	{
 		reset_surface(elem);
-		draw_gui_elem(elem);
+		draw_gui_elem(elem, ui);
 	}
 	if (elem->show == FALSE)
 		return ;
 	if (elem->parent_type == ELEM)
 		dst_surface = elem->parent.elem->surface;
 	else
-		dst_surface = elem->parent.ui->window_surface;
+		dst_surface = ui->window_surface;
 	if (elem->gui_type == TEXT || elem->has_alpha)
 		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->rel_pos);
 	else
