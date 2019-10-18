@@ -18,7 +18,7 @@ static t_return_code	get_text_attr(const char *attr)
 {
 	if (ft_strequ(attr, "text"))
 		return (text);
-	else if (ft_strequ(attr, "text_color"))
+	else if (ft_strequ(attr, "text_color") || ft_strequ(attr, "text_colour"))
 		return (text_color);
 	else if (ft_strequ(attr, "text_font"))
 		return (text_font);
@@ -45,7 +45,7 @@ t_return_code			get_attr(const char *attr)
 		return (show);
 	else if (ft_strequ(attr, "texture"))
 		return (texture);
-	else if (ft_strequ(attr, "color"))
+	else if (ft_strequ(attr, "color") || ft_strequ(attr, "colour"))
 		return (color);
 	else if (ft_strequ(attr, "draw_method"))
 		return (draw_method);
