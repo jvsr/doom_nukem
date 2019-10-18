@@ -1,4 +1,6 @@
 - panel: options
+  - show: 0
+  - clickable: 0
   - layer: 1
   - image: overlay
     - color: #26020699
@@ -23,12 +25,12 @@
       - text_font: neckromancer
     - button: sensitivityleft
       - pos: 0.42, 0.117
-      - dim: 0.03, 0.0335
+      - dim: 0.03, 0.0345
       - texture: ui/arrow_left.tga
       - onclick: options_sensitivity_down
     - button: sensitivityright
       - pos: 0.55, 0.117
-      - dim: 0.03, 0.0335
+      - dim: 0.03, 0.0345
       - texture: ui/arrow_right.tga
       - onclick: options_sensitivity_up
     - text_block: volume
@@ -44,12 +46,14 @@
       - text_size: 0.6
       - text_font: neckromancer
     - button: volumeleft
-      - pos: 0.39, 0.25
-      - dim: 0.05, 0.05
+      - pos: 0.42, 0.262
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_left.tga
       - onclick: options_volume_down
     - button: volumeright
-      - pos: 0.56, 0.25
-      - dim: 0.05, 0.05
+      - pos: 0.55, 0.262
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_right.tga
       - onclick: options_volume_up
     - text_block: fov
       - pos: 0.1, 0.32
@@ -64,12 +68,14 @@
       - text_size: 0.6
       - text_font: neckromancer
     - button: fovleft
-      - pos: 0.39, 0.40
-      - dim: 0.05, 0.05
+      - pos: 0.42, 0.411
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_left.tga
       - onclick: options_fov_down
     - button: fovright
-      - pos: 0.56, 0.40
-      - dim: 0.05, 0.05
+      - pos: 0.55, 0.411
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_right.tga
       - onclick: options_fov_up
     - text_block: resolution
       - pos: 0.1, 0.47
@@ -83,6 +89,16 @@
       - dim: 0.4, 0.08
       - text_size: 0.6
       - text_font: neckromancer
+    - button: resolutionleft
+      - pos: 0.35, 0.56
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_left.tga
+      - onclick: options_resolution_down
+    - button: resolutionright
+      - pos: 0.62, 0.56
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_right.tga
+      - onclick: options_resolution_up
     - text_block: resolutiontype
       - pos: 0.1, 0.62
       - dim: 0.8, 0.08
@@ -95,6 +111,16 @@
       - dim: 0.4, 0.08
       - text_size: 0.6
       - text_font: neckromancer
+    - button: resolutiontypeleft
+      - pos: 0.35, 0.71
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_left.tga
+      - onclick: options_resolutiontype_down
+    - button: resolutiontyperight
+      - pos: 0.62, 0.71
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_right.tga
+      - onclick: options_resolutiontype_up
     - button: controls
       - pos: 0.1, 0.78
       - dim: 0.8, 0.08
@@ -111,3 +137,38 @@
       - text_color: #300206
       - text_draw_method: centered
       - onclick: options_return
+  - panel: confirmation
+    - show: 0
+    - clickable: 0
+    - layer: 3
+    - image: confirmationoverlay
+      - color: #00000000
+    - panel: confirmationbox
+      - pos: 0.35, 0.35
+      - dim: 0.3, 0.3
+      - image: confirmationbackground
+        - texture: ui/border1x1.tga
+      - text_block: confirmationtext
+        - pos: 0.05, 0.1
+        - dim: 0.9, 0.2
+        - text: "Restart to apply changes"
+        - text_font: foulfiend
+        - text_color: #e3e3e3
+        - text_size: 0.5
+      - button: confirmationreturnbutton
+        - pos: 0.1, 0.37
+        - dim: 0.8, 0.25
+        - texture: ui/border5x1.tga
+        - text: "Return"
+        - text_font: neckromancer
+        - text_color: #e3e3e3
+        - text_size: 0.7
+      - button: confirmationrestartbutton
+        - pos: 0.1, 0.64
+        - dim: 0.8, 0.25
+        - texture: ui/border5x1.tga
+        - text: "Restart"
+        - text_font: neckromancer
+        - text_color: #e3e3e3
+        - text_size: 0.7
+        - onclick: restart_game

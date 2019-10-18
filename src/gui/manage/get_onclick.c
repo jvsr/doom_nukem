@@ -27,7 +27,13 @@ static const t_onclickpair	g_onclicks[] = {
 	{"options_volume_down", options_volume_down},
 	{"options_fov_up", options_fov_up},
 	{"options_fov_down", options_fov_down},
+	{"options_resolution_up", options_resolution_up},
+	{"options_resolution_down", options_resolution_down},
+	{"options_resolutiontype_up", options_resolutiontype_down},
+	{"options_resolutiontype_down", options_resolutiontype_down},
 	{"options_return", options_return},
+
+	{"restart_game", restart_game},
 };
 
 const char	*get_onclick_name(t_onclick *onclick)

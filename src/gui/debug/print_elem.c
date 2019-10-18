@@ -30,7 +30,7 @@ static void	print_gui_elem(t_transform *elem, t_bool print_children)
 void		print_elem(t_transform *elem, t_bool print_children)
 {
 	ft_printf("%{yellow}Name: %s\nType: %s%{}\nShow: %hhd\nLayer: %hd\n\
-Pos: %.3f %.3f\nDim: %.3f %.3f\n\
+Pos: %.4f %.4f\nDim: %.4f %.4f\n\
 Has_alpha: %d\nClickable: %hhd\nOnclick: %s\n",
 	elem->name, get_gui_type_name(elem->gui_type), elem->show, elem->layer,
 	elem->pos.x, elem->pos.y, elem->dim.x, elem->dim.y,

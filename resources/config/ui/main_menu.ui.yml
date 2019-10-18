@@ -11,7 +11,7 @@
     - dim: 0.7, 0.7
     - image: background
       - texture: ui/border1x1.tga
-    - button: mapselect
+    - button: mainmenuMapselectButton
       - pos: 0.125, 0.1375
       - dim: 0.75, 0.15
       - texture: ui/border5x1.tga
@@ -20,7 +20,7 @@
       - text_size: 0.63
       - text_color: #EAEAEA
       - text_draw_method: centered
-    - button: options
+    - button: mainmenuOptionsButton
       - pos: 0.125, 0.4250
       - dim: 0.75, 0.15
       - texture: ui/border5x1.tga
@@ -30,7 +30,7 @@
       - text_color: #EAEAEA
       - text_draw_method: centered
       - onclick: mainmenu_options
-    - button: quit
+    - button: mainmenuQuitButton
       - pos: 0.125, 0.7125
       - dim: 0.75, 0.15
       - texture: ui/border5x1.tga

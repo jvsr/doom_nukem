@@ -26,9 +26,18 @@ void	options_volume_up(t_game *game, t_transform *gui);
 void	options_volume_down(t_game *game, t_transform *gui);
 void	options_fov_up(t_game *game, t_transform *gui);
 void	options_fov_down(t_game *game, t_transform *gui);
+void	options_resolution_up(t_game *game, t_transform *gui);
+void	options_resolution_down(t_game *game, t_transform *gui);
+void	options_resolutiontype_up(t_game *game, t_transform *gui);
+void	options_resolutiontype_down(t_game *game, t_transform *gui);
 void	options_return(t_game *game, t_transform *gui);
+
+void	restart_game(t_game *game, t_transform *gui);
 
 void	set_sensitivity(t_setting *setting, t_transform *parent);
 void	set_volume(t_setting *setting, t_transform *parent);
+void	set_fov(t_setting *setting, t_transform *parent);
+void	set_resolution(t_setting *setting, t_transform *parent);
+void	set_resolutiontype(t_setting *setting, t_transform *parent);
 
 #endif

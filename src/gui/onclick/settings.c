@@ -20,6 +20,23 @@ void	set_float(float setting, t_transform *location, int precision)
 		ft_strformat("%.*f", precision, setting));
 }
 
+void	set_int(int setting, t_transform *location)
+{
+	set_elem_text_str(location,
+		ft_strformat("%d", setting));
+}
+
+char	*get_resolutiontype(t_resolution_type resolution_type)
+{
+	if (resolution_type == windowed)
+		return ("Windowed");
+	else if (resolution_type == fullscreen)
+		return ("Fullscreen");
+	else if (resolution_type == fullscreen_windowed)
+		return ("Borderless");
+	return (NULL);
+}
+
 void	set_sensitivity(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->sensitivity,
@@ -32,4 +49,22 @@ void	set_volume(t_setting *setting, t_transform *parent)
 	set_float(setting->volume * 100,
 		get_elem_child(parent, "curvolume"),
 		0);
+}
+
+void	set_fov(t_setting *setting, t_transform *parent)
+{
+	set_int(setting->fov,
+		get_elem_child(parent, "curfov"));
+}
+
+void	set_resolution(t_setting *setting, t_transform *parent)
+{
+	set_elem_text_str(get_elem_child(parent, "curresolution"),
+		ft_strformat("%4d x %-4d", setting->resolution.x, setting->resolution.y));
+}
+
+void	set_resolutiontype(t_setting *setting, t_transform *parent)
+{
+	set_elem_text_str(get_elem_child(parent, "curresolutiontype"),
+		get_resolutiontype(setting->resolution_type));
 }

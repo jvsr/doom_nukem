@@ -18,34 +18,18 @@
 #include "setting.h"
 #include "gui_config.h"
 
-static char	*get_resolutiontype(t_resolution_type resolution_type)
-{
-	if (resolution_type == windowed)
-		return ("Windowed");
-	else if (resolution_type == fullscreen)
-		return ("Fullscreen");
-	else
-		return ("Borderless");
-}
-
 void		mainmenu_options(t_game *game, t_transform *gui)
 {
 	t_transform	*options_menu;
 
-	(void)gui;
-	options_menu = analyze_gui_config(game->ui, "options_menu");
+	options_menu = get_elem_child(gui->parent.elem, "options");
+	set_elem_show(options_menu, TRUE);
+	set_elem_clickable(options_menu, TRUE);
 	set_sensitivity(game->setting, options_menu);
 	set_volume(game->setting, options_menu);
-	set_elem_text_str(get_elem_child(options_menu, "curvolume"),
-		ft_strformat("%.f", game->setting->volume * 100));
-	set_elem_text_str(get_elem_child(options_menu, "curfov"),
-		ft_strformat("%d", game->setting->fov));
-	set_elem_text_str(get_elem_child(options_menu, "curresolution"),
-		ft_strformat("%d x %d", game->setting->resolution.x,
-			game->setting->resolution.y));
-	set_elem_text_str(get_elem_child(options_menu, "curresolutiontype"),
-		get_resolutiontype(game->setting->resolution_type));
-	add_elem_child(get_gui_child(game->ui, "mainmenu"), options_menu);
+	set_fov(game->setting, options_menu);
+	set_resolution(game->setting, options_menu);
+	set_resolutiontype(game->setting, options_menu);
 }
 
 void	mainmenu_quit(t_game *game, t_transform *gui)

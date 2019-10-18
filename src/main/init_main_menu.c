@@ -21,8 +21,11 @@
 void	init_main_menu(t_game *game, t_bool *is_loaded)
 {
 	t_transform	*main_menu;
+	t_transform	*options_menu;
 
 	main_menu = analyze_gui_config(game->ui, "main_menu");
+	options_menu = analyze_gui_config(game->ui, "options_menu");
 	add_gui_child(game->ui, main_menu);
+	add_elem_child(main_menu, options_menu);
 	*is_loaded = TRUE;
 }
