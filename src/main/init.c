@@ -26,6 +26,9 @@
 #include "gametime.h"
 #include "audio.h"
 #include "tga.h"
+#include "serializer.h"
+
+#include <fcntl.h>
 
 static void		init_sdl(void)
 {
@@ -68,18 +71,26 @@ static void		init_game(t_game *game)
 
 static void		init_settings(t_game *game)
 {
+	int			fd;
 	t_setting	*setting;
 
 	setting = (t_setting *)ft_memalloc(sizeof(t_setting));
 	if (setting == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc settings");
-	setting->sensitivity = 1.0;
-	setting->volume = 0.8;
-	setting->fov = 75;
-	setting->resolution.x = INIT_WIDTH;
-	setting->resolution.y = INIT_HEIGHT;
-	setting->resolution_type = windowed;
-	game->setting = setting;
+	fd = open("./resources/data/settings/settings.conf", O_RDONLY);
+	if (fd == -1)
+	{
+		setting->sensitivity = 1.0;
+		setting->volume = 0.8;
+		setting->fov = 75;
+		setting->resolution.x = INIT_WIDTH;
+		setting->resolution.y = INIT_HEIGHT;
+		setting->resolution_type = windowed;
+		game->setting = setting;
+		return ;
+	}
+	close(fd);
+	game->setting = read_settings();
 }
 
 t_game			*init(void)
