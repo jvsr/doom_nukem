@@ -1,0 +1,26 @@
+- panel: selectlevel
+  - image: background
+    - colour: #bb0a1e
+  - panel: menu
+    - pos: 0.15, 0.1
+    - dim: 0.7, 0.8
+    - image: background
+      - texture: ui/border1x1.tga
+  - button: campaignButton
+    - pos: 0.21, 0.07
+    - dim: 0.2, 0.1
+    - texture: ui/border5x1.tga
+    - text: "Campaign"
+    - text_font: foulfiend
+    - text_size: 0.5
+    - text_color: #E3E3E3
+    - text_draw_method: centered
+  - button: customButton
+    - pos: 0.41, 0.07
+    - dim: 0.2, 0.1
+    - texture: ui/border5x1.tga
+    - text: "Custom"
+    - text_font: foulfiend
+    - text_size: 0.5
+    - text_color: #E3E3E3
+    - text_draw_method: centered
