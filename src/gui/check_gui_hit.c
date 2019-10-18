@@ -36,11 +36,11 @@ static t_transform	*check_children(SDL_Point *pos, t_transform *elem)
 	next_hit = check_children(pos, elem->next);
 	if (next_hit != NULL)
 		return (next_hit);
-	if (is_hit(pos, elem))
+	if (elem->clickable && is_hit(pos, elem))
 	{
 		if (elem->gui_type == PANEL)
 			return (check_children(pos, elem->gui_elem.panel->children));
-		else if (elem->clickable)
+		else
 			return (elem);
 	}
 	return (NULL);
