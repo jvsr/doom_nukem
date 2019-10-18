@@ -45,7 +45,7 @@ t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)
 	new->redraw = TRUE;
 	new->gui_type = type;
 	new->has_alpha = (type == TEXT);
-	new->clickable = (type != PANEL);
+	new->clickable = TRUE;
 	new->parent_type = -1;
 	ft_memcpy(&new->dim, &(t_coord){1, 1}, sizeof(t_coord));
 	new_gui_elem(ui, type, &new->gui_elem);
