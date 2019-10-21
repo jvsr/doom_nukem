@@ -17,14 +17,16 @@
 #include "gui_internal.h"
 
 static const t_onclickpair	g_onclicks[] = {
-	{"mainmenu_missions", NULL},
+	{"mainmenu_missions", mainmenu_missions},
 	{"mainmenu_options", mainmenu_options},
 	{"mainmenu_quit", mainmenu_quit},
 
 	{"options_sensitivity_up", options_sensitivity_up},
 	{"options_sensitivity_down", options_sensitivity_down},
-	{"options_volume_up", options_volume_up},
-	{"options_volume_down", options_volume_down},
+	{"options_music_volume_up", options_music_volume_up},
+	{"options_music_volume_down", options_music_volume_down},
+	{"options_sound_volume_up", options_sound_volume_up},
+	{"options_sound_volume_down", options_sound_volume_down},
 	{"options_fov_up", options_fov_up},
 	{"options_fov_down", options_fov_down},
 	{"options_resolution_up", options_resolution_up},

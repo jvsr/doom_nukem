@@ -14,22 +14,27 @@
 
 #include "gui.h"
 
-t_transform		*get_elem_child(t_transform *elem, const char *name)
+static t_transform	*get_child(t_transform *child, const char *name)
 {
 	t_transform	*found;
-	t_transform	*cur;
 
-	cur = elem;
 	found = NULL;
-	while (cur != NULL)
+	while (child != NULL)
 	{
-		if (ft_strequ(cur->name, name))
-			return (cur);
-		if (cur->gui_type == PANEL)
-			found = get_elem_child(cur->gui_elem.panel->children, name);
+		if (ft_strequ(child->name, name))
+			return (child);
+		if (child->gui_type == PANEL)
+			found = get_child(child->gui_elem.panel->children, name);
 		if (found != NULL)
 			return (found);
-		cur = cur->next;
+		child = child->next;
 	}
 	return (NULL);
+}
+
+t_transform			*get_elem_child(t_transform *elem, const char *name)
+{
+	if (elem->gui_type != PANEL)
+		return (NULL);
+	return (get_child(elem->gui_elem.panel->children, name));
 }

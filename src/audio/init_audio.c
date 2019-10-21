@@ -14,6 +14,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "libft/ft_mem.h"
 #include "game.h"
+#include "setting.h"
 #include "audio.h"
 #include "error.h"
 
@@ -30,4 +31,6 @@ void	init_audio(t_game *game)
 	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
 	if (!(support & MIX_INIT_MP3))
 		error_msg_sdl(EIO, "Failed to init Audio Mixer");
+	set_sound_volume(game->setting->sound_volume);
+	set_music_volume(game->setting->music_volume);
 }

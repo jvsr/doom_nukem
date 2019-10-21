@@ -42,21 +42,51 @@
       - text_font: foulfiend
       - text_color: #EAEAEA
       - text: "Volume"
-    - text_block: curvolume
-      - pos: 0.4, 0.24
+
+    - text_block: musicvolume
+      - pos: 0.15, 0.237
+      - dim: 0.1, 0.08
+      - text_size: 0.5
+      - text_font: neckromancer
+      - text: "Music"
+    - text_block: curmusicvolume
+      - pos: 0.25, 0.24
       - dim: 0.2, 0.08
       - text_size: 0.6
       - text_font: neckromancer
     - button: volumeleft
-      - pos: 0.42, 0.262
+      - pos: 0.27, 0.262
       - dim: 0.03, 0.0345
       - texture: ui/arrow_left.tga
-      - onclick: options_volume_down
+      - onclick: options_music_volume_down
     - button: volumeright
-      - pos: 0.55, 0.262
+      - pos: 0.40, 0.262
       - dim: 0.03, 0.0345
       - texture: ui/arrow_right.tga
-      - onclick: options_volume_up
+      - onclick: options_music_volume_up
+
+    - text_block: soundvolume
+      - pos: 0.55, 0.237
+      - dim: 0.1, 0.08
+      - text_size: 0.5
+      - text_font: neckromancer
+      - text: "Sound"
+    - text_block: cursoundvolume
+      - pos: 0.65, 0.24
+      - dim: 0.2, 0.08
+      - text_size: 0.6
+      - text_font: neckromancer
+    - button: soundvolumeleft
+      - pos: 0.67, 0.262
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_left.tga
+      - onclick: options_sound_volume_down
+    - button: soundvolumeright
+      - pos: 0.80, 0.262
+      - dim: 0.03, 0.0345
+      - texture: ui/arrow_right.tga
+      - onclick: options_sound_volume_up
+
     - text_block: fov
       - pos: 0.1, 0.32
       - dim: 0.8, 0.08

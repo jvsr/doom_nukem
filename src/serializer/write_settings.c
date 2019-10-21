@@ -19,7 +19,8 @@ void	write_settings(t_setting *settings)
 
 	bin = new_binary();
 	add_float(settings->sensitivity, bin);
-	add_float(settings->volume, bin);
+	add_float(settings->music_volume, bin);
+	add_float(settings->sound_volume, bin);
 	add_short(settings->fov, bin);
 	add_int(settings->resolution.x, bin);
 	add_int(settings->resolution.y, bin);

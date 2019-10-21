@@ -44,10 +44,17 @@ void	set_sensitivity(t_setting *setting, t_transform *parent)
 		1);
 }
 
-void	set_volume(t_setting *setting, t_transform *parent)
+void	set_music(t_setting *setting, t_transform *parent)
 {
-	set_float(setting->volume * 100,
-		get_elem_child(parent, "curvolume"),
+	set_float(setting->music_volume * 100,
+		get_elem_child(parent, "curmusicvolume"),
+		0);
+}
+
+void	set_sound(t_setting *setting, t_transform *parent)
+{
+	set_float(setting->sound_volume * 100,
+		get_elem_child(parent, "cursoundvolume"),
 		0);
 }
 
@@ -63,7 +70,7 @@ void	set_resolution(t_setting *setting, t_transform *parent)
 		ft_strformat("%4d x %-4d", setting->resolution.x, setting->resolution.y));
 }
 
-void	set_resolutiontype(t_setting *setting, t_transform *parent)
+void	set_resolution_type(t_setting *setting, t_transform *parent)
 {
 	set_elem_text_str(get_elem_child(parent, "curresolutiontype"),
 		get_resolutiontype(setting->resolution_type));

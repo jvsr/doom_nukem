@@ -22,6 +22,8 @@
 #include "gui_config.h"
 #include "serializer.h"
 
+#include "audio.h"
+
 void	incr_float_max(float *loc, float incr, float max)
 {
 	*loc += incr;
@@ -108,7 +110,7 @@ void	decr_game_resolution(SDL_Point *resolution)
 	}
 }
 
-void	incr_game_resolutiontype(t_resolution_type *resolution_type)
+void	incr_game_resolution_type(t_resolution_type *resolution_type)
 {
 	if (*resolution_type == windowed)
 		*resolution_type = fullscreen_windowed;
@@ -118,7 +120,7 @@ void	incr_game_resolutiontype(t_resolution_type *resolution_type)
 		*resolution_type = windowed;
 }
 
-void	decr_game_resolutiontype(t_resolution_type *resolution_type)
+void	decr_game_resolution_type(t_resolution_type *resolution_type)
 {
 	if (*resolution_type == fullscreen)
 		*resolution_type = fullscreen_windowed;
@@ -143,18 +145,44 @@ void	options_sensitivity_down(t_game *game, t_transform *gui)
 	set_sensitivity(game->setting, gui->parent.elem);
 }
 
-void	options_volume_up(t_game *game, t_transform *gui)
+void	options_music_volume_up(t_game *game, t_transform *gui)
 {
 	game->setting->changed = TRUE;
-	incr_float_max(&game->setting->volume, 0.1, 1.0);
-	set_volume(game->setting, gui->parent.elem);
+	incr_float_max(&game->setting->music_volume, 0.1, 1.0);
+	set_music(game->setting, gui->parent.elem);
+	set_music_volume(game->setting->music_volume);
+	pause_music();
+	resume_music();
 }
 
-void	options_volume_down(t_game *game, t_transform *gui)
+void	options_music_volume_down(t_game *game, t_transform *gui)
 {
 	game->setting->changed = TRUE;
-	decr_float_min(&game->setting->volume, 0.1, 0.0);
-	set_volume(game->setting, gui->parent.elem);
+	decr_float_min(&game->setting->music_volume, 0.1, 0.0);
+	set_music(game->setting, gui->parent.elem);
+	set_music_volume(game->setting->music_volume);
+	pause_music();
+	resume_music();
+}
+
+void	options_sound_volume_up(t_game *game, t_transform *gui)
+{
+	game->setting->changed = TRUE;
+	incr_float_max(&game->setting->sound_volume, 0.1, 1.0);
+	set_sound(game->setting, gui->parent.elem);
+	set_sound_volume(game->setting->sound_volume);
+	pause_all_sounds();
+	resume_all_sounds();
+}
+
+void	options_sound_volume_down(t_game *game, t_transform *gui)
+{
+	game->setting->changed = TRUE;
+	decr_float_min(&game->setting->sound_volume, 0.1, 0.0);
+	set_sound(game->setting, gui->parent.elem);
+	set_sound_volume(game->setting->sound_volume);
+	pause_all_sounds();
+	resume_all_sounds();
 }
 
 void	options_fov_up(t_game *game, t_transform *gui)
@@ -188,15 +216,15 @@ void	options_resolution_down(t_game *game, t_transform *gui)
 void	options_resolutiontype_up(t_game *game, t_transform *gui)
 {
 	game->setting->confirm = TRUE;
-	incr_game_resolutiontype(&game->setting->resolution_type);
-	set_resolutiontype(game->setting, gui->parent.elem);
+	incr_game_resolution_type(&game->setting->resolution_type);
+	set_resolution_type(game->setting, gui->parent.elem);
 }
 
 void	options_resolutiontype_down(t_game *game, t_transform *gui)
 {
 	game->setting->confirm = TRUE;
-	decr_game_resolutiontype(&game->setting->resolution_type);
-	set_resolutiontype(game->setting, gui->parent.elem);
+	decr_game_resolution_type(&game->setting->resolution_type);
+	set_resolution_type(game->setting, gui->parent.elem);
 }
 
 void	add_confirmation(t_game *game)
