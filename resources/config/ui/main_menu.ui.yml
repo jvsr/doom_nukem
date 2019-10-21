@@ -20,6 +20,7 @@
       - text_size: 0.63
       - text_color: #EAEAEA
       - text_draw_method: centered
+      - onclick: mainmenu_missions
     - button: mainmenuOptionsButton
       - pos: 0.125, 0.4250
       - dim: 0.75, 0.15

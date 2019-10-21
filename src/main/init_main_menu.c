@@ -30,5 +30,6 @@ void	init_main_menu(t_game *game, t_bool *is_loaded)
 	add_elem_child(main_menu, options_menu);
 	add_elem_child(main_menu, select_level);
 	add_gui_child(game->ui, main_menu);
+	// print_elem(main_menu, TRUE);
 	*is_loaded = TRUE;
 }
