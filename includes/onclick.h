@@ -32,6 +32,8 @@ void	options_resolutiontype_up(t_game *game, t_transform *gui);
 void	options_resolutiontype_down(t_game *game, t_transform *gui);
 void	options_return(t_game *game, t_transform *gui);
 
+void	confirmation_return(t_game *game, t_transform *gui);
+
 void	restart_game(t_game *game, t_transform *gui);
 
 void	set_sensitivity(t_setting *setting, t_transform *parent);

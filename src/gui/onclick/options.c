@@ -130,6 +130,7 @@ void	decr_game_resolutiontype(t_resolution_type *resolution_type)
 
 void	options_sensitivity_up(t_game *game, t_transform *gui)
 {
+	game->setting->changed = TRUE;
 	print_elem(gui, FALSE);
 	incr_float_max(&game->setting->sensitivity, 0.1, 3.0);
 	set_sensitivity(game->setting, gui->parent.elem);
@@ -137,67 +138,120 @@ void	options_sensitivity_up(t_game *game, t_transform *gui)
 
 void	options_sensitivity_down(t_game *game, t_transform *gui)
 {
+	game->setting->changed = TRUE;
 	decr_float_min(&game->setting->sensitivity, 0.1, 0.1);
 	set_sensitivity(game->setting, gui->parent.elem);
 }
 
 void	options_volume_up(t_game *game, t_transform *gui)
 {
+	game->setting->changed = TRUE;
 	incr_float_max(&game->setting->volume, 0.1, 1.0);
 	set_volume(game->setting, gui->parent.elem);
 }
 
 void	options_volume_down(t_game *game, t_transform *gui)
 {
+	game->setting->changed = TRUE;
 	decr_float_min(&game->setting->volume, 0.1, 0.0);
 	set_volume(game->setting, gui->parent.elem);
 }
 
 void	options_fov_up(t_game *game, t_transform *gui)
 {
+	game->setting->changed = TRUE;
 	incr_uint16_max(&game->setting->fov, 5, 110);
 	set_fov(game->setting, gui->parent.elem);
 }
 
 void	options_fov_down(t_game *game, t_transform *gui)
 {
+	game->setting->changed = TRUE;
 	decr_uint16_min(&game->setting->fov, 5, 45);
 	set_fov(game->setting, gui->parent.elem);
 }
 
 void	options_resolution_up(t_game *game, t_transform *gui)
 {
+	game->setting->confirm = TRUE;
 	incr_game_resolution(&game->setting->resolution);
 	set_resolution(game->setting, gui->parent.elem);
 }
 
 void	options_resolution_down(t_game *game, t_transform *gui)
 {
+	game->setting->confirm = TRUE;
 	decr_game_resolution(&game->setting->resolution);
 	set_resolution(game->setting, gui->parent.elem);
 }
 
 void	options_resolutiontype_up(t_game *game, t_transform *gui)
 {
+	game->setting->confirm = TRUE;
 	incr_game_resolutiontype(&game->setting->resolution_type);
 	set_resolutiontype(game->setting, gui->parent.elem);
 }
 
 void	options_resolutiontype_down(t_game *game, t_transform *gui)
 {
+	game->setting->confirm = TRUE;
 	decr_game_resolutiontype(&game->setting->resolution_type);
 	set_resolutiontype(game->setting, gui->parent.elem);
 }
 
+void	add_confirmation(t_game *game)
+{
+	t_transform	*menu;
+	t_transform	*overlay;
+
+	menu = get_gui_child(game->ui, "confirmationmenu");
+	overlay = get_gui_child(game->ui, "confirmationoverlay");
+	set_elem_show_clickable(menu, TRUE);
+	set_elem_show_clickable(overlay, TRUE);
+}
+
+void	remove_confirmation(t_game *game)
+{
+	t_transform	*menu;
+	t_transform	*overlay;
+
+	menu = get_gui_child(game->ui, "confirmationmenu");
+	overlay = get_gui_child(game->ui, "confirmationoverlay");
+	set_elem_show_clickable(menu, FALSE);
+	set_elem_show_clickable(overlay, FALSE);
+}
+
+void	remove_options(t_game *game)
+{
+	t_transform	*menu;
+	t_transform	*overlay;
+
+	menu = get_gui_child(game->ui, "optionsmenu");
+	overlay = get_gui_child(game->ui, "optionsoverlay");
+	set_elem_show_clickable(menu, FALSE);
+	set_elem_show_clickable(overlay, FALSE);
+}
+
 void	options_return(t_game *game, t_transform *gui)
 {
-	t_transform	*confirmation;
-
 	(void)gui;
-	write_settings(game->setting);
-	confirmation = get_gui_child(game->ui, "confirmation");
-	set_elem_show(confirmation, TRUE);
-	set_elem_clickable(confirmation, TRUE);
+	if (game->setting->changed == TRUE || game->setting->confirm == TRUE)
+	{
+		write_settings(game->setting);
+		if (game->setting->confirm == TRUE)
+			add_confirmation(game);
+	}
+	if (game->setting->confirm == FALSE)
+		remove_options(game);
+	game->setting->changed = FALSE;
+	game->setting->confirm = FALSE;
+}
+
+void	confirmation_return(t_game *game, t_transform *gui)
+{
+	(void)gui;
+	remove_confirmation(game);
+	remove_options(game);
 }
 
 void	restart_game(t_game *game, t_transform *gui)

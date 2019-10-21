@@ -21,10 +21,12 @@
 void		mainmenu_options(t_game *game, t_transform *gui)
 {
 	t_transform	*options_menu;
+	t_transform	*options_overlay;
 
-	options_menu = get_elem_child(gui->parent.elem, "options");
-	set_elem_show(options_menu, TRUE);
-	set_elem_clickable(options_menu, TRUE);
+	options_menu = get_elem_child(gui->parent.elem, "optionsmenu");
+	options_overlay = get_elem_child(gui->parent.elem, "optionsoverlay");
+	set_elem_show_clickable(options_menu, TRUE);
+	set_elem_show_clickable(options_overlay, TRUE);
 	set_sensitivity(game->setting, options_menu);
 	set_volume(game->setting, options_menu);
 	set_fov(game->setting, options_menu);

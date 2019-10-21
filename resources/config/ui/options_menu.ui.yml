@@ -1,11 +1,13 @@
 - panel: options
-  - show: 0
-  - clickable: 0
   - layer: 1
-  - image: overlay
+  - image: optionsoverlay
+    - show: 0
+    - clickable: 0
     - color: #26020699
     - layer: 1
-  - panel: menu
+  - panel: optionsmenu
+    - show: 0
+    - clickable: 0
     - pos: 0.25, 0.05
     - dim: 0.5, 0.9
     - layer: 2
@@ -124,20 +126,21 @@
     - button: controls
       - pos: 0.1, 0.78
       - dim: 0.8, 0.08
-      - text_size: 0.6
+      - text_size: 0.5
       - text: "Controls"
       - text_font: foulfiend
-      - text_color: #300206
+      - text_color: #EAEAEA
+      - texture: ui/border5x1.tga
     - button: return
       - pos: 0.1, 0.88
       - dim: 0.8, 0.08
-      - text_size: 0.6
+      - text_size: 0.5
       - text: "Return"
       - text_font: foulfiend
-      - text_color: #300206
-      - text_draw_method: centered
+      - text_color: #EAEAEA
       - onclick: options_return
-  - panel: confirmation
+      - texture: ui/border5x1.tga
+  - panel: confirmationmenu
     - show: 0
     - clickable: 0
     - layer: 3
@@ -163,6 +166,7 @@
         - text_font: neckromancer
         - text_color: #e3e3e3
         - text_size: 0.7
+        - onclick: confirmation_return
       - button: confirmationrestartbutton
         - pos: 0.1, 0.64
         - dim: 0.8, 0.25

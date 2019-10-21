@@ -17,6 +17,7 @@
 # include <SDL2/SDL_keycode.h>
 
 # include "types.h"
+# include "libft/ft_bool.h"
 
 typedef enum	e_resolution_type
 {
@@ -45,6 +46,8 @@ typedef struct	s_setting
 	SDL_Point			resolution;
 	t_resolution_type	resolution_type;
 	t_control			controls;
+	t_bool				changed;
+	t_bool				confirm;
 }				t_setting;
 
 #endif

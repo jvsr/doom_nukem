@@ -48,14 +48,30 @@ static t_game	*alloc_game(void)
 	return (game);
 }
 
-static	void	init_window_surface(t_game *game)
+static uint32_t	create_window_flags(t_setting *setting)
 {
+	uint32_t	flags;
+
+	flags = 0;
+	flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+	flags |= SDL_WINDOW_MOUSE_FOCUS;
+	if (setting->resolution_type == fullscreen_windowed)
+		flags |= SDL_WINDOW_BORDERLESS;
+	else if (setting->resolution_type == fullscreen)
+		flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+	return (flags);
+}
+
+static void	init_window_surface(t_game *game)
+{
+	const uint32_t flags = create_window_flags(game->setting);
+
 	game->window = SDL_CreateWindow("Doom Nukem",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		game->setting->resolution.x,
 		game->setting->resolution.y,
-		SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MOUSE_FOCUS);
+		flags);
 	if (game->window == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc game window");
 	game->surface = SDL_GetWindowSurface(game->window);

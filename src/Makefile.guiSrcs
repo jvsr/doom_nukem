@@ -75,6 +75,7 @@ MANAGE_SRCS = add_gui_child \
 		set_elem_pos \
 		set_elem_redraw \
 		set_elem_show \
+		set_elem_show_clickable \
 		set_elem_text_color \
 		set_elem_text_draw_method \
 		set_elem_text_font \
