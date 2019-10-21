@@ -26,6 +26,7 @@ typedef struct s_game		t_game;
 
 typedef enum	e_music
 {
+	MUSIC_LONELY_TROUTMAN,
 	MUSIC_ASKING_QUESTIONS,
 	MUSIC_COUNT
 }				t_music;

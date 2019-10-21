@@ -18,6 +18,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "audio.h"
 #include "keymap.h"
 
 static void		check_quit(t_game *game, SDL_Event event)
@@ -56,10 +57,17 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		print_keymap(game->keymap);
 }
 
+static void		play_title_song(t_game *game)
+{
+	play_music(game->audio_man, MUSIC_LONELY_TROUTMAN);
+}
+
 void			loop(t_game *game)
 {
 	SDL_Event	event;
 
+	load_audio(game);
+	play_title_song(game);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
