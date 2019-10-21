@@ -40,6 +40,7 @@ static void	loadmusic(t_game *game)
 	files = (char *[]){
 		"lonely_troutman_ii.mp3",
 		"asking_questions.mp3",
+		"hit_n_smash.mp3",
 	};
 	index = 0;
 	while (index < MUSIC_COUNT)

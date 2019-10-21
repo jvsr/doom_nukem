@@ -59,7 +59,7 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 
 static void		play_title_song(t_game *game)
 {
-	play_music(game->audio_man, MUSIC_LONELY_TROUTMAN);
+	play_music(game->audio_man, MUSIC_HIT_N_SMASH);
 }
 
 void			loop(t_game *game)

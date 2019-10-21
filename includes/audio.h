@@ -28,6 +28,7 @@ typedef enum	e_music
 {
 	MUSIC_LONELY_TROUTMAN,
 	MUSIC_ASKING_QUESTIONS,
+	MUSIC_HIT_N_SMASH,
 	MUSIC_COUNT
 }				t_music;
 
