@@ -102,7 +102,7 @@ static void		init_settings(t_game *game)
 		setting->fov = 75;
 		setting->resolution.x = INIT_WIDTH;
 		setting->resolution.y = INIT_HEIGHT;
-		setting->resolution_type = windowed;
+		setting->resolution_type = fullscreen;
 		game->setting = setting;
 		return ;
 	}
