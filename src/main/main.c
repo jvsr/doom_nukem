@@ -24,7 +24,7 @@ int	main(void)
 	isloaded = FALSE;
 	game = init();
 	sdl_new_thread("mainmenu", init_main_menu, 2, game, &isloaded);
-	// splash(game, &isloaded, "splash/splash");
+	splash(game, &isloaded, "splash/splash");
 	loop(game);
 	return (quit(game));
 }
