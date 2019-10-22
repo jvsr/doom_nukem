@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 14:27:39 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/16 14:27:39 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/22 18:40:23 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,15 @@ void	restart_game(t_game *game, t_transform *gui)
 	(void)gui;
 	(void)game;
 	execve("./doom-nukem", newargv, NULL);
+}
+
+void	options_open_controls(t_game *game, t_transform *gui)
+{
+	t_transform	*controls;
+
+	(void)gui;
+	controls = get_gui_child(game->ui, "controls");
+	set_elem_show_clickable(controls, TRUE);
 }
 
 /*

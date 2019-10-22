@@ -18,7 +18,8 @@ PREFIX =
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 ONCLICK_SRCS = mainmenu \
 				options \
-				settings
+				settings \
+				mission
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \

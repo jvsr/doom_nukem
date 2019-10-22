@@ -4,13 +4,13 @@
     - show: 0
     - clickable: 0
     - color: #26020699
-    - layer: 1
+    - layer: 0
   - panel: optionsmenu
     - show: 0
     - clickable: 0
     - pos: 0.25, 0.05
     - dim: 0.5, 0.9
-    - layer: 2
+    - layer: 1
     - image: background
       - texture: ui/border5x9.tga
     - text_block: sensitivity
@@ -153,7 +153,7 @@
       - dim: 0.03, 0.0345
       - texture: ui/arrow_right.tga
       - onclick: options_resolutiontype_up
-    - button: controls
+    - button: optionscontrolsbutton
       - pos: 0.1, 0.78
       - dim: 0.8, 0.08
       - text_size: 0.5
@@ -161,7 +161,8 @@
       - text_font: foulfiend
       - text_color: #EAEAEA
       - texture: ui/border5x1.tga
-    - button: return
+      - onclick: options_open_controls
+    - button: optionsreturnbutton
       - pos: 0.1, 0.88
       - dim: 0.8, 0.08
       - text_size: 0.5
@@ -173,7 +174,7 @@
   - panel: confirmationmenu
     - show: 0
     - clickable: 0
-    - layer: 3
+    - layer: 2
     - image: confirmationoverlay
       - color: #00000000
     - panel: confirmationbox

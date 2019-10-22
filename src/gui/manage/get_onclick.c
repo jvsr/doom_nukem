@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/07 17:27:29 by pholster      ########   odam.nl         */
+/*   Updated: 2019/10/22 18:02:38 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ static const t_onclickpair	g_onclicks[] = {
 	{"options_resolution_down", options_resolution_down},
 	{"options_resolutiontype_up", options_resolutiontype_up},
 	{"options_resolutiontype_down", options_resolutiontype_down},
+	{"options_open_controls", options_open_controls},
 	{"options_return", options_return},
+
+	{"missions_focus_campaign", missions_focus_campaign},
+	{"missions_focus_custom", missions_focus_custom},
+	{"mission_return", mission_return},
 
 	{"confirmation_return", confirmation_return},
 
