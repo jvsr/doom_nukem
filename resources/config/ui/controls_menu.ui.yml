@@ -1,0 +1,13 @@
+- panel: controls
+  - show: 0
+  - clickable: 0
+  - layer: 2
+  - image: controlsoverlay
+    - color: #00000000
+    - layer: 0
+  - panel: controlsmenu
+    - pos: 0.1, 0.1
+    - dim: 0.8, 0.8
+    - layer: 1
+    - image: background
+      - texture: ui/border1x1.tga
