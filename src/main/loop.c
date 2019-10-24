@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 17:18:06 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 17:12:54 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void			loop(t_game *game)
 			check_ui_click(game, event);
 			manage_keymap(game, event);
 		}
-		render_3d(NULL);
 		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);
 	}

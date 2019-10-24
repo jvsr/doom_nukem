@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/25 15:39:48 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/10/24 17:26:59 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@
 #include "game.h"
 #include "init.h"
 #include "audio.h"
+#include "sdl_thread.h"
 
 int			main(void)
 {
-	t_game *game;
-	t_bool isloaded;
+	t_game 		*game;
+	t_bool 		isloaded;
+	SDL_Thread *thread;
 
-	isloaded = TRUE;
+	isloaded = FALSE;
 	game = init();
+	thread = sdl_new_thread("loader", loader, 2, game, &isloaded);
 	splash(game, &isloaded, "splash/splash");
 	loop(game);
 	return (quit(game));

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/10 14:55:04 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/10/24 16:49:48 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,11 @@ typedef enum				e_endian
 	ENDIAN_BIG,
 	ENDIAN_LITTLE
 }							t_endian;
+
+typedef enum				e_texture
+{
+	TEXTURE_BRICK_WALL,
+	TEXTURE_COUNT
+}							t_texture;
 
 #endif

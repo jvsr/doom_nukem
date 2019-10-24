@@ -6,13 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:14:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 12:00:02 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 17:00:53 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 
+# include "libft/ft_mem.h"
 # include "types.h"
 # include "coord.h"
 # include "audio.h"
@@ -20,7 +21,9 @@
 # define WALL_TEXTURE_SIDES	2
 # define ENEMY_MOVE_ANGLES	6
 
-typedef	t_uint64	t_time64;
+typedef	t_uint64		t_time64;
+typedef struct s_list	t_list;
+
 /* 
 typedef struct	s_anim
 {
@@ -132,19 +135,35 @@ typedef struct	s_sector
 	t_uint8		z_ceiling; //ABS
 }				t_sector;
 */
+
+typedef struct	s_wall
+{
+	t_uint32	sector_portal;
+	t_coord		texture_size;
+	t_texture	texture;
+}				t_wall;
+
+typedef struct	s_sector
+{
+	t_uint32 sector_id;
+	t_uint32 startwall;
+	t_uint32 wallcount;
+}				t_sector;
+
+
 typedef struct	s_level
 {
-	// *f			init;
+	// *f		init;
 	//t_win_args	*win_arg;
 	t_coord		player_start_pos;
 	t_uint16	player_start_angle;
-	//t_enemy		*all_enemy; //Keep linked list to allow spawning while in level
-	t_uint16	num_sector;
-	//t_sector	**all_sector;
-	t_uint16	num_wall;
-	//t_wall		**all_wall;
-	t_uint16	num_object;
+	//t_enemy	*all_enemy; //Keep linked list to allow spawning while in level
+	//t_uint16	num_object;
 	//t_object	*all_object;
+	t_uint32	sector_count;
+	t_uint32	wall_count;
+	t_wall		**sectors;
+	t_sector	**walls;
 }				t_level;
 
 #endif
