@@ -6,12 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/22 18:05:33 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:23:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ONCLICK_H
 # define ONCLICK_H
+
+# include "types.h"
 
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
@@ -51,5 +53,16 @@ void	set_sound(t_setting *setting, t_transform *parent);
 void	set_fov(t_setting *setting, t_transform *parent);
 void	set_resolution(t_setting *setting, t_transform *parent);
 void	set_resolution_type(t_setting *setting, t_transform *parent);
+
+void	set_int(int setting, t_transform *location);
+void	set_float(float setting, t_transform *location, int precision);
+void	incr_float_max(float *loc, float incr, float max);
+void	decr_float_min(float *loc, float decr, float min);
+void	incr_uint16_max(t_uint16 *loc, t_uint16 incr, t_uint16 max);
+void	decr_uint16_min(t_uint16 *loc, t_uint16 decr, t_uint16 min);
+
+void	remove_options(t_game *game);
+void	add_confirmation(t_game *game);
+void	remove_confirmation(t_game *game);
 
 #endif

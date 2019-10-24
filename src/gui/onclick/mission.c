@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/22 16:13:28 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/22 16:56:55 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:18:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void remove_mission(t_game *game)
 	set_elem_show_clickable(elem, FALSE);
 }
 
-void	switch_focus(t_transform *focus, t_transform *no_focus)
+static void	switch_focus(t_transform *focus, t_transform *no_focus)
 {
 	set_elem_layer(focus, 4);
 	set_elem_layer(no_focus, 3);

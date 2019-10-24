@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:02:43 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/15 17:02:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 13:52:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,17 @@
 
 void	mainmenu_missions(t_game *game, t_transform *gui)
 {
-	t_transform	*missions_menu;
-	t_transform	*missions_overlay;
-	t_transform	*missions_campaign;
-	t_transform	*missions_custom;
+	t_transform	*elem;
 
 	(void)gui;
-	missions_menu = get_gui_child(game->ui, "missionsmenu");
-	missions_overlay = get_gui_child(game->ui, "missionsoverlay");
-	missions_campaign = get_gui_child(game->ui, "missionscampaignbutton");
-	missions_custom = get_gui_child(game->ui, "missionscustombutton");
-	set_elem_show_clickable(missions_menu, TRUE);
-	set_elem_show_clickable(missions_overlay, TRUE);
-	set_elem_show_clickable(missions_campaign, TRUE);
-	set_elem_show_clickable(missions_custom, TRUE);
+	elem = get_gui_child(game->ui, "missionsmenu");
+	set_elem_show_clickable(elem, TRUE);
+	elem = get_gui_child(game->ui, "missionsoverlay");
+	set_elem_show_clickable(elem, TRUE);
+	elem = get_gui_child(game->ui, "missionscampaignbutton");
+	set_elem_show_clickable(elem, TRUE);
+	elem = get_gui_child(game->ui, "missionscustombutton");
+	set_elem_show_clickable(elem, TRUE);
 }
 
 void	mainmenu_options(t_game *game, t_transform *gui)

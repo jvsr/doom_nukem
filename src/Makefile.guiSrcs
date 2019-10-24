@@ -18,8 +18,15 @@ PREFIX =
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 ONCLICK_SRCS = mainmenu \
 				options \
-				settings \
-				mission
+				mission \
+				fov \
+				music \
+				resolution_type \
+				resolution \
+				sensitivity \
+				sound \
+				utils \
+				confirmation
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \

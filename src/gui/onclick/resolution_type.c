@@ -1,0 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   resolution_type.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/10/24 13:45:36 by jvisser        #+#    #+#                */
+/*   Updated: 2019/10/24 15:10:28 by jvisser       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft/ft_str.h"
+
+#include "gui.h"
+#include "game.h"
+#include "onclick.h"
+#include "setting.h"
+
+static char	*get_resolution_type(t_resolution_type resolution_type)
+{
+	if (resolution_type == windowed)
+		return ("Windowed");
+	else if (resolution_type == fullscreen)
+		return ("Fullscreen");
+	else if (resolution_type == fullscreen_windowed)
+		return ("Borderless");
+	return (NULL);
+}
+
+void	set_resolution_type(t_setting *setting, t_transform *parent)
+{
+	set_elem_text_str(get_elem_child(parent, "curresolutiontype"),
+		get_resolution_type(setting->resolution_type));
+}
+
+void	incr_game_resolution_type(t_resolution_type *resolution_type)
+{
+	if (*resolution_type == windowed)
+		*resolution_type = fullscreen_windowed;
+	else if (*resolution_type == fullscreen_windowed)
+		*resolution_type = fullscreen;
+	else if (*resolution_type == fullscreen)
+		*resolution_type = windowed;
+}
+
+void	decr_game_resolution_type(t_resolution_type *resolution_type)
+{
+	if (*resolution_type == fullscreen)
+		*resolution_type = fullscreen_windowed;
+	else if (*resolution_type == fullscreen_windowed)
+		*resolution_type = windowed;
+	else if (*resolution_type == windowed)
+		*resolution_type = fullscreen;
+}
+
+void	options_resolutiontype_up(t_game *game, t_transform *gui)
+{
+	game->setting->confirm = TRUE;
+	incr_game_resolution_type(&game->setting->resolution_type);
+	set_resolution_type(game->setting, gui->parent.elem);
+}
+
+void	options_resolutiontype_down(t_game *game, t_transform *gui)
+{
+	game->setting->confirm = TRUE;
+	decr_game_resolution_type(&game->setting->resolution_type);
+	set_resolution_type(game->setting, gui->parent.elem);
+}
