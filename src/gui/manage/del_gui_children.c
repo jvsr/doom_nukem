@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   set_elem_redraw.c                                  :+:    :+:            */
+/*   del_gui_children.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 18:07:36 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/12 18:07:36 by pholster      ########   odam.nl         */
+/*   Created: 2019/09/18 11:26:25 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/18 11:26:25 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
-void	set_elem_redraw(t_transform *elem)
+void	del_gui_children(t_gui *ui)
 {
 	t_transform	*cur;
+	t_transform	*next;
 
-	cur = elem;
-	elem->redraw = TRUE;
-	if (elem->parent_type == PARENT_UNDEFINED)
-		return ;
-	while (cur->parent_type == ELEM)
+	cur = ui->children;
+	while (cur != NULL)
 	{
-		cur->parent.elem->redraw = TRUE;
-		cur = elem->parent.elem;
+		next = cur->next;
+		del_elem(&cur);
+		cur = next;
 	}
+	ui->children = NULL;
 }

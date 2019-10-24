@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_elem_shown.c                                   :+:    :+:            */
+/*   set_elem_moved.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 10:47:41 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 14:16:29 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/12 18:07:36 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/12 18:07:36 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_bool.h"
-
 #include "gui.h"
 
-t_bool		get_elem_shown(t_transform *elem)
+void	set_elem_moved(t_transform *elem)
 {
-	if (elem->show)
-		return (FALSE);
-	while (elem->parent_type == ELEM)
+	t_transform	*cur;
+
+	cur = elem;
+	elem->moved = TRUE;
+	if (elem->parent_type == PARENT_UNDEFINED)
+		return ;
+	while (cur->parent_type == ELEM)
 	{
-		elem = elem->parent.elem;
-		if (elem->show == FALSE)
-			return (FALSE);
+		cur->parent.elem->moved = TRUE;
+		cur = cur->parent.elem;
 	}
-	return (TRUE);
 }

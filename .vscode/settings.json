@@ -6,7 +6,13 @@
 		"sdl2_mixer": "ruby",
 		"iterator": "c",
 		"cerrno": "c",
-		"locale": "c",
-		"string": "c"
+		"__locale": "c",
+		"functional": "c",
+		"typeinfo": "c",
+		"ios": "c",
+		"algorithm": "c",
+		"chrono": "c",
+		"limits": "c",
+		"ratio": "c"
 	}
 }

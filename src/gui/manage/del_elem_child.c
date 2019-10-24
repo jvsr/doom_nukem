@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_button.c                                     :+:    :+:            */
+/*   del_elem_child.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/04 17:51:36 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/04 17:51:36 by pholster      ########   odam.nl         */
+/*   Created: 2019/09/16 11:50:04 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/16 11:50:04 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
-void	print_button(t_button *button)
+void	del_elem_child(t_transform *elem, const char *name)
 {
-	print_text(button->text);
-	print_image(button->image);
+	del_child(&elem->gui_elem.panel->children, name);
+	set_elem_redraw(elem);
 }

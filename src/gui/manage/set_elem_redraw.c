@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   del_child.c                                        :+:    :+:            */
+/*   set_elem_redraw.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/16 11:50:04 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/24 15:17:53 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/12 18:07:36 by pholster       #+#    #+#                */
+/*   Updated: 2019/09/12 18:07:36 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_str.h"
-
 #include "gui.h"
 
-void	del_child(t_transform **children, const char *name)
+void	set_elem_redraw(t_transform *elem)
 {
 	t_transform	*cur;
-	t_transform	*prv;
 
-	prv = NULL;
-	cur = *children;
-	while (cur != NULL && ft_strequ(cur->name, name) == FALSE)
-	{
-		prv = cur;
-		cur = cur->next;
-	}
-	if (cur == NULL)
+	cur = elem;
+	elem->redraw = TRUE;
+	if (elem->parent_type == PARENT_UNDEFINED)
 		return ;
-	if (cur == *children)
-		*children = cur->next;
-	else
-		prv->next = cur->next;
-	cur->parent_type = PARENT_UNDEFINED;
-	del_elem(&cur);
+	while (cur->parent_type == ELEM)
+	{
+		cur->parent.elem->redraw = TRUE;
+		cur = cur->parent.elem;
+	}
 }

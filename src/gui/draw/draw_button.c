@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_panel.c                                       :+:    :+:            */
+/*   draw_button.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,23 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
 
 /*
 ** * Gui internal function
 */
 
-static void	draw_children(t_transform *child)
+void		draw_button(SDL_Surface *dst, t_button *button, SDL_Point abs_dim)
 {
-	while (child != NULL)
-	{
-		draw_elem(child);
-		child = child->next;
-	}
-}
-
-void		draw_panel(SDL_Surface *dst, t_panel *panel)
-{
-	draw_children(panel->children);
-	(void)dst;
+	draw_image(dst, button->image);
+	draw_text(dst, button->text, abs_dim);
 }

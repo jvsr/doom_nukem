@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   del_elem_child.c                                   :+:    :+:            */
+/*   hex_to_rgba.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/16 11:50:04 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/16 11:50:04 by pholster      ########   odam.nl         */
+/*   Created: 2019/10/07 15:14:59 by pholster       #+#    #+#                */
+/*   Updated: 2019/10/07 15:14:59 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "color.h"
 
-void	del_elem_child(t_transform *elem, const char *name)
+t_uint32	hex_to_rgba(char *hex)
 {
-	del_child(&elem->gui_elem.panel->children, name);
+	SDL_Color	color;
+
+	hex_to_color(&color, hex);
+	return (color_to_rgba(color));
 }

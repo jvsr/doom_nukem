@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   new_button.c                                       :+:    :+:            */
+/*   draw_panel.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 15:20:18 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/04 13:48:38 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/10 13:58:51 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <string.h>
-
-#include "libft/ft_mem.h"
-
-#include "gui.h"
-#include "error.h"
+#include "gui_internal.h"
 
 /*
 ** * Gui internal function
 */
 
-t_button	*new_button(t_gui *ui)
+static void	draw_children(t_transform *child)
 {
-	t_button *button;
+	while (child != NULL)
+	{
+		draw_elem(child);
+		child = child->next;
+	}
+}
 
-	button = (t_button *)ft_memalloc(sizeof(t_button));
-	if (button == NULL)
-		error_msg_errno("Failed to alloc button");
-	button->text = new_text(ui);
-	button->image = new_image();
-	return (button);
+void		draw_panel(t_panel *panel)
+{
+	draw_children(panel->children);
 }

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   set_elem_moved.c                                   :+:    :+:            */
+/*   draw_gui.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 18:07:36 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/12 18:07:36 by pholster      ########   odam.nl         */
+/*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/09 17:33:28 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
+#include "gui_internal.h"
+#include "sdl_extra.h"
 
-void	set_elem_moved(t_transform *elem)
+void			draw_gui(t_gui *ui)
 {
 	t_transform	*cur;
 
-	cur = elem;
-	elem->moved = TRUE;
-	if (elem->parent_type == PARENT_UNDEFINED)
-		return ;
-	while (cur->parent_type == ELEM)
+	cur = ui->children;
+	while (cur != NULL)
 	{
-		cur->parent.elem->moved = TRUE;
-		cur = elem->parent.elem;
+		draw_elem(cur);
+		cur = cur->next;
 	}
 }

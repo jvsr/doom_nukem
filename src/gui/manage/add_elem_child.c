@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_gui.c                                         :+:    :+:            */
+/*   add_elem_child.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:33:28 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/08/29 11:02:33 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/24 15:28:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
-#include "sdl_extra.h"
+#include "gui_internal.h"
 
-void			draw_gui(t_gui *ui)
+void		add_elem_child(t_transform *parent, t_transform *child)
 {
-	t_transform	*cur;
-
-	cur = ui->children;
-	while (cur != NULL)
-	{
-		draw_elem(cur);
-		cur = cur->next;
-	}
+	child->parent_type = ELEM;
+	child->parent.elem = parent;
+	add_to_children(&parent->gui_elem.panel->children, child);
+	set_elem_redraw(child);
 }

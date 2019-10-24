@@ -16,7 +16,7 @@
 
 #include "libft/ft_mem.h"
 
-#include "gui.h"
+#include "gui_internal.h"
 #include "sdl_extra.h"
 #include "error.h"
 
@@ -79,15 +79,18 @@ static void		reset_surface(t_transform *elem)
 
 static void		draw_gui_elem(t_transform *elem)
 {
+	SDL_Surface	*dst;
+
+	dst = elem->surface;
 	if (elem->gui_type == TEXT)
-		draw_text(elem->surface, elem->gui_elem.text);
+		draw_text(dst, elem->gui_elem.text, elem->abs_dim);
 	else if (elem->gui_type == IMAGE)
-		draw_image(elem->surface, elem->gui_elem.image);
+		draw_image(dst, elem->gui_elem.image);
 	else if (elem->gui_type == BUTTON)
-		draw_button(elem->surface, elem->gui_elem.button);
+		draw_button(dst, elem->gui_elem.button, elem->abs_dim);
 	else if (elem->gui_type == PANEL)
 	{
-		draw_panel(elem->surface, elem->gui_elem.panel);
+		draw_panel(elem->gui_elem.panel);
 		elem->has_alpha = sdl_has_surface_alpha(elem->surface);
 	}
 }

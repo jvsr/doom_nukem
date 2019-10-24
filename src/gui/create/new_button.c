@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   del_button.c                                       :+:    :+:            */
+/*   new_button.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/28 17:27:37 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 15:17:47 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/28 16:58:48 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/24 15:20:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
 
-#include "libft/ft_str.h"
+#include "libft/ft_mem.h"
 
-#include "gui.h"
+#include "gui_internal.h"
+#include "error.h"
 
 /*
 ** * Gui internal function
 */
 
-void		del_button(t_button **button)
+t_button	*new_button(t_gui *ui)
 {
-	if (button == NULL || *button == NULL)
-		return ;
-	del_text(&(*button)->text);
-	del_image(&(*button)->image);
-	free(*button);
-	*button = NULL;
+	t_button *button;
+
+	button = (t_button *)ft_memalloc(sizeof(t_button));
+	if (button == NULL)
+		error_msg_errno("Failed to alloc button");
+	button->text = new_text(ui);
+	button->image = new_image();
+	return (button);
 }
