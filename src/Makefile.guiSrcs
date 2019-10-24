@@ -22,10 +22,12 @@ ONCLICK_SRCS = mainmenu \
 				fov \
 				music \
 				resolution_type \
+				set_resolution_type \
 				resolution \
 				sensitivity \
 				sound \
 				utils \
+				set_utils \
 				confirmation
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 

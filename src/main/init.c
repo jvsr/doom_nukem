@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
@@ -7,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/25 17:18:00 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:52:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,36 +45,6 @@ static t_game	*alloc_game(void)
 	if (game == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc game");
 	return (game);
-}
-
-static uint32_t	create_window_flags(t_setting *setting)
-{
-	uint32_t	flags;
-
-	flags = 0;
-	flags |= SDL_WINDOW_ALLOW_HIGHDPI;
-	flags |= SDL_WINDOW_MOUSE_FOCUS;
-	if (setting->resolution_type == fullscreen_windowed)
-		flags |= SDL_WINDOW_BORDERLESS;
-	else if (setting->resolution_type == fullscreen)
-		flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
-	return (flags);
-}
-
-static void	init_window_surface(t_game *game)
-{
-	const uint32_t flags = create_window_flags(game->setting);
-
-	game->window = SDL_CreateWindow("Doom Nukem",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		game->setting->resolution.x,
-		game->setting->resolution.y,
-		flags);
-	if (game->window == NULL)
-		error_msg_sdl(ENOMEM, "Failed to alloc game window");
-	game->surface = SDL_GetWindowSurface(game->window);
-	SDL_SetWindowIcon(game->window, open_tga_sdl("splash/icon"));
 }
 
 static void		init_game(t_game *game)

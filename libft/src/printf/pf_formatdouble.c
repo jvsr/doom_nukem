@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/19 14:30:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:27:01 by pholster      ########   odam.nl         */
+/*   Updated: 2019/10/24 15:37:37 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	adddouble(t_info *info, long double value, ssize_t n)
 	num = (intmax_t)value;
 	value -= num;
 	num += setdecimals(value, decimals, n);
-	// num += (n == 0 && decimals[0] >= '5');
 	pf_addnum(info, num);
 	if (n != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 15:19:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:21:52 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:39:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	confirmation_return(t_game *game, t_transform *gui)
 
 void	restart_game(t_game *game, t_transform *gui)
 {
-	char	*newargv[] = { "foo", NULL };
-	char	*newenv[] = { "bar", NULL };
+	char	*const newargv[] = { "foo", NULL };
+	char	*const newenv[] = { "bar", NULL };
 
 	(void)gui;
 	(void)game;

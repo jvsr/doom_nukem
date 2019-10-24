@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 13:42:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:11:04 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:39:58 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@
 **	* 960 x 640
 */
 
-void	set_resolution(t_setting *setting, t_transform *parent)
+void		set_resolution(t_setting *setting, t_transform *parent)
 {
 	set_elem_text_str(get_elem_child(parent, "curresolution"),
-		ft_strformat("%4d x %-4d", setting->resolution.x, setting->resolution.y));
+		ft_strformat("%4d x %-4d",
+						setting->resolution.x,
+						setting->resolution.y));
 }
 
-static void incr_game_resolution(SDL_Point *resolution)
+static void	incr_game_resolution(SDL_Point *resolution)
 {
 	if (resolution->x == 1680 && resolution->y == 1050)
 	{
@@ -64,7 +66,7 @@ static void incr_game_resolution(SDL_Point *resolution)
 	}
 }
 
-static void decr_game_resolution(SDL_Point *resolution)
+static void	decr_game_resolution(SDL_Point *resolution)
 {
 	if (resolution->x == 1920 && resolution->y == 1080)
 	{
@@ -93,14 +95,14 @@ static void decr_game_resolution(SDL_Point *resolution)
 	}
 }
 
-void	options_resolution_up(t_game *game, t_transform *gui)
+void		options_resolution_up(t_game *game, t_transform *gui)
 {
 	game->setting->confirm = TRUE;
 	incr_game_resolution(&game->setting->resolution);
 	set_resolution(game->setting, gui->parent.elem);
 }
 
-void	options_resolution_down(t_game *game, t_transform *gui)
+void		options_resolution_down(t_game *game, t_transform *gui)
 {
 	game->setting->confirm = TRUE;
 	decr_game_resolution(&game->setting->resolution);

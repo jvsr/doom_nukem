@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:39:20 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/25 15:40:30 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/10/24 15:54:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ t_game	*init(void);
 void	init_gui(t_game *game);
 void	init_keymap(t_game *game);
 void	init_main_menu(t_game *game, t_bool *is_loaded);
+void	init_window_surface(t_game *game);
 
 #endif

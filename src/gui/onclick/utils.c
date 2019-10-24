@@ -5,27 +5,12 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/24 13:48:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:07:28 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/24 15:44:40 by jvisser        #+#    #+#                */
+/*   Updated: 2019/10/24 15:45:01 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_str.h"
-
-#include "gui.h"
-#include "setting.h"
-
-void	set_float(float setting, t_transform *location, int precision)
-{
-	set_elem_text_str(location,
-		ft_strformat("%.*f", precision, setting));
-}
-
-void	set_int(int setting, t_transform *location)
-{
-	set_elem_text_str(location,
-		ft_strformat("%d", setting));
-}
+#include "types.h"
 
 void	incr_float_max(float *loc, float incr, float max)
 {
