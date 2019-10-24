@@ -66,3 +66,4 @@ dkms.conf
 *.content
 get_headers
 personal.h
+resources/data/settings/settings.conf
