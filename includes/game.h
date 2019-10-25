@@ -35,6 +35,8 @@ typedef	enum	e_state
 
 typedef struct	s_game
 {
+	char			**envp;
+	char			**argv;
 	t_state			state;
 	SDL_Window		*window;
 	SDL_Surface		*surface;

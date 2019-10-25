@@ -79,12 +79,14 @@ static void		init_settings(t_game *game)
 	game->setting = read_settings();
 }
 
-t_game			*init(void)
+t_game			*init(char **argv, char **envp)
 {
 	t_game *game;
 
 	init_sdl();
 	game = alloc_game();
+	game->argv = argv;
+	game->envp = envp;
 	init_settings(game);
 	init_window_surface(game);
 	init_game(game);

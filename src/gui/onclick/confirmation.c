@@ -47,10 +47,6 @@ void	confirmation_return(t_game *game, t_transform *gui)
 
 void	restart_game(t_game *game, t_transform *gui)
 {
-	char	*const newargv[] = { "foo", NULL };
-	char	*const newenv[] = { "bar", NULL };
-
 	(void)gui;
-	(void)game;
-	execve("./doom-nukem", newargv, newenv);
+	execve("./doom-nukem", game->argv, game->envp);
 }

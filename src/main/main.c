@@ -16,13 +16,14 @@
 #include "init.h"
 #include "sdl_thread.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_game *game;
 	t_bool isloaded;
 
+	(void)argc;
 	isloaded = FALSE;
-	game = init();
+	game = init(argv, envp);
 	sdl_new_thread("mainmenu", init_main_menu, 2, game, &isloaded);
 	splash(game, &isloaded, "splash/splash");
 	loop(game);
