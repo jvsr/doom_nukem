@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:14:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 17:00:53 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/10/28 16:36:54 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,18 +136,30 @@ typedef struct	s_sector
 }				t_sector;
 */
 
+typedef struct	s_floor
+{
+	t_texture	texture;
+	t_coord		angle;
+}				t_floor;
+
 typedef struct	s_wall
 {
+	t_bool		is_portal;
 	t_uint32	sector_portal;
 	t_coord		texture_size;
 	t_texture	texture;
+	t_coord		start;
+	t_coord		end;
 }				t_wall;
 
 typedef struct	s_sector
 {
-	t_uint32 sector_id;
-	t_uint32 startwall;
-	t_uint32 wallcount;
+	t_uint32	sector_id;
+	t_uint32	startwall;
+	t_uint32	wallcount;
+	t_floor		floor;
+	t_bool		has_ceiling;
+	t_texture	ceiling;
 }				t_sector;
 
 
@@ -162,8 +174,8 @@ typedef struct	s_level
 	//t_object	*all_object;
 	t_uint32	sector_count;
 	t_uint32	wall_count;
-	t_wall		**sectors;
-	t_sector	**walls;
+	t_sector	**sectors;
+	t_wall		**walls;
 }				t_level;
 
 #endif

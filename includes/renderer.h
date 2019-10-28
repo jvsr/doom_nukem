@@ -6,18 +6,25 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/24 17:03:36 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/10/28 16:18:40 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERER_H
 # define RENDERER_H
 
-#include "map.h"
-#include "coord.h"
+# include "coord.h"
 
-void			render_3d(t_level *level, t_game *game);
+typedef struct s_level	t_level;
+typedef struct s_sector	t_sector;
+typedef struct s_wall	t_wall;
+typedef struct s_list	t_list;
+
+void			render_3d(t_game *game, t_level *level);
 SDL_Surface		*get_texture(t_game *game, t_texture texture);
 void 			load_textures(t_game *game);
+void			render_rooms(t_game *game, t_level *level);
+t_wall			**get_walls_from_sector(t_sector *sector, t_level *level);
+t_list			*get_bunches(t_game *game, t_level *level);
 
 #endif
