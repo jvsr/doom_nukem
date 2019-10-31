@@ -6,19 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 14:27:39 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:20:50 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/31 14:55:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-
-#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "game.h"
 #include "setting.h"
 #include "onclick.h"
-#include "gui_config.h"
 #include "serializer.h"
 
 void	remove_options(t_game *game)
