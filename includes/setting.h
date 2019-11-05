@@ -23,7 +23,7 @@ typedef enum	e_resolution_type
 {
 	windowed,
 	fullscreen,
-	fullscreen_windowed
+	borderless
 }				t_resolution_type;
 
 typedef struct	s_control

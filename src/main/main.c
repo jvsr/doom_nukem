@@ -18,14 +18,17 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_game *game;
-	t_bool isloaded;
+	SDL_Thread	*init_thread;
+	t_game		*game;
+	t_bool		is_loaded;
 
 	(void)argc;
-	isloaded = FALSE;
+	is_loaded = FALSE;
 	game = init(argv, envp);
-	sdl_new_thread("mainmenu", init_main_menu, 2, game, &isloaded);
-	splash(game, &isloaded, "splash/splash");
+	init_thread = sdl_new_thread("mainmenu", init_main_menu, 2,
+								game, &is_loaded);
+	SDL_DetachThread(init_thread);
+	splash(game, &is_loaded, "splash/splash");
 	loop(game);
 	return (quit(game));
 }

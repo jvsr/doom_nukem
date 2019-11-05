@@ -14,29 +14,32 @@
 
 #include "setting.h"
 #include "serializer.h"
+#include "error.h"
 
 t_setting	*read_settings(void)
 {
-	t_setting		*settings;
+	t_setting		*setting;
 	t_binary_read	*bin;
 
-	settings = (t_setting*)ft_memalloc(sizeof(t_setting));
+	setting = (t_setting*)ft_memalloc(sizeof(t_setting));
+	if (setting == NULL)
+		error_msg_errno("Failed to alloc settings");
 	bin = new_binary_read("settings/settings.conf");
-	settings->sensitivity = read_float(bin);
-	settings->music_volume = read_float(bin);
-	settings->sound_volume = read_float(bin);
-	settings->fov = read_short(bin);
-	settings->resolution.x = read_int(bin);
-	settings->resolution.y = read_int(bin);
-	settings->resolution_type = read_int(bin);
-	settings->controls.backward = read_int(bin);
-	settings->controls.crouch = read_int(bin);
-	settings->controls.forward = read_int(bin);
-	settings->controls.interact = read_int(bin);
-	settings->controls.jump = read_int(bin);
-	settings->controls.left = read_int(bin);
-	settings->controls.right = read_int(bin);
-	settings->controls.shoot = read_int(bin);
+	setting->sensitivity = read_float(bin);
+	setting->music_volume = read_float(bin);
+	setting->sound_volume = read_float(bin);
+	setting->fov = read_short(bin);
+	setting->resolution.x = read_int(bin);
+	setting->resolution.y = read_int(bin);
+	setting->resolution_type = read_int(bin);
+	setting->controls.backward = read_int(bin);
+	setting->controls.crouch = read_int(bin);
+	setting->controls.forward = read_int(bin);
+	setting->controls.interact = read_int(bin);
+	setting->controls.jump = read_int(bin);
+	setting->controls.left = read_int(bin);
+	setting->controls.right = read_int(bin);
+	setting->controls.shoot = read_int(bin);
 	del_binary_read(&bin);
-	return (settings);
+	return (setting);
 }

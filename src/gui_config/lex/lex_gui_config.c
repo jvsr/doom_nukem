@@ -70,5 +70,6 @@ t_token			*lex_gui_config(const int fd)
 	if (file == NULL)
 		error_msg(strerror(errno), errno, "Failed to read the gui config file");
 	tokens = create_tokens(file);
+	free(file);
 	return (tokens);
 }
