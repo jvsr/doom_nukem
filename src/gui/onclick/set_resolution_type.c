@@ -19,13 +19,17 @@ static char	*get_resolution_type(t_resolution_type resolution_type)
 		return ("Windowed");
 	else if (resolution_type == fullscreen)
 		return ("Fullscreen");
-	else if (resolution_type == fullscreen_windowed)
+	else if (resolution_type == borderless)
 		return ("Borderless");
 	return (NULL);
 }
 
 void		set_resolution_type(t_setting *setting, t_transform *parent)
 {
-	set_elem_text_str(get_elem_child(parent, "curresolutiontype"),
-		get_resolution_type(setting->resolution_type));
+	t_transform	*elem;
+	char		*text;
+
+	elem = get_elem_child(parent, "curresolutiontype");
+	text = get_resolution_type(setting->resolution_type);
+	set_elem_text_str(elem, text);
 }

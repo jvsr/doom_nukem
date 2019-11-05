@@ -30,6 +30,7 @@ static void			next_token(t_token **token)
 	|| (*token)->type == PLAIN)
 	{
 		*token = cur->next;
+		free(cur->token);
 		free(cur);
 	}
 	else

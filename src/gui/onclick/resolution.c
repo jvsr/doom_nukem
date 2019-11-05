@@ -31,10 +31,15 @@
 
 void		set_resolution(t_setting *setting, t_transform *parent)
 {
-	set_elem_text_str(get_elem_child(parent, "curresolution"),
-		ft_strformat("%4d x %-4d",
-						setting->resolution.x,
-						setting->resolution.y));
+	t_transform	*elem;
+	char		*text;
+
+	elem = get_elem_child(parent, "curresolution");
+	text = ft_strformat("%4d x %-4d",
+		setting->resolution.x,
+		setting->resolution.y);
+	set_elem_text_str(elem, text);
+	free(text);
 }
 
 static void	incr_game_resolution(SDL_Point *resolution)

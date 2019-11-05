@@ -59,12 +59,12 @@ static void		init_settings(t_game *game)
 	int			fd;
 	t_setting	*setting;
 
-	setting = (t_setting *)ft_memalloc(sizeof(t_setting));
-	if (setting == NULL)
-		error_msg_sdl(ENOMEM, "Failed to alloc settings");
 	fd = open("./resources/data/settings/settings.conf", O_RDONLY);
 	if (fd == -1)
 	{
+		setting = (t_setting *)ft_memalloc(sizeof(t_setting));
+		if (setting == NULL)
+			error_msg_errno("Failed to alloc settings");
 		setting->sensitivity = 1.0;
 		setting->music_volume = 0.8;
 		setting->sound_volume = 0.8;

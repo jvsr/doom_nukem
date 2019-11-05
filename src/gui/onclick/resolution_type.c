@@ -20,8 +20,8 @@
 void		incr_game_resolution_type(t_resolution_type *resolution_type)
 {
 	if (*resolution_type == windowed)
-		*resolution_type = fullscreen_windowed;
-	else if (*resolution_type == fullscreen_windowed)
+		*resolution_type = borderless;
+	else if (*resolution_type == borderless)
 		*resolution_type = fullscreen;
 	else if (*resolution_type == fullscreen)
 		*resolution_type = windowed;
@@ -30,8 +30,8 @@ void		incr_game_resolution_type(t_resolution_type *resolution_type)
 void		decr_game_resolution_type(t_resolution_type *resolution_type)
 {
 	if (*resolution_type == fullscreen)
-		*resolution_type = fullscreen_windowed;
-	else if (*resolution_type == fullscreen_windowed)
+		*resolution_type = borderless;
+	else if (*resolution_type == borderless)
 		*resolution_type = windowed;
 	else if (*resolution_type == windowed)
 		*resolution_type = fullscreen;

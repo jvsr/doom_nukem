@@ -17,12 +17,18 @@
 
 void	set_float(float setting, t_transform *location, int precision)
 {
-	set_elem_text_str(location,
-		ft_strformat("%.*f", precision, setting));
+	char *text;
+
+	text = ft_strformat("%.*f", precision, setting);
+	set_elem_text_str(location, text);
+	free(text);
 }
 
 void	set_int(int setting, t_transform *location)
 {
-	set_elem_text_str(location,
-		ft_strformat("%d", setting));
+	char *text;
+
+	text = ft_strformat("%d", setting);
+	set_elem_text_str(location, text);
+	free(text);
 }
