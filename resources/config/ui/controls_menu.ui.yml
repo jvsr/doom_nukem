@@ -11,3 +11,51 @@
     - layer: 1
     - image: background
       - texture: ui/border1x1.tga
+    - panel: controlsleftside
+      - pos: 0.1, 0.1
+      - dim: 0.35, 0.8
+      - image: background
+      - panel: controlsforward
+        - pos: 0.05, 0.05
+        - dim: 0.9, 0.15
+        - image: backkie
+          - color: #123456
+        - text_block: controlsforwardtext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Forward :"
+          - text_font: foulfiend
+          - text_size: 0.65
+        - button: controlsforwardbutton
+          - pos: 0.75, 0.1
+          - dim: 0.2, 0.8
+    - text_block: controlsbackwardtext
+      - pos: 0.1, 0.3
+      - dim: 0.2, 0.1
+      - text: "Backward :"
+      - text_font: foulfiend
+    - panel: controlsrightside
+      - pos: 0.55, 0.1
+      - dim: 0.35, 0.8
+      - image: background
+    - text_block: controlslefttext
+      - pos: 0.1, 0.5
+      - dim: 0.2, 0.1
+      - text: "Left :"
+      - text_font: foulfiend
+      - text_size: 0.5
+    - text_block: controlsrighttext
+      - pos: 0.1, 0.7
+      - dim: 0.2, 0.1
+      - text: "Right :"
+      - text_font: foulfiend
+      - text_size: 0.5
+    - button: controlsbackwardbutton
+      - pos: 0.3, 0.32
+      - dim: 0.05, 0.06
+    - button: controlsleftbutton
+      - pos: 0.3, 0.52
+      - dim: 0.05, 0.06
+    - button: controlsrightbutton
+      - pos: 0.3, 0.72
+      - dim: 0.05, 0.06
