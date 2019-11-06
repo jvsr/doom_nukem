@@ -30,7 +30,7 @@ typedef	struct	s_player
 	t_uint16	*fov;
 	t_uint16	angle;
 	t_vec		forward;
-	t_coord		pos;
+	t_vec		pos;
 	t_uint32	cur_sector;
 }				t_player;
 

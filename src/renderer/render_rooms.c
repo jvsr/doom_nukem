@@ -10,15 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <SDL2/SDL_surface.h>
 #include "libft/ft_list.h"
 #include "game.h"
 #include "map.h"
+#include "player.h"
 #include "renderer.h"
 
-void	render_rooms(t_game *game, t_level *level)
+static void		render_wall(t_wall *wall, t_game *game, int *mask)
 {
-	t_list *walls;
+	
+}
+
+void			render_rooms(t_game *game, t_level *level)
+{
+	t_list	*walls;
+	int		mask[game->surface->w * game->surface->h];
+	t_wall	*cur_wall;
 
 	walls = get_bunches(game, level);
-	
+	while (walls)
+	{
+		cur_wall = get_closest(walls, &game->player->pos);
+	}
 }
