@@ -5,6 +5,7 @@
     - clickable: 0
     - color: #26020699
     - layer: 0
+
   - panel: optionsmenu
     - show: 0
     - clickable: 0
@@ -13,146 +14,183 @@
     - layer: 1
     - image: background
       - texture: ui/border5x9.tga
-    - text_block: sensitivity
+
+    - panel: sensitivity
       - pos: 0.1, 0.03
-      - dim: 0.8, 0.08
-      - text_size: 0.5
-      - text_font: foulfiend
-      - text_color: #EAEAEA
-      - text: "Sensitivity"
-    - text_block: cursensitivity
-      - pos: 0.4, 0.095
-      - dim: 0.2, 0.08
-      - text_size: 0.6
-      - text_font: neckromancer
-    - button: sensitivityleft
-      - pos: 0.42, 0.117
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_left.tga
-      - onclick: options_sensitivity_down
-    - button: sensitivityright
-      - pos: 0.55, 0.117
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_right.tga
-      - onclick: options_sensitivity_up
-    - text_block: volume
-      - pos: 0.1, 0.17
-      - dim: 0.8, 0.08
-      - text_size: 0.5
-      - text_font: foulfiend
-      - text_color: #EAEAEA
-      - text: "Volume"
+      - dim: 0.8, 0.14
+      - text_block: sensitivitytext
+        - pos: 0.0, 0.05
+        - dim: 1.0, 0.5
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+        - text: "Sensitivity"
+        - layer: 1
+      - panel: sensitivityblock
+        - pos: 0.4, 0.5
+        - dim: 0.2, 0.5
+        - text_block: cursensitivity
+          - pos: 0.2, 0.0
+          - dim: 0.6, 1.0
+          - text_size: 0.7
+          - text_font: neckromancer
+        - button: sensitivityleft
+          - pos: 0.0, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: options_sensitivity_down
+        - button: sensitivityright
+          - pos: 0.8, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: options_sensitivity_up
 
-    - text_block: musicvolume
-      - pos: 0.15, 0.237
-      - dim: 0.1, 0.08
-      - text_size: 0.5
-      - text_font: neckromancer
-      - text: "Music"
-    - text_block: curmusicvolume
-      - pos: 0.25, 0.24
-      - dim: 0.2, 0.08
-      - text_size: 0.6
-      - text_font: neckromancer
-    - button: volumeleft
-      - pos: 0.27, 0.262
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_left.tga
-      - onclick: options_music_volume_down
-    - button: volumeright
-      - pos: 0.40, 0.262
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_right.tga
-      - onclick: options_music_volume_up
+    - panel: volume
+      - pos: 0.1, 0.18
+      - dim: 0.8, 0.14
+      - text_block: volumetext
+        - pos: 0.0, 0.05
+        - dim: 1.0, 0.5
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+        - text: "Volume"
+      - panel: musicvolumeblock
+        - pos: 0.0, 0.5
+        - dim: 0.5, 0.5
+        - text_block: musicvolumetext
+          - pos: 0.0, 0.0
+          - dim: 0.5, 1.0
+          - text_size: 0.6
+          - text_font: neckromancer
+          - text: "Music"
+        - text_block: curmusicvolume
+          - pos: 0.5, 0.0
+          - dim: 0.25, 1.0
+          - text_size: 0.6
+          - text_font: neckromancer
+        - button: musicvolumeleft
+          - pos: 0.42, 0.2
+          - dim: 0.08, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: options_music_volume_down
+        - button: musicvolumeright
+          - pos: 0.75, 0.2
+          - dim: 0.08, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: options_music_volume_up
+      - panel: soundvolumeblock
+        - pos: 0.5, 0.5
+        - dim: 0.5, 0.5
+        - text_block: soundvolumetext
+          - pos: 0.0, 0.0
+          - dim: 0.5, 1.0
+          - text_size: 0.6
+          - text_font: neckromancer
+          - text: "Sound"
+        - text_block: cursoundvolume
+          - pos: 0.5, 0.0
+          - dim: 0.25, 1.0
+          - text_size: 0.6
+          - text_font: neckromancer
+        - button: soundvolumeleft
+          - pos: 0.42, 0.2
+          - dim: 0.08, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: options_sound_volume_down
+        - button: soundvolumeright
+          - pos: 0.75, 0.2
+          - dim: 0.08, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: options_sound_volume_up
 
-    - text_block: soundvolume
-      - pos: 0.55, 0.237
-      - dim: 0.1, 0.08
-      - text_size: 0.5
-      - text_font: neckromancer
-      - text: "Sound"
-    - text_block: cursoundvolume
-      - pos: 0.65, 0.24
-      - dim: 0.2, 0.08
-      - text_size: 0.6
-      - text_font: neckromancer
-    - button: soundvolumeleft
-      - pos: 0.67, 0.262
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_left.tga
-      - onclick: options_sound_volume_down
-    - button: soundvolumeright
-      - pos: 0.80, 0.262
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_right.tga
-      - onclick: options_sound_volume_up
+    - panel: fov
+      - pos: 0.1, 0.33
+      - dim: 0.8, 0.14
+      - text_block: fovtext
+        - pos: 0.0, 0.05
+        - dim: 1.0, 0.5
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+        - text: "FOV"
+      - panel: fovblock
+        - pos: 0.4, 0.5
+        - dim: 0.2, 0.5
+        - text_block: curfov
+          - pos: 0.2, 0.0
+          - dim: 0.6, 1.0
+          - text_size: 0.7
+          - text_font: neckromancer
+        - button: fovleft
+          - pos: 0.0, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: options_fov_down
+        - button: fovright
+          - pos: 0.8, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: options_fov_up
 
-    - text_block: fov
-      - pos: 0.1, 0.32
-      - dim: 0.8, 0.08
-      - text_size: 0.5
-      - text_font: foulfiend
-      - text_color: #EAEAEA
-      - text: "FOV"
-    - text_block: curfov
-      - pos: 0.4, 0.39
-      - dim: 0.2, 0.08
-      - text_size: 0.6
-      - text_font: neckromancer
-    - button: fovleft
-      - pos: 0.42, 0.411
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_left.tga
-      - onclick: options_fov_down
-    - button: fovright
-      - pos: 0.55, 0.411
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_right.tga
-      - onclick: options_fov_up
-    - text_block: resolution
-      - pos: 0.1, 0.47
-      - dim: 0.8, 0.08
-      - text_size: 0.5
-      - text_font: foulfiend
-      - text_color: #EAEAEA
-      - text: "Resolution"
-    - text_block: curresolution
-      - pos: 0.3, 0.54
-      - dim: 0.4, 0.08
-      - text_size: 0.6
-      - text_font: neckromancer
-    - button: resolutionleft
-      - pos: 0.35, 0.56
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_left.tga
-      - onclick: options_resolution_down
-    - button: resolutionright
-      - pos: 0.62, 0.56
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_right.tga
-      - onclick: options_resolution_up
-    - text_block: resolutiontype
-      - pos: 0.1, 0.62
-      - dim: 0.8, 0.08
-      - text_size: 0.5
-      - text_font: foulfiend
-      - text_color: #EAEAEA
-      - text: "Resolution Type"
-    - text_block: curresolutiontype
-      - pos: 0.3, 0.69
-      - dim: 0.4, 0.08
-      - text_size: 0.6
-      - text_font: neckromancer
-    - button: resolutiontypeleft
-      - pos: 0.35, 0.71
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_left.tga
-      - onclick: options_resolutiontype_down
-    - button: resolutiontyperight
-      - pos: 0.62, 0.71
-      - dim: 0.03, 0.0345
-      - texture: ui/arrow_right.tga
-      - onclick: options_resolutiontype_up
+    - panel: resolution
+      - pos: 0.1, 0.48
+      - dim: 0.8, 0.14
+      - text_block: resolutiontext
+        - pos: 0.0, 0.05
+        - dim: 1.0, 0.5
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+        - text: "Resolution"
+      - panel: resolutionblock
+        - pos: 0.3, 0.5
+        - dim: 0.4, 0.5
+        - text_block: curresolution
+          - pos: 0.2, 0.0
+          - dim: 0.6, 1.0
+          - text_size: 0.9
+          - text_font: neckromancer
+        - button: resolutionleft
+          - pos: 0.0, 0.2
+          - dim: 0.1, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: options_resolution_down
+        - button: resolutionright
+          - pos: 0.9, 0.2
+          - dim: 0.1, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: options_resolution_up
+
+    - panel: resolutiontype
+      - pos: 0.1, 0.63
+      - dim: 0.8, 0.14
+      - text_block: resolutiontypetext
+        - pos: 0.0, 0.05
+        - dim: 1.0, 0.5
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+        - text: "Resolution Type"
+      - panel: resolutiontypeblock
+        - pos: 0.3, 0.5
+        - dim: 0.4, 0.5
+        - text_block: curresolutiontype
+          - pos: 0.2, 0.0
+          - dim: 0.6, 1.0
+          - text_size: 0.9
+          - text_font: neckromancer
+        - button: resolutiontypeleft
+          - pos: 0.0, 0.2
+          - dim: 0.1, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: options_resolutiontype_down
+        - button: resolutiontyperight
+          - pos: 0.9, 0.2
+          - dim: 0.1, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: options_resolutiontype_up
+
     - button: optionscontrolsbutton
       - pos: 0.1, 0.78
       - dim: 0.8, 0.08
@@ -162,6 +200,7 @@
       - text_color: #EAEAEA
       - texture: ui/border5x1.tga
       - onclick: options_open_controls
+
     - button: optionsreturnbutton
       - pos: 0.1, 0.88
       - dim: 0.8, 0.08
@@ -171,6 +210,7 @@
       - text_color: #EAEAEA
       - onclick: options_return
       - texture: ui/border5x1.tga
+
   - panel: confirmationmenu
     - show: 0
     - clickable: 0
