@@ -16,8 +16,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 
-#include "libft/ft_printf.h"
-
 #include "error.h"
 
 void	error_msg_errno(const char *msg)

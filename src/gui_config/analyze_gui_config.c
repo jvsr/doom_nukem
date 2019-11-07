@@ -14,7 +14,6 @@
 #include <unistd.h>
 
 #include "libft/ft_str.h"
-#include "libft/ft_printf.h"
 
 #include "gui.h"
 #include "lex.h"

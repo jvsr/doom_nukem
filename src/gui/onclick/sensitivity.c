@@ -25,7 +25,6 @@ void	set_sensitivity(t_setting *setting, t_transform *parent)
 void	options_sensitivity_up(t_game *game, t_transform *gui)
 {
 	game->setting->changed = TRUE;
-	print_elem(gui, FALSE);
 	incr_float_max(&game->setting->sensitivity, 0.1, 3.0);
 	set_sensitivity(game->setting, gui->parent.elem);
 }

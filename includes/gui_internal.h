@@ -16,7 +16,6 @@
 # include "gui.h"
 
 # define TEXT_ALPHA_ROUND	0x30
-# define TEXT_SIZE_RATIO	0.015
 
 typedef struct	s_onclickpair
 {

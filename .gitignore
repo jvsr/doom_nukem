@@ -2,6 +2,12 @@
 doom-nukem
 doomtest
 
+# Config files
+*.conf
+
+# Compile paths
+*.content
+
 # Prerequisites
 *.d
 
@@ -63,7 +69,5 @@ dkms.conf
 *.DS_Store
 
 # Other
-*.content
 get_headers
 personal.h
-*.conf
