@@ -79,7 +79,8 @@ SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
 # Resource Folders
 DATAPATH = resources/data
-DATAPATH := $(DATAPATH)/map $(DATAPATH)/map/custom $(DATAPATH)/map/campaign
+DATAPATH := $(DATAPATH)/map $(DATAPATH)/map/custom $(DATAPATH)/map/campaign \
+	$(DATAPATH)/settings/
 
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
