@@ -1,5 +1,5 @@
 - panel: mainmenu
-  - image: background
+  - image: mainmenubackground
     - color: #bb0a1e
   - image: logo
     - pos: 0.35, 0.025
@@ -9,7 +9,7 @@
   - panel: menu
     - pos: 0.15, 0.275
     - dim: 0.7, 0.7
-    - image: background
+    - image: menubackground
       - texture: ui/border1x1.tga
     - button: mainmenuMapselectButton
       - pos: 0.125, 0.1375

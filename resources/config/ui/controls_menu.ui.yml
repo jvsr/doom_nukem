@@ -9,7 +9,7 @@
     - pos: 0.1, 0.1
     - dim: 0.8, 0.8
     - layer: 1
-    - image: background
+    - image: controlsbackground
       - texture: ui/border1x1.tga
 
     - panel: controlsleftside

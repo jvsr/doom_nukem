@@ -39,7 +39,7 @@
     - pos: 0.06, 0.05
     - dim: 0.9, 0.9
     - layer: 2
-    - image: background
+    - image: missionsbackground
       - texture: ui/border1x1.tga
 
     - button: level1
