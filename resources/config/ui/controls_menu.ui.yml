@@ -131,5 +131,4 @@
       - text: "Return"
       - text_font: foulfiend
       - text_color: #EAEAEA
-      - onclick: options_return
       - texture: ui/border5x1.tga
