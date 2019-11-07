@@ -16,6 +16,7 @@ void		add_gui_child(t_gui *ui, t_transform *panel)
 {
 	panel->parent_type = GUI;
 	panel->parent.ui = ui;
+	check_elem_duplicate(ui->children, panel);
 	add_to_children(&ui->children, panel);
 	set_elem_redraw(panel);
 }

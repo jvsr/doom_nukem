@@ -62,6 +62,7 @@ DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 MANAGE_SRCS = add_gui_child \
 		add_elem_child \
 		add_to_children \
+		check_elem_duplicate \
 		remove_elem_parent \
 		del_gui_child \
 		del_elem_child \
