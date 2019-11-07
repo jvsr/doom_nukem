@@ -17,7 +17,6 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
 #include "libft/ft_char.h"
-#include "libft/ft_printf.h"
 
 #include "lex.h"
 #include "error.h"
