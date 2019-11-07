@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/06 17:33:09 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/07 20:28:49 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,34 @@
 
 #define TABLE_SIZE 22
 
-static const t_onclickpair	g_onclicks[] = {
-	{"mainmenu_missions", mainmenu_missions},
-	{"mainmenu_options", mainmenu_options},
-	{"mainmenu_quit", mainmenu_quit},
+// static const t_onclickpair	g_onclicks[] = {
+// 	{"mainmenu_missions", mainmenu_missions},
+// 	{"mainmenu_options", mainmenu_options},
+// 	{"mainmenu_quit", mainmenu_quit},
 
-	{"options_sensitivity_up", options_sensitivity_up},
-	{"options_sensitivity_down", options_sensitivity_down},
-	{"options_music_volume_up", options_music_volume_up},
-	{"options_music_volume_down", options_music_volume_down},
-	{"options_sound_volume_up", options_sound_volume_up},
-	{"options_sound_volume_down", options_sound_volume_down},
-	{"options_fov_up", options_fov_up},
-	{"options_fov_down", options_fov_down},
-	{"options_resolution_up", options_resolution_up},
-	{"options_resolution_down", options_resolution_down},
-	{"options_resolutiontype_up", options_resolutiontype_up},
-	{"options_resolutiontype_down", options_resolutiontype_down},
-	{"options_open_controls", options_open_controls},
-	{"options_return", options_return},
+// 	{"options_sensitivity_up", options_sensitivity_up},
+// 	{"options_sensitivity_down", options_sensitivity_down},
+// 	{"options_music_volume_up", options_music_volume_up},
+// 	{"options_music_volume_down", options_music_volume_down},
+// 	{"options_sound_volume_up", options_sound_volume_up},
+// 	{"options_sound_volume_down", options_sound_volume_down},
+// 	{"options_fov_up", options_fov_up},
+// 	{"options_fov_down", options_fov_down},
+// 	{"options_resolution_up", options_resolution_up},
+// 	{"options_resolution_down", options_resolution_down},
+// 	{"options_resolutiontype_up", options_resolutiontype_up},
+// 	{"options_resolutiontype_down", options_resolutiontype_down},
+// 	{"options_open_controls", options_open_controls},
+// 	{"options_return", options_return},
 
-	{"missions_focus_campaign", missions_focus_campaign},
-	{"missions_focus_custom", missions_focus_custom},
-	{"mission_return", mission_return},
+// 	{"missions_focus_campaign", missions_focus_campaign},
+// 	{"missions_focus_custom", missions_focus_custom},
+// 	{"mission_return", mission_return},
 
-	{"confirmation_return", confirmation_return},
+// 	{"confirmation_return", confirmation_return},
 
-	{"restart_game", restart_game},
-};
+// 	{"restart_game", restart_game},
+// };
 
 static void		fill_gui_onclick_table_0_9(t_tablepair *gui_onclicks)
 {
@@ -121,13 +121,10 @@ t_tablepair	*create_gui_onclick_table(void)
 
 const char	*get_onclick_name(t_onclick *onclick)
 {
-	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
-	size_t			i;
 	t_tablepair		*gui_onclicks;
 
 	if (onclick == NULL)
 		return (NULL);
-	i = 0;
 	gui_onclicks = create_gui_onclick_table();
 	return (NULL);
 }

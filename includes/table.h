@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 20:26:31 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/06 17:26:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/07 20:11:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TABLE_H
 
 # include <stddef.h>
+
 typedef struct	s_tablepair
 {
 	const char	*id;
@@ -25,11 +26,6 @@ typedef struct	s_tablepair_int
 	const char	*id;
 	int			value;
 }				t_tablepair_int;
-
-typedef struct	s_ables
-{
-	
-}				t_tables;
 
 void		*find_tablepair_value(t_tablepair *table, size_t table_size,
 										const char *id);
