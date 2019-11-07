@@ -15,7 +15,6 @@
 #include <limits.h>
 
 #include "libft/ft_str.h"
-#include "libft/ft_printf.h"
 
 #include "tga.h"
 #include "error.h"
