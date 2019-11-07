@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/22 18:02:38 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/07 22:12:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static const t_onclickpair	g_onclicks[] = {
 
 	{"confirmation_return", confirmation_return},
 
+	{"controls_set_forward", controls_set_forward},
+	
 	{"restart_game", restart_game},
 };
 

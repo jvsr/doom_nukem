@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 17:18:06 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/07 22:45:01 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "game.h"
 #include "audio.h"
 #include "keymap.h"
+#include "keystate.h"
 
 static void		check_quit(t_game *game, SDL_Event event)
 {
@@ -65,6 +66,7 @@ static void		play_title_song(t_game *game)
 void			loop(t_game *game)
 {
 	SDL_Event	event;
+	void		(*eventstate_fnc)(t_game*, SDL_Event);
 
 	load_audio(game);
 	play_title_song(game);
@@ -75,6 +77,8 @@ void			loop(t_game *game)
 			check_quit(game, event);
 			check_ui_click(game, event);
 			manage_keymap(game, event);
+			eventstate_fnc = g_keystate[game->cureventstate->eventstate];
+			eventstate_fnc(game, event);
 		}
 		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);

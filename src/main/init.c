@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:52:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/07 23:00:25 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include "audio.h"
 #include "tga.h"
 #include "serializer.h"
+#include "keystate.h"
 
 #include <fcntl.h>
 
@@ -79,6 +80,18 @@ static void		init_settings(t_game *game)
 	game->setting = read_settings();
 }
 
+void			init_eventstate(t_game *game)
+{
+	t_eventstate	*cureventstate;
+
+	cureventstate = ft_memalloc(sizeof(t_eventstate));
+	if (cureventstate == NULL)
+		error_msg_errno("Failed to alloc eventstate");
+	cureventstate->eventstate = mainmenu;
+	cureventstate->arguments = NULL;
+	game->cureventstate = cureventstate;
+}
+
 t_game			*init(char **argv, char **envp)
 {
 	t_game *game;
@@ -93,5 +106,6 @@ t_game			*init(char **argv, char **envp)
 	init_audio(game);
 	init_gui(game);
 	init_keymap(game);
+	init_eventstate(game);
 	return (game);
 }

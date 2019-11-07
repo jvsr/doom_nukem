@@ -28,6 +28,7 @@
         - button: controlsforwardbutton
           - pos: 0.75, 0.2
           - dim: 0.2, 0.6
+          - onclick: controls_set_forward
 
       - panel: controlsbackward
         - pos: 0.05, 0.22

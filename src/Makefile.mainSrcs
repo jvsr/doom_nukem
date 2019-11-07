@@ -18,4 +18,5 @@ PREFIX =
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = main init error_msg loop splash quit error_msg_sdl error_msg_errno \
 		init_main_menu \
-		init_window
+		init_window \
+		eventstates
