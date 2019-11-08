@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 20:40:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/07 22:55:37 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/08 13:34:37 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	mainmenu_eventstate(t_game *game, SDL_Event event);
 void	options_eventstate(t_game *game, SDL_Event event);
 void	set_controls_eventstate(t_game *game, SDL_Event event);
 
-static t_eventstate_fnc	*g_keystate[] =
+static t_eventstate_fnc	*g_eventstate[] =
 {
 	mainmenu_eventstate,
 	options_eventstate,

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/07 22:45:01 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/08 13:49:58 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		check_ui_click(t_game *game, SDL_Event event)
 
 	if (game->cursoractive == FALSE || event.type != SDL_MOUSEBUTTONDOWN)
 		return ;
-	if (event.button.button & SDL_BUTTON_LEFT)
+	if (event.button.button == SDL_BUTTON_LEFT)
 	{
 		hit = check_gui_hit(game, (SDL_Point){event.button.x, event.button.y});
 		if (hit != NULL && hit->onclick != NULL)
@@ -77,8 +77,9 @@ void			loop(t_game *game)
 			check_quit(game, event);
 			check_ui_click(game, event);
 			manage_keymap(game, event);
-			eventstate_fnc = g_keystate[game->cureventstate->eventstate];
+			eventstate_fnc = g_eventstate[game->cureventstate->eventstate];
 			eventstate_fnc(game, event);
+			(void)event;
 		}
 		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);
