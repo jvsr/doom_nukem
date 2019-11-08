@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/07 23:00:25 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/08 22:27:31 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ static void		init_game(t_game *game)
 	game->cursoractive = TRUE;
 }
 
+static void		init_controls(t_setting *settings)
+{
+	settings->controls.forward = SDLK_w;
+}
+
 static void		init_settings(t_game *game)
 {
 	int			fd;
@@ -74,10 +79,12 @@ static void		init_settings(t_game *game)
 		setting->resolution.y = INIT_HEIGHT;
 		setting->resolution_type = fullscreen;
 		game->setting = setting;
+		init_controls(setting);
 		return ;
 	}
 	close(fd);
 	game->setting = read_settings();
+	init_controls(game->setting);
 }
 
 void			init_eventstate(t_game *game)

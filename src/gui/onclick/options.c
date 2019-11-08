@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 14:27:39 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/31 14:55:18 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/08 22:48:54 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	options_open_controls(t_game *game, t_transform *gui)
 
 	(void)gui;
 	controls = get_gui_child(game->ui, "controls");
+	set_key_str(game->setting->controls.forward, get_gui_child(game->ui, "controlsforwardbutton"));
 	set_elem_show_clickable(controls, TRUE);
 }

@@ -6,12 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/07 22:30:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/08 22:48:48 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ONCLICK_H
 # define ONCLICK_H
+
+# include <SDL2/SDL_keycode.h>
 
 # include "types.h"
 
@@ -55,6 +57,8 @@ void	set_sound(t_setting *setting, t_transform *parent);
 void	set_fov(t_setting *setting, t_transform *parent);
 void	set_resolution(t_setting *setting, t_transform *parent);
 void	set_resolution_type(t_setting *setting, t_transform *parent);
+
+void	set_key_str(SDL_Keycode keycode, t_transform *self);
 
 void	set_int(int setting, t_transform *location);
 void	set_float(float setting, t_transform *location, int precision);

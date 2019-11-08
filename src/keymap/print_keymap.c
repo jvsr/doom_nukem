@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 15:53:13 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/03 13:51:49 by pholster      ########   odam.nl         */
+/*   Updated: 2019/11/08 22:44:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft/ft_str.h"
 
 #include "keymap.h"
+#include "error.h"
 
 /*
 ** * print_keymap will take the keymap. (This function is for debug only)
@@ -273,6 +274,27 @@ static const t_keypair	g_keytable[] = {
 ** *	{"AUDIOREWIND", SDLK_AUDIOREWIND},
 ** *	{"AUDIOFASTFORWARD", SDLK_AUDIOFASTFORWARD},
 */
+
+const char	*get_keystate_name(SDL_Keycode key)
+{
+	const size_t	size = sizeof(g_keytable) / sizeof(t_keypair);
+	char			*result;
+	size_t			i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (g_keytable[i].key == key)
+		{
+			result = ft_strdup(g_keytable[i].name);
+			if (result == NULL)
+				error_msg_errno("Failed to alloc keystate name");
+			return (result);
+		}
+		i++;
+	}
+	return (NULL);
+}
 
 static const char	*getname(void *key)
 {

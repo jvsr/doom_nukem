@@ -29,7 +29,8 @@ ONCLICK_SRCS = mainmenu \
 				utils \
 				set_utils \
 				confirmation \
-				controls
+				controls \
+				key_2
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \

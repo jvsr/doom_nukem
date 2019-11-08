@@ -24,11 +24,15 @@
           - dim: 0.6, 0.8
           - text: "Forward :"
           - text_font: foulfiend
+          - text_color: #EAEAEA
           - text_size: 0.8
         - button: controlsforwardbutton
           - pos: 0.75, 0.2
           - dim: 0.2, 0.6
           - onclick: controls_set_forward
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
 
       - panel: controlsbackward
         - pos: 0.05, 0.22
