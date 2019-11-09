@@ -14,12 +14,9 @@
 SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
 			audio keymap serializer
 
-# Executibale name
+# Executable name
 NAME = doom-nukem
 PARENTNAME = $(NAME)
-
-# Get Headers Script
-GET_HEADERS = libft/src/get_headers
 
 # Compile settings
 CCSILENT = FALSE
@@ -115,14 +112,10 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(DATAPATH) $(GET_HEADERS) $(LIB) $(SUBLIBS)
+$(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
-
-# Create Get Headers Script
-$(GET_HEADERS):
-	@make -C libft/.get_headers
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE
@@ -153,7 +146,7 @@ src/$(SUBLIBSPATH):
 	@mkdir src/$(SUBLIBSPATH)
 
 # Clean all non .content files
-clean: $(GET_HEADERS)
+clean:
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif
@@ -170,11 +163,11 @@ ifneq ($(FCLEAN),)
 endif
 
 # Clean $(LIB)
-lib_clean:
+clean_lib:
 	@$(MAKE) -s -e -C $(LIBPATH) clean
 
 # Fclean $(LIB)
-lib_fclean: lib_clean
+fclean_lib: clean_lib
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
 
 # Recompile only the project
@@ -182,7 +175,7 @@ re: fclean
 	@$(MAKE)
 
 # Recompile the $(LIB) and project
-re_all: lib_fclean fclean
+re_all: fclean_lib fclean
 	@$(MAKE)
 
 FORCE: ;
