@@ -3,15 +3,15 @@
   - image: controlsoverlay
     - show: 0
     - clickable: 0
-    - color: #00000000
-    - layer: 0
+    - color: #26020699
+    - layer: 1
 
   - panel: controlsmenu
     - show: 0
     - clickable: 0
     - pos: 0.1, 0.1
     - dim: 0.8, 0.8
-    - layer: 1
+    - layer: 2
     - image: controlsbackground
       - texture: ui/border1x1.tga
 
@@ -186,4 +186,5 @@
     - panel: controlskeychangebox
       - pos: 0.35, 0.35
       - dim: 0.3, 0.3
-      - image: jelw
+      - image: controlskeychangebackground
+        - texture: ui/border1x1.tga
