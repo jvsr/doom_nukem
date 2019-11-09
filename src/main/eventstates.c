@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 21:12:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/09 17:01:48 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/09 19:49:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	set_controls_eventstate(t_game *game, SDL_Event event)
 {
 	static t_bool	first = TRUE;
 
-	printf("cur forwardkey before: %d\n", *game->cureventstate->arguments[0].dgtptr);
 	if (first == FALSE && (event.type == SDL_KEYDOWN || event.type == SDL_MOUSEBUTTONDOWN))
 	{
 		if (event.type == SDL_KEYDOWN)
@@ -55,5 +54,4 @@ void	set_controls_eventstate(t_game *game, SDL_Event event)
 	}
 	else
 		first = FALSE;
-	printf("cur forwardkey  after: %d\n", *game->cureventstate->arguments[0].dgtptr);
 }
