@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/07 22:12:18 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/09 17:37:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ static const t_onclickpair	g_onclicks[] = {
 	{"confirmation_return", confirmation_return},
 
 	{"controls_set_forward", controls_set_forward},
+	{"controls_set_backward", controls_set_backward},
+	{"controls_set_left", controls_set_left},
+	{"controls_set_right", controls_set_right},
+	{"controls_set_shoot", controls_set_shoot},
+	{"controls_set_interact", controls_set_interact},
+	{"controls_set_crouch", controls_set_crouch},
+	{"controls_set_jump", controls_set_jump},
+	{"controls_return", controls_return},
 	
 	{"restart_game", restart_game},
 };

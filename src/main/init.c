@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/08 22:27:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/09 16:46:38 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ static void		init_game(t_game *game)
 static void		init_controls(t_setting *settings)
 {
 	settings->controls.forward = SDLK_w;
+	settings->controls.backward = SDLK_s;
+	settings->controls.left = SDLK_a;
+	settings->controls.right = SDLK_d;
+	settings->controls.interact = SDLK_e;
+	settings->controls.shoot = SDL_BUTTON_LEFT;
+	settings->controls.jump = SDLK_SPACE;
+	settings->controls.crouch = SDLK_LCTRL;
 }
 
 static void		init_settings(t_game *game)
@@ -84,7 +91,6 @@ static void		init_settings(t_game *game)
 	}
 	close(fd);
 	game->setting = read_settings();
-	init_controls(game->setting);
 }
 
 void			init_eventstate(t_game *game)

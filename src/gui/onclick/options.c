@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 14:27:39 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/08 22:48:54 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/09 16:35:00 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,19 @@ void	options_return(t_game *game, t_transform *gui)
 
 void	options_open_controls(t_game *game, t_transform *gui)
 {
-	t_transform	*controls;
+	t_transform	*elem;
 
 	(void)gui;
-	controls = get_gui_child(game->ui, "controls");
+	elem = get_gui_child(game->ui, "controlsmenu");
+	set_elem_show_clickable(elem, TRUE);
+	elem = get_gui_child(game->ui, "controlsmenu");
+	set_elem_show_clickable(elem, TRUE);
 	set_key_str(game->setting->controls.forward, get_gui_child(game->ui, "controlsforwardbutton"));
-	set_elem_show_clickable(controls, TRUE);
+	set_key_str(game->setting->controls.backward, get_gui_child(game->ui, "controlsbackwardbutton"));
+	set_key_str(game->setting->controls.left, get_gui_child(game->ui, "controlsleftbutton"));
+	set_key_str(game->setting->controls.right, get_gui_child(game->ui, "controlsrightbutton"));
+	set_key_str(game->setting->controls.interact, get_gui_child(game->ui, "controlsinteractbutton"));
+	set_key_str(game->setting->controls.shoot, get_gui_child(game->ui, "controlsshootbutton"));
+	set_key_str(game->setting->controls.crouch, get_gui_child(game->ui, "controlscrouchbutton"));
+	set_key_str(game->setting->controls.jump, get_gui_child(game->ui, "controlsjumpbutton"));
 }

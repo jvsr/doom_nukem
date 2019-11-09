@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/08 22:48:48 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/09 17:37:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ void	missions_focus_custom(t_game *game, t_transform *gui);
 void	mission_return(t_game *game, t_transform *gui);
 
 void	controls_set_forward(t_game *game, t_transform *gui);
+void	controls_set_backward(t_game *game, t_transform *gui);
+void	controls_set_left(t_game *game, t_transform *gui);
+void	controls_set_right(t_game *game, t_transform *gui);
+void	controls_set_shoot(t_game *game, t_transform *gui);
+void	controls_set_interact(t_game *game, t_transform *gui);
+void	controls_set_crouch(t_game *game, t_transform *gui);
+void	controls_set_jump(t_game *game, t_transform *gui);
+void	controls_return(t_game *game, t_transform *gui);
 
 void	restart_game(t_game *game, t_transform *gui);
 
