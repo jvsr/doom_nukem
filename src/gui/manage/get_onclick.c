@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/09 17:37:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/09 19:51:09 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static const t_onclickpair	g_onclicks[] = {
 	{"controls_set_crouch", controls_set_crouch},
 	{"controls_set_jump", controls_set_jump},
 	{"controls_return", controls_return},
-	
+
 	{"restart_game", restart_game},
 };
 

@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 15:53:13 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/09 17:29:50 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/09 21:25:02 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,7 @@ static const t_keypair	g_keytable[] = {
 ** *	{"AUDIOFASTFORWARD", SDLK_AUDIOFASTFORWARD},
 */
 
-const char	*get_keystate_name(SDL_Keycode key)
+const char			*get_keystate_name(SDL_Keycode key)
 {
 	const size_t	size = sizeof(g_keytable) / sizeof(t_keypair);
 	char			*result;
