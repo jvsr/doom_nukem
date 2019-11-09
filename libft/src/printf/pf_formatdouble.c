@@ -14,10 +14,9 @@
 #include "ft_str.h"
 #include "ft_num.h"
 
-static void	setdecimals(long double value, char *decimals, size_t n)
+static int	setdecimals(long double value, char *decimals, ssize_t n)
 {
-	size_t	i;
-	int		rnd;
+	ssize_t	i;
 	int		num;
 
 	i = 0;
@@ -31,19 +30,20 @@ static void	setdecimals(long double value, char *decimals, size_t n)
 		i++;
 	}
 	i--;
-	rnd = (num >= 5);
-	while (i > 0)
+	if (decimals[i] < '5')
+		return (0);
+	decimals[i] += 1;
+	while (i >= 0 && decimals[i] == ('9' + 1))
 	{
+		decimals[i] = '0';
 		i--;
-		decimals[i] += rnd;
-		if (decimals[i] == ('9' + 1))
-			decimals[i] = '0';
-		else
-			rnd = 0;
+		if (i != -1)
+			decimals[i]++;
 	}
+	return (i == -1);
 }
 
-static void	adddouble(t_info *info, long double value, size_t n)
+static void	adddouble(t_info *info, long double value, ssize_t n)
 {
 	char		*decimals;
 	intmax_t	num;
@@ -55,8 +55,9 @@ static void	adddouble(t_info *info, long double value, size_t n)
 		value *= -1;
 	num = (intmax_t)value;
 	value -= num;
-	setdecimals(value, decimals, n);
-	num += (n == 0 && decimals[0] >= '5');
+	num += setdecimals(value, decimals, n);
+	if (n == 0 && decimals[0] >= '5')
+		num++;
 	pf_addnum(info, num);
 	if (n != 0)
 	{

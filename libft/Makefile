@@ -19,9 +19,6 @@ NAME = libft.a
 BASENAME = $(NAME:%.a=%)
 PARENTNAME = $(BASENAME)
 
-# Get Headers Script
-GET_HEADERS = src/get_headers
-
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
@@ -77,14 +74,10 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(GET_HEADERS) $(SUBLIBS)
+$(NAME): $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(BASENAME),$(NAME))
 	@rm -f $(NAME)
 	@ar rcs $(NAME) $(OBJS)
-
-# Create Get Headers Script
-$(GET_HEADERS):
-	@make -C .get_headers
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(NAME) FORCE
@@ -103,7 +96,7 @@ src/$(SUBLIBSPATH)/%.content: FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
 
 # Clean all non .content files
-clean: $(GET_HEADERS)
+clean:
 ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif
