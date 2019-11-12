@@ -6,12 +6,11 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/09 16:46:38 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 15:50:17 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
@@ -19,16 +18,9 @@
 #include "libft/ft_mem.h"
 
 #include "game.h"
-#include "setting.h"
 #include "init.h"
 #include "error.h"
-#include "gametime.h"
-#include "audio.h"
-#include "tga.h"
-#include "serializer.h"
-#include "keystate.h"
-
-#include <fcntl.h>
+#include "eventstate.h"
 
 static void		init_sdl(void)
 {
@@ -53,44 +45,6 @@ static void		init_game(t_game *game)
 	game->state = running;
 	init_gametime(&game->starttime);
 	game->cursoractive = TRUE;
-}
-
-static void		init_controls(t_setting *settings)
-{
-	settings->controls.forward = SDLK_w;
-	settings->controls.backward = SDLK_s;
-	settings->controls.left = SDLK_a;
-	settings->controls.right = SDLK_d;
-	settings->controls.interact = SDLK_e;
-	settings->controls.shoot = SDL_BUTTON_LEFT;
-	settings->controls.jump = SDLK_SPACE;
-	settings->controls.crouch = SDLK_LCTRL;
-}
-
-static void		init_settings(t_game *game)
-{
-	int			fd;
-	t_setting	*setting;
-
-	fd = open("./resources/data/settings/settings.conf", O_RDONLY);
-	if (fd == -1)
-	{
-		setting = (t_setting *)ft_memalloc(sizeof(t_setting));
-		if (setting == NULL)
-			error_msg_errno("Failed to alloc settings");
-		setting->sensitivity = 1.0;
-		setting->music_volume = 0.8;
-		setting->sound_volume = 0.8;
-		setting->fov = 75;
-		setting->resolution.x = INIT_WIDTH;
-		setting->resolution.y = INIT_HEIGHT;
-		setting->resolution_type = fullscreen;
-		game->setting = setting;
-		init_controls(setting);
-		return ;
-	}
-	close(fd);
-	game->setting = read_settings();
 }
 
 void			init_eventstate(t_game *game)

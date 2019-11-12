@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/08 22:12:37 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/09 21:24:35 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 15:50:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "game.h"
 #include "keymap.h"
 #include "setting.h"
-#include "keystate.h"
+#include "eventstate.h"
 
 void	set_key_str(SDL_Keycode keycode, t_transform *self)
 {

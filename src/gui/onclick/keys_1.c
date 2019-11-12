@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/08 22:12:19 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/09 21:24:02 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 15:51:03 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "gui.h"
 #include "game.h"
 #include "setting.h"
-#include "keystate.h"
+#include "eventstate.h"
 
 void	controls_set_forward(t_game *game, t_transform *gui)
 {

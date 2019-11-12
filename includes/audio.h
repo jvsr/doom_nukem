@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/25 17:22:43 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 17:22:43 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/12 15:48:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,5 @@ void			effect_all_sounds(int(*func)(int));
 void			set_music_volume(float volume);
 void			set_sound_volume(float volume);
 void			free_audio(t_game *game);
-void			init_audio(t_game *game);
 
 #endif

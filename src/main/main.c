@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/07 22:33:48 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 15:44:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	init_thread = sdl_new_thread("mainmenu", init_main_menu, 2,
 								game, &is_loaded);
 	SDL_DetachThread(init_thread);
-	// splash(game, &is_loaded, "splash/splash");
+	splash(game, &is_loaded, "splash/splash");
 	loop(game);
 	return (quit(game));
 }

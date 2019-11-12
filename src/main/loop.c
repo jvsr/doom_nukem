@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/08 13:49:58 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 15:53:40 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@
 #include "game.h"
 #include "audio.h"
 #include "keymap.h"
-#include "keystate.h"
+#include "eventstate.h"
 
 static void		check_quit(t_game *game, SDL_Event event)
 {
 	if (event.type == SDL_QUIT)
-		game->state = stopped;
-	else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		game->state = stopped;
 }
 

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 21:12:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/09 21:26:15 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 15:51:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "game.h"
 #include "keymap.h"
 #include "onclick.h"
-#include "keystate.h"
+#include "eventstate.h"
 
 void	mainmenu_eventstate(t_game *game, SDL_Event event)
 {
@@ -36,6 +36,7 @@ void	options_eventstate(t_game *game, SDL_Event event)
 **	[1]: t_transform*, location of the keychange element
 **	[2]: t_transform*, location of the controlsbutton element
 */
+
 void	set_controls_eventstate(t_game *game, SDL_Event event)
 {
 	static t_bool	first = TRUE;

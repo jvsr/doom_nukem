@@ -6,13 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 22:10:12 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/09 20:05:39 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 15:50:36 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "game.h"
-#include "keystate.h"
+#include "eventstate.h"
 #include "serializer.h"
 
 void	controls_return(t_game *game, t_transform *gui)
@@ -25,5 +25,5 @@ void	controls_return(t_game *game, t_transform *gui)
 	menu = get_gui_child(game->ui, "controlsmenu");
 	overlay = get_gui_child(game->ui, "controlsoverlay");
 	set_elem_show_clickable(menu, FALSE);
-	set_elem_show_clickable(overlay, FALSE);	
+	set_elem_show_clickable(overlay, FALSE);
 }
