@@ -49,5 +49,5 @@ void	restart_game(t_game *game, t_transform *gui)
 {
 	(void)gui;
 	execve("./doom-nukem", game->argv, game->envp);
-	quit(game);
+	quit(0);
 }

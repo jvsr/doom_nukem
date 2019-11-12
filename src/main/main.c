@@ -30,5 +30,5 @@ int	main(int argc, char **argv, char **envp)
 	SDL_DetachThread(init_thread);
 	splash(game, &is_loaded, "splash/splash");
 	loop(game);
-	return (quit(game));
+	quit(0);
 }
