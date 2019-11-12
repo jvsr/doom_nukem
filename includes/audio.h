@@ -19,8 +19,9 @@
 # define AUDIO_FREQ MIX_DEFAULT_FREQUENCY
 # define AUDIO_CHANNELS MIX_DEFAULT_CHANNELS
 # define AUDIO_BUFFER 4096
-# define SOUND_EFFECT_LOC "./resources/sounds/effects/"
-# define MUSIC_LOC "./resources/sounds/music/"
+
+# define SOUND_EFFECT_PATH "resources/sounds/effects/"
+# define MUSIC_PATH "resources/sounds/music/"
 
 typedef struct s_game		t_game;
 
@@ -68,6 +69,5 @@ void			effect_all_sounds(int(*func)(int));
 void			set_music_volume(float volume);
 void			set_sound_volume(float volume);
 void			free_audio(t_game *game);
-void			init_audio(t_game *game);
 
 #endif
