@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:37:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 16:39:05 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 17:05:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	quit_controls(t_game *game)
 	controls_return(game, get_gui_child(game->ui, "controlsreturnbutton"));
 }
 
-void	controls_eventstate(t_game *game, SDL_Event event)
+void		controls_eventstate(t_game *game, SDL_Event event)
 {
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		quit_controls(game);

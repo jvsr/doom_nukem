@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 15:19:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:39:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 17:02:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "gui.h"
 #include "game.h"
 #include "onclick.h"
+#include "eventstate.h"
 
 void	add_confirmation(t_game *game)
 {
@@ -43,6 +44,7 @@ void	confirmation_return(t_game *game, t_transform *gui)
 	(void)gui;
 	remove_confirmation(game);
 	remove_options(game);
+	game->cureventstate->eventstate = mainmenu;
 }
 
 void	restart_game(t_game *game, t_transform *gui)

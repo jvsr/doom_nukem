@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   eventstates.c                                      :+:    :+:            */
+/*   eventstate_set_controls.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/07 21:12:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 16:37:20 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/12 17:20:34 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/12 17:27:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,6 @@
 #include "keymap.h"
 #include "onclick.h"
 #include "eventstate.h"
-
-void	mainmenu_eventstate(t_game *game, SDL_Event event)
-{
-	(void)game;
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-		quit(game);
-}
-
-void	missions_eventstate(t_game *game, SDL_Event event)
-{
-	(void)game;
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-	{
-		game->cureventstate->eventstate = mainmenu;
-		mission_return(game, get_gui_child(game->ui, "missionreturnbutton"));
-	}
-}
-
-void	options_eventstate(t_game *game, SDL_Event event)
-{
-	(void)game;
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-	{
-		game->cureventstate->eventstate = mainmenu;
-		options_return(game, get_gui_child(game->ui, "optionsreturnbutton"));
-	}
-}
-
-void	options_confirmation_eventstate(t_game *game, SDL_Event event)
-{
-	(void)game;
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-	{
-		game->cureventstate->eventstate = options;
-		confirmation_return(game,
-			get_gui_child(game->ui, "confirmationreturnbutton"));
-	}
-}
 
 /*
 **	Arguments:
