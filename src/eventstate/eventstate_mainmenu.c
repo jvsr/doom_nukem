@@ -18,6 +18,7 @@
 
 void	mainmenu_eventstate(t_game *game, SDL_Event event)
 {
+	(void)game;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-		quit(game);
+		quit(0);
 }
