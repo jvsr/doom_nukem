@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/04 15:37:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 15:15:33 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:28:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ SDL_Surface		*open_tga_sdl(char *file_name)
 
 	create_image(file_name, &img);
 	surface = sdl_create_surface_default((SDL_Point){img.width, img.height});
-	ft_memcpy(surface->pixels, img.pixels, img.pitch * img.height);
+	ft_memcpy(surface->pixels, img.pixels, (img.width * img.height) * 4);
 	free(img.pixels);
 	return (surface);
 }

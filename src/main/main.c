@@ -6,27 +6,29 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/25 15:39:48 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/12 15:44:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_video.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
 
 #include "game.h"
 #include "init.h"
-#include "audio.h"
+#include "sdl_thread.h"
 
-int			main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	t_game *game;
-	t_bool isloaded;
+	SDL_Thread	*init_thread;
+	t_game		*game;
+	t_bool		is_loaded;
 
-	isloaded = TRUE;
-	game = init();
-	splash(game, &isloaded, "splash/splash");
+	(void)argc;
+	is_loaded = FALSE;
+	game = init(argv, envp);
+	init_thread = sdl_new_thread("mainmenu", init_main_menu, 2,
+								game, &is_loaded);
+	SDL_DetachThread(init_thread);
+	splash(game, &is_loaded, "splash/splash");
 	loop(game);
-	return (quit(game));
+	quit(0);
 }

@@ -19,12 +19,10 @@
 #include "init.h"
 #include "audio.h"
 
-int		quit(t_game *game)
+void	quit(int exit_code)
 {
-	SDL_DestroyWindow(game->window);
 	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
-	exit(0);
-	return (0);
+	exit(exit_code);
 }

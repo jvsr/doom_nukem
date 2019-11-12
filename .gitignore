@@ -2,6 +2,12 @@
 doom-nukem
 doomtest
 
+# Config files
+*.conf
+
+# Compile paths
+*.content
+
 # Prerequisites
 *.d
 
@@ -18,7 +24,6 @@ doomtest
 
 # Linker output
 *.ilk
-*.map
 *.exp
 
 # Precompiled Headers
@@ -60,7 +65,9 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# OSX files
+*.DS_Store
+
 # Other
-*.content
 get_headers
 personal.h

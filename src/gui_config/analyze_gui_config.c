@@ -12,10 +12,11 @@
 
 #include <errno.h>
 #include <unistd.h>
+#include <limits.h>
 
 #include "libft/ft_str.h"
-#include "libft/ft_printf.h"
 
+#include "game.h"
 #include "gui.h"
 #include "lex.h"
 #include "parse.h"
@@ -24,9 +25,13 @@
 
 static void	empty_file_error(const char *file_name)
 {
+	char	full_path[PATH_MAX];
+
+	ft_strcpy(full_path, g_doom_dir);
+	ft_strcat(full_path, UI_CONFIG_PATH);
+	ft_strcat(full_path, file_name);
 	error_msg("GUI Error", 20,
-		ft_strformat("Empty GUI config file: %s%s.ui.yml",
-		UI_CONFIG_PATH, file_name));
+		ft_strformat("Empty GUI config file: %s.ui.yml", full_path));
 }
 
 t_transform	*analyze_gui_config(t_gui *ui, const char *file_name)
