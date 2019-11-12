@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/12 16:18:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 18:10:37 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "audio.h"
 #include "keymap.h"
 #include "eventstate.h"
+#include "eventstate_transition_table.h"
 
 static void		check_quit(t_game *game, SDL_Event event)
 {
