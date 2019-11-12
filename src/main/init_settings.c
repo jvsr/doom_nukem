@@ -3,16 +3,17 @@
 /*                                                        ::::::::            */
 /*   init_settings.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/12 14:53:44 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/12 14:53:44 by pholster      ########   odam.nl         */
+/*   Created: 2019/11/12 15:45:10 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/12 15:48:31 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <limits.h>
 #include <unistd.h>
+#include <SDL2/SDL_events.h>
 
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
@@ -33,7 +34,19 @@ static int	open_file(void)
 	return (open(full_path, O_RDONLY));
 }
 
-void		init_settings(t_game *game)
+static void		init_controls(t_setting *settings)
+{
+	settings->controls.forward = SDLK_w;
+	settings->controls.backward = SDLK_s;
+	settings->controls.left = SDLK_a;
+	settings->controls.right = SDLK_d;
+	settings->controls.interact = SDLK_e;
+	settings->controls.shoot = SDL_BUTTON_LEFT;
+	settings->controls.jump = SDLK_SPACE;
+	settings->controls.crouch = SDLK_LCTRL;
+}
+
+void			init_settings(t_game *game)
 {
 	int			fd;
 	t_setting	*setting;
@@ -52,6 +65,7 @@ void		init_settings(t_game *game)
 		setting->resolution.y = INIT_HEIGHT;
 		setting->resolution_type = fullscreen;
 		game->setting = setting;
+		init_controls(setting);
 		return ;
 	}
 	close(fd);

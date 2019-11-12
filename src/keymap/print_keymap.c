@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/29 15:53:13 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/03 13:51:49 by pholster      ########   odam.nl         */
+/*   Updated: 2019/11/09 21:25:02 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft/ft_str.h"
 
 #include "keymap.h"
+#include "error.h"
 
 /*
 ** * print_keymap will take the keymap. (This function is for debug only)
@@ -26,30 +27,30 @@
 static const t_keypair	g_keytable[] = {
 	{"UNKNOWN", SDLK_UNKNOWN},
 
-	{"BUTTON_LEFT", SDL_BUTTON_LEFT},
-	{"BUTTON_RIGHT", SDL_BUTTON_RIGHT},
-	{"BUTTON_MIDDLE", SDL_BUTTON_MIDDLE},
+	{"MB1", SDL_BUTTON_LEFT},
+	{"MB2", SDL_BUTTON_RIGHT},
+	{"MB3", SDL_BUTTON_MIDDLE},
 
-	{"RETURN", SDLK_RETURN},
-	{"ESCAPE", SDLK_ESCAPE},
-	{"BACKSPACE", SDLK_BACKSPACE},
+	{"RET", SDLK_RETURN},
+	{"ESC", SDLK_ESCAPE},
+	{"BSPACE", SDLK_BACKSPACE},
 	{"TAB", SDLK_TAB},
 	{"SPACE", SDLK_SPACE},
-	{"EXCLAIM", SDLK_EXCLAIM},
+	{"!", SDLK_EXCLAIM},
 	{"QUOTEDBL", SDLK_QUOTEDBL},
-	{"HASH", SDLK_HASH},
-	{"PERCENT", SDLK_PERCENT},
-	{"DOLLAR", SDLK_DOLLAR},
+	{"#", SDLK_HASH},
+	{"%", SDLK_PERCENT},
+	{"$", SDLK_DOLLAR},
 	{"AMPERSAND", SDLK_AMPERSAND},
 	{"QUOTE", SDLK_QUOTE},
-	{"LEFTPAREN", SDLK_LEFTPAREN},
-	{"RIGHTPAREN", SDLK_RIGHTPAREN},
+	{")", SDLK_LEFTPAREN},
+	{"(", SDLK_RIGHTPAREN},
 	{"ASTERISK", SDLK_ASTERISK},
-	{"PLUS", SDLK_PLUS},
-	{"COMMA", SDLK_COMMA},
-	{"MINUS", SDLK_MINUS},
-	{"PERIOD", SDLK_PERIOD},
-	{"SLASH", SDLK_SLASH},
+	{"+", SDLK_PLUS},
+	{",", SDLK_COMMA},
+	{"-", SDLK_MINUS},
+	{".", SDLK_PERIOD},
+	{"/", SDLK_SLASH},
 	{"0", SDLK_0},
 	{"1", SDLK_1},
 	{"2", SDLK_2},
@@ -60,8 +61,8 @@ static const t_keypair	g_keytable[] = {
 	{"7", SDLK_7},
 	{"8", SDLK_8},
 	{"9", SDLK_9},
-	{"COLON", SDLK_COLON},
-	{"SEMICOLON", SDLK_SEMICOLON},
+	{":", SDLK_COLON},
+	{";", SDLK_SEMICOLON},
 	{"LESS", SDLK_LESS},
 	{"EQUALS", SDLK_EQUALS},
 	{"GREATER", SDLK_GREATER},
@@ -71,7 +72,7 @@ static const t_keypair	g_keytable[] = {
 	{"BACKSLASH", SDLK_BACKSLASH},
 	{"RIGHTBRACKET", SDLK_RIGHTBRACKET},
 	{"CARET", SDLK_CARET},
-	{"UNDERSCORE", SDLK_UNDERSCORE},
+	{"_", SDLK_UNDERSCORE},
 	{"BACKQUOTE", SDLK_BACKQUOTE},
 	{"a", SDLK_a},
 	{"b", SDLK_b},
@@ -99,7 +100,7 @@ static const t_keypair	g_keytable[] = {
 	{"x", SDLK_x},
 	{"y", SDLK_y},
 	{"z", SDLK_z},
-	{"CAPSLOCK", SDLK_CAPSLOCK},
+	{"CPSLCK", SDLK_CAPSLOCK},
 	{"F1", SDLK_F1},
 	{"F2", SDLK_F2},
 	{"F3", SDLK_F3},
@@ -273,6 +274,27 @@ static const t_keypair	g_keytable[] = {
 ** *	{"AUDIOREWIND", SDLK_AUDIOREWIND},
 ** *	{"AUDIOFASTFORWARD", SDLK_AUDIOFASTFORWARD},
 */
+
+const char			*get_keystate_name(SDL_Keycode key)
+{
+	const size_t	size = sizeof(g_keytable) / sizeof(t_keypair);
+	char			*result;
+	size_t			i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (g_keytable[i].key == key)
+		{
+			result = ft_strdup(g_keytable[i].name);
+			if (result == NULL)
+				error_msg_errno("Failed to alloc keystate name");
+			return (result);
+		}
+		i++;
+	}
+	return (NULL);
+}
 
 static const char	*getname(void *key)
 {

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -21,6 +21,7 @@
 #include "game.h"
 #include "init.h"
 #include "error.h"
+#include "eventstate.h"
 
 static void		init_sdl(void)
 {
@@ -63,6 +64,18 @@ static void		set_basic_args(t_game *game, char **argv, char **envp)
 		error_msg_errno("Failed to alloc doom dir");
 }
 
+void			init_eventstate(t_game *game)
+{
+	t_eventstate	*cureventstate;
+
+	cureventstate = ft_memalloc(sizeof(t_eventstate));
+	if (cureventstate == NULL)
+		error_msg_errno("Failed to alloc eventstate");
+	cureventstate->eventstate = mainmenu;
+	cureventstate->arguments = NULL;
+	game->cureventstate = cureventstate;
+}
+
 t_game			*init(char **argv, char **envp)
 {
 	t_game *game;
@@ -76,5 +89,6 @@ t_game			*init(char **argv, char **envp)
 	init_audio(game);
 	init_gui(game);
 	init_keymap(game);
+	init_eventstate(game);
 	return (game);
 }

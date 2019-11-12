@@ -17,6 +17,7 @@
 #include "onclick.h"
 #include "setting.h"
 #include "gui_config.h"
+#include "eventstate.h"
 
 void	mainmenu_missions(t_game *game, t_transform *gui)
 {
@@ -31,6 +32,7 @@ void	mainmenu_missions(t_game *game, t_transform *gui)
 	set_elem_show_clickable(elem, TRUE);
 	elem = get_gui_child(game->ui, "missionscustombutton");
 	set_elem_show_clickable(elem, TRUE);
+	game->cureventstate->eventstate = missions;
 }
 
 void	mainmenu_options(t_game *game, t_transform *gui)
@@ -49,6 +51,7 @@ void	mainmenu_options(t_game *game, t_transform *gui)
 	set_fov(game->setting, options_menu);
 	set_resolution(game->setting, options_menu);
 	set_resolution_type(game->setting, options_menu);
+	game->cureventstate->eventstate = options;
 }
 
 void	mainmenu_quit(t_game *game, t_transform *gui)

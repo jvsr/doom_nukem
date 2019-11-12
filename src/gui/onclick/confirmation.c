@@ -18,6 +18,7 @@
 #include "gui.h"
 #include "game.h"
 #include "onclick.h"
+#include "eventstate.h"
 
 void	add_confirmation(t_game *game)
 {
@@ -46,6 +47,7 @@ void	confirmation_return(t_game *game, t_transform *gui)
 	(void)gui;
 	remove_confirmation(game);
 	remove_options(game);
+	game->cureventstate->eventstate = mainmenu;
 }
 
 void	restart_game(t_game *game, t_transform *gui)

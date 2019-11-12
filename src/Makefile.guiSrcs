@@ -28,7 +28,10 @@ ONCLICK_SRCS = mainmenu \
 				sound \
 				utils \
 				set_utils \
-				confirmation
+				confirmation \
+				controls \
+				keys_1 \
+				key_2
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \
