@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 21:12:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 15:51:11 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 16:37:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,39 @@
 void	mainmenu_eventstate(t_game *game, SDL_Event event)
 {
 	(void)game;
-	(void)event;
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+		quit(game);
+}
+
+void	missions_eventstate(t_game *game, SDL_Event event)
+{
+	(void)game;
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+	{
+		game->cureventstate->eventstate = mainmenu;
+		mission_return(game, get_gui_child(game->ui, "missionreturnbutton"));
+	}
 }
 
 void	options_eventstate(t_game *game, SDL_Event event)
 {
 	(void)game;
-	(void)event;
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+	{
+		game->cureventstate->eventstate = mainmenu;
+		options_return(game, get_gui_child(game->ui, "optionsreturnbutton"));
+	}
+}
+
+void	options_confirmation_eventstate(t_game *game, SDL_Event event)
+{
+	(void)game;
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+	{
+		game->cureventstate->eventstate = options;
+		confirmation_return(game,
+			get_gui_child(game->ui, "confirmationreturnbutton"));
+	}
 }
 
 /*
@@ -44,6 +70,7 @@ void	set_controls_eventstate(t_game *game, SDL_Event event)
 	if (first == FALSE
 	&& (event.type == SDL_KEYDOWN || event.type == SDL_MOUSEBUTTONDOWN))
 	{
+		game->cureventstate->eventstate = options;
 		if (event.type == SDL_KEYDOWN)
 			*game->cureventstate->arguments[0].dgtptr = event.key.keysym.sym;
 		else
@@ -52,7 +79,6 @@ void	set_controls_eventstate(t_game *game, SDL_Event event)
 			(t_transform*)game->cureventstate->arguments[1].ptr, FALSE);
 		set_key_str(*game->cureventstate->arguments[0].dgtptr,
 			(t_transform*)game->cureventstate->arguments[2].ptr);
-		game->cureventstate->eventstate = options;
 		free(game->cureventstate->arguments);
 		first = TRUE;
 	}

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/12 15:53:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 16:18:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void			loop(t_game *game)
 			manage_keymap(game, event);
 			eventstate_fnc = g_eventstate[game->cureventstate->eventstate];
 			eventstate_fnc(game, event);
-			(void)event;
 		}
 		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);
