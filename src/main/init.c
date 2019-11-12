@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:52:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 17:46:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,6 @@ static void		set_basic_args(t_game *game, char **argv, char **envp)
 	g_doom_dir = ft_strndup(argv[0], path_len);
 	if (g_doom_dir == NULL)
 		error_msg_errno("Failed to alloc doom dir");
-}
-
-void			init_eventstate(t_game *game)
-{
-	t_eventstate	*cureventstate;
-
-	cureventstate = ft_memalloc(sizeof(t_eventstate));
-	if (cureventstate == NULL)
-		error_msg_errno("Failed to alloc eventstate");
-	cureventstate->eventstate = mainmenu;
-	cureventstate->arguments = NULL;
-	game->cureventstate = cureventstate;
 }
 
 t_game			*init(char **argv, char **envp)

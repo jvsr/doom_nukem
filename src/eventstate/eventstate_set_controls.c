@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:20:34 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:27:04 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 17:49:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	set_controls_eventstate(t_game *game, SDL_Event event)
 	if (first == FALSE
 	&& (event.type == SDL_KEYDOWN || event.type == SDL_MOUSEBUTTONDOWN))
 	{
-		game->cureventstate->eventstate = options;
+		game->cureventstate->eventstate = controls;
 		if (event.type == SDL_KEYDOWN)
 			*game->cureventstate->arguments[0].dgtptr = event.key.keysym.sym;
 		else

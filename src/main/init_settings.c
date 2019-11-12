@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 15:45:10 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 15:48:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 17:45:48 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include "error.h"
 #include "serializer.h"
 
-static int	open_file(void)
+static int		open_file(void)
 {
 	char	full_path[PATH_MAX];
 
