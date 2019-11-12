@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
+
+#include "game.h"
 #include "setting.h"
 #include "serializer.h"
 

@@ -16,6 +16,7 @@
 
 #include "libft/ft_str.h"
 
+#include "game.h"
 #include "lex.h"
 #include "error.h"
 
@@ -24,11 +25,12 @@ int	open_gui_config(const char *file_name)
 	int		fd;
 	char	full_path[PATH_MAX];
 
-	ft_strcpy(full_path, UI_CONFIG_PATH);
+	ft_strcpy(full_path, g_doom_dir);
+	ft_strcat(full_path, UI_CONFIG_PATH);
 	ft_strcat(full_path, file_name);
 	ft_strcat(full_path, ".ui.yml");
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
-		error_msg(strerror(errno), errno, "Failed to open ui config");
+		error_msg_errno(ft_strformat("Failed to open %s", full_path));
 	return (fd);
 }

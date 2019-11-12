@@ -16,9 +16,9 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "game.h"
-#include "setting.h"
 #include "init.h"
 #include "error.h"
 #include "eventstate.h"
@@ -48,6 +48,22 @@ static void		init_game(t_game *game)
 	game->cursoractive = TRUE;
 }
 
+static void		set_basic_args(t_game *game, char **argv, char **envp)
+{
+	const size_t	exec_len = ft_strlen(argv[0]);
+	size_t			path_len;
+
+	game->argv = argv;
+	game->envp = envp;
+	game->exec_name = ft_strdup(ft_strrchr(argv[0], '/') + 1);
+	if (game->exec_name == NULL)
+		error_msg_errno("Failed to alloc exec name");
+	path_len = exec_len - ft_strlen(game->exec_name);
+	g_doom_dir = ft_strndup(argv[0], path_len);
+	if (g_doom_dir == NULL)
+		error_msg_errno("Failed to alloc doom dir");
+}
+
 void			init_eventstate(t_game *game)
 {
 	t_eventstate	*cureventstate;
@@ -66,8 +82,7 @@ t_game			*init(char **argv, char **envp)
 
 	init_sdl();
 	game = alloc_game();
-	game->argv = argv;
-	game->envp = envp;
+	set_basic_args(game, argv, envp);
 	init_settings(game);
 	init_window_surface(game);
 	init_game(game);

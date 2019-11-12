@@ -17,7 +17,7 @@
 # include "libft/ft_bool.h"
 # include "types.h"
 
-# define INIT_PATH "resources/data/"
+# define RESOURCE_PATH "resources/data/"
 
 typedef enum e_endian		t_endian;
 typedef struct s_list		t_list;

@@ -11,15 +11,28 @@
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <limits.h>
 #include <unistd.h>
+#include <SDL2/SDL_events.h>
 
 #include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
-#include "init.h"
 #include "game.h"
-#include "error.h"
 #include "setting.h"
+#include "init.h"
+#include "error.h"
 #include "serializer.h"
+
+static int	open_file(void)
+{
+	char	full_path[PATH_MAX];
+
+	ft_strcpy(full_path, g_doom_dir);
+	ft_strcat(full_path, SETTINGS_PATH);
+	ft_strcat(full_path, "settings.conf");
+	return (open(full_path, O_RDONLY));
+}
 
 static void		init_controls(t_setting *settings)
 {
@@ -38,7 +51,7 @@ void			init_settings(t_game *game)
 	int			fd;
 	t_setting	*setting;
 
-	fd = open("./resources/data/settings/settings.conf", O_RDONLY);
+	fd = open_file();
 	if (fd == -1)
 	{
 		setting = (t_setting *)ft_memalloc(sizeof(t_setting));
