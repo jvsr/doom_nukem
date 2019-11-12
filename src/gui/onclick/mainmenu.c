@@ -54,5 +54,6 @@ void	mainmenu_options(t_game *game, t_transform *gui)
 void	mainmenu_quit(t_game *game, t_transform *gui)
 {
 	(void)gui;
-	quit(game);
+	(void)game;
+	quit(0);
 }
