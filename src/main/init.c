@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
@@ -22,12 +21,7 @@
 #include "setting.h"
 #include "init.h"
 #include "error.h"
-#include "gametime.h"
-#include "audio.h"
-#include "tga.h"
-#include "serializer.h"
-
-#include <fcntl.h>
+#include "eventstate.h"
 
 static void		init_sdl(void)
 {
@@ -54,29 +48,16 @@ static void		init_game(t_game *game)
 	game->cursoractive = TRUE;
 }
 
-static void		init_settings(t_game *game)
+void			init_eventstate(t_game *game)
 {
-	int			fd;
-	t_setting	*setting;
+	t_eventstate	*cureventstate;
 
-	fd = open("./resources/data/settings/settings.conf", O_RDONLY);
-	if (fd == -1)
-	{
-		setting = (t_setting *)ft_memalloc(sizeof(t_setting));
-		if (setting == NULL)
-			error_msg_errno("Failed to alloc settings");
-		setting->sensitivity = 1.0;
-		setting->music_volume = 0.8;
-		setting->sound_volume = 0.8;
-		setting->fov = 75;
-		setting->resolution.x = INIT_WIDTH;
-		setting->resolution.y = INIT_HEIGHT;
-		setting->resolution_type = fullscreen;
-		game->setting = setting;
-		return ;
-	}
-	close(fd);
-	game->setting = read_settings();
+	cureventstate = ft_memalloc(sizeof(t_eventstate));
+	if (cureventstate == NULL)
+		error_msg_errno("Failed to alloc eventstate");
+	cureventstate->eventstate = mainmenu;
+	cureventstate->arguments = NULL;
+	game->cureventstate = cureventstate;
 }
 
 t_game			*init(char **argv, char **envp)
@@ -93,5 +74,6 @@ t_game			*init(char **argv, char **envp)
 	init_audio(game);
 	init_gui(game);
 	init_keymap(game);
+	init_eventstate(game);
 	return (game);
 }

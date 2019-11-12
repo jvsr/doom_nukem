@@ -42,6 +42,16 @@ static const t_onclickpair	g_onclicks[] = {
 
 	{"confirmation_return", confirmation_return},
 
+	{"controls_set_forward", controls_set_forward},
+	{"controls_set_backward", controls_set_backward},
+	{"controls_set_left", controls_set_left},
+	{"controls_set_right", controls_set_right},
+	{"controls_set_shoot", controls_set_shoot},
+	{"controls_set_interact", controls_set_interact},
+	{"controls_set_crouch", controls_set_crouch},
+	{"controls_set_jump", controls_set_jump},
+	{"controls_return", controls_return},
+
 	{"restart_game", restart_game},
 };
 
