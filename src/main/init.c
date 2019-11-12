@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 15:50:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:52:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "libft/ft_mem.h"
 
 #include "game.h"
+#include "setting.h"
 #include "init.h"
 #include "error.h"
 #include "eventstate.h"

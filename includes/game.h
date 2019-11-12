@@ -54,6 +54,6 @@ typedef struct	s_game
 
 void			loop(t_game *game);
 void			splash(t_game *game, t_bool *finished, char *loc);
-int				quit(t_game *game);
+void			quit(int exit_code);
 
 #endif

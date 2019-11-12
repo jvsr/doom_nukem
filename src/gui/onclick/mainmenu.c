@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:02:43 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 16:07:46 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 13:52:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	mainmenu_options(t_game *game, t_transform *gui)
 void	mainmenu_quit(t_game *game, t_transform *gui)
 {
 	(void)gui;
-	quit(game);
+	(void)game;
+	quit(0);
 }

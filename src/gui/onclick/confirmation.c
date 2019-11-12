@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 15:19:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:02:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/10/24 15:39:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void	restart_game(t_game *game, t_transform *gui)
 {
 	(void)gui;
 	execve("./doom-nukem", game->argv, game->envp);
-	quit(game);
+	quit(0);
 }
