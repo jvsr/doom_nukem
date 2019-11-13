@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   loader.c                                           :+:    :+:            */
+/*   eventstate_initload.c                              :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/24 17:02:28 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/13 11:21:10 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/13 17:52:38 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/13 17:56:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "game.h"
-#include "init.h"
-#include "renderer.h"
+#include <SDL2/SDL_events.h>
 
-void	loader(t_game *game, t_bool *isloaded)
+#include "game.h"
+#include "keymap.h"
+#include "eventstate.h"
+
+void	initload_eventstate(t_game *game, SDL_Event event)
 {
-	load_textures(game);
-	init_main_menu(game);
-	*isloaded = TRUE;
+	(void)game;
+	(void)event;
 }

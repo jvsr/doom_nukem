@@ -14,10 +14,11 @@ CCFLAGS +=
 # Source file prefix
 PREFIX =
 
-# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
-# These will be automaticly prefixed with ft_ and sufixed with .c
-FT_SRCS =
-
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = init_map
+SRCS = init \
+		init_prerequisites \
+		init_main_menu \
+		init_window \
+		init_settings \
+		init_eventstate

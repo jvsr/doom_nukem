@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/25 13:42:11 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:48:50 by pholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 18:08:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,10 @@ SDL_Thread		*sdl_new_thread(const char *name, void (*f)(),
 	thread = SDL_CreateThread(&run_fnc, name, (void *)task);
 	if (thread == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc new thread");
+	if (name == NULL)
+	{
+		SDL_DetachThread(thread);
+		return (NULL);
+	}
 	return (thread);
 }

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/13 11:12:26 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/13 18:09:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 
 #include "gui.h"
 #include "game.h"
+#include "init.h"
 #include "audio.h"
 #include "keymap.h"
 #include "renderer.h"
 #include "eventstate.h"
+#include "sdl_thread.h"
 #include "eventstate_transition_table.h"
 
 static void		check_quit(t_game *game, SDL_Event event)
@@ -58,18 +60,20 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		print_keymap(game->keymap);
 }
 
-static void		play_title_song(t_game *game)
-{
-	fade_in_music(game->audio_man, MUSIC_HIT_N_SMASH, 3500);
-}
-
 void			loop(t_game *game)
 {
 	SDL_Event	event;
 	void		(*eventstate_fnc)(t_game*, SDL_Event);
 
-	load_audio(game);
-	play_title_song(game);
+	sdl_new_thread(NULL, init_function, 1, game);
+	sdl_new_thread(NULL, display_splash, 2, game, "splash/splash");
+	while (game->state == running
+	&& (game->cureventstate->eventstate == initload
+	|| game->cureventstate->eventstate == splash))
+	{
+		while (SDL_PollEvent(&event))
+			check_quit(game, event);
+	}
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))

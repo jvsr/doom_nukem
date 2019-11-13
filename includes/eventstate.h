@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 20:40:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 18:10:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/13 17:56:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 typedef struct s_game			t_game;
 
+void							initload_eventstate
+									(t_game *game, SDL_Event event);
+void							splash_eventstate
+									(t_game *game, SDL_Event event);
 void							mainmenu_eventstate
 									(t_game *game, SDL_Event event);
 void							missions_eventstate
@@ -32,6 +36,8 @@ void							set_controls_eventstate
 
 typedef enum					e_eventstate_code
 {
+	initload,
+	splash,
 	mainmenu,
 	missions,
 	options,

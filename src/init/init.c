@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   eventstate_transition_table.h                      :+:    :+:            */
+/*   init.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/12 18:05:18 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/13 17:57:22 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/13 18:03:27 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTSTATE_TRANSITION_TABLE_H
-# define EVENTSTATE_TRANSITION_TABLE_H
+#include "game.h"
+#include "audio.h"
+#include "init.h"
+#include "eventstate.h"
+#include "renderer.h"
 
-# include "eventstate.h"
-
-typedef void		(t_eventstate_fnc)(t_game *, SDL_Event);
-
-static t_eventstate_fnc	*g_eventstate[] =
+void	init_function(t_game *game)
 {
-	initload_eventstate,
-	splash_eventstate,
-	mainmenu_eventstate,
-	missions_eventstate,
-	options_eventstate,
-	options_confirmation_eventstate,
-	controls_eventstate,
-	set_controls_eventstate,
-};
-
-#endif
+	init_audio(game);
+	init_gui(game);
+	load_textures(game);
+	init_main_menu(game);
+	init_keymap(game);
+	game->cureventstate->eventstate = splash;
+}

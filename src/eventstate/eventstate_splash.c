@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   eventstate_transition_table.h                      :+:    :+:            */
+/*   eventstate_splash.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/12 18:05:18 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/13 17:57:22 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/13 12:04:40 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/13 12:08:44 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTSTATE_TRANSITION_TABLE_H
-# define EVENTSTATE_TRANSITION_TABLE_H
+#include <SDL2/SDL_events.h>
 
-# include "eventstate.h"
+#include "game.h"
 
-typedef void		(t_eventstate_fnc)(t_game *, SDL_Event);
-
-static t_eventstate_fnc	*g_eventstate[] =
+void	splash_eventstate(t_game *game, SDL_Event event)
 {
-	initload_eventstate,
-	splash_eventstate,
-	mainmenu_eventstate,
-	missions_eventstate,
-	options_eventstate,
-	options_confirmation_eventstate,
-	controls_eventstate,
-	set_controls_eventstate,
-};
-
-#endif
+	(void)game;
+	(void)event;
+}

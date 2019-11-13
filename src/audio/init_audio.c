@@ -6,19 +6,26 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/01 11:16:29 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/01 11:16:29 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/13 16:34:49 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <SDL2/SDL_mixer.h>
+
 #include "libft/ft_mem.h"
+
 #include "game.h"
-#include "setting.h"
 #include "audio.h"
 #include "error.h"
+#include "setting.h"
 
-void	init_audio(t_game *game)
+static void	play_title_song(t_game *game)
+{
+	fade_in_music(game->audio_man, MUSIC_HIT_N_SMASH, 3500);
+}
+
+void		init_audio(t_game *game)
 {
 	int support;
 
@@ -33,4 +40,6 @@ void	init_audio(t_game *game)
 		error_msg_sdl(EIO, "Failed to init Audio Mixer");
 	set_sound_volume(game->setting->sound_volume);
 	set_music_volume(game->setting->music_volume);
+	load_audio(game);
+	play_title_song(game);
 }

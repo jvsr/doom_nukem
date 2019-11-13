@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/13 11:11:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/13 12:01:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ typedef struct s_eventstate		t_eventstate;
 
 const char		*g_doom_dir;
 
-typedef	enum	e_state
+typedef	enum	e_gamestate
 {
 	running,
 	suspended,
 	stopped
-}				t_state;
+}				t_gamestate;
 
 typedef struct	s_game
 {
 	char			*exec_name;
 	char			**envp;
 	char			**argv;
-	t_state			state;
+	t_gamestate		state;
 	SDL_Window		*window;
 	SDL_Surface		*surface;
 	t_gui			*ui;
@@ -57,8 +57,8 @@ typedef struct	s_game
 }				t_game;
 
 void			loop(t_game *game);
-void			splash(t_game *game, t_bool *finished, char *loc);
-void			loader(t_game *game, t_bool *isloaded);
+void			display_splash(t_game *game, char *loc);
+void			loader(t_game *game);
 void			quit(int exit_code);
 
 #endif

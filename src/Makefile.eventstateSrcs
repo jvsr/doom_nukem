@@ -17,6 +17,8 @@ PREFIX =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = eventstate_controls \
+		eventstate_initload \
+		eventstate_splash \
 		eventstate_mainmenu \
 		eventstate_missions \
 		eventstate_options \
