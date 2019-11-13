@@ -17,7 +17,13 @@
 #include "types.h"
 #include "renderer.h"
 
-t_list	*add_walls(t_sector *sector, t_level *level, t_list *sectors)
+int		is_between(float mag, t_mag *pmag)
+{
+	return (!(mag > pmag->start || mag < pmag->end));
+}
+
+t_list	*add_walls(t_sector *sector,
+					t_level *level, t_list *sectors, t_mag *mag)
 {
 	t_wall		**walls;
 	t_uint32	i;
@@ -31,7 +37,7 @@ t_list	*add_walls(t_sector *sector, t_level *level, t_list *sectors)
 	{
 		normal = (walls[i]->start.x * walls[i]->end.y) -
 			(walls[i]->end.x * walls[i]->start.y);
-		if (normal > 0.7)
+		if (!is_between(normal, mag))
 			continue;
 		if (walls[i]->is_portal == TRUE)
 			ft_lstaddbck(&sectors,ft_lstnew(
@@ -42,7 +48,7 @@ t_list	*add_walls(t_sector *sector, t_level *level, t_list *sectors)
 	return (lst);
 }
 
-t_list	*get_walls(t_list *sectors, t_level *level)
+t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
 {
 	t_list *walls;
 
@@ -50,7 +56,7 @@ t_list	*get_walls(t_list *sectors, t_level *level)
 	while (sectors != NULL)
 	{
 		ft_lstaddbck(&walls, ft_lstnew(
-			add_walls(sectors->content, level, sectors), sizeof(t_list*)));	
+			add_walls(sectors->content, level, sectors, mag), sizeof(t_list*)));	
 		sectors = sectors->next;
 	}
 	return (walls);
@@ -63,7 +69,7 @@ t_list	*get_bunches(t_game *game, t_level *level)
 
 	sectors = ft_lstnew(level->sectors[game->player->cur_sector],
 		sizeof(t_sector*));
-	walls = get_walls(sectors, level);
+	walls = get_walls(sectors, level, &game->player->mag);
 	ft_lstdel(&sectors, NULL);
 	return (walls);
 }

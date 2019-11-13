@@ -27,5 +27,6 @@ void			render_rooms(t_game *game, t_level *level);
 t_wall			**get_walls_from_sector(t_sector *sector, t_level *level);
 t_list			*get_bunches(t_game *game, t_level *level);
 t_wall          *get_closest(t_list *walls, t_vec *pos);
+void            render_part(t_game *game, t_coord range, t_list *walls);
 
 #endif

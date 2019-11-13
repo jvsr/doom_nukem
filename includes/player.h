@@ -16,6 +16,12 @@
 # include "types.h"
 # include "coord.h"
 
+typedef struct	s_mag
+{
+	float start;
+	float end;
+}				t_mag;
+
 typedef	struct	s_player
 {
 	/*t_uint16	hp;
@@ -29,6 +35,7 @@ typedef	struct	s_player
 	t_uint8		detection_area;*/
 	t_uint16	*fov;
 	t_uint16	angle;
+	t_mag		mag;
 	t_vec		forward;
 	t_vec		pos;
 	t_uint32	cur_sector;

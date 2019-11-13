@@ -150,7 +150,7 @@ typedef struct	s_wall
 	t_texture	texture;
 	t_coord		start;
 	t_coord		end;
-}				t_wall;
+}				 t_wall;
 
 typedef struct	s_sector
 {

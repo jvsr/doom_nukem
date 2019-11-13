@@ -10,16 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include <SDL2/SDL_surface.h>
 #include "libft/ft_list.h"
+#include "libft/ft_mem.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"
 #include "renderer.h"
 
-static void		render_wall(t_wall *wall, t_game *game, int *mask)
+static void		draw_point(int colour,
+							SDL_Surface *surface, int *mask, t_point pos)
 {
-	
+	int pos_1d;
+	int *pixels;
+
+	pos_1d = (pos.y * surface->w) + pos.x;
+	if (pos.x >= 0 && pos.y >= 0 && pos.x < surface->w && pos.y < surface->h &&
+			!mask[pos_1d])
+	{
+		mask[pos_1d] = 1;
+		pixels = surface->pixels;
+		pixels[pos_1d] = colour;
+	}
 }
 
 void			render_rooms(t_game *game, t_level *level)
@@ -28,9 +41,6 @@ void			render_rooms(t_game *game, t_level *level)
 	int		mask[game->surface->w * game->surface->h];
 	t_wall	*cur_wall;
 
+	ft_bzero(mask, game->surface->w * game->surface->h);
 	walls = get_bunches(game, level);
-	while (walls)
-	{
-		cur_wall = get_closest(walls, &game->player->pos);
-	}
 }
