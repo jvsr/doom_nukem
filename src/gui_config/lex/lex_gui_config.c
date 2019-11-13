@@ -17,7 +17,6 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
 #include "libft/ft_char.h"
-#include "libft/ft_printf.h"
 
 #include "lex.h"
 #include "error.h"
@@ -57,6 +56,7 @@ static t_token	*create_tokens(const char *file)
 	tokens = NULL;
 	while (file[index])
 		create_token(file, &tokens, &index);
+	add_lex_token(&tokens, NULL);
 	return (tokens);
 }
 
@@ -69,5 +69,6 @@ t_token			*lex_gui_config(const int fd)
 	if (file == NULL)
 		error_msg(strerror(errno), errno, "Failed to read the gui config file");
 	tokens = create_tokens(file);
+	free(file);
 	return (tokens);
 }

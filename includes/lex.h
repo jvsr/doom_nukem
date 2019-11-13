@@ -13,7 +13,7 @@
 #ifndef LEX_H
 # define LEX_H
 
-# define UI_CONFIG_PATH "./resources/config/ui/"
+# define UI_CONFIG_PATH "resources/config/ui/"
 
 # include <sys/types.h>
 

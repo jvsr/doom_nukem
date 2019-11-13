@@ -19,6 +19,8 @@ static const t_matchpair	g_font_types[] = {
 	{"ROBOTO", ROBOTO},
 	{"MONOF", MONOF},
 	{"KARARC", KARARC},
+	{"FOULFIEND", FOULFIEND},
+	{"NECKROMANCER", NECKROMANCER},
 };
 
 const char		*get_font_type_name(t_font_type font_type)

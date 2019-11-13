@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
+
 #include "serializer.h"
 #include "error.h"
 

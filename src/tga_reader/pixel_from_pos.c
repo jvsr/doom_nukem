@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_printf.h"
+#include "libft/ft_str.h"
 
 #include "error.h"
 #include "tga.h"
@@ -19,10 +19,11 @@ static int	b32(unsigned char *str, size_t i)
 {
 	unsigned int	ret;
 
-	ret = str[i + 2] << 24;
-	ret |= str[i + 1] << 16;
-	ret |= str[i] << 8;
-	ret |= str[i + 3];
+	ret = 0;
+	ret |= str[i + 3] << 24;
+	ret |= str[i];
+	ret |= str[i + 1] << 8;
+	ret |= str[i + 2] << 16;
 	return (ret);
 }
 
@@ -31,9 +32,9 @@ static int	b24(unsigned char *str, size_t i)
 	unsigned int	ret;
 
 	ret = 0xFF << 24;
-	ret |= str[i + 1] << 16;
-	ret |= str[i] << 8;
-	ret |= str[i + 2];
+	ret |= str[i];
+	ret |= str[i + 1] << 8;
+	ret |= str[i + 2] << 16;
 	return (ret);
 }
 

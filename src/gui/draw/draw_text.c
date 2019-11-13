@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include <SDL2/SDL_rect.h>
 
 #include "libft/ft_str.h"
@@ -22,20 +23,43 @@
 ** * Gui internal function
 */
 
+static void			get_smaller_scale(SDL_Point *text_size,
+								SDL_Point scaled_width, SDL_Point scaled_height)
+{
+	int	scaled_width_sum;
+	int	scaled_height_sum;
+
+	scaled_width_sum = (scaled_width.x + scaled_width.y);
+	scaled_height_sum = (scaled_height.x + scaled_height.y);
+	if (scaled_width_sum < scaled_height_sum)
+		*text_size = scaled_width;
+	else
+		*text_size = scaled_height;
+}
+
+static void			get_scaled_text_size(SDL_Point abs_dim, t_coord text_ratio,
+							SDL_Point *scaled_width, SDL_Point *scaled_height)
+{
+	scaled_width->x = abs_dim.x;
+	scaled_width->y = (int)round(abs_dim.x * text_ratio.y);
+	scaled_height->x = (int)round(abs_dim.y * text_ratio.x);
+	scaled_height->y = abs_dim.y;
+}
+
 static SDL_Surface	*scale_text(SDL_Surface *text, float size,
 								SDL_Point abs_dim)
 {
 	SDL_Surface	*scaled;
-	float		scaled_size;
 	SDL_Point	text_size;
+	SDL_Point	scaled_width;
+	SDL_Point	scaled_height;
+	t_coord		text_ratio;
 
-	if (abs_dim.x < abs_dim.y)
-		scaled_size = abs_dim.x * TEXT_SIZE_RATIO;
-	else
-		scaled_size = abs_dim.y * TEXT_SIZE_RATIO;
-	scaled_size *= size;
-	text_size.x = text->w * scaled_size;
-	text_size.y = text->h * scaled_size;
+	text_ratio = (t_coord){(float)text->w / text->h, (float)text->h / text->w};
+	get_scaled_text_size(abs_dim, text_ratio, &scaled_width, &scaled_height);
+	get_smaller_scale(&text_size, scaled_width, scaled_height);
+	text_size.x *= size;
+	text_size.y *= size;
 	scaled = sdl_create_surface_default(text_size);
 	sdl_merge_surface_scaled(scaled, text);
 	return (scaled);

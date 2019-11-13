@@ -17,10 +17,11 @@
 # include "libft/ft_bool.h"
 # include "types.h"
 
-# define INIT_PATH "resources/data/"
+# define RESOURCE_PATH "resources/data/"
 
-typedef struct s_list	t_list;
-typedef enum e_endian	t_endian;
+typedef enum e_endian		t_endian;
+typedef struct s_list		t_list;
+typedef struct s_setting	t_setting;
 
 typedef union	u_convert
 {
@@ -78,5 +79,8 @@ void			finish_bin(t_binary *bin);
 t_endian		detect_endian(void);
 long			read_header(t_binary_read *bin_r);
 void			swap_bytes(void *v_bytes, t_uint64 size);
+
+t_setting		*read_settings(void);
+void			write_settings(t_setting *settings);
 
 #endif

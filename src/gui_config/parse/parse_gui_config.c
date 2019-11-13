@@ -12,7 +12,7 @@
 
 #include <stddef.h>
 
-#include "libft/ft_printf.h"
+#include "libft/ft_str.h"
 
 #include "lex.h"
 #include "parse.h"
@@ -30,6 +30,7 @@ static void			next_token(t_token **token)
 	|| (*token)->type == PLAIN)
 	{
 		*token = cur->next;
+		free(cur->token);
 		free(cur);
 	}
 	else

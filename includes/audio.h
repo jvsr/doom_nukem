@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/25 17:22:43 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 17:22:43 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/12 15:48:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@
 # define AUDIO_FREQ MIX_DEFAULT_FREQUENCY
 # define AUDIO_CHANNELS MIX_DEFAULT_CHANNELS
 # define AUDIO_BUFFER 4096
-# define SOUND_EFFECT_LOC "./resources/sounds/effects/"
-# define MUSIC_LOC "./resources/sounds/music/"
+
+# define SOUND_EFFECT_PATH "resources/sounds/effects/"
+# define MUSIC_PATH "resources/sounds/music/"
 
 typedef struct s_game		t_game;
 
 typedef enum	e_music
 {
+	MUSIC_LONELY_TROUTMAN,
 	MUSIC_ASKING_QUESTIONS,
+	MUSIC_HIT_N_SMASH,
 	MUSIC_COUNT
 }				t_music;
 
@@ -66,6 +69,5 @@ void			effect_all_sounds(int(*func)(int));
 void			set_music_volume(float volume);
 void			set_sound_volume(float volume);
 void			free_audio(t_game *game);
-void			init_audio(t_game *game);
 
 #endif

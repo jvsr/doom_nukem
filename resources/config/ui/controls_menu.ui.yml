@@ -1,0 +1,195 @@
+- panel: controls
+  - layer: 2
+  - image: controlsoverlay
+    - show: 0
+    - clickable: 0
+    - color: #00000000
+    - layer: 1
+
+  - panel: controlsmenu
+    - show: 0
+    - clickable: 0
+    - pos: 0.1, 0.1
+    - dim: 0.8, 0.8
+    - layer: 2
+    - image: controlsbackground
+      - texture: ui/border1x1.tga
+
+    - panel: controlsleftside
+      - pos: 0.1, 0.1
+      - dim: 0.40, 0.8
+
+      - panel: controlsforward
+        - pos: 0.05, 0.0
+        - dim: 0.8, 0.20
+        - text_block: controlsforwardtext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Forward :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlsforwardbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_forward
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+      - panel: controlsbackward
+        - pos: 0.05, 0.22
+        - dim: 0.8, 0.20
+        - text_block: controlsbackwardtext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Backward :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlsbackwardbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_backward
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+      - panel: controlsleft
+        - pos: 0.05, 0.44
+        - dim: 0.8, 0.20
+        - text_block: controlslefttext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Left :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlsleftbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_left
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+      - panel: controlsright
+        - pos: 0.05, 0.66
+        - dim: 0.8, 0.20
+        - text_block: controlsrighttext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Right :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlsrightbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_right
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+    - panel: controlsrightside
+      - pos: 0.50, 0.1
+      - dim: 0.40, 0.8
+
+      - panel: controlsinteract
+        - pos: 0.05, 0.0
+        - dim: 0.8, 0.20
+        - text_block: controlsinteracttext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Interact :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlsinteractbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_interact
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+      - panel: controlsshoot
+        - pos: 0.05, 0.22
+        - dim: 0.8, 0.20
+        - text_block: controlsshoottext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Shoot :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlsshootbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_shoot
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+      - panel: controlscrouch
+        - pos: 0.05, 0.44
+        - dim: 0.8, 0.20
+        - text_block: controlscrouchtext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Crouch :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlscrouchbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_crouch
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+      - panel: controlsjump
+        - pos: 0.05, 0.66
+        - dim: 0.8, 0.20
+        - text_block: controlsjumptext
+          - pos: 0.1, 0.1
+          - dim: 0.6, 0.8
+          - text: "Jump :"
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.8
+        - button: controlsjumpbutton
+          - pos: 0.75, 0.2
+          - dim: 0.2, 0.6
+          - onclick: controls_set_jump
+          - texture: ui/border1x1.tga
+          - text_font: foulfiend
+          - text_size: 0.8
+
+    - button: controlsreturnbutton
+      - pos: 0.2, 0.81
+      - dim: 0.6, 0.1
+      - text_size: 0.5
+      - text: "Return"
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - texture: ui/border5x1.tga
+      - onclick: controls_return
+
+  - panel: controlskeychange
+    - show: 0
+    - clickable: 0
+    - layer: 3
+    - image: controlskeychangeoverlay
+      - color: #00000000
+    - panel: controlskeychangebox
+      - pos: 0.35, 0.45
+      - dim: 0.3, 0.1
+      - image: controlskeychangebackground
+        - texture: ui/border5x1.tga
+      - text_block: controlskeychangetext
+        - text: "Press/click DESIRED key"
+        - text_font: foulfiend
+        - text_color: #e3e3e3
+        - text_size: 0.8

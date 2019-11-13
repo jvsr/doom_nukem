@@ -11,9 +11,11 @@
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <limits.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "gui.h"
 #include "game.h"
@@ -29,11 +31,27 @@ static t_gui	*alloc_ui(void)
 	return (ui);
 }
 
+static TTF_Font	*open_font(const char *file_name)
+{
+	TTF_Font	*font;
+	char		full_path[PATH_MAX];
+
+	ft_strcpy(full_path, g_doom_dir);
+	ft_strcat(full_path, FONT_PATH);
+	ft_strcat(full_path, file_name);
+	font = TTF_OpenFont(full_path, 50);
+	if (font == NULL)
+		error_msg_sdl(23, ft_strformat("Failed to open %s", full_path));
+	return (font);
+}
+
 static void		init_fonts(t_gui *ui)
 {
-	ui->fonts[0] = TTF_OpenFont("fonts/Roboto-Regular.ttf", 50);
-	ui->fonts[1] = TTF_OpenFont("fonts/monof55.ttf", 50);
-	ui->fonts[2] = TTF_OpenFont("fonts/ka1.ttf", 50);
+	ui->fonts[0] = open_font("Roboto-Regular.ttf");
+	ui->fonts[1] = open_font("monof55.ttf");
+	ui->fonts[2] = open_font("ka1.ttf");
+	ui->fonts[3] = open_font("Foul-Fiend.ttf");
+	ui->fonts[4] = open_font("NECK-ROMANCER-Regular.ttf");
 }
 
 void			init_gui(t_game *game)
