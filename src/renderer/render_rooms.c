@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 16:07:29 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:57:33 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/13 11:18:40 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 #include "player.h"
 #include "renderer.h"
 
-static void		render_wall(t_wall *wall, t_game *game, int *mask)
-{
-	
-}
+// static void		render_wall(t_wall *wall, t_game *game, int *mask)
+// {
+// 	(void)wall;
+// 	(void)game;
+// 	(void)mask;
+// }
 
 void			render_rooms(t_game *game, t_level *level)
 {
@@ -28,6 +30,7 @@ void			render_rooms(t_game *game, t_level *level)
 	int		mask[game->surface->w * game->surface->h];
 	t_wall	*cur_wall;
 
+	(void)mask;
 	walls = get_bunches(game, level);
 	while (walls)
 	{
