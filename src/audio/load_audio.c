@@ -38,10 +38,12 @@ static void	loadmusic(t_game *game)
 	size_t	index;
 
 	files = (char *[]){
-		"asking_questions.mp3"
+		"lonely_troutman_ii.mp3",
+		"asking_questions.mp3",
+		"hit_n_smash.mp3",
 	};
 	index = 0;
-	while (index < SOUND_COUNT)
+	while (index < MUSIC_COUNT)
 	{
 		game->audio_man->tracks[index] = get_music_from_mp3(files[index]);
 		index++;

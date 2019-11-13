@@ -16,6 +16,24 @@ PREFIX =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+ONCLICK_SRCS = mainmenu \
+				options \
+				mission \
+				fov \
+				music \
+				resolution_type \
+				set_resolution_type \
+				resolution \
+				sensitivity \
+				sound \
+				utils \
+				set_utils \
+				confirmation \
+				controls \
+				keys_1 \
+				key_2
+ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
+
 CREATE_SRCS = new_elem \
 		del_elem \
 		new_button \
@@ -47,6 +65,7 @@ DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 MANAGE_SRCS = add_gui_child \
 		add_elem_child \
 		add_to_children \
+		check_elem_duplicate \
 		remove_elem_parent \
 		del_gui_child \
 		del_elem_child \
@@ -70,6 +89,7 @@ MANAGE_SRCS = add_gui_child \
 		set_elem_pos \
 		set_elem_redraw \
 		set_elem_show \
+		set_elem_show_clickable \
 		set_elem_text_color \
 		set_elem_text_draw_method \
 		set_elem_text_font \
@@ -83,4 +103,5 @@ SRCS = init_gui \
 		$(CREATE_SRCS) \
 		$(DEBUG_SRCS) \
 		$(DRAW_SRCS) \
-		$(MANAGE_SRCS)
+		$(MANAGE_SRCS) \
+		$(ONCLICK_SRCS)

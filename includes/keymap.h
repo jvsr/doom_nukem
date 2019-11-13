@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:35:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/03 13:51:14 by pholster      ########   odam.nl         */
+/*   Updated: 2019/11/08 22:45:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_bool			toggle_keystate(const t_hashmap *keymap, SDL_Keycode key,
 					t_bool pressed);
 t_bool			set_keystate(const t_hashmap *keymap, SDL_Keycode key,
 					t_keystate state);
+const char		*get_keystate_name(SDL_Keycode key);
 
 #endif

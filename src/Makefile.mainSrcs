@@ -17,4 +17,8 @@ PREFIX =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = main init error_msg loop splash quit error_msg_sdl error_msg_errno \
-		loader
+		loader \
+		init_main_menu \
+		init_window \
+		init_settings \
+		init_eventstate

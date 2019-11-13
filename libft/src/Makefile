@@ -10,17 +10,17 @@
 #                                                                              #
 # **************************************************************************** #
 
-# Input values for sublib (From parrent makefile)
+# Input values for sublib (From parent makefile)
 SUBLIB =
 FOLDER =
 PARENTNAME =
 
-# Input values for compile (From parrent makefile)
+# Input values for compile (From parent makefile)
 CCSILENT =
 CCSTRICT =
 CCOPTIMISE =
 
-# Input values for gcov (From parrent makefile)
+# Input values for gcov (From parent makefile)
 GCOV =
 GCOVSILENT =
 GCOVFLAGS =
@@ -50,13 +50,13 @@ include Makefile.$(SRCFOLDER)Srcs
 # Dependency prefix
 SRCS := $(FT_SRCS:%=$(SRCFOLDER)/ft_%.c) $(SRCS:%=$(SRCFOLDER)/$(PREFIX)%.c)
 SRCS := $(sort $(SRCS))
-HEADERS := $(HEADERS:%=$(INCLUDES)/%.h)
-HEADERS += $(shell ./get_headers $(INCLUDES) $(SRCS))
 
-# Compile dependencys
+# Compile dependencies
 OBJS = $(SRCS:.c=.o)
+DEPS = $(OBJS:.o=.d)
 GCNOS = $(OBJS:.o=.gcno)
-COMPILE_FILES = $(OBJS)
+
+COMPILE_FILES = $(OBJS) $(DEPS)
 ifeq ($(GCOV)_$(LIBFT_DISABLE_GCOV), TRUE_FALSE)
 COMPILE_FILES += $(GCNOS)
 endif
@@ -65,6 +65,7 @@ endif
 GCDAS = $(OBJS:.o=.gcda)
 TEMPS = $(SRCS:.c=.c~)
 GCOVS = $(OBJS:.o=.c.gcov)
+CLEAN_FILES = $(OBJS) $(DEPS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)
 
 # Function - Gcov report
 BASE_GCOVS = $(GCOVS:$(SRCFOLDER)/%=%)
@@ -86,19 +87,22 @@ $(NAME): $(COMPILE_FILES)
 gcovreport: $(NAME)
 	@$(GCOVREPORT)
 
-# Compile .o or .gcno if $(GCOV)==TRUE
-%.o %.gcno: %.c $(HEADERS)
+# Include all existing header dependencies files
+include $(wildcard $(DEPS))
+
+# Compile .o, .d or .gcno if $(GCOV)==TRUE
+%.o %.d %.gcno: %.c
 ifeq ($(CCSILENT), FALSE)
 	@$(call FNC_PRINT_PLUS,$(PARENTNAME)-$(SRCFOLDER),$(@:$(SRCFOLDER)/%=%))
 endif
 	@rm -f $(<:.c=.o)
-	@$(CC) $(CCFLAGS) -o $(<:.c=.o) -c $<
+	@$(CC) -MMD $(CCFLAGS) -o $(<:.c=.o) -c $<
 
 # Clean all non .content files
 clean:
-ifneq ($(wildcard $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)),)
+ifneq ($(wildcard $(CLEAN_FILES)),)
 	@$(call FNC_PRINT_MIN,$(PARENTNAME)-$(SRCFOLDER),clean)
-	@rm -f $(OBJS) $(TEMPS) $(GCOVS) $(GCDAS) $(GCNOS)
+	@rm -f $(CLEAN_FILES)
 endif
 
 # Norm fclean

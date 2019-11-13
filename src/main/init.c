@@ -6,24 +6,22 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/25 17:18:00 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 17:46:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "game.h"
 #include "init.h"
 #include "error.h"
-#include "gametime.h"
-#include "audio.h"
-#include "tga.h"
+#include "eventstate.h"
 
 static void		init_sdl(void)
 {
@@ -43,20 +41,6 @@ static t_game	*alloc_game(void)
 	return (game);
 }
 
-static	void	init_window_surface(t_game *game)
-{
-	game->window = SDL_CreateWindow("Doom Nukem",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		INIT_WIDTH,
-		INIT_HEIGHT,
-		SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MOUSE_FOCUS);
-	if (game->window == NULL)
-		error_msg_sdl(ENOMEM, "Failed to alloc game window");
-	game->surface = SDL_GetWindowSurface(game->window);
-	SDL_SetWindowIcon(game->window, open_tga_sdl("splash/icon"));
-}
-
 static void		init_game(t_game *game)
 {
 	game->state = running;
@@ -64,16 +48,35 @@ static void		init_game(t_game *game)
 	game->cursoractive = TRUE;
 }
 
-t_game			*init(void)
+static void		set_basic_args(t_game *game, char **argv, char **envp)
+{
+	const size_t	exec_len = ft_strlen(argv[0]);
+	size_t			path_len;
+
+	game->argv = argv;
+	game->envp = envp;
+	game->exec_name = ft_strdup(ft_strrchr(argv[0], '/') + 1);
+	if (game->exec_name == NULL)
+		error_msg_errno("Failed to alloc exec name");
+	path_len = exec_len - ft_strlen(game->exec_name);
+	g_doom_dir = ft_strndup(argv[0], path_len);
+	if (g_doom_dir == NULL)
+		error_msg_errno("Failed to alloc doom dir");
+}
+
+t_game			*init(char **argv, char **envp)
 {
 	t_game *game;
 
 	init_sdl();
 	game = alloc_game();
+	set_basic_args(game, argv, envp);
+	init_settings(game);
 	init_window_surface(game);
 	init_game(game);
 	init_audio(game);
 	init_gui(game);
 	init_keymap(game);
+	init_eventstate(game);
 	return (game);
 }

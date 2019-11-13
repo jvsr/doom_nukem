@@ -1,0 +1,86 @@
+- panel: missions
+  - layer: 1
+  - image: missionsoverlay
+    - show: 0
+    - clickable: 0
+    - colour: #26020699
+    - layer: 1
+
+  - button: missionscampaignbutton
+    - show: 0
+    - clickable: 0
+    - layer: 4
+    - pos: 0.15, 0.005
+    - dim: 0.39, 0.05
+    - texture: ui/tab.tga
+    - text: "Campaign"
+    - text_font: foulfiend
+    - text_size: 0.5
+    - text_color: #E3E3E3
+    - text_draw_method: centered
+    - onclick: missions_focus_campaign
+  - button: missionscustombutton
+    - show: 0
+    - clickable: 0
+    - layer: 3
+    - pos: 0.48, 0.005
+    - dim: 0.39, 0.05
+    - texture: ui/tab.tga
+    - text: "Custom"
+    - text_font: foulfiend
+    - text_size: 0.5
+    - text_color: #666666
+    - text_draw_method: centered
+    - onclick: missions_focus_custom
+
+  - panel: missionsmenu
+    - show: 0
+    - clickable: 0
+    - pos: 0.06, 0.05
+    - dim: 0.9, 0.9
+    - layer: 2
+    - image: missionsbackground
+      - texture: ui/border1x1.tga
+
+    - button: level1
+      - pos: 0.1, 0.07
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+    - button: level2
+      - pos: 0.1, 0.26
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+    - button: level3
+      - pos: 0.1, 0.45
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+    - button: level4
+      - pos: 0.1, 0.64
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+    - button: level5
+      - pos: 0.55, 0.07
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+    - button: level6
+      - pos: 0.55, 0.26
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+    - button: level7
+      - pos: 0.55, 0.45
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+    - button: level8
+      - pos: 0.55, 0.64
+      - dim: 0.35, 0.18
+      - texture: ui/border5x1.tga
+
+    - button: missionreturnbutton
+      - pos: 0.3, 0.845
+      - dim: 0.4, 0.085
+      - text: "return"
+      - text_font: foulfiend
+      - text_size: 0.4
+      - text_color: #e3e3e3
+      - texture: ui/border5x1.tga
+      - onclick: mission_return

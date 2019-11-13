@@ -13,9 +13,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <limits.h>
-#include "libft/ft_printf.h"
+
+#include "libft/ft_str.h"
 #include "libft/ft_bool.h"
 #include "libft/ft_str.h"
+
+#include "game.h"
 #include "serializer.h"
 #include "error.h"
 
@@ -25,7 +28,8 @@ unsigned char		*read_struct(const char *loc)
 	unsigned char	*file_stream;
 	char			full_path[PATH_MAX];
 
-	ft_strcpy(full_path, INIT_PATH);
+	ft_strcpy(full_path, g_doom_dir);
+	ft_strcat(full_path, RESOURCE_PATH);
 	ft_strcat(full_path, loc);
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)

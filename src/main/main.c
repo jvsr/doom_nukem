@@ -6,23 +6,19 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/28 16:21:58 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/13 11:13:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_video.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
 
 #include "game.h"
 #include "init.h"
 #include "audio.h"
 #include "sdl_thread.h"
 
-int			main(void)
+int	main(int argc, char **argv, char **envp)
 {
-
 	t_game 		*game;
 	t_bool 		isloaded;
 	SDL_Thread *thread;
