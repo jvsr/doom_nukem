@@ -12,8 +12,11 @@
 
 #include <SDL2/SDL_surface.h>
 #include "libft/ft_list.h"
+#include "map.h"
 #include "game.h"
 #include "player.h"
+#include "renderer.h"
+#include "setting.h"
 
 /*
 static void		draw_point(int colour,
@@ -33,25 +36,32 @@ static void		draw_point(int colour,
 }
 */
 
-static void		render_coloumn(t_game *game, int w, t_list *walls)
+static void		draw_wall(t_coord range, t_game *game, t_wall *wall, int *mask)
 {
-	(void)game;
-	(void)w;
-	(void)walls;
+	float ray;
+	float step;
+	float i;
+	t_coord pos;
+
+	ray = range.x;
+	step = game->setting->fov / game->surface->w;
+	i = (float)game->surface->w * (range.x / (float)game->setting->fov);
+	while (ray < range.y)
+	{
+		i++;
+		ray += step;
+	}
 }
 
-void		   	render_part(t_game *game, t_coord range, t_list *walls)
+void		   	render_part(t_game *game,
+										t_coord range, t_list *walls, int *mask)
 {
-	float	indices[2];
-	int		i;
+	t_wall *wall;
 
-	indices[1] = game->surface->w; //FOV / game->
-	indices[0] = range.x;
-	i = indices[1]; //FOV / indices[1]
-	while (indices[0] < range.y)
+	wall = get_closest(walls, &(game->player->pos));
+	while (walls)
 	{
-		render_coloumn(game, i, walls);
-		indices[0] += indices[1];
-		i++;
+		draw_wall(range, game, wall, mask);
+		wall = get_closest(walls, &(game->player->pos));
 	}
 }
