@@ -6,12 +6,12 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 20:40:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/14 11:45:54 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/18 14:47:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYSTATE_H
-# define KEYSTATE_H
+#ifndef EVENTSTATE_H
+# define EVENTSTATE_H
 
 # include <SDL2/SDL_events.h>
 

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 18:50:28 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/18 18:50:28 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/18 18:48:38 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_setting	*read_settings(void)
 	setting = (t_setting*)ft_memalloc(sizeof(t_setting));
 	if (setting == NULL)
 		error_msg_errno("Failed to alloc settings");
-	bin = new_binary_read("settings/settings.conf");
+	bin = new_binary_read("settings/settings.conf", TRUE);
 	setting->sensitivity = read_float(bin);
 	setting->music_volume = read_float(bin);
 	setting->sound_volume = read_float(bin);

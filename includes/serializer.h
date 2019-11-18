@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/07 11:10:53 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/18 18:48:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef enum e_endian		t_endian;
 typedef struct s_list		t_list;
 typedef struct s_setting	t_setting;
+typedef struct s_wad_header	t_wad_header;
 
 typedef union	u_convert
 {
@@ -53,7 +54,7 @@ typedef struct	s_binary_read
 
 t_binary		*new_binary(void);
 void			del_binary(t_binary **bin);
-t_binary_read	*new_binary_read(const char *loc);
+t_binary_read	*new_binary_read(const char *loc, t_bool add_header);
 void			del_binary_read(t_binary_read **bin_r);
 t_bool			write_struct(char *loc, t_binary *bin);
 unsigned char	*read_struct(const char *loc);
@@ -82,5 +83,7 @@ void			swap_bytes(void *v_bytes, t_uint64 size);
 
 t_setting		*read_settings(void);
 void			write_settings(t_setting *settings);
+
+t_wad_header	*read_wad_header(t_binary_read *bin_r);
 
 #endif
