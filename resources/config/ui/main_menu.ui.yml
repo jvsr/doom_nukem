@@ -4,7 +4,7 @@
   - image: logo
     - pos: 0.35, 0.02
     - dim: 0.29, 0.303
-    - texture: splash/doom2.tga
+    - texture: splash/doom3.tga
   - panel: menu
     - pos: 0.15, 0.325
     - dim: 0.7, 0.65
