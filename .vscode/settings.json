@@ -1,19 +1,11 @@
 {
+	"files.exclude": {
+		"**/*.o": true,
+		"**/*.d": true,
+	},
     "files.associations": {
-		"*.mainSrcs": "makefile",
 		"*.h": "c",
 		"Makefile.*": "makefile",
 		"sdl2_mixer": "ruby",
-		"iterator": "c",
-		"cerrno": "c",
-		"locale": "c",
-		"string": "c",
-		"functional": "c",
-		"typeinfo": "c",
-		"ios": "c",
-		"algorithm": "c",
-		"chrono": "c",
-		"limits": "c",
-		"ratio": "c"
 	}
 }
