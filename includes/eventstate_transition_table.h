@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 18:05:18 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 18:11:14 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/14 11:46:03 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static t_eventstate_fnc	*g_eventstate[] =
 	options_confirmation_eventstate,
 	controls_eventstate,
 	set_controls_eventstate,
+	map_editor_eventstate,
+	map_editor_select_eventstate,
 };
 
 #endif

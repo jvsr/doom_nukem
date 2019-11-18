@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:39:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/14 12:20:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ typedef struct s_transform	t_transform;
 
 void	mainmenu_missions(t_game *game, t_transform *gui);
 void	mainmenu_options(t_game *game, t_transform *gui);
+void	mainmenu_mapeditor(t_game *game, t_transform *gui);
 void	mainmenu_quit(t_game *game, t_transform *gui);
+
+void	map_editor_select_return(t_game *game, t_transform *gui);
 
 void	options_sensitivity_up(t_game *game, t_transform *gui);
 void	options_sensitivity_down(t_game *game, t_transform *gui);

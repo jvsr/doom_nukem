@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/22 18:02:38 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/14 12:20:30 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 static const t_onclickpair	g_onclicks[] = {
 	{"mainmenu_missions", mainmenu_missions},
 	{"mainmenu_options", mainmenu_options},
+	{"mainmenu_mapeditor", mainmenu_mapeditor},
 	{"mainmenu_quit", mainmenu_quit},
+
+	{"map_editor_select_return", map_editor_select_return},
 
 	{"options_sensitivity_up", options_sensitivity_up},
 	{"options_sensitivity_down", options_sensitivity_down},

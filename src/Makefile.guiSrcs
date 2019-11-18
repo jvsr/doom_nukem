@@ -31,7 +31,8 @@ ONCLICK_SRCS = mainmenu \
 				confirmation \
 				controls \
 				keys_1 \
-				key_2
+				key_2 \
+				editor_select
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \

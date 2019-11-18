@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 20:40:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 18:10:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/14 11:45:54 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ void							controls_eventstate
 									(t_game *game, SDL_Event event);
 void							set_controls_eventstate
 									(t_game *game, SDL_Event event);
+void							map_editor_eventstate
+									(t_game *game, SDL_Event event);
+void							map_editor_select_eventstate
+									(t_game *game, SDL_Event event);
 
 typedef enum					e_eventstate_code
 {
@@ -38,6 +42,8 @@ typedef enum					e_eventstate_code
 	options_confirmation,
 	controls,
 	set_controls,
+	map_editor,
+	map_editor_select,
 }								t_eventstate_code;
 
 typedef union					u_types

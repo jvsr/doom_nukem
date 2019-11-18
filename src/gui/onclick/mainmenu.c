@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:02:43 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 13:52:52 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/14 11:45:15 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ void	mainmenu_options(t_game *game, t_transform *gui)
 	set_resolution(game->setting, options_menu);
 	set_resolution_type(game->setting, options_menu);
 	game->cureventstate->eventstate = options;
+}
+
+void	mainmenu_mapeditor(t_game *game, t_transform *gui)
+{
+	(void)gui;
+	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), TRUE);
+	game->cureventstate->eventstate = map_editor_select;
 }
 
 void	mainmenu_quit(t_game *game, t_transform *gui)

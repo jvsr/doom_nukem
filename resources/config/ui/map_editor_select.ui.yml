@@ -1,0 +1,33 @@
+- panel: mapeditorselect
+  - image: mapeditorselectbackground
+    - color: #333333
+  - panel: mapeditorselectbox
+    - pos: 0.35, 0.3
+    - dim: 0.3, 0.4
+    - image: mapeditorselectboxbackground
+      - texture: ui/border1x1_2.tga
+    - button: mapeditorselectboxloadbutton
+      - pos: 0.1, 0.1375
+      - dim: 0.8, 0.2
+      - text: "Load Map"
+      - text_color: #EAEAEA
+      - text_font: foulfiend
+      - text_size: 0.6
+      - texture: ui/border5x1.tga
+    - button: mapeditorselectboxnewbutton
+      - pos: 0.1, 0.4
+      - dim: 0.8, 0.2
+      - text: "New Map"
+      - text_color: #EAEAEA
+      - text_font: foulfiend
+      - text_size: 0.6
+      - texture: ui/border5x1.tga
+    - button: mapeditorselectboxreturnbutton
+      - pos: 0.1, 0.6725
+      - dim: 0.8, 0.2
+      - text: "Return"
+      - text_color: #EAEAEA
+      - text_font: foulfiend
+      - text_size: 0.6
+      - texture: ui/border5x1.tga
+      - onclick: map_editor_select_return

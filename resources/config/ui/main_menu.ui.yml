@@ -1,16 +1,15 @@
 - panel: mainmenu
   - image: mainmenubackground
-    - color: #bb0a1e
+    - color: #333333
   - image: logo
-    - pos: 0.45, 0.025
-    - dim: 0.1, 0.225
-    - texture: splash/icon3.tga
-    - draw_method: scaled
+    - pos: 0.35, 0.02
+    - dim: 0.29, 0.303
+    - texture: splash/doom2.tga
   - panel: menu
-    - pos: 0.15, 0.275
-    - dim: 0.7, 0.7
+    - pos: 0.15, 0.325
+    - dim: 0.7, 0.65
     - image: menubackground
-      - texture: ui/border1x1.tga
+      - texture: ui/border1x1_2.tga
     - button: mainmenuMapselectButton
       - pos: 0.125, 0.1375
       - dim: 0.75, 0.15
@@ -22,7 +21,7 @@
       - text_draw_method: centered
       - onclick: mainmenu_missions
     - button: mainmenuOptionsButton
-      - pos: 0.125, 0.4250
+      - pos: 0.125, 0.32917
       - dim: 0.75, 0.15
       - texture: ui/border5x1.tga
       - text: "Options"
@@ -31,6 +30,16 @@
       - text_color: #EAEAEA
       - text_draw_method: centered
       - onclick: mainmenu_options
+    - button: mainmenuMapEditorButton
+      - pos: 0.125, 0.52084
+      - dim: 0.75, 0.15
+      - texture: ui/border5x1.tga
+      - text: "Map Editor"
+      - text_font: foulfiend
+      - text_size: 0.63
+      - text_color: #EAEAEA
+      - text_draw_method: centered
+      - onclick: mainmenu_mapeditor
     - button: mainmenuQuitButton
       - pos: 0.125, 0.7125
       - dim: 0.75, 0.15
