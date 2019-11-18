@@ -1,21 +1,11 @@
 {
+	"files.exclude": {
+		"**/*.o": true,
+		"**/*.d": true,
+	},
 	"files.associations": {
 		"*.h": "c",
 		"Makefile.*": "makefile",
 		"Makefile*": "makefile",
-		"__functional_base": "c",
-		"__locale": "c",
-		"bitset": "c",
-		"functional": "c",
-		"memory": "c",
-		"string": "c",
-		"system_error": "c",
-		"vector": "c",
-		"sstream": "c",
-		"random": "c",
-		"array": "c",
-		"deque": "c",
-		"iterator": "c",
-		"string_view": "c"
 	}
 }
