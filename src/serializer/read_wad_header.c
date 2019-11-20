@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 15:00:49 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/18 19:13:06 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/20 18:17:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "serializer.h"
 #include "error.h"
 
-#include <stdio.h>
 static t_wad_type	get_wad_header_type(int i)
 {
 	t_wad_type	type;

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/18 18:48:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/20 18:30:27 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 
 # define RESOURCE_PATH "resources/data/"
 
-typedef enum e_endian		t_endian;
-typedef struct s_list		t_list;
-typedef struct s_setting	t_setting;
-typedef struct s_wad_header	t_wad_header;
+typedef enum e_endian			t_endian;
+typedef struct s_list			t_list;
+typedef struct s_setting		t_setting;
+typedef struct s_wad_header		t_wad_header;
+typedef struct s_wad_directory	t_wad_directory;
 
 typedef union	u_convert
 {
@@ -85,5 +86,6 @@ t_setting		*read_settings(void);
 void			write_settings(t_setting *settings);
 
 t_wad_header	*read_wad_header(t_binary_read *bin_r);
+t_wad_directory	*read_wad_directory(t_binary_read *bin_r);
 
 #endif
