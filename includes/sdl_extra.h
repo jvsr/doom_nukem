@@ -20,6 +20,7 @@
 # include "libft/ft_bool.h"
 # include "types.h"
 
+typedef struct s_coord	t_coord;
 typedef struct s_circle	t_circle;
 
 SDL_Surface	*sdl_create_surface_default(SDL_Point size);
@@ -45,5 +46,8 @@ void		sdl_merge_surface_alpha_repeat(SDL_Surface *dst, SDL_Surface *src);
 t_bool		sdl_has_surface_alpha(SDL_Surface *surface);
 void		sdl_set_surface_alpha(SDL_Surface *surface, t_uint8 alpha);
 void		sdl_set_surface_color(SDL_Surface *surface, SDL_Color color);
+
+void		sdl_scale_index(SDL_Point *result, SDL_Point *cur,
+							t_coord const *ratio, SDL_Surface *target_surface);
 
 #endif
