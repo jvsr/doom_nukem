@@ -15,8 +15,9 @@
 
 #include "onclick.h"
 #include "gui_internal.h"
+#include "table.h"
 
-static const t_onclickpair	g_onclicks[] = {
+static t_tablepair const	g_onclicks[] = {
 	{"mainmenu_missions", mainmenu_missions},
 	{"mainmenu_options", mainmenu_options},
 	{"mainmenu_quit", mainmenu_quit},
@@ -55,28 +56,20 @@ static const t_onclickpair	g_onclicks[] = {
 	{"restart_game", restart_game},
 };
 
-const char	*get_onclick_name(t_onclick *onclick)
+char const	*get_onclick_name(t_onclick *onclick)
 {
-	t_onclick		*result;
-	t_tablepair		*gui_onclicks;
+	size_t const	table_size = sizeof(g_onclicks) / sizeof(t_tablepair);
 
 	if (onclick == NULL)
 		return (NULL);
-	gui_onclicks = create_gui_onclick_table();
-	result = find_tablepair_id(gui_onclicks, TABLE_SIZE, onclick);
-	free(gui_onclicks);
-	return (result);
+	return (find_tablepair_id(g_onclicks, table_size, onclick));
 }
 
 t_onclick	*get_onclick_f(const char *name)
 {
-	t_onclick		*result;
-	t_tablepair		*gui_onclicks;
+	size_t const	table_size = sizeof(g_onclicks) / sizeof(t_tablepair);
 
 	if (name == NULL)
 		return (NULL);
-	gui_onclicks = create_gui_onclick_table();
-	result = find_tablepair_value(gui_onclicks, TABLE_SIZE, name);
-	free(gui_onclicks);
-	return (result);
+	return (find_tablepair_value(g_onclicks, table_size, name));
 }

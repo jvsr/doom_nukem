@@ -14,7 +14,8 @@
 
 #include "table.h"
 
-void	*find_tablepair_value(t_tablepair *table, size_t table_size, const char *id)
+void const	*find_tablepair_value(t_tablepair const *table, size_t table_size,
+								char const *id)
 {
 	size_t	i;
 

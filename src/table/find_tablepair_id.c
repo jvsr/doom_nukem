@@ -16,21 +16,17 @@
 
 #include "table.h"
 
-const char	*find_tablepair_id(t_tablepair *table, size_t table_size, void *value)
+char const	*find_tablepair_id(t_tablepair const *table, size_t table_size,
+								void const *value)
 {
-	size_t	i;
-	const char	*result;
+	size_t		i;
 
 	i = 0;
 	while (i < table_size)
 	{
-		if (table[i].value != NULL && value == table[i].value)
-		{
-			result = ft_strdup(table[i].id);
-			if (result == NULL)
-				error_msg_errno("Failed to alloc tablepair_int value name");
-			return (result);
-		}
+		if (value == table[i].value)
+			return (table[i].id);
 		i++;
 	}
+	return (NULL);
 }

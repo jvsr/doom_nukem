@@ -18,13 +18,14 @@
 
 #include "keymap.h"
 #include "error.h"
+#include "table.h"
 
 /*
 ** * print_keymap will take the keymap. (This function is for debug only)
 ** * It will then print the state of every monitored key.
 */
 
-static const t_keypair	g_keytable[] = {
+static t_tablepair_int const	g_keytable[] = {
 	{"UNKNOWN", SDLK_UNKNOWN},
 
 	{"MB1", SDL_BUTTON_LEFT},
@@ -275,42 +276,11 @@ static const t_keypair	g_keytable[] = {
 ** *	{"AUDIOFASTFORWARD", SDLK_AUDIOFASTFORWARD},
 */
 
-const char			*get_keystate_name(SDL_Keycode key)
+char const	*get_keystate_name(SDL_Keycode key)
 {
-	const size_t	size = sizeof(g_keytable) / sizeof(t_keypair);
-	char			*result;
-	size_t			i;
+	size_t const	size = sizeof(g_keytable) / sizeof(t_tablepair_int);
 
-	i = 0;
-	while (i < size)
-	{
-		if (g_keytable[i].key == key)
-		{
-			result = ft_strdup(g_keytable[i].name);
-			if (result == NULL)
-				error_msg_errno("Failed to alloc keystate name");
-			return (result);
-		}
-		i++;
-	}
-	return (NULL);
-}
-
-static const char	*getname(void *key)
-{
-	const size_t	size = sizeof(g_keytable) / sizeof(t_keypair);
-	SDL_Keycode		*sdl_key;
-	size_t			i;
-
-	i = 0;
-	sdl_key = key;
-	while (i < size)
-	{
-		if (g_keytable[i].key == *sdl_key)
-			return (g_keytable[i].name);
-		i++;
-	}
-	return (NULL);
+	return (find_tablepair_int_id(g_keytable, size, key));
 }
 
 static void			print_list(t_hashlist *lst)
@@ -318,14 +288,16 @@ static void			print_list(t_hashlist *lst)
 	size_t			pos;
 	t_hashlist		*cur;
 	t_keystate		value;
+	SDL_Keycode		key;
 
 	pos = 0;
 	cur = lst;
 	while (cur != NULL)
 	{
+		key = *((SDL_Keycode *)cur->key);
 		value = *((t_keystate *)cur->value);
 		ft_printf("Name: %s - state: %hhu (List pos: %zu)\n",
-			getname(cur->key),
+			get_keystate_name(key),
 			value,
 			pos);
 		pos++;
@@ -335,7 +307,7 @@ static void			print_list(t_hashlist *lst)
 
 void				print_keymap(const t_hashmap *keymap)
 {
-	size_t			i;
+	size_t	i;
 
 	i = 0;
 	ft_putline(" Keymap ");

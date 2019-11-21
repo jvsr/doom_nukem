@@ -14,25 +14,18 @@
 
 #include "libft/ft_str.h"
 
-#include "error.h"
 #include "table.h"
 
-const char	*find_tablepair_int_id(t_tablepair_int *table, size_t table_size,
-										int value)
+char const	*find_tablepair_int_id(t_tablepair_int const *table,
+									size_t table_size, int value)
 {
-	size_t	i;
-	char	*result;
+	size_t		i;
 
 	i = 0;
 	while (i < table_size)
 	{
 		if (value == table[i].value)
-		{
-			result = ft_strdup(table[i].id);
-			if (result == NULL)
-				error_msg_errno("Failed to alloc tablepair_int value name");
-			return (result);
-		}
+			return (table[i].id);
 		i++;
 	}
 	return (NULL);
