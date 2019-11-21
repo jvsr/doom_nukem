@@ -16,7 +16,10 @@ PREFIX =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-WAD_SRCS = parse_wad
+WAD_SRCS = parse_wad \
+			parse_wad_playpal \
+			parse_wad_colormap \
+			parse_wad_endoom
 WAD_SRCS := $(WAD_SRCS:%=WAD/%)
 
 MAP_SRCS =

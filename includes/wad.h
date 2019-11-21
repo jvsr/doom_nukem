@@ -6,15 +6,19 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/20 21:39:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/21 20:25:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WAD_H
 # define WAD_H
 
+# include "SDL2/SDL_pixels.h"
+
+typedef struct s_binary_read	t_binary_read;
 typedef enum			e_wad_state
 {
+	wad_pre,
 	wad_first,
 	wad_level,
 	wad_sprite,
@@ -46,24 +50,45 @@ typedef struct			s_wad_thing
 {
 	struct s_wad_thing	*next;
 }						t_wad_thing;
-typedef struct			s_wad_lump
+typedef struct			s_wad_level
 {
 	char				*name;
 	t_wad_thing			*things;
-	struct s_wad_lump	*next;
-}						t_wad_lump;
+	struct s_wad_level	*next;
+}						t_wad_level;
 
+typedef struct			s_wad_palette
+{
+	size_t				color_amount;
+	SDL_Color			*color;
+}						t_wad_playpal;
+typedef struct			s_wad_colormap
+{
+	size_t				color_amount;
+	uint8_t				*color;
+}						t_wad_colormap;
+typedef struct			s_wad_endoom
+{
+	uint8_t				*ascii;
+	uint8_t				*color;
+}						t_wad_endoom;
 typedef struct			s_wad_general
 {
-
+	size_t				playpal_amount;
+	t_wad_playpal		**playpal;
+	size_t				colormap_amount;
+	t_wad_colormap		**colormap;
+	t_wad_endoom		*endoom;
 }						t_wad_general;
-
 typedef struct			s_wad
 {
 	char				*name;
-	t_wad_lump			*lumps;
+	t_wad_level			*lumps;
 	t_wad_general		*general;
 }						t_wad;
 
+void	parse_wad_playpal(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
+void	parse_wad_colormap(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
+void	parse_wad_endoom(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
 
 #endif
