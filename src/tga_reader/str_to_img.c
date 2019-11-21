@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/08 21:36:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/22 18:43:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 18:24:54 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	bottomleft(t_img *img, t_tga *tga, unsigned char *str)
 		min += tga->cm_len * (tga->cm_size / 4);
 	i = ((img->height - 1) * img->width * pitch) + min;
 	j = 0;
-	while (j != img->width * img->height)
+	while (j != (size_t)(img->width * img->height))
 	{
 		img->pixels[j] = pixel_from_pos(str, i, img);
 		i += pitch;

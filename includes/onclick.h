@@ -13,6 +13,8 @@
 #ifndef ONCLICK_H
 # define ONCLICK_H
 
+# include <SDL2/SDL_keycode.h>
+
 # include "types.h"
 
 typedef struct s_game		t_game;
@@ -45,6 +47,16 @@ void	missions_focus_campaign(t_game *game, t_transform *gui);
 void	missions_focus_custom(t_game *game, t_transform *gui);
 void	mission_return(t_game *game, t_transform *gui);
 
+void	controls_set_forward(t_game *game, t_transform *gui);
+void	controls_set_backward(t_game *game, t_transform *gui);
+void	controls_set_left(t_game *game, t_transform *gui);
+void	controls_set_right(t_game *game, t_transform *gui);
+void	controls_set_shoot(t_game *game, t_transform *gui);
+void	controls_set_interact(t_game *game, t_transform *gui);
+void	controls_set_crouch(t_game *game, t_transform *gui);
+void	controls_set_jump(t_game *game, t_transform *gui);
+void	controls_return(t_game *game, t_transform *gui);
+
 void	restart_game(t_game *game, t_transform *gui);
 
 void	set_sensitivity(t_setting *setting, t_transform *parent);
@@ -53,6 +65,8 @@ void	set_sound(t_setting *setting, t_transform *parent);
 void	set_fov(t_setting *setting, t_transform *parent);
 void	set_resolution(t_setting *setting, t_transform *parent);
 void	set_resolution_type(t_setting *setting, t_transform *parent);
+
+void	set_key_str(SDL_Keycode keycode, t_transform *self);
 
 void	set_int(int setting, t_transform *location);
 void	set_float(float setting, t_transform *location, int precision);

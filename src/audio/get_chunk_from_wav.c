@@ -10,21 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_mixer.h>
 #include <errno.h>
+#include <limits.h>
+#include <SDL2/SDL_mixer.h>
+
 #include "libft/ft_str.h"
+
+#include "game.h"
 #include "audio.h"
 #include "error.h"
 
 Mix_Chunk	*get_chunk_from_wav(char *file)
 {
-	char		*str;
 	Mix_Chunk	*chunk;
+	char		full_path[PATH_MAX];
 
-	str = ft_strjoin(SOUND_EFFECT_LOC, file);
-	chunk = Mix_LoadWAV(str);
+	ft_strcpy(full_path, g_doom_dir);
+	ft_strcat(full_path, SOUND_EFFECT_PATH);
+	ft_strcat(full_path, file);
+	chunk = Mix_LoadWAV(full_path);
 	if (chunk == NULL)
-		error_msg_sdl(ENOENT, "Missing Sound");
-	ft_strdel(&str);
+		error_msg_sdl(ENOENT, ft_strformat("Failed to open %s", full_path));
 	return (chunk);
 }

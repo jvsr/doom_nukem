@@ -1,15 +1,15 @@
 - panel: mainmenu
-  - image: background
+  - image: mainmenubackground
     - color: #bb0a1e
   - image: logo
-    - pos: 0.35, 0.025
-    - dim: 0.3, 0.225
-    - texture: splash/splash.tga
+    - pos: 0.45, 0.025
+    - dim: 0.1, 0.225
+    - texture: splash/icon3.tga
     - draw_method: scaled
   - panel: menu
     - pos: 0.15, 0.275
     - dim: 0.7, 0.7
-    - image: background
+    - image: menubackground
       - texture: ui/border1x1.tga
     - button: mainmenuMapselectButton
       - pos: 0.125, 0.1375

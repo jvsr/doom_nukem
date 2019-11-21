@@ -19,6 +19,8 @@
 # include "types.h"
 # include "libft/ft_bool.h"
 
+# define SETTINGS_PATH "resources/data/settings/"
+
 typedef enum	e_resolution_type
 {
 	windowed,

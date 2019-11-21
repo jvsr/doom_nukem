@@ -1,5 +1,5 @@
 - panel: hud
   - pos: 0.85, 0.0
   - dim: 0.15, 1.0
-  - image: background
+  - image: hudbackground
     - texture: splash/splash.tga

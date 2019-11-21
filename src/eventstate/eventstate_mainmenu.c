@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_headers.h                                      :+:    :+:            */
+/*   eventstate_mainmenu.c                              :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/03 00:34:48 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/03 00:34:48 by pholster      ########   odam.nl         */
+/*   Created: 2019/11/12 17:16:15 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/12 17:18:24 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_HEADERS_H
-# define GET_HEADERS_H
+#include <SDL2/SDL_events.h>
 
-typedef struct	s_header
+#include "game.h"
+#include "keymap.h"
+#include "eventstate.h"
+
+void	mainmenu_eventstate(t_game *game, SDL_Event event)
 {
-	char			*name;
-	struct s_header	*next;
-}				t_header;
-
-void			sort_headers(t_header **head);
-
-#endif
+	(void)game;
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+		quit(0);
+}

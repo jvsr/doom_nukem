@@ -12,10 +12,22 @@
 
 #include "gui_internal.h"
 
-void		add_elem_child(t_transform *parent, t_transform *child)
+static t_transform	*get_elem_root_children(t_transform *elem)
+{
+	while (elem->parent_type != PARENT_UNDEFINED)
+	{
+		if (elem->parent_type == GUI)
+			return (elem->parent.ui->children);
+		elem = elem->parent.elem;
+	}
+	return (elem->gui_elem.panel->children);
+}
+
+void				add_elem_child(t_transform *parent, t_transform *child)
 {
 	child->parent_type = ELEM;
 	child->parent.elem = parent;
+	check_elem_duplicate(get_elem_root_children(child), child);
 	add_to_children(&parent->gui_elem.panel->children, child);
 	set_elem_redraw(child);
 }

@@ -36,11 +36,12 @@ static TTF_Font	*open_font(const char *file_name)
 	TTF_Font	*font;
 	char		full_path[PATH_MAX];
 
-	ft_strcpy(full_path, FONT_PATH);
+	ft_strcpy(full_path, g_doom_dir);
+	ft_strcat(full_path, FONT_PATH);
 	ft_strcat(full_path, file_name);
 	font = TTF_OpenFont(full_path, 50);
 	if (font == NULL)
-		error_msg_sdl(23, "Failed to open font");
+		error_msg_sdl(23, ft_strformat("Failed to open %s", full_path));
 	return (font);
 }
 

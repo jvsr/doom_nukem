@@ -28,7 +28,10 @@ ONCLICK_SRCS = mainmenu \
 				sound \
 				utils \
 				set_utils \
-				confirmation
+				confirmation \
+				controls \
+				keys_1 \
+				key_2
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \
@@ -62,6 +65,7 @@ DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 MANAGE_SRCS = add_gui_child \
 		add_elem_child \
 		add_to_children \
+		check_elem_duplicate \
 		remove_elem_parent \
 		del_gui_child \
 		del_elem_child \

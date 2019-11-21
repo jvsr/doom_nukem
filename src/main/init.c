@@ -6,28 +6,23 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:52:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 17:46:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "libft/ft_mem.h"
+#include "libft/ft_str.h"
 
 #include "game.h"
 #include "setting.h"
 #include "init.h"
 #include "error.h"
-#include "gametime.h"
-#include "audio.h"
-#include "tga.h"
-#include "serializer.h"
-
-#include <fcntl.h>
+#include "eventstate.h"
 
 static void		init_sdl(void)
 {
@@ -54,29 +49,20 @@ static void		init_game(t_game *game)
 	game->cursoractive = TRUE;
 }
 
-static void		init_settings(t_game *game)
+static void		set_basic_args(t_game *game, char **argv, char **envp)
 {
-	int			fd;
-	t_setting	*setting;
+	const size_t	exec_len = ft_strlen(argv[0]);
+	size_t			path_len;
 
-	fd = open("./resources/data/settings/settings.conf", O_RDONLY);
-	if (fd == -1)
-	{
-		setting = (t_setting *)ft_memalloc(sizeof(t_setting));
-		if (setting == NULL)
-			error_msg_errno("Failed to alloc settings");
-		setting->sensitivity = 1.0;
-		setting->music_volume = 0.8;
-		setting->sound_volume = 0.8;
-		setting->fov = 75;
-		setting->resolution.x = INIT_WIDTH;
-		setting->resolution.y = INIT_HEIGHT;
-		setting->resolution_type = fullscreen;
-		game->setting = setting;
-		return ;
-	}
-	close(fd);
-	game->setting = read_settings();
+	game->argv = argv;
+	game->envp = envp;
+	game->exec_name = ft_strdup(ft_strrchr(argv[0], '/') + 1);
+	if (game->exec_name == NULL)
+		error_msg_errno("Failed to alloc exec name");
+	path_len = exec_len - ft_strlen(game->exec_name);
+	g_doom_dir = ft_strndup(argv[0], path_len);
+	if (g_doom_dir == NULL)
+		error_msg_errno("Failed to alloc doom dir");
 }
 
 t_game			*init(char **argv, char **envp)
@@ -85,13 +71,13 @@ t_game			*init(char **argv, char **envp)
 
 	init_sdl();
 	game = alloc_game();
-	game->argv = argv;
-	game->envp = envp;
+	set_basic_args(game, argv, envp);
 	init_settings(game);
 	init_window_surface(game);
 	init_game(game);
 	init_audio(game);
 	init_gui(game);
 	init_keymap(game);
+	init_eventstate(game);
 	return (game);
 }

@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 11:43:29 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/22 17:05:31 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/12 18:20:46 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void			set_elem_layer(t_transform *elem, short layer)
 {
-	short				old_layer;
 	t_transform			**p_children;
 	const t_parent_type	parent_type = elem->parent_type;
 
@@ -29,7 +28,6 @@ void			set_elem_layer(t_transform *elem, short layer)
 		p_children = &elem->parent.elem->gui_elem.panel->children;
 	else
 		p_children = &elem->parent.ui->children;
-	old_layer = elem->layer;
 	elem->layer = layer;
 	remove_elem_parent(elem);
 	add_to_children(p_children, elem);

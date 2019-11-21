@@ -56,6 +56,8 @@ static void	adddouble(t_info *info, long double value, ssize_t n)
 	num = (intmax_t)value;
 	value -= num;
 	num += setdecimals(value, decimals, n);
+	if (n == 0 && decimals[0] >= '5')
+		num++;
 	pf_addnum(info, num);
 	if (n != 0)
 	{
