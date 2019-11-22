@@ -17,6 +17,7 @@
 #include "player.h"
 #include "renderer.h"
 #include "setting.h"
+#include "cmath.h"
 
 /*
 static void		draw_point(int colour,
@@ -38,16 +39,18 @@ static void		draw_point(int colour,
 
 static void		draw_wall(t_coord range, t_game *game, t_wall *wall, int *mask)
 {
-	float ray;
-	float step;
-	float i;
-	t_coord pos;
+	float	ray;
+	float	step;
+	int		i;
+	t_coord	pos;
 
 	ray = range.x;
 	step = game->setting->fov / game->surface->w;
 	i = (float)game->surface->w * (range.x / (float)game->setting->fov);
 	while (ray < range.y)
 	{
+		get_collision(game, &game->player->angles[i],
+			(t_coord*){&wall->start, &wall->end}, &pos);
 		i++;
 		ray += step;
 	}

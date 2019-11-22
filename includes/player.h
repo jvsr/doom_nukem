@@ -38,6 +38,7 @@ typedef	struct	s_player
 	t_mag		mag;
 	t_vec		forward;
 	t_vec		pos;
+	t_coord		*angles;
 	t_uint32	cur_sector;
 }				t_player;
 

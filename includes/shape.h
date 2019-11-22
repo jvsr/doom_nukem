@@ -21,11 +21,4 @@ typedef struct	s_circle
 	SDL_Point	mid;
 }				t_circle;
 
-typedef struct	s_line
-{
-	float		x;
-	float		y;
-	float		equals;
-}				t_line;
-
 #endif
