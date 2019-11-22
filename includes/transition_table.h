@@ -225,7 +225,7 @@ typedef struct				s_transition
 	const t_state_code	dst_state;
 }							t_transition;
 
-static const t_transition	g_transition_table[] =
+static t_transition const	g_transition_table[] =
 {
 	{entry, ok, dash},
 	{entry, fail, error},
