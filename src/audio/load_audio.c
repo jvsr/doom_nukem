@@ -16,42 +16,20 @@
 #include "audio.h"
 #include "error.h"
 
-static void	loadeffects(t_game *game)
+static void	loadsound(t_game *game)
 {
-	char	**files;
-	size_t	index;
-
-	files = (char *[]){
-		"explosion.wav"
-	};
-	index = 0;
-	while (index < SOUND_COUNT)
-	{
-		game->audio_man->effects[index] = get_chunk_from_wav(files[index]);
-		index++;
-	}
+	game->audio_man->effects[0] = get_chunk_from_wav("explosion");
 }
 
 static void	loadmusic(t_game *game)
 {
-	char	**files;
-	size_t	index;
-
-	files = (char *[]){
-		"lonely_troutman_ii.mp3",
-		"asking_questions.mp3",
-		"hit_n_smash.mp3",
-	};
-	index = 0;
-	while (index < MUSIC_COUNT)
-	{
-		game->audio_man->tracks[index] = get_music_from_mp3(files[index]);
-		index++;
-	}
+	game->audio_man->tracks[0] = get_music_from_mp3("lonely_troutman_ii");
+	game->audio_man->tracks[1] = get_music_from_mp3("asking_questions");
+	game->audio_man->tracks[2] = get_music_from_mp3("hit_n_smash");
 }
 
 void		load_audio(t_game *game)
 {
-	loadeffects(game);
+	loadsound(game);
 	loadmusic(game);
 }

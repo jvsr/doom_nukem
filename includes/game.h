@@ -27,7 +27,7 @@ typedef struct s_audio_man		t_audio_man;
 typedef struct s_setting		t_setting;
 typedef struct s_eventstate		t_eventstate;
 
-const char		*g_doom_dir;
+char const		*g_doom_dir;
 
 typedef	enum	e_state
 {

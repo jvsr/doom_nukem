@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   eventstate_transition_table.h                      :+:    :+:            */
+/*   find_tablepair_int_id.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/12 18:05:18 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 18:11:14 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/06 14:19:35 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/06 14:52:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTSTATE_TRANSITION_TABLE_H
-# define EVENTSTATE_TRANSITION_TABLE_H
+#include <stddef.h>
 
-# include "eventstate.h"
+#include "libft/ft_str.h"
 
-typedef void		(t_eventstate_fnc)(t_game *, SDL_Event);
+#include "table.h"
 
-static t_eventstate_fnc	*const g_eventstate[] =
+char const	*find_tablepair_int_id(t_tablepair_int const *table,
+									size_t table_size, int value)
 {
-	mainmenu_eventstate,
-	missions_eventstate,
-	options_eventstate,
-	options_confirmation_eventstate,
-	controls_eventstate,
-	set_controls_eventstate,
-};
+	size_t		i;
 
-#endif
+	i = 0;
+	while (i < table_size)
+	{
+		if (value == table[i].value)
+			return (table[i].id);
+		i++;
+	}
+	return (NULL);
+}
