@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/21 12:05:42 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/22 15:21:27 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/22 20:06:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@
 #include "libft/ft_char.h" //
 
 #define	ANSI_SIZE (80 * 25)
+
+#define DOOM_BLUE 1
+#define DOOM_CYAN 3
+#define DOOM_RED 4
+#define DOOM_YELLOW 6
+#define DOOM_BRIGHT_BLUE 9
+#define DOOM_BRIGHT_CYAN 11
+#define DOOM_BRIGHT_RED 12
+#define DOOM_BRIGHT_YELLOW 14
+
+#define ANSI_BLUE 4
+#define ANSI_CYAN 6
+#define ANSI_RED 1
+#define ANSI_YELLOW 3
+#define ANSI_BRIGHT_BLUE 12
+#define ANSI_BRIGHT_CYAN 14
+#define ANSI_BRIGHT_RED 9
+#define ANSI_BRIGHT_YELLOW 11
 
 static t_tablepair_int const g_eascii_unicode[] = {
 	{"\u00C7", 128},
@@ -157,6 +175,28 @@ static t_tablepair_int const g_eascii_unicode[] = {
 	{"\u00A0", 255},
 };
 
+static int				get_doom_ansi(int doom_ansi)
+{
+	if (doom_ansi == DOOM_BLUE)
+		return (ANSI_BLUE);
+	else if (doom_ansi == DOOM_RED)
+		return (ANSI_RED);
+	else if (doom_ansi == DOOM_CYAN)
+		return (ANSI_CYAN);
+	else if (doom_ansi == DOOM_YELLOW)
+		return (ANSI_YELLOW);
+	else if (doom_ansi == DOOM_BRIGHT_BLUE)
+		return (ANSI_BRIGHT_BLUE);
+	else if (doom_ansi == DOOM_BRIGHT_RED)
+		return (ANSI_BRIGHT_RED);
+	else if (doom_ansi == DOOM_BRIGHT_CYAN)
+		return (ANSI_BRIGHT_CYAN);
+	else if (doom_ansi == DOOM_BRIGHT_YELLOW)
+		return (ANSI_BRIGHT_YELLOW);
+	else
+		return (doom_ansi);
+}
+
 static void				print_endoom(t_wad_endoom *endoom)
 {
 	size_t			i;
@@ -164,9 +204,12 @@ static void				print_endoom(t_wad_endoom *endoom)
 
 	i = 0;
 	while (i < ANSI_SIZE)
-	{	
-		ft_termsetcolor(endoom->color[i] & 0x0F);
-		ft_termsetcolorbg((endoom->color[i] & 0x80) >> 3);
+	{
+
+		if (endoom->color[i] & 0b10000000)
+			ft_termcommand(5);
+		ft_termsetcolor(get_doom_ansi(endoom->color[i] & 0b00001111));
+		ft_termsetcolorbg(get_doom_ansi((endoom->color[i] & 0b01110000) >> 4));
 		if (endoom->ascii[i] >= 128)
 			ft_printf("%s", find_tablepair_int_id(g_eascii_unicode, size, endoom->ascii[i]));
 		else
@@ -176,6 +219,7 @@ static void				print_endoom(t_wad_endoom *endoom)
 		i++;
 		ft_termresetcolor();
 		ft_termresetcolorbg();
+		ft_termcommand(25);
 	}
 }
 

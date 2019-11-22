@@ -19,7 +19,8 @@ PREFIX =
 WAD_SRCS = parse_wad \
 			parse_wad_playpal \
 			parse_wad_colormap \
-			parse_wad_endoom
+			parse_wad_endoom \
+			parse_wad_level
 WAD_SRCS := $(WAD_SRCS:%=WAD/%)
 
 MAP_SRCS =

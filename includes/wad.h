@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/22 15:07:00 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/22 19:05:34 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ typedef struct			s_wad
 void	parse_wad_playpal(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
 void	parse_wad_colormap(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
 void	parse_wad_endoom(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
+
+void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory);
 
 #endif

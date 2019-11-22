@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/21 20:33:33 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/22 20:06:55 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,77 +38,91 @@ static void	print_header(t_wad_header *header)
 // 		directory->name_lump);
 // }
 
-static void	parse_wad_flat(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state state)
+static void	parse_wad_flat(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
 {
-	(void)state;
 	(void)wad_bin;
+	(void)wad_general;
 	if (ft_strmatch(directory->name_lump, "E*M*") == TRUE)
 	{
-		wad->lumps->name = ft_strdup(directory->name_lump);
 		// print_directory(directory);
 	}
 }
-static void	parse_wad_sprite(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state state)
+static void	parse_wad_sprite(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
 {
-	(void)state;
 	(void)wad_bin;
+	(void)wad_general;
 	if (ft_strmatch(directory->name_lump, "E*M*") == TRUE)
 	{
-		wad->lumps->name = ft_strdup(directory->name_lump);
 		// print_directory(directory);
 	}
 }
-static void	parse_wad_patch(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state state)
+static void	parse_wad_patch(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
 {
-	(void)state;
 	(void)wad_bin;
+	(void)wad_general;
 	if (ft_strmatch(directory->name_lump, "E*M*") == TRUE)
 	{
-		wad->lumps->name = ft_strdup(directory->name_lump);
 		// print_directory(directory);
 	}
 }
-static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state state)
+static t_bool	is_wad_level(char *const name)
+{
+	size_t			i;
+	size_t const	len = ft_strlen(name);
+
+	i = 0;
+	while (i < len)
+	{
+		if (i == 0 && name[i] != 'E')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+static void	parse_wad_other(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory)
+{
+	if (is_wad_level(directory->name_lump))
+		parse_wad_level(wad_bin, wad, directory);
+}
+
+static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
 {
 	(void)state;
-	(void)wad_bin;
 	if (ft_strequ(directory->name_lump, "PLAYPAL"))
 		parse_wad_playpal(wad_bin, wad->general, directory);
 	else if (ft_strequ(directory->name_lump, "COLORMAP"))
 		parse_wad_colormap(wad_bin, wad->general, directory);
 	else if (ft_strequ(directory->name_lump, "ENDOOM"))
 		parse_wad_endoom(wad_bin, wad->general, directory);
-	if (ft_strmatch(directory->name_lump, "E*M*") == TRUE)
-	{
-		wad->lumps->name = ft_strdup(directory->name_lump);
-		// print_directory(directory);
-	}
+	else
+		parse_wad_other(wad_bin, wad, directory);
 }
 
-static void	parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state state)
+static void	parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
 {
-	(void)wad_bin;
-	if (state == wad_flat)
-		parse_wad_flat(wad_bin, wad, directory, state);
-	else if (state == wad_sprite)
-		parse_wad_sprite(wad_bin, wad, directory, state);
-	else if (state == wad_patch)
-		parse_wad_patch(wad_bin, wad, directory, state);
+	if (*state == wad_flat)
+		parse_wad_flat(wad_bin, wad->general, directory);
+	else if (*state == wad_sprite)
+		parse_wad_sprite(wad_bin, wad->general, directory);
+	else if (*state == wad_patch)
+		parse_wad_patch(wad_bin, wad->general, directory);
 	else
 		parse_wad_special(wad_bin, wad, directory, state);
 }
 
-static void	loop_wad_directories(t_binary_read *wad_bin, t_wad *wad, t_wad_header *header, t_wad_state state)
+static void	loop_wad_directories(t_binary_read *wad_bin, t_wad *wad, t_wad_header *header)
 {
 	int				i;
+	t_wad_state		state;
 	t_wad_directory	*directory;
 
 	i = 0;
+	state = wad_pre;
 	while (i < header->no_entries)
 	{
 		wad_bin->content_pos = header->loc_directory + i * 16;
 		directory = read_wad_directory(wad_bin);
-		parse_wad_directory(wad_bin, wad, directory, state);
+		parse_wad_directory(wad_bin, wad, directory, &state);
 		// print_directory(directory);
 		free(directory->name_lump);
 		free(directory);
@@ -136,14 +150,12 @@ void	parse_wad(char *const filename)
 {
 	t_wad					*wad;
 	t_wad_header			*header;
-	t_wad_state				state;
 	t_binary_read *const	wad_bin = new_binary_read(filename, FALSE);
 
 	wad = alloc_wad();
 	wad_bin->endian = ENDIAN_LITTLE;
 	header = read_wad_header(wad_bin);
 	print_header(header);
-	state = wad_pre;
-	loop_wad_directories(wad_bin, wad, header, state);
+	loop_wad_directories(wad_bin, wad, header);
 	return ;
 }
