@@ -13,6 +13,7 @@
 #include <SDL2/SDL_surface.h>
 #include "libft/ft_list.h"
 #include "game.h"
+#include "cmath.h"
 #include "map.h"
 #include "renderer.h"
 #include "shape.h"

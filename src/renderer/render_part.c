@@ -50,7 +50,7 @@ static void		draw_wall(t_coord range, t_game *game, t_wall *wall, int *mask)
 	while (ray < range.y)
 	{
 		get_collision(game, &game->player->angles[i],
-			(t_coord*){&wall->start, &wall->end}, &pos);
+			(t_coord[]){wall->start, wall->end}, &pos);
 		i++;
 		ray += step;
 	}
