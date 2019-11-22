@@ -30,7 +30,6 @@ typedef struct s_text		t_text;
 typedef struct s_image		t_image;
 typedef struct s_button		t_button;
 typedef struct s_panel		t_panel;
-typedef struct s_table		t_table;
 
 typedef void	(t_onclick)(t_game *, t_transform *);
 
@@ -143,7 +142,6 @@ struct			s_gui
 	SDL_Surface	*window_surface;
 	t_transform	*children;
 	TTF_Font	*fonts[FONT_AMOUNT];
-	t_table		*onclicks;
 };
 
 t_transform		*check_gui_hit(t_game *game, SDL_Point pos);
