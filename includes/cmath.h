@@ -13,6 +13,9 @@
 #ifndef CMATH_H
 # define CMATH_H
 
+# define PI 3.14159265359
+# define PI_R 0.0174532925
+
 typedef struct s_coord  t_coord;
 typedef struct s_game   t_game;
 
@@ -27,5 +30,8 @@ t_coord		*get_collision(t_game *game,
                                     t_coord *a, t_coord *wall, t_coord *pos);
 float		get_angle_from_vectors(t_coord *vec0, t_coord *vec1);
 float		get_angle_from_vector(t_coord *vec);
+t_coord		*get_vector_from_angle(float angle, t_coord *vec);
+float		dot_vectors(t_coord *vec0, t_coord *vec1);
+float		get_vector_magnitude(t_coord *vec);
 
 #endif
