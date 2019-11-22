@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include <math.h>
+#include <cmath.h>
 #include "coord.h"
 
 float	get_angle_from_vector(t_coord *vec)
 {
-	return (atan(vec->y / vec->x));
+	return (atan(vec->y / vec->x) * PI_D);
 }
