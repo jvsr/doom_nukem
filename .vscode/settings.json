@@ -1,6 +1,9 @@
 {
+	"files.exclude": {
+		"**/*.o": true,
+		"**/*.d": true,
+	},
     "files.associations": {
-		"*.mainSrcs": "makefile",
 		"*.h": "c",
 		"Makefile.*": "makefile",
 		"sdl2_mixer": "ruby",

@@ -24,16 +24,6 @@ typedef	struct s_game		t_game;
 typedef	struct s_hashmap	t_hashmap;
 typedef	unsigned char		t_keystate;
 
-/*
-** t_keypair is only used for keymapprint which is a debug func
-*/
-
-typedef struct	s_keypair
-{
-	const char	*name;
-	SDL_Keycode	key;
-}				t_keypair;
-
 t_keystate		*new_keystate(void);
 void			reset_keymap(const t_hashmap *keymap);
 void			clear_keymap(const t_hashmap *keymap);

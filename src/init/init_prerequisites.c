@@ -19,6 +19,7 @@
 #include "libft/ft_str.h"
 
 #include "game.h"
+#include "setting.h"
 #include "init.h"
 #include "error.h"
 

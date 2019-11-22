@@ -6,15 +6,17 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/03 10:38:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 13:38:52 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/06 17:32:54 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_str.h"
+#include "libft/ft_mem.h"
 
+#include "table.h"
+#include "error.h"
 #include "gui_internal.h"
 
-static const t_matchpair	g_gui_types[] = {
+static t_tablepair_int const	g_types[] = {
 	{"GUI_UNDEFINED", GUI_UNDEFINED},
 	{"TEXT", TEXT},
 	{"TEXT_BLOCK", TEXT},
@@ -23,34 +25,18 @@ static const t_matchpair	g_gui_types[] = {
 	{"PANEL", PANEL},
 };
 
-const char		*get_gui_type_name(t_gui_type gui_type)
+char const		*get_gui_type_name(t_gui_type gui_type)
 {
-	const size_t	size = sizeof(g_gui_types) / sizeof(t_matchpair);
-	size_t			i;
+	size_t const	size = sizeof(g_types) / sizeof(t_tablepair_int);
 
-	i = 0;
-	while (i < size)
-	{
-		if (gui_type == g_gui_types[i].value)
-			return (g_gui_types[i].name);
-		i++;
-	}
-	return (NULL);
+	return (find_tablepair_int_id(g_types, size, gui_type));
 }
 
 t_gui_type		get_gui_type_value(const char *name)
 {
-	const size_t	size = sizeof(g_gui_types) / sizeof(t_matchpair);
-	size_t			i;
+	size_t const	size = sizeof(g_types) / sizeof(t_tablepair_int);
 
 	if (name == NULL)
 		return (GUI_UNDEFINED);
-	i = 0;
-	while (i < size)
-	{
-		if (ft_strequ_nocase(name, g_gui_types[i].name))
-			return (g_gui_types[i].value);
-		i++;
-	}
-	return (GUI_UNDEFINED);
+	return (find_tablepair_int_value(g_types, size, name));
 }

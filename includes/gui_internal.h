@@ -17,18 +17,6 @@
 
 # define TEXT_ALPHA_ROUND	0x30
 
-typedef struct	s_onclickpair
-{
-	const char	*name;
-	t_onclick	*f;
-}				t_onclickpair;
-
-typedef struct	s_matchpair
-{
-	const char	*name;
-	int			value;
-}				t_matchpair;
-
 void			del_text(t_text **text);
 void			del_image(t_image **image);
 void			del_panel(t_panel **panel);
