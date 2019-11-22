@@ -28,6 +28,7 @@ Mix_Music	*get_music_from_mp3(char *file)
 	ft_strcpy(full_path, g_doom_dir);
 	ft_strcat(full_path, MUSIC_PATH);
 	ft_strcat(full_path, file);
+	ft_strcat(full_path, ".mp3");
 	track = Mix_LoadMUS(full_path);
 	if (track == NULL)
 		error_msg_sdl(ENOENT, ft_strformat("Failed to open %s", full_path));

@@ -28,6 +28,7 @@ Mix_Chunk	*get_chunk_from_wav(char *file)
 	ft_strcpy(full_path, g_doom_dir);
 	ft_strcat(full_path, SOUND_EFFECT_PATH);
 	ft_strcat(full_path, file);
+	ft_strcat(full_path, ".wav");
 	chunk = Mix_LoadWAV(full_path);
 	if (chunk == NULL)
 		error_msg_sdl(ENOENT, ft_strformat("Failed to open %s", full_path));
