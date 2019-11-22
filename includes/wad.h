@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/21 20:25:04 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/22 15:07:00 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define WAD_H
 
 # include "SDL2/SDL_pixels.h"
+
+# include "types.h"
 
 typedef struct s_binary_read	t_binary_read;
 typedef enum			e_wad_state
@@ -65,12 +67,12 @@ typedef struct			s_wad_palette
 typedef struct			s_wad_colormap
 {
 	size_t				color_amount;
-	uint8_t				*color;
+	t_uint8				*color;
 }						t_wad_colormap;
 typedef struct			s_wad_endoom
 {
-	uint8_t				*ascii;
-	uint8_t				*color;
+	t_uint8				*ascii;
+	t_uint8				*color;
 }						t_wad_endoom;
 typedef struct			s_wad_general
 {

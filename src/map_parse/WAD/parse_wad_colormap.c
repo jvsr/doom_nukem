@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/21 18:50:13 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/21 20:17:26 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/22 15:06:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void				alloc_colormap(t_wad_general *wad_general, size_t colormap_amount
 static void				alloc_color(t_wad_colormap *colormap, size_t color_amount)
 {
 	colormap->color_amount = color_amount;
-	colormap->color = (uint8_t*)ft_memalloc(sizeof(uint8_t) * colormap->color_amount);
+	colormap->color = (t_uint8*)ft_memalloc(sizeof(t_uint8) * colormap->color_amount);
 	if (colormap->color == NULL)
 			error_msg_errno("Failed to allocate colormap colors");
 }
