@@ -15,8 +15,9 @@
 
 #include "onclick.h"
 #include "gui_internal.h"
+#include "table.h"
 
-static const t_onclickpair	g_onclicks[] = {
+static t_tablepair const	g_onclicks[] = {
 	{"mainmenu_missions", mainmenu_missions},
 	{"mainmenu_options", mainmenu_options},
 	{"mainmenu_mapeditor", mainmenu_mapeditor},
@@ -58,36 +59,20 @@ static const t_onclickpair	g_onclicks[] = {
 	{"restart_game", restart_game},
 };
 
-const char	*get_onclick_name(t_onclick *onclick)
+char const	*get_onclick_name(t_onclick *onclick)
 {
-	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
-	size_t			i;
+	size_t const	table_size = sizeof(g_onclicks) / sizeof(t_tablepair);
 
 	if (onclick == NULL)
 		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		if (g_onclicks[i].f != NULL && onclick == g_onclicks[i].f)
-			return (g_onclicks[i].name);
-		i++;
-	}
-	return (NULL);
+	return (find_tablepair_id(g_onclicks, table_size, onclick));
 }
 
 t_onclick	*get_onclick_f(const char *name)
 {
-	const size_t	size = sizeof(g_onclicks) / sizeof(t_onclickpair);
-	size_t			i;
+	size_t const	table_size = sizeof(g_onclicks) / sizeof(t_tablepair);
 
 	if (name == NULL)
 		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		if (ft_strequ_nocase(name, g_onclicks[i].name))
-			return (g_onclicks[i].f);
-		i++;
-	}
-	return (NULL);
+	return (find_tablepair_value(g_onclicks, table_size, name));
 }

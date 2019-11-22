@@ -6,10 +6,11 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/04 17:31:18 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/04 17:31:18 by pholster      ########   odam.nl         */
+/*   Updated: 2019/11/06 14:58:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_str.h"
 #include "libft/ft_char.h"
 #include "libft/ft_printf.h"
 
@@ -29,13 +30,18 @@ static void	print_gui_elem(t_transform *elem, t_bool print_children)
 
 void		print_elem(t_transform *elem, t_bool print_children)
 {
+	const char	*gui_type_name = get_gui_type_name(elem->gui_type);
+	const char	*gui_onclick_name = get_onclick_name(elem->onclick);
+
 	ft_printf("%{yellow}Name: %s\nType: %s%{}\nShow: %hhd\nLayer: %hd\n\
 Pos: %.4f %.4f\nDim: %.4f %.4f\n\
 Has_alpha: %d\nClickable: %hhd\nOnclick: %s\n",
-	elem->name, get_gui_type_name(elem->gui_type), elem->show, elem->layer,
+	elem->name, gui_type_name, elem->show, elem->layer,
 	elem->pos.x, elem->pos.y, elem->dim.x, elem->dim.y,
-	elem->has_alpha, elem->clickable, get_onclick_name(elem->onclick));
+	elem->has_alpha, elem->clickable, gui_onclick_name);
 	print_gui_elem(elem, print_children);
 	if (elem->next != NULL)
 		ft_putchar('\n');
+	ft_strdel((char**)&gui_type_name);
+	ft_strdel((char**)&gui_onclick_name);
 }

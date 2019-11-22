@@ -17,7 +17,7 @@
 
 typedef void		(t_eventstate_fnc)(t_game *, SDL_Event);
 
-static t_eventstate_fnc	*g_eventstate[] =
+static t_eventstate_fnc	*const g_eventstate[] =
 {
 	mainmenu_eventstate,
 	missions_eventstate,
