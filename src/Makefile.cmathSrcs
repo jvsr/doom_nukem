@@ -20,4 +20,4 @@ FT_SRCS =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = get_collision
+SRCS = get_collision get_angle_from_vectors get_angle_from_vector

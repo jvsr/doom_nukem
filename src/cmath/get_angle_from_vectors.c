@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cmath.h                                            :+:    :+:            */
+/*   get_angle_from_vectors.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/22 13:11:10 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/22 13:11:10 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/11/22 13:19:58 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/11/22 13:19:58 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMATH_H
-# define CMATH_H
+#include <math.h>
+#include "coord.h"
 
-typedef struct s_coord  t_coord;
-typedef struct s_game   t_game;
-
-typedef struct	s_line
+float	get_angle_from_vectors(t_coord *vec0, t_coord *vec1)
 {
-	float		x;
-	float		y;
-	float		equals;
-}				t_line;
+	float top;
+	float bottom;
 
-t_coord		*get_collision(t_game *game,
-                                    t_coord *a, t_coord *wall, t_coord *pos);
-float		get_angle_from_vectors(t_coord *vec0, t_coord *vec1);
-float		get_angle_from_vector(t_coord *vec);
-
-#endif
+	top = (vec0->x * vec1->x) + (vec0->y * vec1->y);
+	bottom = sqrt(pow(vec0->x, 2) + pow(vec0->y, 2)) *
+			sqrt(pow(vec1->x, 2) + pow(vec1->y, 2));
+	return (top / bottom);
+}

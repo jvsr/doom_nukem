@@ -15,7 +15,7 @@
 #include "player.h"
 
 t_coord		*get_collision(t_game *game,
-                                    t_coord *a, t_coord *wall, t_coord *pos)
+									t_coord *a, t_coord *wall, t_coord *pos)
 {
 	float	x;
 	float	y;

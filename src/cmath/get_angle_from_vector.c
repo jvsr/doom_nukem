@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cmath.h                                            :+:    :+:            */
+/*   get_angle_from_vector.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/22 13:11:10 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/22 13:11:10 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/11/22 13:37:51 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/11/22 13:37:51 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMATH_H
-# define CMATH_H
+#include <math.h>
+#include "coord.h"
 
-typedef struct s_coord  t_coord;
-typedef struct s_game   t_game;
-
-typedef struct	s_line
+float	get_angle_from_vector(t_coord *vec)
 {
-	float		x;
-	float		y;
-	float		equals;
-}				t_line;
-
-t_coord		*get_collision(t_game *game,
-                                    t_coord *a, t_coord *wall, t_coord *pos);
-float		get_angle_from_vectors(t_coord *vec0, t_coord *vec1);
-float		get_angle_from_vector(t_coord *vec);
-
-#endif
+	return (atan(vec->y / vec->x));
+}
