@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/22 20:06:55 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/23 16:52:38 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,72 +30,49 @@ static void	print_header(t_wad_header *header)
 		header->loc_directory);
 }
 
-// static void	print_directory(t_wad_directory *directory)
-// {
-// 	ft_printf("LumpP:\t%d\nSize:\t%d\nName:\t%s\n\n",
-// 		directory->loc_lump,
-// 		directory->size_lump,
-// 		directory->name_lump);
-// }
+void	print_directory(t_wad_directory *directory)
+{
+	ft_printf("LumpP:\t%d\nSize:\t%d\nName:\t%s\n\n",
+		directory->loc_lump,
+		directory->size_lump,
+		directory->name_lump);
+}
 
-static void	parse_wad_flat(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
-{
-	(void)wad_bin;
-	(void)wad_general;
-	if (ft_strmatch(directory->name_lump, "E*M*") == TRUE)
-	{
-		// print_directory(directory);
-	}
-}
-static void	parse_wad_sprite(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
-{
-	(void)wad_bin;
-	(void)wad_general;
-	if (ft_strmatch(directory->name_lump, "E*M*") == TRUE)
-	{
-		// print_directory(directory);
-	}
-}
-static void	parse_wad_patch(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
-{
-	(void)wad_bin;
-	(void)wad_general;
-	if (ft_strmatch(directory->name_lump, "E*M*") == TRUE)
-	{
-		// print_directory(directory);
-	}
-}
 static t_bool	is_wad_level(char *const name)
 {
 	size_t			i;
 	size_t const	len = ft_strlen(name);
 
-	i = 0;
-	while (i < len)
-	{
-		if (i == 0 && name[i] != 'E')
-			return (FALSE);
+	if (0 >= len || name[0] != 'E')
+		return (FALSE);
+	i = 1;
+	if (i >= len || ft_isdigit(name[i]) == FALSE)
+		return (FALSE);
+	while (i < len && ft_isdigit(name[i]) == TRUE)
 		i++;
-	}
+	if (i >= len || name[i] != 'M')
+		return (FALSE);
+	if (i + 1 > len || ft_isdigit(name[i + 1]) == FALSE)
+		return (FALSE);
 	return (TRUE);
-}
-static void	parse_wad_other(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory)
-{
-	if (is_wad_level(directory->name_lump))
-		parse_wad_level(wad_bin, wad, directory);
 }
 
 static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
 {
-	(void)state;
+	// print_directory(directory);
 	if (ft_strequ(directory->name_lump, "PLAYPAL"))
 		parse_wad_playpal(wad_bin, wad->general, directory);
 	else if (ft_strequ(directory->name_lump, "COLORMAP"))
 		parse_wad_colormap(wad_bin, wad->general, directory);
 	else if (ft_strequ(directory->name_lump, "ENDOOM"))
 		parse_wad_endoom(wad_bin, wad->general, directory);
+	else if (is_wad_level(directory->name_lump))
+	{
+		*state = wad_level;
+		parse_wad_level(wad_bin, wad, directory);
+	}
 	else
-		parse_wad_other(wad_bin, wad, directory);
+		print_directory(directory);
 }
 
 static void	parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
@@ -117,7 +94,7 @@ static void	loop_wad_directories(t_binary_read *wad_bin, t_wad *wad, t_wad_heade
 	t_wad_directory	*directory;
 
 	i = 0;
-	state = wad_pre;
+	state = wad_none;
 	while (i < header->no_entries)
 	{
 		wad_bin->content_pos = header->loc_directory + i * 16;
@@ -126,6 +103,10 @@ static void	loop_wad_directories(t_binary_read *wad_bin, t_wad *wad, t_wad_heade
 		// print_directory(directory);
 		free(directory->name_lump);
 		free(directory);
+		if (state == wad_level) {
+			state = wad_none;
+			i += 10;
+		}
 		i++;
 	}
 }
@@ -137,9 +118,6 @@ static t_wad	*alloc_wad(void)
 	wad = (t_wad*)ft_memalloc(sizeof(t_wad));
 	if (wad == NULL)
 		error_msg_errno("Failed to allocate wad");
-	wad->lumps = (t_wad_level*)ft_memalloc(sizeof(t_wad_level));
-	if (wad->lumps == NULL)
-		error_msg_errno("Failed to allocate lumps");
 	wad->general = (t_wad_general*)ft_memalloc(sizeof(t_wad_general));
 	if (wad->general == NULL)
 		error_msg_errno("Failed to allocate lumps");

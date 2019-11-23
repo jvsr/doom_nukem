@@ -20,7 +20,16 @@ WAD_SRCS = parse_wad \
 			parse_wad_playpal \
 			parse_wad_colormap \
 			parse_wad_endoom \
-			parse_wad_level
+			parse_wad_level \
+			parse_wad_flat \
+			parse_wad_patch \
+			parse_wad_sprite \
+			parse_wad_things \
+			parse_wad_linedefs \
+			parse_wad_sidedefs \
+			parse_wad_vertexes \
+			parse_wad_segs \
+			parse_wad_ssectors
 WAD_SRCS := $(WAD_SRCS:%=WAD/%)
 
 MAP_SRCS =

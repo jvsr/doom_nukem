@@ -1,0 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse_wad_flat.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/11/23 12:29:25 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/23 12:40:36 by jvisser       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft/ft_mem.h"
+
+#include "wad.h"
+#include "error.h"
+#include "serializer.h"
+
+void	parse_wad_flat(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
+{
+	(void)wad_bin;
+	(void)wad_general;
+	(void)directory;
+}
