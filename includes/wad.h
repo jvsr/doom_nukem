@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/23 21:43:47 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/24 22:06:35 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,35 @@ typedef struct			s_wad_ssector
 	short				segment_no;
 	short				segment_first;
 }						t_wad_ssector;
+typedef struct			s_wad_node
+{
+	short				partition_line_x;
+	short				partition_line_y;
+	short				change_partition_line_x;
+	short				change_partition_line_y;
+	long				right_box;
+	long				left_box;
+	short				right_child;
+	short				left_child;
+}						t_wad_node;
+typedef struct			s_wad_sector
+{
+	short				height_floor;
+	short				height_ceiling;
+	char				*texture_floor;
+	char				*texture_ceiling;
+	short				light_level;
+	unsigned short		sector_special;
+	unsigned short		sector_tag;
+}						t_wad_sector;
+typedef struct			s_wad_blockmap
+{
+	unsigned short		grid_org_x;
+	unsigned short		grid_org_y;
+	short				colums_no;
+	short				rows_no;
+	short				*offsets;
+}						t_wad_blockmap;
 typedef struct			s_wad_level
 {
 	char				*name;
@@ -108,6 +137,12 @@ typedef struct			s_wad_level
 	t_wad_seg			**segs;
 	size_t				ssectors_amount;
 	t_wad_ssector		**ssectors;
+	size_t				nodes_amount;
+	t_wad_node			**nodes;
+	size_t				sectors_amount;
+	t_wad_sector		**sectors;
+	unsigned char		**reject;
+	t_wad_blockmap		*blockmap;
 	struct s_wad_level	*next;
 }						t_wad_level;
 
@@ -158,5 +193,9 @@ void	parse_wad_sidedefs(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_di
 void	parse_wad_vertexes(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
 void	parse_wad_segs(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
 void	parse_wad_ssectors(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
+void	parse_wad_nodes(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
+void	parse_wad_sectors(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
+void	parse_wad_reject(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
+void	parse_wad_blockmap(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
 
 #endif

@@ -6,12 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 19:03:22 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/23 21:45:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/24 22:10:30 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
+#include "libft/ft_printf.h" //
 
 #include "wad.h"
 #include "error.h"
@@ -50,6 +51,14 @@ void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *direct
 			parse_wad_segs(wad_bin, level, directory);
 		else if (ft_strequ(directory->name_lump, "SSECTORS"))
 			parse_wad_ssectors(wad_bin, level, directory);
+		else if (ft_strequ(directory->name_lump, "NODES"))
+			parse_wad_nodes(wad_bin, level, directory);
+		else if (ft_strequ(directory->name_lump, "SECTORS"))
+			parse_wad_sectors(wad_bin, level, directory);
+		else if (ft_strequ(directory->name_lump, "REJECT"))
+			parse_wad_reject(wad_bin, level, directory);
+		else if (ft_strequ(directory->name_lump, "BLOCKMAP"))
+			parse_wad_blockmap(wad_bin, level, directory);
 		else
 			print_directory(directory);
 		i++;

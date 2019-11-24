@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/23 16:52:38 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/24 21:52:46 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ static void	loop_wad_directories(t_binary_read *wad_bin, t_wad *wad, t_wad_heade
 		// print_directory(directory);
 		free(directory->name_lump);
 		free(directory);
-		if (state == wad_level) {
+		if (state == wad_level)
+		{
 			state = wad_none;
 			i += 10;
 		}

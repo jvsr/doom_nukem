@@ -29,7 +29,11 @@ WAD_SRCS = parse_wad \
 			parse_wad_sidedefs \
 			parse_wad_vertexes \
 			parse_wad_segs \
-			parse_wad_ssectors
+			parse_wad_ssectors \
+			parse_wad_nodes \
+			parse_wad_sectors \
+			parse_wad_reject \
+			parse_wad_blockmap
 WAD_SRCS := $(WAD_SRCS:%=WAD/%)
 
 MAP_SRCS =
