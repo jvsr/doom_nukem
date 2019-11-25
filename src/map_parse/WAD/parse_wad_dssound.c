@@ -48,13 +48,11 @@ static void	fill_wad_dssound(t_binary_read *wad_bin, t_wad_dssound *dssound)
 	dssound->samples = (t_uint8*)ft_memalloc(sizeof(t_uint8) * dssound->sample_count);
 	if (dssound->samples == NULL)
 		error_msg_errno("Failed to allocate dssound samples");
-	ft_printf("format: %hu, sample_rate: %hu, sample_count %u\n", dssound->format, dssound->sample_rate, dssound->sample_count);
 	i = 0;
 	read_padding(wad_bin);
 	while (i < dssound->sample_count)
 	{
 		dssound->samples[i] = read_char(wad_bin);
-		ft_printf("sample: %hhu\n", dssound->samples[i]);
 		i++;
 	}
 	read_padding(wad_bin);
@@ -64,7 +62,5 @@ void		parse_wad_dssound(t_binary_read *wad_bin, t_wad_general *wad_general, t_wa
 {
 	alloc_dssound(wad_general);
 	wad_bin->content_pos = directory->loc_lump;
-	ft_printf("DS-SOUND: %s\n", directory->name_lump);
 	fill_wad_dssound(wad_bin, wad_general->dssound);
-	ft_printf("\n");
 }
