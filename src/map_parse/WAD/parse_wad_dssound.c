@@ -11,15 +11,14 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
-
-#include "libft/ft_printf.h"
+#include "libft/ft_str.h"
 
 #include "wad.h"
 #include "error.h"
 #include "types.h"
 #include "serializer.h"
 
-static void	alloc_dssound(t_wad_general *wad_general)
+static t_wad_dssound	*alloc_dssound(t_wad_general *wad_general)
 {
 	t_wad_dssound	*dssound;
 	t_wad_dssound	*next;
@@ -30,37 +29,43 @@ static void	alloc_dssound(t_wad_general *wad_general)
 		error_msg_errno("Failed to allocate dssound");
 	dssound->next = next;
 	wad_general->dssound = dssound;
+	return (dssound);
 }
 
-static void	read_padding(t_binary_read *wad_bin)
+static void				read_padding(t_binary_read *wad_bin)
 {
 	read_long(wad_bin);
 	read_long(wad_bin);
 }
 
-static void	fill_wad_dssound(t_binary_read *wad_bin, t_wad_dssound *dssound)
+static void				fill_wad_dssound(t_binary_read *wad_bin, t_wad_dssound *dssound)
 {
 	size_t	i;
 
 	dssound->format = read_short(wad_bin);
 	dssound->sample_rate = read_short(wad_bin);
 	dssound->sample_count = read_int(wad_bin);
-	dssound->samples = (t_uint8*)ft_memalloc(sizeof(t_uint8) * dssound->sample_count);
-	if (dssound->samples == NULL)
+	dssound->sample = (t_uint8*)ft_memalloc(sizeof(t_uint8) * dssound->sample_count);
+	if (dssound->sample == NULL)
 		error_msg_errno("Failed to allocate dssound samples");
 	i = 0;
 	read_padding(wad_bin);
 	while (i < dssound->sample_count)
 	{
-		dssound->samples[i] = read_char(wad_bin);
+		dssound->sample[i] = read_char(wad_bin);
 		i++;
 	}
 	read_padding(wad_bin);
 }
 
-void		parse_wad_dssound(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
+void					parse_wad_dssound(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
 {
-	alloc_dssound(wad_general);
+	t_wad_dssound	*dssound;
+
+	dssound = alloc_dssound(wad_general);
+	dssound->name = ft_strdup(directory->name_lump);
+	if (dssound->name == NULL)
+		error_msg_errno("Failed to allocate dssound name");
 	wad_bin->content_pos = directory->loc_lump;
-	fill_wad_dssound(wad_bin, wad_general->dssound);
+	fill_wad_dssound(wad_bin, dssound);
 }
