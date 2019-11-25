@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 15:19:29 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 15:36:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_director
 		*state = wad_level;
 		parse_wad_level(wad_bin, wad, directory);
 	}
-	// else
-	// 	print_directory(directory);
+	else
+		print_directory(directory);
 }
 
 static void	parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
@@ -130,7 +130,7 @@ static t_wad	*alloc_wad(void)
 	return (wad);
 }
 
-void	parse_wad(char *const filename)
+t_wad	*parse_wad(char *const filename)
 {
 	t_wad					*wad;
 	t_wad_header			*header;
@@ -141,4 +141,5 @@ void	parse_wad(char *const filename)
 	header = read_wad_header(wad_bin);
 	print_header(header);
 	loop_wad_directories(wad_bin, wad, header);
+	return (wad);
 }
