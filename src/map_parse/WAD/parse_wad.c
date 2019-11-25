@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/24 21:52:46 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 11:13:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_director
 		parse_wad_colormap(wad_bin, wad->general, directory);
 	else if (ft_strequ(directory->name_lump, "ENDOOM"))
 		parse_wad_endoom(wad_bin, wad->general, directory);
+	else if (ft_strmatch(directory->name_lump, "DS*"))
+		return ;
+	else if (ft_strmatch(directory->name_lump, "DP*"))
+		return ;
 	else if (is_wad_level(directory->name_lump))
 	{
 		*state = wad_level;

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 19:03:22 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/24 22:10:30 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 11:04:55 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	get_next_directory(t_binary_read *wad_bin, t_wad_directory **directo
 {
 	*directory = read_wad_directory(wad_bin);
 }
-
+#include <unistd.h>
+#include <fcntl.h>
 void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory)
 {
 	size_t			i;

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/23 16:59:26 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/24 22:07:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 12:39:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #include "error.h"
 #include "serializer.h"
 
-static void	print_blockmap(t_wad_blockmap *blockmap)
-{
-	ft_printf("G ORG X:\t%hu\nG ORG Y:\t%hu\nCOL:\t%d\nROW:\t%d\n\n",
-		blockmap->grid_org_x,
-		blockmap->grid_org_y,
-		blockmap->colums_no,
-		blockmap->rows_no);
-}
+// static void	print_blockmap(t_wad_blockmap *blockmap)
+// {
+// 	ft_printf("G ORG X:\t%hu\nG ORG Y:\t%hu\nCOL:\t%d\nROW:\t%d\n\n",
+// 		blockmap->grid_org_x,
+// 		blockmap->grid_org_y,
+// 		blockmap->colums_no,
+// 		blockmap->rows_no);
+// }
 
 static void	alloc_blockmap(t_wad_level *level)
 {
@@ -60,13 +60,20 @@ void	read_blockmap_offsets(t_binary_read *wad_bin, t_wad_blockmap *blockmap)
 	while (i < (size_t)(blockmap->rows_no * blockmap->colums_no))
 	{
 		blockmap->offsets[i] = read_short(wad_bin);
+		ft_printf("OFFSET: %d\n", blockmap->offsets[i]);
 		i++;
 	}
 }
 
+void	read_blockmap_blocklist(t_binary_read *wad_bin, t_wad_blockmap *blockmap)
+{
+	(void)wad_bin;
+	(void)blockmap;
+}
+
 void	parse_wad_blockmap(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
-	// size_t	i;
+	size_t	i;
 	(void)wad_bin;
 
 	alloc_blockmap(level);
@@ -75,7 +82,18 @@ void	parse_wad_blockmap(t_binary_read *wad_bin, t_wad_level *level, t_wad_direct
 	level->blockmap->offsets = (short*)ft_memalloc(sizeof(short) * level->blockmap->rows_no * level->blockmap->colums_no);
 	if (level->blockmap->offsets == NULL)
 		error_msg_errno("Failed to alloc level blockmap offsets");
+	level->blockmap->blocklist = (short**)ft_memalloc(sizeof(short*) * level->blockmap->rows_no * level->blockmap->colums_no);
+	if (level->blockmap->blocklist == NULL)
+		error_msg_errno("Failed to alloc level blockmap offsets");
 	read_blockmap_offsets(wad_bin, level->blockmap);
 
-		print_blockmap(level->blockmap);
+	ft_printf("BLOCKMAP SIZE: %d\n", directory->size_lump);
+	i = 0;
+	while (i < (size_t)(level->blockmap->rows_no * level->blockmap->colums_no))
+	{
+		read_blockmap_blocklist(wad_bin, level->blockmap);
+		i++;
+	}
+
+	// print_blockmap(level->blockmap);
 }
