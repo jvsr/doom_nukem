@@ -17,5 +17,15 @@
 
 char	*read_string(t_binary_read *bin_r)
 {
-	return (read_mem(bin_r));
+	long	size;
+	char	*string;
+
+	bin_r->header_pos += sizeof(long);
+	size = read_header(bin_r);
+	string = ft_strnew(size);
+	if (string == NULL)
+		error_msg_errno("Unable to allocate string");
+	ft_memcpy(string, bin_r->bytes + bin_r->content_pos, size);
+	bin_r->content_pos += size;
+	return (string);
 }
