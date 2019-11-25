@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:18:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 15:35:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 17:32:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define PARSE_MAP_H
 
 typedef struct s_wad	t_wad;
+typedef struct s_game	t_game;
 
 
-void	parse_map(char *const filename);
+void	parse_map(char *const filename, t_game *game);
 
 t_wad	*parse_wad(char *const filename);
 

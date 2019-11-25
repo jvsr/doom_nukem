@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:46:11 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 17:32:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ t_game			*init(char **argv, char **envp)
 	init_gui(game);
 	init_keymap(game);
 	init_eventstate(game);
+	parse_map("map/campaign/doom1.wad", game);
 	return (game);
 }

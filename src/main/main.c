@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/18 18:30:36 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 17:31:31 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	t_bool		is_loaded;
 
 	(void)argc;
-		parse_map("map/campaign/doom1.wad");
 	is_loaded = FALSE;
 	game = init(argv, envp);
 	init_thread = sdl_new_thread("mainmenu", init_main_menu, 2,
