@@ -14,7 +14,10 @@
 # define SERIALIZER_H
 
 # include <stdlib.h>
+# include <sys/_types/_ssize_t.h>
+
 # include "libft/ft_bool.h"
+
 # include "types.h"
 
 # define RESOURCE_PATH "resources/data/"
@@ -61,6 +64,7 @@ t_bool			write_struct(char *loc, t_binary *bin);
 unsigned char	*read_struct(const char *loc);
 void			add_type(unsigned char **bytes, t_uint64 *b_size,
 											t_convert *val, t_uint64 v_size);
+void			add_mem(void *mem, t_uint64 size, t_binary *bin);
 void			add_char(char c, t_binary *bin);
 void			add_short(short s, t_binary *bin);
 void			add_int(int i, t_binary *bin);
@@ -69,6 +73,8 @@ void			add_float(float f, t_binary *bin);
 void			add_double(double d, t_binary *bin);
 void			add_string(char *string, t_binary *bin);
 void			add_list_gen(t_list *lst, t_binary *bin);
+void			*read_mem_size(size_t size, t_binary_read *bin_r);
+void			*read_mem(t_binary_read *bin_r);
 unsigned char	read_char(t_binary_read *bin_r);
 short			read_short(t_binary_read *bin_r);
 int				read_int(t_binary_read *bin_r);
