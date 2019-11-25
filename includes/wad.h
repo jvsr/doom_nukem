@@ -149,10 +149,11 @@ typedef struct			s_wad_level
 
 typedef struct			s_wad_dssound
 {
+	char					*name;
 	t_uint16				format;
 	t_uint16				sample_rate;
 	t_uint32				sample_count;
-	t_uint8					*samples;
+	t_uint8					*sample;
 	struct s_wad_dssound	*next;
 }						t_wad_dssound;
 typedef struct			s_wad_palette
