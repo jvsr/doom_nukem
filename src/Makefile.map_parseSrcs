@@ -33,7 +33,8 @@ WAD_SRCS = parse_wad \
 			parse_wad_nodes \
 			parse_wad_sectors \
 			parse_wad_reject \
-			parse_wad_blockmap
+			parse_wad_blockmap \
+			parse_wad_dssound
 WAD_SRCS := $(WAD_SRCS:%=WAD/%)
 
 MAP_SRCS =

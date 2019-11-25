@@ -147,6 +147,14 @@ typedef struct			s_wad_level
 	struct s_wad_level	*next;
 }						t_wad_level;
 
+typedef struct			s_wad_dssound
+{
+	t_uint16				format;
+	t_uint16				sample_rate;
+	t_uint32				sample_count;
+	t_uint8					*samples;
+	struct s_wad_dssound	*next;
+}						t_wad_dssound;
 typedef struct			s_wad_palette
 {
 	size_t				color_amount;
@@ -169,6 +177,7 @@ typedef struct			s_wad_general
 	size_t				colormap_amount;
 	t_wad_colormap		**colormap;
 	t_wad_endoom		*endoom;
+	t_wad_dssound		*dssound;
 }						t_wad_general;
 typedef struct			s_wad
 {
@@ -181,6 +190,7 @@ void	print_directory(t_wad_directory *directory); //
 
 void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory);
 
+void	parse_wad_dssound(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
 void	parse_wad_playpal(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
 void	parse_wad_colormap(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
 void	parse_wad_endoom(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory);
