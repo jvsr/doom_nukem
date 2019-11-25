@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:57 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 11:52:50 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 14:09:47 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct			s_wad_blockmap
 	unsigned short		grid_org_y;
 	short				colums_no;
 	short				rows_no;
-	short				*offsets;
+	short				*offset;
 	short				**blocklist;
 }						t_wad_blockmap;
 typedef struct			s_wad_level

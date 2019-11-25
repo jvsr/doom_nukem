@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 19:03:22 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 11:04:55 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 15:33:06 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,31 @@ static void	get_next_directory(t_binary_read *wad_bin, t_wad_directory **directo
 {
 	*directory = read_wad_directory(wad_bin);
 }
-#include <unistd.h>
-#include <fcntl.h>
+
+static void	add_to_back(t_wad_level **head, t_wad_level *level)
+{
+	t_wad_level	*save;
+
+	save = *head;
+	if (*head == NULL)
+		*head = level;
+	else
+	{
+		while (save->next != NULL)
+			save = save->next;
+		save->next = level;
+	}
+}
+
+void	print_list(t_wad_level *levels)
+{
+	while (levels)
+	{
+		ft_printf("%s -> ", levels->name);
+		levels = levels->next;
+	}
+}
+
 void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory)
 {
 	size_t			i;
@@ -35,6 +58,10 @@ void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *direct
 	level = ft_memalloc(sizeof(t_wad_level));
 	if (level == NULL)
 		error_msg_errno("Failed to alloc wad level");
+	level->next = NULL;
+	level->name = ft_strdup(directory->name_lump);
+	if (level->name == NULL)
+		error_msg_errno("Failed to alloc wad level name");
 	i = 0;
 	while (i < LEVEL_DIR_SIZE)
 	{
@@ -64,5 +91,7 @@ void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *direct
 			print_directory(directory);
 		i++;
 	}
-	wad->levels = level;
+	add_to_back(&wad->levels, level);
+	print_list(wad->levels);
+	ft_printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 11:13:51 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 15:19:29 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ static t_wad	*alloc_wad(void)
 	wad = (t_wad*)ft_memalloc(sizeof(t_wad));
 	if (wad == NULL)
 		error_msg_errno("Failed to allocate wad");
+	wad->levels = NULL;
 	wad->general = (t_wad_general*)ft_memalloc(sizeof(t_wad_general));
 	if (wad->general == NULL)
 		error_msg_errno("Failed to allocate lumps");
@@ -140,5 +141,4 @@ void	parse_wad(char *const filename)
 	header = read_wad_header(wad_bin);
 	print_header(header);
 	loop_wad_directories(wad_bin, wad, header);
-	return ;
 }
