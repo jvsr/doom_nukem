@@ -60,7 +60,7 @@ void	read_blockmap_offsets(t_binary_read *wad_bin, t_wad_blockmap *blockmap)
 	while (i < (size_t)(blockmap->rows_no * blockmap->colums_no))
 	{
 		blockmap->offsets[i] = read_short(wad_bin);
-		ft_printf("OFFSET: %d\n", blockmap->offsets[i]);
+		// ft_printf("OFFSET: %d\n", blockmap->offsets[i]);
 		i++;
 	}
 }
@@ -87,7 +87,7 @@ void	parse_wad_blockmap(t_binary_read *wad_bin, t_wad_level *level, t_wad_direct
 		error_msg_errno("Failed to alloc level blockmap offsets");
 	read_blockmap_offsets(wad_bin, level->blockmap);
 
-	ft_printf("BLOCKMAP SIZE: %d\n", directory->size_lump);
+	// ft_printf("BLOCKMAP SIZE: %d\n", directory->size_lump);
 	i = 0;
 	while (i < (size_t)(level->blockmap->rows_no * level->blockmap->colums_no))
 	{
