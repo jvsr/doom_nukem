@@ -21,9 +21,9 @@ FT_SRCS =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = write_struct read_struct add_type add_char add_short add_int add_long \
-		add_float add_double read_short read_char read_int read_long \
+		add_float add_mem add_double read_short read_char read_int read_long \
 		read_float read_double finish_bin add_string read_string add_list_gen \
 		read_list_gen detect_endian swap_bytes new_binary del_binary \
-		del_binary_read new_binary_read read_header \
+		del_binary_read new_binary_read read_header read_mem_size read_mem \
 		write_settings read_settings \
 		read_wad_header read_wad_directory

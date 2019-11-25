@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   add_string.c                                       :+:    :+:            */
+/*   add_mem.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -13,7 +13,20 @@
 #include "libft/ft_str.h"
 #include "serializer.h"
 
-void		add_string(char *string, t_binary *bin)
+void		add_mem(void *mem, t_uint64 size, t_binary *bin)
 {
-	add_mem(string, ft_strlen(string) + 1, bin);
+	t_uint64		i;
+	t_convert		con;
+	t_uint8	const	*stream = mem;
+
+	con.l = bin->c_size;
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
+	con.l = size;
+	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
+	i = 0;
+	while (i < size)
+	{
+		add_char(stream[i], bin);
+		i++;
+	}
 }
