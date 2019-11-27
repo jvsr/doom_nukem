@@ -43,8 +43,8 @@ void		free_audio(t_game *game)
 {
 	if (game->audio_man == NULL)
 		return ;
-	free_music(game->audio_man->tracks);
-	free_sound(game->audio_man->effects);
+	free_music(game->audio_man->track);
+	free_sound(game->audio_man->effect);
 	free(game->audio_man);
 	game->audio_man = NULL;
 }

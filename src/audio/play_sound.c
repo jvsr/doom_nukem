@@ -13,7 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-void		play_sound(t_audio_man *man, t_sounds sound)
+void		play_sound(t_audio_man *man, t_sound sound)
 {
-	Mix_PlayChannel(-1, man->effects[sound], 0);
+	Mix_PlayChannel(-1, man->effect[sound], 0);
 }

@@ -18,14 +18,14 @@
 
 static void	loadsound(t_game *game)
 {
-	game->audio_man->effects[0] = get_chunk_from_wav("explosion");
+	game->audio_man->effect[0] = get_chunk_from_wav("explosion");
 }
 
 static void	loadmusic(t_game *game)
 {
-	game->audio_man->tracks[0] = get_music_from_mp3("lonely_troutman_ii");
-	game->audio_man->tracks[1] = get_music_from_mp3("asking_questions");
-	game->audio_man->tracks[2] = get_music_from_mp3("hit_n_smash");
+	game->audio_man->track[0] = get_music_from_mp3("lonely_troutman_ii");
+	game->audio_man->track[1] = get_music_from_mp3("asking_questions");
+	game->audio_man->track[2] = get_music_from_mp3("hit_n_smash");
 }
 
 void		load_audio(t_game *game)

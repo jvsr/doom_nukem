@@ -15,5 +15,5 @@
 
 void		fade_in_music(t_audio_man *man, t_music music, int time)
 {
-	Mix_FadeInMusic(man->tracks[music], -1, time);
+	Mix_FadeInMusic(man->track[music], -1, time);
 }

@@ -13,12 +13,12 @@
 #include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-void	effect_sounds(t_audio_man *man, t_sounds sound, int (*func)(int))
+void	effect_sounds(t_audio_man *man, t_sound sound, int (*func)(int))
 {
 	Mix_Chunk	*chunk;
 	int			index;
 
-	chunk = man->effects[sound];
+	chunk = man->effect[sound];
 	index = 0;
 	while (index < AUDIO_MAX_CHUNKS)
 	{

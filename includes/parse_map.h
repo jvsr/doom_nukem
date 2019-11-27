@@ -16,9 +16,9 @@
 typedef struct s_wad	t_wad;
 typedef struct s_game	t_game;
 
-
 void	parse_map(char *const filename, t_game *game);
 
 t_wad	*parse_wad(char *const filename);
+void	convert_wad(t_wad *wad, t_game *game);
 
 #endif

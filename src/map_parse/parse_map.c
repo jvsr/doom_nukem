@@ -19,10 +19,14 @@
 #include <stdio.h> //
 void	parse_map(char *const filename, t_game *game)
 {
+	t_wad		*wad;
 	char *const extension = ft_strrchr(filename, '.');
 
 	if (extension == NULL)
 		error_msg("Failed to parse map", 24, "invalid map extension");
 	else if (ft_strequ_nocase(extension, ".wad"))
-		parse_wad(filename);
+	{
+		wad = parse_wad(filename);
+		convert_wad(wad, game);
+	}
 }

@@ -19,7 +19,7 @@ static int	resume(int index)
 	return (0);
 }
 
-void		resume_sounds(t_audio_man *man, t_sounds sound)
+void		resume_sounds(t_audio_man *man, t_sound sound)
 {
 	effect_sounds(man, sound, resume);
 }

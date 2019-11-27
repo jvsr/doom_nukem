@@ -16,5 +16,5 @@
 void		play_music(t_audio_man *man, t_music music)
 {
 	Mix_HaltMusic();
-	Mix_PlayMusic(man->tracks[music], -1);
+	Mix_PlayMusic(man->track[music], -1);
 }
