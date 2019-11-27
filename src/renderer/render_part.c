@@ -19,7 +19,7 @@
 #include "setting.h"
 #include "cmath.h"
 
-/*
+
 static void		draw_point(int colour,
 							SDL_Surface *surface, int *mask, t_point pos)
 {
@@ -35,26 +35,52 @@ static void		draw_point(int colour,
 		pixels[pos_1d] = colour;
 	}
 }
-*/
+
+static void		draw_coloumn(t_coord *coords,
+									t_wall *wall, int *mask, t_game *game, int x)
+{
+	float	dist;
+	float	hb;
+	int		i;
+
+	dist = get_distance(&coords[0], &coords[1]) * cosf(game->player->angle * PI_R);
+	hb = 1 - (wall->length / dist);
+	if (hb > 1)
+		hb = 0;
+	hb *= wall->height;
+	i = 0;
+	while (i < (int)hb)
+	{
+		draw_point(0xFFFFFFFF, game->surface, mask, (t_point){x, i});
+		i++;
+	}
+}
 
 static void		draw_wall(t_coord range, t_game *game, t_wall *wall, int *mask)
 {
 	float	ray;
 	float	step;
-	int		i;
 	t_coord	pos;
+	t_coord origin;
+	t_coord hit;
 
 	ray = range.x;
 	step = game->setting->fov / game->surface->w;
-	i = (float)game->surface->w * (range.x / (float)game->setting->fov);
+	origin = (t_coord){game->player->forward.x + game->player->pos.x, game->player->forward.y + game->player->pos.y};
+	pos = (t_coord){game->player->forward.y, -game->player->forward.x};
+	origin  = (t_coord){origin.x + (pos.x * (range.x - (game->setting->fov / RENDER_THREAD_COUNT))), origin.y + (pos.y * (range.x - (game->setting->fov / RENDER_THREAD_COUNT)))};
 	while (ray < range.y)
 	{
-		get_collision(game, &game->player->angles[i],
-			(t_coord[]){wall->start, wall->end}, &pos);
-		i++;
+		if (get_collision(&(t_coord){game->player->pos.x, game->player->pos.y},
+			&game->player->forward,
+			(t_coord[]){wall->start, wall->end}, &hit) != NULL)
+			draw_coloumn((t_coord[]){hit, origin}, wall, mask, game, 0);
+		origin = (t_coord){origin.x + (pos.x * step), origin.y + (pos.y * step)};
 		ray += step;
 	}
 }
+
+
 
 void		   	render_part(t_game *game,
 										t_coord range, t_list *walls, int *mask)

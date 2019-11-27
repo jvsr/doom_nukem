@@ -36,7 +36,7 @@ typedef	struct	s_player
 	t_uint16	*fov;
 	t_uint16	angle;
 	t_mag		mag;
-	t_vec		forward;
+	t_coord		forward;
 	t_vec		pos;
 	t_coord		*angles;
 	t_uint32	cur_sector;

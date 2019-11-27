@@ -40,7 +40,7 @@ t_list	*add_walls(t_sector *sector,
 		if (!is_between(normal, mag))
 			continue;
 		if (walls[i]->is_portal == TRUE)
-			ft_lstaddbck(&sectors,ft_lstnew(
+			ft_lstaddbck(&sectors, ft_lstnew(
 				level->sectors[walls[i]->sector_portal], sizeof(t_sector*)));
 		ft_lstaddbck(&lst, ft_lstnew(walls[i], sizeof(sizeof(t_wall*))));
 		i++;
@@ -56,7 +56,7 @@ t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
 	while (sectors != NULL)
 	{
 		ft_lstaddbck(&walls, ft_lstnew(
-			add_walls(sectors->content, level, sectors, mag), sizeof(t_list*)));	
+			add_walls(sectors->content, level, sectors, mag), sizeof(t_list*)));
 		sectors = sectors->next;
 	}
 	return (walls);

@@ -15,9 +15,11 @@
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
 #include "game.h"
+#include "cmath.h"
 #include "map.h"
 #include "player.h"
 #include "renderer.h"
+#include "setting.h"
 
 static t_wall	*get_wall(t_list **walls)
 {
@@ -32,13 +34,14 @@ static t_wall	*get_wall(t_list **walls)
 }
 
 static void		split_walls(t_list **out_walls,
-							t_player *player, t_list *walls, float parts)
+							t_game *game, t_list *walls, float parts)
 {
 	t_wall *wall;
 
 	while (walls != NULL)
 	{
 		wall = get_wall(&walls);
+		add_wall_to_out(out_walls, wall, game, parts);
 	}
 }
 
@@ -52,12 +55,13 @@ void			render_rooms(t_game *game, t_level *level)
 
 	ft_bzero(mask, game->surface->w * game->surface->h);
 	walls = get_bunches(game, level);
-	parts = game->player->angle / RENDER_THREAD_COUNT;
-	split_walls(out_walls, game->player, walls, parts);
+	parts = game->setting->fov / RENDER_THREAD_COUNT;
+	split_walls(out_walls, game, walls, parts);
 	i = 0;
 	while (i < RENDER_THREAD_COUNT)
 	{
 		render_part(game,
 					(t_coord){i * parts, (i + 1) * parts}, out_walls[i], mask);
+		i++;
 	}
 }

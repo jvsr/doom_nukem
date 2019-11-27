@@ -146,10 +146,10 @@ typedef struct	s_wall
 {
 	t_bool		is_portal;
 	t_uint32	sector_portal;
-	t_coord		texture_size;
-	t_texture	texture;
 	t_coord		start;
 	t_coord		end;
+	float		length;
+	float		height;
 }				 t_wall;
 
 typedef struct	s_sector

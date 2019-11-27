@@ -22,9 +22,9 @@
 #include "setting.h"
 #include "init.h"
 #include "error.h"
-
 #include "audio.h"
 #include "renderer.h"
+#include "cmath.h"
 
 static void		init_sdl(void)
 {
@@ -76,6 +76,7 @@ t_game			*init_prerequisites(char **argv, char **envp)
 	set_basic_args(game, argv, envp);
 	init_settings(game);
 	init_window_surface(game);
+	calc_vfov(game->setting, game->surface->w, game->surface->h);
 	init_eventstate(game);
 	init_general(game);
 	return (game);

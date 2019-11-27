@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include <stdlib.h>
 #include "coord.h"
-#include "player.h"
 
-t_coord		*get_collision(t_game *game,
+t_coord		*get_collision(t_coord *start,
 									t_coord *a, t_coord *wall, t_coord *pos)
 {
 	float	x;
@@ -22,16 +21,16 @@ t_coord		*get_collision(t_game *game,
 	float	d;
 	t_coord	vec;
 
-	x = game->player->pos.x + a->x;
-	y = game->player->pos.y + a->y;
-	d = ((wall[0].x - wall[1].x) * (game->player->pos.y - y)) -
-		((wall[0].y - wall[1].y) * (game->player->pos.x - x));
+	x = start->x + a->x;
+	y = start->y + a->y;
+	d = ((wall[0].x - wall[1].x) * (start->y - y)) -
+		((wall[0].y - wall[1].y) * (start->x - x));
 	if (d == 0)
 		return (NULL);
-	vec.x = (((wall[0].x - game->player->pos.x) * (game->player->pos.y - y)) -
-		((wall[0].y - game->player->pos.y) * (game->player->pos.x - x))) / d;
-	vec.y = -(((wall[0].x - wall[1].x) * (wall[0].y - game->player->pos.y)) -
-		((wall[0].y - wall[1].y) * (wall[0].x - game->player->pos.x))) / d;
+	vec.x = (((wall[0].x - start->x) * (start->y - y)) -
+		((wall[0].y - start->y) * (start->x - x))) / d;
+	vec.y = -(((wall[0].x - wall[1].x) * (wall[0].y - start->y)) -
+		((wall[0].y - wall[1].y) * (wall[0].x - start->x))) / d;
 	if (vec.x > 0 && vec.x < 1 && vec.y > 0)
 	{
 		pos->x = wall[0].x + (vec.x * (wall[1].x - wall[0].x));

@@ -32,7 +32,7 @@ static SDL_Surface	*get_texture(char *loc)
 	return (surface);
 }
 
-void 			load_textures(t_game *game)
+void				load_textures(t_game *game)
 {
 	char	**files;
 	size_t	index;

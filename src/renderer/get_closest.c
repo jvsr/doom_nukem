@@ -67,11 +67,10 @@ static void		remove_from_list(t_list *walls, t_wall *wall)
 
 t_wall			*get_closest(t_list *walls, t_vec *pos)
 {
-	t_list  *sub_walls[2];
-	t_wall  *final;
-	
+	t_list	*sub_walls[2];
+	t_wall	*final;
 	t_bool	bool;
-	t_line  cur;
+	t_line	cur;
 
 	final = NULL;
 	bool = TRUE;
@@ -84,11 +83,11 @@ t_wall			*get_closest(t_list *walls, t_vec *pos)
 		while (sub_walls[1])
 		{
 			if (is_closer(&cur, sub_walls[1]->content, pos, &bool) == TRUE)
-				break;
+				break ;
 			sub_walls[1] = sub_walls[1]->next;
 		}
 		if (bool == FALSE)
-			break;
+			break ;
 		sub_walls[0] = sub_walls[0]->next;
 	}
 	remove_from_list(walls, final);
