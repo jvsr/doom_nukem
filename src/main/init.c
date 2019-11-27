@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 17:32:19 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 17:37:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 #include "game.h"
 #include "setting.h"
+#include "parse_map.h"
 #include "init.h"
 #include "error.h"
 #include "eventstate.h"

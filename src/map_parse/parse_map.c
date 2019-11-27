@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:54:16 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 17:32:59 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/25 17:37:36 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	parse_map(char *const filename, t_game *game)
 {
 	t_wad		*wad;
 	char *const extension = ft_strrchr(filename, '.');
-
+	
+	(void)game;
 	if (extension == NULL)
 		error_msg("Failed to parse map", 24, "invalid map extension");
 	else if (ft_strequ_nocase(extension, ".wad"))
