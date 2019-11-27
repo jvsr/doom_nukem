@@ -11,40 +11,39 @@
 /* ************************************************************************** */
 
 #include <SDL2/SDL_mixer.h>
+
+#include "libft/ft_hash.h"
+
 #include "game.h"
 #include "audio.h"
 #include "error.h"
 
-static void	free_music(Mix_Music *musics[MUSIC_COUNT])
+static void	del_sound(void *sound)
 {
-	size_t i;
-
-	i = 0;
-	while (i < MUSIC_COUNT)
-	{
-		Mix_FreeMusic(musics[i]);
-		i++;
-	}
+	Mix_FreeChunk((Mix_Chunk*)sound);
 }
 
-static void	free_sound(Mix_Chunk *chunks[SOUND_COUNT])
+static void	free_sound(t_hashmap *sound_map)
 {
-	size_t i;
+	ft_hashmapdel(sound_map, del_sound);
+}
 
-	i = 0;
-	while (i < SOUND_COUNT)
-	{
-		Mix_FreeChunk(chunks[i]);
-		i++;
-	}
+static void	del_music(void *music)
+{
+	Mix_FreeMusic((Mix_Music*)music);
+}
+
+static void	free_music(t_hashmap *music_map)
+{
+	ft_hashmapdel(music_map, del_music);
 }
 
 void		free_audio(t_game *game)
 {
 	if (game->audio_man == NULL)
 		return ;
-	free_music(game->audio_man->track);
-	free_sound(game->audio_man->effect);
+	free_sound(game->audio_man->sound_map);
+	free_music(game->audio_man->music_map);
 	free(game->audio_man);
 	game->audio_man = NULL;
 }

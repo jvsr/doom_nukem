@@ -59,7 +59,7 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 
 static void		play_title_song(t_game *game)
 {
-	fade_in_music(game->audio_man, MUSIC_HIT_N_SMASH, 3500);
+	fade_in_music(game->audio_man, "hit_n_smash", 3500);
 }
 
 void			loop(t_game *game)
@@ -67,7 +67,6 @@ void			loop(t_game *game)
 	SDL_Event	event;
 	void		(*eventstate_fnc)(t_game*, SDL_Event);
 
-	load_audio(game);
 	play_title_song(game);
 	while (game->state == running)
 	{

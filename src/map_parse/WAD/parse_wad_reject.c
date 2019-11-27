@@ -78,7 +78,7 @@ void	parse_wad_reject(t_binary_read *wad_bin, t_wad_level *level, t_wad_director
 
 		level->reject[(i + 7) / REJECT_SIZE][(i + 7) % REJECT_SIZE] = (c & 0b00000001);
 		// print_reject(level->reject[(i + 7) / REJECT_SIZE][(i + 7) % REJECT_SIZE], level, i + 7);
-		
+
 		// ft_printf("%d", REJECT_SIZE * REJECT_SIZE, REJECT_SIZE);
 		i += 8;
 	}

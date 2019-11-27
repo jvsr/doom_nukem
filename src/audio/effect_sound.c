@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fade_in_music.c                                    :+:    :+:            */
+/*   effect_sound.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/26 14:21:01 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/26 14:21:01 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/26 14:16:41 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/26 14:16:41 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,27 @@
 
 #include "audio.h"
 
-void		fade_in_music(t_audio_man *man, char *const music, int time)
+void	effect_sound(t_audio_man *man, char *const sound, int (*func)(int))
 {
-	void	*chunk;
+	Mix_Chunk	*cur;
+	Mix_Chunk	*chunk;
+	int			index;
 
-	chunk = get_track_from_map(man->music_map, music);
+	chunk = get_track_from_map(man->sound_map, sound);
 	if (chunk == NULL)
 	{
-		ft_dprintf(2, "Trying to fade none existing music '%s'", music);
+		ft_dprintf(2, "Trying to effect none existing sound '%s'", sound);
 		return ;
 	}
-	Mix_FadeInMusic(chunk, -1, time);
+	index = 0;
+	while (index < AUDIO_MAX_CHUNKS)
+	{
+		cur = Mix_GetChunk(index);
+		if (cur != NULL && cur == chunk)
+		{
+			func(index);
+			return ;
+		}
+		index++;
+	}
 }

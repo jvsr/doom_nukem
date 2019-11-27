@@ -11,9 +11,20 @@
 /* ************************************************************************** */
 
 #include <SDL2/SDL_mixer.h>
+
+#include "libft/ft_printf.h"
+
 #include "audio.h"
 
-void	play_sound_repeat(t_audio_man *man, t_sound sound, int times)
+void	play_sound_repeat(t_audio_man *man, char *const sound, int times)
 {
-	Mix_PlayChannel(-1, man->effect[sound], times);
+	void	*chunk;
+
+	chunk = get_track_from_map(man->sound_map, sound);
+	if (chunk == NULL)
+	{
+		ft_dprintf(2, "Trying to effect none existing sound '%s'", sound);
+		return ;
+	}
+	Mix_PlayChannel(-1, chunk, times);
 }

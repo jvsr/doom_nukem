@@ -10,26 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_mixer.h>
-#include "libft/ft_mem.h"
-#include "game.h"
 #include "audio.h"
-#include "error.h"
 
-static void	loadsound(t_game *game)
+void		load_audio(t_audio_man *man)
 {
-	game->audio_man->effect[0] = get_chunk_from_wav("explosion");
-}
-
-static void	loadmusic(t_game *game)
-{
-	game->audio_man->track[0] = get_music_from_mp3("lonely_troutman_ii");
-	game->audio_man->track[1] = get_music_from_mp3("asking_questions");
-	game->audio_man->track[2] = get_music_from_mp3("hit_n_smash");
-}
-
-void		load_audio(t_game *game)
-{
-	loadsound(game);
-	loadmusic(game);
+	load_sound(man->sound_map);
+	load_music(man->music_map);
 }

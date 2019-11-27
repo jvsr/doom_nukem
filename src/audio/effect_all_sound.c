@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   pause_all_sounds.c                                 :+:    :+:            */
+/*   effect_all_sound.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/26 13:50:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/26 13:50:22 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/26 14:34:06 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/26 14:34:06 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-static int	pause(int index)
+void	effect_all_sound(int (*func)(int))
 {
-	Mix_Pause(index);
-	return (0);
-}
+	int	index;
 
-void		pause_all_sounds(void)
-{
-	effect_all_sounds(pause);
+	index = 0;
+	while (index < AUDIO_MAX_CHUNKS)
+	{
+		func(index);
+		index++;
+	}
 }

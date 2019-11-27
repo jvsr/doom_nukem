@@ -21,8 +21,8 @@ FT_SRCS =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = load_audio get_chunk_from_wav pause_music play_music resume_music \
-		stop_music play_sound stop_all_sounds pause_all_sounds \
-		resume_all_sounds play_sound_repeat pause_sounds resume_sounds \
-		effect_sounds fade_in_music fade_out_music effect_all_sounds \
-		set_music_volume set_sound_volume stop_sounds get_music_from_mp3 \
-		free_audio init_audio
+		stop_music play_sound stop_all_sound pause_all_sound load_music \
+		resume_all_sound play_sound_repeat pause_sound resume_sound \
+		effect_sound fade_in_music fade_out_music effect_all_sound load_sound \
+		set_music_volume set_sound_volume stop_sound get_music_from_mp3 \
+		free_audio init_audio add_track_to_map get_track_from_map

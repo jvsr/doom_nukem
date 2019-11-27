@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   convert_wad.c                                      :+:    :+:            */
+/*   stop_sound.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/25 17:28:58 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/25 17:28:58 by pholster      ########   odam.nl         */
+/*   Created: 2019/09/26 14:04:06 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/26 14:04:06 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wad.h"
-#include "game.h"
+#include <SDL2/SDL_mixer.h>
+#include "audio.h"
 
-void	convert_wad(t_wad *wad, t_game *game)
+void	stop_sound(t_audio_man *man, char *const sound)
 {
-	t_wad_dssound	*sound;
-
-	(void)wad;
-	(void)game;
-	sound = wad->general->dssound;
-	while (sound != NULL)
-	{
-		sound = sound->next;
-	}
+	effect_sound(man, sound, Mix_HaltChannel);
 }

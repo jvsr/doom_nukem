@@ -11,10 +11,21 @@
 /* ************************************************************************** */
 
 #include <SDL2/SDL_mixer.h>
+
+#include "libft/ft_printf.h"
+
 #include "audio.h"
 
-void		play_music(t_audio_man *man, t_music music)
+void		play_music(t_audio_man *man, char *const music)
 {
+	void	*chunk;
+
+	chunk = get_track_from_map(man->music_map, music);
+	if (chunk == NULL)
+	{
+		ft_dprintf(2, "Trying to play none existing music '%s'", music);
+		return ;
+	}
 	Mix_HaltMusic();
-	Mix_PlayMusic(man->track[music], -1);
+	Mix_PlayMusic(chunk, -1);
 }

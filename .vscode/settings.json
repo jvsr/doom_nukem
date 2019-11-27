@@ -5,7 +5,13 @@
 	},
     "files.associations": {
 		"*.h": "c",
+		"*.hpp": "cpp",
 		"Makefile.*": "makefile",
+		"*.inc": "ext",
+		"*.ext": "ext",
+		"*.sqm": "ext",
 		"sdl2_mixer": "ruby",
+		"typeinfo": "c",
+		"ios": "c"
 	}
 }

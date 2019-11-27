@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   effect_all_sounds.c                                :+:    :+:            */
+/*   resume_sound.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/26 14:34:06 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/26 14:34:06 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/26 14:12:11 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/09/26 14:12:11 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <SDL2/SDL_mixer.h>
 #include "audio.h"
 
-void	effect_all_sounds(int (*func)(int))
+static int	resume(int index)
 {
-	int	index;
+	Mix_Resume(index);
+	return (0);
+}
 
-	index = 0;
-	while (index < AUDIO_MAX_CHUNKS)
-	{
-		func(index);
-		index++;
-	}
+void		resume_sound(t_audio_man *man, char *const sound)
+{
+	effect_sound(man, sound, resume);
 }
