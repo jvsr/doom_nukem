@@ -29,7 +29,6 @@ t_bool	write_struct(char *loc, t_binary *bin)
 	ft_strcpy(full_path, g_doom_dir);
 	ft_strcat(full_path, RESOURCE_PATH);
 	ft_strcat(full_path, loc);
-	printf("FULL PATH %s\n", full_path);
 	fd = open(full_path, O_RDWR | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
 	if (fd == -1)
