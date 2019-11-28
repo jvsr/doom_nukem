@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 11:35:23 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 14:54:17 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef	struct	s_player
 	t_vec		pos;
 	t_coord		*angles;
 	t_uint32	cur_sector;
+	float		height;
 }				t_player;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:54:16 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 17:37:36 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 13:51:17 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "error.h"
 #include "parse_map.h"
 
-#include <stdio.h> //
 void	parse_map(char *const filename, t_game *game)
 {
 	t_wad		*wad;
@@ -28,6 +27,6 @@ void	parse_map(char *const filename, t_game *game)
 	else if (ft_strequ_nocase(extension, ".wad"))
 	{
 		wad = parse_wad(filename);
-		convert_wad(wad, game);
+		game->level = convert_wad(wad, game);
 	}
 }

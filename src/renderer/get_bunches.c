@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/25 10:56:53 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:56:20 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/28 15:00:44 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 #include "types.h"
 #include "renderer.h"
 
-int		is_between(float mag, t_mag *pmag)
+static int		is_between(float mag, t_mag *pmag)
 {
 	return (!(mag > pmag->start || mag < pmag->end));
 }
 
-t_list	*add_walls(t_sector *sector,
+static t_list	*add_walls(t_sector *sector,
 					t_level *level, t_list *sectors, t_mag *mag)
 {
 	t_wall		**walls;
@@ -48,7 +48,7 @@ t_list	*add_walls(t_sector *sector,
 	return (lst);
 }
 
-t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
+static t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
 {
 	t_list *walls;
 

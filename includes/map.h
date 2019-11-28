@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:14:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:54 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/28 14:57:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct	s_wall
 	t_coord		end;
 	float		length;
 	float		height;
+	float		z;
 }				 t_wall;
 
 typedef struct	s_sector
