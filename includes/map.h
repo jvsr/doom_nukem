@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:14:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 14:57:52 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 15:13:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,9 +173,9 @@ typedef struct	s_level
 	//t_enemy	*all_enemy; //Keep linked list to allow spawning while in level
 	//t_uint16	num_object;
 	//t_object	*all_object;
-	t_uint32	sector_count;
-	t_uint32	wall_count;
+	t_uint32	sector_amount;
 	t_sector	**sectors;
+	t_uint32	wall_amount;
 	t_wall		**walls;
 }				t_level;
 

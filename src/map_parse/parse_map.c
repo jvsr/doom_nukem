@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:54:16 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 13:51:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 15:38:35 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	parse_map(char *const filename, t_game *game)
 	else if (ft_strequ_nocase(extension, ".wad"))
 	{
 		wad = parse_wad(filename);
-		game->level = convert_wad(wad, game);
+		game->campaign = convert_wad(wad, game);
 	}
 }
