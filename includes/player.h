@@ -6,14 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 11:24:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 11:35:23 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include <_types/_t_uint8.h>
+# include <_types/_uint8_t.h>
 # include <_types/_uint32_t.h>
 
 # include "types.h"

@@ -6,11 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2019/11/25 17:31:31 by jvisser       ########   odam.nl         */
-=======
-/*   Updated: 2019/11/13 16:34:37 by jvisser       ########   odam.nl         */
->>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63
+/*   Updated: 2019/11/28 11:31:58 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

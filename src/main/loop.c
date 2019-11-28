@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/13 18:09:14 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 11:36:31 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,16 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		print_keymap(game->keymap);
 }
 
-<<<<<<< HEAD
 static void		play_title_song(t_game *game)
 {
 	fade_in_music(game->audio_man, "hit_n_smash", 3500);
 }
 
-=======
->>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63
 void			loop(t_game *game)
 {
 	SDL_Event	event;
 	void		(*eventstate_fnc)(t_game*, SDL_Event);
 
-<<<<<<< HEAD
-	play_title_song(game);
-=======
 	sdl_new_thread(NULL, init_function, 1, game);
 	sdl_new_thread(NULL, display_splash, 2, game, "splash/splash");
 	while (game->state == running
@@ -85,7 +79,7 @@ void			loop(t_game *game)
 		while (SDL_PollEvent(&event))
 			check_quit(game, event);
 	}
->>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63
+	play_title_song(game);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
