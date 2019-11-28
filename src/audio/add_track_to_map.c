@@ -26,4 +26,5 @@ void	add_track_to_map(t_hashmap *map, void *track, char *const name)
 		error_msg_errno(ft_strformat("Failed to allocate name of '%s'", name));
 	if (ft_hashmapadd_str(map, name, track) == FALSE)
 		error_msg_errno(ft_strformat("Failed to add '%s' to track map", name));
+	ft_strdel(&lower_name);
 }
