@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:18:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 13:52:28 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 15:39:03 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 typedef struct s_wad	t_wad;
 typedef struct s_game	t_game;
-typedef struct s_level	t_level;
+typedef struct s_campaign	t_campaign;
 
 void	parse_map(char *const filename, t_game *game);
 
-t_wad	*parse_wad(char *const filename);
-t_level	*convert_wad(t_wad *wad, t_game *game);
+t_wad		*parse_wad(char *const filename);
+t_campaign	*convert_wad(t_wad *wad, t_game *game);
 
 #endif

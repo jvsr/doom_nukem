@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/13 12:01:32 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 15:15:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_player			t_player;
 typedef struct s_hashmap		t_hashmap;
 typedef struct s_audio_man		t_audio_man;
 typedef struct s_setting		t_setting;
+typedef struct s_campaign		t_campaign;
 typedef struct s_eventstate		t_eventstate;
 
 char const		*g_doom_dir;
@@ -46,6 +47,7 @@ typedef struct	s_game
 	SDL_Surface		*surface;
 	t_gui			*ui;
 	t_level			*level;
+	t_campaign		*campaign;
 	t_player		*player;
 	t_hashmap		*keymap;
 	t_bool			cursoractive;
