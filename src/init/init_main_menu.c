@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:28:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/14 11:34:24 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 11:31:48 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "game.h"
 #include "gui_config.h"
 
-void	init_main_menu(t_game *game, t_bool *is_loaded)
+void	init_main_menu(t_game *game)
 {
 	t_transform	*main_menu;
 	t_transform	*map_editor_select;
@@ -36,5 +36,5 @@ void	init_main_menu(t_game *game, t_bool *is_loaded)
 	add_elem_child(main_menu, select_level);
 	add_gui_child(game->ui, main_menu);
 	add_gui_child(game->ui, map_editor_select);
-	*is_loaded = TRUE;
+	// *is_loaded = TRUE;
 }

@@ -6,26 +6,43 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/22 15:06:45 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 11:35:23 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include <_types/_t_uint8.h>
+# include <_types/_uint8_t.h>
 # include <_types/_uint32_t.h>
 
+# include "types.h"
 # include "coord.h"
 
-typedef struct	s_player
+typedef struct	s_mag
 {
+	float start;
+	float end;
+}				t_mag;
+
+typedef	struct	s_player
+{
+	/*t_uint16	hp;
+	float		speed;
+	t_bool		crouched;
+	t_weapon	*cur_weapon;
+	t_weapon	*all_weapon; //Keep list to allow adding mid game
+
+	t_pickup	**all_pickup;
+	t_rect		view;
+	t_uint8		detection_area;*/
+	t_uint16	*fov;
+	t_uint16	angle;
+	t_mag		mag;
+	t_coord		forward;
 	t_vec		pos;
-	uint32_t	ang;
-	t_uint8		cur_sector;
-	t_uint8		hp;
-	t_uint8		ammo;
-	t_uint8		attk;
+	t_coord		*angles;
+	t_uint32	cur_sector;
 }				t_player;
 
 #endif

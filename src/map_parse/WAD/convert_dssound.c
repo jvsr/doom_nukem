@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/28 09:16:47 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/28 09:16:47 by pholster      ########   odam.nl         */
+/*   Updated: 2019/11/28 11:06:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void		print_wav(t_uint8 *wav)
 	int subchunk2_size = *((int *)ft_memdup(wav + 40, 4));
 	ft_printf("subchunk2_id = %s\nsubchunk2_size = %d\n", subchunk2_id, subchunk2_size);
 
-	int	i = 0;
-	int num_sample = subchunk2_size / block_align;
+	// int	i = 0;
+	// int num_sample = subchunk2_size / block_align;
 	// t_uint8 *data = ft_memdup(wav + 44, num_sample * block_align);
 	// while (i < num_sample) {
 	// 	ft_printf("%x ", *((int *)ft_memdup(data + (i * block_align), block_align)));

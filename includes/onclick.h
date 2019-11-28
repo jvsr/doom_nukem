@@ -14,6 +14,7 @@
 # define ONCLICK_H
 
 # include <SDL2/SDL_keycode.h>
+# include <SDL2/SDL_surface.h>
 
 # include "types.h"
 
@@ -65,7 +66,7 @@ void	restart_game(t_game *game, t_transform *gui);
 void	set_sensitivity(t_setting *setting, t_transform *parent);
 void	set_music(t_setting *setting, t_transform *parent);
 void	set_sound(t_setting *setting, t_transform *parent);
-void	set_fov(t_setting *setting, t_transform *parent);
+void	set_fov(t_setting *setting, t_transform *parent, SDL_Surface *surf);
 void	set_resolution(t_setting *setting, t_transform *parent);
 void	set_resolution_type(t_setting *setting, t_transform *parent);
 

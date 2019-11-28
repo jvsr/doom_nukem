@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   eventstate_initload.c                              :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: pholster <pholster@student.codam.nl>         +#+                     */
+/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/28 11:31:58 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/13 17:52:38 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/13 17:56:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_video.h>
+#include <SDL2/SDL_events.h>
 
 #include "game.h"
-#include "init.h"
-#include "audio.h"
-#include "sdl_thread.h"
+#include "keymap.h"
+#include "eventstate.h"
 
-#include "parse_map.h" //
-
-int	main(int argc, char **argv, char **envp)
+void	initload_eventstate(t_game *game, SDL_Event event)
 {
-	t_game	*game;
-
-	(void)argc;
-	game = init_prerequisites(argv, envp);
-	loop(game);
-	return (0);
+	(void)game;
+	(void)event;
 }

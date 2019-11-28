@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   get_angle_from_vectors.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:22 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/11/22 13:19:58 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/11/22 13:19:58 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include <math.h>
+#include "cmath.h"
+#include "coord.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+float	get_angle_from_vectors(t_coord *vec0, t_coord *vec1)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
+	float top;
+	float bottom;
 
-typedef enum				e_texture
-{
-	TEXTURE_BRICK_WALL,
-	TEXTURE_COUNT
-}							t_texture;
-
-#endif
+	top = dot_vectors(vec0, vec1);
+	bottom = get_vector_magnitude(vec0) * get_vector_magnitude(vec1);
+	return (top / bottom);
+}

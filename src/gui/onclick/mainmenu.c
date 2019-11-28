@@ -48,7 +48,7 @@ void	mainmenu_options(t_game *game, t_transform *gui)
 	set_sensitivity(game->setting, options_menu);
 	set_music(game->setting, options_menu);
 	set_sound(game->setting, options_menu);
-	set_fov(game->setting, options_menu);
+	set_fov(game->setting, options_menu, game->surface);
 	set_resolution(game->setting, options_menu);
 	set_resolution_type(game->setting, options_menu);
 	game->cureventstate->eventstate = options;

@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   get_texture.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:22 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/24 16:50:37 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/10/24 17:14:22 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include <SDL2/SDL.h>
+#include "types.h"
+#include "game.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+SDL_Surface		*get_texture(t_game *game, t_texture texture)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
-
-typedef enum				e_texture
-{
-	TEXTURE_BRICK_WALL,
-	TEXTURE_COUNT
-}							t_texture;
-
-#endif
+	return (game->textures[texture]);
+}

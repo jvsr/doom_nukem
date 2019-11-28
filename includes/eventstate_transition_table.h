@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 18:05:18 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/14 11:46:03 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 11:45:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef void		(t_eventstate_fnc)(t_game *, SDL_Event);
 
 static t_eventstate_fnc	*const g_eventstate[] =
 {
+	initload_eventstate,
+	splash_eventstate,
 	mainmenu_eventstate,
 	missions_eventstate,
 	options_eventstate,

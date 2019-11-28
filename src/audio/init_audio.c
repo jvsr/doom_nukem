@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/01 11:16:29 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/01 11:16:29 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/28 11:26:50 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "setting.h"
 #include "audio.h"
 #include "error.h"
+#include "setting.h"
 
 static void	alloc_hashmaps(t_audio_man *man)
 {

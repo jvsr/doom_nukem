@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   calc_vfov.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:22 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/11/27 11:53:17 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/11/27 11:53:17 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include <math.h>
+#include "setting.h"
+#include "cmath.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+void	calc_vfov(t_setting *set, float width, float height)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
+	float const h_fov = tan((set->fov * PI_D) / 2);
+	float const ratio = width / height;
 
-typedef enum				e_texture
-{
-	TEXTURE_BRICK_WALL,
-	TEXTURE_COUNT
-}							t_texture;
-
-#endif
+	set->vfov = ceil(2 * atan(h_fov * ratio) * PI_D);
+}

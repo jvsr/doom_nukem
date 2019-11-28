@@ -11,7 +11,26 @@
 		"*.ext": "ext",
 		"*.sqm": "ext",
 		"sdl2_mixer": "ruby",
+		"iterator": "c",
+		"cerrno": "c",
+		"locale": "c",
+		"string": "c",
+		"functional": "c",
 		"typeinfo": "c",
-		"ios": "c"
+		"ios": "c",
+		"algorithm": "c",
+		"chrono": "c",
+		"limits": "c",
+		"ratio": "c",
+		"__node_handle": "c",
+		"__bit_reference": "c",
+		"__hash_table": "c",
+		"__split_buffer": "c",
+		"array": "c",
+		"initializer_list": "c",
+		"list": "c",
+		"string_view": "c",
+		"unordered_map": "c",
+		"vector": "c"
 	}
 }

@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   get_distance.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:22 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/11/25 15:20:47 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/11/25 15:20:47 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include <math.h>
+#include "coord.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+float		get_distance(t_coord *pos0, t_coord *pos1)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
-
-typedef enum				e_texture
-{
-	TEXTURE_BRICK_WALL,
-	TEXTURE_COUNT
-}							t_texture;
-
-#endif
+	return (sqrt(pow(pos1->x - pos0->x, 2) + pow(pos1->y - pos0->y, 2)));
+}

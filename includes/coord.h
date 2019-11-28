@@ -26,4 +26,10 @@ typedef struct	s_vec
 	float		z;
 }				t_vec;
 
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
 #endif

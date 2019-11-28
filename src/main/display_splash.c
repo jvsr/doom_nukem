@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   splash.c                                           :+:    :+:            */
+/*   display_splash.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/24 16:46:17 by euan           #+#    #+#                */
-/*   Updated: 2019/09/25 16:38:21 by ehollidg      ########   odam.nl         */
+/*   Updated: 2019/11/13 18:12:34 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
+#include <SDL2/SDL_surface.h>
+
 #include "tga.h"
 #include "game.h"
-#include "sdl_extra.h"
 #include "types.h"
+#include "sdl_extra.h"
+#include "eventstate.h"
 
 static t_uint8	fadeout(t_uint64 val, t_uint64 duration)
 {
@@ -39,14 +41,12 @@ static void		fade(t_game *game, SDL_Surface *splash,
 	t_uint8			alpha;
 	t_uint64		now;
 	t_uint64		frametime;
-	SDL_Event		temp;
 	const t_uint64	duration = 1500;
 
 	now = get_gametime(&game->starttime);
 	frametime = now;
 	while (frametime - now < duration)
 	{
-		SDL_PollEvent(&temp);
 		alpha = alpha_func((double)(frametime - now), duration);
 		sdl_set_surface_alpha(splash, alpha);
 		sdl_clear_surface(game->surface);
@@ -54,23 +54,22 @@ static void		fade(t_game *game, SDL_Surface *splash,
 		SDL_UpdateWindowSurface(game->window);
 		frametime = get_gametime(&game->starttime);
 	}
-	(void)temp;
 }
 
-void			splash(t_game *game, t_bool *finished, char *loc)
+void			display_splash(t_game *game, char *loc)
 {
-	SDL_Surface *splash;
+	SDL_Surface *splashscreen;
 	t_uint64	now;
-	SDL_Event	temp;
 
 	sdl_clear_surface(game->surface);
-	splash = open_tga_sdl(loc);
-	sdl_set_surface_alpha(splash, 0);
-	fade(game, splash, fadein);
+	splashscreen = open_tga_sdl(loc);
+	sdl_set_surface_alpha(splashscreen, 0);
+	fade(game, splashscreen, fadein);
 	now = get_gametime(&game->starttime);
-	while (*finished == FALSE || get_gametime(&game->starttime) - now < 3000)
-		SDL_PollEvent(&temp);
-	fade(game, splash, fadeout);
-	SDL_FreeSurface(splash);
-	(void)temp;
+	while (game->cureventstate->eventstate == initload
+	|| get_gametime(&game->starttime) - now < 3000)
+		;
+	fade(game, splashscreen, fadeout);
+	SDL_FreeSurface(splashscreen);
+	game->cureventstate->eventstate = mainmenu;
 }

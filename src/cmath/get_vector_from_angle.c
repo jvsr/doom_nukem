@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   types.h                                            :+:    :+:            */
+/*   get_vector_from_angle.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:22 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/11/22 16:05:32 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/11/22 16:05:32 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include <math.h>
+#include "cmath.h"
+#include "coord.h"
 
-typedef	unsigned char		t_uint8;
-typedef	unsigned short		t_uint16;
-typedef unsigned int		t_uint32;
-typedef unsigned long int	t_uint64;
-
-typedef enum				e_endian
+t_coord		*get_vector_from_angle(float angle, t_coord *vec)
 {
-	ENDIAN_BIG,
-	ENDIAN_LITTLE
-}							t_endian;
-
-typedef enum				e_texture
-{
-	TEXTURE_BRICK_WALL,
-	TEXTURE_COUNT
-}							t_texture;
-
-#endif
+	vec->x = cos(angle * PI_R);
+	vec->y = sin(angle * PI_R);
+	return (vec);
+}
