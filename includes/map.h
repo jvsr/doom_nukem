@@ -150,6 +150,7 @@ typedef struct	s_wall
 	t_coord		end;
 	float		length;
 	float		height;
+	float		z;
 }				 t_wall;
 
 typedef struct	s_sector

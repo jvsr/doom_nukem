@@ -40,6 +40,7 @@ typedef	struct	s_player
 	t_vec		pos;
 	t_coord		*angles;
 	t_uint32	cur_sector;
+	float		height;
 }				t_player;
 
 #endif

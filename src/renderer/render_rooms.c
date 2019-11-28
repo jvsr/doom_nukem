@@ -45,23 +45,35 @@ static void		split_walls(t_list **out_walls,
 	}
 }
 
+static float	get_ratio(t_setting *setting, t_renderinfo *renderin)
+{
+	t_coord angle;
+
+	get_vector_from_angle(90 + (setting->vfov / 2), &angle);
+	ft_memcpy(&renderin->b_vec, &angle, sizeof(angle));
+	return (angle.x / angle.y);
+}
+
 void			render_rooms(t_game *game, t_level *level)
 {
-	t_list	*walls;
-	int		mask[game->surface->w * game->surface->h];
-	t_list	*out_walls[RENDER_THREAD_COUNT];
-	int		i;
-	float	parts;
+	t_list			*walls;
+	t_list			*out_walls[RENDER_THREAD_COUNT];
+	t_renderinfo	renderin;
+	int				i;
+	float			parts;
 
-	ft_bzero(mask, game->surface->w * game->surface->h);
+	renderin.mask = ft_memalloc(sizeof(int) *
+						(game->surface->w * game->surface->h));
 	walls = get_bunches(game, level);
 	parts = game->setting->fov / RENDER_THREAD_COUNT;
 	split_walls(out_walls, game, walls, parts);
+	renderin.ratio = get_ratio(game->setting, &renderin);
 	i = 0;
 	while (i < RENDER_THREAD_COUNT)
 	{
-		render_part(game,
-					(t_coord){i * parts, (i + 1) * parts}, out_walls[i], mask);
+		render_part(game, (t_coord){i * parts, (i + 1) * parts},
+			out_walls[i], &renderin);
 		i++;
 	}
+	ft_memdel((void**)&renderin.mask);
 }

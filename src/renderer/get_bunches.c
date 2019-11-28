@@ -17,12 +17,12 @@
 #include "types.h"
 #include "renderer.h"
 
-int		is_between(float mag, t_mag *pmag)
+static int		is_between(float mag, t_mag *pmag)
 {
 	return (!(mag > pmag->start || mag < pmag->end));
 }
 
-t_list	*add_walls(t_sector *sector,
+static t_list	*add_walls(t_sector *sector,
 					t_level *level, t_list *sectors, t_mag *mag)
 {
 	t_wall		**walls;
@@ -48,7 +48,7 @@ t_list	*add_walls(t_sector *sector,
 	return (lst);
 }
 
-t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
+static t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
 {
 	t_list *walls;
 
