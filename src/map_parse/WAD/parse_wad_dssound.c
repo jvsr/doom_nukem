@@ -18,6 +18,8 @@
 #include "types.h"
 #include "serializer.h"
 
+#define PADDING_BYTES 32
+
 static t_wad_dssound	*alloc_dssound(t_wad_general *wad_general)
 {
 	t_wad_dssound	*dssound;
@@ -44,7 +46,7 @@ static void				fill_wad_dssound(t_binary_read *wad_bin, t_wad_dssound *dssound)
 
 	dssound->format = read_short(wad_bin);
 	dssound->sample_rate = read_short(wad_bin);
-	dssound->sample_count = read_int(wad_bin);
+	dssound->sample_count = read_int(wad_bin) - PADDING_BYTES;
 	dssound->sample = (t_uint8*)ft_memalloc(sizeof(t_uint8) * dssound->sample_count);
 	if (dssound->sample == NULL)
 		error_msg_errno("Failed to allocate dssound samples");

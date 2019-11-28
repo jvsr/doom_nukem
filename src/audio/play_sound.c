@@ -23,7 +23,7 @@ void		play_sound(t_audio_man *man, char *const sound)
 	chunk = get_track_from_map(man->sound_map, sound);
 	if (chunk == NULL)
 	{
-		ft_dprintf(2, "Trying to effect none existing sound '%s'", sound);
+		ft_dprintf(2, "Trying to effect none existing sound '%s'\n", sound);
 		return ;
 	}
 	Mix_PlayChannel(-1, chunk, 0);

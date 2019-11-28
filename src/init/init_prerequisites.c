@@ -20,7 +20,6 @@
 
 #include "game.h"
 #include "setting.h"
-#include "parse_map.h"
 #include "init.h"
 #include "error.h"
 #include "audio.h"
@@ -79,7 +78,6 @@ t_game			*init_prerequisites(char **argv, char **envp)
 	init_window_surface(game);
 	calc_vfov(game->setting, game->surface->w, game->surface->h);
 	init_eventstate(game);
-	parse_map("map/campaign/doom1.wad", game);
 	init_general(game);
 	return (game);
 }

@@ -20,7 +20,7 @@
 t_level *alloc_level(void)
 {
 	t_level *level;
-	
+
 	level = (t_level*)ft_memalloc(sizeof(t_level));
 	if (level == NULL)
 		error_msg_errno("Failed to alloc level");
