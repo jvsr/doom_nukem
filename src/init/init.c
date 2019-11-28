@@ -14,6 +14,7 @@
 #include "audio.h"
 #include "init.h"
 #include "eventstate.h"
+#include "parse_map.h"
 #include "renderer.h"
 
 void	init_function(t_game *game)
@@ -23,5 +24,6 @@ void	init_function(t_game *game)
 	load_textures(game);
 	init_main_menu(game);
 	init_keymap(game);
+	parse_map("map/campaign/doom1.wad", game);
 	game->cureventstate->eventstate = splash;
 }

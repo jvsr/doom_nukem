@@ -6,76 +6,103 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/28 09:16:47 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/28 11:06:14 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 09:16:47 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_printf.h" //
-#include "libft/ft_mem.h" //
-#include "libft/ft_str.h" //
+#include <SDL2/SDL_rwops.h>
+#include <SDL2/SDL_mixer.h>
+
+#include "libft/ft_printf.h"
+#include "libft/ft_mem.h"
 
 #include "wad.h"
 #include "game.h"
+#include "error.h"
+#include "audio.h"
 
-#include "serializer.h" //
+#define WAV_HEADER_SIZE 44
+#define WAV_HEADER_CHUNK_SIZE 36
+#define WAV_PCM_SIZE 16
+#define WAV_PCM_FORMAT 1
+#define DSSOUND_CHANNELS 1
+#define DSSOUND_SAMPLE_BITS 8
 
-static void		print_wav(t_uint8 *wav)
+/*
+** * These ^ defines are not meant to be changed
+** * http://soundfile.sapp.org/doc/WaveFormat
+** * https://doomwiki.org/wiki/Music
+*/
+
+static void			del_dssound(t_wad_dssound *sound, t_uint8 *wav)
 {
-	char *chunk_id = ft_strndup((char *)wav, 4);
-	int chunk_size = *((int *)ft_memdup(wav + 4, 4));
-	char *format = ft_strndup((char *)wav + 8, 4);
-	ft_printf("chunk_id = %s\nchunk_size = %d\nformat = %s\n", chunk_id, chunk_size, format);
-	ft_printf("\n");
-
-	char *subchunk1_id = ft_strndup((char *)wav + 12, 4);
-	int subchunk1_size = *((int *)ft_memdup(wav + 16, 4));;
-	ft_printf("subchunk1_id = %s\nsubchunk1_size = %d\n", subchunk1_id, subchunk1_size);
-	ft_printf("\n");
-
-	int audio_format = *((int *)ft_memdup(wav + 20, 2));
-	int num_channels = *((int *)ft_memdup(wav + 22, 2));
-	int sample_rate = *((int *)ft_memdup(wav + 24, 4));
-	int byte_rate = *((int *)ft_memdup(wav + 28, 4));
-	int block_align = *((int *)ft_memdup(wav + 32, 2));
-	int bits_per_sample = *((int *)ft_memdup(wav + 34, 2));
-	ft_printf("audio_format = %d\nnum_channels = %d\nsample_rate = %d\nbyte_rate = %d\nblock_align = %d\nbits_per_sample = %d\n", audio_format, num_channels, sample_rate, byte_rate, block_align, bits_per_sample);
-	ft_printf("\n");
-
-	char *subchunk2_id = ft_strndup((char *)wav + 36, 4);
-	int subchunk2_size = *((int *)ft_memdup(wav + 40, 4));
-	ft_printf("subchunk2_id = %s\nsubchunk2_size = %d\n", subchunk2_id, subchunk2_size);
-
-	// int	i = 0;
-	// int num_sample = subchunk2_size / block_align;
-	// t_uint8 *data = ft_memdup(wav + 44, num_sample * block_align);
-	// while (i < num_sample) {
-	// 	ft_printf("%x ", *((int *)ft_memdup(data + (i * block_align), block_align)));
-	// 	if ((i % 8) == 0)
-	// 		ft_printf("\n");
-	// 	i++;
-	// }
-	ft_printf("\n");
+	ft_memdel((void **)&sound->sample);
+	ft_memdel((void **)&sound->name);
+	ft_memdel((void **)&sound);
+	ft_memdel((void **)&wav);
 }
 
-// static t_uint8	*format_wav(t_wad_dssound *dssound)
-// {
-
-// }
-
-void			convert_dssound(t_wad *wad, t_game *game)
+static t_uint8		*alloc_wav(size_t size)
 {
-	t_wad_dssound	*sound;
-	// t_uint8			*wav;
+	t_uint8	*wav;
 
-	(void)game;
+	wav = (t_uint8 *)ft_memalloc(sizeof(t_uint8) * (WAV_HEADER_SIZE + size));
+	if (wav == NULL)
+		error_msg_errno("Failed to alloc dssound to wav header");
+	return (wav);
+}
+
+static void			addnum(SDL_RWops *rw, t_uint32 num, size_t size)
+{
+	rw->write(rw, &num, size, 1);
+}
+
+static SDL_RWops	*format_wav(t_uint8 *wav, t_wad_dssound *sound, size_t size)
+{
+	SDL_RWops	*rw;
+
+	rw = SDL_RWFromMem(wav, (WAV_HEADER_SIZE + size));
+	if (rw == NULL)
+		error_msg_sdl(21, "Failed to alloc RWops for dssound");
+	rw->write(rw, "RIFF", sizeof(t_uint32), 1);
+	addnum(rw, WAV_HEADER_CHUNK_SIZE + size, sizeof(t_uint32));
+	rw->write(rw, "WAVE", sizeof(t_uint32), 1);
+	rw->write(rw, "fmt ", sizeof(t_uint32), 1);
+	addnum(rw, WAV_PCM_SIZE, sizeof(t_uint32));
+	addnum(rw, WAV_PCM_FORMAT, sizeof(t_uint16));
+	addnum(rw, DSSOUND_CHANNELS, sizeof(t_uint16));
+	rw->write(rw, &sound->sample_rate, sizeof(t_uint32), 1);
+	addnum(rw, sound->sample_rate * DSSOUND_CHANNELS, sizeof(t_uint32));
+	addnum(rw, DSSOUND_CHANNELS, sizeof(t_uint16));
+	addnum(rw, DSSOUND_SAMPLE_BITS, sizeof(t_uint16));
+	rw->write(rw, "data", sizeof(t_uint32), 1);
+	rw->write(rw, &size, sizeof(t_uint32), 1);
+	rw->write(rw, sound->sample, size, 1);
+	rw->seek(rw, 0, RW_SEEK_SET);
+	return (rw);
+}
+
+void				convert_dssound(t_wad *wad, t_game *game)
+{
+	Mix_Chunk		*chunk;
+	t_wad_dssound	*sound;
+	t_wad_dssound	*next;
+	t_uint8			*wav;
+	size_t			size;
+
 	sound = wad->general->dssound;
-	ft_printf("explosion\n");
-	print_wav(new_binary_read("explosion.wav", TRUE)->bytes);
-	// while (sound != NULL)
-	// {
-		// wav = format_wav(sound);
-		// ft_printf("%s\n", sound->name);
-		// print_wav(wav);
-	// 	sound = sound->next;
-	// }
+	wad->general->dssound = NULL;
+	while (sound != NULL)
+	{
+		size = sound->sample_count * DSSOUND_CHANNELS;
+		wav = alloc_wav(size);
+		chunk = Mix_LoadWAV_RW(format_wav(wav, sound, size), TRUE);
+		if (chunk == NULL)
+			ft_dprintf(2, "Invalid sound file '%s'\n", sound->name);
+		else
+			add_track_to_map(game->audio_man->sound_map, chunk, sound->name);
+		next = sound->next;
+		del_dssound(sound, wav);
+		sound = next;
+	}
 }

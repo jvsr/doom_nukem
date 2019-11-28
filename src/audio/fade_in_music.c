@@ -23,7 +23,7 @@ void		fade_in_music(t_audio_man *man, char *const music, int time)
 	chunk = get_track_from_map(man->music_map, music);
 	if (chunk == NULL)
 	{
-		ft_dprintf(2, "Trying to fade none existing music '%s'", music);
+		ft_dprintf(2, "Trying to fade none existing music '%s'\n", music);
 		return ;
 	}
 	Mix_FadeInMusic(chunk, -1, time);
