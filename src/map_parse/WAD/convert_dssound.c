@@ -22,7 +22,17 @@
 #include "audio.h"
 
 #define WAV_HEADER_SIZE 44
+#define WAV_HEADER_CHUNK_SIZE 36
+#define WAV_PCM_SIZE 16
+#define WAV_PCM_FORMAT 1
 #define DSSOUND_CHANNELS 1
+#define DSSOUND_SAMPLE_BITS 8
+
+/*
+** * These ^ defines are not meant to be changed
+** * http://soundfile.sapp.org/doc/WaveFormat
+** * https://doomwiki.org/wiki/Music
+*/
 
 static void			del_dssound(t_wad_dssound *sound, t_uint8 *wav)
 {
@@ -55,16 +65,16 @@ static SDL_RWops	*format_wav(t_uint8 *wav, t_wad_dssound *sound, size_t size)
 	if (rw == NULL)
 		error_msg_sdl(21, "Failed to alloc RWops for dssound");
 	rw->write(rw, "RIFF", sizeof(t_uint32), 1);
-	addnum(rw, 36 + size, sizeof(t_uint32));
+	addnum(rw, WAV_HEADER_CHUNK_SIZE + size, sizeof(t_uint32));
 	rw->write(rw, "WAVE", sizeof(t_uint32), 1);
 	rw->write(rw, "fmt ", sizeof(t_uint32), 1);
-	addnum(rw, 16, sizeof(t_uint32));
-	addnum(rw, 1, sizeof(t_uint16));
+	addnum(rw, WAV_PCM_SIZE, sizeof(t_uint32));
+	addnum(rw, WAV_PCM_FORMAT, sizeof(t_uint16));
 	addnum(rw, DSSOUND_CHANNELS, sizeof(t_uint16));
 	rw->write(rw, &sound->sample_rate, sizeof(t_uint32), 1);
 	addnum(rw, sound->sample_rate * DSSOUND_CHANNELS, sizeof(t_uint32));
 	addnum(rw, DSSOUND_CHANNELS, sizeof(t_uint16));
-	addnum(rw, 8, sizeof(t_uint16));
+	addnum(rw, DSSOUND_SAMPLE_BITS, sizeof(t_uint16));
 	rw->write(rw, "data", sizeof(t_uint32), 1);
 	rw->write(rw, &size, sizeof(t_uint32), 1);
 	rw->write(rw, sound->sample, size, 1);
