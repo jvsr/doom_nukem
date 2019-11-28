@@ -17,6 +17,7 @@
 
 # include "types.h"
 
+typedef struct s_game			t_game;
 typedef struct s_binary_read	t_binary_read;
 typedef enum			e_wad_state
 {
@@ -209,5 +210,7 @@ void	parse_wad_nodes(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_direc
 void	parse_wad_sectors(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
 void	parse_wad_reject(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
 void	parse_wad_blockmap(t_binary_read *wad_bin, t_wad_level *wad_level, t_wad_directory *directory);
+
+void	convert_dssound(t_wad *wad, t_game *game);
 
 #endif

@@ -15,13 +15,5 @@
 
 void	convert_wad(t_wad *wad, t_game *game)
 {
-	t_wad_dssound	*sound;
-
-	(void)wad;
-	(void)game;
-	sound = wad->general->dssound;
-	while (sound != NULL)
-	{
-		sound = sound->next;
-	}
+	convert_dssound(wad, game);
 }
