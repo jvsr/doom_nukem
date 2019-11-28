@@ -14,6 +14,7 @@
 #include <limits.h>
 #include <unistd.h>
 #include <SDL2/SDL_events.h>
+#include <math.h>
 
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"

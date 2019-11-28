@@ -6,7 +6,11 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2019/11/25 17:31:31 by jvisser       ########   odam.nl         */
+=======
+/*   Updated: 2019/11/13 16:34:37 by jvisser       ########   odam.nl         */
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +18,17 @@
 
 #include "game.h"
 #include "init.h"
+#include "audio.h"
 #include "sdl_thread.h"
 
 #include "parse_map.h" //
 
 int	main(int argc, char **argv, char **envp)
 {
-	SDL_Thread	*init_thread;
-	t_game		*game;
-	t_bool		is_loaded;
+	t_game	*game;
 
 	(void)argc;
-	is_loaded = FALSE;
-	game = init(argv, envp);
-	init_thread = sdl_new_thread("mainmenu", init_main_menu, 2,
-								game, &is_loaded);
-	SDL_DetachThread(init_thread);
-	splash(game, &is_loaded, "splash/splash");
+	game = init_prerequisites(argv, envp);
 	loop(game);
-	quit(0);
+	return (0);
 }

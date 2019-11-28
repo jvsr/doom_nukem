@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 20:40:08 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/18 14:47:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/28 11:23:15 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void							map_editor_select_eventstate
 
 typedef enum					e_eventstate_code
 {
+	initload,
+	splash,
 	mainmenu,
 	missions,
 	options,
@@ -46,17 +48,17 @@ typedef enum					e_eventstate_code
 	map_editor_select,
 }								t_eventstate_code;
 
-typedef union					u_types
+typedef union			u_types
 {
 	int		dgt;
 	int		*dgtptr;
 	void	*ptr;
-}								t_types;
+}						t_types;
 
-typedef struct					s_eventstate
+typedef struct			s_eventstate
 {
 	t_eventstate_code	eventstate;
 	t_types				*arguments;
-}								t_eventstate;
+}						t_eventstate;
 
 #endif

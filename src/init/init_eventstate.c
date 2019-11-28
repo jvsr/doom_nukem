@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:46:05 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:47:15 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/13 17:58:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_eventstate(t_game *game)
 	cureventstate = ft_memalloc(sizeof(t_eventstate));
 	if (cureventstate == NULL)
 		error_msg_errno("Failed to alloc eventstate");
-	cureventstate->eventstate = mainmenu;
+	cureventstate->eventstate = initload;
 	cureventstate->arguments = NULL;
 	game->cureventstate = cureventstate;
 }

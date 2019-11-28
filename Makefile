@@ -6,13 +6,21 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
+<<<<<<< HEAD
 #    Updated: 2019/11/22 13:47:38 by jvisser       ########   odam.nl          #
+=======
+#    Updated: 2019/11/13 11:29:43 by jvisser       ########   odam.nl          #
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names
 SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
+<<<<<<< HEAD
 			audio keymap serializer eventstate map_parse table
+=======
+			audio keymap serializer renderer eventstate init cmath table
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63
 
 # Executable name
 NAME = doom-nukem

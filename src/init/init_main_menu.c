@@ -6,7 +6,11 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:28:08 by jvisser        #+#    #+#                */
+<<<<<<< HEAD:src/main/init_main_menu.c
 /*   Updated: 2019/11/14 11:34:24 by jvisser       ########   odam.nl         */
+=======
+/*   Updated: 2019/11/13 11:20:49 by jvisser       ########   odam.nl         */
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63:src/init/init_main_menu.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +22,7 @@
 #include "game.h"
 #include "gui_config.h"
 
-void	init_main_menu(t_game *game, t_bool *is_loaded)
+void	init_main_menu(t_game *game)
 {
 	t_transform	*main_menu;
 	t_transform	*map_editor_select;
@@ -35,6 +39,9 @@ void	init_main_menu(t_game *game, t_bool *is_loaded)
 	add_elem_child(main_menu, options_menu);
 	add_elem_child(main_menu, select_level);
 	add_gui_child(game->ui, main_menu);
+<<<<<<< HEAD:src/main/init_main_menu.c
 	add_gui_child(game->ui, map_editor_select);
 	*is_loaded = TRUE;
+=======
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63:src/init/init_main_menu.c
 }

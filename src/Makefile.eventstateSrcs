@@ -16,6 +16,7 @@ PREFIX = eventstate_
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+<<<<<<< HEAD
 SRCS = controls \
 		mainmenu \
 		missions \
@@ -24,3 +25,13 @@ SRCS = controls \
 		set_controls \
 		map_editor \
 		map_editor_select
+=======
+SRCS = eventstate_controls \
+		eventstate_initload \
+		eventstate_splash \
+		eventstate_mainmenu \
+		eventstate_missions \
+		eventstate_options \
+		eventstate_options_confirmation \
+		eventstate_set_controls
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63

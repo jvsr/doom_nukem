@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init.c                                             :+:    :+:            */
+/*   init_prerequisites.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
+<<<<<<< HEAD:src/main/init.c
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
 /*   Updated: 2019/11/25 17:37:16 by jvisser       ########   odam.nl         */
+=======
+/*   Created: 2019/11/13 11:32:47 by jvisser        #+#    #+#                */
+/*   Updated: 2019/11/13 16:35:35 by jvisser       ########   odam.nl         */
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63:src/init/init_prerequisites.c
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
+#include <SDL2/SDL_audio.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "libft/ft_mem.h"
@@ -23,7 +28,9 @@
 #include "parse_map.h"
 #include "init.h"
 #include "error.h"
-#include "eventstate.h"
+#include "audio.h"
+#include "renderer.h"
+#include "cmath.h"
 
 static void		init_sdl(void)
 {
@@ -33,21 +40,21 @@ static void		init_sdl(void)
 		error_msg_sdl(ENOMEM, "Failed to init TTF");
 }
 
+static void		init_general(t_game *game)
+{
+	game->state = running;
+	init_gametime(&game->starttime);
+	game->cursoractive = TRUE;
+}
+
 static t_game	*alloc_game(void)
 {
 	t_game	*game;
 
 	game = (t_game *)ft_memalloc(sizeof(t_game));
 	if (game == NULL)
-		error_msg_sdl(ENOMEM, "Failed to alloc game");
+		error_msg_errno("Failed to alloc game");
 	return (game);
-}
-
-static void		init_game(t_game *game)
-{
-	game->state = running;
-	init_gametime(&game->starttime);
-	game->cursoractive = TRUE;
 }
 
 static void		set_basic_args(t_game *game, char **argv, char **envp)
@@ -66,20 +73,21 @@ static void		set_basic_args(t_game *game, char **argv, char **envp)
 		error_msg_errno("Failed to alloc doom dir");
 }
 
-t_game			*init(char **argv, char **envp)
+t_game			*init_prerequisites(char **argv, char **envp)
 {
-	t_game *game;
+	t_game	*game;
 
 	init_sdl();
 	game = alloc_game();
 	set_basic_args(game, argv, envp);
 	init_settings(game);
 	init_window_surface(game);
-	init_game(game);
-	init_audio(game);
-	init_gui(game);
-	init_keymap(game);
+	calc_vfov(game->setting, game->surface->w, game->surface->h);
 	init_eventstate(game);
+<<<<<<< HEAD:src/main/init.c
 	parse_map("map/campaign/doom1.wad", game);
+=======
+	init_general(game);
+>>>>>>> 902071b0a5c1d877af5268d2c75fc4a7a48c2f63:src/init/init_prerequisites.c
 	return (game);
 }

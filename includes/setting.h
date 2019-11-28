@@ -45,6 +45,7 @@ typedef struct	s_setting
 	float				sensitivity;
 	float				music_volume;
 	float				sound_volume;
+	float				vfov;
 	t_uint16			fov;
 	SDL_Point			resolution;
 	t_resolution_type	resolution_type;
