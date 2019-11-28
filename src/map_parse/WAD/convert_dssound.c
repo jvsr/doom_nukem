@@ -76,7 +76,7 @@ static SDL_RWops	*format_wav(t_uint8 *wav, t_wad_dssound *sound, size_t size)
 	addnum(rw, DSSOUND_CHANNELS, sizeof(t_uint16));
 	addnum(rw, DSSOUND_SAMPLE_BITS, sizeof(t_uint16));
 	rw->write(rw, "data", sizeof(t_uint32), 1);
-	rw->write(rw, &size, sizeof(t_uint32), 1);
+	addnum(rw, size, sizeof(t_uint32));
 	rw->write(rw, sound->sample, size, 1);
 	rw->seek(rw, 0, RW_SEEK_SET);
 	return (rw);
