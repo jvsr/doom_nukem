@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/28 15:16:00 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 16:49:46 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/29 19:25:34 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,20 @@ typedef struct			s_campaign_sector
 	char				*texture_floor;
 	char				*texture_ceiling;
 	short				light_level;
+	size_t				wall_amount;
+	t_campaign_wall		**wall;
 	unsigned short		sector_tag;
 }						t_campaign_sector;
 
 typedef struct	s_campaign
 {
 	t_coord				*vertex;
+	size_t				wall_amount;
 	t_campaign_wall		**wall;
-	t_campaign_sector	*sector;
+	size_t				sidedef_amount;
+	t_campaign_sidedef	**sidedef;
+	size_t				sector_amount;
+	t_campaign_sector	**sector;
 }				t_campaign;
 
 #endif

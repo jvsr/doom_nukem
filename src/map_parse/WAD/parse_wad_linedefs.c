@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/23 16:59:26 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 15:10:47 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/11/29 14:57:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 
 #define LINEDEF_SIZE 14
 
-static void	print_linedef(t_wad_linedef *linedef)
-{
-	ft_printf("V BEG:\t%hu\nV END:\t%hu\nFLG:\t%d\nL TYP:\t%d\nS TAG:\t%d\nSD RGT:\t%d\nSD LFT:\t%d\n\n",
-		linedef->vertex_begin,
-		linedef->vertex_end,
-		linedef->flags,
-		linedef->line_type,
-		linedef->sector_tag,
-		linedef->sidedef_right,
-		linedef->sidedef_left);
-}
+// static void	print_linedef(t_wad_linedef *linedef)
+// {
+// 	ft_printf("V BEG:\t%hu\nV END:\t%hu\nFLG:\t%d\nL TYP:\t%d\nS TAG:\t%d\nSD RGT:\t%d\nSD LFT:\t%d\n\n",
+// 		linedef->vertex_begin,
+// 		linedef->vertex_end,
+// 		linedef->flags,
+// 		linedef->line_type,
+// 		linedef->sector_tag,
+// 		linedef->sidedef_right,
+// 		linedef->sidedef_left);
+// }
 
 static void	alloc_linedefs(t_wad_level *level, size_t linedefs_amount)
 {
@@ -75,7 +75,7 @@ void	parse_wad_linedefs(t_binary_read *wad_bin, t_wad_level *level, t_wad_direct
 	{
 		wad_bin->content_pos = directory->loc_lump + i * LINEDEF_SIZE;
 		fill_wad_linedef(wad_bin, level->linedefs[i]);
-		print_linedef(level->linedefs[i]);
+		// print_linedef(level->linedefs[i]);
 		i++;
 	}
 }
