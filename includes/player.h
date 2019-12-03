@@ -36,7 +36,7 @@ typedef	struct	s_player
 	t_weapon	*all_weapon; //Keep list to allow adding mid game
 
 	t_pickup	**all_pickup;
-	t_rect		view;
+	t_rect		vienor
 	t_uint8		detection_area;*/
 	t_uint16	*fov;
 	float		angle;

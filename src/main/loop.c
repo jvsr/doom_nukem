@@ -19,6 +19,7 @@
 #include "gui.h"
 #include "game.h"
 #include "init.h"
+#include "loop.h"
 #include "audio.h"
 #include "keymap.h"
 #include "renderer.h"
@@ -60,15 +61,9 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		print_keymap(game->keymap);
 }
 
-static void		play_title_song(t_game *game)
+static void		load_info(t_game *game)
 {
-	fade_in_music(game->audio_man, TITLE_SONG, 3500);
-}
-
-void			loop(t_game *game)
-{
-	SDL_Event	event;
-	void		(*eventstate_fnc)(t_game*, SDL_Event);
+	SDL_Event event;
 
 	sdl_new_thread(NULL, init_function, 1, game);
 	sdl_new_thread(NULL, display_splash, 2, game, "splash/splash");
@@ -79,7 +74,15 @@ void			loop(t_game *game)
 		while (SDL_PollEvent(&event))
 			check_quit(game, event);
 	}
-	play_title_song(game);
+}
+
+void			loop(t_game *game)
+{
+	SDL_Event	event;
+	void		(*eventstate_fnc)(t_game*, SDL_Event);
+
+	load_info(game);
+	fade_in_music(game->audio_man, TITLE_SONG, 3500);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
@@ -90,6 +93,7 @@ void			loop(t_game *game)
 			eventstate_fnc = g_eventstate[game->cureventstate->eventstate];
 			eventstate_fnc(game, event);
 		}
+		loop_core(game, game->cureventstate->eventstate);
 		draw_gui(game->ui);
 		SDL_UpdateWindowSurface(game->window);
 	}
