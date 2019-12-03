@@ -19,6 +19,8 @@
 # include "types.h"
 # include "coord.h"
 
+# define PLAYER_HEIGHT 2.0
+
 typedef struct	s_mag
 {
 	float start;
@@ -37,7 +39,7 @@ typedef	struct	s_player
 	t_rect		view;
 	t_uint8		detection_area;*/
 	t_uint16	*fov;
-	t_uint16	angle;
+	float		angle;
 	t_mag		mag;
 	t_coord		forward;
 	t_vec		pos;

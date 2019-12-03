@@ -38,5 +38,8 @@ float		get_vector_magnitude(t_coord *vec);
 t_coord		*get_vector_from_points(t_coord *pos0, t_coord *pos1, t_coord *vec);
 float		get_distance(t_coord *pos0, t_coord *pos1);
 void		calc_vfov(t_setting *set, float width, float height);
+float		mod_float(float f0, float max);
+float		clamp_float(float f0, float min, float max);
+float		wrap_float(float f0, float min, float max);
 
 #endif

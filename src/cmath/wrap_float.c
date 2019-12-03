@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   go_to_game.c                                       :+:    :+:            */
+/*   wrap_float.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/03 13:58:52 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/12/03 13:58:52 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/12/03 15:46:15 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/12/03 15:46:15 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui.h"
-#include "game.h"
-#include "audio.h"
-#include "gui_config.h"
-#include "eventstate.h"
+#include <math.h>
 
-void	go_to_game(t_game *game, t_transform *gui)
+float	wrap_float(float f0, float min, float max)
 {
-	(void)gui;
-	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hud"), TRUE);
-	game->cureventstate->eventstate = hud;
-	stop_music();
+	while (f0 < min)
+		f0 = max - (fabs(min - f0));
+	while (f0 > max)
+		f0 = min + (fabs(max - f0));
+	return (f0);
 }

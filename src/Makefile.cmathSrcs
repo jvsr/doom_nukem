@@ -22,4 +22,5 @@ FT_SRCS =
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = get_collision get_angle_from_vectors get_angle_from_vector \
 		get_vector_from_angle dot_vectors get_vector_magnitude \
-		get_vector_from_points get_distance calc_vfov
+		get_vector_from_points get_distance calc_vfov mod_float \
+		clamp_float wrap_float

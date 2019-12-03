@@ -1,6 +1,6 @@
 - panel: hud
   - image: hud_bg
-    - color: #FFFFFF
+    - color: #000000
   - text_block: angle
     - pos: 0.1, 0.1
     - dim: 0.1, 0.1

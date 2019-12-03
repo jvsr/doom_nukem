@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft/ft_list.h"
+#include "coord.h"
 #include "game.h"
 #include "cmath.h"
 #include "map.h"
@@ -67,8 +68,7 @@ void			add_wall_to_out(t_list **out_walls,
 				&(t_coord){game->player->pos.x, game->player->pos.y},
 				&wall->end, &tmp));
 	ensure_sides(&angle_range);
-	range = get_ang_range(&angle_range, parts,
-				(float)game->player->angle - ((float)game->setting->fov / 2));
+	range = get_ang_range(&angle_range, parts, game->player->mag.start);
 	while (range.x < range.y)
 	{
 		ft_lstaddbck(&out_walls[range.x], ft_lstnew(wall, sizeof(wall)));
