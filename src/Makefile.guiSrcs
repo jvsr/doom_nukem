@@ -45,7 +45,9 @@ CREATE_SRCS = new_elem \
 		new_text \
 		del_text \
 		new_panel \
-		del_panel
+		del_panel \
+		del_gview \
+		new_gview
 CREATE_SRCS := $(CREATE_SRCS:%=create/%)
 
 DEBUG_SRCS = print_elem \

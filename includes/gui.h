@@ -30,6 +30,7 @@ typedef struct s_text		t_text;
 typedef struct s_image		t_image;
 typedef struct s_button		t_button;
 typedef struct s_panel		t_panel;
+typedef struct s_gview		t_gview;
 
 typedef void	(t_onclick)(t_game *, t_transform *);
 
@@ -39,7 +40,8 @@ typedef enum	e_gui_type
 	TEXT,
 	IMAGE,
 	BUTTON,
-	PANEL
+	PANEL,
+	GVIEW
 }				t_gui_type;
 
 typedef enum	e_parent_type
@@ -77,6 +79,7 @@ typedef	union	u_gui_elem
 	t_image		*image;
 	t_button	*button;
 	t_panel		*panel;
+	t_gview		*gview;
 }				t_gui_elem;
 
 typedef	union	u_parent
@@ -135,6 +138,11 @@ struct			s_button
 struct			s_panel
 {
 	t_transform	*children;
+};
+
+struct			s_gview
+{
+
 };
 
 struct			s_gui

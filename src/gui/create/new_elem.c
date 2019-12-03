@@ -29,6 +29,8 @@ static void	new_gui_elem(t_gui *ui, t_gui_type type, t_gui_elem *gui_elem)
 		gui_elem->button = new_button(ui);
 	else if (type == PANEL)
 		gui_elem->panel = new_panel();
+	else if (type == GVIEW)
+		gui_elem->gview = new_gview();
 }
 
 t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)

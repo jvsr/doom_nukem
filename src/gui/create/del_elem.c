@@ -27,6 +27,8 @@ static void	del_gui_elem(t_transform *elem)
 		del_button(&elem->gui_elem.button);
 	else if (elem->gui_type == PANEL)
 		del_panel(&elem->gui_elem.panel);
+	else if (elem->gui_type == GVIEW)
+		del_gview(&elem->gui_elem.gview);
 }
 
 void		del_elem(t_transform **elem)
