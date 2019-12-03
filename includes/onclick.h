@@ -83,4 +83,6 @@ void	remove_options(t_game *game);
 void	add_confirmation(t_game *game);
 void	remove_confirmation(t_game *game);
 
+void	go_to_game(t_game *game, t_transform *gui);
+
 #endif

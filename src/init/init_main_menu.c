@@ -21,20 +21,16 @@
 void	init_main_menu(t_game *game)
 {
 	t_transform	*main_menu;
-	t_transform	*map_editor_select;
 	t_transform	*options_menu;
-	t_transform	*select_level;
-	t_transform	*controls_menu;
 
 	main_menu = analyze_gui_config(game->ui, "main_menu");
-	map_editor_select = analyze_gui_config(game->ui, "map_editor_select");
 	options_menu = analyze_gui_config(game->ui, "options_menu");
-	select_level = analyze_gui_config(game->ui, "select_level");
-	controls_menu = analyze_gui_config(game->ui, "controls_menu");
-	add_elem_child(options_menu, controls_menu);
+	add_elem_child(options_menu, analyze_gui_config(game->ui, "controls_menu"));
 	add_elem_child(main_menu, options_menu);
-	add_elem_child(main_menu, select_level);
+	add_elem_child(main_menu, analyze_gui_config(game->ui, "select_level"));
 	add_gui_child(game->ui, main_menu);
-	add_gui_child(game->ui, map_editor_select);
-	// *is_loaded = TRUE;
+	add_gui_child(game->ui, analyze_gui_config(game->ui, "map_editor_select"));
+	add_gui_child(game->ui, analyze_gui_config(game->ui, "hud"));
+	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 }

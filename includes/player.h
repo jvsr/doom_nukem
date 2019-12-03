@@ -19,6 +19,8 @@
 # include "types.h"
 # include "coord.h"
 
+# define PLAYER_HEIGHT 2.0
+
 typedef struct	s_mag
 {
 	float start;
@@ -34,14 +36,13 @@ typedef	struct	s_player
 	t_weapon	*all_weapon; //Keep list to allow adding mid game
 
 	t_pickup	**all_pickup;
-	t_rect		view;
+	t_rect		vienor
 	t_uint8		detection_area;*/
 	t_uint16	*fov;
-	t_uint16	angle;
+	float		angle;
 	t_mag		mag;
 	t_coord		forward;
 	t_vec		pos;
-	t_coord		*angles;
 	t_uint32	cur_sector;
 	float		height;
 }				t_player;

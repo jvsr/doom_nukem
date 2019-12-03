@@ -57,6 +57,7 @@ static t_tablepair const	g_onclicks[] = {
 	{"controls_return", controls_return},
 
 	{"restart_game", restart_game},
+	{"go_to_game", go_to_game}
 };
 
 char const	*get_onclick_name(t_onclick *onclick)

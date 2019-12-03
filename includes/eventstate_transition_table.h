@@ -29,6 +29,7 @@ static t_eventstate_fnc	*const g_eventstate[] =
 	set_controls_eventstate,
 	map_editor_eventstate,
 	map_editor_select_eventstate,
+	hud_eventstate
 };
 
 #endif

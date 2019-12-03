@@ -26,6 +26,8 @@
 # define MUSIC_MAP_SIZE 30
 # define MUSIC_PATH "resources/sounds/music/"
 
+# define TITLE_SONG "hit_n_smash"
+
 typedef struct s_game		t_game;
 typedef struct s_hashmap	t_hashmap;
 

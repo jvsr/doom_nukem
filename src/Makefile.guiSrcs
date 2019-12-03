@@ -32,7 +32,8 @@ ONCLICK_SRCS = mainmenu \
 				controls \
 				keys_1 \
 				key_2 \
-				editor_select
+				editor_select \
+				go_to_game
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \

@@ -1,5 +1,8 @@
 - panel: hud
-  - pos: 0.85, 0.0
-  - dim: 0.15, 1.0
-  - image: hudbackground
-    - texture: splash/splash.tga
+  - image: hud_bg
+    - color: #000000
+  - text_block: angle
+    - pos: 0.1, 0.1
+    - dim: 0.1, 0.1
+    - text: "Angle: "
+    - text_color: #FFFFFF
