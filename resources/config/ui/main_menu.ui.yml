@@ -5,6 +5,13 @@
     - pos: 0.35, 0.02
     - dim: 0.29, 0.303
     - texture: splash/doom3.tga
+  - button: game
+    - pos: 0.1, 0.1
+    - dim: 0.1, 0.1
+    - text: "Game View"
+    - text_color: #FFFFFF
+    - texture: ui/border1x1_2.tga
+    - onclick: go_to_game
   - panel: menu
     - pos: 0.15, 0.325
     - dim: 0.7, 0.65

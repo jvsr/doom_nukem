@@ -15,30 +15,21 @@
 
 # include <SDL2/SDL_events.h>
 
-typedef struct s_game			t_game;
+typedef struct s_game	t_game;
 
-void							initload_eventstate
-									(t_game *game, SDL_Event event);
-void							splash_eventstate
-									(t_game *game, SDL_Event event);
-void							mainmenu_eventstate
-									(t_game *game, SDL_Event event);
-void							missions_eventstate
-									(t_game *game, SDL_Event event);
-void							options_eventstate
-									(t_game *game, SDL_Event event);
-void							options_confirmation_eventstate
-									(t_game *game, SDL_Event event);
-void							controls_eventstate
-									(t_game *game, SDL_Event event);
-void							set_controls_eventstate
-									(t_game *game, SDL_Event event);
-void							map_editor_eventstate
-									(t_game *game, SDL_Event event);
-void							map_editor_select_eventstate
-									(t_game *game, SDL_Event event);
+void			initload_eventstate(t_game *game, SDL_Event event);
+void			splash_eventstate(t_game *game, SDL_Event event);
+void			mainmenu_eventstate(t_game *game, SDL_Event event);
+void			missions_eventstate(t_game *game, SDL_Event event);
+void			options_eventstate(t_game *game, SDL_Event event);
+void			options_confirmation_eventstate(t_game *game, SDL_Event event);
+void			controls_eventstate(t_game *game, SDL_Event event);
+void			set_controls_eventstate(t_game *game, SDL_Event event);
+void			map_editor_eventstate(t_game *game, SDL_Event event);
+void			map_editor_select_eventstate(t_game *game, SDL_Event event);
+void			hud_eventstate(t_game *game, SDL_Event event);
 
-typedef enum					e_eventstate_code
+typedef enum	e_eventstate_code
 {
 	initload,
 	splash,
@@ -50,19 +41,20 @@ typedef enum					e_eventstate_code
 	set_controls,
 	map_editor,
 	map_editor_select,
-}								t_eventstate_code;
+	hud
+}				t_eventstate_code;
 
-typedef union			u_types
+typedef union	u_types
 {
 	int		dgt;
 	int		*dgtptr;
 	void	*ptr;
-}						t_types;
+}				t_types;
 
-typedef struct			s_eventstate
+typedef struct	s_eventstate
 {
 	t_eventstate_code	eventstate;
 	t_types				*arguments;
-}						t_eventstate;
+}				t_eventstate;
 
 #endif
