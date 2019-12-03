@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 19:03:22 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/25 15:33:06 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/03 14:07:17 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *direct
 			parse_wad_reject(wad_bin, level, directory);
 		else if (ft_strequ(directory->name_lump, "BLOCKMAP"))
 			parse_wad_blockmap(wad_bin, level, directory);
-		else
-			print_directory(directory);
+		// else
+		// 	print_directory(directory);
 		i++;
 	}
 	add_to_back(&wad->levels, level);

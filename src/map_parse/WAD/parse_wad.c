@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 12:05:21 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 13:16:09 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/03 14:07:29 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	print_header(t_wad_header *header)
 		header->loc_directory);
 }
 
-void	print_directory(t_wad_directory *directory)
-{
-	ft_printf("LumpP:\t%d\nSize:\t%d\nName:\t%s\n\n",
-		directory->loc_lump,
-		directory->size_lump,
-		directory->name_lump);
-}
+// void	print_directory(t_wad_directory *directory)
+// {
+// 	ft_printf("LumpP:\t%d\nSize:\t%d\nName:\t%s\n\n",
+// 		directory->loc_lump,
+// 		directory->size_lump,
+// 		directory->name_lump);
+// }
 
 static t_bool	is_wad_level(char *const name)
 {
@@ -75,8 +75,8 @@ static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_director
 		*state = wad_level;
 		parse_wad_level(wad_bin, wad, directory);
 	}
-	else
-		print_directory(directory);
+	// else
+	// 	print_directory(directory);
 }
 
 static void	parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)

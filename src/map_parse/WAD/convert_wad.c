@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/25 17:28:58 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/29 19:44:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/03 14:17:25 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,9 @@ void		convert_sectors(t_campaign *campaign, t_wad *wad)
 		campaign->sector[i]->light_level = wad->levels->sectors[i]->light_level;
 		campaign->sector[i]->sector_tag = wad->levels->sectors[i]->sector_tag;
 		
-		ft_printf("HEIGHT\nFLR: %hd\nCEIL: %hd\n", campaign->sector[i]->height_floor, campaign->sector[i]->height_ceiling);
-		ft_printf("TEXTURE\nFLR: %s\nCEIL: %s\n", campaign->sector[i]->texture_floor, campaign->sector[i]->texture_ceiling);
-		ft_printf("LIGHT: %hu\nTAG: %hu\n\n", campaign->sector[i]->light_level, campaign->sector[i]->sector_tag);
+		// ft_printf("HEIGHT\nFLR: %hd\nCEIL: %hd\n", campaign->sector[i]->height_floor, campaign->sector[i]->height_ceiling);
+		// ft_printf("TEXTURE\nFLR: %s\nCEIL: %s\n", campaign->sector[i]->texture_floor, campaign->sector[i]->texture_ceiling);
+		// ft_printf("LIGHT: %hu\nTAG: %hu\n\n", campaign->sector[i]->light_level, campaign->sector[i]->sector_tag);
 
 		i++;
 	}	
@@ -140,13 +140,14 @@ void		convert_sectors(t_campaign *campaign, t_wad *wad)
 void		print_sector_wall(t_campaign_sector *sector)
 {
 	size_t i;
+	static size_t current = 0;
 
 	i = 0;
+	ft_printf("BELONG TO SECTOR: %d\n\n", current);
 	while (i < sector->wall_amount)
 	{
-		// ft_printf("BELONG TO SECTOR: %d\n", sector->sector_tag);
-		// ft_printf("X: %f, Y: %f\n", sector->wall[i]->vertex_begin->x, sector->wall[i]->vertex_begin->y);
-		// ft_printf("X: %f, Y: %f\n", sector->wall[i]->vertex_end->x, sector->wall[i]->vertex_end->y);
+		ft_printf("X: %f, Y: %f\n", sector->wall[i]->vertex_begin->x, sector->wall[i]->vertex_begin->y);
+		ft_printf("X: %f, Y: %f\n\n", sector->wall[i]->vertex_end->x, sector->wall[i]->vertex_end->y);
 		// if (sector->wall[i]->sidedef_right) {
 		// 	ft_printf("R_SIDE X: %d, Y: %d\n", sector->wall[i]->sidedef_right->offset_x, sector->wall[i]->sidedef_right->offset_y);
 		// 	ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", sector->wall[i]->sidedef_right->texture_up, sector->wall[i]->sidedef_right->texture_mid, sector->wall[i]->sidedef_right->texture_low);
@@ -155,9 +156,10 @@ void		print_sector_wall(t_campaign_sector *sector)
 		// 	ft_printf("L_SIDE X: %d, Y: %d\n", sector->wall[i]->sidedef_left->offset_x, sector->wall[i]->sidedef_left->offset_y);
 		// 	ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", sector->wall[i]->sidedef_left->texture_up, sector->wall[i]->sidedef_left->texture_mid, sector->wall[i]->sidedef_right->texture_low);
 		// }
-		// ft_printf("\n\n");
 		i++;
 	}
+	ft_printf("\n");
+	current++;
 }
 void		realloc_walls(t_campaign_sector *sector, t_campaign_wall *wall)
 {
@@ -180,21 +182,25 @@ void		realloc_walls(t_campaign_sector *sector, t_campaign_wall *wall)
 void		apply_walls_to_sector(t_campaign *campaign)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
-	while(i < campaign->sector_amount)
+	while (i < campaign->wall_amount)
 	{
-		j = 0;
-		while (j < campaign->wall_amount)
+		if (campaign->wall[i]->sidedef_left)
 		{
-			if (campaign->sector[i]->sector_tag == campaign->wall[j]->sector_tag)
-			{
-				campaign->sector[i]->wall_amount++;
-				realloc_walls(campaign->sector[i], campaign->wall[j]);
-			}
-			j++;
+			campaign->sector[campaign->wall[i]->sidedef_left->sector]->wall_amount++;
+			realloc_walls(campaign->sector[campaign->wall[i]->sidedef_left->sector], campaign->wall[i]);
 		}
+		if (campaign->wall[i]->sidedef_right)
+		{
+			campaign->sector[campaign->wall[i]->sidedef_right->sector]->wall_amount++;
+			realloc_walls(campaign->sector[campaign->wall[i]->sidedef_right->sector], campaign->wall[i]);
+		}
+		i++;
+	}
+
+	i = 0;
+	while (i < campaign->sector_amount) {
 		print_sector_wall(campaign->sector[i]);
 		i++;
 	}

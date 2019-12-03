@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/23 16:59:26 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/29 14:57:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/03 14:06:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 
 #define SIDEDEF_SIZE 30
 
-static void	print_sidedef(t_wad_sidedef *sidedef)
-{
-	ft_printf("X OFF:\t%d\nY OFF:\t%d\nT UP:\t%s\nT DWN:\t%s\nT MID:\t%s\nSEC:\t%d\n",
-		sidedef->offset_x,
-		sidedef->offset_y,
-		sidedef->texture_up,
-		sidedef->texture_low,
-		sidedef->texture_mid,
-		sidedef->sector);
-}
+// static void	print_sidedef(t_wad_sidedef *sidedef)
+// {
+// 	ft_printf("X OFF:\t%d\nY OFF:\t%d\nT UP:\t%s\nT DWN:\t%s\nT MID:\t%s\nSEC:\t%d\n",
+// 		sidedef->offset_x,
+// 		sidedef->offset_y,
+// 		sidedef->texture_up,
+// 		sidedef->texture_low,
+// 		sidedef->texture_mid,
+// 		sidedef->sector);
+// }
 
 static void	alloc_sidedefs(t_wad_level *level, size_t sidedefs_amount)
 {
@@ -88,7 +88,7 @@ void	parse_wad_sidedefs(t_binary_read *wad_bin, t_wad_level *level, t_wad_direct
 	{
 		wad_bin->content_pos = directory->loc_lump + i * SIDEDEF_SIZE;
 		fill_wad_sidedef(wad_bin, level->sidedefs[i]);
-		print_sidedef(level->sidedefs[i]);
+		// print_sidedef(level->sidedefs[i]);
 		i++;
 	}
 }
