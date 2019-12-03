@@ -41,16 +41,18 @@ static void	manage_player_angle(t_game *game)
 		return ;
 	player = game->player;
 	SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
-	tmp = (fabs((float)mouse_pos.x - (game->surface->w / 2)) / game->surface->w)
-		* 180.0;
-	player->angle = mod_float(player->angle + tmp, 360.0);
+	tmp = ((float)((float)mouse_pos.x - (game->surface->w / 2)) / game->surface->w)
+		* 60.0 * game->setting->sensitivity;
+	player->angle = wrap_float(player->angle + tmp, 0, 360.0);
 	tmp = (float)(mouse_pos.y - (game->surface->h / 2) / game->surface->h) *
-		2.0;
+		2.0 * game->setting->sensitivity;
 	player->height = clamp_float(player->height + tmp, PLAYER_HEIGHT - 1.0,
 		PLAYER_HEIGHT + 1.0);
 	ft_memcpy(&player->mag, &(t_coord){wrap_float(player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));
+	SDL_WarpMouseInWindow(game->window, game->surface->w / 2,
+		game->surface->h / 2);
 }
 
 void		hud_eventstate(t_game *game, SDL_Event event)

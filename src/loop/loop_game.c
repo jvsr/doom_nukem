@@ -10,10 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "gui.h"
 #include "game.h"
-#include <stdio.h>
+#include "player.h"
+#include "libft/ft_str.h"
 
 void	loop_game(t_game *game)
 {
-	(void)game;
+	char *num;
+
+	num = ft_strformat("Angle: %f", game->player->angle);
+	set_elem_text_str(get_gui_child(game->ui, "angle"), num);
+	ft_strdel(&num);
 }
