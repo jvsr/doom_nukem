@@ -17,8 +17,8 @@
 # define PI_R 0.0174532925
 # define PI_D 57.2957795131
 
-typedef struct s_coord  	t_coord;
-typedef struct s_game   	t_game;
+typedef struct s_coord		t_coord;
+typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
 
 typedef struct	s_line
