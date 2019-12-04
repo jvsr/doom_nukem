@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/28 15:16:00 by jvisser        #+#    #+#                */
-/*   Updated: 2019/12/04 14:29:05 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/04 17:35:48 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct			s_campaign_wall
 
 typedef struct			s_campaign_sector
 {
+	size_t				sector_id;
 	short				height_floor;
 	short				height_ceiling;
 	char				*texture_floor;

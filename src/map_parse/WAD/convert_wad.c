@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/25 17:28:58 by pholster       #+#    #+#                */
-/*   Updated: 2019/12/04 14:28:25 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/04 17:36:15 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void		convert_sectors(t_campaign *campaign, t_wad *wad)
 	i = 0;
 	while (i < wad->levels->sectors_amount)
 	{
+		campaign->sector[i]->sector_id = i;
 		campaign->sector[i] = (t_campaign_sector*)ft_memalloc(sizeof(t_campaign_sector));
 		if (campaign->sector[i] == NULL)
 			error_msg_errno("Failed to alloc level sector");
