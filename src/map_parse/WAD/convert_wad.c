@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/25 17:28:58 by pholster       #+#    #+#                */
-/*   Updated: 2019/12/03 14:17:25 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/04 14:28:25 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,28 @@ void		apply_walls_to_sector(t_campaign *campaign)
 	}
 }
 
+void		set_player(t_campaign *campaign, t_wad *wad)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < wad->levels->things_amount)
+	{
+		if (wad->levels->things[i]->types == 1)
+		{
+			campaign->player_start_pos.x = wad->levels->things[i]->x_pos;
+			campaign->player_start_pos.y = wad->levels->things[i]->y_pos;
+			campaign->player_start_angle = wad->levels->things[i]->angle;
+			ft_printf("Pos X: %f\nPos Y: %f\nAngle: %hu\n",
+				campaign->player_start_pos.x,
+				campaign->player_start_pos.y,
+				campaign->player_start_angle);
+			return ;
+		}
+		i++;
+	}
+}
+
 t_campaign	*convert_wad(t_wad *wad, t_game *game)
 {
 	t_campaign	*campaign;
@@ -216,6 +238,7 @@ t_campaign	*convert_wad(t_wad *wad, t_game *game)
 	convert_walls(campaign, wad);
 	convert_sectors(campaign, wad);
 	apply_walls_to_sector(campaign);
+	set_player(campaign, wad);
 	convert_dssound(wad, game);
 	return (campaign);
 }

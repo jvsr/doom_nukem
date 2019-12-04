@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/28 15:16:00 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/29 19:25:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/04 14:29:05 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct			s_campaign_sector
 
 typedef struct	s_campaign
 {
+	t_coord				player_start_pos;
+	t_uint16			player_start_angle;
 	t_coord				*vertex;
 	size_t				wall_amount;
 	t_campaign_wall		**wall;
