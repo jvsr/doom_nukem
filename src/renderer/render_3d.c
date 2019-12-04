@@ -27,10 +27,10 @@ unsigned short	get_starting_sector(t_coord pos, t_campaign *level)
 
 	i = 0;
 	prev_close = -1;
-	while (i < level->wall_amount)
+	while (i < level->wall_amount && level->wall[i])
 	{
 		close0 = get_distance(&pos, level->wall[i]->vertex_begin);
-		close1 = get_distance(&pos, level->wall[i]->vertex_begin);
+		close1 = get_distance(&pos, level->wall[i]->vertex_end);
 		if (close0 < close1)
 			close1 = close0;
 		if (prev_close == -1 || close1 < prev_close)
@@ -39,10 +39,15 @@ unsigned short	get_starting_sector(t_coord pos, t_campaign *level)
 			wall = level->wall[i];
 		}
 		i++;
-		printf("%i\n", level->wall[i]->sector_tag);
+		if (level->wall[i]->sidedef_left)
+			printf("%i\n", level->wall[i]->sidedef_left->sector);
+		else
+			printf("%i\n", level->wall[i]->sidedef_right->sector);
 	}
 	printf("%f\n", prev_close);
-	return (wall->sector_tag);
+	if (wall->sidedef_left)
+		return (wall->sidedef_left->sector);
+	return (wall->sidedef_right->sector);
 }
 
 void			render_3d(t_game *game, t_campaign *level, SDL_Surface *dst)

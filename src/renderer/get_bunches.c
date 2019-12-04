@@ -32,14 +32,14 @@ static t_bool	handle_portal(t_campaign_wall *wall, t_campaign_sector *sector,
 		return (FALSE);
 	if (wall->sidedef_left->sector == wall->sidedef_right->sector)
 		return (FALSE);
-	if (sector == wall->sidedef_left->sector)
+	if (sector->sector_id == (size_t)wall->sidedef_left->sector)
 		tmp = wall->sidedef_right->sector;
 	else
 		tmp = wall->sidedef_left->sector;
 	tmp_lst = secs;
 	while (tmp_lst)
 	{
-		if (tmp == ((t_campaign_sector*)tmp_lst->content)->sector_tag)
+		if ((size_t)tmp == ((t_campaign_sector*)tmp_lst->content)->sector_id)
 			return (FALSE);
 		tmp_lst = tmp_lst->next;
 	}

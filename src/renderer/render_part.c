@@ -80,7 +80,7 @@ static void		draw_wall(t_coord range,t_game *game, t_campaign_wall *wall,
 	origin  = (t_coord){origin.x + (pos.x * (range.x - (game->setting->fov /
 		RENDER_THREAD_COUNT))), origin.y + (pos.y * (range.x -
 		(game->setting->fov / RENDER_THREAD_COUNT)))};
-	sector = get_sector(wall->sector_tag, game->campaign->sector);
+	sector = get_sector(wall->sidedef_left->sector, game->campaign->sector);
 	while (ray < range.y)
 	{
 		if (get_collision(&(t_coord){game->player->pos.x, game->player->pos.y},

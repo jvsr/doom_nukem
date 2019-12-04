@@ -20,7 +20,7 @@ t_campaign_sector	*get_sector(unsigned short tag, t_campaign_sector **sectors)
 	i = 0;
 	while (sectors[i])
 	{
-		if (sectors[i]->sector_tag == tag)
+		if (sectors[i]->sector_id == (size_t)tag)
 			return (sectors[i]);
 		i++;
 	}
