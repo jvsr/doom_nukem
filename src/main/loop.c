@@ -94,7 +94,7 @@ void			loop(t_game *game)
 			eventstate_fnc(game, event);
 		}
 		loop_core(game, game->cureventstate->eventstate);
-		draw_gui(game->ui);
+		draw_gui(game->ui, game);
 		SDL_UpdateWindowSurface(game->window);
 	}
 }

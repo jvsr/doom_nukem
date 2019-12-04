@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_walls_from_sector.c                            :+:    :+:            */
+/*   draw_gview.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/25 13:19:09 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/25 13:46:38 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/12/04 13:29:55 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/12/04 13:29:55 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_mem.h"
-#include "map.h"
+#include "sdl_extra.h"
+#include "renderer.h"
+#include "game.h"
+#include "gui.h"
 
-t_wall		**get_walls_from_sector(t_sector *sector, t_level *level)
+void		draw_gview(SDL_Surface *dst, t_game *game)
 {
-	return (level->walls + sector->startwall);
+	sdl_clear_surface(dst);
+	render_3d(game, game->campaign, dst);
 }

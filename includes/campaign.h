@@ -14,6 +14,8 @@
 # define CAMPAIGN_H
 
 # include "coord.h"
+# include "types.h"
+# include <string.h>
 
 typedef struct			s_campaign_sidedef
 {
@@ -38,6 +40,7 @@ typedef struct			s_campaign_sector
 {
 	short				height_floor;
 	short				height_ceiling;
+	short				height_wall;
 	char				*texture_floor;
 	char				*texture_ceiling;
 	short				light_level;
@@ -46,7 +49,7 @@ typedef struct			s_campaign_sector
 	unsigned short		sector_tag;
 }						t_campaign_sector;
 
-typedef struct	s_campaign
+typedef struct			s_campaign
 {
 	t_coord				player_start_pos;
 	t_uint16			player_start_angle;
@@ -57,6 +60,6 @@ typedef struct	s_campaign
 	t_campaign_sidedef	**sidedef;
 	size_t				sector_amount;
 	t_campaign_sector	**sector;
-}				t_campaign;
+}						t_campaign;
 
 #endif

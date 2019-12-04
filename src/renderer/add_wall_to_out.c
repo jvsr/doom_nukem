@@ -54,19 +54,21 @@ static t_point	get_ang_range(t_coord *angs, float parts, float ang)
 	return ((t_point){k, i});
 }
 
-void			add_wall_to_out(t_list **out_walls,
-									t_wall *wall, t_game *game, float parts)
+void			add_wall_to_out(t_list **out_walls, t_campaign_wall *wall,
+					t_game *game, float parts)
 {
 	t_point	range;
 	t_coord	angle_range;
 	t_coord	tmp;
 
 	angle_range.x = get_angle_from_vector(get_vector_from_points(
-				&(t_coord){game->player->pos.x, game->player->pos.y},
-				&wall->start, &tmp));
+		&(t_coord){game->player->pos.x, game->player->pos.y}, 
+		wall->vertex_begin, 
+		&tmp));
 	angle_range.y = get_angle_from_vector(get_vector_from_points(
-				&(t_coord){game->player->pos.x, game->player->pos.y},
-				&wall->end, &tmp));
+		&(t_coord){game->player->pos.x, game->player->pos.y},
+		wall->vertex_end,
+		&tmp));
 	ensure_sides(&angle_range);
 	range = get_ang_range(&angle_range, parts, game->player->mag.start);
 	while (range.x < range.y)

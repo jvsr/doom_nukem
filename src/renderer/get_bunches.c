@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft/ft_list.h"
-#include "map.h"
+#include "campaign.h"
 #include "player.h"
 #include "game.h"
 #include "types.h"
@@ -22,33 +22,59 @@ static int		is_between(float mag, t_mag *pmag)
 	return (!(mag > pmag->start || mag < pmag->end));
 }
 
-static t_list	*add_walls(t_sector *sector,
-					t_level *level, t_list *sectors, t_mag *mag)
+static t_bool	handle_portal(t_campaign_wall *wall, t_campaign_sector *sector,
+					t_list *secs, t_campaign *level)
 {
-	t_wall		**walls;
-	t_uint32	i;
-	float		normal;
-	t_list		*lst;
+	t_list			*tmp_lst;
+	unsigned short	tmp;
+
+	if (wall->sidedef_left == NULL || wall->sidedef_right == NULL)
+		return (FALSE);
+	if (wall->sidedef_left->sector == wall->sidedef_right->sector)
+		return (FALSE);
+	if (sector == wall->sidedef_left->sector)
+		tmp = wall->sidedef_right->sector;
+	else
+		tmp = wall->sidedef_left->sector;
+	tmp_lst = secs;
+	while (tmp_lst)
+	{
+		if (tmp == ((t_campaign_sector*)tmp_lst->content)->sector_tag)
+			return (FALSE);
+		tmp_lst = tmp_lst->next;
+	}
+	ft_lstaddbck(&secs, ft_lstnew(get_sector(tmp, level->sector),
+		sizeof(t_campaign_sector*)));
+	return (TRUE);
+}
+
+static t_list	*add_walls(t_campaign_sector *sector,
+					t_campaign *level, t_list *sectors, t_mag *mag)
+{
+	t_campaign_wall	**walls;
+	t_uint32		i;
+	float			normal;
+	t_list			*lst;
 
 	lst = NULL;
-	walls = get_walls_from_sector(sector, level);
+	walls = sector->wall;
 	i = 0;
-	while (i < sector->wallcount)
+	while (i < sector->wall_amount)
 	{
-		normal = (walls[i]->start.x * walls[i]->end.y) -
-			(walls[i]->end.x * walls[i]->start.y);
-		if (!is_between(normal, mag))
-			continue;
-		if (walls[i]->is_portal == TRUE)
-			ft_lstaddbck(&sectors, ft_lstnew(
-				level->sectors[walls[i]->sector_portal], sizeof(t_sector*)));
-		ft_lstaddbck(&lst, ft_lstnew(walls[i], sizeof(sizeof(t_wall*))));
+		normal = (walls[i]->vertex_begin->x * walls[i]->vertex_end->y) -
+			(walls[i]->vertex_end->x * walls[i]->vertex_begin->y);
+		if (is_between(normal, mag))
+		{
+			if (handle_portal(walls[i], sector, sectors, level))
+				ft_lstaddbck(&lst, add_walls(ft_lstlast(lst)->content, level, sectors, mag));
+			ft_lstaddbck(&lst, ft_lstnew(walls[i], sizeof(sizeof(t_campaign_wall*))));
+		}
 		i++;
 	}
 	return (lst);
 }
 
-static t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
+static t_list	*get_walls(t_list *sectors, t_campaign *level, t_mag *mag)
 {
 	t_list *walls;
 
@@ -62,13 +88,13 @@ static t_list	*get_walls(t_list *sectors, t_level *level, t_mag *mag)
 	return (walls);
 }
 
-t_list	*get_bunches(t_game *game, t_level *level)
+t_list	*get_bunches(t_game *game, t_campaign *level)
 {
 	t_list *sectors;
 	t_list *walls;
 
-	sectors = ft_lstnew(level->sectors[game->player->cur_sector],
-		sizeof(t_sector*));
+	sectors = ft_lstnew(get_sector(game->player->cur_sector, level->sector),
+		sizeof(t_campaign_sector*));
 	walls = get_walls(sectors, level, &game->player->mag);
 	ft_lstdel(&sectors, NULL);
 	return (walls);

@@ -77,7 +77,7 @@ static void		reset_surface(t_transform *elem)
 	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
 
-static void		draw_gui_elem(t_transform *elem)
+static void		draw_gui_elem(t_transform *elem, t_game *game)
 {
 	SDL_Surface	*dst;
 
@@ -88,14 +88,16 @@ static void		draw_gui_elem(t_transform *elem)
 		draw_image(dst, elem->gui_elem.image);
 	else if (elem->gui_type == BUTTON)
 		draw_button(dst, elem->gui_elem.button, elem->abs_dim);
+	else if (elem->gui_type == GVIEW)
+		draw_gview(dst, game);
 	else if (elem->gui_type == PANEL)
 	{
-		draw_panel(elem->gui_elem.panel);
+		draw_panel(elem->gui_elem.panel, game);
 		elem->has_alpha = sdl_has_surface_alpha(elem->surface);
 	}
 }
 
-void			draw_elem(t_transform *elem)
+void			draw_elem(t_transform *elem, t_game *game)
 {
 	SDL_Surface	*dst_surface;
 
@@ -104,7 +106,7 @@ void			draw_elem(t_transform *elem)
 	if (elem->redraw == TRUE || (elem->gui_type == PANEL && child_moved(elem)))
 	{
 		reset_surface(elem);
-		draw_gui_elem(elem);
+		draw_gui_elem(elem, game);
 	}
 	if (elem->show == FALSE)
 		return ;

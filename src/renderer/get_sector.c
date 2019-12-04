@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_gui.c                                         :+:    :+:            */
+/*   get_sector.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 16:09:25 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/09 17:33:28 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/12/04 14:40:11 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/12/04 14:40:11 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gui_internal.h"
-#include "sdl_extra.h"
+#include <stdlib.h>
+#include "campaign.h"
 
-void			draw_gui(t_gui *ui, t_game *game)
+t_campaign_sector	*get_sector(unsigned short tag, t_campaign_sector **sectors)
 {
-	t_transform	*cur;
+	int i;
 
-	cur = ui->children;
-	while (cur != NULL)
+	i = 0;
+	while (sectors[i])
 	{
-		draw_elem(cur, game);
-		cur = cur->next;
+		if (sectors[i]->sector_tag == tag)
+			return (sectors[i]);
+		i++;
 	}
+	return (NULL);
 }

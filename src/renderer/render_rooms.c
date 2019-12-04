@@ -21,10 +21,10 @@
 #include "renderer.h"
 #include "setting.h"
 
-static t_wall	*get_wall(t_list **walls)
+static t_campaign_wall	*get_wall(t_list **walls)
 {
-	t_list *first;
-	t_wall *ret;
+	t_list				*first;
+	t_campaign_wall		*ret;
 
 	first = *walls;
 	*walls = first->next;
@@ -36,12 +36,13 @@ static t_wall	*get_wall(t_list **walls)
 static void		split_walls(t_list **out_walls,
 							t_game *game, t_list *walls, float parts)
 {
-	t_wall *wall;
+	t_campaign_wall		*wall;
 
 	while (walls != NULL)
 	{
 		wall = get_wall(&walls);
-		add_wall_to_out(out_walls, wall, game, parts);
+		if (wall != NULL)
+			add_wall_to_out(out_walls, wall, game, parts);
 	}
 }
 
@@ -54,7 +55,7 @@ static float	get_ratio(t_setting *setting, t_renderinfo *renderin)
 	return (angle.x / angle.y);
 }
 
-void			render_rooms(t_game *game, t_level *level)
+void			render_rooms(t_game *game, t_campaign *level, SDL_Surface *dst)
 {
 	t_list			*walls;
 	t_list			*out_walls[RENDER_THREAD_COUNT];
@@ -62,8 +63,14 @@ void			render_rooms(t_game *game, t_level *level)
 	int				i;
 	float			parts;
 
-	renderin.mask = ft_memalloc(sizeof(int) *
-						(game->surface->w * game->surface->h));
+	i = 0;
+	while (i < RENDER_THREAD_COUNT)
+	{
+		out_walls[i] = NULL;
+		i++;
+	}
+	renderin.mask = ft_memalloc(sizeof(int) * (dst->w * dst->h));
+	renderin.dst = dst;
 	walls = get_bunches(game, level);
 	parts = game->setting->fov / RENDER_THREAD_COUNT;
 	split_walls(out_walls, game, walls, parts);

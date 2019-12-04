@@ -33,12 +33,13 @@ void			print_button(t_button *button);
 void			print_panel(t_panel *panel, t_bool print_children);
 void			add_to_children(t_transform **children, t_transform *child);
 void			del_child(t_transform **children, const char *name);
-void			draw_elem(t_transform *elem);
+void			draw_elem(t_transform *elem, t_game *game);
 void			draw_image(SDL_Surface *dst, t_image *image);
 void			draw_text(SDL_Surface *dst, t_text *text, SDL_Point abs_dim);
 void			draw_button(SDL_Surface *dst, t_button *button,
 							SDL_Point abs_dim);
-void			draw_panel(t_panel *panel);
+void			draw_panel(t_panel *panel, t_game *game);
+void			draw_gview(SDL_Surface *dst, t_game *game);
 SDL_Surface		*render_text(const char *str, TTF_Font *font, SDL_Color *color);
 void			check_elem_duplicate(t_transform *root_children,
 									t_transform *new);

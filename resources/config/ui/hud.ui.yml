@@ -1,6 +1,8 @@
 - panel: hud
-  - image: hud_bg
-    - color: #000000
+  - image: gamebg
+    - color: #333333
+  - panel: gviewpanel
+    - gview: gameview
   - text_block: angle
     - pos: 0.1, 0.1
     - dim: 0.1, 0.1

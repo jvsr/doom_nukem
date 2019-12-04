@@ -153,7 +153,7 @@ struct			s_gui
 };
 
 t_transform		*check_gui_hit(t_game *game, SDL_Point pos);
-void			draw_gui(t_gui *ui);
+void			draw_gui(t_gui *ui, t_game *game);
 void			print_elem(t_transform *elem, t_bool print_children);
 t_transform		*new_elem(t_gui *ui, const char *name, t_gui_type type);
 void			add_gui_child(t_gui *ui, t_transform *panel);

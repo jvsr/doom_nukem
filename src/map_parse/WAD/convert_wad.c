@@ -124,6 +124,7 @@ void		convert_sectors(t_campaign *campaign, t_wad *wad)
 			error_msg_errno("Failed to alloc level sector");
 		campaign->sector[i]->height_floor = wad->levels->sectors[i]->height_floor;
 		campaign->sector[i]->height_ceiling = wad->levels->sectors[i]->height_ceiling;
+		campaign->sector[i]->height_wall = campaign->sector[i]->height_ceiling - campaign->sector[i]->height_floor;
 		campaign->sector[i]->texture_floor = wad->levels->sectors[i]->texture_floor;
 		campaign->sector[i]->texture_ceiling = wad->levels->sectors[i]->texture_ceiling;
 		campaign->sector[i]->light_level = wad->levels->sectors[i]->light_level;

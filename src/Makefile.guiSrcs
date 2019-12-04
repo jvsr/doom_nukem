@@ -63,7 +63,8 @@ DRAW_SRCS = draw_gui \
 		draw_image \
 		render_text \
 		draw_text \
-		draw_panel
+		draw_panel \
+		draw_gview
 DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 
 MANAGE_SRCS = add_gui_child \

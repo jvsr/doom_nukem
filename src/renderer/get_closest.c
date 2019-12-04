@@ -14,14 +14,14 @@
 #include "libft/ft_list.h"
 #include "game.h"
 #include "cmath.h"
-#include "map.h"
 #include "renderer.h"
 #include "shape.h"
 
-static void		get_line_from_points(t_wall *wall, t_line *line)
+static void		get_line_from_points(t_campaign_wall *wall, t_line *line)
 {
-	line->x = (wall->end.y - wall->start.y) / (wall->end.x - wall->start.x);
-	line->equals = (line->x * wall->start.x) + wall->start.y;
+	line->x = (wall->vertex_end->y - wall->vertex_begin->y) /
+				(wall->vertex_end->x - wall->vertex_begin->x);
+	line->equals = (line->x * wall->vertex_begin->x) + wall->vertex_begin->y;
 	line->y = -1;
 }
 
@@ -30,12 +30,13 @@ static float	solve_line(t_line *line, float x, float y)
 	return ((line->x * x) + (line->y * y) + line->equals);
 }
 
-static t_bool	is_closer(t_line *line, t_wall *wall, t_vec *pos, t_bool *bool)
+static t_bool	is_closer(t_line *line, t_campaign_wall *wall,
+					t_vec *pos, t_bool *bool)
 {
 	float	vals[3];
 
-	vals[0] = solve_line(line, wall->start.x, wall->start.y);
-	vals[1] = solve_line(line, wall->end.x, wall->end.y);
+	vals[0] = solve_line(line, wall->vertex_begin->x, wall->vertex_begin->y);
+	vals[1] = solve_line(line, wall->vertex_end->x, wall->vertex_end->y);
 	vals[2] = solve_line(line, pos->x, pos->y);
 	if (vals[0] > -1 && vals[1] > -1 && vals[2] > -1)
 	{
@@ -51,7 +52,7 @@ static t_bool	is_closer(t_line *line, t_wall *wall, t_vec *pos, t_bool *bool)
 	return (TRUE);
 }
 
-static void		remove_from_list(t_list *walls, t_wall *wall)
+static void		remove_from_list(t_list *walls, t_campaign_wall *wall)
 {
 	t_list	*prev;
 
@@ -65,17 +66,18 @@ static void		remove_from_list(t_list *walls, t_wall *wall)
 	ft_lstdelone(&walls, NULL);
 }
 
-t_wall			*get_closest(t_list *walls, t_vec *pos)
+t_campaign_wall	*get_closest(t_list *walls, t_vec *pos)
 {
-	t_list	*sub_walls[2];
-	t_wall	*final;
-	t_bool	bool;
-	t_line	cur;
+	t_list			*sub_walls[2];
+	t_campaign_wall	*final;
+	t_bool			bool;
+	t_line			cur;
 
-	final = NULL;
+	if (walls == NULL)
+		return (NULL);
 	bool = TRUE;
 	sub_walls[0] = walls;
-	while (sub_walls[0])
+	while (sub_walls[0] != NULL)
 	{
 		final = sub_walls[0]->content;
 		get_line_from_points(sub_walls[0]->content, &cur);
