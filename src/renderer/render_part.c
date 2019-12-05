@@ -73,14 +73,17 @@ static void		draw_wall(t_coord range,t_game *game, t_campaign_wall *wall,
 	t_coord hit;
 
 	ray = range.x;
-	step = game->setting->fov / r_in->dst->w;
+	step = (float)game->setting->fov / r_in->dst->w;
 	origin = (t_coord){game->player->forward.x + game->player->pos.x,
 		game->player->forward.y + game->player->pos.y};
 	pos = (t_coord){game->player->forward.y, -game->player->forward.x};
 	origin  = (t_coord){origin.x + (pos.x * (range.x - (game->setting->fov /
 		RENDER_THREAD_COUNT))), origin.y + (pos.y * (range.x -
 		(game->setting->fov / RENDER_THREAD_COUNT)))};
-	sector = get_sector(wall->sidedef_left->sector, game->campaign->sector);
+	if (wall->sidedef_left)
+		sector = get_sector(wall->sidedef_left->sector, game->campaign->sector);
+	else
+		sector = get_sector(wall->sidedef_right->sector, game->campaign->sector);
 	while (ray < range.y)
 	{
 		if (get_collision(&(t_coord){game->player->pos.x, game->player->pos.y},
@@ -103,12 +106,11 @@ void		   	render_part(t_game *game,
 
 	if (!walls)
 		return ;
-	wall = get_closest(walls, &(game->player->pos));
+	wall = get_closest(&walls, &(game->player->pos));
 	while (wall)
 	{
-		printf("Hey\n");
 		draw_wall(range, game, wall, renderinfo);
-		printf("There\n");
-		wall = get_closest(walls, &(game->player->pos));
+		wall = get_closest(&walls, &(game->player->pos));
+		printf("%p\n", wall);
 	}
 }

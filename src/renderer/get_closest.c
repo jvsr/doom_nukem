@@ -52,36 +52,46 @@ static t_bool	is_closer(t_line *line, t_campaign_wall *wall,
 	return (TRUE);
 }
 
-static void		remove_from_list(t_list *walls, t_campaign_wall *wall)
+static void		remove_from_list(t_list **walls, t_campaign_wall *wall)
 {
 	t_list	*prev;
+	t_list	*wall_lst;
 
-	while (walls != NULL && walls->content != wall)
+	prev = NULL;
+	wall_lst = *walls;
+	while (wall_lst != NULL && wall_lst->content != wall)
 	{
-		prev = walls;
-		walls = walls->next;
+		prev = wall_lst;
+		wall_lst = wall_lst->next;
 	}
-	prev->next = walls->next;
-	walls->next = NULL;
-	ft_lstdelone(&walls, NULL);
+	if (prev == NULL)
+		*walls = NULL;
+	else
+	{
+		prev->next = wall_lst->next;
+		wall_lst->next = NULL;
+	}
+	printf("Walls -> %p\n", *walls);
+	printf("Check -> %p\n", wall_lst);
+	ft_lstdelone(&wall_lst, NULL);
 }
 
-t_campaign_wall	*get_closest(t_list *walls, t_vec *pos)
+t_campaign_wall	*get_closest(t_list **walls, t_vec *pos)
 {
 	t_list			*sub_walls[2];
 	t_campaign_wall	*final;
 	t_bool			bool;
 	t_line			cur;
 
-	if (walls == NULL)
+	if (*walls == NULL)
 		return (NULL);
 	bool = TRUE;
-	sub_walls[0] = walls;
+	sub_walls[0] = *walls;
 	while (sub_walls[0] != NULL)
 	{
 		final = sub_walls[0]->content;
 		get_line_from_points(sub_walls[0]->content, &cur);
-		sub_walls[1] = walls;
+		sub_walls[1] = *walls;
 		while (sub_walls[1])
 		{
 			if (is_closer(&cur, sub_walls[1]->content, pos, &bool) == TRUE)

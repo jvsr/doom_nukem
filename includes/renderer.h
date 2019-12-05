@@ -38,7 +38,7 @@ void				load_textures(t_game *game);
 void				render_rooms(t_game *game, t_campaign *level,
 						SDL_Surface *dst);
 t_list				*get_bunches(t_game *game, t_campaign *level);
-t_campaign_wall		*get_closest(t_list *walls, t_vec *pos);
+t_campaign_wall		*get_closest(t_list **walls, t_vec *pos);
 void				render_part(t_game *game,
 						t_coord range, t_list *walls, t_renderinfo *renderinfo);
 void				add_wall_to_out(t_list **out_walls,
