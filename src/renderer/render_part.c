@@ -108,6 +108,7 @@ void		   	render_part(t_game *game,
 	{
 		printf("Hey\n");
 		draw_wall(range, game, wall, renderinfo);
+		printf("There\n");
 		wall = get_closest(walls, &(game->player->pos));
 	}
 }

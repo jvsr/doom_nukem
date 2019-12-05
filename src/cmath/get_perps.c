@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   wrap_float.c                                       :+:    :+:            */
+/*   get_perps.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/03 15:46:15 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/12/03 15:46:15 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/12/05 13:23:22 by ehollidg       #+#    #+#                */
+/*   Updated: 2019/12/05 13:23:22 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include "coord.h"
+#include "cmath.h"
 
-float	wrap_float(float f0, float min, float max)
+t_coord		get_perps(float angle)
 {
-	if (f0 < min)
-		return (wrap_float(max + (f0 - min), min, max));
-	if (f0 >= max)
-		return (wrap_float((f0 + min) - max, min, max));
-	return (f0);
+	t_coord	perps;
+
+	perps.x = wrap_float(angle + 90, 0, 360);
+	perps.y = wrap_float(angle - 90, 0, 360);
+	return (perps);
 }

@@ -19,17 +19,6 @@
 #include "renderer.h"
 #include "setting.h"
 
-static void		ensure_sides(t_coord *ang)
-{
-	float f_ang;
-
-	if (ang->x < ang->y)
-		return ;
-	f_ang = ang->x;
-	ang->x = ang->y;
-	ang->y = f_ang;
-}
-
 static t_point	get_ang_range(t_coord *angs, float parts, float ang)
 {
 	int		i;
@@ -41,12 +30,12 @@ static t_point	get_ang_range(t_coord *angs, float parts, float ang)
 	{
 		if (k == -1)
 		{
-			if ((float)i * parts < (angs->x - ang))
+			if ((float)i * parts > angs->x - ang)
 				k = i;
 		}
 		else
 		{
-			if ((float)i * parts > (angs->y - ang))
+			if ((float)i * parts < angs->y - ang)
 				break ;
 		}
 		i++;
@@ -69,7 +58,8 @@ void			add_wall_to_out(t_list **out_walls, t_campaign_wall *wall,
 		&(t_coord){game->player->pos.x, game->player->pos.y},
 		wall->vertex_end,
 		&tmp));
-	ensure_sides(&angle_range);
+	angle_range.x = wrap_float(angle_range.x, 0, 360);
+	angle_range.y = wrap_float(angle_range.y, 0, 360);
 	range = get_ang_range(&angle_range, parts, game->player->mag.start);
 	while (range.x < range.y)
 	{

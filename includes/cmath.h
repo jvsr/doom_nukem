@@ -41,5 +41,6 @@ void		calc_vfov(t_setting *set, float width, float height);
 float		mod_float(float f0, float max);
 float		clamp_float(float f0, float min, float max);
 float		wrap_float(float f0, float min, float max);
+t_coord		get_perps(float angle);
 
 #endif

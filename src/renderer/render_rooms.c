@@ -26,6 +26,8 @@ static t_campaign_wall	*get_wall(t_list **walls)
 	t_list				*first;
 	t_campaign_wall		*ret;
 
+	if ((*walls)->content == NULL)
+		return (NULL);
 	first = *walls;
 	*walls = first->next;
 	ret = first->content;
@@ -63,12 +65,7 @@ void			render_rooms(t_game *game, t_campaign *level, SDL_Surface *dst)
 	int				i;
 	float			parts;
 
-	i = 0;
-	while (i < RENDER_THREAD_COUNT)
-	{
-		out_walls[i] = NULL;
-		i++;
-	}
+	ft_bzero(out_walls, RENDER_THREAD_COUNT * sizeof(t_list*));
 	renderin.mask = ft_memalloc(sizeof(int) * (dst->w * dst->h));
 	renderin.dst = dst;
 	walls = get_bunches(game, level);

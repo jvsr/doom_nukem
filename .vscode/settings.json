@@ -33,6 +33,7 @@
 		"unordered_map": "c",
 		"vector": "c",
 		"memory": "c",
-		"utility": "c"
+		"utility": "c",
+		"complex": "c"
 	}
 }

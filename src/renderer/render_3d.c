@@ -47,11 +47,7 @@ unsigned short	get_starting_sector(t_coord pos, t_campaign *level)
 		i++;
 	}
 	if (wall->sidedef_left)
-	{
-		printf("%f, %u\n", prev_close, wall->sidedef_left->sector);
 		return (wall->sidedef_left->sector);
-	}
-	printf("%f, %u\n", prev_close, wall->sidedef_right->sector);
 	return (wall->sidedef_right->sector);
 }
 
@@ -66,7 +62,6 @@ void			render_3d(t_game *game, t_campaign *level, SDL_Surface *dst)
 		game->player->angle = (float)level->player_start_angle;
 		game->player->cur_sector = get_starting_sector((t_coord)
 			{game->player->pos.x, game->player->pos.y}, game->campaign);
-		printf("%u\n", game->player->cur_sector);
 		first = FALSE;
 	}
 	render_rooms(game, level, dst);
