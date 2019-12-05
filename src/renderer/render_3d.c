@@ -29,6 +29,12 @@ unsigned short	get_starting_sector(t_coord pos, t_campaign *level)
 	prev_close = -1;
 	while (i < level->wall_amount && level->wall[i])
 	{
+		if (level->wall[i]->sidedef_left == NULL &&
+			level->wall[i]->sidedef_right == NULL)
+		{
+			i++;
+			continue;
+		}
 		close0 = get_distance(&pos, level->wall[i]->vertex_begin);
 		close1 = get_distance(&pos, level->wall[i]->vertex_end);
 		if (close0 < close1)
@@ -39,14 +45,13 @@ unsigned short	get_starting_sector(t_coord pos, t_campaign *level)
 			wall = level->wall[i];
 		}
 		i++;
-		if (level->wall[i]->sidedef_left)
-			printf("%i\n", level->wall[i]->sidedef_left->sector);
-		else
-			printf("%i\n", level->wall[i]->sidedef_right->sector);
 	}
-	printf("%f\n", prev_close);
 	if (wall->sidedef_left)
+	{
+		printf("%f, %u\n", prev_close, wall->sidedef_left->sector);
 		return (wall->sidedef_left->sector);
+	}
+	printf("%f, %u\n", prev_close, wall->sidedef_right->sector);
 	return (wall->sidedef_right->sector);
 }
 
