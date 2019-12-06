@@ -10,47 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_str.h"
-#include "libft/ft_mem.h"
-
 #include "sdl_thread.h"
-#include "error.h"
+
+/*
+** * Thread internal function
+*/
 
 static t_task	*pass_to_thread(t_task *task, t_pool *pool)
 {
-	size_t i;
+	t_thread	*thread;
+	size_t		i;
 
 	i = 0;
 	while (i < pool->size)
 	{
-		if (pool->threads[i]->state == IDLE)
+		thread = pool->threads[i];
+		if (thread->state == IDLE && thread->task == NULL)
 		{
-			pool->threads[i]->task = task;
-			pool->threads[i]->state = ACTIVE;
+			thread->task = task;
 			return (NULL);
 		}
+		i++;
 	}
-	return (task);
-}
-
-static t_task	*collect_task(t_pool *pool)
-{
-	char	state;
-	t_task	*task;
-
-	if (pool->suspended)
-		return (NULL);
-	state = atomic_exchange(&(pool->state), LOCKED);
-	if (state == LOCKED)
-		return (NULL);
-	task = pool->que;
-	if (task != NULL)
-	{
-		pool->que = task->next;
-		if (task == pool->que_last)
-			pool->que_last = NULL;
-	}
-	atomic_store(&(pool->state), state);
 	return (task);
 }
 
@@ -63,9 +44,9 @@ int				sdl_manage_thread_central(void *param)
 	task = NULL;
 	while (pool != NULL && pool->terminating == FALSE)
 	{
-		if (task == NULL)
-			task = collect_task(pool);
-		if (task != NULL)
+		if (pool->suspended == FALSE && task == NULL)
+			task = sdl_get_task(pool);
+		if (pool->suspended == FALSE && task != NULL)
 			task = pass_to_thread(task, pool);
 	}
 	return (TRUE);

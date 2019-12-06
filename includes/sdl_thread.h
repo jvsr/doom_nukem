@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/24 17:15:08 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/24 17:15:08 by pholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 18:09:01 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include <stdatomic.h>
+
 # include <SDL2/SDL_thread.h>
 
 # include "libft/ft_bool.h"
@@ -66,20 +67,19 @@ typedef struct	s_pool
 t_pool			*sdl_new_pool(size_t size,
 										t_bool tracktime, t_bool centralised);
 void			sdl_del_pool(t_pool **pool);
-void			sdl_join_pool(const t_pool *pool);
-t_bool			sdl_done_pool(const t_pool *pool);
+void			sdl_join_pool(t_pool const *pool);
+t_bool			sdl_done_pool(t_pool const *pool);
 t_bool			sdl_que_pool_back(t_pool *pool, void (*f)(),
 					size_t param_count, ...);
 t_bool			sdl_que_pool_front(t_pool *pool, void (*f)(),
 					size_t param_count, ...);
-SDL_Thread		*sdl_new_thread(const char *name, void (*f)(),
+SDL_Thread		*sdl_new_thread(char const *name, void (*f)(),
 					size_t param_count, ...);
 
 /*
 ** ----------------------------Management Functions-----------------------------
 */
 
-int				sdl_manage_thread(void *param);
 int				sdl_manage_thread_central(void *param);
 int				sdl_manage_thread_worker(void *param);
 t_bool			sdl_que_pool(t_pool *pool, t_bool priority, t_task *task);
@@ -88,9 +88,10 @@ t_bool			sdl_que_pool(t_pool *pool, t_bool priority, t_task *task);
 ** -------------------------------Task Functions--------------------------------
 */
 
-void			sdl_complete_task(t_pool *pool, t_thread *self, t_task *task,
-							float *waittime);
-t_bool			sdl_run_task(const t_task *task);
 t_task			*sdl_new_task(void (*f)(), size_t param_count, va_list params);
+t_task			*sdl_get_task(t_pool *pool);
+t_bool			sdl_run_task(t_task const *task);
+void			sdl_complete_task(t_pool *pool, t_thread *self,
+									float *waittime);
 
 #endif

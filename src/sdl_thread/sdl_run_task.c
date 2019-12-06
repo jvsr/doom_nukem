@@ -16,7 +16,7 @@
 ** * Thread internal function
 */
 
-t_bool		sdl_run_task(const t_task *task)
+t_bool		sdl_run_task(t_task const *task)
 {
 	void	**params;
 
