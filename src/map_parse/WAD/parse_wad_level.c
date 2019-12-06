@@ -92,6 +92,6 @@ void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *direct
 		i++;
 	}
 	add_to_back(&wad->levels, level);
-	print_list(wad->levels);
-	ft_printf("\n");
+	// print_list(wad->levels);
+	// ft_printf("\n");
 }

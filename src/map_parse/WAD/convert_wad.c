@@ -201,11 +201,11 @@ void		apply_walls_to_sector(t_campaign *campaign)
 		i++;
 	}
 
-	i = 0;
-	while (i < campaign->sector_amount) {
-		print_sector_wall(campaign->sector[i]);
-		i++;
-	}
+	// i = 0;
+	// while (i < campaign->sector_amount) {
+	// 	print_sector_wall(campaign->sector[i]);
+	// 	i++;
+	// }
 }
 
 void		set_player(t_campaign *campaign, t_wad *wad)
@@ -220,10 +220,10 @@ void		set_player(t_campaign *campaign, t_wad *wad)
 			campaign->player_start_pos.x = wad->levels->things[i]->x_pos;
 			campaign->player_start_pos.y = wad->levels->things[i]->y_pos;
 			campaign->player_start_angle = wad->levels->things[i]->angle;
-			ft_printf("Pos X: %f\nPos Y: %f\nAngle: %hu\n",
-				campaign->player_start_pos.x,
-				campaign->player_start_pos.y,
-				campaign->player_start_angle);
+			// ft_printf("Pos X: %f\nPos Y: %f\nAngle: %hu\n",
+			// 	campaign->player_start_pos.x,
+			// 	campaign->player_start_pos.y,
+			// 	campaign->player_start_angle);
 			return ;
 		}
 		i++;

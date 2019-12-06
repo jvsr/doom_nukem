@@ -139,7 +139,7 @@ t_wad	*parse_wad(char *const filename)
 	wad = alloc_wad();
 	wad_bin->endian = ENDIAN_LITTLE;
 	header = read_wad_header(wad_bin);
-	print_header(header);
+	// print_header(header);
 	loop_wad_directories(wad_bin, wad, header);
 	return (wad);
 }

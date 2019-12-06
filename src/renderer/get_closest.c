@@ -71,8 +71,6 @@ static void		remove_from_list(t_list **walls, t_campaign_wall *wall)
 		prev->next = wall_lst->next;
 		wall_lst->next = NULL;
 	}
-	printf("Walls -> %p\n", *walls);
-	printf("Check -> %p\n", wall_lst);
 	ft_lstdelone(&wall_lst, NULL);
 }
 
