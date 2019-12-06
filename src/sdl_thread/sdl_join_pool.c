@@ -12,7 +12,7 @@
 
 #include "sdl_thread.h"
 
-void		sdl_join_pool(const t_pool *pool)
+void		sdl_join_pool(t_pool const *pool)
 {
 	if (pool == NULL)
 		return ;

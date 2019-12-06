@@ -12,7 +12,7 @@
 
 #include "sdl_thread.h"
 
-t_bool		sdl_done_pool(const t_pool *pool)
+t_bool		sdl_done_pool(t_pool const *pool)
 {
 	t_thread	*thread;
 	size_t		current;

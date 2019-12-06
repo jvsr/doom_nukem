@@ -19,7 +19,11 @@
 #include "sdl_thread.h"
 #include "error.h"
 
-static void		print_time(t_thread *self, float runtime, float *waittime,
+/*
+** * Thread internal function
+*/
+
+static void		print_time(t_thread *self, float runtime, float waittime,
 							void (*f)())
 {
 	char		*timecolor;
@@ -27,16 +31,14 @@ static void		print_time(t_thread *self, float runtime, float *waittime,
 
 	color = ft_strformat("\033[38;5;%lum", (self->number % 15) + 1);
 	timecolor = "\033[38;5;1m";
-	if (runtime > *waittime)
+	if (runtime > waittime)
 		timecolor = "\033[38;5;2m";
 	ft_printf("%spool->thread[%zu]%{} - Function %p = %sWaittime: %.4f : \
-Runtime %.4f%{}\n", color, self->number, f, timecolor, *waittime, runtime);
+Runtime %.4f%{}\n", color, self->number, f, timecolor, waittime, runtime);
 	ft_strdel(&color);
-	*waittime = 0;
 }
 
-void			sdl_complete_task(t_pool *pool, t_thread *self, t_task *task,
-							float *waittime)
+void			sdl_complete_task(t_pool *pool, t_thread *self, float *waittime)
 {
 	clock_t		start;
 	float		runtime;
@@ -45,13 +47,14 @@ void			sdl_complete_task(t_pool *pool, t_thread *self, t_task *task,
 	start = 0;
 	if (pool->tracktime == TRUE)
 		start = clock();
-	f = task->f;
-	sdl_run_task(task);
-	free(task);
+	f = self->task->f;
+	sdl_run_task(self->task);
+	ft_memdel((void **)&self->task);
 	if (pool->tracktime == TRUE)
 	{
 		runtime = (float)(clock() - start) / CLOCKS_PER_SEC;
-		print_time(self, runtime, waittime, f);
+		print_time(self, runtime, *waittime, f);
+		*waittime = 0;
 	}
 	self->state = IDLE;
 }
