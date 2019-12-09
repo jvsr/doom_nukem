@@ -19,7 +19,6 @@
 #include "setting.h"
 #include "cmath.h"
 
-
 static void		draw_point(int colour,
 							SDL_Surface *surface, int *mask, t_point pos)
 {
@@ -46,8 +45,8 @@ static void		draw_coloumn(t_coord *coords, t_campaign_wall *wall,
 	float	tmp;
 
 	(void)wall;
-	dist = get_distance(&coords[0], &coords[1]) *
-			cosf(game->player->angle * PI_R); 
+	dist = get_distance(&coords[0], &coords[1]);
+	//printf("Dist -> %f, Cos -> %f\n", get_distance(&coords[0], &coords[1]), cos(game->player->angle * PI_R));
 	tmp = r_in->b_vec.y * r_in->ratio * dist;
 	screen = 2 * get_distance(&(t_coord){0, tmp},
 			&(t_coord){0, game->player->height});
@@ -55,6 +54,7 @@ static void		draw_coloumn(t_coord *coords, t_campaign_wall *wall,
 			r_in->dst->h;
 	hb = ((get_distance(&(t_coord){0, sector->height_floor + (sector->height_wall)},
 			&(t_coord){0, tmp})) / screen) * r_in->dst->h;
+	printf("HB -> %i, i -> %i, screen -> %f, dist -> %f\n", hb, i, screen, dist);
 	while (i < hb)
 	{
 		draw_point(0xFFFFFFFF, r_in->dst, r_in->mask, (t_point){x, i});
@@ -65,14 +65,13 @@ static void		draw_coloumn(t_coord *coords, t_campaign_wall *wall,
 static void		draw_wall(t_coord range,t_game *game, t_campaign_wall *wall,
 					t_renderinfo *r_in)
 {
-	float	ray;
 	float	step;
 	t_campaign_sector *sector;
 	t_coord	pos;
 	t_coord origin;
 	t_coord hit;
+	t_coord *h_hit;
 
-	ray = range.x;
 	step = (float)game->setting->fov / r_in->dst->w;
 	origin = (t_coord){game->player->forward.x + game->player->pos.x,
 		game->player->forward.y + game->player->pos.y};
@@ -84,16 +83,16 @@ static void		draw_wall(t_coord range,t_game *game, t_campaign_wall *wall,
 		sector = get_sector(wall->sidedef_left->sector, game->campaign->sector);
 	else
 		sector = get_sector(wall->sidedef_right->sector, game->campaign->sector);
-	while (ray < range.y)
+	printf("	Wall (%f, %f) (%f, %f)\n", wall->vertex_begin->x, wall->vertex_begin->y, wall->vertex_end->x, wall->vertex_end->y);
+	while (range.x < range.y)
 	{
-		if (get_collision(&(t_coord){game->player->pos.x, game->player->pos.y},
-		&game->player->forward,
-		(t_coord[]){*wall->vertex_begin, *wall->vertex_end}, &hit) != NULL)
-			draw_coloumn((t_coord[]){hit, origin}, wall, game, (int)((ray /
+		h_hit = get_collision(&origin, &game->player->forward, (t_coord[]){*wall->vertex_begin, *wall->vertex_end}, &hit);
+		if (h_hit != NULL)
+			draw_coloumn((t_coord[]){hit, origin}, wall, game, (int)((range.x /
 				game->setting->fov) * r_in->dst->w), r_in, sector);
 		origin = (t_coord){origin.x + (pos.x * step), origin.y +
 			(pos.y * step)};
-		ray += step;
+		range.x += step;
 	}
 }
 
@@ -106,6 +105,7 @@ void		   	render_part(t_game *game,
 
 	if (!walls)
 		return ;
+	printf("Wall Count -> %zu, Range(%f, %f), Player(%f, %f)\n", ft_lstlen(walls), range.x, range.y, game->player->pos.x, game->player->pos.y);
 	wall = get_closest(&walls, &(game->player->pos));
 	while (wall)
 	{

@@ -75,8 +75,12 @@ void			render_rooms(t_game *game, t_campaign *level, SDL_Surface *dst)
 	i = 0;
 	while (i < RENDER_THREAD_COUNT)
 	{
-		render_part(game, (t_coord){i * parts, (i + 1) * parts},
-			out_walls[i], &renderin);
+		if (i == RENDER_THREAD_COUNT - 1)
+			render_part(game, (t_coord){i * parts, (float)game->setting->fov},
+				out_walls[i], &renderin);
+		else
+			render_part(game, (t_coord){i * parts, (i + 1) * parts},
+				out_walls[i], &renderin);
 		i++;
 	}
 	ft_memdel((void**)&renderin.mask);
