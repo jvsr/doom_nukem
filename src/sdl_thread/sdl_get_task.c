@@ -36,6 +36,7 @@ t_task		*sdl_get_task(t_pool *pool)
 			pool->que_last = NULL;
 	}
 	atomic_store(&(pool->state), state);
-	task->next = NULL;
+	if (task != NULL)
+		task->next = NULL;
 	return (task);
 }
