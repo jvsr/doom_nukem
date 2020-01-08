@@ -42,5 +42,7 @@ float		mod_float(float f0, float max);
 float		clamp_float(float f0, float min, float max);
 float		wrap_float(float f0, float min, float max);
 t_coord		get_perps(float angle);
+float		wrap_angle(float angle);
+t_coord		intersect3(t_coord c0, t_coord c1, t_coord c2, t_coord c3);
 
 #endif
