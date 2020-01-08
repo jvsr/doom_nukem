@@ -34,19 +34,20 @@ static void	empty_file_error(const char *file_name, char const *exec_path)
 		ft_strformat("Empty GUI config file: %s.ui.yml", full_path));
 }
 
-t_transform	*analyze_gui_config(t_game *game, const char *file_name)
+t_transform	*analyze_gui_config(t_gui *ui, const char *file_name,
+								char const *exec_path)
 {
 	t_transform		*result;
 	t_token			*tokens;
 	t_parse_info	*parse_info;
-	const int		fd = open_gui_config(file_name, game->exec_path);
+	const int		fd = open_gui_config(file_name, exec_path);
 
 	result = NULL;
 	tokens = lex_gui_config(fd);
 	close(fd);
 	if (tokens == NULL)
-		empty_file_error(file_name, game->exec_path);
+		empty_file_error(file_name, exec_path);
 	parse_info = parse_gui_config(tokens);
-	result = exec_gui_config(game->ui, parse_info, game->exec_path);
+	result = exec_gui_config(ui, parse_info, exec_path);
 	return (result);
 }
