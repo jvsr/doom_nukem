@@ -17,6 +17,8 @@
 # include "libft/ft_bool.h"
 # include "types.h"
 
+typedef struct s_sector	t_sector;
+
 typedef struct	s_wall
 {
 	t_coord		corner_0;
@@ -25,13 +27,13 @@ typedef struct	s_wall
 	t_sector	*window;
 }				t_wall;
 
-typedef struct	s_sector
+struct			s_sector
 {
 	t_wall		*walls;
 	t_uint64	wall_count;
 	float		floor;
 	float		ceil;
-}				t_sector;
+};
 
 typedef struct	s_map
 {

@@ -131,7 +131,8 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 			/* Draw Ceiling */
 			draw_vline(dst, (t_drawinfo){i, ytop[i], cya - 1, 0x111111, 0x222222, 0x111111});
 			/* Draw Floor */
-			draw_vline(dst, (t_drawinfo){});
+			draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0x0000FF, 0x0000AA, 0x0000FF});
+			
 		}
 		k++;
 	}
