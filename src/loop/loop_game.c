@@ -21,5 +21,6 @@ void	loop_game(t_game *game)
 
 	num = ft_strformat("Angle: %f", game->player->angle);
 	set_elem_text_str(get_gui_child(game->ui, "angle"), num);
+	// set_elem_redraw(get_gui_child(game->ui, "gameview"));
 	ft_strdel(&num);
 }

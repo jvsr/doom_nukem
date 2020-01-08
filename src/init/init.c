@@ -21,6 +21,7 @@
 #include "parse_map.h"
 #include "renderer.h"
 #include "error.h"
+#include "rinfo.h"
 
 static void		player_init(t_game *game)
 {
@@ -34,6 +35,27 @@ static void		player_init(t_game *game)
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));
 }
 
+static void		map_init(t_game *game)
+{
+	game->map = ft_memalloc(sizeof(t_map));
+	if (!game->map)
+		error_msg_errno("Could not allocate Game Map");
+	game->map->sectors = ft_memalloc(sizeof(t_sector));
+	if (!game->map)
+		error_msg_errno("Could not allocate Map Sector");
+	game->map->sector_count = 1;
+	game->map->sectors[0].ceil = 10;
+	game->map->sectors[0].floor = 40;
+	game->map->sectors->wall_count = 4;
+	game->map->sectors->walls = ft_memalloc(sizeof(t_wall) * 4);
+	if (game->map->sectors->walls == NULL)
+		error_msg_errno("Could not allocate Map Walls");
+	game->map->sectors->walls[0] = (t_wall){(t_coord){0, 0}, (t_coord){20, 0}, FALSE, NULL};
+	game->map->sectors->walls[1] = (t_wall){(t_coord){20, 0}, (t_coord){20, 20}, FALSE, NULL};
+	game->map->sectors->walls[2] = (t_wall){(t_coord){20, 20}, (t_coord){0, 20}, FALSE, NULL};
+	game->map->sectors->walls[3] = (t_wall){(t_coord){0, 20}, (t_coord){0, 0}, FALSE, NULL};
+}
+
 void			init_function(t_game *game)
 {
 	init_audio(game);
@@ -41,6 +63,7 @@ void			init_function(t_game *game)
 	load_textures(game);
 	init_main_menu(game);
 	init_keymap(game);
+	map_init(game);
 	player_init(game);
 	parse_map("map/campaign/doom1.wad", game);
 	game->cureventstate->eventstate = splash;

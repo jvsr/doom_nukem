@@ -27,6 +27,7 @@ typedef struct s_audio_man		t_audio_man;
 typedef struct s_setting		t_setting;
 typedef struct s_campaign		t_campaign;
 typedef struct s_eventstate		t_eventstate;
+typedef struct s_map			t_map;
 
 char const		*g_doom_dir;
 
@@ -47,6 +48,7 @@ typedef struct	s_game
 	SDL_Surface		*surface;
 	t_gui			*ui;
 	t_level			*level;
+	t_map			*map;
 	t_campaign		*campaign;
 	t_player		*player;
 	t_hashmap		*keymap;

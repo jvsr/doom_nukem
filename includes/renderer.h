@@ -31,19 +31,8 @@ typedef struct	s_renderinfo
 	SDL_Surface	*dst;
 }				t_renderinfo;
 
-void				render_3d(t_game *game, t_campaign *level,
-						SDL_Surface *dst);
+void				render_3d(t_game *game, SDL_Surface *dst);
 SDL_Surface			*get_texture(t_game *game, t_texture texture);
 void				load_textures(t_game *game);
-void				render_rooms(t_game *game, t_campaign *level,
-						SDL_Surface *dst);
-t_list				*get_bunches(t_game *game, t_campaign *level);
-t_campaign_wall		*get_closest(t_list **walls, t_vec *pos);
-void				render_part(t_game *game,
-						t_coord range, t_list *walls, t_renderinfo *renderinfo);
-void				add_wall_to_out(t_list **out_walls,
-						t_campaign_wall *wall, t_game *game, float parts);
-t_campaign_sector	*get_sector(unsigned short tag,
-						t_campaign_sector **sectors);
 
 #endif

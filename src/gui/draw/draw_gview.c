@@ -14,9 +14,13 @@
 #include "renderer.h"
 #include "game.h"
 #include "gui.h"
+#include "player.h"
+#include "coord.h"
 
 void		draw_gview(SDL_Surface *dst, t_game *game)
 {
 	sdl_clear_surface(dst);
-	render_3d(game, game->campaign, dst);
+	game->player->pos.x = 0;
+	game->player->pos.y = 0;
+	render_3d(game, dst);
 }

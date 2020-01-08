@@ -42,7 +42,7 @@ typedef	struct	s_player
 	float		angle;
 	t_mag		mag;
 	t_coord		forward;
-	t_vec		pos;
+	t_coord		pos;
 	t_uint32	cur_sector;
 	float		height;
 }				t_player;

@@ -42,10 +42,13 @@ void		init_audio(t_game *game)
 		error_msg_errno("Failed to allocate Audio Manager");
 	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
 		!= 0)
-		error_msg_sdl(EIO, "Failed to open Audio Mixer");
+			error_msg_sdl(EIO, "Failed to open Audio Mixer");
 	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
 	if (!(support & MIX_INIT_MP3))
+	{
+		printf ("%i, %i\n", support & MIX_INIT_MP3, support & MIX_INIT_FLAC);
 		error_msg_sdl(EIO, "Failed to init Audio Mixer");
+	}
 	alloc_hashmaps(game->audio_man);
 	set_sound_volume(game->setting->sound_volume);
 	set_music_volume(game->setting->music_volume);

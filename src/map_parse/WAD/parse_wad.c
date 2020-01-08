@@ -22,6 +22,7 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_char.h"
 
+/*
 static void	print_header(t_wad_header *header)
 {
 	ft_printf("Type:\t%d\nSize:\t%d\nDirP:\t%d\n\n",
@@ -37,7 +38,7 @@ static void	print_header(t_wad_header *header)
 // 		directory->size_lump,
 // 		directory->name_lump);
 // }
-
+*/ 
 static t_bool	is_wad_level(char *const name)
 {
 	size_t			i;
