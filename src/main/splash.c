@@ -57,14 +57,15 @@ static void		fade(t_game *game, SDL_Surface *splash,
 	(void)temp;
 }
 
-void			splash(t_game *game, t_bool *finished, char *loc)
+void			splash(t_game *game, t_bool *finished,
+						char *loc, char const *exec_path)
 {
 	SDL_Surface *splash;
 	t_uint64	now;
 	SDL_Event	temp;
 
 	sdl_clear_surface(game->surface);
-	splash = open_tga_sdl(loc);
+	splash = open_tga_sdl(loc, exec_path);
 	sdl_set_surface_alpha(splash, 0);
 	fade(game, splash, fadein);
 	now = get_gametime(&game->starttime);

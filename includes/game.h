@@ -27,8 +27,6 @@ typedef struct s_audio_man		t_audio_man;
 typedef struct s_setting		t_setting;
 typedef struct s_eventstate		t_eventstate;
 
-char const		*g_doom_dir;
-
 typedef	enum	e_state
 {
 	running,
@@ -38,6 +36,7 @@ typedef	enum	e_state
 
 typedef struct	s_game
 {
+	char			*exec_path;
 	char			*exec_name;
 	char			**envp;
 	char			**argv;
@@ -56,7 +55,8 @@ typedef struct	s_game
 }				t_game;
 
 void			loop(t_game *game);
-void			splash(t_game *game, t_bool *finished, char *loc);
+void			splash(t_game *game, t_bool *finished,
+						char *loc, char const *exec_path);
 void			quit(int exit_code);
 
 #endif

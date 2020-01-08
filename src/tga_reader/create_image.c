@@ -21,13 +21,13 @@
 #include "types.h"
 #include "error.h"
 
-static t_uint8	*read_tga_file(const char *file_name)
+static t_uint8	*read_tga_file(const char *file_name, char const *exec_path)
 {
 	int		fd;
 	char	full_path[PATH_MAX];
 	t_uint8	*file_stream;
 
-	ft_strcpy(full_path, g_doom_dir);
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, TEXTURE_PATH);
 	ft_strcat(full_path, file_name);
 	ft_strcat(full_path, ".tga");
@@ -58,12 +58,13 @@ static void		set_tga_header(t_uint8 *file_stream, t_tga *tga, t_img *img)
 	img->pitch = img->width * (img->px_depth / 8);
 }
 
-void			create_image(const char *file_name, t_img *img)
+void			create_image(const char *file_name, char const *exec_path,
+							t_img *img)
 {
 	t_tga	tga;
 	t_uint8	*file_stream;
 
-	file_stream = read_tga_file(file_name);
+	file_stream = read_tga_file(file_name, exec_path);
 	set_tga_header(file_stream, &tga, img);
 	if (tga.img_type == 0)
 	{

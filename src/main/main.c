@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	init_thread = sdl_new_thread("mainmenu", init_main_menu, 2,
 								game, &is_loaded);
 	SDL_DetachThread(init_thread);
-	splash(game, &is_loaded, "splash/splash");
+	splash(game, &is_loaded, "splash/splash", game->exec_path);
 	loop(game);
 	quit(0);
 }

@@ -24,11 +24,11 @@
 #include "error.h"
 #include "serializer.h"
 
-static int		open_file(void)
+static int		open_file(char const *exec_path)
 {
 	char	full_path[PATH_MAX];
 
-	ft_strcpy(full_path, g_doom_dir);
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, SETTINGS_PATH);
 	ft_strcat(full_path, "settings.conf");
 	return (open(full_path, O_RDONLY));
@@ -51,7 +51,7 @@ void			init_settings(t_game *game)
 	int			fd;
 	t_setting	*setting;
 
-	fd = open_file();
+	fd = open_file(game->exec_path);
 	if (fd == -1)
 	{
 		setting = (t_setting *)ft_memalloc(sizeof(t_setting));
@@ -69,5 +69,5 @@ void			init_settings(t_game *game)
 		return ;
 	}
 	close(fd);
-	game->setting = read_settings();
+	game->setting = read_settings(game->exec_path);
 }

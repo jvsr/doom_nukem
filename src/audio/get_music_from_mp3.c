@@ -20,12 +20,12 @@
 #include "audio.h"
 #include "error.h"
 
-Mix_Music	*get_music_from_mp3(char *file)
+Mix_Music	*get_music_from_mp3(char *file, char const *exec_path)
 {
 	Mix_Music	*track;
 	char		full_path[PATH_MAX];
 
-	ft_strcpy(full_path, g_doom_dir);
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, MUSIC_PATH);
 	ft_strcat(full_path, file);
 	ft_strcat(full_path, ".mp3");

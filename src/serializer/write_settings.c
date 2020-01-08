@@ -16,7 +16,7 @@
 #include "setting.h"
 #include "serializer.h"
 
-void	write_settings(t_setting *settings)
+void	write_settings(t_setting *settings, char const *exec_path)
 {
 	t_binary *bin;
 
@@ -37,6 +37,6 @@ void	write_settings(t_setting *settings)
 	add_int(settings->controls.right, bin);
 	add_int(settings->controls.shoot, bin);
 	finish_bin(bin);
-	write_struct("settings/settings.conf", bin);
+	write_struct("settings/settings.conf", bin, exec_path);
 	del_binary(&bin);
 }

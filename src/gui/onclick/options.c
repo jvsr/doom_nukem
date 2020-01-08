@@ -33,7 +33,7 @@ void	options_return(t_game *game, t_transform *gui)
 	(void)gui;
 	if (game->setting->changed == TRUE || game->setting->confirm == TRUE)
 	{
-		write_settings(game->setting);
+		write_settings(game->setting, game->exec_path);
 		if (game->setting->confirm == TRUE)
 		{
 			add_confirmation(game);
