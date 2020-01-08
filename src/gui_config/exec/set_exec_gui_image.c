@@ -30,17 +30,22 @@ static void	validate(t_parse_info *elem_info, t_draw_method draw_method)
 		error_msg("Executer validation error", 21, msg);
 }
 
-void		set_exec_gui_image(t_transform *elem, t_parse_info *elem_info)
+void		set_exec_gui_image(t_transform *elem, t_parse_info *elem_info,
+								char const *exec_path)
 {
 	SDL_Color		color;
 	t_draw_method	draw_method;
+	SDL_Surface		*image;
 
 	draw_method = get_draw_method_value(elem_info->draw_method);
 	validate(elem_info, draw_method);
 	hex_to_color(&color, elem_info->color);
 	set_elem_image_color(elem, color);
 	if (elem_info->texture[0] != '\0')
-		set_elem_image_texture(elem, open_tga_sdl(elem_info->texture));
+	{
+		image = open_tga_sdl(elem_info->texture, exec_path);
+		set_elem_image_texture(elem, image);
+	}
 	if (draw_method != DRAW_METHOD_UNDEFINED)
 		set_elem_image_draw_method(elem, draw_method);
 }

@@ -46,8 +46,8 @@ typedef struct	s_audio_man
 }				t_audio_man;
 
 void			load_audio(t_game *game);
-Mix_Chunk		*get_chunk_from_wav(char *file);
-Mix_Music		*get_music_from_mp3(char *file);
+Mix_Chunk		*get_chunk_from_wav(char *file, char const *exec_path);
+Mix_Music		*get_music_from_mp3(char *file, char const *exec_path);
 void			play_music(t_audio_man *man, t_music music);
 void			pause_music(void);
 void			resume_music(void);

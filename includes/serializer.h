@@ -53,10 +53,10 @@ typedef struct	s_binary_read
 
 t_binary		*new_binary(void);
 void			del_binary(t_binary **bin);
-t_binary_read	*new_binary_read(const char *loc);
+t_binary_read	*new_binary_read(const char *loc, char const *exec_path);
 void			del_binary_read(t_binary_read **bin_r);
-t_bool			write_struct(char *loc, t_binary *bin);
-unsigned char	*read_struct(const char *loc);
+t_bool			write_struct(char *loc, t_binary *bin, char const *exec_path);
+unsigned char	*read_struct(const char *loc, char const *exec_path);
 void			add_type(unsigned char **bytes, t_uint64 *b_size,
 											t_convert *val, t_uint64 v_size);
 void			add_char(char c, t_binary *bin);
@@ -80,7 +80,7 @@ t_endian		detect_endian(void);
 long			read_header(t_binary_read *bin_r);
 void			swap_bytes(void *v_bytes, t_uint64 size);
 
-t_setting		*read_settings(void);
-void			write_settings(t_setting *settings);
+t_setting		*read_settings(char const *exec_path);
+void			write_settings(t_setting *settings, char const *exec_path);
 
 #endif

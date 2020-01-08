@@ -27,17 +27,19 @@ static void			validate(t_parse_info *elem_info, t_onclick *onclick)
 		error_msg("Executer validation error", 21, msg);
 }
 
-static void			set_gui_info(t_transform *elem, t_parse_info *elem_info)
+static void			set_gui_info(t_transform *elem, t_parse_info *elem_info,
+									char const *exec_path)
 {
 	if (elem->gui_type == TEXT)
 		set_exec_gui_text(elem, elem_info);
 	else if (elem->gui_type == IMAGE)
-		set_exec_gui_image(elem, elem_info);
+		set_exec_gui_image(elem, elem_info, exec_path);
 	else if (elem->gui_type == BUTTON)
-		set_exec_gui_button(elem, elem_info);
+		set_exec_gui_button(elem, elem_info, exec_path);
 }
 
-t_transform			*new_exec_elem(t_gui *ui, t_parse_info *elem_info)
+t_transform			*new_exec_elem(t_gui *ui, t_parse_info *elem_info,
+									char const *exec_path)
 {
 	t_onclick	*onclick;
 	t_transform	*elem;
@@ -51,6 +53,6 @@ t_transform			*new_exec_elem(t_gui *ui, t_parse_info *elem_info)
 	set_elem_layer(elem, elem_info->layer);
 	set_elem_clickable(elem, elem_info->clickable);
 	set_elem_show(elem, elem_info->show);
-	set_gui_info(elem, elem_info);
+	set_gui_info(elem, elem_info, exec_path);
 	return (elem);
 }

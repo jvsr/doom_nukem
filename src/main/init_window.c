@@ -36,7 +36,7 @@ void			init_window_surface(t_game *game)
 	const uint32_t	flags = create_window_flags(game->setting);
 	SDL_Surface		*window_icon;
 
-	window_icon = open_tga_sdl("splash/icon");
+	window_icon = open_tga_sdl("splash/icon", game->exec_path);
 	game->window = SDL_CreateWindow("Doom Nukem",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,

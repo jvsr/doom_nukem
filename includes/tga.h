@@ -47,10 +47,11 @@ typedef struct	s_img
 	unsigned int	pitch;
 }				t_img;
 
-SDL_Surface		*open_tga_sdl(char *file_name);
-void			create_image(const char *file_name, t_img *img);
+SDL_Surface		*open_tga_sdl(char *file_name, char const *exec_path);
 char			reversebyte(char b);
 void			str_to_img(t_img *img, t_tga *tga, unsigned char *str);
 int				pixel_from_pos(unsigned char *str, size_t i, t_img *img);
+void			create_image(const char *file_name, char const *exec_path,
+								t_img *img);
 
 #endif

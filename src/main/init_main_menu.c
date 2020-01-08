@@ -25,10 +25,10 @@ void	init_main_menu(t_game *game, t_bool *is_loaded)
 	t_transform	*select_level;
 	t_transform	*controls_menu;
 
-	main_menu = analyze_gui_config(game->ui, "main_menu");
-	options_menu = analyze_gui_config(game->ui, "options_menu");
-	select_level = analyze_gui_config(game->ui, "select_level");
-	controls_menu = analyze_gui_config(game->ui, "controls_menu");
+	main_menu = analyze_gui_config(game, "main_menu");
+	options_menu = analyze_gui_config(game, "options_menu");
+	select_level = analyze_gui_config(game, "select_level");
+	controls_menu = analyze_gui_config(game, "controls_menu");
 	add_elem_child(options_menu, controls_menu);
 	add_elem_child(main_menu, options_menu);
 	add_elem_child(main_menu, select_level);

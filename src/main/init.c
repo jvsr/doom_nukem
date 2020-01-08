@@ -56,12 +56,13 @@ static void		set_basic_args(t_game *game, char **argv, char **envp)
 
 	game->argv = argv;
 	game->envp = envp;
+	ft_putendl(argv[0]);
 	game->exec_name = ft_strdup(ft_strrchr(argv[0], '/') + 1);
 	if (game->exec_name == NULL)
 		error_msg_errno("Failed to alloc exec name");
 	path_len = exec_len - ft_strlen(game->exec_name);
-	g_doom_dir = ft_strndup(argv[0], path_len);
-	if (g_doom_dir == NULL)
+	game->exec_path = ft_strndup(argv[0], path_len);
+	if (game->exec_path == NULL)
 		error_msg_errno("Failed to alloc doom dir");
 }
 
