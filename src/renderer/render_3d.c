@@ -64,16 +64,19 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	if (game->player->cur_sector > game->map->sector_count)
 		return;
 	t_wall *walls = sectors[game->player->cur_sector].walls;
-	while (k < sectors[game->player->cur_sector].wall_count)
+	while ((t_uint64)k < sectors[game->player->cur_sector].wall_count)
 	{
-		t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
-		t_coord v1 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
+		t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_0.y - game->player->pos.y};
+		t_coord v1 = {walls[k].corner_1.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
 		
 		t_coord p = {cosf(game->player->angle), sinf(game->player->angle)};
 		t_coord t0 = {v0.x * p.y - v0.y * p.x, v0.x * p.x + v0.y * p.y};
-		t_coord t1 = {v0.x * p.y - v0.y * p.x, v0.x * p.x + v0.y * p.y};
+		t_coord t1 = {v1.x * p.y - v1.y * p.x, v1.x * p.x + v1.y * p.y};
 		if (t0.y <= 0 && t1.y <= 0)
+		{
+			k++;
 			continue;
+		}
 		if (t0.y <= 0 || t1.y <= 0)
 		{
 			float near = 1e-4f;
@@ -114,7 +117,13 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		int x0 = dst->w / 2 - (int)(t0.x * scale0.x);
 		int x1 = dst->w / 2 - (int)(t1.x * scale1.x);
 		if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1)
+		{
+			k++;
+			//printf("t0 : x = %f, y = %f\n", t0.x, t0.y);
+			//printf("t1 : x = %f, y = %f\n", t1.x, t1.y);
+			printf("x0: %i, x1: %i\n", x0, x1);
 			continue;
+		}
 		float yceil = sectors[i].ceil - game->player->height;
 		float yfloor = sectors[i].floor - game->player->height;
 
@@ -124,6 +133,7 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		i = 0;
 		while (i <= xvalues.y)
 		{
+			printf("Here\n");
 			int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0);
 			int cya = ft_constrain(ya, ytop[i], yBottom[i]);
 			int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0);
@@ -132,7 +142,12 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 			draw_vline(dst, (t_drawinfo){i, ytop[i], cya - 1, 0x111111, 0x222222, 0x111111});
 			/* Draw Floor */
 			draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0x0000FF, 0x0000AA, 0x0000FF});
-			
+			/* Draw Wall / Portal */
+			if (walls[k].is_portal)
+				draw_vline(dst, (t_drawinfo){i, cya, cyb, 0x00AA00, 0x00AA00, 0x00AA00});
+			else
+				draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : 0xAAAAAA, 0});
+			i++;
 		}
 		k++;
 	}
