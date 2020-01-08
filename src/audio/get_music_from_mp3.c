@@ -25,10 +25,7 @@ Mix_Music	*get_music_from_mp3(char *file, char const *exec_path)
 	Mix_Music	*track;
 	char		full_path[PATH_MAX];
 
-	if (exec_path != NULL)
-		ft_strcpy(full_path, exec_path);
-	else
-		full_path[0] = '\0';
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, MUSIC_PATH);
 	ft_strcat(full_path, file);
 	ft_strcat(full_path, ".mp3");

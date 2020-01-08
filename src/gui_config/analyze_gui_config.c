@@ -27,10 +27,7 @@ static void	empty_file_error(const char *file_name, char const *exec_path)
 {
 	char	full_path[PATH_MAX];
 
-	if (exec_path != NULL)
-		ft_strcpy(full_path, exec_path);
-	else
-		full_path[0] = '\0';
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, UI_CONFIG_PATH);
 	ft_strcat(full_path, file_name);
 	error_msg("GUI Error", 20,

@@ -27,10 +27,7 @@ unsigned char		*read_struct(const char *loc, char const *exec_path)
 	unsigned char	*file_stream;
 	char			full_path[PATH_MAX];
 
-	if (exec_path != NULL)
-		ft_strcpy(full_path, exec_path);
-	else
-		full_path[0] = '\0';
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, RESOURCE_PATH);
 	ft_strcat(full_path, loc);
 	fd = open(full_path, O_RDONLY);

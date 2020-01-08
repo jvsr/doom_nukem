@@ -28,10 +28,7 @@ static int		open_file(char const *exec_path)
 {
 	char	full_path[PATH_MAX];
 
-	if (exec_path != NULL)
-		ft_strcpy(full_path, exec_path);
-	else
-		full_path[0] = '\0';
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, SETTINGS_PATH);
 	ft_strcat(full_path, "settings.conf");
 	return (open(full_path, O_RDONLY));

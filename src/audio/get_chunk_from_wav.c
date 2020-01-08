@@ -25,10 +25,7 @@ Mix_Chunk	*get_chunk_from_wav(char *file, char const *exec_path)
 	Mix_Chunk	*chunk;
 	char		full_path[PATH_MAX];
 
-	if (exec_path != NULL)
-		ft_strcpy(full_path, exec_path);
-	else
-		full_path[0] = '\0';
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, SOUND_EFFECT_PATH);
 	ft_strcat(full_path, file);
 	ft_strcat(full_path, ".wav");

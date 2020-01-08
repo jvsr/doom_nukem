@@ -56,7 +56,6 @@ static void		set_basic_args(t_game *game, char **argv, char **envp)
 
 	game->argv = argv;
 	game->envp = envp;
-	ft_putendl(argv[0]);
 	game->exec_name = ft_strdup(ft_strrchr(argv[0], '/') + 1);
 	if (game->exec_name == NULL)
 		error_msg_errno("Failed to alloc exec name");

@@ -36,10 +36,7 @@ static TTF_Font	*open_font(const char *file_name, char const *exec_path)
 	TTF_Font	*font;
 	char		full_path[PATH_MAX];
 
-	if (exec_path != NULL)
-		ft_strcpy(full_path, exec_path);
-	else
-		full_path[0] = '\0';
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, FONT_PATH);
 	ft_strcat(full_path, file_name);
 	font = TTF_OpenFont(full_path, 50);
