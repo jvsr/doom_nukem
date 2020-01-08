@@ -21,7 +21,7 @@ void		loop_core(t_game *game, t_eventstate_code code)
 	while (g_loop_table[i].func != NULL)
 	{
 		if (g_loop_table[i].val == (const int)code)
-			return g_loop_table[i].func(game);
+			g_loop_table[i].func(game);
 		i++;
 	}
 	return ;

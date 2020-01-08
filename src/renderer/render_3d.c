@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
+#include "libft/ft_num.h"
 #include "game.h"
 #include "campaign.h"
 #include "player.h"
@@ -18,6 +19,7 @@
 #include "cmath.h"
 #include "rinfo.h"
 #include "setting.h"
+#include <math.h>
 
 void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 {
@@ -42,10 +44,7 @@ void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 	}
 }
 
-t_coord	intersect3(t_coord c0, t_coord c1, t_coord c2)
-{
-	
-}
+
 
 void	render_3d(t_game *game, SDL_Surface *dst)
 {
@@ -60,43 +59,80 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	ft_bzero(renderedSectors, game->map->sector_count * 4);
 	ft_bzero(ytop, dst->w * 4);
 	ft_memset4(yBottom, dst->h  - 1, dst->w);
-	i = 0;
 	k = 0;
 	t_sector *sectors = game->map->sectors;
-	while (i < game->map->sector_count)
+	if (game->player->cur_sector > game->map->sector_count)
+		return;
+	t_wall *walls = sectors[game->player->cur_sector].walls;
+	while (k < sectors[game->player->cur_sector].wall_count)
 	{
-		t_wall *walls = sectors[i].walls;
-		while (k < sectors[i].wall_count)
+		t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
+		t_coord v1 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
+		
+		t_coord p = {cosf(game->player->angle), sinf(game->player->angle)};
+		t_coord t0 = {v0.x * p.y - v0.y * p.x, v0.x * p.x + v0.y * p.y};
+		t_coord t1 = {v0.x * p.y - v0.y * p.x, v0.x * p.x + v0.y * p.y};
+		if (t0.y <= 0 && t1.y <= 0)
+			continue;
+		if (t0.y <= 0 || t1.y <= 0)
 		{
-			t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
-			t_coord v1 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
-			
-			t_coord p = {cosf(game->player->angle), sinf(game->player->angle)};
-			t_coord t0 = {v0.x * p.y - v0.y * p.x, v0.x * p.x + v0.y * p.y};
-			t_coord t1 = {v0.x * p.y - v0.y * p.x, v0.x * p.x + v0.y * p.y};
-			if (t0.y <= 0 && t1.y <= 0)
-				continue;
-			if (t0.y <= 0 || t1.y <= 0)
+			float near = 1e-4f;
+			float far = 5.0;
+			float nearside = 1e-5f;
+			float farside = 20.0;
+			t_coord insec0 = intersect3(t0, t1, (t_coord){-nearside, near}, (t_coord){-farside, far});
+			t_coord insec1 = intersect3(t0, t1, (t_coord){nearside, near}, (t_coord){farside, far});
+			if (t0.y < near)
 			{
-				float near = 1e-4f;
-				float far = 5.0;
-				float nearside = 1e-5f;
-				float farside = 20.0;
+					if (insec0.y > 0)
+					{
+						t0.x = insec0.x;
+						t0.y = insec0.y;
+					}
+					else
+					{
+						t0.x = insec1.x;
+						t0.y = insec1.y;
+					}
 			}
-			t_coord scale0 = { hfov / t0.y, vfov / t0.y };
-			t_coord scale1 = { hfov / t1.y, vfov / t1.y };
-			int x0 = dst->w / 2 - (int)(t0.x * scale0.x);
-			int x1 = dst->w / 2 - (int)(t1.x * scale1.x);
-			if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1)
-				continue;
-			float yceil = sectors[i].ceil - game->player->height;
-			float yfloor = sectors[i].floor - game->player->height;
-
-			t_point y1 = {dst->h / 2 - (int)(yceil * scale0.y), dst->h / 2 - (int)(yfloor * scale0.y)};
-			t_point y2 = {dst->h / 2 - (int)(yceil * scale1.y), dst->h / 2 - (int)(yfloor * scale1.y)};
-			
-			k++;
+			if (t1.y < near)
+			{
+					if (insec0.y > 0)
+					{
+						t1.x = insec0.x;
+						t1.y = insec0.y;
+					}
+					else
+					{
+						t1.x = insec1.x;
+						t1.y = insec1.y;
+					}
+			}
 		}
-		i++;
+		t_coord scale0 = { hfov / t0.y, vfov / t0.y };
+		t_coord scale1 = { hfov / t1.y, vfov / t1.y };
+		int x0 = dst->w / 2 - (int)(t0.x * scale0.x);
+		int x1 = dst->w / 2 - (int)(t1.x * scale1.x);
+		if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1)
+			continue;
+		float yceil = sectors[i].ceil - game->player->height;
+		float yfloor = sectors[i].floor - game->player->height;
+
+		t_point y1 = {dst->h / 2 - (int)(yceil * scale0.y), dst->h / 2 - (int)(yfloor * scale0.y)};
+		t_point y2 = {dst->h / 2 - (int)(yceil * scale1.y), dst->h / 2 - (int)(yfloor * scale1.y)};
+		t_point xvalues = {(int)fminf(x0, 0), (int)fmaxf(x1, dst->w - 1)};
+		i = 0;
+		while (i <= xvalues.y)
+		{
+			int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0);
+			int cya = ft_constrain(ya, ytop[i], yBottom[i]);
+			int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0);
+			int cyb = ft_constrain(yb, ytop[i], yBottom[i]);
+			/* Draw Ceiling */
+			draw_vline(dst, (t_drawinfo){i, ytop[i], cya - 1, 0x111111, 0x222222, 0x111111});
+			/* Draw Floor */
+			draw_vline(dst, (t_drawinfo){});
+		}
+		k++;
 	}
 }
