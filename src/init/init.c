@@ -41,21 +41,38 @@ static void		map_init(t_game *game)
 	game->map = ft_memalloc(sizeof(t_map));
 	if (!game->map)
 		error_msg_errno("Could not allocate Game Map");
-	game->map->sectors = ft_memalloc(sizeof(t_sector));
+	game->map->sectors = ft_memalloc(sizeof(t_sector) * 2);
 	if (!game->map)
 		error_msg_errno("Could not allocate Map Sector");
-	game->map->sector_count = 1;
+	game->map->sector_count = 2;
+
+	//Sector 1
 	game->map->sectors[0].ceil = 40;
 	game->map->sectors[0].floor = 0;
-	game->map->sectors->wall_count = 4;
-	game->map->sectors->walls = ft_memalloc(sizeof(t_wall) * 4);
-	if (game->map->sectors->walls == NULL)
+	game->map->sectors[0].wall_count = 4;
+	game->map->sectors[0].walls = ft_memalloc(sizeof(t_wall) * 4);
+	if (game->map->sectors[0].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
-	game->map->sectors->walls[0] = (t_wall){(t_coord){-20, -20}, (t_coord){20, -20}, FALSE, NULL};
-	game->map->sectors->walls[1] = (t_wall){(t_coord){20, -20}, (t_coord){20, 20}, FALSE, NULL};
-	game->map->sectors->walls[2] = (t_wall){(t_coord){20, 20}, (t_coord){-20, 20}, FALSE, NULL};
-	game->map->sectors->walls[3] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, -20}, FALSE, NULL};
-	game->map->sectors->walls[3].is_portal = TRUE;
+	game->map->sectors[0].walls[0] = (t_wall){(t_coord){-20, -20}, (t_coord){20, -20}, FALSE, NULL};
+	game->map->sectors[0].walls[1] = (t_wall){(t_coord){20, -20}, (t_coord){20, 20}, FALSE, NULL};
+	game->map->sectors[0].walls[2] = (t_wall){(t_coord){20, 20}, (t_coord){-20, 20}, FALSE, NULL};
+	game->map->sectors[0].walls[3] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, -20}, FALSE, NULL};
+	game->map->sectors[0].walls[3].is_portal = TRUE;
+	game->map->sectors[0].walls[3].window = &game->map->sectors[1];
+
+	//Sector 2
+	game->map->sectors[1].ceil = 30;
+	game->map->sectors[1].floor = 10;
+	game->map->sectors[1].wall_count = 4;
+	game->map->sectors[1].walls = ft_memalloc(sizeof(t_wall) * 4);
+	if (game->map->sectors[1].walls == NULL)
+		error_msg_errno("Could not allocate Map Walls");
+	game->map->sectors[1].walls[0] = (t_wall){(t_coord){-20, -20}, (t_coord){-30, -20}, FALSE, NULL};
+	game->map->sectors[1].walls[1] = (t_wall){(t_coord){-30, -20}, (t_coord){-30, 20}, FALSE, NULL};
+	game->map->sectors[1].walls[2] = (t_wall){(t_coord){-30, 20}, (t_coord){-20, 20}, FALSE, NULL};
+	game->map->sectors[1].walls[3] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, -20}, FALSE, NULL};
+	game->map->sectors[1].walls[3].is_portal = TRUE;
+	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
 }
 
 void			init_function(t_game *game)
