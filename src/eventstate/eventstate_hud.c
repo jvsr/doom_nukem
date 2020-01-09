@@ -44,10 +44,8 @@ static void	manage_player_angle(t_game *game)
 	tmp = ((float)((float)mouse_pos.x - (game->surface->w / 2)) / game->surface->w)
 		* 60.0 * game->setting->sensitivity;
 	player->angle = wrap_float(player->angle + tmp, 0, 360.0);
-	tmp = (float)(mouse_pos.y - (game->surface->h / 2) / game->surface->h) *
-		2.0 * game->setting->sensitivity;
-	player->height = clamp_float(player->height + tmp, PLAYER_HEIGHT - 1.0,
-		PLAYER_HEIGHT + 1.0);
+	player->mag.cos = cosf(player->angle * PI_R);
+	player->mag.sin = sinf(player->angle * PI_R);
 	ft_memcpy(&player->mag, &(t_coord){wrap_float(player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));

@@ -18,6 +18,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "player.h"
 #include "init.h"
 #include "loop.h"
 #include "audio.h"
@@ -61,7 +62,11 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		print_keymap(game->keymap);
 	
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
+	{
+		//game->player->height += 1;
 		set_elem_redraw(get_gui_child(game->ui, "gameview"));
+		//printf("Height %f\n", game->player->height);
+	}
 }
 
 static void		load_info(t_game *game)
@@ -86,6 +91,9 @@ void			loop(t_game *game)
 
 	load_info(game);
 	fade_in_music(game->audio_man, TITLE_SONG, 3500);
+	game->player->pos.x = 0;
+	game->player->pos.y = 0;
+	game->player->cur_sector = 0;
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))

@@ -19,9 +19,8 @@
 
 void		draw_gview(SDL_Surface *dst, t_game *game)
 {
+
+	game->player->height = 16;
 	sdl_clear_surface(dst);
-	game->player->pos.x = 10;
-	game->player->pos.y = 10;
-	game->player->cur_sector = 0;
 	render_3d(game, dst);
 }

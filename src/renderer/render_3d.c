@@ -27,8 +27,8 @@ void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 	int i;
 
 	pixels = (int*)dst->pixels;
-	draw.y0 = clamp_float(draw.y0, 0, dst->h - 1);
-	draw.y1 = clamp_float(draw.y1, 0, dst->h - 1);
+	draw.y0 = ft_constrain(draw.y0, 0, dst->h - 1);
+	draw.y1 = ft_constrain(draw.y1, 0, dst->h - 1);
 	if (draw.y0 == draw.y1)
 		pixels[draw.y0 * dst->w + draw.x] = draw.middle;
 	else if (draw.y1 > draw.y0)
@@ -54,11 +54,11 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	int i, k;
 	float hfov, vfov;
 
-	hfov = (float)game->setting->fov / (float)360;
-	vfov = (float)game->setting->vfov / (float)180;
+	hfov = ((float)game->setting->fov / (float)180) * (float)dst->w;
+	vfov = ((float)game->setting->vfov / (float)360) * (float)dst->h;
 	ft_bzero(renderedSectors, game->map->sector_count * 4);
 	ft_bzero(ytop, dst->w * 4);
-	ft_memset4(yBottom, dst->h  - 1, dst->w);
+	ft_memset4(yBottom, dst->h - 1, dst->w);
 	k = 0;
 	t_sector *sectors = game->map->sectors;
 	if (game->player->cur_sector > game->map->sector_count)
@@ -69,9 +69,9 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_0.y - game->player->pos.y};
 		t_coord v1 = {walls[k].corner_1.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
 		
-		t_coord p = {cosf(game->player->angle), sinf(game->player->angle)};
-		t_coord t0 = {v0.x * p.y - v0.y * p.x, v0.x * p.x + v0.y * p.y};
-		t_coord t1 = {v1.x * p.y - v1.y * p.x, v1.x * p.x + v1.y * p.y};
+		t_mag p = game->player->mag;
+		t_coord t0 = {v0.x * p.sin - v0.y * p.cos, v0.x * p.cos + v0.y * p.sin};
+		t_coord t1 = {v1.x * p.sin - v1.y * p.cos, v1.x * p.cos + v1.y * p.sin};
 		if (t0.y <= 0 && t1.y <= 0)
 		{
 			k++;
@@ -79,10 +79,11 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		}
 		if (t0.y <= 0 || t1.y <= 0)
 		{
+			printf("Close\n");
 			float near = 1e-4f;
-			float far = 5;
+			float far = 5.0;
 			float nearside = 1e-5f;
-			float farside = 20.f;
+			float farside = 20.0;
 			t_coord insec0 = intersect3(t0, t1, (t_coord){-nearside, near}, (t_coord){-farside, far});
 			t_coord insec1 = intersect3(t0, t1, (t_coord){nearside, near}, (t_coord){farside, far});
 			if (t0.y < near)
@@ -116,11 +117,11 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		t_coord scale1 = { hfov / t1.y, vfov / t1.y };
 		int x0 = dst->w / 2 - (int)(t0.x * scale0.x);
 		int x1 = dst->w / 2 - (int)(t1.x * scale1.x);
-		if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1)
+		if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1) //Look At Better
 		{
 			k++;
 			printf("Begin\n");
-			printf("Player Angle: %f, c %f, s %f\n", game->player->angle, p.x, p.y);
+			printf("Player Angle: %f, cos %f, sin %f\n", game->player->angle, p.cos, p.sin);
 			printf("t0 : x = %f, y = %f\n", t0.x, t0.y);
 			printf("t1 : x = %f, y = %f\n", t1.x, t1.y);
 			printf("Scale0 : x = %f, y = %f\n", scale0.x, scale0.y);
@@ -129,31 +130,32 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 			printf("End\n\n");
 			continue;
 		}
-		printf("Here1\n");
-		float yceil = sectors[i].ceil - game->player->height;
-		float yfloor = sectors[i].floor - game->player->height;
+		float yceil = sectors[game->player->cur_sector].ceil - game->player->height;
+		float yfloor = sectors[game->player->cur_sector].floor - game->player->height;
 
+		//Look At Better
 		t_point y1 = {dst->h / 2 - (int)(yceil * scale0.y), dst->h / 2 - (int)(yfloor * scale0.y)};
 		t_point y2 = {dst->h / 2 - (int)(yceil * scale1.y), dst->h / 2 - (int)(yfloor * scale1.y)};
-		t_point xvalues = {(int)fminf(x0, 0), (int)fmaxf(x1, dst->w - 1)};
-		i = 0;
+
+		//Look At Better
+		t_point xvalues = {(int)fmaxf(x0, 0), (int)fminf(x1, dst->w - 1)};
+		i = xvalues.x;
 		printf("Here0\n");
 		while (i <= xvalues.y)
 		{
-			printf("Herea\n");
-			int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0);
+			int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0) + y1.x;
 			int cya = ft_constrain(ya, ytop[i], yBottom[i]);
-			int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0);
+			int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0) + y1.y;
 			int cyb = ft_constrain(yb, ytop[i], yBottom[i]);
-			/* Draw Ceiling */
-			draw_vline(dst, (t_drawinfo){i, ytop[i], cya - 1, 0x111111FF, 0x222222FF, 0x111111FF});
-			/* Draw Floor */
-			draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0x0000FFFF, 0x0000AAFF, 0x0000FFFF});
-			/* Draw Wall / Portal */
+			/* Draw Ceiling (Colour Green)*/
+			draw_vline(dst, (t_drawinfo){i, ytop[i], cya - 1, 0xFF66FF66, 0xFF66FF66, 0xFF66FF66});
+			/* Draw Floor (Colour Blue)*/
+			draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0xFF0000cc, 0xFF0000cc, 0xFF0000cc});
+			/* Draw Wall (Colour White) / Portal (Colour Red)*/
 			if (walls[k].is_portal)
-				draw_vline(dst, (t_drawinfo){i, cya, cyb, 0x00AA00FF, 0x00AA00FF, 0x00AA00FF});
+				draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, 0xFFFF0000, 0});
 			else
-				draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : 0xAAAAAAFF, 0});
+				draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : 0xffffffff, 0});
 			i++;
 		}
 		k++;

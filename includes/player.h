@@ -23,8 +23,8 @@
 
 typedef struct	s_mag
 {
-	float start;
-	float end;
+	float cos;
+	float sin;
 }				t_mag;
 
 typedef	struct	s_player
