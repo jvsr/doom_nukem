@@ -41,10 +41,10 @@ static void	manage_player_angle(t_game *game)
 		return ;
 	player = game->player;
 	SDL_GetRelativeMouseState(&mouse_pos.x, &mouse_pos.y);
-	tmp = (float)mouse_pos.x * game->setting->sensitivity * 0.2;
+	tmp = ((float)mouse_pos.x * game->setting->sensitivity);
 	player->angle = wrap_float(player->angle + tmp, 0, 360.0);
-	player->mag.cos = cosf(player->angle);
-	player->mag.sin = sinf(player->angle);
+	player->mag.cos = cosf(player->angle * PI_R);
+	player->mag.sin = sinf(player->angle * PI_R);
 	SDL_WarpMouseInWindow(game->window, game->surface->w / 2,
 		game->surface->h / 2);
 }
