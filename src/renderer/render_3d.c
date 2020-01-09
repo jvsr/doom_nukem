@@ -50,13 +50,12 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 {
 	int ytop[dst->w];
 	int yBottom[dst->w];
-	int renderedSectors[game->map->sector_count];
 	int i, k;
 	float hfov, vfov;
 
-	hfov = ((float)game->setting->fov / (float)180) * (float)dst->w;
-	vfov = ((float)game->setting->vfov / (float)360) * (float)dst->h;
-	ft_bzero(renderedSectors, game->map->sector_count * 4);
+	hfov = 0.73 * (float)dst->h;
+	vfov = 0.2 * (float)dst->h;
+	printf("Dimensions : %i, %i\n", dst->w, dst->h);
 	ft_bzero(ytop, dst->w * 4);
 	ft_memset4(yBottom, dst->h - 1, dst->w);
 	k = 0;
@@ -69,9 +68,9 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_0.y - game->player->pos.y};
 		t_coord v1 = {walls[k].corner_1.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
 		
-		t_mag p = game->player->mag;
-		t_coord t0 = {v0.x * p.sin - v0.y * p.cos, v0.x * p.cos + v0.y * p.sin};
-		t_coord t1 = {v1.x * p.sin - v1.y * p.cos, v1.x * p.cos + v1.y * p.sin};
+		t_mag *p = &game->player->mag;
+		t_coord t0 = {v0.x * p->sin - v0.y * p->cos, v0.x * p->cos + v0.y * p->sin};
+		t_coord t1 = {v1.x * p->sin - v1.y * p->cos, v1.x * p->cos + v1.y * p->sin};
 		if (t0.y <= 0 && t1.y <= 0)
 		{
 			k++;
@@ -79,7 +78,6 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		}
 		if (t0.y <= 0 || t1.y <= 0)
 		{
-			printf("Close\n");
 			float near = 1e-4f;
 			float far = 5.0;
 			float nearside = 1e-5f;
@@ -117,11 +115,11 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		t_coord scale1 = { hfov / t1.y, vfov / t1.y };
 		int x0 = dst->w / 2 - (int)(t0.x * scale0.x);
 		int x1 = dst->w / 2 - (int)(t1.x * scale1.x);
-		if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1) //Look At Better
+		if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1)
 		{
 			k++;
 			printf("Begin\n");
-			printf("Player Angle: %f, cos %f, sin %f\n", game->player->angle, p.cos, p.sin);
+			printf("Player Angle: %f, c %f, s %f\n", game->player->angle, game->player->mag.cos, game->player->mag.sin);
 			printf("t0 : x = %f, y = %f\n", t0.x, t0.y);
 			printf("t1 : x = %f, y = %f\n", t1.x, t1.y);
 			printf("Scale0 : x = %f, y = %f\n", scale0.x, scale0.y);
@@ -136,11 +134,8 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		//Look At Better
 		t_point y1 = {dst->h / 2 - (int)(yceil * scale0.y), dst->h / 2 - (int)(yfloor * scale0.y)};
 		t_point y2 = {dst->h / 2 - (int)(yceil * scale1.y), dst->h / 2 - (int)(yfloor * scale1.y)};
-
-		//Look At Better
 		t_point xvalues = {(int)fmaxf(x0, 0), (int)fminf(x1, dst->w - 1)};
 		i = xvalues.x;
-		printf("Here0\n");
 		while (i <= xvalues.y)
 		{
 			int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0) + y1.x;

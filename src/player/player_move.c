@@ -24,8 +24,8 @@ static t_bool	move_forward(t_player *player, float speed)
 	float	xspeed;
 	float	yspeed;
 
-	xspeed = speed * cos(player->angle * PI_R);
-	yspeed = speed * sin(player->angle * PI_R);
+	xspeed = speed * cos(player->angle + (*player->fov / 2) * PI_R);
+	yspeed = speed * sin(player->angle + (*player->fov / 2) * PI_R);
 	player->pos.x += xspeed;
 	player->pos.y += yspeed;
 	return (TRUE);

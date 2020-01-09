@@ -46,7 +46,7 @@ static void		map_init(t_game *game)
 		error_msg_errno("Could not allocate Map Sector");
 	game->map->sector_count = 1;
 	game->map->sectors[0].ceil = 40;
-	game->map->sectors[0].floor = 10;
+	game->map->sectors[0].floor = 0;
 	game->map->sectors->wall_count = 4;
 	game->map->sectors->walls = ft_memalloc(sizeof(t_wall) * 4);
 	if (game->map->sectors->walls == NULL)

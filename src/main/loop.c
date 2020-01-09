@@ -63,7 +63,7 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 	
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
 	{
-		//game->player->height += 1;
+		game->player->height += 0.1;
 		set_elem_redraw(get_gui_child(game->ui, "gameview"));
 		//printf("Height %f\n", game->player->height);
 	}
@@ -94,7 +94,7 @@ void			loop(t_game *game)
 	game->player->pos.x = 0;
 	game->player->pos.y = 0;
 	game->player->cur_sector = 0;
-	game->player->height = 16;
+	game->player->height = 6;
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))

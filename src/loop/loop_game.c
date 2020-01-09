@@ -18,14 +18,12 @@
 
 void		loop_game(t_game *game)
 {
-	t_bool	redraw;
 	char	*elem_text;
-
-	redraw = player_move(game->player, game->keymap);
+	
+	player_move(game->player, game->keymap);
 	elem_text = ft_strformat("Angle: %.2f\nPos: %.2f %.2f",
 		game->player->angle, game->player->pos.x, game->player->pos.y);
 	set_elem_text_str(get_gui_child(game->ui, "angle"), elem_text);
-	if (redraw == TRUE)
-		set_elem_redraw(get_gui_child(game->ui, "gameview"));
+	set_elem_redraw(get_gui_child(game->ui, "gameview"));
 	ft_strdel(&elem_text);
 }
