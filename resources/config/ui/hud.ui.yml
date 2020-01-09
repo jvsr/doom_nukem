@@ -5,6 +5,6 @@
     - gview: gameview
   - text_block: angle
     - pos: 0.1, 0.1
-    - dim: 0.1, 0.1
+    - dim: 0.1, 0.2
     - text: "Angle: "
     - text_color: #FFFFFF

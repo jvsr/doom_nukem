@@ -13,7 +13,8 @@
 # Sublib folder names
 SUBLIBS = main color sdl_extra tga_reader gui game gui_config sdl_thread \
 			audio keymap serializer eventstate map_parse table renderer init \
-			cmath loop
+			cmath loop \
+			player
 
 # Executable name
 NAME = doom-nukem
