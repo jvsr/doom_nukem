@@ -40,12 +40,11 @@ static void	manage_player_angle(t_game *game)
 	if (!SDL_GetRelativeMouseMode())
 		return ;
 	player = game->player;
-	SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
-	tmp = ((float)((float)mouse_pos.x - (game->surface->w / 2)) / game->surface->w)
-		* 60.0 * game->setting->sensitivity;
+	SDL_GetRelativeMouseState(&mouse_pos.x, &mouse_pos.y);
+	tmp = (float)mouse_pos.x * game->setting->sensitivity;
 	player->angle = wrap_float(player->angle + tmp, 0, 360.0);
-	player->mag.cos = cosf(player->angle * PI_R);
-	player->mag.sin = sinf(player->angle * PI_R);
+	player->mag.cos = cosf(player->angle);
+	player->mag.sin = sinf(player->angle);
 	ft_memcpy(&player->mag, &(t_coord){wrap_float(player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));
