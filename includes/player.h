@@ -20,6 +20,10 @@
 # include "coord.h"
 
 # define PLAYER_HEIGHT 2.0
+# define PLAYER_MOVE_SPEED 3
+# define PLAYER_RUN_SPEED 4.5
+
+typedef struct s_hashmap	t_hashmap;
 
 typedef struct	s_mag
 {
@@ -46,5 +50,7 @@ typedef	struct	s_player
 	t_uint32	cur_sector;
 	float		height;
 }				t_player;
+
+t_bool			player_move(t_player *player, t_hashmap *keymap);
 
 #endif

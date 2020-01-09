@@ -36,4 +36,7 @@ t_bool			set_keystate(const t_hashmap *keymap, SDL_Keycode key,
 					t_keystate state);
 const char		*get_keystate_name(SDL_Keycode key);
 
+t_bool			is_helddown(t_hashmap const *keymap, SDL_Keycode key);
+t_bool			is_toggled(t_hashmap const *keymap, SDL_Keycode key);
+
 #endif
