@@ -10,17 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_str.h"
+
 #include "gui.h"
 #include "game.h"
 #include "player.h"
-#include "libft/ft_str.h"
 
-void	loop_game(t_game *game)
+void		loop_game(t_game *game)
 {
-	char *num;
+	t_bool	redraw;
+	char	*elem_text;
 
-	num = ft_strformat("Angle: %f", game->player->angle);
-	set_elem_text_str(get_gui_child(game->ui, "angle"), num);
-	// set_elem_redraw(get_gui_child(game->ui, "gameview"));
-	ft_strdel(&num);
+	redraw = player_move(game->player, game->keymap);
+	elem_text = ft_strformat("Angle: %.2f\nPos: %.2f %.2f",
+		game->player->angle, game->player->pos.x, game->player->pos.y);
+	set_elem_text_str(get_gui_child(game->ui, "angle"), elem_text);
+	if (redraw == TRUE)
+		set_elem_redraw(get_gui_child(game->ui, "gameview"));
+	ft_strdel(&elem_text);
 }

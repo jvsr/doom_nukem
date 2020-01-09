@@ -14,9 +14,11 @@ CCFLAGS +=
 # Source file prefix
 PREFIX =
 
+# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with ft_ and sufixed with .c
+FT_SRCS =
+
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = set_keystate get_keystate print_keymap init_keymap toggle_keystate \
-	set_keystate_all reset_keymap clear_keymap new_keystate \
-	is_toggled \
-	is_helddown
+SRCS = \
+	player_move

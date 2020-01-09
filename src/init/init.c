@@ -28,6 +28,7 @@ static void		player_init(t_game *game)
 	game->player = ft_memalloc(sizeof(t_player));
 	if (game->player == NULL)
 		error_msg_errno("Could not allocate Game Player");
+	game->player->fov = &game->setting->fov;
 	get_vector_from_angle(game->player->angle, &game->player->forward);
 	game->player->height = PLAYER_HEIGHT;
 	ft_memcpy(&game->player->mag, &(t_coord){wrap_float(game->player->angle -
