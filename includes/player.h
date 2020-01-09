@@ -20,8 +20,8 @@
 # include "coord.h"
 
 # define PLAYER_HEIGHT 2.0
-# define PLAYER_MOVE_SPEED 1.5
-# define PLAYER_RUN_SPEED 2.5
+# define PLAYER_MOVE_SPEED 0.5
+# define PLAYER_RUN_SPEED 1
 
 typedef struct s_hashmap	t_hashmap;
 

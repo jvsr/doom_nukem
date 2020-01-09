@@ -71,3 +71,4 @@ dkms.conf
 # Other
 get_headers
 personal.h
+log

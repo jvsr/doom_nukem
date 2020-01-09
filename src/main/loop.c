@@ -95,6 +95,7 @@ void			loop(t_game *game)
 	game->player->pos.y = 0;
 	game->player->cur_sector = 0;
 	game->player->height = 6;
+	game->player->mag = (t_mag){cosf(0), sinf(0)};
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))

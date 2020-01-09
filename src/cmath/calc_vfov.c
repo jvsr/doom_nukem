@@ -16,8 +16,8 @@
 
 void	calc_vfov(t_setting *set, float width, float height)
 {
-	float const h_fov = tan((set->fov * PI_D) / 2);
-	float const ratio = width / height;
+	float const h_fov = tan(((float)set->fov * PI_R) / 2.0);
+	float const ratio = height / width;
 
-	set->vfov = ceil(2 * atan(h_fov * ratio) * PI_D);
+	set->vfov = ceil(2.0 * atan(h_fov * ratio) * PI_D);
 }

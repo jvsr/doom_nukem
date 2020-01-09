@@ -4,7 +4,7 @@
   - panel: gviewpanel
     - gview: gameview
   - text_block: angle
-    - pos: 0.1, 0.1
-    - dim: 0.1, 0.2
+    - pos: 0.01, 0.01
+    - dim: 0.2, 0.4
     - text: "Angle: "
-    - text_color: #FFFFFF
+    - text_color: #000000

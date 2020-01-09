@@ -44,8 +44,6 @@ void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 	}
 }
 
-
-
 void	render_3d(t_game *game, SDL_Surface *dst)
 {
 	int ytop[dst->w];
@@ -55,7 +53,6 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 
 	hfov = 0.73 * (float)dst->h;
 	vfov = 0.2 * (float)dst->h;
-	printf("Dimensions : %i, %i\n", dst->w, dst->h);
 	ft_bzero(ytop, dst->w * 4);
 	ft_memset4(yBottom, dst->h - 1, dst->w);
 	k = 0;
@@ -118,14 +115,6 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 		if (x0 >= x1 || x1 < 0 || x0 > dst->w - 1)
 		{
 			k++;
-			printf("Begin\n");
-			printf("Player Angle: %f, c %f, s %f\n", game->player->angle, game->player->mag.cos, game->player->mag.sin);
-			printf("t0 : x = %f, y = %f\n", t0.x, t0.y);
-			printf("t1 : x = %f, y = %f\n", t1.x, t1.y);
-			printf("Scale0 : x = %f, y = %f\n", scale0.x, scale0.y);
-			printf("Scale1 : x = %f, y = %f\n", scale1.x, scale1.y);
-			printf("x0: %i, x1: %i\n", x0, x1);
-			printf("End\n\n");
 			continue;
 		}
 		float yceil = sectors[game->player->cur_sector].ceil - game->player->height;
