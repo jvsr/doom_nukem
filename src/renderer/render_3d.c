@@ -56,7 +56,6 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	vfov = 0.2 * (float)dst->h;
 	ft_bzero(yTop, dst->w * 4);
 	ft_memset4(yBottom, dst->h - 1, dst->w);
-	k = 0;
 	count = 0;
 	r_max = 1;
 	t_sector *sectors = game->map->sectors;
@@ -66,6 +65,7 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	while (count < r_max)
 	{
 		t_wall *walls = renders[count].sector->walls;
+		k = 0;
 		while ((t_uint64)k < renders[count].sector->wall_count)
 		{
 			t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_0.y - game->player->pos.y};
