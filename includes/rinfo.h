@@ -17,6 +17,8 @@
 # include "libft/ft_bool.h"
 # include "types.h"
 
+# define MAX_RENDERS 32
+
 typedef struct s_sector	t_sector;
 
 typedef struct	s_wall
@@ -50,5 +52,12 @@ typedef struct	s_drawinfo
 	int		middle;
 	int		bottom;
 }				t_drawinfo;
+
+typedef struct	s_ritem
+{
+	t_sector	*sector;
+	int			beginx;
+	int			endx;
+}				t_ritem;
 
 #endif

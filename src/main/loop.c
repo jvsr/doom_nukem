@@ -65,7 +65,6 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 	{
 		game->player->height += 0.1;
 		set_elem_redraw(get_gui_child(game->ui, "gameview"));
-		//printf("Height %f\n", game->player->height);
 	}
 }
 
