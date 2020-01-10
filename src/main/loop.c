@@ -87,6 +87,8 @@ void			loop(t_game *game)
 {
 	SDL_Event	event;
 	void		(*eventstate_fnc)(t_game*, SDL_Event);
+	int			framecount;
+	t_uint64	lastsecond;
 
 	load_info(game);
 	fade_in_music(game->audio_man, TITLE_SONG, 3500);
@@ -95,6 +97,8 @@ void			loop(t_game *game)
 	game->player->cur_sector = 0;
 	game->player->height = 6;
 	game->player->mag = (t_mag){cosf(0), sinf(0)};
+	framecount = 0;
+	lastsecond = get_gametime(&game->starttime);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
@@ -108,5 +112,12 @@ void			loop(t_game *game)
 		loop_core(game, game->cureventstate->eventstate);
 		draw_gui(game->ui, game);
 		SDL_UpdateWindowSurface(game->window);
+		if(get_gametime(&game->starttime) - lastsecond >= 1000)
+		{
+			printf("FPS %d\n", framecount);
+			framecount = 0;
+			lastsecond = get_gametime(&game->starttime);
+		}
+		framecount++;
 	}
 }
