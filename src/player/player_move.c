@@ -19,19 +19,17 @@
 #include "player.h"
 #include "keymap.h"
 
-static t_bool	move_forward(t_player *player, float speed)
+static t_bool	move_forward(t_player *player, float speed, t_map *map)
 {
 	float	xspeed;
 	float	yspeed;
 
 	xspeed = speed * cosf(player->angle * PI_R);
 	yspeed = speed * sinf(player->angle * PI_R);
-	player->pos.x += xspeed;
-	player->pos.y += yspeed;
-	return (TRUE);
+	return (player_col(player, map, xspeed, yspeed));
 }
 
-static t_bool	move_backward(t_player *player, float speed)
+static t_bool	move_backward(t_player *player, float speed, t_map *map)
 {
 	float	xspeed;
 	float	yspeed;
@@ -40,10 +38,10 @@ static t_bool	move_backward(t_player *player, float speed)
 	yspeed = -(speed * sin(player->angle * PI_R));
 	player->pos.x += xspeed;
 	player->pos.y += yspeed;
-	return (TRUE);
+	return (player_col(player, map, xspeed, yspeed));
 }
 
-static t_bool	move_left(t_player *player, float speed)
+static t_bool	move_left(t_player *player, float speed, t_map *map)
 {
 	float	xspeed;
 	float	yspeed;
@@ -52,10 +50,10 @@ static t_bool	move_left(t_player *player, float speed)
 	yspeed = -(speed * cos(player->angle * PI_R));
 	player->pos.x += xspeed;
 	player->pos.y += yspeed;
-	return (TRUE);
+	return (player_col(player, map, xspeed, yspeed));
 }
 
-static t_bool	move_right(t_player *player, float speed)
+static t_bool	move_right(t_player *player, float speed, t_map *map)
 {
 	float	xspeed;
 	float	yspeed;
@@ -64,10 +62,10 @@ static t_bool	move_right(t_player *player, float speed)
 	yspeed = speed * cos(player->angle * PI_R);
 	player->pos.x += xspeed;
 	player->pos.y += yspeed;
-	return (TRUE);
+	return (player_col(player, map, xspeed, yspeed));
 }
 
-t_bool			player_move(t_player *player, t_hashmap *keymap)
+t_bool			player_move(t_player *player, t_hashmap *keymap, t_map *map)
 {
 	t_bool	draw;
 	float	speed;
@@ -78,12 +76,12 @@ t_bool			player_move(t_player *player, t_hashmap *keymap)
 	else
 		speed = PLAYER_MOVE_SPEED;
 	if (is_helddown(keymap, SDLK_w))
-		draw |= move_forward(player, speed);
+		draw |= move_forward(player, speed, map);
 	if (is_helddown(keymap, SDLK_s))
-		draw |= move_backward(player, speed);
+		draw |= move_backward(player, speed, map);
 	if (is_helddown(keymap, SDLK_a))
-		draw |= move_left(player, speed);
+		draw |= move_left(player, speed, map);
 	if (is_helddown(keymap, SDLK_d))
-		draw |= move_right(player, speed);
+		draw |= move_right(player, speed, map);
 	return (draw);
 }

@@ -20,7 +20,7 @@ void		loop_game(t_game *game)
 {
 	char	*elem_text;
 	
-	player_move(game->player, game->keymap);
+	player_move(game->player, game->keymap, game->map);
 	elem_text = ft_strformat("Angle: %.2f\nPos: %.2f %.2f",
 		game->player->angle, game->player->pos.x, game->player->pos.y);
 	set_elem_text_str(get_gui_child(game->ui, "angle"), elem_text);

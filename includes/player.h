@@ -24,6 +24,7 @@
 # define PLAYER_RUN_SPEED 1
 
 typedef struct s_hashmap	t_hashmap;
+typedef struct s_map		t_map;
 
 typedef struct	s_mag
 {
@@ -51,6 +52,8 @@ typedef	struct	s_player
 	float		height;
 }				t_player;
 
-t_bool			player_move(t_player *player, t_hashmap *keymap);
+t_bool			player_move(t_player *player, t_hashmap *keymap, t_map *map);
+t_bool			player_col(t_player *player,
+									t_map *map, float xspeed, float yspeed);
 
 #endif
