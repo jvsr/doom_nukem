@@ -25,4 +25,6 @@ void	set_elem_redraw(t_transform *elem)
 		cur->parent.elem->redraw = TRUE;
 		cur = cur->parent.elem;
 	}
+	if (cur->parent_type == GUI)
+		cur->parent.ui->redraw = TRUE;
 }

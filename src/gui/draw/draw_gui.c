@@ -17,10 +17,13 @@ void			draw_gui(t_gui *ui)
 {
 	t_transform	*cur;
 
+	if (ui->redraw == FALSE)
+		return ;
 	cur = ui->children;
 	while (cur != NULL)
 	{
 		draw_elem(cur);
 		cur = cur->next;
 	}
+	ui->redraw = FALSE;
 }
