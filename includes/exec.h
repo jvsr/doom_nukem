@@ -17,9 +17,12 @@
 
 typedef struct s_parse_info	t_parse_info;
 
-t_transform		*new_exec_elem(t_gui *ui, t_parse_info *elem_info);
+t_transform		*new_exec_elem(t_gui *ui, t_parse_info *elem_info,
+								char const *exec_path);
 void			set_exec_gui_text(t_transform *elem, t_parse_info *elem_info);
-void			set_exec_gui_image(t_transform *elem, t_parse_info *elem_info);
-void			set_exec_gui_button(t_transform *elem, t_parse_info *elem_info);
+void			set_exec_gui_image(t_transform *elem, t_parse_info *elem_info,
+									char const *exec_path);
+void			set_exec_gui_button(t_transform *elem, t_parse_info *elem_info,
+									char const *exec_path);
 
 #endif

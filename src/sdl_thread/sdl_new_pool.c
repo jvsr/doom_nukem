@@ -18,8 +18,7 @@
 #include "sdl_thread.h"
 #include "error.h"
 
-static SDL_Thread	*alloc_thread(size_t number,
-										t_thread *thread, t_bool centralised)
+static SDL_Thread	*alloc_thread(size_t number, t_thread *thread)
 {
 	SDL_Thread	*sdl_thread;
 	char		*name;
@@ -27,11 +26,8 @@ static SDL_Thread	*alloc_thread(size_t number,
 	name = ft_strformat("Pool-Thread %zu", number);
 	if (name == NULL)
 		error_msg_errno("Failed to alloc thread name");
-	if (!centralised)
-		sdl_thread = SDL_CreateThread(&sdl_manage_thread, name, thread);
-	else
-		sdl_thread = SDL_CreateThread(&sdl_manage_thread_worker, name, thread);
-	if (thread == NULL)
+	sdl_thread = SDL_CreateThread(&sdl_manage_thread_worker, name, thread);
+	if (sdl_thread == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc pool thread");
 	free(name);
 	return (sdl_thread);
@@ -47,7 +43,7 @@ static t_thread		*new_thread(t_pool *pool, size_t number)
 	thread->number = number;
 	thread->state = IDLE;
 	thread->pool = pool;
-	thread->thread = alloc_thread(number, thread, pool->centralised);
+	thread->thread = alloc_thread(number, thread);
 	return (thread);
 }
 
@@ -67,14 +63,20 @@ static void			alloc_threads(t_pool *pool, size_t size)
 static void			set_default(t_pool *pool,
 							size_t size, t_bool tracktime, t_bool centralised)
 {
+	SDL_Thread	*manager;
+
 	pool->size = size;
 	pool->state = ACTIVE;
 	pool->suspended = TRUE;
 	pool->tracktime = tracktime;
 	pool->centralised = centralised;
 	if (centralised)
-		pool->manager = SDL_CreateThread(sdl_manage_thread_central,
-															"Manager", pool);
+	{
+		manager = SDL_CreateThread(sdl_manage_thread_central, "Manager", pool);
+		if (manager == NULL)
+			error_msg_sdl(ENOMEM, "Failed to alloc pool manager thread");
+		pool->manager = manager;
+	}
 	else
 		pool->manager = NULL;
 }

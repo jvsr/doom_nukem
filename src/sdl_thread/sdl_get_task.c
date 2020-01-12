@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_run_task.c                                     :+:    :+:            */
+/*   sdl_get_task.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/25 14:58:08 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:47:03 by pholster      ########   odam.nl         */
+/*   Created: 2019/12/06 13:09:26 by pholster       #+#    #+#                */
+/*   Updated: 2019/12/06 13:09:26 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <time.h>
 
 #include "sdl_thread.h"
 
@@ -16,20 +18,25 @@
 ** * Thread internal function
 */
 
-t_bool		sdl_run_task(t_task const *task)
+t_task		*sdl_get_task(t_pool *pool)
 {
-	void	**params;
+	atomic_char	state;
+	t_task		*task;
 
-	params = (void **)task->params;
-	if (task->param_count == 0)
-		task->f();
-	else if (task->param_count == 1)
-		task->f(params[0]);
-	else if (task->param_count == 2)
-		task->f(params[0], params[1]);
-	else if (task->param_count == 3)
-		task->f(params[0], params[1], params[2]);
-	else
-		task->f(params[0], params[1], params[2], params[3]);
-	return (TRUE);
+	if (pool->que == NULL)
+		return (NULL);
+	state = atomic_exchange(&(pool->state), LOCKED);
+	if (state == LOCKED)
+		return (NULL);
+	task = pool->que;
+	if (task != NULL)
+	{
+		pool->que = task->next;
+		if (task == pool->que_last)
+			pool->que_last = NULL;
+	}
+	atomic_store(&(pool->state), state);
+	if (task != NULL)
+		task->next = NULL;
+	return (task);
 }

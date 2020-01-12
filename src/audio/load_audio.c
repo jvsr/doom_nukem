@@ -12,8 +12,8 @@
 
 #include "audio.h"
 
-void		load_audio(t_audio_man *man)
+void		load_audio(t_audio_man *man, char const *exec_path)
 {
-	load_sound(man->sound_map);
-	load_music(man->music_map);
+	load_sound(man->sound_map, exec_path);
+	load_music(man->music_map, exec_path);
 }

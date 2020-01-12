@@ -29,21 +29,20 @@ typedef struct s_campaign		t_campaign;
 typedef struct s_eventstate		t_eventstate;
 typedef struct s_map			t_map;
 
-char const		*g_doom_dir;
-
-typedef	enum	e_gamestate
+typedef	enum	e_state
 {
 	running,
 	suspended,
 	stopped
-}				t_gamestate;
+}				t_state;
 
 typedef struct	s_game
 {
+	char			*exec_path;
 	char			*exec_name;
 	char			**envp;
 	char			**argv;
-	t_gamestate		state;
+	t_state			state;
 	SDL_Window		*window;
 	SDL_Surface		*surface;
 	t_gui			*ui;
@@ -61,7 +60,7 @@ typedef struct	s_game
 }				t_game;
 
 void			loop(t_game *game);
-void			display_splash(t_game *game, char *loc);
+void			display_splash(t_game *game, char *loc, char const *exec_path);
 void			loader(t_game *game);
 void			quit(int exit_code);
 

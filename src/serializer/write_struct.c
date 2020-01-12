@@ -21,12 +21,12 @@
 #include "serializer.h"
 #include "error.h"
 
-t_bool	write_struct(char *loc, t_binary *bin)
+t_bool	write_struct(char *loc, t_binary *bin, char const *exec_path)
 {
 	int		fd;
 	char	full_path[PATH_MAX];
 
-	ft_strcpy(full_path, g_doom_dir);
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, RESOURCE_PATH);
 	ft_strcat(full_path, loc);
 	fd = open(full_path, O_RDWR | O_CREAT | O_TRUNC,

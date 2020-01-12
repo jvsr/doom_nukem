@@ -16,7 +16,7 @@
 #include "serializer.h"
 #include "error.h"
 
-t_setting	*read_settings(void)
+t_setting	*read_settings(char const *exec_path)
 {
 	t_setting		*setting;
 	t_binary_read	*bin;
@@ -24,7 +24,7 @@ t_setting	*read_settings(void)
 	setting = (t_setting*)ft_memalloc(sizeof(t_setting));
 	if (setting == NULL)
 		error_msg_errno("Failed to alloc settings");
-	bin = new_binary_read("settings/settings.conf", TRUE);
+	bin = new_binary_read("settings/settings.conf", TRUE, exec_path);
 	setting->sensitivity = read_float(bin);
 	setting->music_volume = read_float(bin);
 	setting->sound_volume = read_float(bin);

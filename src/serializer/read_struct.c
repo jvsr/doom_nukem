@@ -21,13 +21,13 @@
 #include "serializer.h"
 #include "error.h"
 
-unsigned char		*read_struct(const char *loc)
+unsigned char		*read_struct(const char *loc, char const *exec_path)
 {
 	int				fd;
 	unsigned char	*file_stream;
 	char			full_path[PATH_MAX];
 
-	ft_strcpy(full_path, g_doom_dir);
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, RESOURCE_PATH);
 	ft_strcat(full_path, loc);
 	fd = open(full_path, O_RDONLY);

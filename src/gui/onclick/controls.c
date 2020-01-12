@@ -21,7 +21,7 @@ void	controls_return(t_game *game, t_transform *gui)
 	t_transform	*overlay;
 
 	(void)gui;
-	write_settings(game->setting);
+	write_settings(game->setting, game->exec_path);
 	menu = get_gui_child(game->ui, "controlsmenu");
 	overlay = get_gui_child(game->ui, "controlsoverlay");
 	set_elem_show_clickable(menu, FALSE);

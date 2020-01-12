@@ -31,12 +31,12 @@ static t_gui	*alloc_ui(void)
 	return (ui);
 }
 
-static TTF_Font	*open_font(const char *file_name)
+static TTF_Font	*open_font(const char *file_name, char const *exec_path)
 {
 	TTF_Font	*font;
 	char		full_path[PATH_MAX];
 
-	ft_strcpy(full_path, g_doom_dir);
+	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, FONT_PATH);
 	ft_strcat(full_path, file_name);
 	font = TTF_OpenFont(full_path, 50);
@@ -45,13 +45,13 @@ static TTF_Font	*open_font(const char *file_name)
 	return (font);
 }
 
-static void		init_fonts(t_gui *ui)
+static void		init_fonts(t_gui *ui, char const *exec_path)
 {
-	ui->fonts[0] = open_font("Roboto-Regular.ttf");
-	ui->fonts[1] = open_font("monof55.ttf");
-	ui->fonts[2] = open_font("ka1.ttf");
-	ui->fonts[3] = open_font("Foul-Fiend.ttf");
-	ui->fonts[4] = open_font("NECK-ROMANCER-Regular.ttf");
+	ui->fonts[0] = open_font("Roboto-Regular.ttf", exec_path);
+	ui->fonts[1] = open_font("monof55.ttf", exec_path);
+	ui->fonts[2] = open_font("ka1.ttf", exec_path);
+	ui->fonts[3] = open_font("Foul-Fiend.ttf", exec_path);
+	ui->fonts[4] = open_font("NECK-ROMANCER-Regular.ttf", exec_path);
 }
 
 void			init_gui(t_game *game)
@@ -61,5 +61,5 @@ void			init_gui(t_game *game)
 	ui = alloc_ui();
 	game->ui = ui;
 	ui->window_surface = game->surface;
-	init_fonts(ui);
+	init_fonts(ui, game->exec_path);
 }

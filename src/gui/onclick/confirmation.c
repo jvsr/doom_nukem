@@ -55,7 +55,7 @@ void	restart_game(t_game *game, t_transform *gui)
 	char		full_path[PATH_MAX];
 
 	(void)gui;
-	ft_strcpy(full_path, g_doom_dir);
+	ft_strcpy(full_path, game->exec_path);
 	ft_strcat(full_path, game->exec_name);
 	execve(full_path, game->argv, game->envp);
 	quit(0);

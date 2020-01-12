@@ -15,7 +15,8 @@
 #include "serializer.h"
 #include "error.h"
 
-t_binary_read	*new_binary_read(const char *loc, t_bool add_header)
+t_binary_read	*new_binary_read(const char *loc,
+									t_bool add_header, char const *exec_path)
 {
 	t_binary_read	*bin_r;
 	long			tmp;
@@ -23,7 +24,7 @@ t_binary_read	*new_binary_read(const char *loc, t_bool add_header)
 	bin_r = (t_binary_read*)ft_memalloc(sizeof(t_binary_read));
 	if (bin_r == NULL)
 		error_msg_errno("Unable to allocate binary in-stream");
-	bin_r->bytes = read_struct(loc);
+	bin_r->bytes = read_struct(loc, exec_path);
 	if (add_header)
 	{
 		bin_r->header_pos = sizeof(long) + sizeof(char);

@@ -20,13 +20,13 @@
 #include "audio.h"
 #include "error.h"
 
-Mix_Chunk	*get_chunk_from_wav(char *file)
+Mix_Chunk	*get_chunk_from_wav(char *file, char const *exec_path)
 {
 	Mix_Chunk	*chunk;
 	char		full_path[PATH_MAX];
 
-	ft_strcpy(full_path, g_doom_dir);
-	ft_strcat(full_path, SOUND_PATH);
+	ft_strcpy(full_path, exec_path);
+	ft_strcat(full_path, SOUND_EFFECT_PATH);
 	ft_strcat(full_path, file);
 	ft_strcat(full_path, ".wav");
 	chunk = Mix_LoadWAV(full_path);

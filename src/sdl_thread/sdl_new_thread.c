@@ -28,7 +28,7 @@ static int		run_fnc(void *param)
 	return (TRUE);
 }
 
-SDL_Thread		*sdl_new_thread(const char *name, void (*f)(),
+SDL_Thread		*sdl_new_thread(char const *name, void (*f)(),
 								size_t param_count, ...)
 {
 	va_list		params;

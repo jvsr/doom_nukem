@@ -38,13 +38,13 @@ typedef struct	s_audio_man
 }				t_audio_man;
 
 void			load_audio(t_audio_man *man);
-void			load_sound(t_hashmap *sound_map);
-void			load_music(t_hashmap *music_map);
+void			load_sound(t_hashmap *sound_map, char const *exec_path);
+void			load_music(t_hashmap *music_map, char const *exec_path);
 void			free_audio(t_game *game);
 void			add_track_to_map(t_hashmap *map, void *track, char *const name);
 void			*get_track_from_map(t_hashmap *map, char *const name);
-Mix_Chunk		*get_chunk_from_wav(char *file);
-Mix_Music		*get_music_from_mp3(char *file);
+Mix_Chunk		*get_chunk_from_wav(char *file, char const *exec_path);
+Mix_Music		*get_music_from_mp3(char *file, char const *exec_path);
 void			play_music(t_audio_man *man, char *const music);
 void			stop_music(void);
 void			pause_music(void);
