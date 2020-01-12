@@ -25,5 +25,6 @@ void		rgba_to_color(SDL_Color *c, t_uint32 rgba);
 void		hex_to_color(SDL_Color *c, char *hex);
 t_uint32	hex_to_rgba(char *hex);
 t_uint32	mix_color(t_uint32 dst, t_uint32 src);
+t_uint32	rgba_intensity(t_uint32 colour, float offset);
 
 #endif

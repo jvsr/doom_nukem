@@ -18,6 +18,7 @@
 # include "types.h"
 
 # define MAX_RENDERS 32
+# define MAX_LIGHT_DIST 200.0
 
 typedef struct s_sector	t_sector;
 

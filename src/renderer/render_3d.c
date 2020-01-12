@@ -20,6 +20,7 @@
 #include "rinfo.h"
 #include "setting.h"
 #include <math.h>
+#include "color.h"
 
 void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 {
@@ -51,7 +52,7 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	int yBottom[dst->w];
 	int i, k, count, r_max;
 	float hfov, vfov;
-
+	
 	hfov = 0.73 * (float)dst->h;
 	vfov = 0.2 * (float)dst->h;
 	ft_bzero(yTop, dst->w * 4);
@@ -144,6 +145,7 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 			i = xvalues.x;
 			while (i <= xvalues.y)
 			{
+				float light = (MAX_LIGHT_DIST - clamp_float((float)((i - x0) * (t1.y - t0.y) / (x1 - x0) + t0.y), 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
 				int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0) + y1.x;
 				int cya = ft_constrain(ya + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 				int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0) + y1.y;
@@ -161,15 +163,15 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 					int cnyb = ft_constrain(nyb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 
 					/* Between our ceiling and the new sector ceiling */
-					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : 0xFF800080, 0});
+					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0});
 					yTop[i] = ft_constrain(ft_max(cya, cnya), yTop[i], dst->h - 1);
 
 					/* Between our floor and the new sector floor */
-					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : 0xFF800080, 0});
+					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0});
     	            yBottom[i] = ft_constrain(ft_min(cyb, cnyb), 0, yBottom[i]);
 				}
 				else
-					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : 0xffffffff, 0});
+					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xffffffff, light), 0});
 				i++;
 			}
 			if (walls[k].is_portal && xvalues.y > xvalues.x && count + 1 < MAX_RENDERS)

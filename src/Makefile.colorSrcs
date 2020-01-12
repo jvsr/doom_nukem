@@ -17,4 +17,4 @@ PREFIX =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = rgba_to_color color_to_rgba hex_to_color color_to_hex mix_color \
-	hex_to_rgba
+	hex_to_rgba rgba_intensity
