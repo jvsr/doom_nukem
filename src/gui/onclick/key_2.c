@@ -24,7 +24,6 @@ void	set_key_str(SDL_Keycode keycode, t_transform *self)
 	const char	*keystate = get_keystate_name(keycode);
 
 	set_elem_text_str(self, keystate);
-	ft_strdel((char**)&keystate);
 }
 
 void	controls_set_shoot(t_game *game, t_transform *gui)
