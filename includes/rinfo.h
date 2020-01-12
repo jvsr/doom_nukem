@@ -48,9 +48,11 @@ typedef struct	s_map
 typedef struct	s_iminfo
 {
 	SDL_Surface	*image;
-	int			pos;
-	int			begin;
-	int			end;
+	int			x;
+	int			beginx;
+	int			endx;
+	int			beginy;
+	int			endy;
 }				t_iminfo;
 
 typedef struct	s_drawinfo
@@ -70,6 +72,5 @@ typedef struct	s_ritem
 	int			beginx;
 	int			endx;
 }				t_ritem;
-
 
 #endif

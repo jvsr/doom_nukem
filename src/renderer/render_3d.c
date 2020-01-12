@@ -33,8 +33,8 @@ void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 	draw.y1 = ft_constrain(draw.y1, 0, dst->h - 1);
 	if (draw.y1 > draw.y0)
 	{
-		//if (draw.draw.image == NULL)
-		//{		
+		if (draw.draw.image == NULL)
+		{		
 			pixels[draw.y0 * dst->w + draw.x] = draw.top;
 			i = draw.y0 + 1;
 			while (i < draw.y1)
@@ -43,20 +43,18 @@ void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 				i++;
 			}
 			pixels[draw.y1 * dst->w + draw.x] = draw.bottom;
-		//}
-		/*
+		}
 		else
 		{
 			i = draw.y0;
 			img_pixels = (int*)draw.draw.image->pixels;
 			while (i <= draw.y1)
 			{
-				int img_pos = (int)(((float)i / draw.y1) * (draw.draw.image->h - 1)) * draw.draw.image->w + (int)(((float)(draw.draw.pos - draw.draw.begin) / (draw.draw.end - draw.draw.begin - 1)) * draw.draw.image->w);
+				int img_pos = (int)(((float)(i - draw.draw.beginy) / (draw.draw.endy - draw.draw.beginy - 1)) * draw.draw.image->h) * draw.draw.image->w + (int)(((float)(draw.draw.x - draw.draw.beginx) / (draw.draw.endx - draw.draw.beginx - 1)) * draw.draw.image->w);
 				pixels[i * dst->w + draw.x] = img_pixels[img_pos];
 				i++;
 			}	
 		}
-		*/
 	}
 }
 
@@ -166,9 +164,9 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 				int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0) + y1.y;
 				int cyb = ft_constrain(yb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 				/* Draw Ceiling (Colour Green)*/
-				draw_vline(dst, (t_drawinfo){i, yTop[i], cya - 1, 0, 0xFF66FF66, 0, (t_iminfo){NULL, i, x0, x1}});
+				draw_vline(dst, (t_drawinfo){i, yTop[i], cya - 1, 0, 0xFF66FF66, 0, (t_iminfo){NULL, i, x0, x1, yTop[i], cya - 1}});
 				/* Draw Floor (Colour Blue)*/
-				draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0, 0xFF0000cc, 0, (t_iminfo){NULL, i, x0, x1}});
+				draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0, 0xFF0000cc, 0, (t_iminfo){NULL, i, x0, x1, cyb + 1, yBottom[i]}});
 				/* Draw Wall (Colour White) / Portal (Colour Red)*/
 				if (walls[k].is_portal)
 				{
@@ -178,15 +176,15 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 					int cnyb = ft_constrain(nyb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 
 					/* Between our ceiling and the new sector ceiling */
-					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){get_texture(game, TEXTURE_BRICK_WALL), i, x0, x1}});
+					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){get_texture(game, TEXTURE_BRICK_WALL), i, x0, x1, cya, cnya - 1}});
 					yTop[i] = ft_constrain(ft_max(cya, cnya), yTop[i], dst->h - 1);
 
 					/* Between our floor and the new sector floor */
-					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){get_texture(game, TEXTURE_BRICK_WALL), i, x0, x1}});
+					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){get_texture(game, TEXTURE_BRICK_WALL), i, x0, x1, cnyb+1, cyb}});
     	            yBottom[i] = ft_constrain(ft_min(cyb, cnyb), 0, yBottom[i]);
 				}
 				else
-					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xffffffff, light), 0, (t_iminfo){get_texture(game, TEXTURE_BRICK_WALL), i, x0, x1}});
+					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xffffffff, light), 0, (t_iminfo){get_texture(game, TEXTURE_BRICK_WALL), i, x0, x1, cya, cyb}});
 				i++;
 			}
 			if (walls[k].is_portal && xvalues.y > xvalues.x && r_max + 1 < MAX_RENDERS)
