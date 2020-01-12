@@ -149,9 +149,9 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 				int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0) + y1.y;
 				int cyb = ft_constrain(yb, yTop[i], yBottom[i]);
 				/* Draw Ceiling (Colour Green)*/
-				draw_vline(dst, (t_drawinfo){i, yTop[i], cya - 1, 0xFF66FF66, 0xFF66FF66, 0xFF66FF66});
+				draw_vline(dst, (t_drawinfo){i, yTop[i], cya - 1, 0, 0xFF66FF66, 0});
 				/* Draw Floor (Colour Blue)*/
-				draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0xFF0000cc, 0xFF0000cc, 0xFF0000cc});
+				draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0, 0xFF0000cc, 0});
 				/* Draw Wall (Colour White) / Portal (Colour Red)*/
 				if (walls[k].is_portal)
 				{
@@ -167,9 +167,6 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 					/* Between our floor and the new sector floor */
 					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : 0xFF800080, 0});
     	            yBottom[i] = ft_constrain(ft_min(cyb, cnyb), 0, yBottom[i]);
-
-					/* Filling Out Space */
-					//draw_vline(dst, (t_drawinfo){i, yTop[i], yBottom[i], 0, 0xFFFF0000, 0});
 				}
 				else
 					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : 0xffffffff, 0});

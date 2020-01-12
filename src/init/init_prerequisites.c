@@ -76,6 +76,7 @@ t_game			*init_prerequisites(char **argv, char **envp)
 	set_basic_args(game, argv, envp);
 	init_settings(game);
 	init_window_surface(game);
+	SDL_GL_SetSwapInterval(-1);
 	calc_vfov(game->setting, game->surface->w, game->surface->h);
 	init_eventstate(game);
 	init_general(game);
