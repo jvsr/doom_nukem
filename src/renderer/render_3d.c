@@ -145,9 +145,9 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 			while (i <= xvalues.y)
 			{
 				int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0) + y1.x;
-				int cya = ft_constrain(ya, yTop[i], yBottom[i]);
+				int cya = ft_constrain(ya + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 				int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0) + y1.y;
-				int cyb = ft_constrain(yb, yTop[i], yBottom[i]);
+				int cyb = ft_constrain(yb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 				/* Draw Ceiling (Colour Green)*/
 				draw_vline(dst, (t_drawinfo){i, yTop[i], cya - 1, 0, 0xFF66FF66, 0});
 				/* Draw Floor (Colour Blue)*/
@@ -156,9 +156,9 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 				if (walls[k].is_portal)
 				{
 					int nya = (i - x0) * (ny2.x - ny1.x) / (x1 - x0) + ny1.x;
-					int cnya = ft_constrain(nya, yTop[i], yBottom[i]);
+					int cnya = ft_constrain(nya + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 					int nyb = (i - x0) * (ny2.y - ny1.y) / (x1 - x0) + ny1.y;
-					int cnyb = ft_constrain(nyb, yTop[i], yBottom[i]);
+					int cnyb = ft_constrain(nyb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 
 					/* Between our ceiling and the new sector ceiling */
 					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : 0xFF800080, 0});

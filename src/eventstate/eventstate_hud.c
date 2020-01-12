@@ -20,6 +20,7 @@
 #include "keymap.h"
 #include "setting.h"
 #include "onclick.h"
+#include "rinfo.h"
 #include "eventstate.h"
 #include "libft/ft_mem.h"
 
@@ -43,6 +44,9 @@ static void	manage_player_angle(t_game *game)
 	SDL_GetRelativeMouseState(&mouse_pos.x, &mouse_pos.y);
 	tmp = ((float)mouse_pos.x * game->setting->sensitivity);
 	player->angle = wrap_float(player->angle + tmp, 0, 360.0);
+	player->updown = clamp_float(player->updown -
+		((float)mouse_pos.y * game->setting->sensitivity * PLAYER_V_SENSE),
+		PLAYER_UPDOWN_MIN, PLAYER_UPDOWN_MAX);
 	player->mag.cos = cosf(player->angle * PI_R);
 	player->mag.sin = sinf(player->angle * PI_R);
 	SDL_WarpMouseInWindow(game->window, game->surface->w / 2,
