@@ -55,6 +55,7 @@ typedef	struct	s_player
 	t_coord		pos;
 	t_uint32	cur_sector;
 	float		height;
+	float		heightoffset;
 	float		updown;
 }				t_player;
 

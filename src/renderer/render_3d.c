@@ -123,15 +123,15 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 				k++;
 				continue;
 			}
-			float yceil = renders[count].sector->ceil - game->player->height;
-			float yfloor = renders[count].sector->floor - game->player->height;
+			float yceil = renders[count].sector->ceil - game->player->height - game->player->heightoffset;
+			float yfloor = renders[count].sector->floor - game->player->height - game->player->heightoffset;
 
 			float nyceil = 0;
 			float nyfloor = 0;
 			if (walls[k].is_portal)
 			{
-				nyceil = walls[k].window->ceil - game->player->height;
-				nyfloor = walls[k].window->floor - game->player->height;
+				nyceil = walls[k].window->ceil - game->player->height - game->player->heightoffset;
+				nyfloor = walls[k].window->floor - game->player->height - game->player->heightoffset;
 			}
 
 			t_point y1 = {dst->h / 2 - (int)(yceil * scale0.y), dst->h / 2 - (int)(yfloor * scale0.y)};
