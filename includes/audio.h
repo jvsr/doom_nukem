@@ -37,7 +37,7 @@ typedef struct	s_audio_man
 	t_hashmap	*sound_map;
 }				t_audio_man;
 
-void			load_audio(t_audio_man *man);
+void			load_audio(t_audio_man *man, char const *exec_path);
 void			load_sound(t_hashmap *sound_map, char const *exec_path);
 void			load_music(t_hashmap *music_map, char const *exec_path);
 void			free_audio(t_game *game);

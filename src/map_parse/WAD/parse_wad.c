@@ -131,11 +131,11 @@ static t_wad	*alloc_wad(void)
 	return (wad);
 }
 
-t_wad	*parse_wad(char *const filename)
+t_wad	*parse_wad(char *const filename, const char *exec_path)
 {
 	t_wad					*wad;
 	t_wad_header			*header;
-	t_binary_read *const	wad_bin = new_binary_read(filename, FALSE);
+	t_binary_read *const	wad_bin = new_binary_read(filename, FALSE, exec_path);
 
 	wad = alloc_wad();
 	wad_bin->endian = ENDIAN_LITTLE;

@@ -18,12 +18,13 @@
 #include "audio.h"
 #include "error.h"
 
-static void	addsound(t_hashmap *sound_map, char *const name)
+static void	addsound(t_hashmap *sound_map,
+									char *const name, char const *exec_path)
 {
-	add_track_to_map(sound_map, get_chunk_from_wav(name), name);
+	add_track_to_map(sound_map, get_chunk_from_wav(name, exec_path), name);
 }
 
-void		load_sound(t_hashmap *sound_map)
+void		load_sound(t_hashmap *sound_map, char const *exec_path)
 {
-	addsound(sound_map, "explosion");
+	addsound(sound_map, "explosion", exec_path);
 }

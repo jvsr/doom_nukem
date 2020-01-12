@@ -30,14 +30,12 @@ void				init_main_menu(t_game *game)
 
 	main_menu = create_gui(game, "main_menu");
 	options_menu = create_gui(game, "options_menu");
-	select_level = create_gui(game, "select_level");
-	controls_menu = create_gui(game, "controls_menu");
-	add_elem_child(options_menu, controls_menu);
+	add_elem_child(options_menu, create_gui(game, "controls_menu"));
 	add_elem_child(main_menu, options_menu);
-	add_elem_child(main_menu, analyze_gui_config(game->ui, "select_level"));
+	add_elem_child(main_menu, create_gui(game, "select_level"));
 	add_gui_child(game->ui, main_menu);
-	add_gui_child(game->ui, analyze_gui_config(game->ui, "map_editor_select"));
-	add_gui_child(game->ui, analyze_gui_config(game->ui, "hud"));
+	add_gui_child(game->ui, create_gui(game, "map_editor_select"));
+	add_gui_child(game->ui, create_gui(game, "hud"));
 	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 }

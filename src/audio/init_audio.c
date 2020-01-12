@@ -52,5 +52,5 @@ void		init_audio(t_game *game)
 	alloc_hashmaps(game->audio_man);
 	set_sound_volume(game->setting->sound_volume);
 	set_music_volume(game->setting->music_volume);
-	load_audio(game->audio_man);
+	load_audio(game->audio_man, game->exec_path);
 }

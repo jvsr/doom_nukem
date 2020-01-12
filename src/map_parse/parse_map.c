@@ -26,7 +26,7 @@ void	parse_map(char *const filename, t_game *game)
 		error_msg("Failed to parse map", 24, "invalid map extension");
 	else if (ft_strequ_nocase(extension, ".wad"))
 	{
-		wad = parse_wad(filename);
+		wad = parse_wad(filename, game->exec_path);
 		game->campaign = convert_wad(wad, game);
 	}
 }
