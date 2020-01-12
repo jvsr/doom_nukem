@@ -99,6 +99,8 @@ void			draw_elem(t_transform *elem)
 {
 	SDL_Surface	*dst_surface;
 
+	if (elem->show == FALSE)
+		return ;
 	if (elem->redraw == TRUE || elem->moved == TRUE)
 		update_pos_dim(elem);
 	if (elem->redraw == TRUE || (elem->gui_type == PANEL && child_moved(elem)))
@@ -106,8 +108,6 @@ void			draw_elem(t_transform *elem)
 		reset_surface(elem);
 		draw_gui_elem(elem);
 	}
-	if (elem->show == FALSE)
-		return ;
 	if (elem->parent_type == ELEM)
 		dst_surface = elem->parent.elem->surface;
 	else
