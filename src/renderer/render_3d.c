@@ -67,8 +67,8 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	float hfov, vfov;
 
 	hfov = (MAX_FOV - game->setting->fov) + MIN_FOV;
-	hfov = ((float)hfov / HFOV_RANGE) * (float)dst->w;
 	vfov = (calc_vfov(hfov, dst->w, dst->h) / VFOV_RANGE) * (float)dst->h;
+	hfov = (hfov / HFOV_RANGE) * (float)dst->w;
 	ft_bzero(yTop, dst->w * 4);
 	ft_memset4(yBottom, dst->h - 1, dst->w);
 	count = 0;
