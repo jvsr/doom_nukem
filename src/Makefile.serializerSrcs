@@ -25,5 +25,4 @@ SRCS = write_struct read_struct add_type add_char add_short add_int add_long \
 		read_float read_double finish_bin add_string read_string add_list_gen \
 		read_list_gen detect_endian swap_bytes new_binary del_binary \
 		del_binary_read new_binary_read read_header \
-		write_settings read_settings \
-		read_wad_header read_wad_directory
+		write_settings read_settings

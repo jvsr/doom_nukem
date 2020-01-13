@@ -18,7 +18,6 @@
 
 void	parse_map(char *const filename, t_game *game)
 {
-	t_wad		*wad;
 	char *const extension = ft_strrchr(filename, '.');
 
 	(void)game;
