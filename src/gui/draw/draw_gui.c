@@ -19,6 +19,7 @@ void			draw_gui(t_gui *ui)
 
 	if (ui->redraw == FALSE)
 		return ;
+	sdl_clear_surface(ui->window_surface);
 	cur = ui->children;
 	while (cur != NULL)
 	{
