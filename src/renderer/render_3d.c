@@ -73,7 +73,7 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	count = 0;
 	r_max = 1;
 	t_sector *sectors = game->map->sectors;
-	if (game->player->cur_sector >= 0 && game->player->cur_sector > game->map->sector_count)
+	if (game->player->cur_sector > game->map->sector_count)
 		return;
 	renders[0] = (t_ritem){&sectors[game->player->cur_sector], 0, dst->w - 1};
 	while (count < r_max)

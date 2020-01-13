@@ -60,7 +60,7 @@ typedef struct	s_game
 }				t_game;
 
 void			loop(t_game *game);
-void			display_splash(t_game *game, char *loc, char const *exec_path);
+void			display_splash(t_game *game, char *loc);
 void			loader(t_game *game);
 void			quit(int exit_code);
 
