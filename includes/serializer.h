@@ -22,6 +22,8 @@
 typedef enum e_endian			t_endian;
 typedef struct s_list			t_list;
 typedef struct s_setting		t_setting;
+typedef struct s_wad_header		t_wad_header;
+typedef struct s_wad_directory	t_wad_directory;
 
 typedef union	u_convert
 {
@@ -83,5 +85,8 @@ void			swap_bytes(void *v_bytes, t_uint64 size);
 
 t_setting		*read_settings(char const *exec_path);
 void			write_settings(t_setting *settings, char const *exec_path);
+
+t_wad_header	*read_wad_header(t_binary_read *bin_r);
+t_wad_directory	*read_wad_directory(t_binary_read *bin_r);
 
 #endif

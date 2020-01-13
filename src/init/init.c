@@ -85,5 +85,6 @@ void			init_function(t_game *game)
 	init_keymap(game);
 	map_init(game);
 	player_init(game);
+	parse_map("map/campaign/doom1.wad", game);
 	game->cureventstate->eventstate = splash;
 }
