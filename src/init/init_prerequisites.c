@@ -36,9 +36,13 @@ static void		init_sdl(void)
 
 static void		init_general(t_game *game)
 {
+	SDL_Surface const	*surf = game->surface;
+
 	game->state = running;
 	init_gametime(&game->starttime);
 	game->cursoractive = TRUE;
+	game->setting->vfov = calc_vfov(game->setting->fov, surf->w, surf->h);
+	SDL_GL_SetSwapInterval(-1);
 }
 
 static t_game	*alloc_game(void)
@@ -76,8 +80,6 @@ t_game			*init_prerequisites(char **argv, char **envp)
 	set_basic_args(game, argv, envp);
 	init_settings(game);
 	init_window_surface(game);
-	SDL_GL_SetSwapInterval(-1);
-	calc_vfov(game->setting, game->surface->w, game->surface->h);
 	init_eventstate(game);
 	init_general(game);
 	return (game);

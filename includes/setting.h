@@ -19,6 +19,10 @@
 # include "types.h"
 # include "libft/ft_bool.h"
 
+# define MAX_FOV 110
+# define MIN_FOV 45
+# define FOV_STEP 5
+
 # define SETTINGS_PATH "resources/data/settings/"
 
 typedef enum	e_resolution_type

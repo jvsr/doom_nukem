@@ -34,7 +34,7 @@ void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 	if (draw.y1 > draw.y0)
 	{
 		if (draw.draw.image == NULL)
-		{		
+		{
 			pixels[draw.y0 * dst->w + draw.x] = draw.top;
 			i = draw.y0 + 1;
 			while (i < draw.y1)
@@ -53,7 +53,7 @@ void	draw_vline(SDL_Surface *dst, t_drawinfo draw)
 				int img_pos = (int)(((float)(i - draw.draw.beginy) / (draw.draw.endy - draw.draw.beginy - 1)) * draw.draw.image->h) * draw.draw.image->w + (int)(((float)(draw.draw.x - draw.draw.beginx) / (draw.draw.endx - draw.draw.beginx - 1)) * draw.draw.image->w);
 				pixels[i * dst->w + draw.x] = img_pixels[img_pos];
 				i++;
-			}	
+			}
 		}
 	}
 }
@@ -65,9 +65,10 @@ void	render_3d(t_game *game, SDL_Surface *dst)
 	int yBottom[dst->w];
 	int i, k, count, r_max;
 	float hfov, vfov;
-	
-	hfov = 0.73 * (float)dst->h;
-	vfov = 0.2 * (float)dst->h;
+
+	hfov = (MAX_FOV - game->setting->fov) + MIN_FOV;
+	hfov = ((float)hfov / HFOV_RANGE) * (float)dst->w;
+	vfov = (calc_vfov(hfov, dst->w, dst->h) / VFOV_RANGE) * (float)dst->h;
 	ft_bzero(yTop, dst->w * 4);
 	ft_memset4(yBottom, dst->h - 1, dst->w);
 	count = 0;

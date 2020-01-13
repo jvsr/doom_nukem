@@ -17,7 +17,8 @@
 #include "campaign.h"
 # include <SDL2/SDL_surface.h>
 
-# define RENDER_THREAD_COUNT 4
+# define HFOV_RANGE 180
+# define VFOV_RANGE 180
 
 typedef struct	s_list		t_list;
 typedef struct	s_game		t_game;

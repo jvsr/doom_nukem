@@ -14,10 +14,10 @@
 #include "setting.h"
 #include "cmath.h"
 
-void	calc_vfov(t_setting *set, float width, float height)
+float	calc_vfov(float fov, float width, float height)
 {
-	float const h_fov = tan(((float)set->fov * PI_R) / 2.0);
+	float const h_fov = tan((fov * PI_R) / 2.0);
 	float const ratio = height / width;
 
-	set->vfov = ceil(2.0 * atan(h_fov * ratio) * PI_D);
+	return (ceil(2.0 * atan(h_fov * ratio) * PI_D));
 }
