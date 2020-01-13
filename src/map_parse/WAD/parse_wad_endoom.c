@@ -223,7 +223,7 @@
 // 	}
 // }
 
-static void				alloc_endoom(t_wad_general *wad_general)
+static void	alloc_endoom(t_wad_general *wad_general)
 {
 	wad_general->endoom = (t_wad_endoom*)ft_memalloc(sizeof(t_wad_endoom));
 	if (wad_general->endoom == NULL)
@@ -240,7 +240,7 @@ static void				alloc_color(t_wad_endoom *endoom)
 		error_msg_errno("Failed to allocate endoom colors");
 }
 
-static void				fill_wad_endoom(t_binary_read *wad_bin, t_wad_endoom *endoom)
+static void	fill_wad_endoom(t_binary_read *wad_bin, t_wad_endoom *endoom)
 {
 	size_t			i;
 
@@ -254,7 +254,7 @@ static void				fill_wad_endoom(t_binary_read *wad_bin, t_wad_endoom *endoom)
 	}
 }
 
-void	parse_wad_endoom(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
+void		parse_wad_endoom(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
 {
 	if (directory->size_lump == ANSI_SIZE * 2)
 		alloc_endoom(wad_general);

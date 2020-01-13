@@ -53,7 +53,7 @@ void	read_blockmap_offset(t_binary_read *wad_bin, t_wad_blockmap *blockmap)
 	}
 }
 
-int	get_blocklist_size(t_binary_read *wad_bin)
+int		get_blocklist_size(t_binary_read *wad_bin)
 {
 	unsigned short	s;
 	size_t			i;

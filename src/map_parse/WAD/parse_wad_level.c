@@ -49,7 +49,7 @@ void	print_list(t_wad_level *levels)
 	}
 }
 
-void	parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory)
+void		parse_wad_level(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory)
 {
 	size_t			i;
 	t_wad_level		*level;

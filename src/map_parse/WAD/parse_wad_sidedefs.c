@@ -58,7 +58,7 @@ static void	alloc_sidedefs(t_wad_level *level, size_t sidedefs_amount)
 	}
 }
 
-static void				fill_wad_sidedef(t_binary_read *wad_bin, t_wad_sidedef *sidedef)
+static void	fill_wad_sidedef(t_binary_read *wad_bin, t_wad_sidedef *sidedef)
 {
 	long	name;
 
@@ -73,12 +73,12 @@ static void				fill_wad_sidedef(t_binary_read *wad_bin, t_wad_sidedef *sidedef)
 	sidedef->sector = read_short(wad_bin);
 }
 
-void	parse_wad_sidedefs(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_sidedefs(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
+
 	(void)wad_bin;
 	(void)directory;
-
 	if (directory->size_lump % SIDEDEF_SIZE == 0)
 		alloc_sidedefs(level, directory->size_lump / SIDEDEF_SIZE);
 	else

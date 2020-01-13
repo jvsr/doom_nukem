@@ -50,7 +50,7 @@ static void	alloc_nodes(t_wad_level *level, size_t nodes_amount)
 	}
 }
 
-static void				fill_wad_node(t_binary_read *wad_bin, t_wad_node *node)
+static void	fill_wad_node(t_binary_read *wad_bin, t_wad_node *node)
 {
 	node->partition_line_x = read_short(wad_bin);
 	node->partition_line_y = read_short(wad_bin);
@@ -62,12 +62,12 @@ static void				fill_wad_node(t_binary_read *wad_bin, t_wad_node *node)
 	node->left_child = read_short(wad_bin);
 }
 
-void	parse_wad_nodes(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_nodes(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
+
 	(void)wad_bin;
 	(void)directory;
-
 	if (directory->size_lump % NODE_SIZE == 0)
 		alloc_nodes(level, directory->size_lump / NODE_SIZE);
 	else

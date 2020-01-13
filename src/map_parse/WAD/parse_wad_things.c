@@ -46,7 +46,7 @@ static void	alloc_things(t_wad_level *level, size_t things_amount)
 	}
 }
 
-static void				fill_wad_thing(t_binary_read *wad_bin, t_wad_thing *thing)
+static void	fill_wad_thing(t_binary_read *wad_bin, t_wad_thing *thing)
 {
 	thing->x_pos = read_short(wad_bin);
 	thing->y_pos = read_short(wad_bin);
@@ -55,12 +55,12 @@ static void				fill_wad_thing(t_binary_read *wad_bin, t_wad_thing *thing)
 	thing->spawn_flags = read_short(wad_bin);
 }
 
-void	parse_wad_things(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_things(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
+
 	(void)wad_bin;
 	(void)directory;
-
 	if (directory->size_lump % THING_SIZE == 0)
 		alloc_things(level, directory->size_lump / THING_SIZE);
 	else

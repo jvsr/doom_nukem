@@ -38,7 +38,8 @@ static void	print_header(t_wad_header *header)
 // 		directory->size_lump,
 // 		directory->name_lump);
 // }
-*/ 
+*/
+
 static t_bool	is_wad_level(char *const name)
 {
 	size_t			i;
@@ -58,7 +59,7 @@ static t_bool	is_wad_level(char *const name)
 	return (TRUE);
 }
 
-static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
+static void		parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
 {
 	// print_directory(directory);
 	if (ft_strequ(directory->name_lump, "PLAYPAL"))
@@ -80,7 +81,7 @@ static void	parse_wad_special(t_binary_read *wad_bin, t_wad *wad, t_wad_director
 	// 	print_directory(directory);
 }
 
-static void	parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
+static void		parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_directory *directory, t_wad_state *state)
 {
 	if (*state == wad_flat)
 		parse_wad_flat(wad_bin, wad->general, directory);
@@ -92,7 +93,7 @@ static void	parse_wad_directory(t_binary_read *wad_bin, t_wad *wad, t_wad_direct
 		parse_wad_special(wad_bin, wad, directory, state);
 }
 
-static void	loop_wad_directories(t_binary_read *wad_bin, t_wad *wad, t_wad_header *header)
+static void		loop_wad_directories(t_binary_read *wad_bin, t_wad *wad, t_wad_header *header)
 {
 	int				i;
 	t_wad_state		state;

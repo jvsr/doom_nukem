@@ -32,7 +32,7 @@
 // 	}
 // }
 
-static void				alloc_colormap(t_wad_general *wad_general, size_t colormap_amount)
+static void	alloc_colormap(t_wad_general *wad_general, size_t colormap_amount)
 {
 	size_t	i;
 
@@ -50,7 +50,7 @@ static void				alloc_colormap(t_wad_general *wad_general, size_t colormap_amount
 	}
 }
 
-static void				alloc_color(t_wad_colormap *colormap, size_t color_amount)
+static void	alloc_color(t_wad_colormap *colormap, size_t color_amount)
 {
 	colormap->color_amount = color_amount;
 	colormap->color = (t_uint8*)ft_memalloc(sizeof(t_uint8) * colormap->color_amount);
@@ -58,7 +58,7 @@ static void				alloc_color(t_wad_colormap *colormap, size_t color_amount)
 			error_msg_errno("Failed to allocate colormap colors");
 }
 
-static void				fill_wad_colormap(t_binary_read *wad_bin, t_wad_colormap *colormap)
+static void	fill_wad_colormap(t_binary_read *wad_bin, t_wad_colormap *colormap)
 {
 	size_t			i;
 
@@ -71,7 +71,7 @@ static void				fill_wad_colormap(t_binary_read *wad_bin, t_wad_colormap *colorma
 	}
 }
 
-void	parse_wad_colormap(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
+void		parse_wad_colormap(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
 {
 	size_t	i;
 

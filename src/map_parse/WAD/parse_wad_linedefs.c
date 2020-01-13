@@ -49,7 +49,7 @@ static void	alloc_linedefs(t_wad_level *level, size_t linedefs_amount)
 	}
 }
 
-static void				fill_wad_linedef(t_binary_read *wad_bin, t_wad_linedef *linedef)
+static void	fill_wad_linedef(t_binary_read *wad_bin, t_wad_linedef *linedef)
 {
 	linedef->vertex_begin = read_short(wad_bin);
 	linedef->vertex_end = read_short(wad_bin);
@@ -60,7 +60,7 @@ static void				fill_wad_linedef(t_binary_read *wad_bin, t_wad_linedef *linedef)
 	linedef->sidedef_left = read_short(wad_bin);
 }
 
-void	parse_wad_linedefs(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_linedefs(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
 	(void)wad_bin;

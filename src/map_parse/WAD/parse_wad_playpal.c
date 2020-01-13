@@ -34,7 +34,7 @@
 // 	}
 // }
 
-static void				alloc_playpal(t_wad_general *wad_general, size_t palette_amount)
+static void		alloc_playpal(t_wad_general *wad_general, size_t palette_amount)
 {
 	size_t	i;
 
@@ -52,7 +52,7 @@ static void				alloc_playpal(t_wad_general *wad_general, size_t palette_amount)
 	}
 }
 
-static void				alloc_color(t_wad_playpal *playpal, size_t color_amount)
+static void		alloc_color(t_wad_playpal *playpal, size_t color_amount)
 {
 	playpal->color_amount = color_amount;
 	playpal->color = (SDL_Color*)ft_memalloc(sizeof(SDL_Color) * playpal->color_amount);
@@ -60,7 +60,7 @@ static void				alloc_color(t_wad_playpal *playpal, size_t color_amount)
 			error_msg_errno("Failed to allocate playpal colors");
 }
 
-static void				fill_wad_playpal(t_binary_read *wad_bin, t_wad_playpal *playpal)
+static void		fill_wad_playpal(t_binary_read *wad_bin, t_wad_playpal *playpal)
 {
 	size_t			i;
 
@@ -75,7 +75,7 @@ static void				fill_wad_playpal(t_binary_read *wad_bin, t_wad_playpal *playpal)
 	}
 }
 
-void	parse_wad_playpal(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
+void			parse_wad_playpal(t_binary_read *wad_bin, t_wad_general *wad_general, t_wad_directory *directory)
 {
 	size_t	i;
 

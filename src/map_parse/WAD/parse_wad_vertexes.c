@@ -45,13 +45,13 @@ static void	alloc_vertexes(t_wad_level *level, size_t vertexes_amount)
 	}
 }
 
-static void				fill_wad_vertex(t_binary_read *wad_bin, t_wad_vertex *vertex)
+static void	fill_wad_vertex(t_binary_read *wad_bin, t_wad_vertex *vertex)
 {
 	vertex->x = read_short(wad_bin);
 	vertex->y = read_short(wad_bin);
 }
 
-void	parse_wad_vertexes(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_vertexes(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
 

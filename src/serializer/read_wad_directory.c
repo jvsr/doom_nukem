@@ -20,7 +20,7 @@
 #define NAME_SIZE 8
 
 t_wad_directory	*read_wad_directory(t_binary_read *bin)
-{	
+{
 	long			name_lump;
 	t_wad_directory	*wad_directory;
 

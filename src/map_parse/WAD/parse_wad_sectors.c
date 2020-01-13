@@ -56,7 +56,7 @@ static void	alloc_sectors(t_wad_level *level, size_t sectors_amount)
 	}
 }
 
-static void				fill_wad_sector(t_binary_read *wad_bin, t_wad_sector *sector)
+static void	fill_wad_sector(t_binary_read *wad_bin, t_wad_sector *sector)
 {
 	long	name;
 
@@ -71,12 +71,12 @@ static void				fill_wad_sector(t_binary_read *wad_bin, t_wad_sector *sector)
 	sector->sector_tag = read_short(wad_bin);
 }
 
-void	parse_wad_sectors(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_sectors(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
+
 	(void)wad_bin;
 	(void)directory;
-
 	if (directory->size_lump % SECTOR_SIZE == 0)
 		alloc_sectors(level, directory->size_lump / SECTOR_SIZE);
 	else

@@ -49,7 +49,7 @@ static void	alloc_segs(t_wad_level *level, size_t segs_amount)
 	}
 }
 
-static void				fill_wad_seg(t_binary_read *wad_bin, t_wad_seg *seg)
+static void	fill_wad_seg(t_binary_read *wad_bin, t_wad_seg *seg)
 {
 	seg->vertex_begin = read_short(wad_bin);
 	seg->vertex_end = read_short(wad_bin);
@@ -59,12 +59,13 @@ static void				fill_wad_seg(t_binary_read *wad_bin, t_wad_seg *seg)
 	seg->offset = read_short(wad_bin);
 }
 
-void	parse_wad_segs(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_segs(t_binary_read *wad_bin,
+				t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
+
 	(void)wad_bin;
 	(void)directory;
-
 	if (directory->size_lump % SEG_SIZE == 0)
 		alloc_segs(level, directory->size_lump / SEG_SIZE);
 	else

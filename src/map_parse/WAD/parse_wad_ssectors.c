@@ -45,13 +45,13 @@ static void	alloc_ssectors(t_wad_level *level, size_t ssectors_amount)
 	}
 }
 
-static void				fill_wad_ssector(t_binary_read *wad_bin, t_wad_ssector *ssector)
+static void	fill_wad_ssector(t_binary_read *wad_bin, t_wad_ssector *ssector)
 {
 	ssector->segment_no = read_short(wad_bin);
 	ssector->segment_first = read_short(wad_bin);
 }
 
-void	parse_wad_ssectors(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
+void		parse_wad_ssectors(t_binary_read *wad_bin, t_wad_level *level, t_wad_directory *directory)
 {
 	size_t	i;
 
