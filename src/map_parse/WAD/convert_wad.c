@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/25 17:28:58 by pholster       #+#    #+#                */
-/*   Updated: 2019/12/04 17:38:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2019/12/04 18:01:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,19 @@ void		convert_walls(t_campaign *campaign, t_wad *wad)
 		campaign->wall[i]->sidedef_left = campaign->sidedef[wad->levels->linedefs[i]->sidedef_left];
 		campaign->wall[i]->sector_tag = wad->levels->linedefs[i]->sector_tag;
 
-		// ft_printf("X: %f, Y: %f\n", campaign->wall[i]->vertex_begin->x, campaign->wall[i]->vertex_begin->y);
-		// ft_printf("X: %f, Y: %f\n", campaign->wall[i]->vertex_end->x, campaign->wall[i]->vertex_end->y);
-		// if (campaign->wall[i]->sidedef_right) {
-		// 	ft_printf("R_SIDE X: %d, Y: %d\n", campaign->wall[i]->sidedef_right->offset_x, campaign->wall[i]->sidedef_right->offset_y);
-		// 	ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", campaign->wall[i]->sidedef_right->texture_up, campaign->wall[i]->sidedef_right->texture_mid, campaign->wall[i]->sidedef_right->texture_low);
-		// }
-		// if (campaign->wall[i]->sidedef_left) {
-		// 	ft_printf("L_SIDE X: %d, Y: %d\n", campaign->wall[i]->sidedef_left->offset_x, campaign->wall[i]->sidedef_left->offset_y);
-		// 	ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", campaign->wall[i]->sidedef_left->texture_up, campaign->wall[i]->sidedef_left->texture_mid, campaign->wall[i]->sidedef_right->texture_low);
-		// }
-		// ft_printf("\n");
+		ft_printf("Wall: X: %f, Y: %f\n", campaign->wall[i]->vertex_begin->x, campaign->wall[i]->vertex_begin->y);
+		ft_printf("Wall: X: %f, Y: %f\n", campaign->wall[i]->vertex_end->x, campaign->wall[i]->vertex_end->y);
+		if (campaign->wall[i]->sidedef_right) {
+			ft_printf("RIGHT\n");
+			// ft_printf("R_SIDE X: %d, Y: %d\n", campaign->wall[i]->sidedef_right->offset_x, campaign->wall[i]->sidedef_right->offset_y);
+			// ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", campaign->wall[i]->sidedef_right->texture_up, campaign->wall[i]->sidedef_right->texture_mid, campaign->wall[i]->sidedef_right->texture_low);
+		}
+		if (campaign->wall[i]->sidedef_left) {
+			ft_printf("LEFT\n");
+			// ft_printf("L_SIDE X: %d, Y: %d\n", campaign->wall[i]->sidedef_left->offset_x, campaign->wall[i]->sidedef_left->offset_y);
+			// ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", campaign->wall[i]->sidedef_left->texture_up, campaign->wall[i]->sidedef_left->texture_mid, campaign->wall[i]->sidedef_right->texture_low);
+		}
+		ft_printf("\n");
 
 		i++;
 	}	
@@ -149,14 +151,16 @@ void		print_sector_wall(t_campaign_sector *sector)
 	{
 		ft_printf("X: %f, Y: %f\n", sector->wall[i]->vertex_begin->x, sector->wall[i]->vertex_begin->y);
 		ft_printf("X: %f, Y: %f\n\n", sector->wall[i]->vertex_end->x, sector->wall[i]->vertex_end->y);
-		// if (sector->wall[i]->sidedef_right) {
-		// 	ft_printf("R_SIDE X: %d, Y: %d\n", sector->wall[i]->sidedef_right->offset_x, sector->wall[i]->sidedef_right->offset_y);
-		// 	ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", sector->wall[i]->sidedef_right->texture_up, sector->wall[i]->sidedef_right->texture_mid, sector->wall[i]->sidedef_right->texture_low);
-		// }
-		// if (sector->wall[i]->sidedef_left) {
-		// 	ft_printf("L_SIDE X: %d, Y: %d\n", sector->wall[i]->sidedef_left->offset_x, sector->wall[i]->sidedef_left->offset_y);
-		// 	ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", sector->wall[i]->sidedef_left->texture_up, sector->wall[i]->sidedef_left->texture_mid, sector->wall[i]->sidedef_right->texture_low);
-		// }
+		if (sector->wall[i]->sidedef_right) {
+			ft_printf("R_SIDE X: %d, Y: %d\n", sector->wall[i]->sidedef_right->offset_x, sector->wall[i]->sidedef_right->offset_y);
+			ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", sector->wall[i]->sidedef_right->texture_up, sector->wall[i]->sidedef_right->texture_mid, sector->wall[i]->sidedef_right->texture_low);
+		}
+		else if (sector->wall[i]->sidedef_left) {
+			ft_printf("L_SIDE X: %d, Y: %d\n", sector->wall[i]->sidedef_left->offset_x, sector->wall[i]->sidedef_left->offset_y);
+			ft_printf("TEXTURE\nUP: %s\nMID: %s\nLOW: %s\n", sector->wall[i]->sidedef_left->texture_up, sector->wall[i]->sidedef_left->texture_mid, sector->wall[i]->sidedef_right->texture_low);
+		}
+		else
+			ft_printf("NO SIDE\n");
 		i++;
 	}
 	ft_printf("\n");
