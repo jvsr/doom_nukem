@@ -29,6 +29,9 @@ typedef struct	s_wall
 	t_coord		corner_1;
 	t_bool		is_portal;
 	t_sector	*window;
+	t_texture	texture;
+	float		xperc;
+	float		yperc;
 }				t_wall;
 
 struct			s_sector
@@ -72,5 +75,16 @@ typedef struct	s_ritem
 	int			beginx;
 	int			endx;
 }				t_ritem;
+
+typedef struct	s_wallbounds
+{
+	t_point x;
+	t_point ya;
+	t_point yb;
+	float	dista;
+	float	distb;
+	float	anglea;
+	float	angleb;
+}				t_wallbounds;
 
 #endif
