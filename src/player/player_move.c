@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/09 12:47:55 by pholster      ########   odam.nl         */
+/*   Updated: 2020/01/14 18:09:21 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "libft/ft_str.h"
 
+#include "game.h"
+#include "setting.h"
 #include "cmath.h"
 #include "player.h"
 #include "keymap.h"
@@ -65,23 +67,43 @@ static t_bool	move_right(t_player *player, float speed, t_map *map)
 	return (player_col(player, map, xspeed, yspeed));
 }
 
-t_bool			player_move(t_player *player, t_hashmap *keymap, t_map *map)
+static t_bool	move_jump(t_player *player, size_t *jump)
 {
-	t_bool	draw;
-	float	speed;
+	(*jump)++;
+	if (*jump > PLAYER_JUMP_FRAMES / 2)
+		player->heightoffset -= PLAYER_JUMP
+			* (pow(((double)(*jump)
+			- (PLAYER_JUMP_FRAMES / 2)) / PLAYER_JUMP_FRAMES, 2));
+	else if (*jump - 1 <= PLAYER_JUMP_FRAMES / 2)
+		player->heightoffset += PLAYER_JUMP
+			* (pow(((double)(PLAYER_JUMP_FRAMES / 2)
+			- (*jump - 1)) / PLAYER_JUMP_FRAMES, 2));
+	if (*jump == PLAYER_JUMP_FRAMES)
+		*jump = 0;
+	return (TRUE);
+}
+
+t_bool			player_move(t_game *game)
+{
+	t_bool			draw;
+	float			speed;
+	static size_t	jump = 0;
 
 	draw = FALSE;
-	if (is_helddown(keymap, SDLK_LSHIFT))
+	if (is_helddown(game->keymap, SDLK_LSHIFT))
 		speed = PLAYER_RUN_SPEED;
 	else
 		speed = PLAYER_MOVE_SPEED;
-	if (is_helddown(keymap, SDLK_w))
-		draw |= move_forward(player, speed, map);
-	if (is_helddown(keymap, SDLK_s))
-		draw |= move_backward(player, speed, map);
-	if (is_helddown(keymap, SDLK_a))
-		draw |= move_left(player, speed, map);
-	if (is_helddown(keymap, SDLK_d))
-		draw |= move_right(player, speed, map);
+	speed *= game->setting->sensitivity;
+	if (is_helddown(game->keymap, SDLK_w))
+		draw |= move_forward(game->player, speed, game->map);
+	if (is_helddown(game->keymap, SDLK_s))
+		draw |= move_backward(game->player, speed, game->map);
+	if (is_helddown(game->keymap, SDLK_a))
+		draw |= move_left(game->player, speed, game->map);
+	if (is_helddown(game->keymap, SDLK_d))
+		draw |= move_right(game->player, speed, game->map);
+	if (is_helddown(game->keymap, SDLK_SPACE) || jump > 0)
+		draw |= move_jump(game->player, &jump);
 	return (draw);
 }

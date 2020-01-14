@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/09 17:24:34 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/01/14 12:12:59 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_bool				player_col(t_player *player,
 	if (cur_sector != 4294967294)
 	{
 		player->cur_sector = cur_sector;
-		player->height = map->sectors[cur_sector].floor + 6;
+		player->height = map->sectors[cur_sector].floor + PLAYER_HEIGHT;
 	}
 	ft_memcpy(&(player->pos), &pos, sizeof(pos));
 	return (TRUE);

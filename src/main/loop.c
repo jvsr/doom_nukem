@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/28 14:57:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/14 16:35:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKQUOTE)
 		print_keymap(game->keymap);
 	
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
-	{
-		game->player->height += 0.1;
-		set_elem_redraw(get_gui_child(game->ui, "gameview"));
-	}
+	// if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
+	// {
+	// 	game->player->height += 0.2;
+	// 	set_elem_redraw(get_gui_child(game->ui, "gameview"));
+	// }
 }
 
 static void		load_info(t_game *game)
@@ -95,7 +95,7 @@ void			loop(t_game *game)
 	game->player->pos.x = 0;
 	game->player->pos.y = 0;
 	game->player->cur_sector = 0;
-	game->player->height = 6;
+	game->player->height = PLAYER_HEIGHT;
 	game->player->mag = (t_mag){cosf(0), sinf(0)};
 	framecount = 0;
 	lastsecond = get_gametime(&game->starttime);

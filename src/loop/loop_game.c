@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 16:37:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/12/03 16:37:51 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/01/14 15:55:25 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		loop_game(t_game *game)
 {
 	char	*elem_text;
 	
-	player_move(game->player, game->keymap, game->map);
+	player_move(game);
 	elem_text = ft_strformat("Angle: %.2f\nPos: %.2f %.2f",
 		game->player->angle, game->player->pos.x, game->player->pos.y);
 	set_elem_text_str(get_gui_child(game->ui, "angle"), elem_text);

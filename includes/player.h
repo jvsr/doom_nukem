@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 14:54:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/14 17:03:26 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@
 # include "types.h"
 # include "coord.h"
 
-# define PLAYER_HEIGHT 6.0
-# define PLAYER_CROUCH 3.0
-# define PLAYER_JUMP 9.0
-# define PLAYER_UPDOWN_MIN -0.15
-# define PLAYER_UPDOWN_MAX 0.25
-# define PLAYER_MOVE_SPEED 0.5
+# define PLAYER_HEIGHT 9.0
+# define PLAYER_CROUCH 5.0
+# define PLAYER_JUMP 20.0
+# define PLAYER_JUMP_FRAMES 20
+# define PLAYER_UPDOWN_MIN -0.45
+# define PLAYER_UPDOWN_MAX 0.60
+# define PLAYER_MOVE_SPEED 0.7
 # define PLAYER_RUN_SPEED 1
-# define PLAYER_V_SENSE 0.001
+# define PLAYER_H_SENSE 0.12
+# define PLAYER_V_SENSE 0.002
 
+typedef struct s_game		t_game;
 typedef struct s_hashmap	t_hashmap;
 typedef struct s_map		t_map;
 
@@ -59,7 +62,7 @@ typedef	struct	s_player
 	float		updown;
 }				t_player;
 
-t_bool			player_move(t_player *player, t_hashmap *keymap, t_map *map);
+t_bool			player_move(t_game *game);
 t_bool			player_col(t_player *player,
 									t_map *map, float xspeed, float yspeed);
 

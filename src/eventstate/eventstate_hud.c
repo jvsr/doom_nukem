@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:25:51 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/14 12:23:30 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static void	manage_player_angle(t_game *game)
 		return ;
 	player = game->player;
 	SDL_GetRelativeMouseState(&mouse_pos.x, &mouse_pos.y);
-	tmp = ((float)mouse_pos.x * game->setting->sensitivity);
+	tmp = ((float)mouse_pos.x * game->setting->sensitivity * PLAYER_H_SENSE);
 	player->angle = wrap_float(player->angle + tmp, 0, 360.0);
 	player->updown = clamp_float(player->updown -
-		((float)mouse_pos.y * game->setting->sensitivity * PLAYER_V_SENSE),
+		((float)mouse_pos.y * pow(game->setting->sensitivity, 2) * PLAYER_V_SENSE),
 		PLAYER_UPDOWN_MIN, PLAYER_UPDOWN_MAX);
 	player->mag.cos = cosf(player->angle * PI_R);
 	player->mag.sin = sinf(player->angle * PI_R);
@@ -57,7 +57,16 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 {
 	(void)game;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+	{
 		set_mouse_capture();
+		// different behaviour to be implemented, real main menu as placeholder
+		if (SDL_GetRelativeMouseMode() == SDL_FALSE)
+		{
+			set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
+			set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
+			game->cureventstate->eventstate = mainmenu;
+		}
+	}
 	if (event.type == SDL_MOUSEMOTION)
 		manage_player_angle(game);
 }
