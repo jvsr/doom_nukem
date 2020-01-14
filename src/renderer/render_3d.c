@@ -46,14 +46,18 @@ void			draw_vline(SDL_Surface *dst, t_drawinfo draw, t_wall *wall, t_wallbounds 
 		}
 		else
 		{
-			int end = draw.draw.beginx < draw.draw.endx ? draw.draw.beginx : draw.draw.endx;
-			float x = (float)(draw.draw.x - end) / cosf(bounds.anglea * PI_R);
-			int prop_x = ((float)((int)x % (int)(bounds.dista * wall->xperc)) / (bounds.dista * wall->xperc)) * draw.draw.image->w;
+			float x = (float)(draw.draw.x - draw.draw.beginx) / cosf(bounds.anglea * PI_R);
+			float percentage = bounds.dista * wall->xperc;
+			if (percentage == 0)
+				percentage = 0.00001;
+			int prop_x = ((float)((int)x % (int)percentage) / percentage) * draw.draw.image->w;
 			img_pixels = (int*)draw.draw.image->pixels;
 			i = draw.y0;
 			while (i <= draw.y1)
 			{
 				int rel = draw.draw.endy - draw.draw.beginy;
+				if (rel == 0)
+					rel = 1;
 				int y = ((float)((i - draw.draw.beginy) % rel) / rel) * draw.draw.image->h;
 				int img_pos = y * draw.draw.image->w + prop_x;
 				pixels[i * dst->w + draw.x] = img_pixels[img_pos];
