@@ -127,7 +127,7 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 			if (t0.y <= 0 || t1.y <= 0)
 			{
 				float near = 1e-4f;
-				float far = 1.0;
+				float far = 0.1;
 				float nearside = 1e-5f;
 				float farside = 20.0;
 				t_coord insec0 = intersect3(t0, t1, (t_coord){-nearside, near}, (t_coord){-farside, far});
