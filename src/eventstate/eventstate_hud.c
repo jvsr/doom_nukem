@@ -47,8 +47,8 @@ static void	manage_player_angle(t_game *game)
 	player->updown = clamp_float(player->updown -
 		((float)mouse_pos.y * pow(game->setting->sensitivity, 2) * PLAYER_V_SENSE),
 		PLAYER_UPDOWN_MIN, PLAYER_UPDOWN_MAX);
-	player->mag.cos = cosf(player->angle * PI_R);
-	player->mag.sin = sinf(player->angle * PI_R);
+	player->mag.cos = cos(player->angle * PI_R);
+	player->mag.sin = sin(player->angle * PI_R);
 	SDL_WarpMouseInWindow(game->window, game->surface->w / 2,
 		game->surface->h / 2);
 }

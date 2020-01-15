@@ -84,7 +84,7 @@ t_wallbounds	get_wallbounds(t_point xvalues,
 	bounds.distb = get_distance(&(t_coord){xvalues.x, bounds.yb.x},
 								&(t_coord){xvalues.y, bounds.yb.y});
 	bounds.anglea = sinf(((float)x_diff / bounds.dista) * PI_R);
-	bounds.angleb = sinf(((float)x_diff / bounds.distb) * PI_R);
+	bounds.angleb = sinf(((float)x_diff / bounds.distb));
 	return (bounds);
 }
 
@@ -94,7 +94,7 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 	int yTop[dst->w];
 	int yBottom[dst->w];
 	int i, k, count, r_max;
-	float hfov, vfov;
+	double hfov, vfov;
 
 	hfov = (MAX_FOV - game->setting->fov) + MIN_FOV;
 	vfov = (calc_vfov(hfov, dst->w, dst->h) / VFOV_RANGE) * (float)dst->h;
@@ -107,6 +107,7 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 	if (game->player->cur_sector > game->map->sector_count)
 		return;
 	renders[0] = (t_ritem){&sectors[game->player->cur_sector], 0, dst->w - 1};
+	t_mag *p = &game->player->mag;
 	while (count < r_max)
 	{
 		t_wall *walls = renders[count].sector->walls;
@@ -116,7 +117,6 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 			t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_0.y - game->player->pos.y};
 			t_coord v1 = {walls[k].corner_1.x - game->player->pos.x, walls[k].corner_1.y - game->player->pos.y};
 
-			t_mag *p = &game->player->mag;
 			t_coord t0 = {v0.x * p->sin - v0.y * p->cos, v0.x * p->cos + v0.y * p->sin};
 			t_coord t1 = {v1.x * p->sin - v1.y * p->cos, v1.x * p->cos + v1.y * p->sin};
 			if (t0.y <= 0 && t1.y <= 0)
@@ -159,6 +159,10 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 						}
 				}
 			}
+			if (t0.y < 0.25 && t0.y > 0)
+				t0.y = 0.25;
+			if (t1.y < 0.25 && t1.y > 0)
+				t1.y = 0.25;
 			t_coord scale0 = { hfov / t0.y, vfov / t0.y };
 			t_coord scale1 = { hfov / t1.y, vfov / t1.y };
 			int x0 = dst->w / 2 - (int)(t0.x * scale0.x);
@@ -209,15 +213,15 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 					int cnyb = ft_constrain(nyb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 
 					/* Between our ceiling and the new sector ceiling */
-					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){get_texture(game, walls[k].texture), i, x0, x1, ya + (game->player->updown * dst->h), nya - 1 + (game->player->updown * dst->h)}}, &walls[k], bounds);
+					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){NULL, i, x0, x1, ya + (game->player->updown * dst->h), nya - 1 + (game->player->updown * dst->h)}}, &walls[k], bounds);
 					yTop[i] = ft_constrain(ft_max(cya, cnya), yTop[i], dst->h - 1);
 
 					/* Between our floor and the new sector floor */
-					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){get_texture(game, walls[k].texture), i, x0, x1, nyb+1 + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds);
+					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){NULL, i, x0, x1, nyb+1 + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds);
     	            yBottom[i] = ft_constrain(ft_min(cyb, cnyb), 0, yBottom[i]);
 				}
 				else
-					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xffffffff, light), 0, (t_iminfo){get_texture(game, walls[k].texture), i, x0, x1, ya + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds);
+					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xffffffff, light), 0, (t_iminfo){NULL, i, x0, x1, ya + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds);
 				i++;
 			}
 			if (walls[k].is_portal && xvalues.y > xvalues.x && r_max + 1 < MAX_RENDERS)
