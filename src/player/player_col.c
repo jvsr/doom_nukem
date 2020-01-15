@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/14 12:12:59 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/15 21:21:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "rinfo.h"
 #include "cmath.h"
 #include <stdio.h>
+#include <limits.h>
 
 static t_bool		col(t_coord c0, t_coord c1, t_coord c2, t_coord c3)
 {
@@ -60,34 +61,101 @@ static t_uint32		get_sector_id(t_map *map, t_sector *sec)
 	return (4294967294);
 }
 
-t_bool				player_col(t_player *player,
+static t_uint32		check_col(t_player *player, t_uint8 *col,
 									t_map *map, float xspeed, float yspeed)
 {
-	t_coord		pos;
+	t_coord		pos_x;
+	t_coord		pos_y;
+	t_coord		pos_xy;
 	t_wall		*walls;
 	int			i;
 	int			max;
-	t_uint32	cur_sector;
+	t_uint32	next_sector;
+	static t_uint32	prev_sector = UINT32_MAX;
 
-	pos = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
+	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
+	pos_y = (t_coord){player->pos.x, player->pos.y + yspeed};
+	pos_xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
 	walls = map->sectors[player->cur_sector].walls;
 	i = 0;
 	max = map->sectors[player->cur_sector].wall_count;
-	cur_sector = player->cur_sector;
+	next_sector = player->cur_sector;
+	t_uint32 temp = player->cur_sector;
+	if (prev_sector == UINT32_MAX)
+		prev_sector = player->cur_sector;
 	while (i < max)
 	{
-		/*if (!walls[i].is_portal &&
-			wall_col(pos, player->pos, &walls[i]) == TRUE)
-			return (FALSE);*/
-		if (walls[i].is_portal && wall_col(pos, player->pos, &walls[i]))
-			cur_sector = get_sector_id(map, walls[i].window);
+		if (walls[i].is_portal == FALSE)
+		{
+			if (wall_col(pos_x, player->pos, &walls[i]) == TRUE)
+				*col |= 1;
+			if (wall_col(pos_y, player->pos, &walls[i]) == TRUE)
+				*col |= 2;
+			if (wall_col(pos_xy, player->pos, &walls[i]) == TRUE)
+				*col |= 4;
+		}
+		else if (walls[i].is_portal == TRUE
+		&& get_sector_id(map, walls[i].window) != prev_sector)
+		{
+			if (wall_col(pos_xy, player->pos, &walls[i])
+			|| wall_col(pos_x, player->pos, &walls[i]) == TRUE
+			|| wall_col(pos_y, player->pos, &walls[i]) == TRUE)
+			{
+				prev_sector = player->cur_sector;
+				next_sector = get_sector_id(map, walls[i].window);
+				player->cur_sector = next_sector;
+				check_col(player, col, map, xspeed, yspeed);
+			}
+		}
+		if (*col == 7)
+		{
+			player->cur_sector = temp;
+			prev_sector = UINT32_MAX;
+			return (UINT32_MAX);
+		}
 		i++;
 	}
-	if (cur_sector != 4294967294)
+	prev_sector = UINT32_MAX;
+	return (next_sector);
+}
+
+t_bool				player_col(t_player *player,
+									t_map *map, float xspeed, float yspeed)
+{
+	t_coord		pos_x;
+	t_coord		pos_y;
+	t_coord		pos_xy;
+	t_uint8		col;
+	t_uint32	next_sector;
+
+	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
+	pos_y = (t_coord){player->pos.x, player->pos.y + yspeed};
+	pos_xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
+	col = 0;
+	next_sector = check_col(player, &col, map, xspeed, yspeed);
+	if (col == 7)
+		return (FALSE);
+	if (next_sector != UINT32_MAX)
 	{
-		player->cur_sector = cur_sector;
-		player->height = map->sectors[cur_sector].floor + PLAYER_HEIGHT;
+		player->cur_sector = next_sector;
+		player->height = map->sectors[next_sector].floor + PLAYER_HEIGHT;
 	}
-	ft_memcpy(&(player->pos), &pos, sizeof(pos));
+	if ((col & 4) == 0)
+		ft_memcpy(&(player->pos), &pos_xy, sizeof(pos_xy));
+	else
+	{
+		if ((col & 3) == 0)
+		{
+			if (xspeed > yspeed)
+				ft_memcpy(&(player->pos), &pos_x, sizeof(pos_x));
+			else
+				ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
+		}
+		else if ((col & 1) == 0)
+			ft_memcpy(&(player->pos), &pos_x, sizeof(pos_x));
+		else if ((col & 2) == 0)
+			ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
+	}
 	return (TRUE);
 }
+
