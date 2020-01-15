@@ -22,7 +22,7 @@
 #include <math.h>
 #include "color.h"
 
-void			draw_vline(SDL_Surface *dst, t_drawinfo draw, t_wall *wall, t_wallbounds bounds)
+void			draw_vline(SDL_Surface *dst, t_drawinfo draw, t_wall *wall, t_wallbounds bounds, float xperc)
 {
 	int	*pixels;
 	int *img_pixels;
@@ -46,11 +46,14 @@ void			draw_vline(SDL_Surface *dst, t_drawinfo draw, t_wall *wall, t_wallbounds 
 		}
 		else
 		{
-			float x = (float)(draw.draw.x - draw.draw.beginx) / cosf(bounds.anglea * PI_R);
 			float percentage = bounds.dista * wall->xperc;
 			if (percentage == 0)
 				percentage = 0.00001;
-			int prop_x = ((float)((int)x % (int)percentage) / percentage) * draw.draw.image->w;
+			//printf("%f\n", xperc);
+			while (xperc > wall->xperc)
+				xperc -= wall->xperc;
+			xperc /= wall->xperc;
+			int prop_x = xperc * draw.draw.image->w;
 			img_pixels = (int*)draw.draw.image->pixels;
 			i = draw.y0;
 			while (i <= draw.y1)
@@ -88,6 +91,39 @@ t_wallbounds	get_wallbounds(t_point xvalues,
 	return (bounds);
 }
 
+float			get_xperc(t_wall *wall, t_player *player, float angle, float o)
+{
+	float ang;
+	t_coord hit;
+	t_coord walls;
+	float	wall_len;
+
+	ang = (angle * *player->fov) + player->angle - ((float)*player->fov / 2);
+	ang = clamp_float(ang, 0, 360);
+	hit = (t_coord){0, 0};
+	if (angle < 0.5)
+		angle = ((0.5 - angle) / 0.5) * ((float)*player->fov / 2);
+	else if (angle > 0.5)
+		angle = ((angle - 0.5) / 0.5) * ((float)*player->fov / 2);
+	float a = o / tan(PI_R * angle);
+	t_coord start = {(cos(ang * PI_R) * a) + player->pos.x, (sin(ang * PI_R) * o) + player->pos.y};
+	//printf("Before Hit -> (%f, %f)\n", hit.x, hit.y);
+	get_collision(&start, &(t_coord){player->mag.cos, player->mag.sin}, get_vector_from_points(&wall->corner_0, &wall->corner_1, &walls), &hit);
+	//printf("After Hit -> (%f, %f)\n", hit.x, hit.y);
+	wall_len = get_distance(&wall->corner_0, &wall->corner_1);
+	return (get_distance(&wall->corner_0, &hit) / wall_len);
+}
+
+float			get_o(t_player *player, float hfov)
+{
+	float angle;
+
+	hfov /= 2.0;
+	angle = (float)*player->fov / 2.0;
+	angle = 180 - 90 - angle;
+	return (tan(angle * PI_R) * hfov);
+}
+
 void			render_3d(t_game *game, SDL_Surface *dst)
 {
 	t_ritem renders[MAX_RENDERS];
@@ -108,6 +144,8 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 		return;
 	renders[0] = (t_ritem){&sectors[game->player->cur_sector], 0, dst->w - 1};
 	t_mag *p = &game->player->mag;
+	float o = get_o(game->player, hfov);
+	//printf("O -> %f, %f, %f\n", o, hfov, vfov);
 	while (count < r_max)
 	{
 		t_wall *walls = renders[count].sector->walls;
@@ -196,18 +234,25 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 			t_point xvalues = {(int)fmaxf(x0, renders[count].beginx), (int)fminf(x1, renders[count].endx)};
 			t_wallbounds bounds = get_wallbounds((t_point){x0, x1}, (t_point[2]){y1, y2}, (t_point[2]){ny1, ny2}, walls[k].is_portal);
 			i = xvalues.x;
+			// if (k == 0)
+			// {
+			// 	printf("nt0 (%f, %f), nt1 (%f, %f)\n", t0.x, t0.y, t1.x, t1.y);
+			// 	printf("x0 %i, x1 %i\n", x0, x1);
+			// 	printf("\n\n");
+			// }
 			while (i <= xvalues.y)
 			{
 				float light = (MAX_LIGHT_DIST - clamp_float((float)((i - x0) * (t1.y - t0.y) / (x1 - x0) + t0.y), 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
+				float xperc = get_xperc(&walls[k], game->player, (float)i / dst->w, o);
 				int ya = (i - x0) * (y2.x - y1.x) / (x1 - x0) + y1.x;
 				int cya = ft_constrain(ya + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 				int yb = (i - x0) * (y2.y - y1.y) / (x1 - x0) + y1.y;
 				int cyb = ft_constrain(yb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 				
 				/* Draw Ceiling (Colour Green)*/
-				draw_vline(dst, (t_drawinfo){i, yTop[i], cya - 1, 0, 0xFF66FF66, 0, (t_iminfo){NULL, i, x0, x1, yTop[i], ya - 1}}, &walls[k], bounds);
+				draw_vline(dst, (t_drawinfo){i, yTop[i], cya - 1, 0, 0xFF66FF66, 0, (t_iminfo){NULL, i, x0, x1, yTop[i], ya - 1}}, &walls[k], bounds, xperc);
 				/* Draw Floor (Colour Blue)*/
-				draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0, 0xFF0000cc, 0, (t_iminfo){NULL, i, x0, x1, yb + 1, yBottom[i]}}, &walls[k], bounds);
+				draw_vline(dst, (t_drawinfo){i, cyb + 1, yBottom[i], 0, 0xFF0000cc, 0, (t_iminfo){NULL, i, x0, x1, yb + 1, yBottom[i]}}, &walls[k], bounds, xperc);
 				/* Draw Wall (Colour White) / Portal (Colour Red)*/
 				if (walls[k].is_portal)
 				{
@@ -217,20 +262,20 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 					int cnyb = ft_constrain(nyb + (game->player->updown * dst->h), yTop[i], yBottom[i]);
 
 					/* Between our ceiling and the new sector ceiling */
-					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){NULL, i, x0, x1, ya + (game->player->updown * dst->h), nya - 1 + (game->player->updown * dst->h)}}, &walls[k], bounds);
+					draw_vline(dst, (t_drawinfo){i, cya, cnya - 1, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){NULL, i, x0, x1, ya + (game->player->updown * dst->h), nya - 1 + (game->player->updown * dst->h)}}, &walls[k], bounds, xperc);
 					yTop[i] = ft_constrain(ft_max(cya, cnya), yTop[i], dst->h - 1);
 
 					/* Between our floor and the new sector floor */
-					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){NULL, i, x0, x1, nyb+1 + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds);
+					draw_vline(dst, (t_drawinfo){i, cnyb+1, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xFF800080, light), 0, (t_iminfo){NULL, i, x0, x1, nyb+1 + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds, xperc);
     	            yBottom[i] = ft_constrain(ft_min(cyb, cnyb), 0, yBottom[i]);
 				}
 				else
-					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xffffffff, light), 0, (t_iminfo){NULL, i, x0, x1, ya + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds);
+					draw_vline(dst, (t_drawinfo){i, cya, cyb, 0, i==x0||i==x1 ? 0 : rgba_intensity(0xffffffff, light), 0, (t_iminfo){NULL, i, x0, x1, ya + (game->player->updown * dst->h), yb + (game->player->updown * dst->h)}}, &walls[k], bounds, xperc);
 				i++;
 			}
 			if (walls[k].is_portal && xvalues.y > xvalues.x && r_max + 1 < MAX_RENDERS)
 			{
-				renders[count + 1] = (t_ritem){walls[k].window, xvalues.x, xvalues.y};
+				renders[r_max] = (t_ritem){walls[k].window, xvalues.x, xvalues.y};
 				r_max++;
 			}
 			k++;
