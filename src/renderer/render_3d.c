@@ -112,6 +112,7 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 	{
 		t_wall *walls = renders[count].sector->walls;
 		k = 0;
+		printf("\n\n");
 		while ((t_uint64)k < renders[count].sector->wall_count)
 		{
 			t_coord v0 = {walls[k].corner_0.x - game->player->pos.x, walls[k].corner_0.y - game->player->pos.y};
@@ -159,10 +160,15 @@ void			render_3d(t_game *game, SDL_Surface *dst)
 						}
 				}
 			}
-			if (t0.y < 0.25 && t0.y > 0)
-				t0.y = 0.25;
-			if (t1.y < 0.25 && t1.y > 0)
-				t1.y = 0.25;
+			if (t0.y < 0.5 && t0.y > 0)
+				t0.y = 0.5;
+			if (t1.y < 0.5 && t1.y > 0)
+				t1.y = 0.5;
+			if (t0.y > -0.5 && t0.y < 0)
+				t0.y = -0.5;
+			if (t1.y > -0.5 && t1.y < 0)
+				t1.y = -0.5;
+			printf("Wall %i -> T 0 (%f, %f), T 1 (%f, %f)\n", k, t0.x, t0.y, t1.x, t1.y);
 			t_coord scale0 = { hfov / t0.y, vfov / t0.y };
 			t_coord scale1 = { hfov / t1.y, vfov / t1.y };
 			int x0 = dst->w / 2 - (int)(t0.x * scale0.x);
