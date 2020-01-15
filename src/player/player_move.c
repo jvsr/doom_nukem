@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/14 18:09:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/15 11:19:38 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static t_bool	move_backward(t_player *player, float speed, t_map *map)
 
 	xspeed = -(speed * cos(player->angle * PI_R));
 	yspeed = -(speed * sin(player->angle * PI_R));
-	player->pos.x += xspeed;
-	player->pos.y += yspeed;
 	return (player_col(player, map, xspeed, yspeed));
 }
 
@@ -50,8 +48,6 @@ static t_bool	move_left(t_player *player, float speed, t_map *map)
 
 	xspeed = speed * sin(player->angle * PI_R);
 	yspeed = -(speed * cos(player->angle * PI_R));
-	player->pos.x += xspeed;
-	player->pos.y += yspeed;
 	return (player_col(player, map, xspeed, yspeed));
 }
 
@@ -62,8 +58,6 @@ static t_bool	move_right(t_player *player, float speed, t_map *map)
 
 	xspeed = -(speed * sin(player->angle * PI_R));
 	yspeed = speed * cos(player->angle * PI_R);
-	player->pos.x += xspeed;
-	player->pos.y += yspeed;
 	return (player_col(player, map, xspeed, yspeed));
 }
 
