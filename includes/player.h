@@ -36,8 +36,8 @@ typedef struct s_map		t_map;
 
 typedef struct	s_mag
 {
-	float cos;
-	float sin;
+	double cos;
+	double sin;
 }				t_mag;
 
 typedef	struct	s_player
