@@ -24,15 +24,15 @@
 #include "eventstate.h"
 #include "libft/ft_mem.h"
 
-static void set_mouse_capture()
+static void	set_mouse_capture(void)
 {
-	static int caught = TRUE;
+	static int	caught = TRUE;
 
 	SDL_SetRelativeMouseMode(caught);
 	caught = !caught;
 }
 
-static void	manage_player_angle(t_game *game)
+static void	manage_player_angle(t_game *game, t_bool skip)
 {
 	t_player	*player;
 	t_point		mouse_pos;
@@ -40,8 +40,10 @@ static void	manage_player_angle(t_game *game)
 
 	if (!SDL_GetRelativeMouseMode())
 		return ;
-	player = game->player;
 	SDL_GetRelativeMouseState(&mouse_pos.x, &mouse_pos.y);
+	if (skip == TRUE)
+		return ;
+	player = game->player;
 	tmp = ((float)mouse_pos.x * game->setting->sensitivity * PLAYER_H_SENSE);
 	player->angle = wrap_float(player->angle + tmp, 0, 360.0);
 	player->updown = clamp_float(player->updown -
@@ -49,24 +51,28 @@ static void	manage_player_angle(t_game *game)
 		PLAYER_UPDOWN_MIN, PLAYER_UPDOWN_MAX);
 	player->mag.cos = cos(player->angle * PI_R);
 	player->mag.sin = sin(player->angle * PI_R);
-	SDL_WarpMouseInWindow(game->window, game->surface->w / 2,
-		game->surface->h / 2);
 }
 
 void		hud_eventstate(t_game *game, SDL_Event event)
 {
-	(void)game;
+	static t_bool	skip_mouse_move = FALSE;
+
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 	{
 		set_mouse_capture();
-		// different behaviour to be implemented, real main menu as placeholder
-		if (SDL_GetRelativeMouseMode() == SDL_FALSE)
+		if (SDL_GetRelativeMouseMode() == SDL_TRUE)
+			skip_mouse_move = TRUE;
+		else
 		{
+			// different behaviour to be implemented, real main menu as placeholder
 			set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
 			set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 			game->cureventstate->eventstate = mainmenu;
 		}
 	}
 	if (event.type == SDL_MOUSEMOTION)
-		manage_player_angle(game);
+	{
+		manage_player_angle(game, skip_mouse_move);
+		skip_mouse_move = FALSE;
+	}
 }
