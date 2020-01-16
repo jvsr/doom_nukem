@@ -28,6 +28,7 @@ void	mainmenu_mapeditor(t_game *game, t_transform *gui);
 void	mainmenu_quit(t_game *game, t_transform *gui);
 
 void	map_editor_select_return(t_game *game, t_transform *gui);
+void	map_editor_select_new(t_game *game, t_transform *gui);
 
 void	options_sensitivity_up(t_game *game, t_transform *gui);
 void	options_sensitivity_down(t_game *game, t_transform *gui);

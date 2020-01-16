@@ -24,6 +24,7 @@ static t_tablepair const	g_onclicks[] = {
 	{"mainmenu_quit", mainmenu_quit},
 
 	{"map_editor_select_return", map_editor_select_return},
+	{"map_editor_select_new", map_editor_select_new},
 
 	{"options_sensitivity_up", options_sensitivity_up},
 	{"options_sensitivity_down", options_sensitivity_down},

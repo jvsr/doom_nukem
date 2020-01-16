@@ -14,6 +14,14 @@
 #include "game.h"
 #include "eventstate.h"
 
+void	map_editor_select_new(t_game *game, t_transform *gui)
+{
+	(void)gui;
+	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mapeditor"), TRUE);
+	game->cureventstate->eventstate = map_editor;
+}
+
 void	map_editor_select_return(t_game *game, t_transform *gui)
 {
 	(void)gui;
