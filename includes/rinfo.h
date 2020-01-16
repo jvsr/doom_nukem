@@ -18,8 +18,8 @@
 # include "types.h"
 # include <SDL2/SDL_surface.h>
 
-# define MAX_RENDERS 32
 # define MAX_LIGHT_DIST 200.0
+# define LEVEL_MULTIPLIER 4.0
 
 typedef struct s_sector	t_sector;
 
@@ -48,27 +48,6 @@ typedef struct	s_map
 	t_uint64	sector_count;
 }				t_map;
 
-typedef struct	s_iminfo
-{
-	SDL_Surface	*image;
-	int			x;
-	int			beginx;
-	int			endx;
-	int			beginy;
-	int			endy;
-}				t_iminfo;
-
-typedef struct	s_drawinfo
-{
-	int			x;
-	int			y0;
-	int			y1;
-	int			top;
-	int			middle;
-	int			bottom;
-	t_iminfo	draw;
-}				t_drawinfo;
-
 typedef struct	s_ritem
 {
 	t_sector	*sector;
@@ -76,15 +55,12 @@ typedef struct	s_ritem
 	int			endx;
 }				t_ritem;
 
-typedef struct	s_wallbounds
+typedef struct	s_hit
 {
-	t_point x;
-	t_point ya;
-	t_point yb;
-	float	dista;
-	float	distb;
-	float	anglea;
-	float	angleb;
-}				t_wallbounds;
+	float		dist;
+	t_coord		pos;
+	t_wall		*wall;
+	t_sector	*sect;
+}				t_hit;
 
 #endif
