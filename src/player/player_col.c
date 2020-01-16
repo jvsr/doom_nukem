@@ -140,7 +140,7 @@ t_bool				player_col(t_player *player,
 		player->cur_sector = next_sector;
 		player->height = map->sectors[next_sector].floor + PLAYER_HEIGHT;
 	}
-	if ((col & 4) == 0)
+	if (col == 0)
 		ft_memcpy(&(player->pos), &pos_xy, sizeof(pos_xy));
 	else
 	{
