@@ -84,11 +84,12 @@ t_bool			player_move(t_game *game)
 	static size_t	jump = 0;
 
 	draw = FALSE;
-	if (is_helddown(game->keymap, SDLK_LSHIFT))
+	if (is_helddown(game->keymap, game->setting->controls.crouch))
+		speed = PLAYER_CROUCH_SPEED;
+	else if (is_helddown(game->keymap, SDLK_LSHIFT))
 		speed = PLAYER_RUN_SPEED;
 	else
 		speed = PLAYER_MOVE_SPEED;
-	speed *= game->setting->sensitivity;
 	if (is_helddown(game->keymap, game->setting->controls.forward))
 		draw |= move_forward(game->player, speed, game->map);
 	if (is_helddown(game->keymap, game->setting->controls.backward))
