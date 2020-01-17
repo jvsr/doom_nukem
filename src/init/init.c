@@ -63,6 +63,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].walls[3].is_portal = TRUE;
 	game->map->sectors[0].walls[3].window = &game->map->sectors[1];
 	game->map->sectors[0].has_ceiling = TRUE;
+	game->map->sectors[0].object_count = 0;
+	game->map->sectors[0].object = NULL;
 
 	//Sector 2
 	game->map->sectors[1].ceil = 30;
@@ -80,6 +82,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].walls[3].is_portal = TRUE;
 	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
 	game->map->sectors[1].has_ceiling = TRUE;
+	game->map->sectors[1].object_count = 0;
+	game->map->sectors[1].object = NULL;
 
 	//Sector 3
 	game->map->sectors[2].ceil = 40;
@@ -94,7 +98,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[2].walls[3] = (t_wall){(t_coord){-30, -20}, (t_coord){-30, 20}, FALSE, NULL, TEXTURE_BRICK_WALL, 0.2, 0.5};
 	game->map->sectors[2].walls[3].is_portal = TRUE;
 	game->map->sectors[2].walls[3].window = &game->map->sectors[1];
-
+	game->map->sectors[2].object_count = 0;
+	game->map->sectors[2].object = NULL;
 }
 
 void			init_function(t_game *game)
