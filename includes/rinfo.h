@@ -18,7 +18,7 @@
 # include "types.h"
 # include <SDL2/SDL_surface.h>
 
-# define MAX_LIGHT_DIST 200.0
+# define MAX_LIGHT_DIST 150.0
 # define LEVEL_MULTIPLIER 4.0
 
 typedef struct s_sector	t_sector;
@@ -58,6 +58,7 @@ typedef struct	s_ritem
 typedef struct	s_hit
 {
 	float		dist;
+	float		og_dist;
 	t_coord		pos;
 	t_wall		*wall;
 	t_sector	*sect;
