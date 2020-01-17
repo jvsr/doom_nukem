@@ -22,7 +22,6 @@
 #include "setting.h"
 #include <math.h>
 #include "color.h"
-#include "sdl_thread.h"
 
 static void draw_line(SDL_Surface *dst, t_point *ybounds, int x, int colour, t_point *bounds, t_hit *hit, t_game *game)
 {
@@ -60,27 +59,6 @@ static void draw_line(SDL_Surface *dst, t_point *ybounds, int x, int colour, t_p
 			
 			i++;
 		}
-	}
-}
-
-static void		draw_skybox(int x, SDL_Surface *dst, t_game *game, t_point *bounds)
-{
-	int			*pixels;
-	SDL_Surface	*skybox;
-	float		perc;
-	int			x_pos;
-	int			*skybox_pixels;
-
-	pixels = dst->pixels;
-	skybox = get_texture(game, game->map->skybox);
-	skybox_pixels = skybox->pixels;
-	perc = ((float)game->setting->fov / 360) * skybox->w;
-	x_pos = ((perc / dst->w) * x) + (wrap_float((float)game->player->angle - (game->setting->fov / 2), 0, 360) / 360) * skybox->w;
-	*bounds = (t_point){ft_constrain(bounds->x, 0, dst->h), ft_constrain(bounds->y, 0, dst->h)};
-	while (bounds->x < bounds->y)
-	{
-		pixels[x + ((dst->h - bounds->x - 1) * dst->w)] = skybox_pixels[x_pos + (skybox->h - 1 - (int)(((float)bounds->x / dst->h) * skybox->h)) * skybox->w];
-		bounds->x++;
 	}
 }
 
@@ -141,34 +119,6 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	return ((t_point){0, 0});
 }
 
-static t_hit get_hit(t_coord *cosin,
-						t_player *player, t_sector *sector, t_sector *prev)
-{
-	t_uint64 i;
-	t_wall *walls;
-	t_hit hit;
-	t_coord val;
-	float dist;
-
-	i = 0;
-	walls = sector->walls;
-	hit.dist = 2147483646;
-	while (i < sector->wall_count)
-	{
-		if (!(prev != NULL && walls[i].is_portal && walls[i].window == prev) &&
-			get_collision(&player->pos, cosin,
-							(t_coord[2]){walls[i].corner_0, walls[i].corner_1},
-							&val))
-		{
-			dist = get_distance(&player->pos, &val);
-			if (dist < hit.dist)
-				hit = (t_hit){dist, dist, val, &walls[i], sector};
-		}
-		i++;
-	}
-	return (hit);
-}
-
 static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 {
 	float	angle;
@@ -179,6 +129,7 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 	t_hit	hit;
 	t_sector *prev;
 	t_sector *sec;
+	float	zbuf[max - start];
 
 	hfov2 = (float)game->setting->fov / 2;
 	step = (float)game->setting->fov / dst->w;
@@ -198,6 +149,7 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 			else if (angle < hfov2)
 				hit.dist *= cosf((hfov2 - angle) * PI_R);
 			hit.og_dist = hit.dist;
+			zbuf[max - start] = hit.og_dist;
 			hit.dist *= LEVEL_MULTIPLIER;
 			out = draw_vline(&hit, game, start, dst, &out);
 			if (out.x != out.y)

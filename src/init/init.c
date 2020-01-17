@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/17 18:38:25 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/17 19:33:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].walls[4].is_portal = TRUE;
 	game->map->sectors[0].walls[4].window = &game->map->sectors[1];
 	game->map->sectors[0].has_ceiling = TRUE;
+	game->map->sectors[0].object_count = 0;
+	game->map->sectors[0].object = NULL;
 
 	//Sector 2
 	game->map->sectors[1].ceil = 30;
@@ -83,6 +85,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].walls[3].is_portal = TRUE;
 	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
 	game->map->sectors[1].has_ceiling = TRUE;
+	game->map->sectors[1].object_count = 0;
+	game->map->sectors[1].object = NULL;
 
 	//Sector 3
 	game->map->sectors[2].ceil = 40;
@@ -113,6 +117,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].walls[3].window = &game->map->sectors[0];
 	game->map->sectors[3].has_ceiling = TRUE;
 
+	game->map->sectors[2].object_count = 0;
+	game->map->sectors[2].object = NULL;
 }
 
 void			init_function(t_game *game)
