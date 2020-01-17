@@ -40,12 +40,15 @@ struct			s_sector
 	t_uint64	wall_count;
 	float		floor;
 	float		ceil;
+	t_bool		has_ceiling;
 };
 
 typedef struct	s_map
 {
 	t_sector	*sectors;
 	t_uint64	sector_count;
+	t_bool		has_skybox;
+	t_texture	skybox;
 }				t_map;
 
 typedef struct	s_ritem

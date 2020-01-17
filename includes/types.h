@@ -27,6 +27,8 @@ typedef enum				e_endian
 typedef enum				e_texture
 {
 	TEXTURE_BRICK_WALL,
+	TEXTURE_SKYBOX_DAY,
+	TEXTURE_SKYBOX_DUSK,
 	TEXTURE_COUNT
 }							t_texture;
 

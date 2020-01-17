@@ -22,6 +22,7 @@
 #include "renderer.h"
 #include "error.h"
 #include "rinfo.h"
+#include "sdl_thread.h"
 
 static void		player_init(t_game *game)
 {
@@ -45,6 +46,8 @@ static void		map_init(t_game *game)
 	if (!game->map)
 		error_msg_errno("Could not allocate Map Sector");
 	game->map->sector_count = 3;
+	game->map->has_skybox = TRUE;
+	game->map->skybox = TEXTURE_SKYBOX_DAY;
 
 	//Sector 1
 	game->map->sectors[0].ceil = 40;
@@ -59,6 +62,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].walls[3] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, -20}, FALSE, NULL, TEXTURE_BRICK_WALL, 0.2, 2};
 	game->map->sectors[0].walls[3].is_portal = TRUE;
 	game->map->sectors[0].walls[3].window = &game->map->sectors[1];
+	game->map->sectors[0].has_ceiling = TRUE;
 
 	//Sector 2
 	game->map->sectors[1].ceil = 30;
@@ -75,9 +79,10 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].walls[3] = (t_wall){(t_coord){-20, -20}, (t_coord){-20, 20}, FALSE, NULL, TEXTURE_BRICK_WALL, 0.2, 0.5};
 	game->map->sectors[1].walls[3].is_portal = TRUE;
 	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
+	game->map->sectors[1].has_ceiling = TRUE;
 
 	//Sector 3
-	game->map->sectors[2].ceil = 20;
+	game->map->sectors[2].ceil = 40;
 	game->map->sectors[2].floor = 10;
 	game->map->sectors[2].wall_count = 4;
 	game->map->sectors[2].walls = ft_memalloc(sizeof(t_wall) * 4);
@@ -101,5 +106,7 @@ void			init_function(t_game *game)
 	init_keymap(game);
 	map_init(game);
 	player_init(game);
+	game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
+					FALSE, INIT_THREADPOOL_CENTRALIZED);
 	game->cureventstate->eventstate = splash;
 }

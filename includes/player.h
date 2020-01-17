@@ -61,6 +61,7 @@ typedef	struct	s_player
 	float		height;
 	float		heightoffset;
 	float		updown;
+	int			screen_updown;
 }				t_player;
 
 t_bool			player_move(t_game *game);

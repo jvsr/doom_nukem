@@ -28,6 +28,7 @@ typedef struct s_setting		t_setting;
 typedef struct s_campaign		t_campaign;
 typedef struct s_eventstate		t_eventstate;
 typedef struct s_map			t_map;
+typedef struct s_pool			t_pool;
 
 typedef	enum	e_state
 {
@@ -57,6 +58,7 @@ typedef struct	s_game
 	SDL_Surface		**textures;
 	t_setting		*setting;
 	t_eventstate	*cureventstate;
+	t_pool			*pool;
 }				t_game;
 
 void			loop(t_game *game);
