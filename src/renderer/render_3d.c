@@ -6,10 +6,11 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:58:30 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:57:27 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/01/17 18:54:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_printf.h"
 #include "libft/ft_mem.h"
 #include "libft/ft_num.h"
 #include "game.h"
@@ -93,7 +94,25 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	y1 = y0 + t0;
 	y0 -= t0;
 	s = t0 * 2;
-	ybounds = (t_point){(((hit->sect->floor - y0) / s) * (dst->h)) - game->player->screen_updown,
+	if (!hit)
+		ft_printf("HIT");
+	if (!hit->sect)
+		ft_printf("SECT");
+	// if (!hit->sect->floor)
+		// ft_printf("FLR");
+	if (!dst)
+		ft_printf("DST");
+	if (!dst->h)
+		ft_printf("DSH");
+	if (!game)
+		ft_printf("GAM");
+	if (!game->player)
+		ft_printf("PLR");
+	// if (!game->player->screen_updown)
+	// 	ft_printf("SCR");
+	ybounds = (t_point){(((hit->sect->floor - y0) / s)
+	* (dst->h))
+	- game->player->screen_updown,
 						dst->h - (((y1 - hit->sect->ceil) / s) * (dst->h)) - game->player->screen_updown};
 	if (ybounds.y < dst->h && hit->sect->has_ceiling)
 		draw_line(dst, &(t_point){ybounds.y, dst->h}, x, 0xFF00FF00, bounds, hit, game);
@@ -190,9 +209,9 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 		start++;
 	}
 }
-
 void render_3d(t_game *game, SDL_Surface *dst)
 {
 	game->player->screen_updown = game->player->updown * dst->h;
 	render_chunk(game, dst, 0, dst->w - 1);
+	ft_printf("3");
 }

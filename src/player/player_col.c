@@ -6,10 +6,11 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/15 21:21:04 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/17 18:16:58 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_printf.h" //
 #include "libft/ft_bool.h"
 #include "libft/ft_mem.h"
 #include "player.h"
@@ -71,6 +72,7 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 	int			i;
 	int			max;
 	t_uint32	next_sector;
+	t_list		*portals;
 	static t_uint32	prev_sector = UINT32_MAX;
 
 	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
@@ -81,6 +83,7 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 	max = map->sectors[player->cur_sector].wall_count;
 	next_sector = player->cur_sector;
 	t_uint32 temp = player->cur_sector;
+	portals = NULL;
 	if (prev_sector == UINT32_MAX)
 		prev_sector = player->cur_sector;
 	while (i < max)
@@ -100,22 +103,60 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 			if (wall_col(pos_xy, player->pos, &walls[i])
 			|| wall_col(pos_x, player->pos, &walls[i]) == TRUE
 			|| wall_col(pos_y, player->pos, &walls[i]) == TRUE)
-			{
-				prev_sector = player->cur_sector;
-				next_sector = get_sector_id(map, walls[i].window);
-				player->cur_sector = next_sector;
-				check_col(player, col, map, xspeed, yspeed);
-			}
+				ft_lstadd(&portals, ft_lstnew(&walls[i], sizeof(t_wall*)));
+			// {
+				// prev_sector = player->cur_sector;
+				// next_sector = get_sector_id(map, walls[i].window);
+				// player->cur_sector = next_sector;
+					// ft_printf("1cur: %d\n", prev_sector);
+					// ft_printf("1nxt: %d\n", player->cur_sector);
+					// ft_printf("prev: %d\n", prev_sector);
+							// ft_printf("col: %d\n", *col);
+							// ft_printf("sec: %d\n", player->cur_sector);
+							// ft_printf("xs: %f, ys: %f\n", xspeed, yspeed);
+							// ft_printf("px: %f, py: %f\n", pos_x.x, pos_x.y);
+							// ft_printf("pxy: %f, pxy: %f\n", pos_xy.x, pos_xy.y);
+							// ft_printf("x: %f, y: %f\n", player->pos.x, player->pos.y);
+				// check_col(player, col, map, xspeed, yspeed);
+				// player->cur_sector = temp;
+					// ft_printf("2: %d\n", player->cur_sector);
+					// ft_printf("col: %d\n", *col);
+			// }
 		}
 		if (*col == 7)
 		{
 			player->cur_sector = temp;
 			prev_sector = UINT32_MAX;
+			// ft_printf("end1\n");
 			return (UINT32_MAX);
 		}
+		ft_printf("2");
 		i++;
 	}
+	while (portals != NULL)
+	{
+		if (((*col & 1) == 0 && wall_col(pos_x, player->pos, (t_wall*)portals->content))
+		|| ((*col & 2) == 0 && wall_col(pos_y, player->pos, (t_wall*)portals->content))
+		|| (*col == 0 && wall_col(pos_xy, player->pos, (t_wall*)portals->content))
+		)
+		{
+			prev_sector = player->cur_sector;
+			next_sector = get_sector_id(map, (*((t_wall*)portals->content)).window);
+			player->cur_sector = next_sector;
+			check_col(player, col, map, xspeed, yspeed);
+			player->cur_sector = temp;
+		}
+		ft_printf("1");
+		portals = portals->next;
+	}
+	if (*col == 7)
+	{
+		player->cur_sector = temp;
+		// ft_printf("end1\n");
+		return (UINT32_MAX);
+	}
 	prev_sector = UINT32_MAX;
+	// ft_printf("end2\n");
 	return (next_sector);
 }
 
@@ -156,6 +197,17 @@ t_bool				player_col(t_player *player,
 		else if ((col & 2) == 0)
 			ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
 	}
+	if (player->pos.y < -20.0 || player->cur_sector == 3)
+	{
+		// ft_printf("col: %d\n", col);
+		// ft_printf("sec: %d\n", player->cur_sector);
+		// ft_printf("xs: %f, ys: %f\n", xspeed, yspeed);
+		// ft_printf("px: %f, py: %f\n", pos_x.x, pos_x.y);
+		// ft_printf("pxy: %f, pxy: %f\n", pos_xy.x, pos_xy.y);
+		// ft_printf("x: %f, y: %f\n", player->pos.x, player->pos.y);
+		// exit(EXIT_FAILURE);
+	}
+	// ft_printf("realend\n");
 	return (TRUE);
 }
 
