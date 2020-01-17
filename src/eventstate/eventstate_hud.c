@@ -57,6 +57,10 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 {
 	static t_bool	skip_mouse_move = FALSE;
 
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == game->setting->controls.crouch)
+		game->player->height = PLAYER_CROUCH + game->map->sectors[game->player->cur_sector].floor;
+	else if (event.type == SDL_KEYUP && event.key.keysym.sym == game->setting->controls.crouch)
+		game->player->height = PLAYER_HEIGHT + game->map->sectors[game->player->cur_sector].floor;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 	{
 		set_mouse_capture();
