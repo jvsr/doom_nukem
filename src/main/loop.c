@@ -116,6 +116,7 @@ void			loop(t_game *game)
 		if(get_gametime(&game->starttime) - lastsecond >= 1000)
 		{
 			printf("FPS %d\n", framecount);
+			game->frametime = framecount;
 			framecount = 0;
 			lastsecond = get_gametime(&game->starttime);
 		}
