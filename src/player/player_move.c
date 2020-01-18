@@ -69,15 +69,20 @@ t_bool			player_move(t_game *game)
 {
 	t_bool			draw;
 	float			speed;
+	float			xspeed;
+	float			yspeed;
 	static size_t	jump = 0;
 
 	draw = FALSE;
+	xspeed = 0;
+	yspeed = 0;
 	if (is_helddown(game->keymap, game->setting->controls.crouch))
-		speed = PLAYER_CROUCH_SPEED;
+		speed = PLAYER_CROUCH_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
 	else if (is_helddown(game->keymap, SDLK_LSHIFT))
-		speed = PLAYER_RUN_SPEED;
+		speed = PLAYER_RUN_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
 	else
-		speed = PLAYER_MOVE_SPEED;
+		speed = PLAYER_MOVE_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
+
 	if (is_helddown(game->keymap, game->setting->controls.forward))
 		draw |= move_forward(game->player, speed, &xspeed, &yspeed);
 	if (is_helddown(game->keymap, game->setting->controls.backward))

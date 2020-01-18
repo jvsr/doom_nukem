@@ -99,6 +99,7 @@ void			loop(t_game *game)
 	game->player->mag = (t_mag){cosf(0), sinf(0)};
 	framecount = 0;
 	lastsecond = get_gametime(&game->starttime);
+	game->frametime = PLAYER_MOVE_BASE_FPS;
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
