@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/17 18:16:58 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/20 23:25:40 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_uint32		get_sector_id(t_map *map, t_sector *sec)
 			return (i);
 		i++;
 	}
-	return (4294967294);
+	return (4294967294); // <3
 }
 
 static t_uint32		check_col(t_player *player, t_uint8 *col,
@@ -81,7 +81,7 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 	walls = map->sectors[player->cur_sector].walls;
 	i = 0;
 	max = map->sectors[player->cur_sector].wall_count;
-	next_sector = player->cur_sector;
+	next_sector = UINT32_MAX;
 	t_uint32 temp = player->cur_sector;
 	portals = NULL;
 	if (prev_sector == UINT32_MAX)
@@ -130,12 +130,13 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 			// ft_printf("end1\n");
 			return (UINT32_MAX);
 		}
-		ft_printf("2");
+		// ft_printf("2");
 		i++;
 	}
 	while (portals != NULL)
 	{
-		if (((*col & 1) == 0 && wall_col(pos_x, player->pos, (t_wall*)portals->content))
+		if (
+		((*col & 1) == 0 && wall_col(pos_x, player->pos, (t_wall*)portals->content))
 		|| ((*col & 2) == 0 && wall_col(pos_y, player->pos, (t_wall*)portals->content))
 		|| (*col == 0 && wall_col(pos_xy, player->pos, (t_wall*)portals->content))
 		)
@@ -146,7 +147,7 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 			check_col(player, col, map, xspeed, yspeed);
 			player->cur_sector = temp;
 		}
-		ft_printf("1");
+		// ft_printf("1");
 		portals = portals->next;
 	}
 	if (*col == 7)
@@ -178,6 +179,13 @@ t_bool				player_col(t_player *player,
 		return (FALSE);
 	if (next_sector != UINT32_MAX)
 	{
+		ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
+		if (player->height + player->heightoffset + PLAYER_CLIMB - PLAYER_HEIGHT < map->sectors[next_sector].floor)
+			return (FALSE);
+		if (player->height + player->heightoffset > map->sectors[next_sector].floor + PLAYER_HEIGHT)
+			player->heightoffset += player->height - (map->sectors[next_sector].floor + PLAYER_HEIGHT);
+		else
+			player->heightoffset = 0.0001;
 		player->cur_sector = next_sector;
 		player->height = map->sectors[next_sector].floor + PLAYER_HEIGHT;
 	}

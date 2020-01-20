@@ -165,5 +165,5 @@ void render_3d(t_game *game, SDL_Surface *dst)
 {
 	game->player->screen_updown = game->player->updown * dst->h;
 	render_chunk(game, dst, 0, dst->w - 1);
-	ft_printf("3");
+	// ft_printf("3");
 }
