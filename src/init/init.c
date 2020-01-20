@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/17 19:33:53 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/20 21:27:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		map_init(t_game *game)
 	game->map->skybox = TEXTURE_SKYBOX_DAY;
 
 	//Sector 1
-	game->map->sectors[0].ceil = 40;
+	game->map->sectors[0].ceil = 150;
 	game->map->sectors[0].floor = 0;
 	game->map->sectors[0].wall_count = 5;
 	game->map->sectors[0].walls = ft_memalloc(sizeof(t_wall) * 5);
@@ -70,8 +70,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].object = NULL;
 
 	//Sector 2
-	game->map->sectors[1].ceil = 30;
-	game->map->sectors[1].floor = 5;
+	game->map->sectors[1].ceil = 100;
+	game->map->sectors[1].floor = -5;
 	game->map->sectors[1].wall_count = 4;
 	game->map->sectors[1].walls = ft_memalloc(sizeof(t_wall) * 4);
 	if (game->map->sectors[1].walls == NULL)
@@ -103,7 +103,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[2].walls[3].window = &game->map->sectors[1];
 
 	//Sector 4
-	game->map->sectors[3].ceil = 30;
+	game->map->sectors[3].ceil = 200;
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
 	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * 4);
