@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:58:30 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/17 18:54:51 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/20 17:13:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	- game->player->screen_updown,
 						dst->h - (((y1 - hit->sect->ceil) / s) * (dst->h)) - game->player->screen_updown};
 	if (ybounds.y < dst->h && hit->sect->has_ceiling)
-		draw_line(dst, &(t_point){ybounds.y, dst->h}, x, 0xFF00FF00, bounds, hit, game);
+		draw_line(dst, &(t_point){ybounds.y, dst->h}, x, CEILING_COLOR, bounds, hit, game);
 	else
 		draw_skybox(x, dst, game, &(t_point){ybounds.y, bounds->y});
 	if (ybounds.x > 0)
-		draw_line(dst, &(t_point){0, ybounds.x}, x, 0xFF0000FF, bounds, hit, game);
+		draw_line(dst, &(t_point){0, ybounds.x}, x, FLOOR_COLOR, bounds, hit, game);
 	if (!hit->wall->is_portal && hit->sect->ceil > y0 && hit->sect->floor < y1)
 		draw_line(dst, &ybounds, x,  -1, bounds, hit, game);
 	else if (hit->sect->ceil > y0 && hit->sect->floor < y1)

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/28 14:53:01 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/20 12:53:54 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 
 # define HFOV_RANGE 180
 # define VFOV_RANGE 180
+
+# define CEILING_COLOR 0xFFFFFFF0
+# define FLOOR_COLOR 0xFFF4EEB1
 
 typedef struct	s_list		t_list;
 typedef struct	s_game		t_game;
