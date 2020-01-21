@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/20 21:45:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/21 21:33:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "libft/ft_str.h"
 
 #include "game.h"
+#include "rinfo.h"
 #include "setting.h"
 #include "cmath.h"
 #include "player.h"
@@ -65,7 +66,7 @@ static t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
 	if (speed < 0)
 		speed = 0;
 	player->heightoffset += speed;
-	if (cur > 500)
+	if (cur > 500 || (game->map->sectors[player->cur_sector].has_ceiling && player->height + player->heightoffset >= game->map->sectors[player->cur_sector].ceil))
 	{
 		*jump = FALSE;
 		momentum = UINT64_MAX;

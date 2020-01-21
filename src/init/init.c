@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/20 21:27:20 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/21 21:31:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[2].walls[3].window = &game->map->sectors[1];
 
 	//Sector 4
-	game->map->sectors[3].ceil = 200;
+	game->map->sectors[3].ceil = 20;
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
 	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * 4);
