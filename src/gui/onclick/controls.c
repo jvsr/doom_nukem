@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 22:10:12 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 15:50:36 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/15 21:32:39 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	controls_return(t_game *game, t_transform *gui)
 	overlay = get_gui_child(game->ui, "controlsoverlay");
 	set_elem_show_clickable(menu, FALSE);
 	set_elem_show_clickable(overlay, FALSE);
+	game->cureventstate->eventstate = options;
 }
