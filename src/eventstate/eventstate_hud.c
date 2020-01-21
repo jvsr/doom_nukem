@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/14 12:23:30 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/21 20:01:09 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	static t_bool	skip_mouse_move = FALSE;
 
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == game->setting->controls.crouch)
-		game->player->height = PLAYER_CROUCH + game->map->sectors[game->player->cur_sector].floor;
+		game->player->player_height = PLAYER_CROUCH;
 	else if (event.type == SDL_KEYUP && event.key.keysym.sym == game->setting->controls.crouch)
-		game->player->height = PLAYER_HEIGHT + game->map->sectors[game->player->cur_sector].floor;
+		game->player->player_height = PLAYER_HEIGHT;
+	game->player->height = game->player->player_height + game->map->sectors[game->player->cur_sector].floor;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 	{
 		set_mouse_capture();

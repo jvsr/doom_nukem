@@ -31,6 +31,7 @@ static void		player_init(t_game *game)
 		error_msg_errno("Could not allocate Game Player");
 	game->player->fov = &game->setting->fov;
 	get_vector_from_angle(game->player->angle, &game->player->forward);
+	game->player->player_height = PLAYER_HEIGHT;
 	game->player->height = PLAYER_HEIGHT;
 	ft_memcpy(&game->player->mag, &(t_coord){wrap_float(game->player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(game->player->angle +

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/20 23:25:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/21 19:56:29 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,14 +180,14 @@ t_bool				player_col(t_player *player,
 	if (next_sector != UINT32_MAX)
 	{
 		ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
-		if (player->height + player->heightoffset + PLAYER_CLIMB - PLAYER_HEIGHT < map->sectors[next_sector].floor)
+		if (player->height + player->heightoffset + PLAYER_CLIMB - player->player_height < map->sectors[next_sector].floor)
 			return (FALSE);
-		if (player->height + player->heightoffset > map->sectors[next_sector].floor + PLAYER_HEIGHT)
-			player->heightoffset += player->height - (map->sectors[next_sector].floor + PLAYER_HEIGHT);
+		if (player->height + player->heightoffset > map->sectors[next_sector].floor + player->player_height)
+			player->heightoffset += player->height - (map->sectors[next_sector].floor + player->player_height);
 		else
 			player->heightoffset = 0.0001;
 		player->cur_sector = next_sector;
-		player->height = map->sectors[next_sector].floor + PLAYER_HEIGHT;
+		player->height = map->sectors[next_sector].floor + player->player_height;
 	}
 	if (col == 0)
 		ft_memcpy(&(player->pos), &pos_xy, sizeof(pos_xy));

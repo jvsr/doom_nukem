@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/20 23:17:49 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/21 19:48:27 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef	struct	s_player
 	t_coord		pos;
 	t_uint32	cur_sector;
 	float		height;
+	float		player_height;
 	float		heightoffset;
 	float		updown;
 	int			screen_updown;
