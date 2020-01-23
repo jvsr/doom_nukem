@@ -24,6 +24,7 @@ static t_tablepair_int const	g_types[] = {
 	{"BUTTON", BUTTON},
 	{"PANEL", PANEL},
 	{"GVIEW", GVIEW},
+	{"MAP_EDITOR", MAP_EDITOR},
 };
 
 char const		*get_gui_type_name(t_gui_type gui_type)

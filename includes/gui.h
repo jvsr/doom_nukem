@@ -23,6 +23,7 @@
 
 # define FONT_PATH "resources/fonts/"
 
+typedef struct s_wall_line	t_wall_line;
 typedef struct s_game		t_game;
 typedef struct s_gui		t_gui;
 typedef struct s_transform	t_transform;
@@ -31,6 +32,8 @@ typedef struct s_image		t_image;
 typedef struct s_button		t_button;
 typedef struct s_panel		t_panel;
 typedef struct s_gview		t_gview;
+typedef struct s_map_editor	t_map_editor;
+
 
 typedef void	(t_onclick)(t_game *, t_transform *);
 
@@ -41,7 +44,8 @@ typedef enum	e_gui_type
 	IMAGE,
 	BUTTON,
 	PANEL,
-	GVIEW
+	GVIEW,
+	MAP_EDITOR
 }				t_gui_type;
 
 typedef enum	e_parent_type
@@ -75,11 +79,12 @@ typedef enum	e_draw_method
 
 typedef	union	u_gui_elem
 {
-	t_text		*text;
-	t_image		*image;
-	t_button	*button;
-	t_panel		*panel;
-	t_gview		*gview;
+	t_text			*text;
+	t_image			*image;
+	t_button		*button;
+	t_panel			*panel;
+	t_gview			*gview;
+	t_map_editor	*map_editor;
 }				t_gui_elem;
 
 typedef	union	u_parent
@@ -143,6 +148,13 @@ struct			s_panel
 struct			s_gview
 {
 
+};
+
+struct			s_map_editor
+{
+	int				x_offset;
+	int				y_offset;
+	t_wall_line		*line;
 };
 
 struct			s_gui

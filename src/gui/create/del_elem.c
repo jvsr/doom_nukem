@@ -29,6 +29,8 @@ static void	del_gui_elem(t_transform *elem)
 		del_panel(&elem->gui_elem.panel);
 	else if (elem->gui_type == GVIEW)
 		del_gview(&elem->gui_elem.gview);
+	else if (elem->gui_type == MAP_EDITOR)
+		del_map_editor(&elem->gui_elem.map_editor);
 }
 
 void		del_elem(t_transform **elem)

@@ -47,7 +47,9 @@ CREATE_SRCS = new_elem \
 		new_panel \
 		del_panel \
 		del_gview \
-		new_gview
+		new_gview \
+		del_map_editor \
+		new_map_editor
 CREATE_SRCS := $(CREATE_SRCS:%=create/%)
 
 DEBUG_SRCS = print_elem \
@@ -64,7 +66,8 @@ DRAW_SRCS = draw_gui \
 		render_text \
 		draw_text \
 		draw_panel \
-		draw_gview
+		draw_gview \
+		draw_map_editor
 DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 
 MANAGE_SRCS = add_gui_child \

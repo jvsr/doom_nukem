@@ -90,6 +90,8 @@ static void		draw_gui_elem(t_transform *elem, t_game *game)
 		draw_button(dst, elem->gui_elem.button, elem->abs_dim);
 	else if (elem->gui_type == GVIEW)
 		draw_gview(dst, game);
+	else if (elem->gui_type == MAP_EDITOR)
+		draw_map_editor(dst, game, elem);
 	else if (elem->gui_type == PANEL)
 	{
 		draw_panel(elem->gui_elem.panel, game);

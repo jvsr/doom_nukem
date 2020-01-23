@@ -1,3 +1,2 @@
 - panel: mapeditor
-  - image: mapeditorbackground
-    - color: #333333
+  - map_editor: mapeditorview
