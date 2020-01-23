@@ -12,24 +12,28 @@
 
 #include <math.h>
 
-#include "coord.h"
+#include "shape.h"
 #include "sdl_extra.h"
 
 static void	put_point(SDL_Surface *dst, SDL_Color color,
 						SDL_Point point, size_t size)
 {
-	sdl_draw_surface_rect(dst, color, (SDL_Rect){point.x, point.y, size, size});
+	SDL_Point const	start = {point.x - (size / 2), point.y - (size / 2)};
+	SDL_Point const	end = {point.x + (size / 2), point.y + (size / 2)};
+
+	if (start.x > (dst->w - 1) || start.y > (dst->h - 1)
+		|| end.x < 0 || end.x < 0)
+		return ;
+	sdl_draw_surface_rect(dst, color, (SDL_Rect){start.x, start.y, size, size});
 }
 
 static void	draw_line_x_plus(SDL_Surface *dst, SDL_Color color,
 								t_line line, float m)
 {
-	int				dx;
-	int				dy;
-	int				y_step;
+	int const	dx = line.end.x - line.start.x;
+	int	const	dy = line.end.y - line.start.y;
+	int			y_step;
 
-	dx = line.end.x - line.start.x;
-	dy = line.end.y - line.start.y;
 	y_step = 1;
 	if (dy < 0)
 		y_step = -1;
@@ -50,12 +54,10 @@ static void	draw_line_x_plus(SDL_Surface *dst, SDL_Color color,
 static void	draw_line_y_plus(SDL_Surface *dst, SDL_Color color,
 							t_line line, float m)
 {
-	int				dx;
-	int				dy;
-	int				x_step;
+	int const	dx = line.end.x - line.start.x;
+	int	const	dy = line.end.y - line.start.y;
+	int			x_step;
 
-	dx = line.end.x - line.start.x;
-	dy = line.end.y - line.start.y;
 	x_step = 1;
 	if (dx < 0)
 		x_step = -1;
@@ -76,13 +78,11 @@ static void	draw_line_y_plus(SDL_Surface *dst, SDL_Color color,
 void		sdl_draw_surface_line(SDL_Surface *dst, SDL_Color color,
 									t_line line)
 {
-	float	m;
-	int		mode;
-	int		dx;
-	int		dy;
+	float		m;
+	int			mode;
+	int const	dx = line.end.x - line.start.x;
+	int	const	dy = line.end.y - line.start.y;
 
-	dx = line.end.x - line.start.x;
-	dy = line.end.y - line.start.y;
 	if (abs(dx) > abs(dy))
 		mode = 1;
 	else

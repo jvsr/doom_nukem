@@ -21,4 +21,10 @@ typedef struct	s_circle
 	SDL_Point	mid;
 }				t_circle;
 
+typedef struct	s_line
+{
+	SDL_Point	start;
+	SDL_Point	end;
+}				t_line;
+
 #endif

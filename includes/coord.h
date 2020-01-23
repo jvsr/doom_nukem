@@ -13,7 +13,7 @@
 #ifndef COORD_H
 # define COORD_H
 
-# include <SDL2/SDL_surface.h>
+# include <SDL2/SDL_rect.h>
 
 typedef struct	s_coord
 {
@@ -27,12 +27,6 @@ typedef struct	s_vec
 	float		y;
 	float		z;
 }				t_vec;
-
-typedef struct	s_line
-{
-	SDL_Point	start;
-	SDL_Point	end;
-}				t_line;
 
 typedef struct	s_point
 {

@@ -13,7 +13,7 @@
 #ifndef MAP_EDITOR_H
 # define MAP_EDITOR_H
 
-# include "coord.h"
+# include "shape.h"
 # include <SDL2/SDL_surface.h>
 
 # define EDITOR_BACKGROUND_COLOR "333333"
