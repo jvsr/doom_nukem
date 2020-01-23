@@ -105,8 +105,8 @@ static void	draw_grid(SDL_Surface *dst, t_transform *elem)
 	int			y;
 	SDL_Color	color;
 
-	x = (-1 - elem->gui_elem.map_editor->x_offset) % EDITOR_GRID_STEP;
-	y = (-1 - elem->gui_elem.map_editor->y_offset) % EDITOR_GRID_STEP;
+	x = (-1 - elem->gui_elem.map_editor->pos.x) % EDITOR_GRID_STEP;
+	y = (-1 - elem->gui_elem.map_editor->pos.y) % EDITOR_GRID_STEP;
 	hex_to_color(&color, EDITOR_GRID_COLOR);
 	while (x < dst->w)
 	{
@@ -136,10 +136,10 @@ void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 	while (line != NULL)
 	{
 		ft_memcpy(&line_copy, line, sizeof(t_wall_line));
-		line_copy.start.x -= elem->gui_elem.map_editor->x_offset;
-		line_copy.start.y -= elem->gui_elem.map_editor->y_offset;
-		line_copy.end.x -= elem->gui_elem.map_editor->x_offset;
-		line_copy.end.y -= elem->gui_elem.map_editor->y_offset;
+		line_copy.start.x -= elem->gui_elem.map_editor->pos.x;
+		line_copy.start.y -= elem->gui_elem.map_editor->pos.y;
+		line_copy.end.x -= elem->gui_elem.map_editor->pos.x;
+		line_copy.end.y -= elem->gui_elem.map_editor->pos.y;
 		ft_drawline(dst, line_copy.start, line_copy.end, line_color);
 		line = line->next;
 	}

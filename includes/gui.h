@@ -152,8 +152,7 @@ struct			s_gview
 
 struct			s_map_editor
 {
-	int				x_offset;
-	int				y_offset;
+	SDL_Point		pos;
 	t_wall_line		*line;
 };
 

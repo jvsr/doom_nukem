@@ -47,8 +47,8 @@ static void	add_line(t_game *game, SDL_Event event, t_transform *map_editor_elem
 		first_place = FALSE;
 	}
 	index = !first_place;
-	points[index].x = event.button.x + map_editor_elem->gui_elem.map_editor->x_offset;
-	points[index].y = event.button.y + map_editor_elem->gui_elem.map_editor->y_offset;
+	points[index].x = event.button.x + map_editor_elem->gui_elem.map_editor->pos.x;
+	points[index].y = event.button.y + map_editor_elem->gui_elem.map_editor->pos.y;
 	if (first_place == FALSE)
 	{
 		new = (t_wall_line *)ft_memalloc(sizeof(t_wall_line));
@@ -95,22 +95,22 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 	//Super ugly (Same goes for the above ^) for testing atm
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_LEFT)
 	{
-		map_editor_elem->gui_elem.map_editor->x_offset -= EDITOR_MOVE_SPEED;
+		map_editor_elem->gui_elem.map_editor->pos.x -= EDITOR_MOVE_SPEED;
 		set_elem_redraw(map_editor_elem);
 	}
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RIGHT)
 	{
-		map_editor_elem->gui_elem.map_editor->x_offset += EDITOR_MOVE_SPEED;
+		map_editor_elem->gui_elem.map_editor->pos.x += EDITOR_MOVE_SPEED;
 		set_elem_redraw(map_editor_elem);
 	}
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_UP)
 	{
-		map_editor_elem->gui_elem.map_editor->y_offset -= EDITOR_MOVE_SPEED;
+		map_editor_elem->gui_elem.map_editor->pos.y -= EDITOR_MOVE_SPEED;
 		set_elem_redraw(map_editor_elem);
 	}
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_DOWN)
 	{
-		map_editor_elem->gui_elem.map_editor->y_offset += EDITOR_MOVE_SPEED;
+		map_editor_elem->gui_elem.map_editor->pos.y += EDITOR_MOVE_SPEED;
 		set_elem_redraw(map_editor_elem);
 	}
 }
