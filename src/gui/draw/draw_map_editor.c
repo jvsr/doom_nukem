@@ -18,87 +18,6 @@
 #include "game.h"
 #include "gui.h"
 
-static void	ft_drawlinexplus(SDL_Surface *dst, SDL_Point start, SDL_Point end,
-							SDL_Color color, float m)
-{
-	int			dx;
-	int			dy;
-	int			ystep;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	ystep = 1;
-	if (dy < 0)
-		ystep = -1;
-	sdl_draw_surface_rect(dst, color, (SDL_Rect){start.x, start.y, 1, 1});
-	while (start.x < end.x)
-	{
-		m -= dy * ystep;
-		start.x += 1;
-		if (m < 0)
-		{
-			start.y += ystep;
-			m += dx;
-		}
-		sdl_draw_surface_rect(dst, color, (SDL_Rect){start.x, start.y, 1, 1});
-	}
-}
-
-static void	ft_drawlineyplus(SDL_Surface *dst, SDL_Point start, SDL_Point end,
-							SDL_Color color, float m)
-{
-	int			dx;
-	int			dy;
-	int			xstep;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	xstep = 1;
-	if (dx < 0)
-		xstep = -1;
-	sdl_draw_surface_rect(dst, color, (SDL_Rect){start.x, start.y, 1, 1});
-	while (start.y < end.y)
-	{
-		m -= dx * xstep;
-		start.y += 1;
-		if (m < 0)
-		{
-			start.x += xstep;
-			m += dy;
-		}
-		sdl_draw_surface_rect(dst, color, (SDL_Rect){start.x, start.y, 1, 1});
-	}
-}
-
-static void	ft_drawline(SDL_Surface *dst, SDL_Point start, SDL_Point end, SDL_Color color)
-{
-	float	m;
-	int		mode;
-	int		dx;
-	int		dy;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	if (abs(dx) > abs(dy))
-		mode = 1;
-	else
-		mode = 2;
-	if (mode == 1)
-		m = dx;
-	else
-		m = dy;
-	m /= 2;
-	if (m < 0)
-	{
-		ft_drawline(dst, end, start, color);
-		return ;
-	}
-	if (mode == 1)
-		ft_drawlinexplus(dst, start, end, color, m);
-	else if (mode == 2)
-		ft_drawlineyplus(dst, start, end, color, m);
-}
-
 static void	draw_grid(SDL_Surface *dst, t_transform *elem)
 {
 	int			x;
@@ -110,20 +29,20 @@ static void	draw_grid(SDL_Surface *dst, t_transform *elem)
 	hex_to_color(&color, EDITOR_GRID_COLOR);
 	while (x < dst->w)
 	{
-		ft_drawline(dst, (SDL_Point){x, 0}, (SDL_Point){x, dst->h}, color);
+		sdl_draw_surface_line(dst, color, (t_line){{x, 0}, {x, dst->h}});
 		x += EDITOR_GRID_STEP;
 	}
 	while (y < dst->h)
 	{
-		ft_drawline(dst, (SDL_Point){0, y}, (SDL_Point){dst->w, y}, color);
+		sdl_draw_surface_line(dst, color, (t_line){{0, y}, {dst->w, y}});
 		y += EDITOR_GRID_STEP;
 	}
 }
 
 void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 {
-	t_wall_line	*line;
-	t_wall_line	line_copy;
+	t_wall_line	*wall_line;
+	t_line		line;
 	SDL_Color	background_color;
 	SDL_Color	line_color;
 
@@ -132,15 +51,15 @@ void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 	hex_to_color(&background_color, EDITOR_BACKGROUND_COLOR);
 	sdl_fill_surface_color(dst, background_color);
 	draw_grid(dst, elem);
-	line = elem->gui_elem.map_editor->line;
-	while (line != NULL)
+	wall_line = elem->gui_elem.map_editor->line;
+	while (wall_line != NULL)
 	{
-		ft_memcpy(&line_copy, line, sizeof(t_wall_line));
-		line_copy.start.x -= elem->gui_elem.map_editor->pos.x;
-		line_copy.start.y -= elem->gui_elem.map_editor->pos.y;
-		line_copy.end.x -= elem->gui_elem.map_editor->pos.x;
-		line_copy.end.y -= elem->gui_elem.map_editor->pos.y;
-		ft_drawline(dst, line_copy.start, line_copy.end, line_color);
-		line = line->next;
+		ft_memcpy(&line, &wall_line->line, sizeof(t_line));
+		line.start.x -= elem->gui_elem.map_editor->pos.x;
+		line.start.y -= elem->gui_elem.map_editor->pos.y;
+		line.end.x -= elem->gui_elem.map_editor->pos.x;
+		line.end.y -= elem->gui_elem.map_editor->pos.y;
+		sdl_draw_surface_line(dst, line_color, line);
+		wall_line = wall_line->next;
 	}
 }

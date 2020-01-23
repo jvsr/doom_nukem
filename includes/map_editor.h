@@ -13,6 +13,7 @@
 #ifndef MAP_EDITOR_H
 # define MAP_EDITOR_H
 
+# include "coord.h"
 # include <SDL2/SDL_surface.h>
 
 # define EDITOR_BACKGROUND_COLOR "333333"
@@ -25,8 +26,7 @@ typedef struct s_wall_line	t_wall_line;
 
 struct		s_wall_line
 {
-	SDL_Point	start;
-	SDL_Point	end;
+	t_line		line;
 	t_wall_line	*next;
 };
 

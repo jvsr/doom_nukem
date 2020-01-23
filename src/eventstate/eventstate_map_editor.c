@@ -14,6 +14,7 @@
 
 #include "libft/ft_mem.h"
 
+#include "coord.h"
 #include "game.h"
 #include "gui.h"
 #include "map_editor.h"
@@ -52,8 +53,8 @@ static void	add_line(t_game *game, SDL_Event event, t_transform *map_editor_elem
 	if (first_place == FALSE)
 	{
 		new = (t_wall_line *)ft_memalloc(sizeof(t_wall_line));
-		ft_memcpy(&new->start, &points[0], sizeof(SDL_Point));
-		ft_memcpy(&new->end, &points[1], sizeof(SDL_Point));
+		ft_memcpy(&new->line.start, &points[0], sizeof(SDL_Point));
+		ft_memcpy(&new->line.end, &points[1], sizeof(SDL_Point));
 		add_to_end(&map_editor_elem->gui_elem.map_editor->line, new);
 		set_elem_redraw(map_editor_elem);
 	}
