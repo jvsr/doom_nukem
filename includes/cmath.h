@@ -17,6 +17,8 @@
 # define PI_R 0.0174532925
 # define PI_D 57.2957795131
 
+#include "libft/ft_bool.h"
+
 typedef struct s_coord		t_coord;
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
@@ -44,5 +46,6 @@ float		wrap_float(float f0, float min, float max);
 t_coord		get_perps(float angle);
 float		wrap_angle(float angle);
 t_coord		intersect3(t_coord c0, t_coord c1, t_coord c2, t_coord c3);
+t_bool		is_between_fov(float a, float start, float end);
 
 #endif

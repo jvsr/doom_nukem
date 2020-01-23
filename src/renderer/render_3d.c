@@ -13,6 +13,7 @@
 #include "libft/ft_printf.h"
 #include "libft/ft_mem.h"
 #include "libft/ft_num.h"
+#include "libft/ft_list.h"
 #include "game.h"
 #include "campaign.h"
 #include "player.h"
@@ -72,22 +73,6 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	y1 = y0 + t0;
 	y0 -= t0;
 	s = t0 * 2;
-	if (!hit)
-		ft_printf("HIT");
-	if (!hit->sect)
-		ft_printf("SECT");
-	// if (!hit->sect->floor)
-		// ft_printf("FLR");
-	if (!dst)
-		ft_printf("DST");
-	if (!dst->h)
-		ft_printf("DSH");
-	if (!game)
-		ft_printf("GAM");
-	if (!game->player)
-		ft_printf("PLR");
-	// if (!game->player->screen_updown)
-	// 	ft_printf("SCR");
 	ybounds = (t_point){(((hit->sect->floor - y0) / s)
 	* (dst->h))
 	- game->player->screen_updown,
@@ -119,17 +104,45 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	return ((t_point){0, 0});
 }
 
+static void render_objects(t_list *secs, float *zbuf, SDL_Surface *dst, t_game *game, t_coord *range)
+{
+	t_list		*objs;
+	t_list		*n_secs;
+	int			i;
+	t_sector	*sec;
+	t_coord		vec;
+
+	objs = NULL;
+	n_secs = secs;
+	(void)zbuf;
+	(void)dst;
+	while (n_secs->next != NULL)
+	{
+		i = 0;
+		sec = n_secs->content;
+		while ((t_uint64)i < sec->object_count)
+		{
+			if (is_between_fov(get_angle_from_vector(get_vector_from_points(&sec->object[i].pos, &game->player->pos, &vec)), range->x, range->y))
+				ft_lstaddbck(&objs, ft_lstnew(&sec->object[i], sizeof(t_object)));
+			i++;
+		}
+		n_secs = n_secs->next;
+	}
+	ft_lstdel(&objs, NULL);
+}
+
 static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 {
-	float	angle;
-	float	step;
-	float	hfov2;
-	t_coord	cosin;
-	float	r_angle;
-	t_hit	hit;
-	t_sector *prev;
-	t_sector *sec;
-	float	zbuf[max - start];
+	float		angle;
+	float		step;
+	float		hfov2;
+	t_coord		cosin;
+	float		r_angle;
+	t_hit		hit;
+	t_sector	*prev;
+	t_sector	*sec;
+	float		zbuf[max - start];
+	t_list		*r_secs;
 
 	hfov2 = (float)game->setting->fov / 2;
 	step = (float)game->setting->fov / dst->w;
@@ -141,6 +154,7 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 		t_point out = {0, dst->h};
 		prev = NULL;
 		sec = &game->map->sectors[game->player->cur_sector];
+		r_secs = ft_lstnew(sec, sizeof(t_sector));
 		while (out.x != out.y)
 		{
 			hit = get_hit(&cosin, game->player, sec, prev);
@@ -156,14 +170,18 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 			{
 				prev = hit.sect;
 				sec = hit.wall->window;
+				ft_lstaddbck(&r_secs, ft_lstnew(sec, sizeof(t_sector)));
 			}
 		}
 		start++;
 	}
+	render_objects(r_secs, zbuf, dst, game, &(t_coord){
+		wrap_float((start * step) + (game->player->angle - hfov2), 0, 360) * PI_R,
+		wrap_float((max * step) + (game->player->angle - hfov2), 0, 360) * PI_R});
+	ft_lstdel(&r_secs, NULL);
 }
 void render_3d(t_game *game, SDL_Surface *dst)
 {
 	game->player->screen_updown = game->player->updown * dst->h;
 	render_chunk(game, dst, 0, dst->w - 1);
-	// ft_printf("3");
 }
