@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_EDITOR
-# define MAP_EDITOR
+#ifndef MAP_EDITOR_H
+# define MAP_EDITOR_H
 
 # include <SDL2/SDL_surface.h>
 
