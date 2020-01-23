@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/14 17:03:26 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/21 19:48:27 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@
 # define PLAYER_JUMP_FRAMES 20
 # define PLAYER_UPDOWN_MIN -0.45
 # define PLAYER_UPDOWN_MAX 0.60
-# define PLAYER_MOVE_SPEED 0.7
-# define PLAYER_RUN_SPEED 1
+# define PLAYER_MOVE_SPEED 0.5
+# define PLAYER_RUN_SPEED 0.7
+# define PLAYER_CLIMB 5.0
 # define PLAYER_CROUCH_SPEED 0.2
 # define PLAYER_H_SENSE 0.12
 # define PLAYER_V_SENSE 0.002
+# define PLAYER_MOVE_BASE_FPS 40
+# define PLAYER_INIT_DROP_SPEED 2.5
 
 typedef struct s_game		t_game;
 typedef struct s_hashmap	t_hashmap;
@@ -59,8 +62,10 @@ typedef	struct	s_player
 	t_coord		pos;
 	t_uint32	cur_sector;
 	float		height;
+	float		player_height;
 	float		heightoffset;
 	float		updown;
+	int			screen_updown;
 }				t_player;
 
 t_bool			player_move(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/15 21:31:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/21 21:33:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,64 +16,83 @@
 #include "libft/ft_str.h"
 
 #include "game.h"
+#include "rinfo.h"
 #include "setting.h"
 #include "cmath.h"
 #include "player.h"
 #include "keymap.h"
 
-static t_bool	move_forward(t_player *player, float speed, t_map *map)
+static t_bool	move_forward(t_player *player, float speed, float *xspeed, float *yspeed)
 {
-	float	xspeed;
-	float	yspeed;
-
-	xspeed = speed * cosf(player->angle * PI_R);
-	yspeed = speed * sinf(player->angle * PI_R);
-	return (player_col(player, map, xspeed, yspeed));
+	*xspeed += speed * cosf(player->angle * PI_R);
+	*yspeed += speed * sinf(player->angle * PI_R);
+	return (TRUE);
 }
 
-static t_bool	move_backward(t_player *player, float speed, t_map *map)
+static t_bool	move_backward(t_player *player, float speed, float *xspeed, float *yspeed)
 {
-	float	xspeed;
-	float	yspeed;
-
-	xspeed = -(speed * cos(player->angle * PI_R));
-	yspeed = -(speed * sin(player->angle * PI_R));
-	return (player_col(player, map, xspeed, yspeed));
+	*xspeed += -(speed * cos(player->angle * PI_R));
+	*yspeed += -(speed * sin(player->angle * PI_R));
+	return (TRUE);
 }
 
-static t_bool	move_left(t_player *player, float speed, t_map *map)
+static t_bool	move_left(t_player *player, float speed, float *xspeed, float *yspeed)
 {
-	float	xspeed;
-	float	yspeed;
-
-	xspeed = speed * sin(player->angle * PI_R);
-	yspeed = -(speed * cos(player->angle * PI_R));
-	return (player_col(player, map, xspeed, yspeed));
+	*xspeed += speed * sin(player->angle * PI_R);
+	*yspeed += -(speed * cos(player->angle * PI_R));
+	return (TRUE);
 }
 
-static t_bool	move_right(t_player *player, float speed, t_map *map)
+static t_bool	move_right(t_player *player, float speed, float *xspeed, float *yspeed)
 {
-	float	xspeed;
-	float	yspeed;
-
-	xspeed = -(speed * sin(player->angle * PI_R));
-	yspeed = speed * cos(player->angle * PI_R);
-	return (player_col(player, map, xspeed, yspeed));
+	*xspeed += -(speed * sin(player->angle * PI_R));
+	*yspeed += speed * cos(player->angle * PI_R);
+	return (TRUE);
 }
 
-static t_bool	move_jump(t_player *player, size_t *jump)
+static t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
 {
-	(*jump)++;
-	if (*jump > PLAYER_JUMP_FRAMES / 2)
-		player->heightoffset -= PLAYER_JUMP
-			* (pow(((double)(*jump)
-			- (PLAYER_JUMP_FRAMES / 2)) / PLAYER_JUMP_FRAMES, 2));
-	else if (*jump - 1 <= PLAYER_JUMP_FRAMES / 2)
-		player->heightoffset += PLAYER_JUMP
-			* (pow(((double)(PLAYER_JUMP_FRAMES / 2)
-			- (*jump - 1)) / PLAYER_JUMP_FRAMES, 2));
-	if (*jump == PLAYER_JUMP_FRAMES)
-		*jump = 0;
+	static uint64_t	momentum = UINT64_MAX;
+	uint64_t		cur;
+	double			factor;
+	float			speed;
+
+	*jump = TRUE;
+	if (momentum == UINT64_MAX)
+		momentum = get_gametime(&game->starttime);
+	cur = get_gametime(&game->starttime) - momentum;
+	factor = (double)cur * ((double)PLAYER_MOVE_BASE_FPS / game->frametime) / CLOCKS_PER_MILLI;
+	speed = PLAYER_INIT_DROP_SPEED - pow(factor * 3, 2.5);
+	if (speed < 0)
+		speed = 0;
+	player->heightoffset += speed;
+	if (cur > 500 || (game->map->sectors[player->cur_sector].has_ceiling && player->height + player->heightoffset >= game->map->sectors[player->cur_sector].ceil))
+	{
+		*jump = FALSE;
+		momentum = UINT64_MAX;
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
+#include "libft/ft_printf.h"
+static t_bool	move_down(t_game *game, t_player *player, t_bool *jump)
+{
+	static uint64_t	momentum = UINT64_MAX;
+	uint64_t		cur;
+	double			factor;
+
+	if (momentum == UINT64_MAX)
+		momentum = get_gametime(&game->starttime);
+	cur = get_gametime(&game->starttime) - momentum;
+	factor = (double)cur * ((double)PLAYER_MOVE_BASE_FPS / game->frametime) / CLOCKS_PER_MILLI;
+	player->heightoffset -= pow(factor * 3, 2.2) + 1;
+	if (player->heightoffset <= 0)
+	{
+		*jump = FALSE;
+		player->heightoffset = 0;
+		momentum = UINT64_MAX;
+	}
 	return (TRUE);
 }
 
@@ -81,24 +100,38 @@ t_bool			player_move(t_game *game)
 {
 	t_bool			draw;
 	float			speed;
-	static size_t	jump = 0;
+	float			xspeed;
+	float			yspeed;
+	static t_bool	jump = FALSE;
 
 	draw = FALSE;
+	xspeed = 0;
+	yspeed = 0;
+
+	// float ratio = ((double)(get_gametime(&game->starttime) - game->frametime)) / CLOCKS_PER_SEC;
+	// ft_printf("rat: %f\n", ratio);
+	// ft_printf("rat: %ld\n", game->frametime);
 	if (is_helddown(game->keymap, game->setting->controls.crouch))
-		speed = PLAYER_CROUCH_SPEED;
+		speed = PLAYER_CROUCH_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
 	else if (is_helddown(game->keymap, SDLK_LSHIFT))
-		speed = PLAYER_RUN_SPEED;
+		speed = PLAYER_RUN_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
 	else
-		speed = PLAYER_MOVE_SPEED;
+		speed = PLAYER_MOVE_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
+
 	if (is_helddown(game->keymap, game->setting->controls.forward))
-		draw |= move_forward(game->player, speed, game->map);
+		draw |= move_forward(game->player, speed, &xspeed, &yspeed);
 	if (is_helddown(game->keymap, game->setting->controls.backward))
-		draw |= move_backward(game->player, speed, game->map);
+		draw |= move_backward(game->player, speed, &xspeed, &yspeed);
 	if (is_helddown(game->keymap, game->setting->controls.left))
-		draw |= move_left(game->player, speed, game->map);
+		draw |= move_left(game->player, speed, &xspeed, &yspeed);
 	if (is_helddown(game->keymap, game->setting->controls.right))
-		draw |= move_right(game->player, speed, game->map);
-	if (is_helddown(game->keymap, game->setting->controls.jump) || jump > 0)
-		draw |= move_jump(game->player, &jump);
+		draw |= move_right(game->player, speed, &xspeed, &yspeed);
+	if (game->player->heightoffset > 0 && jump == FALSE)
+		draw |= move_down(game, game->player, &jump);
+	if ((is_helddown(game->keymap, game->setting->controls.jump) && game->player->heightoffset == 0 && jump == FALSE) || jump == TRUE)
+		draw |= move_jump(game, game->player, &jump);
+	if (draw == TRUE)
+		player_col(game->player, game->map, xspeed, yspeed);
+	ft_printf("height: %5.2f, offset: %5.2f\n", game->player->height, game->player->heightoffset);
 	return (draw);
 }

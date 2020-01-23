@@ -14,6 +14,7 @@
 #include "renderer.h"
 #include "game.h"
 #include "gui.h"
+#include "rinfo.h"
 #include "player.h"
 #include "coord.h"
 

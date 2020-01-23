@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/28 15:15:45 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/18 14:53:51 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_setting		t_setting;
 typedef struct s_campaign		t_campaign;
 typedef struct s_eventstate		t_eventstate;
 typedef struct s_map			t_map;
+typedef struct s_pool			t_pool;
 
 typedef	enum	e_state
 {
@@ -57,6 +58,8 @@ typedef struct	s_game
 	SDL_Surface		**textures;
 	t_setting		*setting;
 	t_eventstate	*cureventstate;
+	t_pool			*pool;
+	t_uint64		frametime;
 }				t_game;
 
 void			loop(t_game *game);

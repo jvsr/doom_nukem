@@ -38,7 +38,7 @@ void				load_textures(t_game *game)
 	size_t	index;
 
 	files = (char *[]){
-		"brick_wall"
+		"brick_wall", "skybox_day", "skybox_dusk"
 	};
 	index = 0;
 	game->textures = ft_memalloc(sizeof(SDL_Surface *) * TEXTURE_COUNT);

@@ -34,18 +34,30 @@ typedef struct	s_wall
 	float		yperc;
 }				t_wall;
 
+typedef struct	s_object
+{
+	t_coord		pos;
+	t_coord		size;
+	t_texture	img;
+}				t_object;
+
 struct			s_sector
 {
 	t_wall		*walls;
+	t_object	*object;
 	t_uint64	wall_count;
+	t_uint64	object_count;
 	float		floor;
 	float		ceil;
+	t_bool		has_ceiling;
 };
 
 typedef struct	s_map
 {
 	t_sector	*sectors;
 	t_uint64	sector_count;
+	t_bool		has_skybox;
+	t_texture	skybox;
 }				t_map;
 
 typedef struct	s_ritem

@@ -23,7 +23,7 @@ PARENTNAME = $(NAME)
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
-CCOPTIMISE = -O1
+CCOPTIMISE = -O2
 
 # Gcov settings
 GCOV = FALSE

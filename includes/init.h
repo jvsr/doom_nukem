@@ -17,7 +17,7 @@
 # define INIT_HEIGHT 1080
 # define INIT_KEYMAP_SIZE 20
 # define INIT_KEYMAP_ALGO ft_hashdjb2a
-# define INIT_THREADPOOL_WORKERS 4
+# define INIT_THREADPOOL_WORKERS 1
 # define INIT_THREADPOOL_CENTRALIZED FALSE
 
 typedef struct s_game	t_game;
