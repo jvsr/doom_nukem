@@ -87,7 +87,7 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 			prv->next = NULL;
 		else
 			map_editor_elem->gui_elem.map_editor->line = NULL;
-		ft_memdel(&line);
+		ft_memdel((void **)&line);
 		set_elem_redraw(map_editor_elem);
 	}
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
