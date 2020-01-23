@@ -17,5 +17,6 @@
 
 void		loop_core(t_game *game, t_eventstate_code code);
 void		loop_game(t_game *game);
+void		loop_map_editor(t_game *game);
 
 #endif

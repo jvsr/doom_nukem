@@ -91,27 +91,4 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 	}
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		quit(0);
-
-
-	//Super ugly (Same goes for the above ^) for testing atm
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_LEFT)
-	{
-		map_editor_elem->gui_elem.map_editor->pos.x -= EDITOR_MOVE_SPEED;
-		set_elem_redraw(map_editor_elem);
-	}
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RIGHT)
-	{
-		map_editor_elem->gui_elem.map_editor->pos.x += EDITOR_MOVE_SPEED;
-		set_elem_redraw(map_editor_elem);
-	}
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_UP)
-	{
-		map_editor_elem->gui_elem.map_editor->pos.y -= EDITOR_MOVE_SPEED;
-		set_elem_redraw(map_editor_elem);
-	}
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_DOWN)
-	{
-		map_editor_elem->gui_elem.map_editor->pos.y += EDITOR_MOVE_SPEED;
-		set_elem_redraw(map_editor_elem);
-	}
 }
