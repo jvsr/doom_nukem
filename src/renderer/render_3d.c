@@ -78,12 +78,8 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	if (ybounds.y < dst->h && hit->sect->has_ceiling)
 		draw_line(dst, &(t_point){ybounds.y, dst->h}, x, CEILING_COLOR, bounds, hit, game);
 	else
-	{
-		t_point c_ybounds;
-		c_ybounds.x = ft_constrain(ybounds.x, bounds->x, bounds->y);
-		c_ybounds.y = ft_constrain(ybounds.y, c_ybounds.x, bounds->y);
-		draw_skybox(x, dst, game, &c_ybounds);
-	}
+
+		draw_skybox(x, dst, game, &(t_point){ft_constrain(ybounds.x, bounds->x, bounds->y), bounds->y});
 	if (ybounds.x > 0)
 		draw_line(dst, &(t_point){0, ybounds.x}, x, FLOOR_COLOR, bounds, hit, game);
 	if (!hit->wall->is_portal && hit->sect->ceil > y0 && hit->sect->floor < y1)
@@ -170,6 +166,7 @@ static void render_objects(t_list *secs, t_zbuf *zbuf, SDL_Surface *dst, t_game 
 
 	n_secs = secs;
 	objs = NULL;
+	float hfov2 = (float)*game->player->fov / 2;
 	while (n_secs)
 	{
 		i = 0;
@@ -182,6 +179,10 @@ static void render_objects(t_list *secs, t_zbuf *zbuf, SDL_Surface *dst, t_game 
 				float tmp_angle = calc_fov(range->x, object_angle);
 				int screen_space = (int)((tmp_angle / calc_fov(range->x, range->y)) * dst->w);
 				float dist = get_distance(&game->player->pos, &sec->object[i].pos);
+				if (tmp_angle > hfov2)
+					dist *= cosf((tmp_angle - hfov2) * PI_R);
+				else if (tmp_angle < hfov2)
+					dist *= cosf((hfov2 - tmp_angle) * PI_R);
 				if (zbuf[screen_space].dist > dist)
 					ft_lstaddbck(&objs, ft_lstnew(new_rendobj(&sec->object[i], sec, (float[2]){dist, object_angle}, screen_space), sizeof(t_object)));
 			}
