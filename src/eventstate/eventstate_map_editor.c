@@ -26,35 +26,40 @@
 static void	add_line(t_game *game, SDL_Event event,
 						t_transform *map_editor_elem)
 {
-	int					index;
 	t_wall				*new;
 	t_wall				*wall;
+	SDL_Point			current;
 	static	t_bool		first_place = TRUE;
-	static	SDL_Point	points[2] = {{0, 0}, {0, 0}};
 
+	current.x = event.button.x;
+	current.y = event.button.y;
+	map_editor_snap_to_grid(map_editor_elem, &current);
 	if (is_helddown(game->keymap, SDLK_LSHIFT) && map_editor_elem->gui_elem.map_editor->wall != NULL)
 	{
 		wall = (t_wall*)ft_lstlast(map_editor_elem->gui_elem.map_editor->wall)->content;
-		points[0].x = wall->corner_1.x;
-		points[0].y = wall->corner_1.y;
+		map_editor_elem->gui_elem.map_editor->last_click.x = wall->corner_1.x;
+		map_editor_elem->gui_elem.map_editor->last_click.y = wall->corner_1.y;
 		first_place = FALSE;
 	}
-	index = !first_place;
-	points[index].x = event.button.x;
-	points[index].y = event.button.y;
-	map_editor_snap_to_grid(map_editor_elem, &points[index]);
-	if (first_place == FALSE)
+	if (first_place == TRUE)
+	{
+		map_editor_elem->gui_elem.map_editor->last_click.x = event.button.x;
+		map_editor_elem->gui_elem.map_editor->last_click.y = event.button.y;
+	}
+	else
 	{
 		new = (t_wall*)ft_memalloc(sizeof(t_wall));
 		if (new == NULL)
 			error_msg_errno("Failed to alloc new mapeditor wall");
-		new->corner_0.x = points[0].x;
-		new->corner_0.y = points[0].y;
-		new->corner_1.x = points[1].x;
-		new->corner_1.y = points[1].y;
+		new->corner_0.x = map_editor_elem->gui_elem.map_editor->last_click.x;
+		new->corner_0.y = map_editor_elem->gui_elem.map_editor->last_click.y;
+		new->corner_1.x = current.x;
+		new->corner_1.y = current.y;
 		map_editor_add_wall(map_editor_elem, new);
 	}
 	first_place = !first_place;
+	map_editor_elem->gui_elem.map_editor->last_click = current;
+	map_editor_elem->gui_elem.map_editor->show_last_click = !first_place;
 }
 
 void		map_editor_eventstate(t_game *game, SDL_Event event)
@@ -63,6 +68,8 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 	t_transform			*map_editor_elem;
 
 	map_editor_elem = get_gui_child(game->ui, "mapeditorview");
+	if (event.type == SDL_MOUSEMOTION)
+		set_elem_redraw(map_editor_elem);
 	if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && first == FALSE)
 		add_line(game, event, map_editor_elem);
 	else

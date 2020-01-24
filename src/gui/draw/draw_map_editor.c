@@ -67,12 +67,21 @@ static void	draw_grid(SDL_Surface *dst, SDL_Point pos)
 
 void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 {
+	SDL_Point		mouse_pos;
+	SDL_Color		preview_color;
 	SDL_Color		background_color;
 	SDL_Point const	pos = elem->gui_elem.map_editor->pos;
 
 	(void)game;
 	hex_to_color(&background_color, EDITOR_BACKGROUND_COLOR);
+	hex_to_color(&preview_color, EDITOR_PREVIEW_PLACE_COLOR);
 	sdl_fill_surface_color(dst, background_color);
 	draw_grid(dst, pos);
 	draw_wall(dst, elem->gui_elem.map_editor->wall, pos);
+
+	SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
+	map_editor_snap_to_grid(elem, &mouse_pos);
+	sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
+	if (elem->gui_elem.map_editor->show_last_click)
+		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, elem->gui_elem.map_editor->last_click});
 }
