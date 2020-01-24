@@ -24,9 +24,11 @@ static void	draw_wall(SDL_Surface *dst, t_list *lst, SDL_Point pos)
 {
 	t_wall		*wall;
 	t_line		line;
-	SDL_Color	line_color;
+	SDL_Color	portal_color;
+	SDL_Color	wall_color;
 
-	hex_to_color(&line_color, EDITOR_LINE_COLOR);
+	hex_to_color(&wall_color, EDITOR_WALL_COLOR);
+	hex_to_color(&portal_color, EDITOR_PORTAL_COLOR);
 	while (lst != NULL)
 	{
 		wall = (t_wall*)lst->content;
@@ -34,7 +36,10 @@ static void	draw_wall(SDL_Surface *dst, t_list *lst, SDL_Point pos)
 		line.start.y = wall->corner_0.y - pos.y;
 		line.end.x = wall->corner_1.x - pos.x;
 		line.end.y = wall->corner_1.y - pos.y;
-		sdl_draw_surface_line(dst, line_color, line);
+		if (wall->is_portal)
+			sdl_draw_surface_line(dst, portal_color, line);
+		else
+			sdl_draw_surface_line(dst, wall_color, line);
 		lst = lst->next;
 	}
 }
