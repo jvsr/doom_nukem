@@ -60,7 +60,7 @@ static void		manage_keymap(t_game *game, SDL_Event event)
 		toggle_keystate(game->keymap, event.button.button, FALSE);
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKQUOTE)
 		print_keymap(game->keymap);
-	
+
 	// if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
 	// {
 	// 	game->player->height += 0.2;

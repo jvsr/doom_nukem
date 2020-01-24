@@ -11,21 +11,42 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
+#include "libft/ft_list.h"
 
 #include "map_editor.h"
+#include "rinfo.h"
 #include "sdl_extra.h"
 #include "color.h"
 #include "game.h"
 #include "gui.h"
 
-static void	draw_grid(SDL_Surface *dst, t_transform *elem)
+static void	draw_wall(SDL_Surface *dst, t_list *lst, SDL_Point pos)
+{
+	t_wall		*wall;
+	t_line		line;
+	SDL_Color	line_color;
+
+	hex_to_color(&line_color, EDITOR_LINE_COLOR);
+	while (lst != NULL)
+	{
+		wall = (t_wall*)lst->content;
+		line.start.x = wall->corner_0.x - pos.x;
+		line.start.y = wall->corner_0.y - pos.y;
+		line.end.x = wall->corner_1.x - pos.x;
+		line.end.y = wall->corner_1.y - pos.y;
+		sdl_draw_surface_line(dst, line_color, line);
+		lst = lst->next;
+	}
+}
+
+static void	draw_grid(SDL_Surface *dst, SDL_Point pos)
 {
 	int			x;
 	int			y;
 	SDL_Color	color;
 
-	x = (-1 - elem->gui_elem.map_editor->pos.x) % EDITOR_GRID_STEP;
-	y = (-1 - elem->gui_elem.map_editor->pos.y) % EDITOR_GRID_STEP;
+	x = (EDITOR_GRID_START_OFFSET - pos.x) % EDITOR_GRID_STEP;
+	y = (EDITOR_GRID_START_OFFSET - pos.y) % EDITOR_GRID_STEP;
 	hex_to_color(&color, EDITOR_GRID_COLOR);
 	while (x < dst->w)
 	{
@@ -41,25 +62,12 @@ static void	draw_grid(SDL_Surface *dst, t_transform *elem)
 
 void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 {
-	t_wall_line	*wall_line;
-	t_line		line;
-	SDL_Color	background_color;
-	SDL_Color	line_color;
+	SDL_Color		background_color;
+	SDL_Point const	pos = elem->gui_elem.map_editor->pos;
 
 	(void)game;
-	hex_to_color(&line_color, EDITOR_LINE_COLOR);
 	hex_to_color(&background_color, EDITOR_BACKGROUND_COLOR);
 	sdl_fill_surface_color(dst, background_color);
-	draw_grid(dst, elem);
-	wall_line = elem->gui_elem.map_editor->line;
-	while (wall_line != NULL)
-	{
-		ft_memcpy(&line, &wall_line->line, sizeof(t_line));
-		line.start.x -= elem->gui_elem.map_editor->pos.x;
-		line.start.y -= elem->gui_elem.map_editor->pos.y;
-		line.end.x -= elem->gui_elem.map_editor->pos.x;
-		line.end.y -= elem->gui_elem.map_editor->pos.y;
-		sdl_draw_surface_line(dst, line_color, line);
-		wall_line = wall_line->next;
-	}
+	draw_grid(dst, pos);
+	draw_wall(dst, elem->gui_elem.map_editor->wall, pos);
 }

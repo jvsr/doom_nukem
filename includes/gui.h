@@ -23,7 +23,7 @@
 
 # define FONT_PATH "resources/fonts/"
 
-typedef struct s_wall_line	t_wall_line;
+typedef struct s_list		t_list;
 typedef struct s_game		t_game;
 typedef struct s_gui		t_gui;
 typedef struct s_transform	t_transform;
@@ -153,7 +153,7 @@ struct			s_gview
 struct			s_map_editor
 {
 	SDL_Point		pos;
-	t_wall_line		*line;
+	t_list			*wall;
 };
 
 struct			s_gui

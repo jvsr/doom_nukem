@@ -14,7 +14,8 @@
 SUBLIBS = main color sdl_extra tga_reader gui game gui_config sdl_thread \
 			audio keymap serializer eventstate map_parse table renderer init \
 			cmath loop \
-			player
+			player \
+			map_editor
 
 # Executable name
 NAME = doom-nukem

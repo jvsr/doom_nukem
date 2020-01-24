@@ -13,21 +13,22 @@
 #ifndef MAP_EDITOR_H
 # define MAP_EDITOR_H
 
-# include "shape.h"
 # include <SDL2/SDL_surface.h>
+
+# include "shape.h"
 
 # define EDITOR_BACKGROUND_COLOR "333333"
 # define EDITOR_LINE_COLOR	"FFFFFF"
 # define EDITOR_GRID_COLOR	"555555"
 # define EDITOR_GRID_STEP	20
 # define EDITOR_MOVE_SPEED	5
+# define EDITOR_GRID_START_OFFSET 1
 
-typedef struct s_wall_line	t_wall_line;
+typedef	struct s_wall		t_wall;
+typedef	struct s_transform	t_transform;
 
-struct		s_wall_line
-{
-	t_line		line;
-	t_wall_line	*next;
-};
+void	map_editor_snap_to_grid(t_transform *map_editor_elem, SDL_Point *point);
+void	map_editor_remove_last_wall(t_transform *map_editor_elem);
+void	map_editor_add_wall(t_transform *map_editor_elem, t_wall *wall);
 
 #endif
