@@ -132,6 +132,6 @@ t_bool			player_move(t_game *game)
 		draw |= move_jump(game, game->player, &jump);
 	if (draw == TRUE)
 		player_col(game->player, game->map, xspeed, yspeed);
-	ft_printf("height: %5.2f, offset: %5.2f\n", game->player->height, game->player->heightoffset);
+	// ft_printf("height: %5.2f, offset: %5.2f\n", game->player->height, game->player->heightoffset);
 	return (draw);
 }

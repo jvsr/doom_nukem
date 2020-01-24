@@ -67,12 +67,20 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].walls[4].is_portal = TRUE;
 	game->map->sectors[0].walls[4].window = &game->map->sectors[1];
 	game->map->sectors[0].has_ceiling = TRUE;
-	game->map->sectors[0].object_count = 0;
-	game->map->sectors[0].object = NULL;
+	game->map->sectors[0].object_count = 2;
+	game->map->sectors[0].object = ft_memalloc(sizeof(t_object) * 3);
+	if (game->map->sectors[0].object == NULL)
+		error_msg_errno("Could not allocate Map Objects");
+	game->map->sectors[0].object[0].pos = (t_coord){0, 0};
+	game->map->sectors[0].object[0].size = (t_coord){2, 5};
+	game->map->sectors[0].object[0].img = TEXTURE_LAMP;
+	game->map->sectors[0].object[1].pos = (t_coord){3, 3};
+	game->map->sectors[0].object[1].size = (t_coord){4, 15};
+	game->map->sectors[0].object[1].img = TEXTURE_LAMP;
 
 	//Sector 2
 	game->map->sectors[1].ceil = 100;
-	game->map->sectors[1].floor = -5;
+	game->map->sectors[1].floor = -10;
 	game->map->sectors[1].wall_count = 4;
 	game->map->sectors[1].walls = ft_memalloc(sizeof(t_wall) * 4);
 	if (game->map->sectors[1].walls == NULL)
@@ -102,6 +110,9 @@ static void		map_init(t_game *game)
 	game->map->sectors[2].walls[3] = (t_wall){(t_coord){-30, -20}, (t_coord){-30, 20}, FALSE, NULL, TEXTURE_BRICK_WALL, 0.2, 0.5};
 	game->map->sectors[2].walls[3].is_portal = TRUE;
 	game->map->sectors[2].walls[3].window = &game->map->sectors[1];
+	game->map->sectors[2].object_count = 0;
+	game->map->sectors[2].object = NULL;
+	game->map->sectors[2].has_ceiling = FALSE;
 
 	//Sector 4
 	game->map->sectors[3].ceil = 20;
@@ -117,9 +128,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].walls[3].is_portal = TRUE;
 	game->map->sectors[3].walls[3].window = &game->map->sectors[0];
 	game->map->sectors[3].has_ceiling = TRUE;
-
-	game->map->sectors[2].object_count = 0;
-	game->map->sectors[2].object = NULL;
+	game->map->sectors[3].object_count = 0;
+	game->map->sectors[3].object = NULL;
 }
 
 void			init_function(t_game *game)
