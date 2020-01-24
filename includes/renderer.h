@@ -47,5 +47,7 @@ t_objrend			*new_rendobj(t_object *obj,
 t_bool				sort_objs(const t_list *a, const t_list *b);
 float				get_object_angle_on_screen(t_object *object,
 						t_player *player, t_coord *range);
+t_point				set_ybounds(t_objrend *obj,
+						t_game *game, t_ybinfo info, t_zbuf *buf);
 
 #endif

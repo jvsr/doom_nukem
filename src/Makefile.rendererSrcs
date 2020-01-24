@@ -21,4 +21,4 @@ FT_SRCS =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = render_3d load_textures get_texture get_hit draw_skybox new_rendobj \
-		sort_objs get_object_angle_on_screen
+		sort_objs get_object_angle_on_screen set_ybounds

@@ -107,34 +107,6 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	return ((t_point){0, 0});
 }
 
-t_point		set_ybounds(t_objrend *obj, t_game *game, t_ybinfo info, t_zbuf *buf)
-{
-	t_player	*plyr;
-	t_sector	*sec;
-	t_point		ret;
-	int			i;
-
-	plyr = game->player;
-	sec = &game->map->sectors[plyr->cur_sector];
-	if (obj->sec == sec)
-		ret = (t_point){ft_constrain(info.ybounds->x, 0, info.h),
-						ft_constrain(info.ybounds->y, 0, info.h)};
-	else
-	{
-		i = 0;
-		while(buf->bounds[i].sec != NULL && buf->bounds[i].sec != obj->sec)
-			i++;
-		if (buf->bounds[i].sec == NULL)
-			i--;
-		ret = (t_point){
-			ft_constrain(info.ybounds->x, buf->bounds[i].bounds.x,
-				buf->bounds[i].bounds.y),
-			ft_constrain(info.ybounds->y, buf->bounds[i].bounds.x,
-				buf->bounds[i].bounds.y)};
-	}
-	return (ret);
-}
-
 static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zbuf)
 {
 	int *pixels;
