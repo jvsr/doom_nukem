@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/21 19:56:29 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/27 18:17:30 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,26 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 	return (next_sector);
 }
 
+static void			player_move_col(t_uint8 col, t_player *player, t_coord pos_xy, t_coord pos_x, t_coord pos_y, float xspeed, float yspeed)
+{
+	if (col == 0)
+		ft_memcpy(&(player->pos), &pos_xy, sizeof(pos_xy));
+	else
+	{
+		if ((col & 3) == 0)
+		{
+			if (xspeed > yspeed)
+				ft_memcpy(&(player->pos), &pos_x, sizeof(pos_x));
+			else
+				ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
+		}
+		else if ((col & 1) == 0)
+			ft_memcpy(&(player->pos), &pos_x, sizeof(pos_x));
+		else if ((col & 2) == 0)
+			ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
+	}
+}
+
 t_bool				player_col(t_player *player,
 									t_map *map, float xspeed, float yspeed)
 {
@@ -180,8 +200,17 @@ t_bool				player_col(t_player *player,
 	if (next_sector != UINT32_MAX)
 	{
 		ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
-		if (player->height + player->heightoffset + PLAYER_CLIMB - player->player_height < map->sectors[next_sector].floor)
+		if (player->height + player->heightoffset + PLAYER_CLIMB - player->player_height < map->sectors[next_sector].floor
+		|| player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor) > map->sectors[next_sector].ceil
+		)
+		{
+			// col |= 4;
+			// if (col == 4)
+			// 	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
+			ft_printf("col: %d\n", col);
 			return (FALSE);
+		}
+		ft_printf("height: %f, other: %f\n", player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor), map->sectors[next_sector].ceil);
 		if (player->height + player->heightoffset > map->sectors[next_sector].floor + player->player_height)
 			player->heightoffset += player->height - (map->sectors[next_sector].floor + player->player_height);
 		else
@@ -189,22 +218,7 @@ t_bool				player_col(t_player *player,
 		player->cur_sector = next_sector;
 		player->height = map->sectors[next_sector].floor + player->player_height;
 	}
-	if (col == 0)
-		ft_memcpy(&(player->pos), &pos_xy, sizeof(pos_xy));
-	else
-	{
-		if ((col & 3) == 0)
-		{
-			if (xspeed > yspeed)
-				ft_memcpy(&(player->pos), &pos_x, sizeof(pos_x));
-			else
-				ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
-		}
-		else if ((col & 1) == 0)
-			ft_memcpy(&(player->pos), &pos_x, sizeof(pos_x));
-		else if ((col & 2) == 0)
-			ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
-	}
+	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
 	if (player->pos.y < -20.0 || player->cur_sector == 3)
 	{
 		// ft_printf("col: %d\n", col);
