@@ -120,7 +120,7 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 		t_objrend *obj = objs->content;
 		int x;
 
-		t0 = obj->dist * tanf((game->setting->vfov / 2) * PI_R);
+		t0 = obj->dist;
 		y0 = game->player->height + game->player->heightoffset;
 		y1 = y0 + t0;
 		y0 -= t0;
