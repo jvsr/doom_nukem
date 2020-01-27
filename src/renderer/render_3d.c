@@ -15,6 +15,7 @@
 #include "libft/ft_num.h"
 #include "libft/ft_list.h"
 #include "game.h"
+#include "color.h"
 #include "campaign.h"
 #include "player.h"
 #include "renderer.h"
@@ -146,7 +147,10 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 				while (i < c_ybounds.y)
 				{
 					int y = (float)(i - ybounds.x) / (ybounds.y - ybounds.x) * tex->h;
-					pixels[x + (dst->w * (dst->h - i - 1))] = rgba_intensity(t_pixels[((tex->h - y - 1) * tex->w) + tex_x], intensity);
+					int im_pixel = t_pixels[((tex->h - y - 1) * tex->w) + tex_x];
+					int in_pix = x + (dst->w * (dst->h - i - 1));
+					if (im_pixel != 0)
+						pixels[in_pix] = mix_color(pixels[in_pix], rgba_intensity(im_pixel , intensity));
 					i++;
 				}
 			}

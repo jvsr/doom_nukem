@@ -40,8 +40,6 @@ typedef struct	s_object
 	t_coord		pos;
 	t_coord		size;
 	t_texture	img;
-	void		(*tick)(t_object, t_game);
-	void*		info;
 }				t_object;
 
 struct			s_sector
