@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/21 20:01:09 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/29 19:55:00 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == game->setting->controls.crouch)
 		game->player->player_height = PLAYER_CROUCH;
-	else if (event.type == SDL_KEYUP && event.key.keysym.sym == game->setting->controls.crouch)
+	else if (event.type == SDL_KEYUP && event.key.keysym.sym == game->setting->controls.crouch
+	&& game->map->sectors[game->player->cur_sector].ceil > game->player->height + (PLAYER_HEIGHT - PLAYER_CROUCH))
 		game->player->player_height = PLAYER_HEIGHT;
 	game->player->height = game->player->player_height + game->map->sectors[game->player->cur_sector].floor;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)

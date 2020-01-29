@@ -6,16 +6,19 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/27 18:17:30 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/29 20:20:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_printf.h" //
 #include "libft/ft_bool.h"
 #include "libft/ft_mem.h"
+#include "game.h"
+#include "setting.h"
 #include "player.h"
 #include "rinfo.h"
 #include "cmath.h"
+#include "keymap.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -181,14 +184,18 @@ static void			player_move_col(t_uint8 col, t_player *player, t_coord pos_xy, t_c
 	}
 }
 
-t_bool				player_col(t_player *player,
-									t_map *map, float xspeed, float yspeed)
+t_bool				player_col(t_game *game, float xspeed, float yspeed)
 {
 	t_coord		pos_x;
 	t_coord		pos_y;
 	t_coord		pos_xy;
 	t_uint8		col;
 	t_uint32	next_sector;
+
+	t_player *player = game->player;
+	t_map *map = game->map;
+	t_hashmap *keymap = game->keymap;
+
 
 	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
 	pos_y = (t_coord){player->pos.x, player->pos.y + yspeed};
@@ -215,6 +222,8 @@ t_bool				player_col(t_player *player,
 			player->heightoffset += player->height - (map->sectors[next_sector].floor + player->player_height);
 		else
 			player->heightoffset = 0.0001;
+		if (is_helddown(keymap, game->setting->controls.crouch) == FALSE)
+			player->player_height = PLAYER_HEIGHT;
 		player->cur_sector = next_sector;
 		player->height = map->sectors[next_sector].floor + player->player_height;
 	}

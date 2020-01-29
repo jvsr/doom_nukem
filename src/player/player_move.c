@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/27 13:40:36 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/29 20:23:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_bool			player_move(t_game *game)
 	// float ratio = ((double)(get_gametime(&game->starttime) - game->frametime)) / CLOCKS_PER_SEC;
 	// ft_printf("rat: %f\n", ratio);
 	// ft_printf("rat: %ld\n", game->frametime);
-	if (is_helddown(game->keymap, game->setting->controls.crouch))
+	if (game->player->player_height == PLAYER_CROUCH)
 		speed = PLAYER_CROUCH_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
 	else if (is_helddown(game->keymap, SDLK_LSHIFT))
 		speed = PLAYER_RUN_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
@@ -131,7 +131,7 @@ t_bool			player_move(t_game *game)
 	if ((is_helddown(game->keymap, game->setting->controls.jump) && game->player->heightoffset == 0 && jump == FALSE) || jump == TRUE)
 		draw |= move_jump(game, game->player, &jump);
 	if (draw == TRUE)
-		player_col(game->player, game->map, xspeed, yspeed);
+		player_col(game, xspeed, yspeed);
 	// ft_printf("height: %5.2f, offset: %5.2f\n", game->player->height, game->player->heightoffset);
 	return (draw);
 }
