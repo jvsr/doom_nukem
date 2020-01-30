@@ -81,7 +81,14 @@ void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 
 	SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
 	map_editor_snap_to_grid(elem, &mouse_pos);
+	mouse_pos.x -= pos.x;
+	mouse_pos.y -= pos.y;
 	sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
 	if (elem->gui_elem.map_editor->show_last_click)
-		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, elem->gui_elem.map_editor->last_click});
+	{
+		mouse_pos = elem->gui_elem.map_editor->last_click;
+		mouse_pos.x -= pos.x;
+		mouse_pos.y -= pos.y;
+		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
+	}
 }
