@@ -15,6 +15,6 @@
 t_bool	is_between_fov(float a, float start, float end)
 {
 	if (start < end)
-		return (a > start && a < end);
+		return (a >= start && a <= end);
 	return ((a <= end && a >= 0) || (a >= start && a <= 360));
 }

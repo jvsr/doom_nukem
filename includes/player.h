@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/21 19:48:27 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/29 20:20:06 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef	struct	s_player
 }				t_player;
 
 t_bool			player_move(t_game *game);
-t_bool			player_col(t_player *player,
-									t_map *map, float xspeed, float yspeed);
+t_bool			player_col(t_game *game, float xspeed, float yspeed);
 
 #endif

@@ -15,6 +15,7 @@
 #include "libft/ft_num.h"
 #include "libft/ft_list.h"
 #include "game.h"
+#include "color.h"
 #include "campaign.h"
 #include "player.h"
 #include "renderer.h"
@@ -47,7 +48,7 @@ static void draw_line(SDL_Surface *dst, t_point *ybounds, int x, int colour, t_p
 	}
 	else
 	{
-		SDL_Surface *tex = get_texture(game, TEXTURE_BRICK_WALL);
+		SDL_Surface *tex = get_texture(game, hit->wall->texture);
 		int *t_pixels = tex->pixels;
 		float perc = get_distance(&hit->pos, &hit->wall->corner_0) / get_distance(&hit->wall->corner_0, &hit->wall->corner_1);
 		perc = wrap_float(perc, 0, hit->wall->xperc) / hit->wall->xperc;
@@ -73,14 +74,13 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	y1 = y0 + t0;
 	y0 -= t0;
 	s = t0 * 2;
-	ybounds = (t_point){(((hit->sect->floor - y0) / s)
-	* (dst->h))
-	- game->player->screen_updown,
+	ybounds = (t_point){(((hit->sect->floor - y0) / s)* (dst->h)) - game->player->screen_updown,
 						dst->h - (((y1 - hit->sect->ceil) / s) * (dst->h)) - game->player->screen_updown};
 	if (ybounds.y < dst->h && hit->sect->has_ceiling)
 		draw_line(dst, &(t_point){ybounds.y, dst->h}, x, CEILING_COLOR, bounds, hit, game);
 	else
-		draw_skybox(x, dst, game, &(t_point){ybounds.y, bounds->y});
+
+		draw_skybox(x, dst, game, &(t_point){ft_constrain(ybounds.x, bounds->x, bounds->y), bounds->y});
 	if (ybounds.x > 0)
 		draw_line(dst, &(t_point){0, ybounds.x}, x, FLOOR_COLOR, bounds, hit, game);
 	if (!hit->wall->is_portal && hit->sect->ceil > y0 && hit->sect->floor < y1)
@@ -104,31 +104,102 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	return ((t_point){0, 0});
 }
 
-static void render_objects(t_list *secs, float *zbuf, SDL_Surface *dst, t_game *game, t_coord *range)
+static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zbuf)
 {
-	t_list		*objs;
+	int *pixels;
+	int count;
+	
+	pixels = dst->pixels;
+	count = 0;
+	while (objs)
+	{
+		float y1, y0, t0, s;
+		t_point ybounds;
+		t_point c_ybounds;
+		t_point xbounds;
+		t_point c_xbounds;
+		t_objrend *obj = objs->content;
+		int x;
+
+		t0 = obj->dist;
+		y0 = game->player->height + game->player->heightoffset;
+		y1 = y0 + t0;
+		y0 -= t0;
+		s = t0 * 2;
+		ybounds = (t_point){(((obj->sec->floor - y0) / s)* (dst->h)) - game->player->screen_updown,
+			dst->h - (((y1 - (obj->obj->size.y + obj->sec->floor)) / s) * (dst->h)) - game->player->screen_updown};
+		int diff = (abs(ybounds.y - ybounds.x) * (obj->obj->size.x / obj->obj->size.y)) / 2;
+		xbounds = (t_point){obj->x - diff, obj->x + diff};
+		c_xbounds.x = ft_constrain(xbounds.x, 0, dst->w - 1);
+		c_xbounds.y = ft_constrain(xbounds.y, c_xbounds.x, dst->w - 1);
+		x = c_xbounds.x;
+		while (x < c_xbounds.y)
+		{
+			if (x >= 0 && x < dst->w && obj->dist < zbuf[x].dist)
+			{
+				c_ybounds = set_ybounds(obj, game, (t_ybinfo){dst->h, &ybounds}, &zbuf[x]);
+				SDL_Surface *tex = get_texture(game, obj->obj->img);
+				int *t_pixels = tex->pixels;
+				float perc = (float)(x - xbounds.x) / (xbounds.y - xbounds.x);
+				int tex_x = perc * (tex->w - 1);
+				float intensity = (MAX_LIGHT_DIST - clamp_float(obj->dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
+				int i = c_ybounds.x;
+				while (i < c_ybounds.y)
+				{
+					int y = (float)(i - ybounds.x) / (ybounds.y - ybounds.x) * tex->h;
+					int im_pixel = t_pixels[((tex->h - y - 1) * tex->w) + tex_x];
+					int in_pix = x + (dst->w * (dst->h - i - 1));
+					if (im_pixel != 0)
+						pixels[in_pix] = mix_color(pixels[in_pix], rgba_intensity(im_pixel , intensity));
+					i++;
+				}
+			}
+			x++;
+		}
+		objs = objs->next;
+		count++;
+	}
+}
+
+static void render_objects(t_list *secs, t_zbuf *zbuf, SDL_Surface *dst, t_game *game, t_coord *range)
+{
 	t_list		*n_secs;
 	int			i;
 	t_sector	*sec;
-	t_coord		vec;
+	t_list		*objs;
 
-	objs = NULL;
 	n_secs = secs;
-	(void)zbuf;
-	(void)dst;
-	while (n_secs->next != NULL)
+	objs = NULL;
+	float hfov2 = (float)*game->player->fov / 2;
+	while (n_secs)
 	{
 		i = 0;
 		sec = n_secs->content;
 		while ((t_uint64)i < sec->object_count)
 		{
-			if (is_between_fov(get_angle_from_vector(get_vector_from_points(&sec->object[i].pos, &game->player->pos, &vec)), range->x, range->y))
-				ft_lstaddbck(&objs, ft_lstnew(&sec->object[i], sizeof(t_object)));
+			float object_angle = get_object_angle_on_screen(&sec->object[i], game->player, range);
+			if (object_angle >= 0)
+			{
+				float tmp_angle = calc_fov(range->x, object_angle);
+				int screen_space = (int)((tmp_angle / calc_fov(range->x, range->y)) * dst->w);
+				float dist = get_distance(&game->player->pos, &sec->object[i].pos);
+				if (tmp_angle > hfov2)
+					dist *= cosf((tmp_angle - hfov2) * PI_R);
+				else if (tmp_angle < hfov2)
+					dist *= cosf((hfov2 - tmp_angle) * PI_R);
+				if (zbuf[screen_space].dist > dist)
+					ft_lstaddbck(&objs, ft_lstnew(new_rendobj(&sec->object[i], sec, (float[2]){dist, object_angle}, screen_space), sizeof(t_object)));
+			}
 			i++;
 		}
 		n_secs = n_secs->next;
 	}
-	ft_lstdel(&objs, NULL);
+	if (objs != NULL)
+	{
+		ft_lstsort(&objs, sort_objs);
+		draw_object(objs, dst, game, zbuf);
+		ft_lstdel(&objs, ft_lstdelmem);
+	}
 }
 
 static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
@@ -141,20 +212,23 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 	t_hit		hit;
 	t_sector	*prev;
 	t_sector	*sec;
-	float		zbuf[max - start];
+	t_zbuf		*zbuf;
 	t_list		*r_secs;
+	int			index;
 
+	zbuf = ft_memalloc(sizeof(t_zbuf) * (max - start));
 	hfov2 = (float)game->setting->fov / 2;
 	step = (float)game->setting->fov / dst->w;
-	while (start <= max)
+	index = start;
+	r_secs = ft_lstnew(&game->map->sectors[game->player->cur_sector], sizeof(t_sector));
+	while (index <= max)
 	{
-		angle = (float)start * step;
+		angle = (float)index * step;
 		r_angle = wrap_float(angle + (game->player->angle - hfov2), 0, 360) * PI_R;
 		cosin = (t_coord){cosf(r_angle), sinf(r_angle)};
 		t_point out = {0, dst->h};
 		prev = NULL;
 		sec = &game->map->sectors[game->player->cur_sector];
-		r_secs = ft_lstnew(sec, sizeof(t_sector));
 		while (out.x != out.y)
 		{
 			hit = get_hit(&cosin, game->player, sec, prev);
@@ -163,23 +237,30 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 			else if (angle < hfov2)
 				hit.dist *= cosf((hfov2 - angle) * PI_R);
 			hit.og_dist = hit.dist;
-			zbuf[max - start] = hit.og_dist;
+			zbuf[index].dist = hit.og_dist;
 			hit.dist *= LEVEL_MULTIPLIER;
-			out = draw_vline(&hit, game, start, dst, &out);
+			out = draw_vline(&hit, game, index, dst, &out);
 			if (out.x != out.y)
 			{
 				prev = hit.sect;
 				sec = hit.wall->window;
-				ft_lstaddbck(&r_secs, ft_lstnew(sec, sizeof(t_sector)));
+				int i = 0;
+				while (zbuf[index].bounds[i].sec && i < MAX_OBJ_SECTORS)
+					i++;
+				zbuf[index].bounds[i] = (t_secbounds){sec, out};
+				if (!ft_lstfind_content(r_secs, sec, sizeof(t_sector)))
+					ft_lstaddbck(&r_secs, ft_lstnew(sec, sizeof(t_sector)));
 			}
 		}
-		start++;
+		index++;
 	}
 	render_objects(r_secs, zbuf, dst, game, &(t_coord){
-		wrap_float((start * step) + (game->player->angle - hfov2), 0, 360) * PI_R,
-		wrap_float((max * step) + (game->player->angle - hfov2), 0, 360) * PI_R});
+		wrap_float((start * step) + (game->player->angle - hfov2), 0, 360),
+		wrap_float((max * step) + (game->player->angle - hfov2), 0, 360)});
 	ft_lstdel(&r_secs, NULL);
+	ft_memdel((void**)&zbuf);
 }
+
 void render_3d(t_game *game, SDL_Surface *dst)
 {
 	game->player->screen_updown = game->player->updown * dst->h;

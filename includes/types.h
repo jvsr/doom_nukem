@@ -29,6 +29,7 @@ typedef enum				e_texture
 	TEXTURE_BRICK_WALL,
 	TEXTURE_SKYBOX_DAY,
 	TEXTURE_SKYBOX_DUSK,
+	TEXTURE_LAMP,
 	TEXTURE_COUNT
 }							t_texture;
 

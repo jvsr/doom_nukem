@@ -14,9 +14,9 @@
 # define RENDERER_H
 
 # include "coord.h"
-#include "campaign.h"
+# include "campaign.h"
 # include <SDL2/SDL_surface.h>
-#include "rinfo.h"
+# include "rinfo.h"
 
 # define HFOV_RANGE 180
 # define VFOV_RANGE 180
@@ -29,13 +29,11 @@ typedef struct	s_game		t_game;
 typedef enum	e_texture	t_texture;
 typedef struct	s_player	t_player;
 
-typedef struct	s_renderinfo
+typedef struct	s_ybinfo
 {
-	float		ratio;
-	t_coord		b_vec;
-	int			*mask;
-	SDL_Surface	*dst;
-}				t_renderinfo;
+	int		h;
+	t_point	*ybounds;
+}				t_ybinfo;
 
 void				render_3d(t_game *game, SDL_Surface *dst);
 SDL_Surface			*get_texture(t_game *game, t_texture texture);
@@ -44,5 +42,12 @@ t_hit				get_hit(t_coord *cosin,
 						t_player *player, t_sector *sector, t_sector *prev);
 void				draw_skybox(int x,
 						SDL_Surface *dst, t_game *game, t_point *bounds);
+t_objrend			*new_rendobj(t_object *obj,
+						t_sector *sec, float *flts, int x);
+t_bool				sort_objs(const t_list *a, const t_list *b);
+float				get_object_angle_on_screen(t_object *object,
+						t_player *player, t_coord *range);
+t_point				set_ybounds(t_objrend *obj,
+						t_game *game, t_ybinfo info, t_zbuf *buf);
 
 #endif

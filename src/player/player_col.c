@@ -6,16 +6,19 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/21 19:56:29 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/01/29 20:20:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_printf.h" //
 #include "libft/ft_bool.h"
 #include "libft/ft_mem.h"
+#include "game.h"
+#include "setting.h"
 #include "player.h"
 #include "rinfo.h"
 #include "cmath.h"
+#include "keymap.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -161,34 +164,8 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 	return (next_sector);
 }
 
-t_bool				player_col(t_player *player,
-									t_map *map, float xspeed, float yspeed)
+static void			player_move_col(t_uint8 col, t_player *player, t_coord pos_xy, t_coord pos_x, t_coord pos_y, float xspeed, float yspeed)
 {
-	t_coord		pos_x;
-	t_coord		pos_y;
-	t_coord		pos_xy;
-	t_uint8		col;
-	t_uint32	next_sector;
-
-	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
-	pos_y = (t_coord){player->pos.x, player->pos.y + yspeed};
-	pos_xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
-	col = 0;
-	next_sector = check_col(player, &col, map, xspeed, yspeed);
-	if (col == 7)
-		return (FALSE);
-	if (next_sector != UINT32_MAX)
-	{
-		ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
-		if (player->height + player->heightoffset + PLAYER_CLIMB - player->player_height < map->sectors[next_sector].floor)
-			return (FALSE);
-		if (player->height + player->heightoffset > map->sectors[next_sector].floor + player->player_height)
-			player->heightoffset += player->height - (map->sectors[next_sector].floor + player->player_height);
-		else
-			player->heightoffset = 0.0001;
-		player->cur_sector = next_sector;
-		player->height = map->sectors[next_sector].floor + player->player_height;
-	}
 	if (col == 0)
 		ft_memcpy(&(player->pos), &pos_xy, sizeof(pos_xy));
 	else
@@ -205,6 +182,52 @@ t_bool				player_col(t_player *player,
 		else if ((col & 2) == 0)
 			ft_memcpy(&(player->pos), &pos_y, sizeof(pos_y));
 	}
+}
+
+t_bool				player_col(t_game *game, float xspeed, float yspeed)
+{
+	t_coord		pos_x;
+	t_coord		pos_y;
+	t_coord		pos_xy;
+	t_uint8		col;
+	t_uint32	next_sector;
+
+	t_player *player = game->player;
+	t_map *map = game->map;
+	t_hashmap *keymap = game->keymap;
+
+
+	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
+	pos_y = (t_coord){player->pos.x, player->pos.y + yspeed};
+	pos_xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
+	col = 0;
+	next_sector = check_col(player, &col, map, xspeed, yspeed);
+	if (col == 7)
+		return (FALSE);
+	if (next_sector != UINT32_MAX)
+	{
+		ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
+		if (player->height + player->heightoffset + PLAYER_CLIMB - player->player_height < map->sectors[next_sector].floor
+		|| player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor) > map->sectors[next_sector].ceil
+		)
+		{
+			// col |= 4;
+			// if (col == 4)
+			// 	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
+			ft_printf("col: %d\n", col);
+			return (FALSE);
+		}
+		ft_printf("height: %f, other: %f\n", player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor), map->sectors[next_sector].ceil);
+		if (player->height + player->heightoffset > map->sectors[next_sector].floor + player->player_height)
+			player->heightoffset += player->height - (map->sectors[next_sector].floor + player->player_height);
+		else
+			player->heightoffset = 0.0001;
+		if (is_helddown(keymap, game->setting->controls.crouch) == FALSE)
+			player->player_height = PLAYER_HEIGHT;
+		player->cur_sector = next_sector;
+		player->height = map->sectors[next_sector].floor + player->player_height;
+	}
+	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
 	if (player->pos.y < -20.0 || player->cur_sector == 3)
 	{
 		// ft_printf("col: %d\n", col);

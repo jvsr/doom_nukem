@@ -20,6 +20,7 @@
 
 # define MAX_LIGHT_DIST 150.0
 # define LEVEL_MULTIPLIER 4.0
+# define MAX_OBJ_SECTORS 32
 
 typedef struct s_sector	t_sector;
 
@@ -75,5 +76,26 @@ typedef struct	s_hit
 	t_wall		*wall;
 	t_sector	*sect;
 }				t_hit;
+
+typedef struct	s_objrend
+{
+	float		dist;
+	t_object	*obj;
+	t_sector	*sec;
+	float		angle;
+	int			x;
+}				t_objrend;
+
+typedef struct	s_secbounds
+{
+	t_sector	*sec;
+	t_point		bounds;
+}				t_secbounds;
+
+typedef struct	s_zbuf
+{
+	float		dist;
+	t_secbounds	bounds[MAX_OBJ_SECTORS];
+}				t_zbuf;
 
 #endif
