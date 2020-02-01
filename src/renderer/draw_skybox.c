@@ -23,26 +23,29 @@
 void		draw_skybox(int x,
 								SDL_Surface *dst, t_game *game, t_point *bounds)
 {
-	int			*pixels;
-	SDL_Surface	*skybox;
-	float		perc;
-	int			x_pos;
-	int			*skybox_pixels;
+	int					*pixels;
+	SDL_Surface const	*skybox = get_texture(game, game->map->skybox);
+	int					x_pos;
+	int					*skybox_pixels;
+	t_point				change;
 
+	change.x = fabs(dst->h * PLAYER_UPDOWN_MIN);
+	change.y = fabs(dst->h * PLAYER_UPDOWN_MAX);
 	pixels = dst->pixels;
-	skybox = get_texture(game, game->map->skybox);
 	skybox_pixels = skybox->pixels;
-	perc = ((float)game->setting->fov / 360) * skybox->w;
-	x_pos = ((perc / dst->w) * x) +
+	x_pos = (((((float)game->setting->fov / 360) * skybox->w) / dst->w) * x) +
 		(wrap_float((float)game->player->angle - (game->setting->fov / 2),
 		0, 360) / 360) * skybox->w;
-	*bounds = (t_point){ft_constrain(bounds->x, 0, dst->h),
-						ft_constrain(bounds->y, 0, dst->h)};
+	bounds[1] = (t_point){ft_constrain(bounds[1].x, 0, dst->h),
+				ft_constrain(bounds[1].y, 0, dst->h)};
+	bounds->x = ft_constrain(bounds->x, bounds[1].x, bounds[1].y);
+	bounds->y = ft_constrain(bounds->y, bounds->x, bounds[1].y);
 	while (bounds->x < bounds->y)
 	{
 		pixels[x + ((dst->h - bounds->x - 1) * dst->w)] = skybox_pixels[x_pos +
-			(skybox->h - 1 - (int)(((float)bounds->x / dst->h) * skybox->h)) *
-			skybox->w];
+			(skybox->h - 1 - (int)(((float)(bounds->x + change.x +
+			game->player->screen_updown) / (dst->h + change.x + change.y)) *
+			skybox->h)) * skybox->w];
 		bounds->x++;
 	}
 }
