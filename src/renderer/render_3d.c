@@ -79,8 +79,7 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	if (ybounds.y < dst->h && hit->sect->has_ceiling)
 		draw_line(dst, &(t_point){ybounds.y, dst->h}, x, CEILING_COLOR, bounds, hit, game);
 	else
-
-		draw_skybox(x, dst, game, &(t_point){ft_constrain(ybounds.x, bounds->x, bounds->y), bounds->y});
+		draw_skybox(x, dst, game, (t_point[2]){(t_point){ybounds.y, dst->h}, *bounds});
 	if (ybounds.x > 0)
 		draw_line(dst, &(t_point){0, ybounds.x}, x, FLOOR_COLOR, bounds, hit, game);
 	if (!hit->wall->is_portal && hit->sect->ceil > y0 && hit->sect->floor < y1)
