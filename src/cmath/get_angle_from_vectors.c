@@ -21,5 +21,5 @@ float	get_angle_from_vectors(t_coord *vec0, t_coord *vec1)
 
 	top = dot_vectors(vec0, vec1);
 	bottom = get_vector_magnitude(vec0) * get_vector_magnitude(vec1);
-	return (top / bottom);
+	return (acos(top / bottom) * PI_D);
 }
