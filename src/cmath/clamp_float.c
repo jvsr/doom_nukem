@@ -16,5 +16,5 @@ float		clamp_float(float f0, float min, float max)
 		return (min);
 	else if (f0 > max)
 		return (max);
-	return (f0);	
+	return (f0);
 }

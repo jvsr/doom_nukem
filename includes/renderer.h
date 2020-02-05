@@ -49,5 +49,10 @@ float				get_object_angle_on_screen(t_object *object,
 						t_player *player, t_coord *range);
 t_point				set_ybounds(t_objrend *obj,
 						t_game *game, t_ybinfo info, t_zbuf *buf);
+void				get_s_object_index(t_game *game, void *anim);
+SDL_Surface			*tex_from_anim(t_game *game, t_anim *anim);
+t_anim				lamp_init(void);
+t_anim				chair_init(t_object *obj);
+void				get_r_object_index(t_game *game, void *anim);
 
 #endif

@@ -14,5 +14,5 @@
 
 float	wrap_angle(float angle)
 {
-	return wrap_float(angle, 0, 360);
+	return (wrap_float(angle, 0, 360));
 }

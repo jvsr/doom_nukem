@@ -138,7 +138,7 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 			if (x >= 0 && x < dst->w && obj->dist < zbuf[x].dist)
 			{
 				c_ybounds = set_ybounds(obj, game, (t_ybinfo){dst->h, &ybounds}, &zbuf[x]);
-				SDL_Surface *tex = get_texture(game, obj->obj->img);
+				SDL_Surface *tex = tex_from_anim(game, &obj->obj->img);
 				int *t_pixels = tex->pixels;
 				float perc = (float)(x - xbounds.x) / (xbounds.y - xbounds.x);
 				int tex_x = perc * (tex->w - 1);
@@ -180,6 +180,7 @@ static void render_objects(t_list *secs, t_zbuf *zbuf, SDL_Surface *dst, t_game 
 			float object_angle = get_object_angle_on_screen(&sec->object[i], game->player, range);
 			if (object_angle >= 0)
 			{
+				sec->object[i].img.angle = object_angle;
 				float tmp_angle = calc_fov(range->x, object_angle);
 				int screen_space = (int)((tmp_angle / calc_fov(range->x, range->y)) * dst->w);
 				float dist = get_distance(&game->player->pos, &sec->object[i].pos);
