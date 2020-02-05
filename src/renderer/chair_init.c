@@ -14,7 +14,7 @@
 #include "rinfo.h"
 #include "renderer.h"
 
-t_anim		chair_init(t_object *obj)
+t_anim		chair_init(t_object *obj, float offset)
 {
 	t_anim anim;
 
@@ -24,5 +24,6 @@ t_anim		chair_init(t_object *obj)
 	anim.back[0] = TEXTURE_CHAIR_BACK;
 	anim.data = (void*)obj;
 	anim.set_index = get_r_object_index;
+	anim.offset = offset;
 	return (anim);
 }

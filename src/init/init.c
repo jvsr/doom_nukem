@@ -73,7 +73,7 @@ static void		map_init(t_game *game)
 		error_msg_errno("Could not allocate Map Objects");
 	game->map->sectors[0].object[0].pos = (t_coord){0, 0};
 	game->map->sectors[0].object[0].size = (t_coord){10, 10};
-	game->map->sectors[0].object[0].img = chair_init(&game->map->sectors[0].object[1]);
+	game->map->sectors[0].object[0].img = chair_init(&game->map->sectors[0].object[1], 10);
 	game->map->sectors[0].object[1].pos = (t_coord){3, 3};
 	game->map->sectors[0].object[1].size = (t_coord){4, 15};
 	game->map->sectors[0].object[1].img = lamp_init();

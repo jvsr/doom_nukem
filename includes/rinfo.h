@@ -36,6 +36,7 @@ typedef struct	s_anim
 	t_texture	actions[ANIMATIONS];
 	void		(*set_index)(t_game*, void*);
 	void		*data;
+	float		offset;
 	float		angle;
 }				t_anim;
 

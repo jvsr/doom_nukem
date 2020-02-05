@@ -133,12 +133,12 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 		c_xbounds.x = ft_constrain(xbounds.x, 0, dst->w - 1);
 		c_xbounds.y = ft_constrain(xbounds.y, c_xbounds.x, dst->w - 1);
 		x = c_xbounds.x;
+		SDL_Surface *tex = tex_from_anim(game, &obj->obj->img);
 		while (x < c_xbounds.y)
 		{
 			if (x >= 0 && x < dst->w && obj->dist < zbuf[x].dist)
 			{
 				c_ybounds = set_ybounds(obj, game, (t_ybinfo){dst->h, &ybounds}, &zbuf[x]);
-				SDL_Surface *tex = tex_from_anim(game, &obj->obj->img);
 				int *t_pixels = tex->pixels;
 				float perc = (float)(x - xbounds.x) / (xbounds.y - xbounds.x);
 				int tex_x = perc * (tex->w - 1);

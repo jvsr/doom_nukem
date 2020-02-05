@@ -19,14 +19,16 @@
 void		get_r_object_index(t_game *game, void *anim)
 {
 	t_anim	*an;
+	float	angle;
 
 	(void)game;
 	an = (t_anim*)anim;
-	if (an->angle >= 45 && an->angle < 135)
+	angle = wrap_float(an->angle + an->offset, 0, 360);
+	if (angle >= 45 && angle < 135)
 		an->index = (t_point){0, 0};
-	else if (an->angle >= 135 && an->angle < 225)
+	else if (angle >= 135 && angle < 225)
 		an->index = (t_point){3, 0};
-	else if (an->angle >= 225 && an->angle < 315)
+	else if (angle >= 225 && angle < 315)
 		an->index = (t_point){1, 0};
 	else
 		an->index = (t_point){2, 0};
