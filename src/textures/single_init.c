@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   wall_init.c                                        :+:    :+:            */
+/*   single_init.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -14,7 +14,7 @@
 #include "rinfo.h"
 #include "renderer.h"
 
-t_anim		wall_init(t_texture texture)
+t_anim		single_init(t_texture texture)
 {
 	t_anim	anim;
 

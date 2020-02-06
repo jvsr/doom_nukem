@@ -24,16 +24,16 @@
 # define CEILING_COLOR 0xFFFFFFF0
 # define FLOOR_COLOR 0xFFF4EEB1
 
-typedef struct	s_list		t_list;
-typedef struct	s_game		t_game;
-typedef enum	e_texture	t_texture;
-typedef struct	s_player	t_player;
+typedef struct s_list		t_list;
+typedef struct s_game		t_game;
+typedef enum e_texture		t_texture;
+typedef struct s_player		t_player;
 
-typedef struct	s_ybinfo
+typedef struct		s_ybinfo
 {
 	int		h;
 	t_point	*ybounds;
-}				t_ybinfo;
+}					t_ybinfo;
 
 void				render_3d(t_game *game, SDL_Surface *dst);
 SDL_Surface			*get_texture(t_game *game, t_texture texture);
@@ -52,5 +52,7 @@ t_point				set_ybounds(t_objrend *obj,
 void				get_s_object_index(t_game *game, void *anim);
 SDL_Surface			*tex_from_anim(t_game *game, t_anim *anim);
 void				get_r_object_index(t_game *game, void *anim);
+t_list				**decals_on_vline(t_wall *wall, float perc_hit,
+						float len, t_list **out);
 
 #endif

@@ -19,7 +19,7 @@
 #include "error.h"
 #include "tga.h"
 
-static SDL_Surface	*get_texture(char *loc, const char *exec_path)
+static SDL_Surface	*load_texture(char *loc, const char *exec_path)
 {
 	char		*str;
 	SDL_Surface	*surface;
@@ -40,7 +40,7 @@ void				load_textures(t_game *game)
 	files = (char *[]){
 		"brick_wall", "skybox_day", "skybox_dusk", "objs/lamp",
 		"objs/chair_back", "objs/chair_front", "objs/chair_left",
-		"objs/chair_right"
+		"objs/chair_right", "bloodsplatter", "quartz"
 	};
 	index = 0;
 	game->textures = ft_memalloc(sizeof(SDL_Surface *) * TEXTURE_COUNT);
@@ -48,7 +48,7 @@ void				load_textures(t_game *game)
 		error_msg_sdl(ENOMEM, "Unable to allocate textures.");
 	while (index < TEXTURE_COUNT)
 	{
-		game->textures[index] = get_texture(files[index], game->exec_path);
+		game->textures[index] = load_texture(files[index], game->exec_path);
 		index++;
 	}
 }

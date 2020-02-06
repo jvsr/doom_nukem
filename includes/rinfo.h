@@ -25,6 +25,7 @@
 
 typedef struct s_sector	t_sector;
 typedef struct s_game	t_game;
+typedef struct s_list	t_list;
 
 typedef struct	s_anim
 {
@@ -43,8 +44,8 @@ typedef struct	s_anim
 typedef struct	s_decal
 {
 	t_coord		pos;
-	t_anim		texture;
 	t_coord		size;
+	t_anim		texture;
 }				t_decal;
 
 typedef struct	s_wall
@@ -55,6 +56,7 @@ typedef struct	s_wall
 	t_sector	*window;
 	t_anim		texture;
 	t_coord		perc;
+	t_list		*decals;
 }				t_wall;
 
 typedef struct	s_object
