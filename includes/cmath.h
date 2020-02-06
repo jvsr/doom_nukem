@@ -43,5 +43,7 @@ t_bool		is_between_fov(float a, float start, float end);
 float		get_angle_between_points(t_coord *a, t_coord *b);
 float		calc_fov(float a, float b);
 float		get_angle_between_pointsv(t_coord *pos0, t_coord *pos1);
+t_bool		circle_collision(t_coord line_start, t_coord line_end,
+								t_coord circle_mid, float radius);
 
 #endif
