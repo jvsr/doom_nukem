@@ -17,14 +17,14 @@
 # define PI_R 0.0174532925
 # define PI_D 57.2957795131
 
-#include "libft/ft_bool.h"
+# include "libft/ft_bool.h"
 
 typedef struct s_coord		t_coord;
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
 
 t_coord		*get_collision(t_coord *start,
-									t_coord *a, t_coord *wall, t_coord *pos);
+				t_coord *a, t_coord *wall, t_coord *pos);
 float		get_angle_from_vectors(t_coord *vec0, t_coord *vec1);
 float		get_angle_from_vector(t_coord *vec);
 t_coord		*get_vector_from_angle(float angle, t_coord *vec);

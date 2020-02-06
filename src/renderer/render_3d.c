@@ -48,19 +48,84 @@ static void draw_line(SDL_Surface *dst, t_point *ybounds, int x, int colour, t_p
 	}
 	else
 	{
-		SDL_Surface *tex = get_texture(game, hit->wall->texture);
+		SDL_Surface *tex = tex_from_anim(game, &hit->wall->texture);
 		int *t_pixels = tex->pixels;
 		float perc = get_distance(&hit->pos, &hit->wall->corner_0) / get_distance(&hit->wall->corner_0, &hit->wall->corner_1);
-		perc = wrap_float(perc, 0, hit->wall->xperc) / hit->wall->xperc;
+		perc = wrap_float(perc, 0, hit->wall->perc.x) / hit->wall->perc.x;
 		int tex_x = perc * tex->w;
 		float intensity = (MAX_LIGHT_DIST - clamp_float(hit->og_dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
 		while (i < c_ybounds.y)
 		{
-			int y = (wrap_float((float)(i - ybounds->x) / (ybounds->y - ybounds->x), 0, hit->wall->yperc) / hit->wall->yperc) * tex->h;
+			int y = (wrap_float((float)(i - ybounds->x) / (ybounds->y - ybounds->x), 0, hit->wall->perc.y) / hit->wall->perc.y) * tex->h;
 			pixels[x + (dst->w * (dst->h - i - 1))] = rgba_intensity(t_pixels[(y * tex->w) + tex_x], intensity);
 			
 			i++;
 		}
+	}
+}
+
+static void draw_wall(SDL_Surface *dst, t_point *ybounds, int x, t_point *bounds, t_hit *hit, t_game *game)
+{
+	int *pixels;
+	int i;
+	t_point c_ybounds;
+	t_bool check;
+	t_list *decals;
+
+	pixels = dst->pixels;
+	decals = NULL;
+	if (x < 0 || x >= dst->w)
+		return;
+	*bounds = (t_point){ft_constrain(bounds->x, 0, dst->h), ft_constrain(bounds->y, 0, dst->h)};
+	c_ybounds.x = ft_constrain(ybounds->x, bounds->x, bounds->y);
+	c_ybounds.y = ft_constrain(ybounds->y, c_ybounds.x, bounds->y);
+	i = c_ybounds.x;
+	SDL_Surface *tex = tex_from_anim(game, &hit->wall->texture);
+	int *t_pixels = tex->pixels;
+	float len = get_distance(&hit->wall->corner_0, &hit->wall->corner_1);
+	float perc = get_distance(&hit->pos, &hit->wall->corner_0) / len;
+	float xperc = wrap_float(perc, 0, hit->wall->perc.x) / hit->wall->perc.x;
+	int tex_x = xperc * tex->w;
+	float intensity = (MAX_LIGHT_DIST - clamp_float(hit->og_dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
+	check = TRUE;
+	if (hit->wall->decals == NULL)
+		check = FALSE;
+	else if (*decals_on_vline(hit->wall, perc, len, &decals) == NULL)
+		check = FALSE;
+	if (!check)
+		while (i < c_ybounds.y)
+		{
+			int y = (wrap_float((float)(i - ybounds->x) / (ybounds->y - ybounds->x), 0, hit->wall->perc.y) / hit->wall->perc.y) * tex->h;
+			pixels[x + (dst->w * (dst->h - i - 1))] = rgba_intensity(t_pixels[(y * tex->w) + tex_x], intensity);
+			i++;
+		}
+	else
+	{
+		float height = hit->sect->ceil - hit->sect->floor;
+		while (i < c_ybounds.y)
+		{
+			float yperc = (float)(i - ybounds->x) / (ybounds->y - ybounds->x);
+			int y = (wrap_float(yperc, 0, hit->wall->perc.y) / hit->wall->perc.y) * tex->h;
+			int colour = t_pixels[(y * tex->w) + tex_x];
+			t_list *tmp = decals;
+			while (tmp)
+			{
+				t_decal *d_tmp = tmp->content;
+				SDL_Surface *srf = tex_from_anim(game, &d_tmp->texture);
+				float size = d_tmp->size.x / len;
+				int x_tmp = (wrap_float(perc - d_tmp->pos.x, 0, size) / size) * srf->w;
+				size = d_tmp->size.y / height;
+				if (yperc >= d_tmp->pos.y && yperc <= d_tmp->pos.y + size)
+				{
+					y = (wrap_float(yperc - d_tmp->pos.y, 0, size) / size) * srf->h;
+					colour = mix_color(colour, ((int*)srf->pixels)[x_tmp + (y * srf->w)]);
+				}
+				tmp = tmp->next;
+			}
+			pixels[x + (dst->w * (dst->h - i - 1))] = rgba_intensity(colour, intensity);
+			i++;
+		}
+		ft_lstdel(&decals, NULL);
 	}
 }
 
@@ -79,12 +144,11 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 	if (ybounds.y < dst->h && hit->sect->has_ceiling)
 		draw_line(dst, &(t_point){ybounds.y, dst->h}, x, CEILING_COLOR, bounds, hit, game);
 	else
-
-		draw_skybox(x, dst, game, &(t_point){ft_constrain(ybounds.x, bounds->x, bounds->y), bounds->y});
+		draw_skybox(x, dst, game, (t_point[2]){(t_point){ybounds.y, dst->h}, *bounds});
 	if (ybounds.x > 0)
 		draw_line(dst, &(t_point){0, ybounds.x}, x, FLOOR_COLOR, bounds, hit, game);
 	if (!hit->wall->is_portal && hit->sect->ceil > y0 && hit->sect->floor < y1)
-		draw_line(dst, &ybounds, x,  -1, bounds, hit, game);
+		draw_wall(dst, &ybounds, x, bounds, hit, game);
 	else if (hit->sect->ceil > y0 && hit->sect->floor < y1)
 	{
 		t_point nybounds = {(((hit->wall->window->floor - y0) / s) * dst->h) - game->player->screen_updown,
@@ -97,8 +161,8 @@ static t_point	draw_vline(t_hit *hit, t_game *game, int x, SDL_Surface *dst, t_p
 			nybounds.y = bounds->y;
 		if (nybounds.x < bounds->x)
 			nybounds.x = bounds->x;
-		draw_line(dst, &(t_point){ybounds.x, nybounds.x}, x, -1, bounds, hit, game);
-		draw_line(dst, &(t_point){nybounds.y, ybounds.y}, x, -1, bounds, hit, game);
+		draw_wall(dst, &(t_point){ybounds.x, nybounds.x}, x, bounds, hit, game);
+		draw_wall(dst, &(t_point){nybounds.y, ybounds.y}, x, bounds, hit, game);
 		return (nybounds);
 	}
 	return ((t_point){0, 0});
@@ -133,12 +197,12 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 		c_xbounds.x = ft_constrain(xbounds.x, 0, dst->w - 1);
 		c_xbounds.y = ft_constrain(xbounds.y, c_xbounds.x, dst->w - 1);
 		x = c_xbounds.x;
+		SDL_Surface *tex = tex_from_anim(game, &obj->obj->img);
 		while (x < c_xbounds.y)
 		{
 			if (x >= 0 && x < dst->w && obj->dist < zbuf[x].dist)
 			{
 				c_ybounds = set_ybounds(obj, game, (t_ybinfo){dst->h, &ybounds}, &zbuf[x]);
-				SDL_Surface *tex = get_texture(game, obj->obj->img);
 				int *t_pixels = tex->pixels;
 				float perc = (float)(x - xbounds.x) / (xbounds.y - xbounds.x);
 				int tex_x = perc * (tex->w - 1);
@@ -180,6 +244,7 @@ static void render_objects(t_list *secs, t_zbuf *zbuf, SDL_Surface *dst, t_game 
 			float object_angle = get_object_angle_on_screen(&sec->object[i], game->player, range);
 			if (object_angle >= 0)
 			{
+				sec->object[i].img.angle = object_angle;
 				float tmp_angle = calc_fov(range->x, object_angle);
 				int screen_space = (int)((tmp_angle / calc_fov(range->x, range->y)) * dst->w);
 				float dist = get_distance(&game->player->pos, &sec->object[i].pos);

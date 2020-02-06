@@ -46,7 +46,8 @@ typedef struct	s_mag
 
 typedef	struct	s_player
 {
-	/*t_uint16	hp;
+	/*
+	t_uint16	hp;
 	float		speed;
 	t_bool		crouched;
 	t_weapon	*cur_weapon;
@@ -54,7 +55,8 @@ typedef	struct	s_player
 
 	t_pickup	**all_pickup;
 	t_rect		vienor
-	t_uint8		detection_area;*/
+	t_uint8		detection_area;
+	*/
 	t_uint16	*fov;
 	float		angle;
 	t_mag		mag;

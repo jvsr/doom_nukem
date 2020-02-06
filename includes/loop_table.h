@@ -24,7 +24,7 @@ typedef struct	s_loop_elm
 	t_loop_func	*func;
 }				t_loop_elm;
 
-static	t_loop_elm const g_loop_table[] =
+static t_loop_elm const g_loop_table[] =
 {
 	{hud, loop_game},
 	{map_editor, loop_map_editor},

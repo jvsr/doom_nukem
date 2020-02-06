@@ -13,7 +13,7 @@
 #ifndef LOOP_H
 # define LOOP_H
 
-#include "eventstate.h"
+# include "eventstate.h"
 
 void		loop_core(t_game *game, t_eventstate_code code);
 void		loop_game(t_game *game);

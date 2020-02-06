@@ -18,5 +18,5 @@ float	get_angle_between_pointsv(t_coord *pos0, t_coord *pos1)
 	t_coord point;
 
 	get_vector_from_points(pos0, pos1, &point);
-	return(get_angle_from_vector(&point));
+	return (get_angle_from_vector(&point));
 }

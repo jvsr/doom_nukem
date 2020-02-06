@@ -21,8 +21,32 @@
 # define MAX_LIGHT_DIST 150.0
 # define LEVEL_MULTIPLIER 4.0
 # define MAX_OBJ_SECTORS 32
+# define ANIMATIONS 4
 
 typedef struct s_sector	t_sector;
+typedef struct s_game	t_game;
+typedef struct s_list	t_list;
+
+typedef struct	s_anim
+{
+	t_point		index;
+	t_texture	left[ANIMATIONS];
+	t_texture	right[ANIMATIONS];
+	t_texture	front[ANIMATIONS];
+	t_texture	back[ANIMATIONS];
+	t_texture	actions[ANIMATIONS];
+	void		(*set_index)(t_game*, void*);
+	void		*data;
+	float		offset;
+	float		angle;
+}				t_anim;
+
+typedef struct	s_decal
+{
+	t_coord		pos;
+	t_coord		size;
+	t_anim		texture;
+}				t_decal;
 
 typedef struct	s_wall
 {
@@ -30,16 +54,16 @@ typedef struct	s_wall
 	t_coord		corner_1;
 	t_bool		is_portal;
 	t_sector	*window;
-	t_texture	texture;
-	float		xperc;
-	float		yperc;
+	t_anim		texture;
+	t_coord		perc;
+	t_list		*decals;
 }				t_wall;
 
 typedef struct	s_object
 {
 	t_coord		pos;
 	t_coord		size;
-	t_texture	img;
+	t_anim		img;
 }				t_object;
 
 struct			s_sector
