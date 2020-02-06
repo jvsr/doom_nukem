@@ -40,15 +40,21 @@ typedef struct	s_anim
 	float		angle;
 }				t_anim;
 
+typedef struct	s_decal
+{
+	t_coord		pos;
+	t_anim		texture;
+	t_coord		size;
+}				t_decal;
+
 typedef struct	s_wall
 {
 	t_coord		corner_0;
 	t_coord		corner_1;
 	t_bool		is_portal;
 	t_sector	*window;
-	t_texture	texture;
-	float		xperc;
-	float		yperc;
+	t_anim		texture;
+	t_coord		perc;
 }				t_wall;
 
 typedef struct	s_object

@@ -48,15 +48,15 @@ static void draw_line(SDL_Surface *dst, t_point *ybounds, int x, int colour, t_p
 	}
 	else
 	{
-		SDL_Surface *tex = get_texture(game, hit->wall->texture);
+		SDL_Surface *tex = tex_from_anim(game, &hit->wall->texture);
 		int *t_pixels = tex->pixels;
 		float perc = get_distance(&hit->pos, &hit->wall->corner_0) / get_distance(&hit->wall->corner_0, &hit->wall->corner_1);
-		perc = wrap_float(perc, 0, hit->wall->xperc) / hit->wall->xperc;
+		perc = wrap_float(perc, 0, hit->wall->perc.x) / hit->wall->perc.x;
 		int tex_x = perc * tex->w;
 		float intensity = (MAX_LIGHT_DIST - clamp_float(hit->og_dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
 		while (i < c_ybounds.y)
 		{
-			int y = (wrap_float((float)(i - ybounds->x) / (ybounds->y - ybounds->x), 0, hit->wall->yperc) / hit->wall->yperc) * tex->h;
+			int y = (wrap_float((float)(i - ybounds->x) / (ybounds->y - ybounds->x), 0, hit->wall->perc.y) / hit->wall->perc.y) * tex->h;
 			pixels[x + (dst->w * (dst->h - i - 1))] = rgba_intensity(t_pixels[(y * tex->w) + tex_x], intensity);
 			
 			i++;
