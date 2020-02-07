@@ -58,7 +58,7 @@ static void draw_line(SDL_Surface *dst, t_point *ybounds, int x, int colour, t_p
 		{
 			int y = (wrap_float((float)(i - ybounds->x) / (ybounds->y - ybounds->x), 0, hit->wall->perc.y) / hit->wall->perc.y) * tex->h;
 			pixels[x + (dst->w * (dst->h - i - 1))] = rgba_intensity(t_pixels[(y * tex->w) + tex_x], intensity);
-			
+
 			i++;
 		}
 	}
@@ -172,7 +172,7 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 {
 	int *pixels;
 	int count;
-	
+
 	pixels = dst->pixels;
 	count = 0;
 	while (objs)
@@ -286,7 +286,7 @@ static void render_chunk(t_game *game, SDL_Surface *dst, int start, int max)
 	step = (float)game->setting->fov / dst->w;
 	index = start;
 	r_secs = ft_lstnew(&game->map->sectors[game->player->cur_sector], sizeof(t_sector));
-	while (index <= max)
+	while (index < max)
 	{
 		angle = (float)index * step;
 		r_angle = wrap_float(angle + (game->player->angle - hfov2), 0, 360) * PI_R;
