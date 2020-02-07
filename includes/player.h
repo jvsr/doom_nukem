@@ -13,9 +13,6 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include <_types/_uint8_t.h>
-# include <_types/_uint32_t.h>
-
 # include "types.h"
 # include "coord.h"
 
