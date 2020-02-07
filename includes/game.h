@@ -60,6 +60,7 @@ typedef struct	s_game
 	t_eventstate	*cureventstate;
 	t_pool			*pool;
 	t_uint64		frametime;
+	t_uint64		lastframe;
 }				t_game;
 
 void			loop(t_game *game);
