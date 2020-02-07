@@ -75,10 +75,10 @@ static void		map_init(t_game *game)
 		error_msg_errno("Could not allocate Map Objects");
 	game->map->sectors[0].object[0].pos = (t_coord){0, 0};
 	game->map->sectors[0].object[0].size = (t_coord){10, 10};
-	game->map->sectors[0].object[0].img = chair_init(&game->map->sectors[0].object[1], 10);
+	game->map->sectors[0].object[0].img = chair_init(&game->map->sectors[0].object[0], 10);
 	game->map->sectors[0].object[1].pos = (t_coord){3, 3};
 	game->map->sectors[0].object[1].size = (t_coord){4, 15};
-	game->map->sectors[0].object[1].img = lamp_init();
+	game->map->sectors[0].object[1].img = enemy_init(&game->map->sectors[0].object[1], TEXTURE_ENEMY0_F0);
 	t_decal *decal = ft_memalloc(sizeof(t_decal));
 	decal->texture = single_init(TEXTURE_BLOOD_SPLATTER);
 	decal->pos = (t_coord){0.8, 0.0};
