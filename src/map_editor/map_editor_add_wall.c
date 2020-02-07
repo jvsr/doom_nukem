@@ -25,13 +25,17 @@
 static t_bool		line_invalid(t_wall *wall, t_wall *compare_wall)
 {
 	t_coord tmp_corner;
+	t_bool	equal;
 
 	if (ft_memequ(wall, compare_wall, sizeof(t_wall)))
 		return (TRUE);
 	tmp_corner = wall->corner_0;
 	wall->corner_0 = wall->corner_1;
 	wall->corner_1 = tmp_corner;
-	return (ft_memequ(wall, compare_wall, sizeof(t_wall)));
+	equal = ft_memequ(wall, compare_wall, sizeof(t_wall));
+	wall->corner_1 = wall->corner_0;
+	wall->corner_0 = tmp_corner;
+	return (equal);
 }
 
 static void		add_to_back(t_list **head, t_list *new)

@@ -27,7 +27,6 @@ static void	add_line(t_game *game, SDL_Event event,
 						t_transform *map_editor_elem)
 {
 	t_wall				*new;
-	t_wall				*wall;
 	SDL_Point			current;
 	static	t_bool		first_place = TRUE;
 
@@ -35,12 +34,7 @@ static void	add_line(t_game *game, SDL_Event event,
 	current.y = event.button.y;
 	map_editor_snap_to_grid(map_editor_elem, &current);
 	if (is_helddown(game->keymap, SDLK_LSHIFT) && map_editor_elem->gui_elem.map_editor->wall != NULL)
-	{
-		wall = (t_wall*)ft_lstlast(map_editor_elem->gui_elem.map_editor->wall)->content;
-		map_editor_elem->gui_elem.map_editor->last_click.x = wall->corner_1.x;
-		map_editor_elem->gui_elem.map_editor->last_click.y = wall->corner_1.y;
 		first_place = FALSE;
-	}
 	if (first_place == TRUE)
 	{
 		map_editor_elem->gui_elem.map_editor->last_click.x = event.button.x;
