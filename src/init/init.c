@@ -153,7 +153,7 @@ void			init_function(t_game *game)
 	init_keymap(game);
 	player_init(game);
 	map_init(game);
-	game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
-					FALSE, INIT_THREADPOOL_CENTRALIZED);
+	// game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
+	// 				FALSE, INIT_THREADPOOL_CENTRALIZED);
 	game->cureventstate->eventstate = splash;
 }
