@@ -25,4 +25,4 @@ SRCS = get_collision get_angle_from_vectors get_angle_from_vector \
 		get_vector_from_points get_distance calc_vfov mod_float \
 		clamp_float wrap_float get_perps wrap_angle intersect3 \
 		is_between_fov get_angle_between_points calc_fov \
-		get_angle_between_pointsv
+		get_angle_between_pointsv lerp

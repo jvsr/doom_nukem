@@ -50,5 +50,6 @@ t_bool		is_between_fov(float a, float start, float end);
 float		get_angle_between_points(t_coord *a, t_coord *b);
 float		calc_fov(float a, float b);
 float		get_angle_between_pointsv(t_coord *pos0, t_coord *pos1);
+float		lerp(float a, float b, float t);
 
 #endif
