@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/08 22:58:24 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/09 19:38:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void			init_function(t_game *game)
 	init_keymap(game);
 	player_init(game);
 	map_init(game);
-	// game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
-	// 				FALSE, INIT_THREADPOOL_CENTRALIZED);
+	game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
+					FALSE, INIT_THREADPOOL_CENTRALIZED);
 	game->cureventstate->eventstate = splash;
 }
