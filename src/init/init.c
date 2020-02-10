@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/09 19:38:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 14:38:19 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].floor = 0;
 	game->map->sectors[0].wall_count = 5;
 	game->map->sectors[0].walls = ft_memalloc(sizeof(t_wall) * 5);
+	game->map->sectors[0].light_value = 0.5;
 	if (game->map->sectors[0].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
 	game->map->sectors[0].walls[0] = (t_wall){(t_coord){-20, -20}, (t_coord){20, -20}, FALSE, NULL, single_init(TEXTURE_BRICK_WALL), (t_coord){0.2, 0.5}, NULL};
@@ -95,6 +96,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].floor = -10;
 	game->map->sectors[1].wall_count = 4;
 	game->map->sectors[1].walls = ft_memalloc(sizeof(t_wall) * 4);
+	game->map->sectors[1].light_value = 1.0;
 	if (game->map->sectors[1].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
 	game->map->sectors[1].walls[0] = (t_wall){(t_coord){-30, -20}, (t_coord){-20, -20}, FALSE, NULL, single_init(TEXTURE_BRICK_WALL), (t_coord){2, 0.5}, NULL};
@@ -114,6 +116,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[2].floor = 10;
 	game->map->sectors[2].wall_count = 4;
 	game->map->sectors[2].walls = ft_memalloc(sizeof(t_wall) * 4);
+	game->map->sectors[2].light_value = 0.5;
 	if (game->map->sectors[2].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
 	game->map->sectors[2].walls[0] = (t_wall){(t_coord){-40, -20}, (t_coord){-30, -20}, FALSE, NULL, single_init(TEXTURE_BRICK_WALL), (t_coord){0.2, 0.5}, NULL};
@@ -131,6 +134,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
 	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * 4);
+	game->map->sectors[3].light_value = 0.5;
 	if (game->map->sectors[3].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
 	game->map->sectors[3].walls[0] = (t_wall){(t_coord){40, -30}, (t_coord){40, -20}, FALSE, NULL, single_init(TEXTURE_BRICK_WALL), (t_coord){0.2, 0.5}, NULL};

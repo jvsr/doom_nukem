@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/07 16:15:51 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/10 14:29:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ struct			s_sector
 	float		floor;
 	float		ceil;
 	t_bool		has_ceiling;
+	float		light_value;
 };
 
 typedef struct	s_map

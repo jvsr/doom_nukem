@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:58:30 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/20 17:13:52 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 14:31:34 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void draw_wall(SDL_Surface *dst, t_point *ybounds, int x, t_point *bounds
 	float perc = get_distance(&hit->pos, &hit->wall->corner_0) / len;
 	float xperc = wrap_float(perc, 0, hit->wall->perc.x) / hit->wall->perc.x;
 	int tex_x = xperc * tex->w;
-	float intensity = (MAX_LIGHT_DIST - clamp_float(hit->og_dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
+	float intensity = ((MAX_LIGHT_DIST - clamp_float(hit->og_dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * hit->sect->light_value;
 	check = TRUE;
 	if (hit->wall->decals == NULL)
 		check = FALSE;
