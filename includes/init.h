@@ -17,13 +17,12 @@
 # define INIT_HEIGHT 1080
 # define INIT_KEYMAP_SIZE 20
 # define INIT_KEYMAP_ALGO ft_hashdjb2a
-# define INIT_THREADPOOL_WORKERS 1
-# define INIT_THREADPOOL_CENTRALIZED FALSE
+# define INIT_THREADPOOL_SIZE_FALLBACK 4
 
 typedef struct s_game	t_game;
 
 t_game	*init_prerequisites(char **argv, char **envp);
-void	init_function(t_game *game);
+void	*init_function(t_game *game);
 void	init_gui(t_game *game);
 void	init_audio(t_game *game);
 void	init_keymap(t_game *game);
