@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_run_task.c                                     :+:    :+:            */
+/*   sdl_run_thread.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/25 14:58:08 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:47:03 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/09 15:25:32 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/09 15:25:32 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sdl_thread.h"
+#include "error.h"
 
-/*
-** * Thread internal function
-*/
-
-t_bool		sdl_run_task(t_task const *task)
+static int	run_task(void *param)
 {
-	void	**params;
+	t_ttask *task;
 
-	params = (void **)task->params;
-	if (task->param_count == 0)
-		task->f();
-	else if (task->param_count == 1)
-		task->f(params[0]);
-	else if (task->param_count == 2)
-		task->f(params[0], params[1]);
-	else if (task->param_count == 3)
-		task->f(params[0], params[1], params[2]);
-	else
-		task->f(params[0], params[1], params[2], params[3]);
+	task = (t_ttask*)param;
+	sdl_run_ttask(task);
+	sdl_complete_ttask(task);
+	return (0);
+}
+
+t_bool		sdl_run_thread(char const *name, t_ttask *task)
+{
+	SDL_Thread	*thread;
+
+	if (task == NULL)
+		return (FALSE);
+	thread = SDL_CreateThread(&run_task, name, task);
+	if (thread == NULL)
+		error_msg_sdl(13, "Failed to alloc run thread");
+	SDL_DetachThread(thread);
 	return (TRUE);
 }
