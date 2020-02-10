@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/29 20:20:06 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 17:27:25 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define PLAYER_UPDOWN_MIN -0.45
 # define PLAYER_UPDOWN_MAX 0.60
 # define PLAYER_MOVE_SPEED 0.5
+# define BASE_FRAME_TIME 30
 # define PLAYER_RUN_SPEED 0.7
 # define PLAYER_CLIMB 5.0
 # define PLAYER_CROUCH_SPEED 0.2

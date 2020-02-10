@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 13:11:10 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/22 13:11:10 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/10 17:48:27 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ float		get_angle_between_points(t_coord *a, t_coord *b);
 float		calc_fov(float a, float b);
 float		get_angle_between_pointsv(t_coord *pos0, t_coord *pos1);
 float		lerp(float a, float b, float t);
+float		lerp_max(float a, float b, float t, float max);
 
 #endif
