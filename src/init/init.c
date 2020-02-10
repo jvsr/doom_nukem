@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/10 14:38:19 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/10 15:10:24 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void		player_init(t_game *game)
 	get_vector_from_angle(game->player->angle, &game->player->forward);
 	game->player->player_height = PLAYER_HEIGHT;
 	game->player->height = PLAYER_HEIGHT;
+	game->player->health = PLAYER_MAX_HEALTH;
 	ft_memcpy(&game->player->mag, &(t_coord){wrap_float(game->player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(game->player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));

@@ -1,7 +1,17 @@
 - panel: hud
   - gview: gameview
+    - dim: 1.0, 0.8
   - text_block: angle
     - pos: 0.01, 0.01
     - dim: 0.2, 0.4
     - text: "Angle: "
     - text_color: #000000
+  - panel: hudinfo
+    - pos: 0.0, 0.8
+    - dim: 1.0, 0.2
+    - image: hudinfoback
+      - color: #360206FF
+    - text_block: hudinfohp
+      - text: "Health: "
+      - pos: 0.0, 0.3
+      - dim: 0.4, 0.3
