@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_get_task.c                                     :+:    :+:            */
+/*   sdl_run_thread.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/06 13:09:26 by pholster       #+#    #+#                */
-/*   Updated: 2019/12/06 13:09:26 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/09 15:25:32 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/09 15:25:32 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <time.h>
-
 #include "sdl_thread.h"
+#include "error.h"
 
-/*
-** * Thread internal function
-*/
-
-t_task		*sdl_get_task(t_pool *pool)
+static int	run_task(void *param)
 {
-	atomic_char	state;
-	t_task		*task;
+	t_ttask *task;
 
-	if (pool->que == NULL)
+	task = (t_ttask*)param;
+	sdl_run_ttask(task);
+	sdl_complete_ttask(task);
+	return (0);
+}
+
+t_ttask		*sdl_run_thread(char const *name, t_ttask *task)
+{
+	SDL_Thread	*thread;
+
+	if (task == NULL)
 		return (NULL);
-	state = atomic_exchange(&(pool->state), LOCKED);
-	if (state == LOCKED)
-		return (NULL);
-	task = pool->que;
-	if (task != NULL)
-	{
-		pool->que = task->next;
-		if (task == pool->que_last)
-			pool->que_last = NULL;
-	}
-	atomic_store(&(pool->state), state);
-	if (task != NULL)
-		task->next = NULL;
+	thread = SDL_CreateThread(&run_task, name, task);
+	if (thread == NULL)
+		error_msg_sdl(13, "Failed to alloc run thread");
+	SDL_DetachThread(thread);
 	return (task);
 }

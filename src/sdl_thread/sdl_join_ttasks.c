@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   sdl_join_ttasks.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/12 15:44:16 by jvisser       ########   odam.nl         */
+/*   Created: 2020/02/07 16:39:56 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:39:56 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_video.h>
-
-#include "game.h"
-#include "init.h"
 #include "sdl_thread.h"
 
-int	main(int argc, char **argv, char **envp)
+void	sdl_join_ttasks(t_ttask **tasks, size_t len)
 {
-	t_game		*game;
-	t_bool		is_loaded;
+	size_t	i;
 
-	(void)argc;
-	is_loaded = FALSE;
-	game = init(argv, envp);
-	sdl_run_thread("mainmenu", sdl_new_ttask(init_main_menu, 0, 2,
-								game, &is_loaded));
-	splash(game, &is_loaded, "splash/splash", game->exec_path);
-	loop(game);
-	quit(0);
+	i = 0;
+	if (tasks == NULL)
+		return ;
+	while (i < len)
+	{
+		sdl_join_ttask(tasks[i]);
+		i++;
+	}
 }

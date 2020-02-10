@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_done_pool.c                                    :+:    :+:            */
+/*   sdl_join_ttask.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/17 22:45:56 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:47:03 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:39:56 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:39:56 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <pthread.h>
+
 #include "sdl_thread.h"
 
-t_bool		sdl_done_pool(t_pool const *pool)
+void	sdl_join_ttask(t_ttask *task)
 {
-	t_thread	*thread;
-	size_t		current;
-
-	current = pool->size;
-	while (current > 0)
-	{
-		current--;
-		thread = pool->threads[current];
-		if (thread != NULL)
-		{
-			if (thread->state == ACTIVE)
-				return (FALSE);
-		}
-	}
-	return (pool->que == NULL);
+	if (task == NULL)
+		return ;
+	SDL_LockMutex(task->lock);
+	while (task->completed == FALSE)
+		SDL_CondWait(task->cond_completed, task->lock);
+	SDL_UnlockMutex(task->lock);
 }

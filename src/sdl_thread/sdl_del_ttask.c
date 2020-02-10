@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_join_pool.c                                    :+:    :+:            */
+/*   sdl_del_ttask.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/17 22:45:56 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:47:03 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:57:18 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:57:18 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_mem.h"
+
 #include "sdl_thread.h"
 
-void		sdl_join_pool(t_pool const *pool)
+void	*sdl_del_ttask(t_ttask **task)
 {
-	if (pool == NULL)
-		return ;
-	while (sdl_done_pool(pool) == FALSE)
-		;
+	if (task == NULL || *task == NULL)
+		return (NULL);
+	SDL_DestroyMutex((*task)->lock);
+	SDL_DestroyCond((*task)->cond_completed);
+	ft_memdel((void**)task);
+	return (NULL);
 }

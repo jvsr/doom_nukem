@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   sdl_add_tpool_ttask.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/12 15:44:16 by jvisser       ########   odam.nl         */
+/*   Created: 2020/02/07 16:42:21 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:42:21 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_video.h>
-
-#include "game.h"
-#include "init.h"
 #include "sdl_thread.h"
 
-int	main(int argc, char **argv, char **envp)
+t_ttask		*sdl_add_tpool_ttask(t_tpool *pool, t_ttask *task)
 {
-	t_game		*game;
-	t_bool		is_loaded;
-
-	(void)argc;
-	is_loaded = FALSE;
-	game = init(argv, envp);
-	sdl_run_thread("mainmenu", sdl_new_ttask(init_main_menu, 0, 2,
-								game, &is_loaded));
-	splash(game, &is_loaded, "splash/splash", game->exec_path);
-	loop(game);
-	quit(0);
+	if (task == NULL || (pool->flags & TFLAG_POOL_TERMINATE) != 0)
+		return (NULL);
+	if (pool->alloced == FALSE && (pool->flags & TFLAG_POOL_ALLOC_ON_EXEC) != 0)
+		sdl_alloc_tpool_tthreads(&pool);
+	return (sdl_add_tqueue_ttask(pool->tasks, task));
 }

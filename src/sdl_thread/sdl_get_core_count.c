@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   sdl_get_core_count.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/12 15:44:16 by jvisser       ########   odam.nl         */
+/*   Created: 2020/02/09 14:04:58 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/09 14:04:58 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_video.h>
+#include <unistd.h>
 
-#include "game.h"
-#include "init.h"
 #include "sdl_thread.h"
 
-int	main(int argc, char **argv, char **envp)
+ssize_t	sdl_get_core_count(void)
 {
-	t_game		*game;
-	t_bool		is_loaded;
-
-	(void)argc;
-	is_loaded = FALSE;
-	game = init(argv, envp);
-	sdl_run_thread("mainmenu", sdl_new_ttask(init_main_menu, 0, 2,
-								game, &is_loaded));
-	splash(game, &is_loaded, "splash/splash", game->exec_path);
-	loop(game);
-	quit(0);
+	return (sysconf(_SC_NPROCESSORS_ONLN));
 }

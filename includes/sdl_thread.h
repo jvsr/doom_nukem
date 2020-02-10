@@ -13,85 +13,111 @@
 #ifndef SDL_THREAD_H
 # define SDL_THREAD_H
 
-# include <stdarg.h>
-# include <stdatomic.h>
-
+# include <unistd.h>
 # include <SDL2/SDL_thread.h>
 
+# include "libft/ft_types.h"
 # include "libft/ft_bool.h"
 
-# define TRACK_TIME FALSE
+# define MAX_TTASK_PARAMS	4
 
-typedef	enum	e_thread_state
-{
-	IDLE,
-	ACTIVE,
-	LOCKED
-}				t_thread_state;
+typedef struct s_ttask		t_ttask;
+typedef	struct s_tthread	t_tthread;
+typedef struct s_tpool		t_tpool;
 
-typedef struct	s_task
+typedef	enum		e_tflags
 {
-	void			(*f)();
-	char			param_count;
-	void			*params[4];
-	struct s_task	*next;
-}				t_task;
+	TFLAG_POOL_TERMINATE = 0b1,
+	TFLAG_POOL_ALLOC_ON_EXEC = 0b10,
+	TFLAG_TASK_NO_DELETE = 0b100,
+	TFLAG_TASK_HIGH_PRIOR = 0b1000,
+}					t_tflags;
 
-typedef struct	s_thread
+typedef union		u_treturn
 {
-	size_t			number;
-	SDL_Thread		*thread;
-	struct s_pool	*pool;
-	t_task			*task;
-	t_thread_state	state;
-}				t_thread;
+	t_int64			*i_ptr;
+	double			*f_ptr;
+	t_uint64		*u_ptr;
+	t_bool			*b_ptr;
+	char			*c_ptr;
+	void			*v_ptr;
+}					t_treturn;
 
-typedef struct	s_pool
+struct				s_ttask
 {
-	t_thread		**threads;
-	t_task			*que;
-	t_task			*que_last;
-	atomic_char		state;
-	t_bool			tracktime;
-	t_bool			terminating;
-	t_bool			suspended;
+	void			*(*f)();
+	void			*params[MAX_TTASK_PARAMS];
+	size_t			param_count;
+	t_uint64		flags;
+	t_treturn		ret;
+	t_bool			completed;
+	SDL_cond		*cond_completed;
+	SDL_mutex		*lock;
+	t_ttask			*next;
+};
+
+typedef struct		s_tqueue
+{
+	t_ttask			*first;
+	t_ttask			*last;
 	size_t			size;
-	t_bool			centralised;
-	SDL_Thread		*manager;
-}				t_pool;
+	SDL_cond		*cond_empty;
+	SDL_cond		*cond_not_empty;
+	SDL_mutex		*lock;
+}					t_tqueue;
 
-/*
-** ------------------------------"Face" Functions-------------------------------
-*/
+struct				s_tthread
+{
+	SDL_Thread		*id;
+	size_t			num;
+	t_bool			running_task;
+	t_ttask			*task;
+	t_tpool			*pool;
+};
 
-t_pool			*sdl_new_pool(size_t size,
-										t_bool tracktime, t_bool centralised);
-void			sdl_del_pool(t_pool **pool);
-void			sdl_join_pool(t_pool const *pool);
-t_bool			sdl_done_pool(t_pool const *pool);
-t_bool			sdl_que_pool_back(t_pool *pool, void (*f)(),
-					size_t param_count, ...);
-t_bool			sdl_que_pool_front(t_pool *pool, void (*f)(),
-					size_t param_count, ...);
-SDL_Thread		*sdl_new_thread(char const *name, void (*f)(),
-					size_t param_count, ...);
+struct				s_tpool
+{
+	size_t			size;
+	t_tthread		*manager;
+	t_tthread		**threads;
+	t_tqueue		*tasks;
+	t_bool			alloced;
+	t_uint64		flags;
+};
 
-/*
-** ----------------------------Management Functions-----------------------------
-*/
+// --- Alloc functions ---
+t_tpool				*sdl_new_tpool(size_t size, t_uint64 flags);
+t_tthread			*sdl_new_tthread(t_tpool *pool, size_t num,
+									int (*f)(void *));
+t_tqueue			*sdl_new_tqueue(void);
+t_ttask				*sdl_new_ttask(void *(*fnc)(), t_uint64 flags,
+								size_t param_count, ...);
 
-int				sdl_manage_thread_central(void *param);
-int				sdl_manage_thread_worker(void *param);
-t_bool			sdl_que_pool(t_pool *pool, t_bool priority, t_task *task);
+void				sdl_alloc_tpool_tthreads(t_tpool **pool);
 
-/*
-** -------------------------------Task Functions--------------------------------
-*/
+// --- Delete functions ---
+void				*sdl_del_tpool(t_tpool **pool);
+void				*sdl_del_tthread(t_tthread **thread);
+void				*sdl_del_tqueue(t_tqueue **queue);
+void				*sdl_del_ttask(t_ttask **task);
 
-t_task			*sdl_new_task(void (*f)(), size_t param_count, va_list params);
-t_task			*sdl_get_task(t_pool *pool);
-t_bool			sdl_run_task(t_task const *task);
-void			sdl_complete_task(t_pool *pool, t_thread *self,
-									float *waittime);
+// --- Sync functions ---
+void				sdl_join_tpool(t_tpool *pool);
+void				sdl_join_ttask(t_ttask *task);
+void				sdl_join_ttasks(t_ttask **tasks, size_t len);
+
+// --- Task functions ---
+void				sdl_run_ttask(t_ttask *task);
+void				sdl_get_ttask(t_tthread *thread);
+void				sdl_complete_ttask(t_ttask *task);
+t_ttask				*sdl_add_tpool_ttask(t_tpool *pool, t_ttask *task);
+t_ttask				*sdl_add_tqueue_ttask(t_tqueue *queue, t_ttask *task);
+
+// --- Thread logic functions ---
+int					sdl_worker_tthread(void *param);
+
+// --- Misc functions ---
+ssize_t				sdl_get_core_count(void);
+t_ttask				*sdl_run_thread(const char *name, t_ttask *task);
 
 #endif

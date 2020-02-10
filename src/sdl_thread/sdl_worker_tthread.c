@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   sdl_worker_tthread.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/12 15:44:16 by jvisser       ########   odam.nl         */
+/*   Created: 2020/02/07 16:40:10 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:40:10 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <SDL2/SDL_video.h>
-
-#include "game.h"
-#include "init.h"
 #include "sdl_thread.h"
 
-int	main(int argc, char **argv, char **envp)
+int		sdl_worker_tthread(void *param)
 {
-	t_game		*game;
-	t_bool		is_loaded;
+	t_tthread	*thread;
 
-	(void)argc;
-	is_loaded = FALSE;
-	game = init(argv, envp);
-	sdl_run_thread("mainmenu", sdl_new_ttask(init_main_menu, 0, 2,
-								game, &is_loaded));
-	splash(game, &is_loaded, "splash/splash", game->exec_path);
-	loop(game);
-	quit(0);
+	thread = (t_tthread *)param;
+	while ((thread->pool->flags & TFLAG_POOL_TERMINATE) == 0)
+	{
+		sdl_get_ttask(thread);
+		if (thread->task== NULL)
+			continue ;
+		sdl_run_ttask(thread->task);
+		sdl_complete_ttask(thread->task);
+		thread->task = NULL;
+		thread->running_task = FALSE;
+	}
+	return (0);
 }
+
