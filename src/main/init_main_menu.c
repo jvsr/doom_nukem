@@ -23,7 +23,7 @@ static t_transform	*create_gui(t_game *game, char const *name)
 	return (analyze_gui_config(game->ui, name, game->exec_path));
 }
 
-void				init_main_menu(t_game *game, t_bool *is_loaded)
+void				*init_main_menu(t_game *game, t_bool *is_loaded)
 {
 	t_transform	*main_menu;
 	t_transform	*options_menu;
@@ -39,4 +39,5 @@ void				init_main_menu(t_game *game, t_bool *is_loaded)
 	add_elem_child(main_menu, select_level);
 	add_gui_child(game->ui, main_menu);
 	*is_loaded = TRUE;
+	return (NULL);
 }

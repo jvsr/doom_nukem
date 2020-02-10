@@ -28,7 +28,7 @@ void	init_audio(t_game *game);
 void	init_keymap(t_game *game);
 void	init_settings(t_game *game);
 void	init_eventstate(t_game *game);
-void	init_main_menu(t_game *game, t_bool *is_loaded);
+void	*init_main_menu(t_game *game, t_bool *is_loaded);
 void	init_window_surface(t_game *game);
 
 #endif
