@@ -41,13 +41,13 @@ static void	add_task(t_tqueue *queue, t_ttask *task)
 		SDL_CondBroadcast(queue->cond_not_empty);
 }
 
-t_bool		sdl_add_tqueue_ttask(t_tqueue *queue, t_ttask *task)
+t_ttask		*sdl_add_tqueue_ttask(t_tqueue *queue, t_ttask *task)
 {
 	if (task == NULL)
-		return (FALSE);
+		return (NULL);
 	task->completed = FALSE;
 	SDL_LockMutex(queue->lock);
 	add_task(queue, task);
 	SDL_UnlockMutex(queue->lock);
-	return (TRUE);
+	return (task);
 }

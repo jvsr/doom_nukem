@@ -110,14 +110,14 @@ void				sdl_join_ttasks(t_ttask **tasks, size_t len);
 void				sdl_run_ttask(t_ttask *task);
 void				sdl_get_ttask(t_tthread *thread);
 void				sdl_complete_ttask(t_ttask *task);
-t_bool				sdl_add_tpool_ttask(t_tpool *pool, t_ttask *task);
-t_bool				sdl_add_tqueue_ttask(t_tqueue *queue, t_ttask *task);
+t_ttask				*sdl_add_tpool_ttask(t_tpool *pool, t_ttask *task);
+t_ttask				*sdl_add_tqueue_ttask(t_tqueue *queue, t_ttask *task);
 
 // --- Thread logic functions ---
 int					sdl_worker_tthread(void *param);
 
 // --- Misc functions ---
 ssize_t				sdl_get_core_count(void);
-t_bool				sdl_run_thread(const char *name, t_ttask *task);
+t_ttask				*sdl_run_thread(const char *name, t_ttask *task);
 
 #endif

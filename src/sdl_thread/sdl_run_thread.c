@@ -23,15 +23,15 @@ static int	run_task(void *param)
 	return (0);
 }
 
-t_bool		sdl_run_thread(char const *name, t_ttask *task)
+t_ttask		*sdl_run_thread(char const *name, t_ttask *task)
 {
 	SDL_Thread	*thread;
 
 	if (task == NULL)
-		return (FALSE);
+		return (NULL);
 	thread = SDL_CreateThread(&run_task, name, task);
 	if (thread == NULL)
 		error_msg_sdl(13, "Failed to alloc run thread");
 	SDL_DetachThread(thread);
-	return (TRUE);
+	return (task);
 }
