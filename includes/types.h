@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:22 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/10 16:38:35 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,13 @@ typedef enum				e_texture
 	TEXTURE_ENEMY0_A,
 	TEXTURE_COUNT
 }							t_texture;
+
+typedef enum				e_enemystate
+{
+	ENEMY_IDLE,
+	ENEMY_MOVING,
+	ENEMY_ATTACK,
+	ENEMY_DEAD
+}							t_enemystate;
 
 #endif
