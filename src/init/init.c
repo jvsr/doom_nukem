@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/09 19:38:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 16:40:13 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 #include "rinfo.h"
 #include "sdl_thread.h"
 #include "textures.h"
+
+void	test_function(t_game *game, t_sector *cur_sector)
+{
+	game->player->heightoffset += 100;
+	cur_sector->ceil += 120;
+}
 
 static void		player_init(t_game *game)
 {
@@ -130,6 +136,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].ceil = 13;
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
+	game->map->sectors[3].f_enter = test_function;
 	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * 4);
 	if (game->map->sectors[3].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
