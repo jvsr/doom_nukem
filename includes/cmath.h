@@ -45,5 +45,6 @@ float		calc_fov(float a, float b);
 float		get_angle_between_pointsv(t_coord *pos0, t_coord *pos1);
 t_bool		circle_collision(t_coord line_start, t_coord line_end,
 								t_coord circle_mid, float radius);
+float		lerp(float a, float b, float t);
 
 #endif

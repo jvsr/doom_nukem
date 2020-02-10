@@ -18,5 +18,6 @@
 t_anim			lamp_init(void);
 t_anim			chair_init(t_object *obj, float offset);
 t_anim			single_init(t_texture texture);
+t_anim			enemy_init(t_object *obj, t_texture start);
 
 #endif

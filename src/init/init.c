@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/27 18:11:33 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/09 19:38:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ static void		map_init(t_game *game)
 		error_msg_errno("Could not allocate Map Objects");
 	game->map->sectors[0].object[0].pos = (t_coord){0, 0};
 	game->map->sectors[0].object[0].size = (t_coord){10, 10};
-	game->map->sectors[0].object[0].img = chair_init(&game->map->sectors[0].object[1], 10);
+	game->map->sectors[0].object[0].img = chair_init(&game->map->sectors[0].object[0], 10);
 	game->map->sectors[0].object[1].pos = (t_coord){3, 3};
 	game->map->sectors[0].object[1].size = (t_coord){4, 15};
-	game->map->sectors[0].object[1].img = lamp_init();
+	game->map->sectors[0].object[1].img = enemy_init(&game->map->sectors[0].object[1], TEXTURE_ENEMY0_F0);
 	t_decal *decal = ft_memalloc(sizeof(t_decal));
 	decal->texture = single_init(TEXTURE_BLOOD_SPLATTER);
 	decal->pos = (t_coord){0.8, 0.0};
@@ -153,7 +153,7 @@ void			init_function(t_game *game)
 	init_keymap(game);
 	player_init(game);
 	map_init(game);
-	// game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
-	// 				FALSE, INIT_THREADPOOL_CENTRALIZED);
+	game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
+					FALSE, INIT_THREADPOOL_CENTRALIZED);
 	game->cureventstate->eventstate = splash;
 }

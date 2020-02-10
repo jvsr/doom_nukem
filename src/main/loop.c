@@ -89,6 +89,7 @@ void			loop(t_game *game)
 	void		(*eventstate_fnc)(t_game*, SDL_Event);
 	int			framecount;
 	t_uint64	lastsecond;
+	t_uint64	lastframe;
 
 	load_info(game);
 	fade_in_music(game->audio_man, TITLE_SONG, 3500);
@@ -100,6 +101,7 @@ void			loop(t_game *game)
 	framecount = 0;
 	lastsecond = get_gametime(&game->starttime);
 	game->frametime = PLAYER_MOVE_BASE_FPS;
+	lastframe = lastsecond;
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
@@ -121,5 +123,7 @@ void			loop(t_game *game)
 			lastsecond = get_gametime(&game->starttime);
 		}
 		framecount++;
+		game->lastframe = get_gametime(&game->starttime) - lastframe;
+		lastframe = get_gametime(&game->starttime);
 	}
 }
