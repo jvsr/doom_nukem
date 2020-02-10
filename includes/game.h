@@ -28,7 +28,7 @@ typedef struct s_setting		t_setting;
 typedef struct s_campaign		t_campaign;
 typedef struct s_eventstate		t_eventstate;
 typedef struct s_map			t_map;
-typedef struct s_pool			t_pool;
+typedef struct s_tpool			t_tpool;
 
 typedef	enum	e_state
 {
@@ -58,13 +58,13 @@ typedef struct	s_game
 	SDL_Surface		**textures;
 	t_setting		*setting;
 	t_eventstate	*cureventstate;
-	t_pool			*pool;
+	t_tpool			*pool;
 	t_uint64		frametime;
 	t_uint64		lastframe;
 }				t_game;
 
 void			loop(t_game *game);
-void			display_splash(t_game *game, char *loc);
+void			*display_splash(t_game *game, char *loc);
 void			loader(t_game *game);
 void			quit(int exit_code);
 

@@ -56,7 +56,7 @@ static void		fade(t_game *game, SDL_Surface *splash,
 	}
 }
 
-void			display_splash(t_game *game, char *loc)
+void			*display_splash(t_game *game, char *loc)
 {
 	SDL_Surface *splashscreen;
 	t_uint64	now;
@@ -72,4 +72,5 @@ void			display_splash(t_game *game, char *loc)
 	fade(game, splashscreen, fadeout);
 	SDL_FreeSurface(splashscreen);
 	game->cureventstate->eventstate = mainmenu;
+	return (NULL);
 }
