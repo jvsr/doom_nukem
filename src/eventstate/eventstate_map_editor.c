@@ -23,6 +23,28 @@
 #include "keymap.h"
 #include "map_editor.h"
 
+static void	manage_last_click(t_hashmap *keymap, SDL_Event event,
+						t_map_editor *map_editor_gui_elem, t_bool *first_place)
+{
+	t_wall	*wall;
+
+	if (is_helddown(keymap, SDLK_LSHIFT) && map_editor_gui_elem->wall != NULL)
+	{
+		if (*first_place == TRUE)
+		{
+			wall = (t_wall*)ft_lstlast(map_editor_gui_elem->wall)->content;
+			map_editor_gui_elem->last_click.x = wall->corner_1.x;
+			map_editor_gui_elem->last_click.y = wall->corner_1.y;
+		}
+		*first_place = FALSE;
+	}
+	else if (*first_place == TRUE)
+	{
+		map_editor_gui_elem->last_click.x = event.button.x;
+		map_editor_gui_elem->last_click.y = event.button.y;
+	}
+}
+
 static void	add_line(t_game *game, SDL_Event event,
 						t_transform *map_editor_elem)
 {
@@ -33,14 +55,9 @@ static void	add_line(t_game *game, SDL_Event event,
 	current.x = event.button.x;
 	current.y = event.button.y;
 	map_editor_snap_to_grid(map_editor_elem, &current);
-	if (is_helddown(game->keymap, SDLK_LSHIFT) && map_editor_elem->gui_elem.map_editor->wall != NULL)
-		first_place = FALSE;
-	if (first_place == TRUE)
-	{
-		map_editor_elem->gui_elem.map_editor->last_click.x = event.button.x;
-		map_editor_elem->gui_elem.map_editor->last_click.y = event.button.y;
-	}
-	else
+	manage_last_click(game->keymap, event,
+		map_editor_elem->gui_elem.map_editor, &first_place);
+	if (first_place == FALSE)
 	{
 		new = (t_wall*)ft_memalloc(sizeof(t_wall));
 		if (new == NULL)
