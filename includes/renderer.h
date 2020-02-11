@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/20 12:53:54 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 17:15:11 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ SDL_Surface			*tex_from_anim(t_game *game, t_anim *anim);
 void				get_r_object_index(t_game *game, void *anim);
 t_list				**decals_on_vline(t_wall *wall, float perc_hit,
 						float len, t_list **out);
+void				get_enemy_index(t_game *game, void *anim);
 
 #endif

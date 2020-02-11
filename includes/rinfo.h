@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/10 16:39:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/11 17:18:11 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 # define LEVEL_MULTIPLIER 4.0
 # define MAX_OBJ_SECTORS 32
 # define ANIMATIONS 4
+# define MAX_ANIMATION_TIME 2000
 
 typedef struct s_sector	t_sector;
 typedef struct s_game	t_game;
 typedef struct s_list	t_list;
+typedef struct s_player	t_player;
 
 typedef struct	s_anim
 {
@@ -61,10 +63,20 @@ typedef struct	s_wall
 
 typedef struct	s_object
 {
-	t_coord		pos;
-	t_coord		size;
-	t_anim		img;
+	t_coord			pos;
+	t_coord			size;
+	t_anim			img;
+	void			*data;
+	t_collisiontype	col_type;
+	void			(*on_collide)(t_game*, void*, t_player*);
 }				t_object;
+
+typedef struct	s_enemy
+{
+	int				health;
+	t_enemystate	state;
+	t_object		*obj;
+}				t_enemy;
 
 struct			s_sector
 {
@@ -76,6 +88,7 @@ struct			s_sector
 	float		ceil;
 	t_bool		has_ceiling;
 	void		(*f_enter)(t_game *game, t_sector *cur_sector);
+	float		light_value;
 };
 
 typedef struct	s_map

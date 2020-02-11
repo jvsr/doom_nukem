@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/28 16:36:22 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/11 12:59:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef enum				e_texture
 	TEXTURE_CHAIR_RIGHT,
 	TEXTURE_BLOOD_SPLATTER,
 	TEXTURE_QUARTZ,
+	TEXTURE_HEALTH_PICKUP,
 	TEXTURE_ENEMY0_F0,
 	TEXTURE_ENEMY0_F1,
 	TEXTURE_ENEMY0_F2,
@@ -57,5 +58,20 @@ typedef enum				e_texture
 	TEXTURE_ENEMY0_A,
 	TEXTURE_COUNT
 }							t_texture;
+
+typedef enum				e_enemystate
+{
+	ENEMY_IDLE,
+	ENEMY_MOVING,
+	ENEMY_ATTACK,
+	ENEMY_DEAD
+}							t_enemystate;
+
+typedef enum				e_collisiontype
+{
+	COLLISION_COLLIDE,
+	COLLISION_NON_COLLIDE,
+	COLLISION_PICKUP
+}							t_collisiontype;
 
 #endif

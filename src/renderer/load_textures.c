@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 16:30:23 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/24 17:23:57 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/11 13:00:20 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void				load_textures(t_game *game)
 	files = (char *[]){
 		"brick_wall", "skybox_day", "skybox_dusk", "objs/lamp",
 		"objs/chair_back", "objs/chair_front", "objs/chair_left",
-		"objs/chair_right", "bloodsplatter", "quartz"
+		"objs/chair_right", "bloodsplatter", "quartz", "objs/health_pickup"
 	};
 	index = 0;
 	game->textures = ft_memalloc(sizeof(SDL_Surface *) * TEXTURE_COUNT);
