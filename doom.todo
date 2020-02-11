@@ -1,16 +1,16 @@
 TODO The floor and ceiling may not be horizontal but inclined planes.
 TODO The floors and ceilings have textures.
 TODO Walls can be partially transparent, unveiling the room behind.
-TODO Each room or area has a light control tool, affecting both the walls and the objects within.
+DONE Each room or area has a light control tool, affecting both the walls and the objects within.
 TODO Text messages can be displayed during the game over the rest of the graphics.
 TODO There must be a HUD (life, currency, ammunition, carried artifacts...).
 
-TODO The player can fly or swim (same difference...).
+DONE The player can fly or swim (same difference...).
 TODO The items around can be picked up - or not, and supply an inventory
 TODO The player can interact with the elements of the rooms (walls, objects...).
 TODO Actions or series of actions can result from interactions, from objects being pickedup, or even in a totally independent way. They can possibly be timed.
 TODO Actions can alter all the elements of the game.
-TODO Your game must contain animations.
+DONE Your game must contain animations.
 TODO Specific characters and / or objects can have their own actions, reactions and interactions in the universe.
 TODO To mimic the Doom and Duke Nukem universes, projectiles can be fired and interact with the background, the objects, the characters, even the player itself.
 TODO There is a story with a mission, a goal to reach, a target.

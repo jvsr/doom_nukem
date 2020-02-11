@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:58:30 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/20 17:13:52 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 16:47:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void draw_wall(SDL_Surface *dst, t_point *ybounds, int x, t_point *bounds
 	float perc = get_distance(&hit->pos, &hit->wall->corner_0) / len;
 	float xperc = wrap_float(perc, 0, hit->wall->perc.x) / hit->wall->perc.x;
 	int tex_x = xperc * tex->w;
-	float intensity = (MAX_LIGHT_DIST - clamp_float(hit->og_dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
+	float intensity = ((MAX_LIGHT_DIST - clamp_float(hit->og_dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * hit->sect->light_value;
 	check = TRUE;
 	if (hit->wall->decals == NULL)
 		check = FALSE;
@@ -206,7 +206,7 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 				int *t_pixels = tex->pixels;
 				float perc = (float)(x - xbounds.x) / (xbounds.y - xbounds.x);
 				int tex_x = perc * (tex->w - 1);
-				float intensity = (MAX_LIGHT_DIST - clamp_float(obj->dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST;
+				float intensity = ((MAX_LIGHT_DIST - clamp_float(obj->dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * obj->sec->light_value;
 				int i = c_ybounds.x;
 				while (i < c_ybounds.y)
 				{

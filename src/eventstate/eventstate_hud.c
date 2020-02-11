@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/01/29 19:55:00 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/11 16:17:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 			game->cureventstate->eventstate = mainmenu;
 		}
 	}
+	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_LCTRL) && is_helddown(game->keymap, SDLK_LALT) && event.key.keysym.sym == SDLK_f)
+		game->player->is_flying = !game->player->is_flying;
 	if (event.type == SDL_MOUSEMOTION)
 	{
 		manage_player_angle(game, skip_mouse_move);
