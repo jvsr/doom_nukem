@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/11 18:11:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/11 18:21:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,32 @@ static t_bool	move_down(t_game *game, t_player *player, t_bool *jump)
 	return (TRUE);
 }
 
+static t_bool	fly_up(t_game *game, t_player *player, t_bool *jump)
+{
+	static float	height_to_go = 400;
+	float			diff;
+
+	diff = lerp(0, height_to_go, (float)game->lastframe / PLAYER_FLY_SPEED);
+	if (player->height + player->heightoffset + diff < game->map->sectors[player->cur_sector].ceil)
+		player->heightoffset += diff;
+	*jump = TRUE;
+	return (TRUE);
+}
+
+static t_bool	fly_down(t_game *game, t_player *player, t_bool *jump)
+{
+	static float	height_to_go = 400;
+	float			diff;
+
+	diff = lerp(0, height_to_go, (float)game->lastframe / PLAYER_FLY_SPEED);
+	if (player->heightoffset - diff < 0)
+		player->heightoffset = 0;
+	else if (player->height + player->heightoffset - diff > game->map->sectors[player->cur_sector].floor)
+		player->heightoffset -= diff;
+	*jump = FALSE;
+	return (TRUE);
+}
+
 t_bool			player_move(t_game *game)
 {
 	t_bool			draw;
@@ -135,17 +161,23 @@ t_bool			player_move(t_game *game)
 		draw |= move_left(game->player, speed, &xspeed, &yspeed);
 	if (is_helddown(game->keymap, game->setting->controls.right))
 		draw |= move_right(game->player, speed, &xspeed, &yspeed);
-	if (game->player->heightoffset > 0 && jump == FALSE)
-		draw |= move_down(game, game->player, &jump);
-	if ((is_helddown(game->keymap, game->setting->controls.jump) && game->player->heightoffset == 0 && jump == FALSE) || jump == TRUE)
-		draw |= move_jump(game, game->player, &jump);
-	// ft_printf("%f, %f\n%f, %f\n\n", game->player->pos.x, game->player->pos.y, game->player->pos.x + xspeed, game->player->pos.y + yspeed);
-	// ft_printf("%f, \n", frametime);
-	// ft_printf("%f, \n", frametime / BASE_FRAME_TIME);
-	// ft_printf("%f, \n", xspeed);
+
+	if (!game->player->is_flying)
+	{
+		if (game->player->heightoffset > 0 && jump == FALSE)
+			draw |= move_down(game, game->player, &jump);
+		if ((is_helddown(game->keymap, game->setting->controls.jump) && game->player->heightoffset == 0 && jump == FALSE) || jump == TRUE)
+			draw |= move_jump(game, game->player, &jump);
+	}
+	else
+	{
+		if (is_helddown(game->keymap, game->setting->controls.jump))
+			draw |= fly_up(game, game->player, &jump);
+		else if (is_helddown(game->keymap, game->setting->controls.crouch))
+			draw |= fly_down(game, game->player, &jump);
+	}
 	xspeed = lerp_max(0, xspeed, frametime / BASE_FRAME_TIME, INFINITY);
 	yspeed = lerp_max(0, yspeed, frametime / BASE_FRAME_TIME, INFINITY);
-	// ft_printf("%f\n\n", xspeed);
 	if (draw == TRUE)
 		player_col(game, xspeed, yspeed);
 	// ft_printf("height: %5.2f, offset: %5.2f\n", game->player->height, game->player->heightoffset);
