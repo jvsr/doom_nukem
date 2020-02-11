@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/10 17:16:59 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/11 13:03:34 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct s_sector	t_sector;
 typedef struct s_game	t_game;
 typedef struct s_list	t_list;
+typedef struct s_player	t_player;
 
 typedef struct	s_anim
 {
@@ -62,10 +63,12 @@ typedef struct	s_wall
 
 typedef struct	s_object
 {
-	t_coord		pos;
-	t_coord		size;
-	t_anim		img;
-	void		*data;
+	t_coord			pos;
+	t_coord			size;
+	t_anim			img;
+	void			*data;
+	t_collisiontype	col_type;
+	void			(*on_collide)(t_game*, void*, t_player*);
 }				t_object;
 
 typedef struct	s_enemy
