@@ -23,7 +23,7 @@ static t_transform	*create_gui(t_game *game, char const *name)
 	return (analyze_gui_config(game->ui, name, game->exec_path));
 }
 
-void				init_main_menu(t_game *game)
+void				*init_main_menu(t_game *game)
 {
 	t_transform	*main_menu;
 	t_transform	*options_menu;
@@ -40,4 +40,5 @@ void				init_main_menu(t_game *game)
 	set_elem_show_clickable(get_gui_child(game->ui, "mapeditor"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
+	return (NULL);
 }

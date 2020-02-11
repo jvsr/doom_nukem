@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/29 20:20:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 16:43:17 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,8 @@ t_bool				player_col(t_game *game, float xspeed, float yspeed)
 			player->player_height = PLAYER_HEIGHT;
 		player->cur_sector = next_sector;
 		player->height = map->sectors[next_sector].floor + player->player_height;
+		if (map->sectors[player->cur_sector].f_enter != NULL)
+			map->sectors[player->cur_sector].f_enter(game, &map->sectors[player->cur_sector]);
 	}
 	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
 	if (player->pos.y < -20.0 || player->cur_sector == 3)

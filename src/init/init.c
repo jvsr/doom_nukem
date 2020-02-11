@@ -6,12 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/09 19:38:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 16:40:13 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
+#include "libft/ft_printf.h"
 #include "game.h"
 #include "audio.h"
 #include "init.h"
@@ -26,6 +27,12 @@
 #include "sdl_thread.h"
 #include "textures.h"
 
+void	test_function(t_game *game, t_sector *cur_sector)
+{
+	game->player->heightoffset += 100;
+	cur_sector->ceil += 120;
+}
+
 static void		player_init(t_game *game)
 {
 	game->player = ft_memalloc(sizeof(t_player));
@@ -38,6 +45,20 @@ static void		player_init(t_game *game)
 	ft_memcpy(&game->player->mag, &(t_coord){wrap_float(game->player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(game->player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));
+}
+
+static void		init_threadpool(t_game *game)
+{
+	ssize_t	core_count;
+
+	core_count = sdl_get_core_count();
+	if (core_count == -1)
+	{
+		core_count = INIT_THREADPOOL_SIZE_FALLBACK;
+		ft_dprintf(2, "Error getting core count. Using fallback size '%zi'\n",
+					core_count);
+	}
+	game->pool = sdl_new_tpool(core_count, TFLAG_POOL_ALLOC_ON_EXEC);
 }
 
 static void		map_init(t_game *game)
@@ -130,6 +151,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].ceil = 13;
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
+	game->map->sectors[3].f_enter = test_function;
 	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * 4);
 	if (game->map->sectors[3].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
@@ -144,8 +166,9 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].object = NULL;
 }
 
-void			init_function(t_game *game)
+void			*init_function(t_game *game)
 {
+	init_threadpool(game);
 	init_audio(game);
 	init_gui(game);
 	load_textures(game);
@@ -153,7 +176,6 @@ void			init_function(t_game *game)
 	init_keymap(game);
 	player_init(game);
 	map_init(game);
-	game->pool = sdl_new_pool(INIT_THREADPOOL_WORKERS,
-					FALSE, INIT_THREADPOOL_CENTRALIZED);
 	game->cureventstate->eventstate = splash;
+	return (NULL);
 }

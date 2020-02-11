@@ -72,8 +72,9 @@ static void		load_info(t_game *game)
 {
 	SDL_Event event;
 
-	sdl_new_thread(NULL, init_function, 1, game);
-	sdl_new_thread(NULL, display_splash, 2, game, "splash/splash");
+	sdl_run_thread(NULL, sdl_new_ttask(init_function, 0, 1, game));
+	sdl_run_thread(NULL, sdl_new_ttask(display_splash, 0, 2, game,
+		"splash/splash"));
 	while (game->state == running
 	&& (game->cureventstate->eventstate == initload
 	|| game->cureventstate->eventstate == splash))

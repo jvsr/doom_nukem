@@ -6,11 +6,12 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/29 20:23:28 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/10 17:54:08 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <limits.h>
 #include <SDL2/SDL_keycode.h>
 
 #include "libft/ft_str.h"
@@ -104,19 +105,22 @@ t_bool			player_move(t_game *game)
 	float			yspeed;
 	static t_bool	jump = FALSE;
 
+	double		frametime;
+	
 	draw = FALSE;
 	xspeed = 0;
 	yspeed = 0;
 
+	frametime = (double)game->lastframe;
 	// float ratio = ((double)(get_gametime(&game->starttime) - game->frametime)) / CLOCKS_PER_SEC;
 	// ft_printf("rat: %f\n", ratio);
 	// ft_printf("rat: %ld\n", game->frametime);
 	if (game->player->player_height == PLAYER_CROUCH)
-		speed = PLAYER_CROUCH_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
+		speed = PLAYER_CROUCH_SPEED ;
 	else if (is_helddown(game->keymap, SDLK_LSHIFT))
-		speed = PLAYER_RUN_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
+		speed = PLAYER_RUN_SPEED ;
 	else
-		speed = PLAYER_MOVE_SPEED * ((double)PLAYER_MOVE_BASE_FPS / game->frametime);
+		speed = PLAYER_MOVE_SPEED ;
 
 	if (is_helddown(game->keymap, game->setting->controls.forward))
 		draw |= move_forward(game->player, speed, &xspeed, &yspeed);
@@ -130,6 +134,8 @@ t_bool			player_move(t_game *game)
 		draw |= move_down(game, game->player, &jump);
 	if ((is_helddown(game->keymap, game->setting->controls.jump) && game->player->heightoffset == 0 && jump == FALSE) || jump == TRUE)
 		draw |= move_jump(game, game->player, &jump);
+	xspeed = lerp_max(0, xspeed, frametime / BASE_FRAME_TIME, INFINITY);
+	yspeed = lerp_max(0, yspeed, frametime / BASE_FRAME_TIME, INFINITY);
 	if (draw == TRUE)
 		player_col(game, xspeed, yspeed);
 	// ft_printf("height: %5.2f, offset: %5.2f\n", game->player->height, game->player->heightoffset);
