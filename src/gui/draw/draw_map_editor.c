@@ -40,6 +40,8 @@ static void	draw_wall(SDL_Surface *dst, t_list *lst, SDL_Point pos)
 			sdl_draw_surface_line(dst, portal_color, line);
 		else
 			sdl_draw_surface_line(dst, wall_color, line);
+		sdl_draw_surface_circ(dst, wall_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.end});
+		sdl_draw_surface_circ(dst, wall_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.start});
 		lst = lst->next;
 	}
 }
