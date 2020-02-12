@@ -73,6 +73,30 @@ static void	add_line(t_game *game, SDL_Event event,
 	map_editor_elem->gui_elem.map_editor->show_last_click = !first_place;
 }
 
+static void	delete_line(SDL_Event event, t_transform *map_editor_elem)
+{
+	t_list		*lst;
+	t_wall		*wall;
+	t_wall		*found;
+	SDL_Point	mouse_pos;
+
+	found = NULL;
+	mouse_pos.x = event.button.x + map_editor_elem->gui_elem.map_editor->pos.x;
+	mouse_pos.y = event.button.y + map_editor_elem->gui_elem.map_editor->pos.y;
+	lst = map_editor_elem->gui_elem.map_editor->wall;
+	while (lst != NULL)
+	{
+		wall = (t_wall *)lst->content;
+		if (map_editor_hit_wall(wall, mouse_pos))
+			found = wall;
+		lst = lst->next;
+	}
+	if (found == NULL)
+		return ;
+	map_editor_delete_wall(map_editor_elem, found);
+	set_elem_redraw(map_editor_elem);
+}
+
 void		map_editor_eventstate(t_game *game, SDL_Event event)
 {
 	static	t_bool		first = TRUE;
@@ -81,8 +105,13 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 	map_editor_elem = get_gui_child(game->ui, "mapeditorview");
 	if (event.type == SDL_MOUSEMOTION)
 		set_elem_redraw(map_editor_elem);
-	if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && first == FALSE)
-		add_line(game, event, map_editor_elem);
+	if (event.type == SDL_MOUSEBUTTONDOWN && first == FALSE)
+	{
+		if (event.button.button == SDL_BUTTON_LEFT)
+			add_line(game, event, map_editor_elem);
+		else if (event.button.button == SDL_BUTTON_RIGHT)
+			delete_line(event, map_editor_elem);
+	}
 	else
 		first = FALSE;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_z && is_helddown(game->keymap, SDLK_LCTRL))

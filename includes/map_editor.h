@@ -17,6 +17,7 @@
 
 # include "shape.h"
 
+# define EDITOR_MOUSE_COLISION_SIZE	3
 # define EDITOR_PREVIEW_CIRCLE_SIZE	6
 # define EDITOR_PREVIEW_PLACE_COLOR	"11AAAA"
 # define EDITOR_BACKGROUND_COLOR 	"333333"
@@ -33,5 +34,7 @@ typedef	struct s_transform	t_transform;
 void	map_editor_snap_to_grid(t_transform *map_editor_elem, SDL_Point *point);
 void	map_editor_remove_last_wall(t_transform *map_editor_elem);
 void	map_editor_add_wall(t_transform *map_editor_elem, t_wall *wall);
+void	map_editor_delete_wall(t_transform *map_editor_elem, t_wall *wall);
+t_bool	map_editor_hit_wall(t_wall *wall, SDL_Point mouse);
 
 #endif
