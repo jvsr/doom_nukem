@@ -28,6 +28,10 @@ void		loop_game(t_game *game)
 	ft_strdel(&elem_text);
 	elem_text = ft_strformat("Health: %i/%i",
 		game->player->health, PLAYER_MAX_HEALTH);
+	set_elem_text_str(get_gui_child(game->ui, "hudinfoammo"), elem_text);
+	ft_strdel(&elem_text);
+	elem_text = ft_strformat("Ammo: %i",
+		game->player->ammo);
 	set_elem_text_str(get_gui_child(game->ui, "hudinfohp"), elem_text);
 	ft_strdel(&elem_text);
 	set_elem_redraw(get_gui_child(game->ui, "gameview"));

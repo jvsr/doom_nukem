@@ -15,3 +15,7 @@
       - text: "Health: "
       - pos: 0.0, 0.3
       - dim: 0.4, 0.3
+    - text_block: hudinfoammo
+      - text: "Ammo: "
+      - pos: 0.6, 0.3
+      - dim: 0.4, 0.3

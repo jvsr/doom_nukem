@@ -60,6 +60,7 @@ typedef	struct	s_player
 	t_uint8		detection_area;
 	*/
 	t_uint32	health;
+	t_uint32	ammo;
 	t_uint16	*fov;
 	float		angle;
 	t_mag		mag;
