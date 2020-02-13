@@ -114,8 +114,6 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 	}
 	else
 		first = FALSE;
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_z && is_helddown(game->keymap, SDLK_LCTRL))
-		map_editor_remove_last_wall(map_editor_elem);
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		quit(0);
 }
