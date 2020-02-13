@@ -17,7 +17,8 @@
 #include "rinfo.h"
 #include "game.h"
 
-void	health_pickup(t_game *game, t_sector *sec, t_object *obj, t_player *player)
+void	health_pickup(t_game *game,
+							t_sector *sec, t_object *obj, t_player *player)
 {
 	const int	health_add = 10;
 	t_list		*lst;
