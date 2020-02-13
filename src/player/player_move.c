@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/11 17:17:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/11 18:21:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,21 @@ static t_bool	move_right(t_player *player, float speed, float *xspeed, float *ys
 static t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
 {
 	static uint64_t	momentum = UINT64_MAX;
+	static float	old_height;
+	float			new_height;
 	uint64_t		cur;
-	double			factor;
-	float			speed;
 
 	*jump = TRUE;
 	if (momentum == UINT64_MAX)
+	{
+		old_height = 0;
 		momentum = get_gametime(&game->starttime);
+	}
 	cur = get_gametime(&game->starttime) - momentum;
-	factor = (double)cur * ((double)PLAYER_MOVE_BASE_FPS / game->frametime) / CLOCKS_PER_MILLI;
-	speed = PLAYER_INIT_DROP_SPEED - pow(factor * 3, 2.5);
-	if (speed < 0)
-		speed = 0;
-	player->heightoffset += speed;
-	if (cur > 600 || (game->map->sectors[player->cur_sector].has_ceiling && player->height + player->heightoffset >= game->map->sectors[player->cur_sector].ceil))
+	new_height = PLAYER_INIT_JUMP_HEIGHT - ( PLAYER_INIT_JUMP_HEIGHT * pow(1.0 - ((double)cur / PLAYER_JUMP_TIME), 2) );
+	player->heightoffset += new_height - old_height;
+	old_height = new_height;
+	if (cur > PLAYER_JUMP_TIME || (game->map->sectors[player->cur_sector].has_ceiling && player->height + player->heightoffset >= game->map->sectors[player->cur_sector].ceil))
 	{
 		*jump = FALSE;
 		momentum = UINT64_MAX;
@@ -76,18 +77,22 @@ static t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
 	return (TRUE);
 }
 
-#include "libft/ft_printf.h"
 static t_bool	move_down(t_game *game, t_player *player, t_bool *jump)
 {
 	static uint64_t	momentum = UINT64_MAX;
+	static float	old_drop;
+	float			new_drop;
 	uint64_t		cur;
-	double			factor;
-
+	
 	if (momentum == UINT64_MAX)
+	{
+		old_drop = 0;
 		momentum = get_gametime(&game->starttime);
+	}
 	cur = get_gametime(&game->starttime) - momentum;
-	factor = (double)cur * ((double)PLAYER_MOVE_BASE_FPS / game->frametime) / CLOCKS_PER_MILLI;
-	player->heightoffset -= pow(factor * 3, 2.2) + 1;
+	new_drop = PLAYER_INIT_JUMP_HEIGHT * pow((double)cur / PLAYER_JUMP_TIME, 2);
+	player->heightoffset -= new_drop - old_drop;
+	old_drop = new_drop;
 	if (player->heightoffset <= 0)
 	{
 		*jump = FALSE;
@@ -130,7 +135,7 @@ t_bool			player_move(t_game *game)
 	float			xspeed;
 	float			yspeed;
 	static t_bool	jump = FALSE;
-
+	// static uint64_t	last_frame = 0;
 	double		frametime;
 	
 	draw = FALSE;
@@ -156,6 +161,7 @@ t_bool			player_move(t_game *game)
 		draw |= move_left(game->player, speed, &xspeed, &yspeed);
 	if (is_helddown(game->keymap, game->setting->controls.right))
 		draw |= move_right(game->player, speed, &xspeed, &yspeed);
+
 	if (!game->player->is_flying)
 	{
 		if (game->player->heightoffset > 0 && jump == FALSE)
@@ -170,6 +176,8 @@ t_bool			player_move(t_game *game)
 		else if (is_helddown(game->keymap, game->setting->controls.crouch))
 			draw |= fly_down(game, game->player, &jump);
 	}
+	xspeed = lerp_max(0, xspeed, frametime / BASE_FRAME_TIME, INFINITY);
+	yspeed = lerp_max(0, yspeed, frametime / BASE_FRAME_TIME, INFINITY);
 	if (draw == TRUE)
 		player_col(game, xspeed, yspeed);
 	// ft_printf("height: %5.2f, offset: %5.2f\n", game->player->height, game->player->heightoffset);
