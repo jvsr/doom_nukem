@@ -76,7 +76,7 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 			game->cureventstate->eventstate = mainmenu;
 		}
 	}
-	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_LCTRL) && is_helddown(game->keymap, SDLK_LALT) && event.key.keysym.sym == SDLK_f)
+	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_F6) && event.key.keysym.sym == SDLK_f)
 		game->player->is_flying = !game->player->is_flying;
 	if (event.type == SDL_MOUSEMOTION)
 	{
