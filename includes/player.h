@@ -52,15 +52,6 @@ typedef struct	s_mag
 
 typedef	struct	s_player
 {
-	/*
-	float		speed;
-	t_weapon	*cur_weapon;
-	t_weapon	*all_weapon; //Keep list to allow adding mid game
-
-	t_pickup	**all_pickup;
-	t_rect		vienor
-	t_uint8		detection_area;
-	*/
 	t_uint32	health;
 	t_uint32	ammo;
 	t_uint16	*fov;

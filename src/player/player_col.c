@@ -62,7 +62,7 @@ static t_uint32		get_sector_id(t_map *map, t_sector *sec)
 			return (i);
 		i++;
 	}
-	return (4294967294); // <3
+	return (4294967294);
 }
 
 static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
@@ -122,13 +122,15 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	{
 		int tmp = 0;
 		t_object *obj = objects->content;
-		if (get_distance(&pos_x, &obj->pos) <= obj->col_radius)
-			tmp |= 1;
-		if (get_distance(&pos_y, &obj->pos) <= obj->col_radius)
-			tmp |= 2;
-		if (get_distance(&pos_xy, &obj->pos) <= obj->col_radius)
-			tmp |= 4;
 		objects = objects->next;
+		if (obj->size.y < player->heightoffset - player->player_height)
+			continue ;
+		if (get_distance(&pos_x, &obj->pos) <= obj->col_radius && get_distance(&pos_x, &obj->pos) < get_distance(&player->pos, &obj->pos))
+			tmp |= 1;
+		if (get_distance(&pos_y, &obj->pos) <= obj->col_radius && get_distance(&pos_y, &obj->pos) < get_distance(&player->pos, &obj->pos))
+			tmp |= 2;
+		if (get_distance(&pos_xy, &obj->pos) <= obj->col_radius && get_distance(&pos_xy, &obj->pos) < get_distance(&player->pos, &obj->pos))
+			tmp |= 4;
 		if (tmp == 0)
 			continue ;
 		if (obj->can_col == TRUE)
