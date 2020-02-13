@@ -1,0 +1,46 @@
+- panel: hudoptions
+  - layer: 2
+  - image: hudoptionsoverlay
+    - show: 0
+    - clickable: 0
+    - color: #26020699
+    - layer: 1
+
+  - panel: hudoptionsmenu
+    - show: 0
+    - clickable: 0
+    - pos: 0.25, 0.25
+    - dim: 0.5, 0.5
+    - layer: 2
+    - image: hudoptionsbackground
+      - texture: ui/border1x1.tga
+
+    - panel: hudsensitivity
+      - pos: 0.1, 0.03
+      - dim: 0.8, 0.14
+      - text_block: hudsensitivitytext
+        - pos: 0.0, 0.05
+        - dim: 1.0, 0.5
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+        - text: "Sensitivity"
+        - layer: 1
+      - panel: hudsensitivityblock
+        - pos: 0.4, 0.5
+        - dim: 0.2, 0.5
+        - text_block: curhudsensitivity
+          - pos: 0.2, 0.0
+          - dim: 0.6, 1.0
+          - text_size: 0.7
+          - text_font: neckromancer
+        - button: hudsensitivityleft
+          - pos: 0.0, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: options_sensitivity_down
+        - button: hudsensitivityright
+          - pos: 0.8, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: options_sensitivity_up

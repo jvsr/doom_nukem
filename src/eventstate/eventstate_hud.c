@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/13 16:20:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/13 17:04:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 	{
 		SDL_SetRelativeMouseMode(SDL_FALSE);
-		set_elem_show_clickable(get_gui_child(game->ui, "hudoptions"), TRUE);
-		set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
+		set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"), TRUE);
+		set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), TRUE);
+		set_hudsensitivity(game->setting, get_gui_child(game->ui, "hudoptions"));
 		game->cureventstate->eventstate = hud_options;
 	}
 	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_F6) && event.key.keysym.sym == SDLK_f)
