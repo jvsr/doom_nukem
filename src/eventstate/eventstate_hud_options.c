@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 11:46:43 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/13 16:38:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/13 17:41:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 #include "game.h"
 #include "keymap.h"
 #include "onclick.h"
+#include "serializer.h"
 #include "eventstate.h"
 
 static void	quit_hud_options(t_game *game)
 {
 	game->cureventstate->eventstate = hud;
+	write_settings(game->setting, game->exec_path);
 	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), TRUE);
