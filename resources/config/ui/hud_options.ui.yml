@@ -38,9 +38,9 @@
           - pos: 0.0, 0.2
           - dim: 0.2, 0.6
           - texture: ui/arrow_left.tga
-          - onclick: options_sensitivity_down
+          - onclick: options_hud_sensitivity_down
         - button: hudsensitivityright
           - pos: 0.8, 0.2
           - dim: 0.2, 0.6
           - texture: ui/arrow_right.tga
-          - onclick: options_sensitivity_up
+          - onclick: options_hud_sensitivity_up
