@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   health_pickup.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/02/13 16:03:32 by ehollidg       #+#    #+#                */
+/*   Updated: 2020/02/13 16:03:32 by ehollidg      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft/ft_list.h"
+#include "libft/ft_bool.h"
+#include "player.h"
+#include "types.h"
+#include "rinfo.h"
+#include "game.h"
+
+void	health_pickup(t_game *game, t_sector *sec, t_object *obj, t_player *player)
+{
+	const int	health_add = 10;
+	t_list		*lst;
+
+	(void)game;
+	if (player->health + health_add > PLAYER_MAX_HEALTH)
+		player->health = PLAYER_MAX_HEALTH;
+	else
+		player->health += health_add;
+	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(obj));
+	ft_lstunlink(sec->objects, lst);
+	ft_lstdelone(&lst, NULL);
+	free(obj);
+}

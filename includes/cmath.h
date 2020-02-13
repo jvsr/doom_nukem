@@ -52,5 +52,6 @@ float		calc_fov(float a, float b);
 float		get_angle_between_pointsv(t_coord *pos0, t_coord *pos1);
 float		lerp(float a, float b, float t);
 float		lerp_max(float a, float b, float t, float max);
+t_coord		get_perp(t_coord *vec);
 
 #endif

@@ -67,11 +67,4 @@ typedef enum				e_enemystate
 	ENEMY_DEAD
 }							t_enemystate;
 
-typedef enum				e_collisiontype
-{
-	COLLISION_COLLIDE,
-	COLLISION_NON_COLLIDE,
-	COLLISION_PICKUP
-}							t_collisiontype;
-
 #endif

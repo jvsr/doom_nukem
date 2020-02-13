@@ -23,11 +23,13 @@
 # define MAX_OBJ_SECTORS 32
 # define ANIMATIONS 4
 # define MAX_ANIMATION_TIME 2000
+# define OBJECT_COL_SIZE 1.0
 
 typedef struct s_sector	t_sector;
 typedef struct s_game	t_game;
 typedef struct s_list	t_list;
 typedef struct s_player	t_player;
+typedef struct s_object t_object;
 
 typedef struct	s_anim
 {
@@ -61,15 +63,16 @@ typedef struct	s_wall
 	t_list		*decals;
 }				t_wall;
 
-typedef struct	s_object
+struct	s_object
 {
 	t_coord			pos;
 	t_coord			size;
 	t_anim			img;
 	void			*data;
-	t_collisiontype	col_type;
-	void			(*on_collide)(t_game*, void*, t_player*);
-}				t_object;
+	float			col_radius;
+	t_bool			can_col;
+	void			(*on_collide)(t_game*, t_sector*, t_object*, t_player*);
+};
 
 typedef struct	s_enemy
 {
@@ -81,7 +84,7 @@ typedef struct	s_enemy
 struct			s_sector
 {
 	t_wall		*walls;
-	t_object	*object;
+	t_list		*objects;
 	t_uint64	wall_count;
 	t_uint64	object_count;
 	float		floor;

@@ -41,6 +41,8 @@
 typedef struct s_game		t_game;
 typedef struct s_hashmap	t_hashmap;
 typedef struct s_map		t_map;
+typedef struct s_object		t_object;
+typedef struct s_sector		t_sector;
 
 typedef struct	s_mag
 {
@@ -77,5 +79,7 @@ typedef	struct	s_player
 
 t_bool			player_move(t_game *game);
 t_bool			player_col(t_game *game, float xspeed, float yspeed);
+void			health_pickup(t_game *game,
+					t_sector *sec, t_object *obj, t_player *player);
 
 #endif
