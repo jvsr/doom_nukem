@@ -50,27 +50,29 @@ static void	add_line(t_game *game, SDL_Event event,
 {
 	t_wall				*new;
 	SDL_Point			current;
+	t_map_editor		*map_editor_gui_elem;
 	static	t_bool		first_place = TRUE;
 
 	current.x = event.button.x;
 	current.y = event.button.y;
+	map_editor_gui_elem = map_editor_elem->gui_elem.map_editor;
 	map_editor_snap_to_grid(map_editor_elem, &current);
-	manage_last_click(game->keymap, event,
-		map_editor_elem->gui_elem.map_editor, &first_place);
-	if (first_place == FALSE)
+	manage_last_click(game->keymap, event, map_editor_gui_elem, &first_place);
+	if (first_place == FALSE && ft_memequ(&map_editor_gui_elem->last_click,
+		&current, sizeof(SDL_Point)) == FALSE)
 	{
 		new = (t_wall*)ft_memalloc(sizeof(t_wall));
 		if (new == NULL)
 			error_msg_errno("Failed to alloc new mapeditor wall");
-		new->corner_0.x = map_editor_elem->gui_elem.map_editor->last_click.x;
-		new->corner_0.y = map_editor_elem->gui_elem.map_editor->last_click.y;
+		new->corner_0.x = map_editor_gui_elem->last_click.x;
+		new->corner_0.y = map_editor_gui_elem->last_click.y;
 		new->corner_1.x = current.x;
 		new->corner_1.y = current.y;
 		map_editor_add_wall(map_editor_elem, new);
 	}
 	first_place = !first_place;
-	map_editor_elem->gui_elem.map_editor->last_click = current;
-	map_editor_elem->gui_elem.map_editor->show_last_click = !first_place;
+	map_editor_gui_elem->last_click = current;
+	map_editor_gui_elem->show_last_click = !first_place;
 }
 
 static void	delete_line(SDL_Event event, t_transform *map_editor_elem)
