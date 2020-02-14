@@ -6,7 +6,7 @@ TODO Text messages can be displayed during the game over the rest of the graphic
 TODO There must be a HUD (life, currency, ammunition, carried artifacts...).
 
 DONE The player can fly or swim (same difference...).
-TODO The items around can be picked up - or not, and supply an inventory
+DONE The items around can be picked up - or not, and supply an inventory
 TODO The player can interact with the elements of the rooms (walls, objects...).
 TODO Actions or series of actions can result from interactions, from objects being pickedup, or even in a totally independent way. They can possibly be timed.
 TODO Actions can alter all the elements of the game.
