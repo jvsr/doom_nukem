@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:03:32 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/13 16:03:32 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/14 15:21:24 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	health_pickup(t_game *game,
 	t_list		*lst;
 
 	(void)game;
+	if (player->health == PLAYER_MAX_HEALTH)
+		return ;
 	if (player->health + health_add > PLAYER_MAX_HEALTH)
 		player->health = PLAYER_MAX_HEALTH;
 	else

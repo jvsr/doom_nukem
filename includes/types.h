@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/11 12:59:59 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/14 15:46:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum				e_texture
 	TEXTURE_BLOOD_SPLATTER,
 	TEXTURE_QUARTZ,
 	TEXTURE_HEALTH_PICKUP,
+	TEXTURE_KEYS,
 	TEXTURE_ENEMY0_F0,
 	TEXTURE_ENEMY0_F1,
 	TEXTURE_ENEMY0_F2,
