@@ -26,4 +26,5 @@ SRCS = controls \
 		map_editor_select \
 		splash \
 		initload \
-		hud
+		hud \
+		hud_options

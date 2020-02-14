@@ -18,6 +18,7 @@
 
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
+#include "libft/ft_num.h"
 
 #include "game.h"
 #include "setting.h"
@@ -53,7 +54,9 @@ void			init_settings(t_game *game)
 	t_setting	*setting;
 
 	fd = open_file(game->exec_path);
-	if (fd == -1)
+	if (fd != -1)
+		game->setting = read_settings(game->exec_path);
+	else
 	{
 		setting = (t_setting *)ft_memalloc(sizeof(t_setting));
 		if (setting == NULL)
@@ -67,8 +70,7 @@ void			init_settings(t_game *game)
 		setting->resolution_type = fullscreen;
 		game->setting = setting;
 		init_controls(setting);
-		return ;
 	}
 	close(fd);
-	game->setting = read_settings(game->exec_path);
+	game->setting->fov = ft_constrain(game->setting->fov, MIN_FOV, MAX_FOV);
 }

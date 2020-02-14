@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-static t_bool		col(t_coord c0, t_coord c1, t_coord c2, t_coord c3)
+static t_bool		coll(t_coord c0, t_coord c1, t_coord c2, t_coord c3)
 {
 	t_coord b;
 	t_coord d;
@@ -46,7 +46,7 @@ static t_bool		col(t_coord c0, t_coord c1, t_coord c2, t_coord c3)
 
 static t_bool		wall_col(t_coord c0, t_coord c1, t_wall *wall)
 {
-	if (col(c0, c1, wall->corner_0, wall->corner_1))
+	if (coll(c0, c1, wall->corner_0, wall->corner_1))
 		return (TRUE);
 	return (FALSE);
 }
@@ -62,16 +62,17 @@ static t_uint32		get_sector_id(t_map *map, t_sector *sec)
 			return (i);
 		i++;
 	}
-	return (4294967294); // <3
+	return (4294967294);
 }
 
-static t_uint32		check_col(t_player *player, t_uint8 *col,
+static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 									t_map *map, float xspeed, float yspeed)
 {
 	t_coord		pos_x;
 	t_coord		pos_y;
 	t_coord		pos_xy;
 	t_wall		*walls;
+	t_list		*objects;
 	int			i;
 	int			max;
 	t_uint32	next_sector;
@@ -106,35 +107,42 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 			if (wall_col(pos_xy, player->pos, &walls[i])
 			|| wall_col(pos_x, player->pos, &walls[i]) == TRUE
 			|| wall_col(pos_y, player->pos, &walls[i]) == TRUE)
-				ft_lstadd(&portals, ft_lstnew(&walls[i], sizeof(t_wall*)));
-			// {
-				// prev_sector = player->cur_sector;
-				// next_sector = get_sector_id(map, walls[i].window);
-				// player->cur_sector = next_sector;
-					// ft_printf("1cur: %d\n", prev_sector);
-					// ft_printf("1nxt: %d\n", player->cur_sector);
-					// ft_printf("prev: %d\n", prev_sector);
-							// ft_printf("col: %d\n", *col);
-							// ft_printf("sec: %d\n", player->cur_sector);
-							// ft_printf("xs: %f, ys: %f\n", xspeed, yspeed);
-							// ft_printf("px: %f, py: %f\n", pos_x.x, pos_x.y);
-							// ft_printf("pxy: %f, pxy: %f\n", pos_xy.x, pos_xy.y);
-							// ft_printf("x: %f, y: %f\n", player->pos.x, player->pos.y);
-				// check_col(player, col, map, xspeed, yspeed);
-				// player->cur_sector = temp;
-					// ft_printf("2: %d\n", player->cur_sector);
-					// ft_printf("col: %d\n", *col);
-			// }
+				ft_lstadd(&portals, ft_lstnew(&walls[i], sizeof(t_wall*)));	
 		}
 		if (*col == 7)
 		{
 			player->cur_sector = temp;
 			prev_sector = UINT32_MAX;
-			// ft_printf("end1\n");
 			return (UINT32_MAX);
 		}
-		// ft_printf("2");
 		i++;
+	}
+	objects = map->sectors[player->cur_sector].objects;
+	while (objects != NULL)
+	{
+		int tmp = 0;
+		t_object *obj = objects->content;
+		objects = objects->next;
+		if (obj->size.y < player->heightoffset - player->player_height)
+			continue ;
+		if (get_distance(&pos_x, &obj->pos) <= obj->col_radius && get_distance(&pos_x, &obj->pos) < get_distance(&player->pos, &obj->pos))
+			tmp |= 1;
+		if (get_distance(&pos_y, &obj->pos) <= obj->col_radius && get_distance(&pos_y, &obj->pos) < get_distance(&player->pos, &obj->pos))
+			tmp |= 2;
+		if (get_distance(&pos_xy, &obj->pos) <= obj->col_radius && get_distance(&pos_xy, &obj->pos) < get_distance(&player->pos, &obj->pos))
+			tmp |= 4;
+		if (tmp == 0)
+			continue ;
+		if (obj->can_col == TRUE)
+			*col |= tmp;
+		if (obj->on_collide)
+			obj->on_collide(game, (void*)&map->sectors[player->cur_sector], obj, player);
+		if (*col == 7)
+		{
+			player->cur_sector = temp;
+			prev_sector = UINT32_MAX;
+			return (UINT32_MAX);
+		}
 	}
 	while (portals != NULL)
 	{
@@ -147,20 +155,17 @@ static t_uint32		check_col(t_player *player, t_uint8 *col,
 			prev_sector = player->cur_sector;
 			next_sector = get_sector_id(map, (*((t_wall*)portals->content)).window);
 			player->cur_sector = next_sector;
-			check_col(player, col, map, xspeed, yspeed);
+			check_col(game, player, col, map, xspeed, yspeed);
 			player->cur_sector = temp;
 		}
-		// ft_printf("1");
 		portals = portals->next;
 	}
 	if (*col == 7)
 	{
 		player->cur_sector = temp;
-		// ft_printf("end1\n");
 		return (UINT32_MAX);
 	}
 	prev_sector = UINT32_MAX;
-	// ft_printf("end2\n");
 	return (next_sector);
 }
 
@@ -201,7 +206,7 @@ t_bool				player_col(t_game *game, float xspeed, float yspeed)
 	pos_y = (t_coord){player->pos.x, player->pos.y + yspeed};
 	pos_xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
 	col = 0;
-	next_sector = check_col(player, &col, map, xspeed, yspeed);
+	next_sector = check_col(game, player, &col, map, xspeed, yspeed);
 	if (col == 7)
 		return (FALSE);
 	if (next_sector != UINT32_MAX)
@@ -211,9 +216,6 @@ t_bool				player_col(t_game *game, float xspeed, float yspeed)
 		|| player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor) > map->sectors[next_sector].ceil
 		)
 		{
-			// col |= 4;
-			// if (col == 4)
-			// 	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
 			ft_printf("col: %d\n", col);
 			return (FALSE);
 		}
@@ -230,17 +232,6 @@ t_bool				player_col(t_game *game, float xspeed, float yspeed)
 			map->sectors[player->cur_sector].f_enter(game, &map->sectors[player->cur_sector]);
 	}
 	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
-	if (player->pos.y < -20.0 || player->cur_sector == 3)
-	{
-		// ft_printf("col: %d\n", col);
-		// ft_printf("sec: %d\n", player->cur_sector);
-		// ft_printf("xs: %f, ys: %f\n", xspeed, yspeed);
-		// ft_printf("px: %f, py: %f\n", pos_x.x, pos_x.y);
-		// ft_printf("pxy: %f, pxy: %f\n", pos_xy.x, pos_xy.y);
-		// ft_printf("x: %f, y: %f\n", player->pos.x, player->pos.y);
-		// exit(EXIT_FAILURE);
-	}
-	// ft_printf("realend\n");
 	return (TRUE);
 }
 

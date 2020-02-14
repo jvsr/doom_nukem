@@ -47,5 +47,6 @@ t_bool		circle_collision(t_coord line_start, t_coord line_end,
 								t_coord circle_mid, float radius);
 float		lerp(float a, float b, float t);
 float		lerp_max(float a, float b, float t, float max);
+t_coord		get_perp(t_coord *vec);
 
 #endif

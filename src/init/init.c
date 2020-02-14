@@ -93,19 +93,36 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].walls[4].window = &game->map->sectors[1];
 	game->map->sectors[0].has_ceiling = TRUE;
 	game->map->sectors[0].object_count = 3;
-	game->map->sectors[0].object = ft_memalloc(sizeof(t_object) * 4);
-	if (game->map->sectors[0].object == NULL)
-		error_msg_errno("Could not allocate Map Objects");
-	game->map->sectors[0].object[0].pos = (t_coord){0, 0};
-	game->map->sectors[0].object[0].size = (t_coord){10, 10};
-	game->map->sectors[0].object[0].img = chair_init(&game->map->sectors[0].object[0], 10);
-	game->map->sectors[0].object[1].pos = (t_coord){3, 3};
-	game->map->sectors[0].object[1].size = (t_coord){4, 15};
-	game->map->sectors[0].object[1].img = enemy_init(&game->map->sectors[0].object[1], TEXTURE_ENEMY0_F0);
-	game->map->sectors[0].object[2].pos = (t_coord){-2, -2};
-	game->map->sectors[0].object[2].size = (t_coord){4, 4};
-	game->map->sectors[0].object[2].img = single_init(TEXTURE_HEALTH_PICKUP, &game->map->sectors[0].object[2]);
-	game->map->sectors[0].object[2].col_type = COLLISION_PICKUP;
+
+	t_object *o = (t_object*)ft_memalloc(sizeof(t_object));
+	game->map->sectors[0].objects = ft_lstnew(o, sizeof(t_object*));
+	o = (t_object*)ft_memalloc(sizeof(t_object));
+	game->map->sectors[0].objects->next = ft_lstnew(o, sizeof(t_object*));;
+	o = (t_object*)ft_memalloc(sizeof(t_object));
+	game->map->sectors[0].objects->next->next = ft_lstnew(o, sizeof(t_object*));
+
+	t_object *obj = game->map->sectors[0].objects->content;
+	obj->pos = (t_coord){5, 0};
+	obj->size = (t_coord){10, 10};
+	obj->img = chair_init(obj, 10);
+	obj->can_col = TRUE;
+	obj->col_radius = 1.0;
+
+	obj = game->map->sectors[0].objects->next->content;
+	obj->pos = (t_coord){3, 3};
+	obj->size = (t_coord){4, 15};
+	obj->img = enemy_init(obj, TEXTURE_ENEMY0_F0);
+	obj->can_col = TRUE;
+	obj->col_radius = 1.0;
+
+	obj = game->map->sectors[0].objects->next->next->content;
+	obj->pos = (t_coord){-5, -2};
+	obj->size = (t_coord){4, 4};
+	obj->img = single_init(TEXTURE_HEALTH_PICKUP, obj);
+	obj->can_col = FALSE;
+	obj->col_radius = 1.0;
+	obj->on_collide = health_pickup;
+
 	t_decal *decal = ft_memalloc(sizeof(t_decal));
 	decal->texture = single_init(TEXTURE_BLOOD_SPLATTER, NULL);
 	decal->pos = (t_coord){0.8, 0.0};
@@ -135,7 +152,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
 	game->map->sectors[1].has_ceiling = TRUE;
 	game->map->sectors[1].object_count = 0;
-	game->map->sectors[1].object = NULL;
+	game->map->sectors[1].objects = NULL;
 
 	//Sector 3
 	game->map->sectors[2].ceil = 40;
@@ -152,7 +169,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[2].walls[3].is_portal = TRUE;
 	game->map->sectors[2].walls[3].window = &game->map->sectors[1];
 	game->map->sectors[2].object_count = 0;
-	game->map->sectors[2].object = NULL;
+	game->map->sectors[2].objects = NULL;
 	game->map->sectors[2].has_ceiling = FALSE;
 
 	//Sector 4
@@ -172,7 +189,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].walls[3].window = &game->map->sectors[0];
 	game->map->sectors[3].has_ceiling = TRUE;
 	game->map->sectors[3].object_count = 0;
-	game->map->sectors[3].object = NULL;
+	game->map->sectors[3].objects = NULL;
 }
 
 void			*init_function(t_game *game)

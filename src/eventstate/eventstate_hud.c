@@ -6,12 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/11 16:17:29 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/13 17:04:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_surface.h>
+#include <SDL2/SDL_stdinc.h>
 
 #include "gui.h"
 #include "game.h"
@@ -24,13 +25,13 @@
 #include "eventstate.h"
 #include "libft/ft_mem.h"
 
-static void	set_mouse_capture(void)
-{
-	static int	caught = TRUE;
+// static void	set_mouse_capture(void)
+// {
+// 	static int	caught = TRUE;
 
-	SDL_SetRelativeMouseMode(caught);
-	caught = !caught;
-}
+// 	SDL_SetRelativeMouseMode(caught);
+// 	caught = !caught;
+// }
 
 static void	manage_player_angle(t_game *game, t_bool skip)
 {
@@ -65,18 +66,13 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	game->player->height = game->player->player_height + game->map->sectors[game->player->cur_sector].floor;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 	{
-		set_mouse_capture();
-		if (SDL_GetRelativeMouseMode() == SDL_TRUE)
-			skip_mouse_move = TRUE;
-		else
-		{
-			// different behaviour to be implemented, real main menu as placeholder
-			set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
-			set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
-			game->cureventstate->eventstate = mainmenu;
-		}
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"), TRUE);
+		set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), TRUE);
+		set_hudsensitivity(game->setting, get_gui_child(game->ui, "hudoptions"));
+		game->cureventstate->eventstate = hud_options;
 	}
-	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_LCTRL) && is_helddown(game->keymap, SDLK_LALT) && event.key.keysym.sym == SDLK_f)
+	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_F6) && event.key.keysym.sym == SDLK_f)
 		game->player->is_flying = !game->player->is_flying;
 	if (event.type == SDL_MOUSEMOTION)
 	{

@@ -19,7 +19,7 @@
 # include "types.h"
 # include "libft/ft_bool.h"
 
-# define MAX_FOV 110
+# define MAX_FOV 75
 # define MIN_FOV 45
 # define FOV_STEP 5
 

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/14 12:20:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/13 17:27:59 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	map_editor_select_return(t_game *game, t_transform *gui);
 void	map_editor_select_new(t_game *game, t_transform *gui);
 
 void	options_sensitivity_up(t_game *game, t_transform *gui);
+void	options_hud_sensitivity_up(t_game *game, t_transform *gui);
 void	options_sensitivity_down(t_game *game, t_transform *gui);
+void	options_hud_sensitivity_down(t_game *game, t_transform *gui);
 void	options_music_volume_up(t_game *game, t_transform *gui);
 void	options_music_volume_down(t_game *game, t_transform *gui);
 void	options_sound_volume_up(t_game *game, t_transform *gui);
@@ -65,6 +67,7 @@ void	controls_return(t_game *game, t_transform *gui);
 void	restart_game(t_game *game, t_transform *gui);
 
 void	set_sensitivity(t_setting *setting, t_transform *parent);
+void	set_hudsensitivity(t_setting *setting, t_transform *parent);
 void	set_music(t_setting *setting, t_transform *parent);
 void	set_sound(t_setting *setting, t_transform *parent);
 void	set_fov(t_setting *setting, t_transform *parent, SDL_Surface *surf);

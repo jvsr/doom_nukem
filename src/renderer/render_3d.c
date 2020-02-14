@@ -228,34 +228,36 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_zbuf *zb
 static void render_objects(t_list *secs, t_zbuf *zbuf, SDL_Surface *dst, t_game *game, t_coord *range)
 {
 	t_list		*n_secs;
-	int			i;
+	t_list		*objects;
 	t_sector	*sec;
 	t_list		*objs;
+	t_object	*obj;
 
 	n_secs = secs;
 	objs = NULL;
 	float hfov2 = (float)*game->player->fov / 2;
 	while (n_secs)
 	{
-		i = 0;
 		sec = n_secs->content;
-		while ((t_uint64)i < sec->object_count)
+		objects = sec->objects;
+		while (objects != NULL)
 		{
-			float object_angle = get_object_angle_on_screen(&sec->object[i], game->player, range);
+			obj = objects->content;
+			float object_angle = get_object_angle_on_screen(obj, game->player, range);
 			if (object_angle >= 0)
 			{
-				sec->object[i].img.angle = object_angle;
+				obj->img.angle = object_angle;
 				float tmp_angle = calc_fov(range->x, object_angle);
 				int screen_space = (int)((tmp_angle / calc_fov(range->x, range->y)) * dst->w);
-				float dist = get_distance(&game->player->pos, &sec->object[i].pos);
+				float dist = get_distance(&game->player->pos, &obj->pos);
 				if (tmp_angle > hfov2)
 					dist *= cosf((tmp_angle - hfov2) * PI_R);
 				else if (tmp_angle < hfov2)
 					dist *= cosf((hfov2 - tmp_angle) * PI_R);
 				if (zbuf[screen_space].dist > dist)
-					ft_lstaddbck(&objs, ft_lstnew(new_rendobj(&sec->object[i], sec, (float[2]){dist, object_angle}, screen_space), sizeof(t_object)));
+					ft_lstaddbck(&objs, ft_lstnew(new_rendobj(obj, sec, (float[2]){dist, object_angle}, screen_space), sizeof(t_object)));
 			}
-			i++;
+			objects = objects->next;
 		}
 		n_secs = n_secs->next;
 	}
