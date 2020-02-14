@@ -21,8 +21,7 @@ float	get_object_angle_on_screen(t_object *object,
 {
 	float obj_ang;
 
-	obj_ang = (get_angle_between_points(&object->pos, &player->pos) * PI_D) +
-				180;
+	obj_ang = get_angle_between_points(&object->pos, &player->pos) + 180;
 	if (is_between_fov(obj_ang, range->x, range->y))
 		return (obj_ang);
 	return (-1);
