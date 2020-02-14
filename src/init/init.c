@@ -42,7 +42,7 @@ static void		player_init(t_game *game)
 	get_vector_from_angle(game->player->angle, &game->player->forward);
 	game->player->player_height = PLAYER_HEIGHT;
 	game->player->height = PLAYER_HEIGHT;
-	game->player->health = 30;
+	game->player->health = PLAYER_MAX_HEALTH;
 	ft_memcpy(&game->player->mag, &(t_coord){wrap_float(game->player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(game->player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));
