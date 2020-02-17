@@ -20,5 +20,4 @@ SRCS = \
 	remove_last_wall \
 	add_wall \
 	snap_to_grid \
-	hit_wall \
 	delete_wall \

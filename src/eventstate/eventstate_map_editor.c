@@ -17,6 +17,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "cmath.h"
 #include "coord.h"
 #include "rinfo.h"
 #include "error.h"
@@ -80,7 +81,7 @@ static void	delete_line(SDL_Event event, t_transform *map_editor_elem)
 	t_list		*lst;
 	t_wall		*wall;
 	t_wall		*found;
-	SDL_Point	mouse_pos;
+	t_coord		mouse_pos;
 
 	found = NULL;
 	mouse_pos.x = event.button.x + map_editor_elem->gui_elem.map_editor->pos.x;
@@ -89,7 +90,8 @@ static void	delete_line(SDL_Event event, t_transform *map_editor_elem)
 	while (lst != NULL)
 	{
 		wall = (t_wall *)lst->content;
-		if (map_editor_hit_wall(wall, mouse_pos))
+		if (circle_collision(wall->corner_0, wall->corner_1, mouse_pos,
+							EDITOR_MOUSE_COLISION_SIZE))
 			found = wall;
 		lst = lst->next;
 	}

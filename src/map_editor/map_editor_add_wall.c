@@ -14,6 +14,7 @@
 #include "libft/ft_mem.h"
 
 #include "gui.h"
+#include "cmath.h"
 #include "rinfo.h"
 #include "error.h"
 #include "map_editor.h"
@@ -22,20 +23,37 @@
 ** Todo Detect if line is inside other line and prevent placing
 */
 
-static t_bool		line_invalid(t_wall *wall, t_wall *compare_wall)
+static t_bool		line_invalid(t_wall *wall, t_wall *other)
+{
+	float	wall_angle;
+	float	other_angle;
+
+	if (ft_memequ(wall, other, sizeof(t_wall)))
+		return (TRUE);
+	wall_angle = get_angle_between_points(&wall->corner_0, &wall->corner_1);
+	other_angle = get_angle_between_points(&other->corner_0, &other->corner_1);
+	if (other_angle == wall_angle || wrap_angle(other_angle + 180) == wall_angle)
+	{
+
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+static t_bool		check_invalid(t_wall *wall, t_wall *other)
 {
 	t_coord tmp_corner;
-	t_bool	equal;
+	t_bool	valid;
 
-	if (ft_memequ(wall, compare_wall, sizeof(t_wall)))
+	if (line_invalid(wall, other))
 		return (TRUE);
 	tmp_corner = wall->corner_0;
 	wall->corner_0 = wall->corner_1;
 	wall->corner_1 = tmp_corner;
-	equal = ft_memequ(wall, compare_wall, sizeof(t_wall));
+	valid = line_invalid(wall, other);
 	wall->corner_1 = wall->corner_0;
 	wall->corner_0 = tmp_corner;
-	return (equal);
+	return (valid);
 }
 
 static void		add_to_back(t_list **head, t_list *new)
@@ -49,7 +67,7 @@ static void		add_to_back(t_list **head, t_list *new)
 	while (lst != NULL)
 	{
 		wall = (t_wall*)lst->content;
-		if (line_invalid(new_wall, wall))
+		if (check_invalid(new_wall, wall))
 		{
 			ft_lstdel(&new, ft_lstdelmem);
 			return ;
