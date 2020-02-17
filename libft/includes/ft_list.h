@@ -38,7 +38,7 @@ t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(const t_list *lst, t_list *(*f)(const t_list *elem));
 t_list			*ft_lstnew(void *content, size_t content_size);
 t_list			*ft_lstnew_dup(const void *content, size_t content_size);
-t_list			*ft_lstunlink(t_list *head, t_list *lst);
+t_list			*ft_lstunlink(t_list **head, t_list *lst);
 size_t			ft_lstlen(const t_list *lst);
 size_t			ft_lstnlen(const t_list *lst, size_t n);
 void			ft_lstadd(t_list **head, t_list *new);

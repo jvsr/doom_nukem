@@ -25,7 +25,9 @@ void	key_pickup(t_game *game,
 	(void)game;
 	player->keys++;
 	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(obj));
-	ft_lstunlink(sec->objects, lst);
+	if (lst == NULL)
+		return ;
+	ft_lstunlink(&sec->objects, lst);
 	ft_lstdelone(&lst, NULL);
 	free(obj);
 }

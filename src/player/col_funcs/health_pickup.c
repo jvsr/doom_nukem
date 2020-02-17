@@ -31,7 +31,9 @@ void	health_pickup(t_game *game,
 	else
 		player->health += health_add;
 	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(obj));
-	ft_lstunlink(sec->objects, lst);
+	ft_lstunlink(&sec->objects, lst);
+	if (lst == NULL)
+		return ;
 	ft_lstdelone(&lst, NULL);
 	free(obj);
 }
