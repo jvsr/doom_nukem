@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 16:37:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/11 16:26:49 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/14 15:10:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,11 @@
 
 #include "gui.h"
 #include "game.h"
+#include "loop.h"
 #include "player.h"
 
 void		loop_game(t_game *game)
 {
-	char	*elem_text;
-	
 	player_move(game);
-	elem_text = ft_strformat("Angle: %.2f Pos: %.2f %.2f Flying : %i",
-		game->player->angle, game->player->pos.x, game->player->pos.y,
-		game->player->is_flying);
-	set_elem_text_str(get_gui_child(game->ui, "angle"), elem_text);
-	ft_strdel(&elem_text);
-	elem_text = ft_strformat("Health: %i/%i",
-		game->player->health, PLAYER_MAX_HEALTH);
-	set_elem_text_str(get_gui_child(game->ui, "hudinfoammo"), elem_text);
-	ft_strdel(&elem_text);
-	elem_text = ft_strformat("Ammo: %i",
-		game->player->ammo);
-	set_elem_text_str(get_gui_child(game->ui, "hudinfohp"), elem_text);
-	ft_strdel(&elem_text);
-	set_elem_redraw(get_gui_child(game->ui, "gameview"));
+	loop_game_gui(game);
 }

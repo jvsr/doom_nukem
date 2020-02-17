@@ -19,4 +19,5 @@ PREFIX = loop_
 SRCS = \
 	core \
 	game \
-	map_editor
+	map_editor \
+	game_gui \
