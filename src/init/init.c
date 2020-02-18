@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/11 17:17:36 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/14 15:52:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		player_init(t_game *game)
 	get_vector_from_angle(game->player->angle, &game->player->forward);
 	game->player->player_height = PLAYER_HEIGHT;
 	game->player->height = PLAYER_HEIGHT;
-	game->player->health = 30;
+	game->player->health = PLAYER_MAX_HEALTH;
 	ft_memcpy(&game->player->mag, &(t_coord){wrap_float(game->player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(game->player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));
@@ -100,6 +100,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].objects->next = ft_lstnew(o, sizeof(t_object*));;
 	o = (t_object*)ft_memalloc(sizeof(t_object));
 	game->map->sectors[0].objects->next->next = ft_lstnew(o, sizeof(t_object*));
+	o = (t_object*)ft_memalloc(sizeof(t_object));
+	game->map->sectors[0].objects->next->next->next = ft_lstnew(o, sizeof(t_object*));
 
 	t_object *obj = game->map->sectors[0].objects->content;
 	obj->pos = (t_coord){5, 0};
@@ -122,6 +124,14 @@ static void		map_init(t_game *game)
 	obj->can_col = FALSE;
 	obj->col_radius = 1.0;
 	obj->on_collide = health_pickup;
+
+	obj = game->map->sectors[0].objects->next->next->next->content;
+	obj->pos = (t_coord){0, 5};
+	obj->size = (t_coord){4, 4};
+	obj->img = single_init(TEXTURE_KEYS, obj);
+	obj->can_col = FALSE;
+	obj->col_radius = 1.0;
+	obj->on_collide = key_pickup;
 
 	t_decal *decal = ft_memalloc(sizeof(t_decal));
 	decal->texture = single_init(TEXTURE_BLOOD_SPLATTER, NULL);

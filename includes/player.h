@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/11 18:18:33 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/14 15:26:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,14 @@ typedef	struct	s_player
 	float		updown;
 	int			screen_updown;
 	t_bool		is_flying;
+	t_uint32	keys;
 }				t_player;
 
 t_bool			player_move(t_game *game);
 t_bool			player_col(t_game *game, float xspeed, float yspeed);
 void			health_pickup(t_game *game,
+					t_sector *sec, t_object *obj, t_player *player);
+void			key_pickup(t_game *game,
 					t_sector *sec, t_object *obj, t_player *player);
 
 #endif

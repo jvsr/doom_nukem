@@ -93,6 +93,8 @@ void			loop(t_game *game)
 	t_uint64	lastframe;
 
 	load_info(game);
+	if (game->state != running)
+		return ;
 	fade_in_music(game->audio_man, TITLE_SONG, 3500);
 	game->player->pos.x = 0;
 	game->player->pos.y = 0;
