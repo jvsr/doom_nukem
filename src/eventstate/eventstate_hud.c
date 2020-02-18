@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/13 17:04:32 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/18 17:22:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	manage_player_angle(t_game *game, t_bool skip)
 
 void		hud_eventstate(t_game *game, SDL_Event event)
 {
-	static t_bool	skip_mouse_move = FALSE;
+	static t_bool	skip_mouse_move = TRUE;
 
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == game->setting->controls.crouch)
 		game->player->player_height = PLAYER_CROUCH;
