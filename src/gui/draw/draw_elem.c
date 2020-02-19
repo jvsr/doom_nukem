@@ -97,12 +97,8 @@ static void		draw_gui_elem(t_transform *elem, t_game *game)
 	}
 }
 
-void			draw_elem(t_transform *elem, t_game *game)
+void			*draw_elem(t_transform *elem, t_game *game)
 {
-	SDL_Surface	*dst_surface;
-
-	if (elem->show == FALSE)
-		return ;
 	if (elem->redraw == TRUE || elem->moved == TRUE)
 		update_pos_dim(elem);
 	if (elem->redraw == TRUE || (elem->gui_type == PANEL && child_moved(elem)))
@@ -110,14 +106,7 @@ void			draw_elem(t_transform *elem, t_game *game)
 		reset_surface(elem);
 		draw_gui_elem(elem, game);
 	}
-	if (elem->parent_type == ELEM)
-		dst_surface = elem->parent.elem->surface;
-	else
-		dst_surface = elem->parent.ui->window_surface;
-	if (elem->gui_type == TEXT || elem->has_alpha)
-		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->rel_pos);
-	else
-		sdl_merge_surface(dst_surface, elem->surface, elem->rel_pos);
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
+	return (elem);
 }
