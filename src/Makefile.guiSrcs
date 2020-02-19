@@ -19,6 +19,7 @@ PREFIX =
 ONCLICK_SRCS = mainmenu \
 				options \
 				mission \
+				load_missions \
 				fov \
 				music \
 				resolution_type \
