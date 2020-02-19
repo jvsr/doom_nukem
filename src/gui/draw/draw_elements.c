@@ -29,7 +29,6 @@ static t_ttask	*update_elem(t_transform *elem, t_game *game)
 		return (new);
 	}
 	draw_elem(elem, game);
-	merge_elem(elem);
 	return (NULL);
 }
 
@@ -57,16 +56,14 @@ static t_ttask	*update_elements(t_transform *elem, t_game *game)
 
 void			draw_elements(t_transform *elem, t_game *game)
 {
-	t_ttask	*task;
-	t_ttask	*next;
+	t_ttask	*tasks;
 
-	task = update_elements(elem, game);
-	while (task != NULL)
+	tasks = update_elements(elem, game);
+	sdl_join_ttask_all(tasks);
+	while (elem != NULL)
 	{
-		next = task->next;
-		sdl_join_ttask(task);
-		merge_elem(task->ret.v_ptr);
-		sdl_del_ttask(&task);
-		task = next;
+		merge_elem(elem);
+		elem = elem->next;
 	}
+	sdl_del_ttask_all(&tasks);
 }
