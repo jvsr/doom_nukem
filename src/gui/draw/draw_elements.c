@@ -18,6 +18,21 @@
 ** * Gui internal function
 */
 
+static t_ttask	*update_elem(t_transform *elem, t_game *game)
+{
+	t_ttask		*new;
+
+	if (elem->parent_type == GUI)
+	{
+		new = sdl_new_ttask(draw_elem, TFLAG_TASK_NO_DELETE, 2, elem, game);
+		sdl_add_tpool_ttask(game->pool, new);
+		return (new);
+	}
+	draw_elem(elem, game);
+	merge_elem(elem);
+	return (NULL);
+}
+
 static t_ttask	*update_elements(t_transform *elem, t_game *game)
 {
 	t_ttask		*head;
@@ -26,15 +41,15 @@ static t_ttask	*update_elements(t_transform *elem, t_game *game)
 	head = NULL;
 	while (elem != NULL)
 	{
-		if (elem->show == TRUE && elem->parent_type == GUI)
+		if (elem->show == TRUE)
 		{
-			new = sdl_new_ttask(draw_elem, TFLAG_TASK_NO_DELETE, 2, elem, game);
-			sdl_add_tpool_ttask(game->pool, new);
-			new->next = head;
-			head = new;
+			new = update_elem(elem, game);
+			if (new != NULL)
+			{
+				new->next = head;
+				head = new;
+			}
 		}
-		else if (elem->show == TRUE)
-			draw_elem(elem, game);
 		elem = elem->next;
 	}
 	return (head);
@@ -42,14 +57,16 @@ static t_ttask	*update_elements(t_transform *elem, t_game *game)
 
 void			draw_elements(t_transform *elem, t_game *game)
 {
-	t_ttask	*tasks;
+	t_ttask	*task;
+	t_ttask	*next;
 
-	tasks = update_elements(elem, game);
-	sdl_join_ttask_all(tasks);
-	while (elem != NULL)
+	task = update_elements(elem, game);
+	while (task != NULL)
 	{
-		merge_elem(elem);
-		elem = elem->next;
+		next = task->next;
+		sdl_join_ttask(task);
+		merge_elem(task->ret.v_ptr);
+		sdl_del_ttask(&task);
+		task = next;
 	}
-	sdl_del_ttask_all(&tasks);
 }

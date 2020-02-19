@@ -110,5 +110,5 @@ void			*draw_elem(t_transform *elem, t_game *game)
 	}
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
-	return (NULL);
+	return (elem);
 }
