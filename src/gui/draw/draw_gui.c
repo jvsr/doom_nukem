@@ -15,16 +15,9 @@
 
 void			draw_gui(t_gui *ui, t_game *game)
 {
-	t_transform	*cur;
-
 	if (ui->redraw == FALSE)
 		return ;
 	sdl_clear_surface(ui->window_surface);
-	cur = ui->children;
-	while (cur != NULL)
-	{
-		draw_elem(cur, game);
-		cur = cur->next;
-	}
+	draw_elements(ui->children, game);
 	ui->redraw = FALSE;
 }

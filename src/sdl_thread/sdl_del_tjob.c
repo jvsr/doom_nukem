@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sdl_join_ttasks.c                                  :+:    :+:            */
+/*   sdl_del_tjob.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/07 16:39:56 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/07 16:39:56 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:41:22 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:41:22 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_mem.h"
+
 #include "sdl_thread.h"
 
-void	sdl_join_ttasks(t_ttask **tasks, size_t len)
+void		*sdl_del_tjob(t_tjob **job, t_bool delete_task)
 {
-	size_t	i;
-
-	i = 0;
-	if (tasks == NULL)
-		return ;
-	while (i < len)
-	{
-		sdl_join_ttask(tasks[i]);
-		i++;
-	}
+	if (job == NULL || *job == NULL)
+		return (NULL);
+	if (delete_task == TRUE)
+		sdl_del_ttask(&(*job)->task);
+	ft_memdel((void**)job);
+	return (NULL);
 }
