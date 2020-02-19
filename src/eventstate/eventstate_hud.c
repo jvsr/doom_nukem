@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/18 17:22:16 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 12:44:59 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 		set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"), TRUE);
 		set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), TRUE);
 		set_hudsensitivity(game->setting, get_gui_child(game->ui, "hudoptions"));
+		set_hudmusic(game->setting, get_gui_child(game->ui, "hudvolume"));
+		set_hudsound(game->setting, get_gui_child(game->ui, "hudvolume"));
+		set_hudfov(game->setting, get_gui_child(game->ui, "hudfov"), game->surface);
 		game->cureventstate->eventstate = hud_options;
 	}
 	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_F6) && event.key.keysym.sym == SDLK_f)

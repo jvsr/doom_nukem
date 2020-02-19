@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/13 17:29:18 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 13:59:58 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,24 @@ static t_tablepair const	g_onclicks[] = {
 	{"options_sensitivity_down", options_sensitivity_down},
 	{"options_hud_sensitivity_down", options_hud_sensitivity_down},
 	{"options_music_volume_up", options_music_volume_up},
+	{"options_hud_music_volume_up", options_hud_music_volume_up},
 	{"options_music_volume_down", options_music_volume_down},
+	{"options_hud_music_volume_down", options_hud_music_volume_down},
 	{"options_sound_volume_up", options_sound_volume_up},
+	{"options_hud_sound_volume_up", options_hud_sound_volume_up},
 	{"options_sound_volume_down", options_sound_volume_down},
+	{"options_hud_sound_volume_down", options_hud_sound_volume_down},
 	{"options_fov_up", options_fov_up},
+	{"options_hud_fov_up", options_hud_fov_up},
 	{"options_fov_down", options_fov_down},
+	{"options_hud_fov_down", options_hud_fov_down},
 	{"options_resolution_up", options_resolution_up},
 	{"options_resolution_down", options_resolution_down},
 	{"options_resolutiontype_up", options_resolutiontype_up},
 	{"options_resolutiontype_down", options_resolutiontype_down},
 	{"options_open_controls", options_open_controls},
 	{"options_return", options_return},
+	{"hudoptions_return", hudoptions_return},
 
 	{"missions_focus_campaign", missions_focus_campaign},
 	{"missions_focus_custom", missions_focus_custom},
