@@ -41,7 +41,7 @@ void			draw_button(SDL_Surface *dst, t_button *button,
 							SDL_Point abs_dim);
 void			draw_panel(t_panel *panel, t_game *game);
 void			draw_gview(SDL_Surface *dst, t_game *game);
-void			merge_elem(t_transform *cur);
+void			merge_elem(t_transform *elem);
 SDL_Surface		*render_text(const char *str, TTF_Font *font, SDL_Color *color);
 void			check_elem_duplicate(t_transform *root_children,
 									t_transform *new);

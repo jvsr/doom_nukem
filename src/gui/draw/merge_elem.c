@@ -17,19 +17,18 @@
 ** * Gui internal function
 */
 
-void	merge_elem(t_transform *cur)
+void	merge_elem(t_transform *elem)
 {
 	SDL_Surface	*dst_surface;
 
-	if (cur->show == TRUE)
-	{
-		if (cur->parent_type == ELEM)
-			dst_surface = cur->parent.elem->surface;
-		else
-			dst_surface = cur->parent.ui->window_surface;
-		if (cur->gui_type == TEXT || cur->has_alpha)
-			sdl_merge_surface_alpha(dst_surface, cur->surface, cur->rel_pos);
-		else
-			sdl_merge_surface(dst_surface, cur->surface, cur->rel_pos);
-	}
+	if (elem->show == FALSE)
+		return ;
+	if (elem->parent_type == ELEM)
+		dst_surface = elem->parent.elem->surface;
+	else
+		dst_surface = elem->parent.ui->window_surface;
+	if (elem->gui_type == TEXT || elem->has_alpha)
+		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->rel_pos);
+	else
+		sdl_merge_surface(dst_surface, elem->surface, elem->rel_pos);
 }
