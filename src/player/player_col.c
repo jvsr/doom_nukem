@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/10 16:43:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 14:44:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/ft_bool.h"
 #include "libft/ft_mem.h"
 #include "game.h"
+#include "error.h"
 #include "setting.h"
 #include "player.h"
 #include "rinfo.h"
@@ -77,6 +78,7 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	int			max;
 	t_uint32	next_sector;
 	t_list		*portals;
+	t_list		*new_wall;
 	static t_uint32	prev_sector = UINT32_MAX;
 
 	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
@@ -104,10 +106,13 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 		else if (walls[i].is_portal == TRUE
 		&& get_sector_id(map, walls[i].window) != prev_sector)
 		{
-			if (wall_col(pos_xy, player->pos, &walls[i])
-			|| wall_col(pos_x, player->pos, &walls[i]) == TRUE
-			|| wall_col(pos_y, player->pos, &walls[i]) == TRUE)
-				ft_lstadd(&portals, ft_lstnew(&walls[i], sizeof(t_wall*)));	
+			if (wall_col(pos_xy, player->pos, &walls[i]) || wall_col(pos_x, player->pos, &walls[i]) == TRUE || wall_col(pos_y, player->pos, &walls[i]) == TRUE)
+			{
+				new_wall = ft_lstnew(&walls[i], sizeof(t_wall*));
+				if (new_wall == NULL)
+					error_msg_errno("Failed to alloc New Wall");
+				ft_lstadd(&portals, new_wall);	
+			}
 		}
 		if (*col == 7)
 		{

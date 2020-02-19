@@ -6,13 +6,14 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 16:33:41 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/11 16:33:41 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/19 14:29:25 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
 #include "serializer.h"
+#include "error.h"
 
 static void	add_lst_data(unsigned char **bytes,
 								size_t *b_size, void *val, size_t v_size)
@@ -20,6 +21,8 @@ static void	add_lst_data(unsigned char **bytes,
 	unsigned char *n_bytes;
 
 	n_bytes = ft_memalloc(*b_size + v_size);
+	if (n_bytes == NULL)
+		error_msg_errno("Failed to alloc n_bytes");
 	ft_memcpy(n_bytes, *bytes, *b_size);
 	ft_memcpy(n_bytes + (t_uint64)*b_size, val, v_size);
 	ft_memdel((void**)bytes);

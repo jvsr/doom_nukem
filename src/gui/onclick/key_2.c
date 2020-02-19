@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/08 22:12:37 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 15:50:45 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 14:27:36 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "error.h"
 #include "keymap.h"
 #include "setting.h"
 #include "eventstate.h"
@@ -35,6 +36,8 @@ void	controls_set_shoot(t_game *game, t_transform *gui)
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);
+	if (arguments == NULL)
+		error_msg_errno("Failed to alloc Arguments");
 	arguments[0] = (t_types)&game->setting->controls.shoot;
 	arguments[1] = (t_types)(void*)elem;
 	arguments[2] = (t_types)(void*)gui;
@@ -50,6 +53,8 @@ void	controls_set_crouch(t_game *game, t_transform *gui)
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);
+	if (arguments == NULL)
+		error_msg_errno("Failed to alloc Arguments");
 	arguments[0] = (t_types)&game->setting->controls.crouch;
 	arguments[1] = (t_types)(void*)elem;
 	arguments[2] = (t_types)(void*)gui;
@@ -65,6 +70,8 @@ void	controls_set_jump(t_game *game, t_transform *gui)
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);
+	if (arguments == NULL)
+		error_msg_errno("Failed to alloc Arguments");
 	arguments[0] = (t_types)&game->setting->controls.jump;
 	arguments[1] = (t_types)(void*)elem;
 	arguments[2] = (t_types)(void*)gui;
