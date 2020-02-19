@@ -74,6 +74,7 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 		set_hudsound(game->setting, get_gui_child(game->ui, "hudvolume"));
 		set_hudfov(game->setting, get_gui_child(game->ui, "hudfov"), game->surface);
 		game->cureventstate->eventstate = hud_options;
+		skip_mouse_move = TRUE;
 	}
 	if (event.type == SDL_KEYDOWN && is_helddown(game->keymap, SDLK_F6) && event.key.keysym.sym == SDLK_f)
 		game->player->is_flying = !game->player->is_flying;
