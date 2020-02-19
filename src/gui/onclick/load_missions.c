@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 15:09:03 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 18:50:59 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 20:41:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static t_list	*read_map_list(void)
 
 static void	add_maps(t_list *list, t_game *game)
 {
-	
+	(void)list;
+	(void)game;
 }
 
 void	printlist(const t_list *list)
