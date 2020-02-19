@@ -6,12 +6,12 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/24 14:25:13 by pholster      ########   odam.nl          #
+#    Updated: 2020/02/19 14:20:01 by jvisser       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names of libft
-SUBLIBS = printf threadpool unum num numarr float char str strarr utf8 mem \
+SUBLIBS = printf unum num numarr float char str strarr utf8 mem \
 	list hash color term bool
 
 # Libft name
