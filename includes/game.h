@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/18 14:53:51 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:26:18 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct	s_game
 }				t_game;
 
 void			loop(t_game *game);
+void			handle_event(t_game *game, SDL_Event event);
+void			check_quit(t_game *game, SDL_Event event);
 void			*display_splash(t_game *game, char *loc);
 void			loader(t_game *game);
 void			quit(int exit_code);

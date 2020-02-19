@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/19 12:07:11 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 22:01:44 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,116 +23,6 @@
 #include "player.h"
 #include "keymap.h"
 
-static t_bool	move_forward(t_player *player, float speed, float *xspeed, float *yspeed)
-{
-	*xspeed += speed * cosf(player->angle * PI_R);
-	*yspeed += speed * sinf(player->angle * PI_R);
-	return (TRUE);
-}
-
-static t_bool	move_backward(t_player *player, float speed, float *xspeed, float *yspeed)
-{
-	*xspeed += -(speed * cos(player->angle * PI_R));
-	*yspeed += -(speed * sin(player->angle * PI_R));
-	return (TRUE);
-}
-
-static t_bool	move_left(t_player *player, float speed, float *xspeed, float *yspeed)
-{
-	*xspeed += speed * sin(player->angle * PI_R);
-	*yspeed += -(speed * cos(player->angle * PI_R));
-	return (TRUE);
-}
-
-static t_bool	move_right(t_player *player, float speed, float *xspeed, float *yspeed)
-{
-	*xspeed += -(speed * sin(player->angle * PI_R));
-	*yspeed += speed * cos(player->angle * PI_R);
-	return (TRUE);
-}
-
-static t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
-{
-	static uint64_t	momentum = UINT64_MAX;
-	static float	old_height;
-	float			new_height;
-	uint64_t		cur;
-
-	*jump = TRUE;
-	if (momentum == UINT64_MAX)
-	{
-		old_height = 0;
-		momentum = get_gametime(&game->starttime);
-	}
-	cur = get_gametime(&game->starttime) - momentum;
-	new_height = PLAYER_INIT_JUMP_HEIGHT - (PLAYER_INIT_JUMP_HEIGHT
-	* pow(1.0 - ((double)cur / PLAYER_JUMP_TIME), 2));
-	player->heightoffset += new_height - old_height;
-	old_height = new_height;
-	if (cur > PLAYER_JUMP_TIME
-	|| (game->map->sectors[player->cur_sector].has_ceiling && player->height
-	+ player->heightoffset >= game->map->sectors[player->cur_sector].ceil))
-	{
-		*jump = FALSE;
-		momentum = UINT64_MAX;
-		return (FALSE);
-	}
-	return (TRUE);
-}
-
-static t_bool	move_down(t_game *game, t_player *player, t_bool *jump)
-{
-	static uint64_t	momentum = UINT64_MAX;
-	static float	old_drop;
-	float			new_drop;
-	uint64_t		cur;
-	
-	if (momentum == UINT64_MAX)
-	{
-		old_drop = 0;
-		momentum = get_gametime(&game->starttime);
-	}
-	cur = get_gametime(&game->starttime) - momentum;
-	new_drop = PLAYER_INIT_JUMP_HEIGHT * pow((double)cur / PLAYER_JUMP_TIME, 2);
-	player->heightoffset -= new_drop - old_drop;
-	old_drop = new_drop;
-	if (player->heightoffset <= 0)
-	{
-		*jump = FALSE;
-		player->heightoffset = 0;
-		momentum = UINT64_MAX;
-	}
-	return (TRUE);
-}
-
-static t_bool	fly_up(t_game *game, t_player *player, t_bool *jump)
-{
-	static float	height_to_go = 400;
-	float			diff;
-
-	diff = lerp(0, height_to_go, (float)game->lastframe / PLAYER_FLY_SPEED);
-	if (player->height + player->heightoffset + diff
-	< game->map->sectors[player->cur_sector].ceil)
-		player->heightoffset += diff;
-	*jump = TRUE;
-	return (TRUE);
-}
-
-static t_bool	fly_down(t_game *game, t_player *player, t_bool *jump)
-{
-	static float	height_to_go = 400;
-	float			diff;
-
-	diff = lerp(0, height_to_go, (float)game->lastframe / PLAYER_FLY_SPEED);
-	if (player->heightoffset - diff < 0)
-		player->heightoffset = 0;
-	else if (player->height + player->heightoffset - diff
-	> game->map->sectors[player->cur_sector].floor)
-		player->heightoffset -= diff;
-	*jump = FALSE;
-	return (TRUE);
-}
-
 static void		set_speed(t_game *game, float *speed)
 {
 	if (game->player->player_height == PLAYER_CROUCH)
@@ -143,49 +33,59 @@ static void		set_speed(t_game *game, float *speed)
 		*speed = PLAYER_MOVE_SPEED;
 }
 
-static void		determine_movement(t_game *game, t_bool *draw, float speed, float *xspeed, float *yspeed)
+static void		determine_movement(t_game *game, t_bool *draw, float speed,
+									t_vec *move)
 {
 	if (is_helddown(game->keymap, game->setting->controls.forward))
-		*draw |= move_forward(game->player, speed, xspeed, yspeed);
+		*draw |= move_forward(game->player, speed, &move->x, &move->y);
 	if (is_helddown(game->keymap, game->setting->controls.backward))
-		*draw |= move_backward(game->player, speed, xspeed, yspeed);
+		*draw |= move_backward(game->player, speed, &move->x, &move->y);
 	if (is_helddown(game->keymap, game->setting->controls.left))
-		*draw |= move_left(game->player, speed, xspeed, yspeed);
+		*draw |= move_left(game->player, speed, &move->x, &move->y);
 	if (is_helddown(game->keymap, game->setting->controls.right))
-		*draw |= move_right(game->player, speed, xspeed, yspeed);
+		*draw |= move_right(game->player, speed, &move->x, &move->y);
+}
+
+static t_bool	handle_fly(t_game *game, t_bool *jump)
+{
+	if (is_helddown(game->keymap, game->setting->controls.jump))
+		return (fly_up(game, game->player, jump));
+	else if (is_helddown(game->keymap, game->setting->controls.crouch))
+		return (fly_down(game, game->player, jump));
+	return (FALSE);
+}
+
+static t_bool	handle_jump(t_game *game, t_bool *jump)
+{
+	if (game->player->heightoffset > 0 && *jump == FALSE)
+		return (move_down(game, game->player, jump));
+	if ((is_helddown(game->keymap, game->setting->controls.jump)
+	&& game->player->heightoffset == 0 && *jump == FALSE) || *jump == TRUE)
+		return (move_jump(game, game->player, jump));
+	return (FALSE);
 }
 
 t_bool			player_move(t_game *game)
 {
 	t_bool			draw;
 	float			speed;
-	float			xspeed;
-	float			yspeed;
+	t_vec			move;
 	static t_bool	jump = FALSE;
-	
+
 	draw = FALSE;
-	xspeed = 0;
-	yspeed = 0;
+	move.x = 0;
+	move.y = 0;
 	set_speed(game, &speed);
-	determine_movement(game, &draw, speed, &xspeed, &yspeed);
-	if (!game->player->is_flying)
-	{
-		if (game->player->heightoffset > 0 && jump == FALSE)
-			draw |= move_down(game, game->player, &jump);
-		if ((is_helddown(game->keymap, game->setting->controls.jump)
-		&& game->player->heightoffset == 0 && jump == FALSE) || jump == TRUE)
-			draw |= move_jump(game, game->player, &jump);
-	}
+	determine_movement(game, &draw, speed, &move);
+	if (game->player->is_flying)
+		draw |= handle_fly(game, &jump);
 	else
-	{
-		if (is_helddown(game->keymap, game->setting->controls.jump))
-			draw |= fly_up(game, game->player, &jump);
-		else if (is_helddown(game->keymap, game->setting->controls.crouch))
-			draw |= fly_down(game, game->player, &jump);
-	}
-	xspeed = lerp_max(0, xspeed, (float)game->lastframe / BASE_FRAME_TIME, INFINITY);
-	yspeed = lerp_max(0, yspeed, (float)game->lastframe / BASE_FRAME_TIME, INFINITY);
+		draw |= handle_jump(game, &jump);
+	move.x = lerp_max(0, move.x,
+			(float)game->lastframe / BASE_FRAME_TIME, INFINITY);
+	move.y = lerp_max(0, move.y,
+			(float)game->lastframe / BASE_FRAME_TIME, INFINITY);
 	if (draw == TRUE)
-		player_col(game, xspeed, yspeed);
+		player_col(game, move.x, move.y);
 	return (draw);
 }

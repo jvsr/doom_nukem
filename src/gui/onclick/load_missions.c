@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 15:09:03 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 20:41:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:08:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "error.h"
 #include "onclick.h"
 
-static void create_map_list(t_game *game)
+static void		create_map_list(t_game *game)
 {
 	int			fd;
 	int			forky;
@@ -70,23 +70,26 @@ static t_list	*read_map_list(void)
 			ft_lstadd(&maps, new);
 		}
 	}
-	close (fd);
+	close(fd);
 	ft_lstsort(&maps, cmp_list);
 	return (maps);
 }
 
-static void	add_maps(t_list *list, t_game *game)
+static void		add_maps(t_list *list, t_game *game)
 {
 	(void)list;
 	(void)game;
 }
 
-void	printlist(const t_list *list)
-{
-	ft_printf("item: %s\n", list->content);
-}
+/*
+**void	printlist(const t_list *list)
+**{
+**	ft_printf("item: %s\n", list->content);
+**}
+**ft_lstiter(maps, printlist);
+*/
 
-void    load_missions(t_game *game)
+void			load_missions(t_game *game)
 {
 	static size_t	page = 0;
 	t_list			*maps;
@@ -95,7 +98,6 @@ void    load_missions(t_game *game)
 	(void)page;
 	create_map_list(game);
 	maps = read_map_list();
-	ft_lstiter(maps, printlist);
 	start = maps;
 	add_maps(start, game);
 }

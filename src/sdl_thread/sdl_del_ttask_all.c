@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 16:57:18 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/07 16:57:18 by pholster      ########   odam.nl         */
+/*   Updated: 2020/02/19 22:16:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	del_tasks(t_ttask *task)
 	}
 }
 
-void	*sdl_del_ttask_all(t_ttask **task)
+void		*sdl_del_ttask_all(t_ttask **task)
 {
 	if (task == NULL || *task == NULL)
 		return (NULL);

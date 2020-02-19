@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 14:27:39 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 14:01:15 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:12:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	hudoptions_return(t_game *game, t_transform *gui)
 	game->setting->changed = FALSE;
 	game->setting->confirm = FALSE;
 	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"),
+																		FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
 	game->cureventstate->eventstate = mainmenu;

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 18:45:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 20:55:29 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	hudoptions_return(t_game *game, t_transform *gui);
 
 void	confirmation_return(t_game *game, t_transform *gui);
 
-void    load_missions(t_game *game);
+void	load_missions(t_game *game);
 void	missions_focus_campaign(t_game *game, t_transform *gui);
 void	missions_focus_custom(t_game *game, t_transform *gui);
 void	mission_return(t_game *game, t_transform *gui);

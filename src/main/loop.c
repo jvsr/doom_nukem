@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/14 16:35:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:33:05 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <SDL2/SDL_keycode.h>
 
 #include "libft/ft_char.h"
+#include "libft/ft_printf.h"
 
 #include "gui.h"
 #include "game.h"
@@ -27,46 +28,6 @@
 #include "eventstate.h"
 #include "sdl_thread.h"
 #include "eventstate_transition_table.h"
-
-static void		check_quit(t_game *game, SDL_Event event)
-{
-	if (event.type == SDL_QUIT)
-		game->state = stopped;
-}
-
-static void		check_ui_click(t_game *game, SDL_Event event)
-{
-	t_transform	*hit;
-
-	if (game->cursoractive == FALSE || event.type != SDL_MOUSEBUTTONDOWN)
-		return ;
-	if (event.button.button == SDL_BUTTON_LEFT)
-	{
-		hit = check_gui_hit(game, (SDL_Point){event.button.x, event.button.y});
-		if (hit != NULL && hit->onclick != NULL)
-			hit->onclick(game, hit);
-	}
-}
-
-static void		manage_keymap(t_game *game, SDL_Event event)
-{
-	if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
-		toggle_keystate(game->keymap, event.key.keysym.sym, TRUE);
-	else if (event.type == SDL_KEYUP && event.key.repeat == 0)
-		toggle_keystate(game->keymap, event.key.keysym.sym, FALSE);
-	else if (event.type == SDL_MOUSEBUTTONDOWN)
-		toggle_keystate(game->keymap, event.button.button, TRUE);
-	else if (event.type == SDL_MOUSEBUTTONUP)
-		toggle_keystate(game->keymap, event.button.button, FALSE);
-	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKQUOTE)
-		print_keymap(game->keymap);
-
-	// if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
-	// {
-	// 	game->player->height += 0.2;
-	// 	set_elem_redraw(get_gui_child(game->ui, "gameview"));
-	// }
-}
 
 static void		load_info(t_game *game)
 {
@@ -84,10 +45,33 @@ static void		load_info(t_game *game)
 	}
 }
 
+static void		init_frames(t_game *game, int *framecount,
+							t_uint64 *lastsecond, t_uint64 *lastframe)
+{
+	*framecount = 0;
+	*lastsecond = get_gametime(&game->starttime);
+	*lastframe = *lastsecond;
+	game->frametime = PLAYER_MOVE_BASE_FPS;
+}
+
+static void		handle_frames(t_game *game, int *framecount,
+							t_uint64 *lastsecond, t_uint64 *lastframe)
+{
+	if (get_gametime(&game->starttime) - *lastsecond >= 1000)
+	{
+		ft_printf("FPS %d\n", *framecount);
+		game->frametime = *framecount;
+		*framecount = 0;
+		*lastsecond = get_gametime(&game->starttime);
+	}
+	(*framecount)++;
+	game->lastframe = get_gametime(&game->starttime) - *lastframe;
+	*lastframe = get_gametime(&game->starttime);
+}
+
 void			loop(t_game *game)
 {
 	SDL_Event	event;
-	void		(*eventstate_fnc)(t_game*, SDL_Event);
 	int			framecount;
 	t_uint64	lastsecond;
 	t_uint64	lastframe;
@@ -95,38 +79,15 @@ void			loop(t_game *game)
 	load_info(game);
 	if (game->state != running)
 		return ;
+	init_frames(game, &framecount, &lastsecond, &lastframe);
 	fade_in_music(game->audio_man, TITLE_SONG, 3500);
-	game->player->pos.x = 0;
-	game->player->pos.y = 0;
-	game->player->cur_sector = 0;
-	game->player->height = PLAYER_HEIGHT;
-	game->player->mag = (t_mag){cosf(0), sinf(0)};
-	framecount = 0;
-	lastsecond = get_gametime(&game->starttime);
-	game->frametime = PLAYER_MOVE_BASE_FPS;
-	lastframe = lastsecond;
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))
-		{
-			check_quit(game, event);
-			check_ui_click(game, event);
-			manage_keymap(game, event);
-			eventstate_fnc = g_eventstate[game->cureventstate->eventstate];
-			eventstate_fnc(game, event);
-		}
+			handle_event(game, event);
 		loop_core(game, game->cureventstate->eventstate);
 		draw_gui(game->ui, game);
 		SDL_UpdateWindowSurface(game->window);
-		if(get_gametime(&game->starttime) - lastsecond >= 1000)
-		{
-			printf("FPS %d\n", framecount);
-			game->frametime = framecount;
-			framecount = 0;
-			lastsecond = get_gametime(&game->starttime);
-		}
-		framecount++;
-		game->lastframe = get_gametime(&game->starttime) - lastframe;
-		lastframe = get_gametime(&game->starttime);
+		handle_frames(game, &framecount, &lastsecond, &lastframe);
 	}
 }

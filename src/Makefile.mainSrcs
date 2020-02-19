@@ -19,6 +19,7 @@ PREFIX =
 SRCS = main \
 		loop \
 		quit \
+		handle_event \
 		display_splash \
 		error_msg \
 		error_msg_sdl \

@@ -21,12 +21,16 @@ ONCLICK_SRCS = mainmenu \
 				mission \
 				load_missions \
 				fov \
+				hudfov \
 				music \
+				hudmusic \
 				resolution_type \
 				set_resolution_type \
 				resolution \
 				sensitivity \
+				hudsensitivity \
 				sound \
+				hudsound \
 				utils \
 				set_utils \
 				confirmation \
