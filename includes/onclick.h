@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 13:59:36 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 18:45:42 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <SDL2/SDL_surface.h>
 
 # include "types.h"
+
+# define PAGE_ITEMS 8
+
+# define MISSION_PATH "resources/data/map"
+# define TMP "resources/data/map/campaign/tmp_list"
+# define CAMPAIGN_PATH "./resources/data/map/campaign"
 
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
@@ -56,6 +62,7 @@ void	hudoptions_return(t_game *game, t_transform *gui);
 
 void	confirmation_return(t_game *game, t_transform *gui);
 
+void    load_missions(t_game *game);
 void	missions_focus_campaign(t_game *game, t_transform *gui);
 void	missions_focus_custom(t_game *game, t_transform *gui);
 void	mission_return(t_game *game, t_transform *gui);

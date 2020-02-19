@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:02:43 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/14 11:45:15 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 15:13:13 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	mainmenu_missions(t_game *game, t_transform *gui)
 	t_transform	*elem;
 
 	(void)gui;
+	load_missions(game);
 	elem = get_gui_child(game->ui, "missionsmenu");
 	set_elem_show_clickable(elem, TRUE);
 	elem = get_gui_child(game->ui, "missionsoverlay");
