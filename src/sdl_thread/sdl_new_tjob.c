@@ -12,6 +12,7 @@
 
 #include "libft/ft_mem.h"
 
+#include "sdl_thread.h"
 #include "error.h"
 
 t_tjob	*sdl_new_tjob(t_ttask *task)
