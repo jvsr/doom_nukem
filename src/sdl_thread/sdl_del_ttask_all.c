@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tp_addtoque.c                                      :+:    :+:            */
+/*   sdl_del_ttask_all.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/17 21:13:06 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:47:03 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:57:18 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:57:18 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_threadpool.h"
+#include "sdl_thread.h"
 
-t_bool		tp_addtoque(t_pool *pool, t_bool priority, t_task *task)
+static void	del_tasks(t_ttask *task)
 {
-	if (pool->terminating)
-		return (FALSE);
-	if (priority == FALSE)
+	t_ttask	*next;
+
+	while (task != NULL)
 	{
-		if (pool->last == NULL)
-			pool->que = task;
-		else
-			pool->last->next = task;
-		pool->last = task;
-		return (TRUE);
+		next = task->next;
+		sdl_del_ttask(&task);
+		task = next;
 	}
-	task->next = pool->que;
-	pool->que = task;
-	if (pool->last == NULL)
-		pool->last = task;
-	return (TRUE);
+}
+
+void	*sdl_del_ttask_all(t_ttask **task)
+{
+	if (task == NULL || *task == NULL)
+		return (NULL);
+	del_tasks(*task);
+	*task = NULL;
+	return (NULL);
 }

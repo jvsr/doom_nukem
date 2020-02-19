@@ -61,13 +61,16 @@ DEBUG_SRCS := $(DEBUG_SRCS:%=debug/%)
 
 DRAW_SRCS = draw_gui \
 		draw_elem \
+		draw_elements \
 		draw_button \
 		draw_image \
 		render_text \
 		draw_text \
 		draw_panel \
 		draw_gview \
-		draw_map_editor
+		draw_map_editor \
+		merge_elem \
+
 DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 
 MANAGE_SRCS = add_gui_child \

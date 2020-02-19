@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 17:33:26 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/10 17:15:33 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/19 14:30:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "renderer.h"
 #include "types.h"
 #include "rinfo.h"
+#include "error.h"
 
 static void	left_add(t_anim *anim, t_texture start)
 {
@@ -71,6 +72,8 @@ t_anim		enemy_init(t_object *obj, t_texture start)
 	anim.set_index = get_enemy_index;
 	anim.data = (void*)obj;
 	enm = ft_memalloc(sizeof(t_enemy));
+	if (enm == NULL)
+		error_msg_errno("Failed to alloc Enemy");
 	enm->health = 20;
 	enm->state = ENEMY_IDLE;
 	obj->data = enm;

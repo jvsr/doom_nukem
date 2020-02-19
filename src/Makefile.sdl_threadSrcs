@@ -16,18 +16,22 @@ PREFIX = sdl_
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = new_tpool \
+SRCS = \
+	new_tjob \
+	new_tpool \
 	new_tthread \
 	new_tqueue \
 	new_ttask \
 	alloc_tpool_tthreads \
+	del_tjob \
 	del_tpool \
 	del_tthread \
 	del_tqueue \
 	del_ttask \
+	del_ttask_all \
 	join_tpool \
 	join_ttask \
-	join_ttasks \
+	join_ttask_all \
 	run_ttask \
 	get_ttask \
 	complete_ttask \

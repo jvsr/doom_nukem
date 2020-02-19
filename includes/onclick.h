@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/13 17:27:59 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 13:59:36 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,17 @@ void	options_hud_sensitivity_up(t_game *game, t_transform *gui);
 void	options_sensitivity_down(t_game *game, t_transform *gui);
 void	options_hud_sensitivity_down(t_game *game, t_transform *gui);
 void	options_music_volume_up(t_game *game, t_transform *gui);
+void	options_hud_music_volume_up(t_game *game, t_transform *gui);
 void	options_music_volume_down(t_game *game, t_transform *gui);
+void	options_hud_music_volume_down(t_game *game, t_transform *gui);
 void	options_sound_volume_up(t_game *game, t_transform *gui);
+void	options_hud_sound_volume_up(t_game *game, t_transform *gui);
 void	options_sound_volume_down(t_game *game, t_transform *gui);
+void	options_hud_sound_volume_down(t_game *game, t_transform *gui);
 void	options_fov_up(t_game *game, t_transform *gui);
+void	options_hud_fov_up(t_game *game, t_transform *gui);
 void	options_fov_down(t_game *game, t_transform *gui);
+void	options_hud_fov_down(t_game *game, t_transform *gui);
 void	options_resolution_up(t_game *game, t_transform *gui);
 void	options_resolution_down(t_game *game, t_transform *gui);
 void	options_resolutiontype_up(t_game *game, t_transform *gui);
@@ -47,6 +53,7 @@ void	options_resolutiontype_down(t_game *game, t_transform *gui);
 
 void	options_open_controls(t_game *game, t_transform *gui);
 void	options_return(t_game *game, t_transform *gui);
+void	hudoptions_return(t_game *game, t_transform *gui);
 
 void	confirmation_return(t_game *game, t_transform *gui);
 
@@ -69,8 +76,11 @@ void	restart_game(t_game *game, t_transform *gui);
 void	set_sensitivity(t_setting *setting, t_transform *parent);
 void	set_hudsensitivity(t_setting *setting, t_transform *parent);
 void	set_music(t_setting *setting, t_transform *parent);
+void	set_hudmusic(t_setting *setting, t_transform *parent);
 void	set_sound(t_setting *setting, t_transform *parent);
+void	set_hudsound(t_setting *setting, t_transform *parent);
 void	set_fov(t_setting *setting, t_transform *parent, SDL_Surface *surf);
+void	set_hudfov(t_setting *setting, t_transform *parent, SDL_Surface *surf);
 void	set_resolution(t_setting *setting, t_transform *parent);
 void	set_resolution_type(t_setting *setting, t_transform *parent);
 

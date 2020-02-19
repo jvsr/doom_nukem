@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tp_tasksetinfo.c                                   :+:    :+:            */
+/*   sdl_new_tjob.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/25 14:54:57 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:48:58 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:40:19 by pholster       #+#    #+#                */
+/*   Updated: 2020/02/07 16:40:19 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_threadpool.h"
-#include "ft_mem.h"
+#include "libft/ft_mem.h"
 
-t_task	*tp_tasksetinfo(t_task *task, void (*f)(), size_t count, va_list params)
+#include "error.h"
+
+t_tjob	*sdl_new_tjob(t_ttask *task)
 {
-	size_t		i;
+	t_tjob	*job;
 
-	i = 0;
-	task->fnc = f;
-	task->param_count = count;
-	task->next = NULL;
-	ft_bzero(task->params, sizeof(task->params));
-	while (i < count)
-	{
-		task->params[i] = va_arg(params, void *);
-		i++;
-	}
-	return (task);
+	job = ft_memalloc(sizeof(t_tjob));
+	if (job == NULL)
+		error_msg_errno("Failed to alloc job struct");
+	job->task = task;
+	return (job);
 }

@@ -13,6 +13,10 @@
 #include "gui.h"
 #include "sdl_extra.h"
 
+/*
+** * Gui internal function
+*/
+
 void		draw_image(SDL_Surface *dst, t_image *image)
 {
 	if (image->draw_method == SCALED)
