@@ -309,7 +309,7 @@ static void	check_obj(t_object *obj, t_game *game, SDL_Surface *dst, float objan
 			(float[2]){dist, objang}, scrnspc), sizeof(t_objrend)));
 }
 
-static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *info, t_list *ren)
+static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *info)
 {
 	int *pixels;
 	int count;
@@ -343,7 +343,7 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *i
 		{
 			if (x >= 0 && x < dst->w && obj->dist < info->hits[x].hit.dist)
 			{
-				c_ybounds = set_ybounds(obj, game, (t_ybinfo){dst->h, &ybounds, x, prev}, ren);
+				c_ybounds = set_ybounds(obj, game, (t_ybinfo){dst->h, &ybounds, x, info->prev});
 				int *t_pixels = tex->pixels;
 				float perc = (float)(x - xbounds.x) / (xbounds.y - xbounds.x);
 				int tex_x = perc * (tex->w - 1);
@@ -366,7 +366,7 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *i
 	}
 }
 
-static void render_objs(t_game *game, SDL_Surface *dst, t_hinfo *info, t_coord *range, float hfov2, t_list *ren)
+static void render_objs(t_game *game, SDL_Surface *dst, t_hinfo *info, t_coord *range, float hfov2)
 {
 	t_list		*objs;
 	size_t		i;
@@ -383,11 +383,11 @@ static void render_objs(t_game *game, SDL_Surface *dst, t_hinfo *info, t_coord *
 			check_obj(obj, game, dst, objang, &objs, range, hfov2, info);
 		i++;
 	}
-	draw_object(objs, dst, game, info, ren);
+	draw_object(objs, dst, game, info);
 	ft_lstdel(&objs, NULL);
 }
 
-static void	render_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end, t_list *ren, float hfov2, t_coord *range)
+static void	render_hits(t_game *game, SDL_Surface *dst, t_list *ren, float hfov2, t_coord *range)
 {
 	t_list	*lst;
 	t_hinfo	*info;
@@ -396,7 +396,6 @@ static void	render_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end
 	t_point	bounds;
 
 	l_index = ft_lstlen(ren);
-	size_t last = l_index;
 	info = NULL;
 	while (l_index > 0)
 	{
@@ -413,7 +412,7 @@ static void	render_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end
 			draw_vline(game, dst, info->hits + index, index, ren, &bounds);
 			index++;
 		}
-		render_objs(game, dst, info, range, hfov2, ren);
+		render_objs(game, dst, info, range, hfov2);
 		l_index--;
 	}
 	ft_lstdel(&ren, del_hinfo);
@@ -431,7 +430,7 @@ static void render_chunk(t_game *game, SDL_Surface *dst, size_t start, size_t en
 	step = (float) game->setting->fov / dst->w;
 	ren = ft_lstnew(NULL, sizeof(void*));
 	get_hits(game, dst, start, end, ren, hfov2, step, vfov2);
-	render_hits(game, dst, start, end, ren, hfov2, &(t_coord){
+	render_hits(game, dst, ren, hfov2, &(t_coord){
 		wrap_float((start * step) + (game->player->angle - hfov2), 0, 360),
 		wrap_float((end * step) + (game->player->angle - hfov2), 0, 360)});
 }

@@ -17,22 +17,7 @@
 #include "game.h"
 #include "rinfo.h"
 
-static t_hinfo	*get_hinfo(t_list *lst, t_sector *sec)
-{
-	t_hinfo *info;
-
-	while (lst)
-	{
-		info = lst->content;
-		if (info->sec == sec)
-			return (info);
-		lst = lst->next;
-	}
-	return (NULL);
-}
-
-t_point		set_ybounds(t_objrend *obj,
-									t_game *game, t_ybinfo info, t_list *ren)
+t_point		set_ybounds(t_objrend *obj, t_game *game, t_ybinfo info)
 {
 	t_player	*plyr;
 	t_point		bnds;

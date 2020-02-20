@@ -50,7 +50,7 @@ t_bool				sort_objs(const t_list *a, const t_list *b);
 float				get_object_angle_on_screen(t_object *object,
 						t_player *player, t_coord *range);
 t_point				set_ybounds(t_objrend *obj,
-						t_game *game, t_ybinfo info, t_list *ren);
+						t_game *game, t_ybinfo info);
 void				get_s_object_index(t_game *game, void *anim);
 SDL_Surface			*tex_from_anim(t_game *game, t_anim *anim);
 void				get_r_object_index(t_game *game, void *anim);
