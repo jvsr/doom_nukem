@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/19 13:59:58 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 15:51:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static t_tablepair const	g_onclicks[] = {
 	{"options_return", options_return},
 	{"hudoptions_return", hudoptions_return},
 
+	{"missions_left_page", missions_left_page},
+	{"missions_right_page", missions_right_page},
 	{"missions_focus_campaign", missions_focus_campaign},
 	{"missions_focus_custom", missions_focus_custom},
 	{"mission_return", mission_return},
