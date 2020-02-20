@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/20 13:19:14 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 17:13:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ void	confirmation_return(t_game *game, t_transform *gui);
 
 void	load_missions(t_game *game);
 void	remove_maps(t_game *game);
+void	set_page_number(t_game *game);
+void	missions_left_page(t_game *game, t_transform *gui);
+void	missions_right_page(t_game *game, t_transform *gui);
 void	missions_focus_campaign(t_game *game, t_transform *gui);
 void	missions_focus_custom(t_game *game, t_transform *gui);
 void	mission_return(t_game *game, t_transform *gui);

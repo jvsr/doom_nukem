@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 15:09:03 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/20 13:29:00 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 15:42:03 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void		add_maps(t_list *list, t_game *game)
 	t_transform	*level;
 
 	i = 1;
-	while (list != NULL)
+	while (list != NULL && i <= 8)
 	{
 		name = ft_strformat("level%d", i);
 		level = get_gui_child(game->ui, name);
@@ -115,14 +115,6 @@ void		remove_maps(t_game *game)
 	}
 }
 
-/*
-**void	printlist(const t_list *list)
-**{
-**	ft_printf("item: %s\n", list->content);
-**}
-**ft_lstiter(maps, printlist);
-*/
-
 t_bool			get_focus(t_game *game)
 {
 	const t_transform *camp = get_gui_child(game->ui, "missionscampaignbutton");
@@ -139,22 +131,33 @@ void			del(void *content, size_t content_size)
 	free(content);
 }
 
+t_list			*skip_page(t_list *maps, size_t page)
+{
+	size_t			i;
+	const	size_t	item = page * 8;
+
+	i = 0;
+	while (i < item && maps != NULL)
+	{
+		i++;
+		maps = maps->next;
+	}
+	return (maps);
+}
+
 void			load_missions(t_game *game)
 {
-	static size_t	page = 0;
 	t_bool			focus;
 	t_list			*maps;
 	t_list			*start;
 
-	(void)page;
 	focus = get_focus(game);
-	ft_printf("%d\n", focus);
 	if (focus == TRUE)
 		create_map_list(game, CAMPAIGN_PATH);
 	else if (focus == FALSE)
 		create_map_list(game, CUSTOM_PATH);
 	maps = read_map_list();
-	start = maps;
+	start = skip_page(maps, game->ui->mission_page);
 	add_maps(start, game);
 	ft_lstdel(&maps, del);
 }

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/07 20:27:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 15:19:05 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ struct			s_gui
 	SDL_Surface	*window_surface;
 	t_transform	*children;
 	TTF_Font	*fonts[FONT_AMOUNT];
+	size_t		mission_page;
 	t_bool		redraw;
 };
 
