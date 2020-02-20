@@ -58,7 +58,6 @@ static void draw_line(SDL_Surface *dst, t_point *ybounds, int x, int colour, t_p
 		{
 			int y = (wrap_float((float)(i - ybounds->x) / (ybounds->y - ybounds->x), 0, hit->wall->perc.y) / hit->wall->perc.y) * tex->h;
 			pixels[x + (dst->w * (dst->h - i - 1))] = rgba_intensity(t_pixels[(y * tex->w) + tex_x], intensity);
-
 			i++;
 		}
 	}
@@ -255,7 +254,7 @@ static void render_objects(t_list *secs, t_zbuf *zbuf, SDL_Surface *dst, t_game 
 				else if (tmp_angle < hfov2)
 					dist *= cosf((hfov2 - tmp_angle) * PI_R);
 				if (zbuf[screen_space].dist > dist)
-					ft_lstaddbck(&objs, ft_lstnew(new_rendobj(obj, sec, (float[2]){dist, object_angle}, screen_space), sizeof(t_object)));
+					ft_lstaddbck(&objs, ft_lstnew(new_rendobj(obj, sec, (float[2]){dist, object_angle}, screen_space), sizeof(t_objrend)));
 			}
 			objects = objects->next;
 		}

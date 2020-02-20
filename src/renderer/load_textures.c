@@ -73,7 +73,7 @@ void				load_textures(t_game *game)
 		"brick_wall", "skybox_day", "skybox_dusk", "objs/lamp",
 		"objs/chair_back", "objs/chair_front", "objs/chair_left",
 		"objs/chair_right", "bloodsplatter", "quartz", "objs/health_pickup",
-		"objs/key"
+		"objs/key", "glass"
 	};
 	index = 0;
 	game->textures = ft_memalloc(sizeof(SDL_Surface *) * TEXTURE_COUNT);

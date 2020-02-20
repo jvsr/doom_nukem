@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "game.h"
+#include "cmath.h"
 #include "coord.h"
 
 t_coord		*get_collision(t_coord *start,

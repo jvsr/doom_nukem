@@ -20,5 +20,5 @@
 
 void		draw_gview(SDL_Surface *dst, t_game *game)
 {
-	render_3d(game, dst);
+	render(game, dst);
 }

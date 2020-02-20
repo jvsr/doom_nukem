@@ -24,12 +24,14 @@
 # define ANIMATIONS 4
 # define MAX_ANIMATION_TIME 2000
 # define OBJECT_COL_SIZE 1.0
+# define MAX_HIT 2147483646
 
 typedef struct s_sector	t_sector;
 typedef struct s_game	t_game;
 typedef struct s_list	t_list;
 typedef struct s_player	t_player;
 typedef struct s_object t_object;
+typedef struct s_hinfo	t_hinfo;
 
 typedef struct	s_anim
 {
@@ -57,8 +59,10 @@ typedef struct	s_wall
 	t_coord		corner_0;
 	t_coord		corner_1;
 	t_bool		is_portal;
+	t_bool		is_window;
 	t_sector	*window;
 	t_anim		texture;
+	t_anim		win_tex;
 	t_coord		perc;
 	t_list		*decals;
 }				t_wall;
@@ -138,5 +142,24 @@ typedef struct	s_zbuf
 	float		dist;
 	t_secbounds	bounds[MAX_OBJ_SECTORS];
 }				t_zbuf;
+
+typedef struct	s_hitem
+{
+	t_point		bounds;
+	t_hit		hit;
+	t_coord		y;
+	t_coord		st;
+}				t_hitem;
+
+struct	s_hinfo
+{
+	t_sector	*sec;
+	t_hitem		*hits;
+	size_t		size;
+	size_t		start;
+	size_t		end;
+	t_hinfo		*prev;
+};
+
 
 #endif

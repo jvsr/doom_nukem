@@ -25,7 +25,7 @@ t_hit	get_hit(t_coord *cosin,
 
 	i = 0;
 	walls = sector->walls;
-	hit.dist = 2147483646;
+	hit.dist = MAX_HIT;
 	while (i < sector->wall_count)
 	{
 		if (!(prev != NULL && walls[i].is_portal && walls[i].window == prev) &&

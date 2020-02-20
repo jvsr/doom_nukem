@@ -35,5 +35,6 @@ void	health_pickup(t_game *game,
 	if (lst == NULL)
 		return ;
 	ft_lstdelone(&lst, NULL);
+	sec->object_count--;
 	free(obj);
 }

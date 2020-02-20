@@ -10,19 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_list.h"
 #include "libft/ft_num.h"
 #include "renderer.h"
 #include "player.h"
 #include "game.h"
 #include "rinfo.h"
 
+static t_hinfo	*get_hinfo(t_list *lst, t_sector *sec)
+{
+	t_hinfo *info;
+
+	while (lst)
+	{
+		info = lst->content;
+		if (info->sec == sec)
+			return (info);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
 t_point		set_ybounds(t_objrend *obj,
-									t_game *game, t_ybinfo info, t_zbuf *buf)
+									t_game *game, t_ybinfo info, t_list *ren)
 {
 	t_player	*plyr;
+	t_point		bnds;
 	t_sector	*sec;
 	t_point		ret;
-	int			i;
 
 	plyr = game->player;
 	sec = &game->map->sectors[plyr->cur_sector];
@@ -31,16 +46,15 @@ t_point		set_ybounds(t_objrend *obj,
 						ft_constrain(info.ybounds->y, 0, info.h)};
 	else
 	{
-		i = 0;
-		while (buf->bounds[i].sec != NULL && buf->bounds[i].sec != obj->sec)
-			i++;
-		if (buf->bounds[i].sec == NULL)
-			i--;
+		if (info.prev)
+			bnds = info.prev->hits[info.index].bounds;
+		else
+			bnds = (t_point){0, info.h};
 		ret = (t_point){
-			ft_constrain(info.ybounds->x, buf->bounds[i].bounds.x,
-				buf->bounds[i].bounds.y),
-			ft_constrain(info.ybounds->y, buf->bounds[i].bounds.x,
-				buf->bounds[i].bounds.y)};
+			ft_constrain(info.ybounds->x, bnds.x,
+				bnds.y),
+			ft_constrain(info.ybounds->y, bnds.x,
+				bnds.y)};
 	}
 	return (ret);
 }

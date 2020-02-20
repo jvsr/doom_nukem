@@ -33,14 +33,16 @@ typedef struct		s_ybinfo
 {
 	int		h;
 	t_point	*ybounds;
+	size_t	index;
+	t_hinfo	*prev;
 }					t_ybinfo;
 
-void				render_3d(t_game *game, SDL_Surface *dst);
+void				render(t_game *game, SDL_Surface *dst);
 SDL_Surface			*get_texture(t_game *game, t_texture texture);
 void				load_textures(t_game *game);
 t_hit				get_hit(t_coord *cosin,
 						t_player *player, t_sector *sector, t_sector *prev);
-void				draw_skybox(int x,
+void				draw_skybox(size_t x,
 						SDL_Surface *dst, t_game *game, t_point *bounds);
 t_objrend			*new_rendobj(t_object *obj,
 						t_sector *sec, float *flts, int x);
@@ -48,7 +50,7 @@ t_bool				sort_objs(const t_list *a, const t_list *b);
 float				get_object_angle_on_screen(t_object *object,
 						t_player *player, t_coord *range);
 t_point				set_ybounds(t_objrend *obj,
-						t_game *game, t_ybinfo info, t_zbuf *buf);
+						t_game *game, t_ybinfo info, t_list *ren);
 void				get_s_object_index(t_game *game, void *anim);
 SDL_Surface			*tex_from_anim(t_game *game, t_anim *anim);
 void				get_r_object_index(t_game *game, void *anim);
