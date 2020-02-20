@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/19 20:51:19 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 20:16:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ struct			s_sector
 	float		ceil;
 	t_bool		has_ceiling;
 	void		(*f_enter)(t_game *game, t_sector *cur_sector);
+	void		(*f_exit)(t_game *game, t_sector *cur_sector);
 	float		light_value;
 };
 
