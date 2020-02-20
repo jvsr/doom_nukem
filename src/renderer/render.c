@@ -136,11 +136,9 @@ static void	get_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end, t
 	float	angle;
 	float	r_angle;
 	t_coord	cosin;
-	t_hinfo *info;
 
 	ren->content = new_hinfo(game->map->sectors + game->player->cur_sector,
 						end - start, start);
-	info = ren->content;
 	while (start < end)
 	{
 		angle = step * start;
@@ -159,7 +157,7 @@ static void draw_cline(SDL_Surface *dst, t_point *ybounds, size_t index, int col
 	t_point c_ybounds;
 
 	pixels = dst->pixels;
-	if (index < 0 || index >= (size_t)dst->w)
+	if (index >= (size_t)dst->w)
 		return;
 	*bounds = (t_point){ft_constrain(bounds->x, 0, dst->h), ft_constrain(bounds->y, 0, dst->h)};
 	c_ybounds.x = ft_constrain(ybounds->x, bounds->x, bounds->y);
@@ -185,7 +183,7 @@ static void draw_wall(SDL_Surface *dst, t_point *ybounds, size_t x, t_point *bou
 
 	pixels = dst->pixels;
 	decals = NULL;
-	if (x < 0 || x >= (size_t)dst->w)
+	if (x >= (size_t)dst->w)
 		return;
 	*bounds = (t_point){ft_constrain(bounds->x, 0, dst->h), ft_constrain(bounds->y, 0, dst->h)};
 	c_ybounds.x = ft_constrain(ybounds->x, bounds->x, bounds->y);
@@ -424,7 +422,7 @@ static void render_chunk(t_game *game, SDL_Surface *dst, size_t start, size_t en
 	float	step;
 	float	vfov2;
 	t_list	*ren;
-	
+
 	hfov2 = (float)game->setting->fov * 0.5;
 	vfov2 = (float)game->setting->vfov * 0.5;
 	step = (float) game->setting->fov / dst->w;
