@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/28 14:57:04 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:27:06 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "init.h"
 #include "audio.h"
 #include "sdl_thread.h"
-
-#include "parse_map.h" //
 
 int	main(int argc, char **argv, char **envp)
 {

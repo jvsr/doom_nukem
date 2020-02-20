@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/14 11:06:09 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/14 12:23:51 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 20:56:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	quit_map_editor_select(t_game *game)
 		game, get_gui_child(game->ui, "mapeditorselectboxreturnbutton"));
 }
 
-void	map_editor_select_eventstate(t_game *game, SDL_Event event)
+void		map_editor_select_eventstate(t_game *game, SDL_Event event)
 {
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		quit_map_editor_select(game);

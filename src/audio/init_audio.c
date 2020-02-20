@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/01 11:16:29 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/28 14:56:05 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 20:54:30 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "libft/ft_mem.h"
+#include "libft/ft_printf.h"
 #include "libft/ft_hash.h"
 
 #include "game.h"
@@ -41,12 +42,12 @@ void		init_audio(t_game *game)
 	if (game->audio_man == NULL)
 		error_msg_errno("Failed to allocate Audio Manager");
 	if (Mix_OpenAudio(AUDIO_FREQ, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER)
-		!= 0)
-			error_msg_sdl(EIO, "Failed to open Audio Mixer");
+	!= 0)
+		error_msg_sdl(EIO, "Failed to open Audio Mixer");
 	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
 	if (!(support & MIX_INIT_MP3))
 	{
-		printf ("%i, %i\n", support & MIX_INIT_MP3, support & MIX_INIT_FLAC);
+		ft_printf("%i, %i\n", support & MIX_INIT_MP3, support & MIX_INIT_FLAC);
 		error_msg_sdl(EIO, "Failed to init Audio Mixer");
 	}
 	alloc_hashmaps(game->audio_man);

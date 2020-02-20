@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 16:40:10 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/07 16:40:10 by pholster      ########   odam.nl         */
+/*   Updated: 2020/02/19 22:16:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ int		sdl_worker_tthread(void *param)
 	}
 	return (0);
 }
-

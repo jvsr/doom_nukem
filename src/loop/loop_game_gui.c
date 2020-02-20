@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 14:31:35 by euan           #+#    #+#                */
-/*   Updated: 2020/02/14 15:11:08 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/19 21:26:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		keys(t_game *game)
 void			loop_game_gui(t_game *game)
 {
 	char	*elem_text;
-	
+
 	elem_text = ft_strformat("Angle: %.2f Pos: %.2f %.2f Flying : %i",
 	game->player->angle, game->player->pos.x, game->player->pos.y,
 	game->player->is_flying);

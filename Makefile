@@ -118,7 +118,7 @@ all: $(NAME)
 $(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
+	@gcc -g -coverage -o $(NAME) $(OBJS) $(LIBS)
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE

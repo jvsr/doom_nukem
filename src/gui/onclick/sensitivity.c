@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 13:48:02 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/13 17:29:47 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:12:54 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ void	set_sensitivity(t_setting *setting, t_transform *parent)
 		1);
 }
 
-void	set_hudsensitivity(t_setting *setting, t_transform *parent)
-{
-	set_float(setting->sensitivity,
-		get_elem_child(parent, "curhudsensitivity"),
-		1);
-}
-
 void	options_sensitivity_up(t_game *game, t_transform *gui)
 {
 	game->setting->changed = TRUE;
@@ -41,18 +34,4 @@ void	options_sensitivity_down(t_game *game, t_transform *gui)
 	game->setting->changed = TRUE;
 	decr_float_min(&game->setting->sensitivity, 0.1, 0.1);
 	set_sensitivity(game->setting, gui->parent.elem);
-}
-
-void	options_hud_sensitivity_up(t_game *game, t_transform *gui)
-{
-	game->setting->changed = TRUE;
-	incr_float_max(&game->setting->sensitivity, 0.1, 3.0);
-	set_hudsensitivity(game->setting, gui->parent.elem);
-}
-
-void	options_hud_sensitivity_down(t_game *game, t_transform *gui)
-{
-	game->setting->changed = TRUE;
-	decr_float_min(&game->setting->sensitivity, 0.1, 0.1);
-	set_hudsensitivity(game->setting, gui->parent.elem);
 }

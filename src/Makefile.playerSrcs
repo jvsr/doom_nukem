@@ -25,5 +25,8 @@ COL_SRCS = health_pickup key_pickup
 COL_SRCS := $(COL_SRCS:%=col_funcs/%)
 
 SRCS = \
-	player_move player_col \
+	player_move \
+	player_directions \
+	player_jump \
+	player_col \
 	$(COL_SRCS)

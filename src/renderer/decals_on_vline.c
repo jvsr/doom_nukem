@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 13:21:27 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/19 14:45:20 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/19 21:37:26 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_list		**decals_on_vline(t_wall *wall,
 	while (temp)
 	{
 		decal = temp->content;
-		if (perc_hit >= decal->pos.x && perc_hit <= decal->pos.x + decal->size.x / len)
+		if (perc_hit >= decal->pos.x && perc_hit
+		<= decal->pos.x + decal->size.x / len)
 		{
 			new = ft_lstnew(decal, sizeof(decal));
 			if (new == NULL)
