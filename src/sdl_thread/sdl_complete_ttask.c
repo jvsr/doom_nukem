@@ -15,7 +15,12 @@
 void	sdl_complete_ttask(t_ttask *task)
 {
 	if ((task->flags & TFLAG_TASK_NO_DELETE) != 0)
+	{
+		SDL_LockMutex(task->lock);
 		SDL_CondBroadcast(task->cond_completed);
+		SDL_UnlockMutex(task->lock);
+	}
 	else
 		sdl_del_ttask(&task);
+
 }

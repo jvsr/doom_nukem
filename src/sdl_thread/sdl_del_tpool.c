@@ -23,7 +23,9 @@ static void	del_threads(t_tpool *pool)
 	i = 0;
 	if (pool->threads == NULL)
 		return ;
+	SDL_LockMutex(pool->tasks->lock);
 	SDL_CondBroadcast(pool->tasks->cond_not_empty);
+	SDL_UnlockMutex(pool->tasks->lock);
 	while (i < pool->size)
 	{
 		SDL_WaitThread(pool->threads[i]->id, NULL);

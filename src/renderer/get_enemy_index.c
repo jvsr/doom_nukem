@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 16:06:50 by euan           #+#    #+#                */
-/*   Updated: 2020/02/10 17:16:22 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/19 21:37:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "rinfo.h"
 #include "types.h"
 #include "cmath.h"
-
 
 static void	calc_second(t_game *game, t_enemy *en, t_point *val)
 {

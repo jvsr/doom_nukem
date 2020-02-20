@@ -19,13 +19,18 @@ PREFIX =
 ONCLICK_SRCS = mainmenu \
 				options \
 				mission \
+				load_missions \
 				fov \
+				hudfov \
 				music \
+				hudmusic \
 				resolution_type \
 				set_resolution_type \
 				resolution \
 				sensitivity \
+				hudsensitivity \
 				sound \
+				hudsound \
 				utils \
 				set_utils \
 				confirmation \
@@ -59,11 +64,13 @@ DEBUG_SRCS := $(DEBUG_SRCS:%=debug/%)
 
 DRAW_SRCS = draw_gui \
 		draw_elem \
+		draw_elements \
 		draw_button \
 		draw_image \
 		render_text \
 		draw_text \
 		draw_panel \
+		merge_elem \
 		draw_gview
 DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 

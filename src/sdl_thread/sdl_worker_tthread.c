@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 16:40:10 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/07 16:40:10 by pholster      ########   odam.nl         */
+/*   Updated: 2020/02/19 22:16:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		sdl_worker_tthread(void *param)
 	while ((thread->pool->flags & TFLAG_POOL_TERMINATE) == 0)
 	{
 		sdl_get_ttask(thread);
-		if (thread->task== NULL)
+		if (thread->task == NULL)
 			continue ;
 		sdl_run_ttask(thread->task);
 		sdl_complete_ttask(thread->task);
@@ -29,4 +29,3 @@ int		sdl_worker_tthread(void *param)
 	}
 	return (0);
 }
-

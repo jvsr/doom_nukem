@@ -14,15 +14,15 @@
 
 #include "sdl_thread.h"
 
-static void	del_tasks(t_ttask *task)
+static void	del_jobs(t_tjob *job)
 {
-	t_ttask	*next;
+	t_tjob	*next;
 
-	while (task != NULL)
+	while (job != NULL)
 	{
-		next = task->next;
-		sdl_del_ttask(&task);
-		task = next;
+		next = job->next;
+		sdl_del_tjob(&job, TRUE);
+		job = next;
 	}
 }
 
@@ -30,7 +30,7 @@ void		*sdl_del_tqueue(t_tqueue **queue)
 {
 	if (queue == NULL || *queue == NULL)
 		return (NULL);
-	del_tasks((*queue)->first);
+	del_jobs((*queue)->first);
 	SDL_DestroyMutex((*queue)->lock);
 	SDL_DestroyCond((*queue)->cond_empty);
 	SDL_DestroyCond((*queue)->cond_not_empty);
