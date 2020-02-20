@@ -20,14 +20,14 @@
 
 static t_ttask	*update_elem(t_transform *elem, t_game *game)
 {
-	// t_ttask		*new;
+	t_ttask		*new;
 
-	// if (elem->parent_type == GUI)
-	// {
-	// 	new = sdl_new_ttask(draw_elem, TFLAG_TASK_NO_DELETE, 2, elem, game);
-	// 	sdl_add_tpool_ttask(game->pool, new);
-	// 	return (new);
-	// }
+	if (elem->parent_type == GUI)
+	{
+		new = sdl_new_ttask(draw_elem, TFLAG_TASK_NO_DELETE, 2, elem, game);
+		sdl_add_tpool_ttask(game->pool, new);
+		return (new);
+	}
 	draw_elem(elem, game);
 	return (NULL);
 }
