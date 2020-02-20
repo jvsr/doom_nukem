@@ -6,12 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/22 16:13:28 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:37:05 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 13:12:00 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "game.h"
+#include "onclick.h"
 
 static void	remove_mission(t_game *game)
 {
@@ -44,6 +45,8 @@ void		missions_focus_campaign(t_game *game, t_transform *gui)
 	campaign = get_gui_child(game->ui, "missionscampaignbutton");
 	custom = get_gui_child(game->ui, "missionscustombutton");
 	switch_focus(campaign, custom);
+	remove_maps(game);
+	load_missions(game);
 }
 
 void		missions_focus_custom(t_game *game, t_transform *gui)
@@ -55,10 +58,13 @@ void		missions_focus_custom(t_game *game, t_transform *gui)
 	campaign = get_gui_child(game->ui, "missionscampaignbutton");
 	custom = get_gui_child(game->ui, "missionscustombutton");
 	switch_focus(custom, campaign);
+	remove_maps(game);
+	load_missions(game);
 }
 
 void		mission_return(t_game *game, t_transform *gui)
 {
 	(void)gui;
 	remove_mission(game);
+	remove_maps(game);
 }

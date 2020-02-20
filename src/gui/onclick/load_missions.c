@@ -6,34 +6,37 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 15:09:03 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:08:14 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 13:29:00 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_str.h"
 #include "libft/ft_printf.h"
 
-#include <fcntl.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 
+#include "gui.h"
 #include "game.h"
 #include "error.h"
 #include "onclick.h"
 
-static void		create_map_list(t_game *game)
+static void		create_map_list(t_game *game, char *path)
 {
 	int			fd;
 	int			forky;
-	char *const	argument[] = {"/bin/ls", CAMPAIGN_PATH, NULL};
+	char *const	argument[] = {"/bin/ls", path, NULL};
 
 	forky = fork();
 	if (forky == 0)
 	{
-		fd = open(TMP, O_CREAT | O_WRONLY,
+		fd = open(TMP, O_CREAT | O_WRONLY | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
 		if (fd == -1)
 			error_msg_errno("Failed to open tmp file");
+		chmod(TMP, S_IRWXU);
 		dup2(fd, STDOUT_FILENO);
 		dup2(fd, STDERR_FILENO);
 		close(fd);
@@ -79,8 +82,37 @@ static t_list	*read_map_list(void)
 
 static void		add_maps(t_list *list, t_game *game)
 {
-	(void)list;
-	(void)game;
+	int			i;
+	char		*name;
+	t_transform	*level;
+
+	i = 1;
+	while (list != NULL)
+	{
+		name = ft_strformat("level%d", i);
+		level = get_gui_child(game->ui, name);
+		set_elem_text_str(level, list->content);
+		free(name);
+		list = list->next;
+		i++;
+	}
+}
+
+void		remove_maps(t_game *game)
+{
+	int			i;
+	char		*name;
+	t_transform	*level;
+
+	i = 1;
+	while (i <= 8)
+	{
+		name = ft_strformat("level%d", i);
+		level = get_gui_child(game->ui, name);
+		set_elem_text_str(level, "");
+		free(name);
+		i++;
+	}
 }
 
 /*
@@ -91,15 +123,38 @@ static void		add_maps(t_list *list, t_game *game)
 **ft_lstiter(maps, printlist);
 */
 
+t_bool			get_focus(t_game *game)
+{
+	const t_transform *camp = get_gui_child(game->ui, "missionscampaignbutton");
+	const t_transform *custom = get_gui_child(game->ui, "missionscustombutton");
+
+	if (camp->layer > custom->layer)
+		return (TRUE);
+	return (FALSE);
+}
+
+void			del(void *content, size_t content_size)
+{
+	(void)content_size;
+	free(content);
+}
+
 void			load_missions(t_game *game)
 {
 	static size_t	page = 0;
+	t_bool			focus;
 	t_list			*maps;
 	t_list			*start;
 
 	(void)page;
-	create_map_list(game);
+	focus = get_focus(game);
+	ft_printf("%d\n", focus);
+	if (focus == TRUE)
+		create_map_list(game, CAMPAIGN_PATH);
+	else if (focus == FALSE)
+		create_map_list(game, CUSTOM_PATH);
 	maps = read_map_list();
 	start = maps;
 	add_maps(start, game);
+	ft_lstdel(&maps, del);
 }
