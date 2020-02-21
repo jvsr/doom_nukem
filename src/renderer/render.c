@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 12:43:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 13:07:58 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -469,20 +469,17 @@ static void	render_hits(t_game *game, SDL_Surface *dst, t_list *ren, float hfov2
 	t_list	*lst;
 	t_hinfo	*info;
 	size_t	index;
-	size_t	l_index;
 	t_point	bounds;
 
-	l_index = ft_lstlen(ren);
 	info = NULL;
-	while (l_index > 0)
+	lst = ren;
+	while (lst)
 	{
-		lst = ft_lstindex(ren, l_index - 1);
 		info = lst->content;
-		lst = ft_lstindex(ren, l_index - 2);
 		index = info->start;
 		while (index < info->end)
 		{
-			if (l_index == 1)
+			if (lst->next == NULL)
 				bounds = (t_point){0, dst->h};
 			else
 				bounds = info->prev->hits[index].bounds;
@@ -491,7 +488,7 @@ static void	render_hits(t_game *game, SDL_Surface *dst, t_list *ren, float hfov2
 			index++;
 		}
 		render_objs(game, dst, info, range, hfov2);
-		l_index--;
+		lst = lst->next;
 	}
 	ft_lstdel(&ren, del_hinfo);
 }
@@ -507,14 +504,11 @@ static void render_chunk(t_game *game, SDL_Surface *dst, size_t start, size_t en
 	vfov2 = (float)game->setting->vfov * 0.5;
 	step = (float) game->setting->fov / dst->w;
 	ren = ft_lstnew(NULL, sizeof(void*));
-	//t_uint64 begin = get_gametime(&game->starttime);
 	get_hits(game, dst, start, end, ren, hfov2, step, vfov2);
-	//t_uint64 mid = get_gametime(&game->starttime);
+	ft_lstrev(&ren);
 	render_hits(game, dst, ren, hfov2, &(t_coord){
 		wrap_float((start * step) + (game->player->angle - hfov2), 0, 360),
 		wrap_float((end * step) + (game->player->angle - hfov2), 0, 360)});
-	//t_uint64 final = get_gametime(&game->starttime);
-	//printf("\nHits : %zu, Renderer : %zu", mid - begin, final - mid);
 }
 
 void	render(t_game *game, SDL_Surface *dst)
