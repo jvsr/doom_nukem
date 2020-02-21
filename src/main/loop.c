@@ -42,6 +42,12 @@ static void		load_info(t_game *game)
 	{
 		while (SDL_PollEvent(&event))
 			check_quit(game, event);
+		if (game->cureventstate->eventstate == splash
+		&& game->cureventstate->arguments->dgt == TRUE)
+		{
+			SDL_UpdateWindowSurface(game->window);
+			game->cureventstate->arguments->dgt = FALSE;
+		}
 	}
 }
 

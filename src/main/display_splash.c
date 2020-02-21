@@ -51,16 +51,19 @@ static void		fade(t_game *game, SDL_Surface *splash,
 		sdl_set_surface_alpha(splash, alpha);
 		sdl_clear_surface(game->surface);
 		sdl_merge_surface_alpha_scaled(game->surface, splash);
-		SDL_UpdateWindowSurface(game->window);
+		game->cureventstate->arguments->dgt = TRUE;
 		frametime = get_gametime(&game->starttime);
 	}
 }
 
 void			*display_splash(t_game *game, char *loc)
 {
+	t_types		update_window;
 	SDL_Surface *splashscreen;
 	t_uint64	now;
 
+	update_window.dgt = FALSE;
+	game->cureventstate->arguments = &update_window;
 	sdl_clear_surface(game->surface);
 	splashscreen = open_tga_sdl(loc, game->exec_path);
 	sdl_set_surface_alpha(splashscreen, 0);
@@ -72,5 +75,6 @@ void			*display_splash(t_game *game, char *loc)
 	fade(game, splashscreen, fadeout);
 	SDL_FreeSurface(splashscreen);
 	game->cureventstate->eventstate = mainmenu;
+	game->cureventstate->arguments = NULL;
 	return (NULL);
 }

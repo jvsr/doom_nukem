@@ -46,6 +46,8 @@ void			init_window_surface(t_game *game)
 	if (game->window == NULL)
 		error_msg_sdl(ENOMEM, "Failed to alloc game window");
 	game->surface = SDL_GetWindowSurface(game->window);
+	if (game->surface == NULL)
+		error_msg_sdl(ENOMEM, "Failed to alloc game surface");
 	SDL_SetWindowIcon(game->window, window_icon);
 	SDL_FreeSurface(window_icon);
 }
