@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 11:00:49 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 11:06:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static t_point	get_bounds(t_player *player, SDL_Surface *dst, t_hitem *hit, floa
 	hit->y.x -= hit->st.y;
 	hit->st.x = hit->st.y * 2;
 	new = (t_point){0, 0};
-	printf("Hit : %p, wall %p, sec %p\n", hit, hit->hit.wall, hit->hit.sect);
 	if (!hit->hit.wall->is_portal && hit->hit.sect->ceil > hit->y.x && hit->hit.sect->floor < hit->y.y)
 	{
 		new.x = (((hit->hit.sect->floor - hit->y.x) / hit->st.x) *
