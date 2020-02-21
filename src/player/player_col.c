@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 16:27:27 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/21 22:11:05 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,15 +222,15 @@ t_bool				player_col(t_game *game, float xspeed, float yspeed)
 	{
 		if (map->sectors[player->cur_sector].f_exit != NULL)
 			map->sectors[player->cur_sector].f_exit(game, &map->sectors[player->cur_sector]);
-		ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
+		// ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
 		if (player->height + player->heightoffset + PLAYER_CLIMB - player->player_height < map->sectors[next_sector].floor
 		|| player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor) > map->sectors[next_sector].ceil
 		)
 		{
-			ft_printf("col: %d\n", col);
+			// ft_printf("col: %d\n", col);
 			return (FALSE);
 		}
-		ft_printf("height: %f, other: %f\n", player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor), map->sectors[next_sector].ceil);
+		// ft_printf("height: %f, other: %f\n", player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor), map->sectors[next_sector].ceil);
 		if (player->height + player->heightoffset > map->sectors[next_sector].floor + player->player_height)
 			player->heightoffset += player->height - (map->sectors[next_sector].floor + player->player_height);
 		else

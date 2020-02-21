@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 17:33:26 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/19 14:30:16 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/21 16:37:16 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_anim		enemy_init(t_object *obj, t_texture start)
 	enm->health = 20;
 	enm->state = ENEMY_IDLE;
 	obj->data = enm;
+	obj->is_enemy = TRUE;
 	front_add(&anim, start);
 	back_add(&anim, start + 4);
 	left_add(&anim, start + 8);

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/21 12:52:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 22:34:02 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void		map_init(t_game *game)
 	//Sector 1
 	game->map->sectors[0].ceil = 150;
 	game->map->sectors[0].floor = 0;
-	game->map->sectors[0].wall_count = 5;
+	game->map->sectors[0].wall_count = 6;
 	game->map->sectors[0].walls = ft_memalloc(sizeof(t_wall) * 5);
 	game->map->sectors[0].light_value = 0.5;
 	if (game->map->sectors[0].walls == NULL)
@@ -92,6 +92,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].walls[4] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 2}, NULL};
 	game->map->sectors[0].walls[4].is_portal = TRUE;
 	game->map->sectors[0].walls[4].window = &game->map->sectors[1];
+	game->map->sectors[0].walls[5] = (t_wall){(t_coord){30, 10}, (t_coord){10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[0].has_ceiling = TRUE;
 	game->map->sectors[0].object_count = 4;
 
@@ -108,6 +109,7 @@ static void		map_init(t_game *game)
 	obj->pos = (t_coord){5, 0};
 	obj->size = (t_coord){10, 10};
 	obj->img = chair_init(obj, 10);
+	obj->is_enemy = FALSE;
 	obj->can_col = TRUE;
 	obj->col_radius = 1.0;
 
@@ -115,6 +117,7 @@ static void		map_init(t_game *game)
 	obj->pos = (t_coord){3, 3};
 	obj->size = (t_coord){4, 15};
 	obj->img = enemy_init(obj, TEXTURE_ENEMY0_F0);
+	obj->is_enemy = TRUE;
 	obj->can_col = TRUE;
 	obj->col_radius = 1.0;
 
@@ -123,6 +126,7 @@ static void		map_init(t_game *game)
 	obj->size = (t_coord){4, 4};
 	obj->img = single_init(TEXTURE_HEALTH_PICKUP, obj);
 	obj->can_col = FALSE;
+	obj->is_enemy = FALSE;
 	obj->col_radius = 1.0;
 	obj->on_collide = health_pickup;
 
@@ -131,6 +135,7 @@ static void		map_init(t_game *game)
 	obj->size = (t_coord){4, 4};
 	obj->img = single_init(TEXTURE_KEYS, obj);
 	obj->can_col = FALSE;
+	obj->is_enemy = FALSE;
 	obj->col_radius = 1.0;
 	obj->on_collide = key_pickup;
 
@@ -161,6 +166,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].walls[3] = (t_wall){(t_coord){-20, -20}, (t_coord){-20, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[1].walls[3].is_portal = TRUE;
 	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
+	
 	game->map->sectors[1].has_ceiling = TRUE;
 	game->map->sectors[1].object_count = 0;
 	game->map->sectors[1].objects = NULL;
@@ -202,6 +208,21 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].has_ceiling = TRUE;
 	game->map->sectors[3].object_count = 0;
 	game->map->sectors[3].objects = NULL;
+
+	// //Sector 5
+	// game->map->sectors[5].ceil = 150;
+	// game->map->sectors[5].floor = 0;
+	// game->map->sectors[5].wall_count = 4;
+	// game->map->sectors[5].walls = ft_memalloc(sizeof(t_wall) * 4);
+	// game->map->sectors[5].light_value = 0.5;
+	// if (game->map->sectors[5].walls == NULL)
+	// 	error_msg_errno("Could not allocate Map Walls");
+	// game->map->sectors[5].walls[0] = (t_wall){(t_coord){-5, -5}, (t_coord){5, -5}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[5].walls[1] = (t_wall){(t_coord){5, -5}, (t_coord){5, -5}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[5].walls[2] = (t_wall){(t_coord){5, -5}, (t_coord){5, 5}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[5].walls[3] = (t_wall){(t_coord){5, 5}, (t_coord){-5, 5}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[5].has_ceiling = TRUE;
+	// game->map->sectors[5].object_count = 4;
 }
 
 void			*init_function(t_game *game)
