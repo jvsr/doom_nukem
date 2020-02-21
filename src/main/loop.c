@@ -42,14 +42,15 @@ static void		load_info(t_game *game)
 	{
 		while (SDL_PollEvent(&event))
 			check_quit(game, event);
-		if (game->cureventstate->eventstate == splash
+		if (game->cureventstate->arguments != NULL
 		&& game->cureventstate->arguments->dgt == TRUE)
 		{
 			SDL_UpdateWindowSurface(game->window);
 			game->cureventstate->arguments->dgt = FALSE;
 		}
 	}
-	game->cureventstate->arguments = NULL;
+	if (game->cureventstate->eventstate == mainmenu)
+		game->cureventstate->arguments = NULL;
 }
 
 static void		init_frames(t_game *game, int *framecount,
