@@ -75,6 +75,5 @@ void			*display_splash(t_game *game, char *loc)
 	fade(game, splashscreen, fadeout);
 	SDL_FreeSurface(splashscreen);
 	game->cureventstate->eventstate = mainmenu;
-	game->cureventstate->arguments = NULL;
 	return (NULL);
 }
