@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 11:06:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 11:30:35 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,20 +372,21 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *i
 static void render_objs(t_game *game, SDL_Surface *dst, t_hinfo *info, t_coord *range, float hfov2)
 {
 	t_list		*objs;
-	size_t		i;
 	float		objang;
 	t_object	*obj;
+	t_list		*tmp;
 
 	objs = NULL;
-	i = 0;
-	while (i < info->sec->object_count)
+	tmp = info->sec->objects;
+	while (tmp)
 	{
-		obj = ft_lstindex(info->sec->objects, i)->content;
+		obj = tmp->content;
 		objang = get_object_angle_on_screen(obj, game->player, range);
 		if (objang >= 0)
 			check_obj(obj, game, dst, objang, &objs, range, hfov2, info);
-		i++;
+		tmp = tmp->next;
 	}
+	ft_lstsort(&objs, sort_objs);
 	draw_object(objs, dst, game, info);
 	ft_lstdel(&objs, NULL);
 }
