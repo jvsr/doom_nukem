@@ -49,7 +49,8 @@ static void		load_info(t_game *game)
 			game->cureventstate->arguments->dgt = FALSE;
 		}
 	}
-	game->cureventstate->arguments = NULL;
+	if (game->state == running)
+		game->cureventstate->arguments = NULL;
 }
 
 static void		init_frames(t_game *game, int *framecount,
