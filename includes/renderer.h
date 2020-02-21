@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/10 17:15:11 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 15:59:56 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ void				get_r_object_index(t_game *game, void *anim);
 t_list				**decals_on_vline(t_wall *wall, float perc_hit,
 						float len, t_list **out);
 void				get_enemy_index(t_game *game, void *anim);
+t_point				get_bounds(t_player *player,
+						SDL_Surface *dst, t_hitem *hit, float tanvfov2);
+void				get_hits(t_rinfo *rinfo, float tanvfov2);
 
 #endif

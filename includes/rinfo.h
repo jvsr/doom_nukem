@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/20 20:16:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/21 15:32:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef struct	s_hitem
 	t_coord		st;
 }				t_hitem;
 
-struct	s_hinfo
+struct			s_hinfo
 {
 	t_sector	*sec;
 	t_hitem		*hits;
@@ -161,6 +161,18 @@ struct	s_hinfo
 	size_t		end;
 	t_hinfo		*prev;
 };
+
+typedef struct	s_rinfo
+{
+	t_game		*game;
+	SDL_Surface	*dst;
+	t_list		*ren;
+	float		hfov2;
+	float		vfov2;
+	float		step;
+	size_t		start;
+	size_t		end;
+}				t_rinfo;
 
 
 #endif

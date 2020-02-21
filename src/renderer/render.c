@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 15:20:39 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 16:00:02 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,6 @@
 #include "error.h"
 #include "personal.h"
 
-static t_hinfo	*new_hinfo(t_sector *sec, size_t ar_size, size_t start)
-{
-	t_hinfo *info;
-
-	info = ft_memalloc(sizeof(t_hinfo));
-	if (info == NULL)
-		error_msg_errno("Error allocating hinfo");
-	info->sec = sec;
-	info->hits = (t_hitem*)ft_memalloc(sizeof(t_hitem) * ar_size);
-	if (info->hits == NULL)
-		error_msg_errno("Error allocating hinfo hits");
-	info->size = ar_size;
-	info->start = start;
-	return (info);
-}
-
 static void		del_hinfo(void *info, size_t size)
 {
 	t_hinfo *h;
@@ -51,109 +35,6 @@ static void		del_hinfo(void *info, size_t size)
 	h = info;
 	ft_memdel((void**)&h->hits);
 	ft_memdel((void**)&h);
-}
-
-static t_point	get_bounds(t_player *player, SDL_Surface *dst, t_hitem *hit, float tanvfov2)
-{
-	t_point	new;
-
-	hit->st.y = hit->hit.dist * tanvfov2;
-	hit->y.x = player->height + player->heightoffset;
-	hit->y.y = hit->y.x + hit->st.y;
-	hit->y.x -= hit->st.y;
-	hit->st.x = hit->st.y * 2;
-	new = (t_point){0, 0};
-	if (!hit->hit.wall->is_portal && hit->hit.sect->ceil > hit->y.x && hit->hit.sect->floor < hit->y.y)
-	{
-		new.x = (((hit->hit.sect->floor - hit->y.x) / hit->st.x) *
-				dst->h) - player->screen_updown;
-		new.y = dst->h - (((hit->y.y - hit->hit.sect->ceil) / hit->st.x) *
-				dst->h) - player->screen_updown;
-	}
-	else if (hit->hit.sect->ceil > hit->y.x && hit->hit.sect->floor < hit->y.y)
-	{
-		new.x = (((hit->hit.wall->window->floor - hit->y.x) / hit->st.x) *
-				dst->h) - player->screen_updown;
-		new.y = dst->h - (((hit->y.y - hit->hit.wall->window->ceil) / hit->st.x) *
-				dst->h) - player->screen_updown;
-	}
-	return (new);
-}
-
-static void	move_sector(t_hit *hit, t_list *ren, t_hinfo **prev, t_hinfo **info, size_t index)
-{
-	t_list	*tmp;
-	t_hinfo	*htmp;
-
-	*prev = *info;
-	tmp = ren;
-	while (tmp)
-	{
-		htmp = tmp->content;
-		if (hit->wall->window == htmp->sec)
-		{
-			*info = htmp;
-			return ;
-		}
-		tmp = tmp->next;
-	}
-	ft_lstaddbck(&ren, ft_lstnew(
-		new_hinfo(hit->wall->window, (*info)->size, index), sizeof(t_hinfo)));
-	*info = ft_lstlast(ren)->content;
-}
-
-static void hit(t_game *game, SDL_Surface *dst, size_t index, t_list *ren, float hfov2, t_coord *cosin, float angle, float tanvfov2)
-{
-	t_hinfo *info;
-	t_hitem	*hit;
-	t_hinfo	*prev;
-	t_point	tmp;
-
-	info = ren->content;
-	prev = info;
-	tmp = (t_point){0, dst->h};
-	hit = NULL;
-	while (tmp.x != tmp.y && (hit == NULL || hit->hit.wall->is_portal))
-	{
-		info->prev = prev;
-		info->end = index;
-		hit = info->hits + index;
-		hit->hit = get_hit(cosin, game->player, info->sec, prev->sec);
-		if (hit->hit.dist == MAX_HIT)
-		{
-			tmp.y = tmp.x;
-			continue;
-		}
-		if (angle > hfov2)
-			hit->hit.dist *= cosf((angle - hfov2) * PI_R);
-		else if (angle < hfov2)
-			hit->hit.dist *= cosf((hfov2 - angle) * PI_R);
-		hit->hit.og_dist = hit->hit.dist;
-		hit->hit.dist *= LEVEL_MULTIPLIER;
-		tmp = get_bounds(game->player, dst, hit, tanvfov2);
-		hit->bounds = tmp;
-		if (tmp.x != tmp.y && hit->hit.wall->is_portal == TRUE)
-			move_sector(&hit->hit, ren, &prev, &info, index);
-	}
-}
-
-static void	get_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end, t_list *ren, float hfov2, float step, float tanvfov2)
-{
-	float	angle;
-	float	r_angle;
-	t_coord	cosin;
-
-	ren->content = new_hinfo(game->map->sectors + game->player->cur_sector,
-						end - start, start);
-	while (start < end)
-	{
-		angle = step * start;
-		r_angle = wrap_float(angle + (game->player->angle - hfov2), 0, 360)
-					* PI_R;
-		cosin = (t_coord){cosf(r_angle), sinf(r_angle)};
-		hit(game, dst, start, ren, hfov2, &cosin, angle, tanvfov2);
-		start++;
-	}
 }
 
 static void draw_cline(SDL_Surface *dst, t_point *ybounds, size_t index, int colour, t_point *bounds)
@@ -363,7 +244,7 @@ static void	draw_vline(t_game *game, SDL_Surface *dst, t_hitem *item, size_t ind
 	}
 }
 
-static void	check_obj(t_object *obj, t_game *game, SDL_Surface *dst, float objang, t_list **objs, t_coord *range, float hfov2, t_hinfo *info)
+static void	check_obj(t_object *obj, float objang, t_list **objs, t_coord *range, t_hinfo *info, t_rinfo *rinfo)
 {
 	float	tmpang;
 	int		scrnspc;
@@ -371,12 +252,12 @@ static void	check_obj(t_object *obj, t_game *game, SDL_Surface *dst, float objan
 
 	obj->img.angle = objang;
 	tmpang = calc_fov(range->x, objang);
-	scrnspc = (int)((tmpang / calc_fov(range->x, range->y)) * dst->w);
-	dist = get_distance(&game->player->pos, &obj->pos);
-	if (tmpang > hfov2)
-		dist *= cosf((tmpang - hfov2) * PI_R);
-	else if (tmpang < hfov2)
-		dist *= cosf((hfov2 - tmpang) * PI_R);
+	scrnspc = (int)((tmpang / calc_fov(range->x, range->y)) * rinfo->dst->w);
+	dist = get_distance(&rinfo->game->player->pos, &obj->pos);
+	if (tmpang > rinfo->hfov2)
+		dist *= cosf((tmpang - rinfo->hfov2) * PI_R);
+	else if (tmpang < rinfo->hfov2)
+		dist *= cosf((rinfo->hfov2 - tmpang) * PI_R);
 	if (dist < info->hits[scrnspc].hit.og_dist)
 		ft_lstadd(objs, ft_lstnew(new_rendobj(obj, info->sec,
 			(float[2]){dist, objang}, scrnspc), sizeof(t_objrend)));
@@ -443,7 +324,7 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *i
 	}
 }
 
-static void render_objs(t_game *game, SDL_Surface *dst, t_hinfo *info, t_coord *range, float hfov2)
+static void render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range)
 {
 	t_list		*objs;
 	float		objang;
@@ -455,17 +336,17 @@ static void render_objs(t_game *game, SDL_Surface *dst, t_hinfo *info, t_coord *
 	while (tmp)
 	{
 		obj = tmp->content;
-		objang = get_object_angle_on_screen(obj, game->player, range);
+		objang = get_object_angle_on_screen(obj, rinfo->game->player, range);
 		if (objang >= 0)
-			check_obj(obj, game, dst, objang, &objs, range, hfov2, info);
+			check_obj(obj, objang, &objs, range, info, rinfo);
 		tmp = tmp->next;
 	}
 	ft_lstsort(&objs, sort_objs);
-	draw_object(objs, dst, game, info);
+	draw_object(objs, rinfo->dst, rinfo->game, info);
 	ft_lstdel(&objs, NULL);
 }
 
-static void	render_hits(t_game *game, SDL_Surface *dst, t_list *ren, float hfov2, t_coord *range)
+static void	render_hits(t_rinfo *rinfo, t_coord *range)
 {
 	t_list	*lst;
 	t_hinfo	*info;
@@ -473,7 +354,7 @@ static void	render_hits(t_game *game, SDL_Surface *dst, t_list *ren, float hfov2
 	t_point	bounds;
 
 	info = NULL;
-	lst = ren;
+	lst = rinfo->ren;
 	while (lst)
 	{
 		info = lst->content;
@@ -481,35 +362,36 @@ static void	render_hits(t_game *game, SDL_Surface *dst, t_list *ren, float hfov2
 		while (index < info->end)
 		{
 			if (lst->next == NULL)
-				bounds = (t_point){0, dst->h};
+				bounds = (t_point){0, rinfo->dst->h};
 			else
 				bounds = info->prev->hits[index].bounds;
 			if (info->hits[index].hit.dist < MAX_HIT)
-				draw_vline(game, dst, info->hits + index, index, ren, &bounds);
+				draw_vline(rinfo->game, rinfo->dst, info->hits + index, index, rinfo->ren, &bounds);
 			index++;
 		}
-		render_objs(game, dst, info, range, hfov2);
+		render_objs(rinfo, info, range);
 		lst = lst->next;
 	}
-	ft_lstdel(&ren, del_hinfo);
+	ft_lstdel(&rinfo->ren, del_hinfo);
 }
 
 static void render_chunk(t_game *game, SDL_Surface *dst, size_t start, size_t end)
 {
-	float	hfov2;
-	float	step;
-	float	vfov2;
-	t_list	*ren;
+	t_rinfo	rinfo;
 
-	hfov2 = (float)game->setting->fov / 2;
-	vfov2 = (float)game->setting->vfov / 2;
-	step = (float) game->setting->fov / dst->w;
-	ren = ft_lstnew(NULL, sizeof(void*));
-	get_hits(game, dst, start, end, ren, hfov2, step, tanf(vfov2 * PI_R));
-	ft_lstrev(&ren);
-	render_hits(game, dst, ren, hfov2, &(t_coord){
-		wrap_float((start * step) + (game->player->angle - hfov2), 0, 360),
-		wrap_float((end * step) + (game->player->angle - hfov2), 0, 360)});
+	rinfo.hfov2 = (float)game->setting->fov / 2;
+	rinfo.vfov2 = (float)game->setting->vfov / 2;
+	rinfo.step = (float) game->setting->fov / dst->w;
+	rinfo.ren = ft_lstnew(NULL, sizeof(void*));
+	rinfo.game = game;
+	rinfo.start = start;
+	rinfo.end = end;
+	rinfo.dst = dst;
+	get_hits(&rinfo, tanf(rinfo.vfov2 * PI_R));
+	ft_lstrev(&rinfo.ren);
+	render_hits(&rinfo, &(t_coord){
+		wrap_float((start * rinfo.step) + (game->player->angle - rinfo.hfov2), 0, 360),
+		wrap_float((end * rinfo.step) + (game->player->angle - rinfo.hfov2), 0, 360)});
 }
 
 void	render(t_game *game, SDL_Surface *dst)
