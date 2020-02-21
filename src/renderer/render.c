@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 14:23:22 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 15:20:39 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ static void		del_hinfo(void *info, size_t size)
 	ft_memdel((void**)&h);
 }
 
-static t_point	get_bounds(t_player *player, SDL_Surface *dst, t_hitem *hit, float vfov2)
+static t_point	get_bounds(t_player *player, SDL_Surface *dst, t_hitem *hit, float tanvfov2)
 {
 	t_point	new;
 
-	hit->st.y = hit->hit.dist * tanf(vfov2 * PI_R);
+	hit->st.y = hit->hit.dist * tanvfov2;
 	hit->y.x = player->height + player->heightoffset;
 	hit->y.y = hit->y.x + hit->st.y;
 	hit->y.x -= hit->st.y;
@@ -102,7 +102,7 @@ static void	move_sector(t_hit *hit, t_list *ren, t_hinfo **prev, t_hinfo **info,
 	*info = ft_lstlast(ren)->content;
 }
 
-static void hit(t_game *game, SDL_Surface *dst, size_t index, t_list *ren, float hfov2, t_coord *cosin, float angle, float vfov2)
+static void hit(t_game *game, SDL_Surface *dst, size_t index, t_list *ren, float hfov2, t_coord *cosin, float angle, float tanvfov2)
 {
 	t_hinfo *info;
 	t_hitem	*hit;
@@ -130,14 +130,14 @@ static void hit(t_game *game, SDL_Surface *dst, size_t index, t_list *ren, float
 			hit->hit.dist *= cosf((hfov2 - angle) * PI_R);
 		hit->hit.og_dist = hit->hit.dist;
 		hit->hit.dist *= LEVEL_MULTIPLIER;
-		tmp = get_bounds(game->player, dst, hit, vfov2);
+		tmp = get_bounds(game->player, dst, hit, tanvfov2);
 		hit->bounds = tmp;
 		if (tmp.x != tmp.y && hit->hit.wall->is_portal == TRUE)
 			move_sector(&hit->hit, ren, &prev, &info, index);
 	}
 }
 
-static void	get_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end, t_list *ren, float hfov2, float step, float vfov2)
+static void	get_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end, t_list *ren, float hfov2, float step, float tanvfov2)
 {
 	float	angle;
 	float	r_angle;
@@ -151,7 +151,7 @@ static void	get_hits(t_game *game, SDL_Surface *dst, size_t start, size_t end, t
 		r_angle = wrap_float(angle + (game->player->angle - hfov2), 0, 360)
 					* PI_R;
 		cosin = (t_coord){cosf(r_angle), sinf(r_angle)};
-		hit(game, dst, start, ren, hfov2, &cosin, angle, vfov2);
+		hit(game, dst, start, ren, hfov2, &cosin, angle, tanvfov2);
 		start++;
 	}
 }
@@ -501,11 +501,11 @@ static void render_chunk(t_game *game, SDL_Surface *dst, size_t start, size_t en
 	float	vfov2;
 	t_list	*ren;
 
-	hfov2 = (float)game->setting->fov * 0.5;
-	vfov2 = (float)game->setting->vfov * 0.5;
+	hfov2 = (float)game->setting->fov / 2;
+	vfov2 = (float)game->setting->vfov / 2;
 	step = (float) game->setting->fov / dst->w;
 	ren = ft_lstnew(NULL, sizeof(void*));
-	get_hits(game, dst, start, end, ren, hfov2, step, vfov2);
+	get_hits(game, dst, start, end, ren, hfov2, step, tanf(vfov2 * PI_R));
 	ft_lstrev(&ren);
 	render_hits(game, dst, ren, hfov2, &(t_coord){
 		wrap_float((start * step) + (game->player->angle - hfov2), 0, 360),
