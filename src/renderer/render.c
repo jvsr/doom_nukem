@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/19 12:39:17 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/21 11:00:49 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static t_point	get_bounds(t_player *player, SDL_Surface *dst, t_hitem *hit, floa
 	hit->y.x -= hit->st.y;
 	hit->st.x = hit->st.y * 2;
 	new = (t_point){0, 0};
+	printf("Hit : %p, wall %p, sec %p\n", hit, hit->hit.wall, hit->hit.sect);
 	if (!hit->hit.wall->is_portal && hit->hit.sect->ceil > hit->y.x && hit->hit.sect->floor < hit->y.y)
 	{
 		new.x = (((hit->hit.sect->floor - hit->y.x) / hit->st.x) *
@@ -118,6 +119,11 @@ static void hit(t_game *game, SDL_Surface *dst, size_t index, t_list *ren, float
 		info->end = index;
 		hit = info->hits + index;
 		hit->hit = get_hit(cosin, game->player, info->sec, prev->sec);
+		if (hit->hit.dist == MAX_HIT)
+		{
+			tmp.y = tmp.x;
+			continue;
+		}
 		if (angle > hfov2)
 			hit->hit.dist *= cosf((angle - hfov2) * PI_R);
 		else if (angle < hfov2)
@@ -407,7 +413,8 @@ static void	render_hits(t_game *game, SDL_Surface *dst, t_list *ren, float hfov2
 				bounds = (t_point){0, dst->h};
 			else
 				bounds = info->prev->hits[index].bounds;
-			draw_vline(game, dst, info->hits + index, index, ren, &bounds);
+			if (info->hits[index].hit.dist < MAX_HIT)
+				draw_vline(game, dst, info->hits + index, index, ren, &bounds);
 			index++;
 		}
 		render_objs(game, dst, info, range, hfov2);
