@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 13:07:58 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 14:23:22 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <math.h>
 #include "color.h"
 #include "error.h"
+#include "personal.h"
 
 static t_hinfo	*new_hinfo(t_sector *sec, size_t ar_size, size_t start)
 {
@@ -377,7 +378,7 @@ static void	check_obj(t_object *obj, t_game *game, SDL_Surface *dst, float objan
 	else if (tmpang < hfov2)
 		dist *= cosf((hfov2 - tmpang) * PI_R);
 	if (dist < info->hits[scrnspc].hit.og_dist)
-		ft_lstaddbck(objs, ft_lstnew(new_rendobj(obj, info->sec,
+		ft_lstadd(objs, ft_lstnew(new_rendobj(obj, info->sec,
 			(float[2]){dist, objang}, scrnspc), sizeof(t_objrend)));
 }
 
