@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 12:28:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 12:43:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,10 +331,8 @@ static void	draw_vline(t_game *game, SDL_Surface *dst, t_hitem *item, size_t ind
 
 	if (item == NULL || item->hit.sect == NULL)
 		return ;
-	ybnds.x = (((item->hit.sect->floor - item->y.x) / item->st.x) * (dst->h))
-					- game->player->screen_updown;
-	ybnds.y = dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x)
-					* (dst->h)) - game->player->screen_updown;
+	ybnds.x = ((item->hit.sect->floor - item->y.x) / item->st.x) * (dst->h) - game->player->screen_updown;
+	ybnds.y =dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x) * (dst->h)) - game->player->screen_updown;
 	if (ybnds.y < dst->h && item->hit.sect->has_ceiling)
 		draw_cline(dst, &(t_point){ybnds.y, dst->h}, index, CEILING_COLOR,
 			bounds);
@@ -423,6 +421,10 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *i
 				int tex_x = perc * (tex->w - 1);
 				float intensity = ((MAX_LIGHT_DIST - clamp_float(obj->dist, 0, MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * obj->sec->light_value;
 				int i = c_ybounds.x;
+				if (i < 0)
+					i = 0;
+				if (c_ybounds.y >= dst->h)
+					c_ybounds.y = dst->h - 1;
 				while (i < c_ybounds.y)
 				{
 					int y = (float)(i - ybounds.x) / (ybounds.y - ybounds.x) * tex->h;
