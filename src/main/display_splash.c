@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/24 16:46:17 by euan           #+#    #+#                */
-/*   Updated: 2019/11/13 18:12:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/21 16:23:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void		fade(t_game *game, SDL_Surface *splash,
 		sdl_set_surface_alpha(splash, alpha);
 		sdl_clear_surface(game->surface);
 		sdl_merge_surface_alpha_scaled(game->surface, splash);
-		if (game->state == running)
-			game->cureventstate->arguments->dgt = TRUE;
+		// if (game->state == running)
+		// 	game->cureventstate->arguments->dgt = TRUE;
 		frametime = get_gametime(&game->starttime);
 	}
 }
