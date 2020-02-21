@@ -45,13 +45,14 @@ static void		fade(t_game *game, SDL_Surface *splash,
 
 	now = get_gametime(&game->starttime);
 	frametime = now;
-	while (frametime - now < duration)
+	while (game->state == running && frametime - now < duration)
 	{
 		alpha = alpha_func((double)(frametime - now), duration);
 		sdl_set_surface_alpha(splash, alpha);
 		sdl_clear_surface(game->surface);
 		sdl_merge_surface_alpha_scaled(game->surface, splash);
-		game->cureventstate->arguments->dgt = TRUE;
+		if (game->state == running)
+			game->cureventstate->arguments->dgt = TRUE;
 		frametime = get_gametime(&game->starttime);
 	}
 }
