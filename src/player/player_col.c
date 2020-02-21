@@ -91,8 +91,8 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	static t_uint32	prev_sector = UINT32_MAX;
 
 	coord.x = (t_coord){player->pos.x + xspeed, player->pos.y};
-	coord.y = (t_coord){player->pos.x + xspeed, player->pos.y};
-	coord.xy = (t_coord){player->pos.x + xspeed, player->pos.y};
+	coord.y = (t_coord){player->pos.x, player->pos.y + yspeed};
+	coord.xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
 	i = 0;
 	max = map->sectors[player->cur_sector].wall_count;
 	next_sector = UINT32_MAX;
@@ -115,7 +115,7 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 				new_wall = ft_lstnew(&walls[i], sizeof(t_wall*));
 				if (new_wall == NULL)
 					error_msg_errno("Failed to alloc New Wall");
-				ft_lstadd(&portals, new_wall);	
+				ft_lstadd(&portals, new_wall);
 			}
 		}
 		if (*col == 7)
