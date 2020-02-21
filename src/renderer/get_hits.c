@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/02/21 16:01:17 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 16:36:01 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_hinfo	*new_hinfo(t_sector *sec, size_t ar_size, size_t start)
 	return (info);
 }
 
-static void	move_sector(t_hit *hit, t_hinfo **prev, t_hinfo **info, t_rinfo *rinfo)
+static void		move_sector(t_hit *hit, t_hinfo **prev, t_hinfo **info, t_rinfo *rinfo)
 {
 	t_list	*tmp;
 	t_hinfo	*htmp;
@@ -58,10 +58,10 @@ static void	move_sector(t_hit *hit, t_hinfo **prev, t_hinfo **info, t_rinfo *rin
 	*info = ft_lstlast(rinfo->ren)->content;
 }
 
-static void hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
+static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 {
-	t_hinfo *info;
 	t_hitem	*hit;
+	t_hinfo *info;
 	t_hinfo	*prev;
 	t_point	tmp;
 
@@ -93,7 +93,7 @@ static void hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 	}
 }
 
-void	get_hits(t_rinfo *rinfo, float tanvfov2)
+void			get_hits(t_rinfo *rinfo, float tanvfov2)
 {
 	float	angle;
 	float	r_angle;

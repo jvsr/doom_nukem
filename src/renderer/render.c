@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 16:00:02 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 16:40:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,41 +206,41 @@ static t_hinfo *find_hinfo(t_list *lst, t_sector *sec)
 	return (NULL);
 }
 
-static void	draw_vline(t_game *game, SDL_Surface *dst, t_hitem *item, size_t index, t_list *ren, t_point *bounds)
+static void	draw_vline(t_rinfo *rinfo, t_hitem *item, size_t index, t_point *bounds)
 {
 	t_point	ybnds;
 	t_point	nybnds;
 
 	if (item == NULL || item->hit.sect == NULL)
 		return ;
-	ybnds.x = ((item->hit.sect->floor - item->y.x) / item->st.x) * (dst->h) - game->player->screen_updown;
-	ybnds.y =dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x) * (dst->h)) - game->player->screen_updown;
-	if (ybnds.y < dst->h && item->hit.sect->has_ceiling)
-		draw_cline(dst, &(t_point){ybnds.y, dst->h}, index, CEILING_COLOR,
+	ybnds.x = ((item->hit.sect->floor - item->y.x) / item->st.x) * (rinfo->dst->h) - rinfo->game->player->screen_updown;
+	ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x) * (rinfo->dst->h)) - rinfo->game->player->screen_updown;
+	if (ybnds.y < rinfo->dst->h && item->hit.sect->has_ceiling)
+		draw_cline(rinfo->dst, &(t_point){ybnds.y, rinfo->dst->h}, index, CEILING_COLOR,
 			bounds);
-	else if (ybnds.y < dst->h)
-		draw_skybox(index, dst, game,
-			(t_point[2]){(t_point){ybnds.y, dst->h}, *bounds});
+	else if (ybnds.y < rinfo->dst->h)
+		draw_skybox(index, rinfo->dst, rinfo->game,
+			(t_point[2]){(t_point){ybnds.y, rinfo->dst->h}, *bounds});
 	if (ybnds.x > 0)
-		draw_cline(dst, &(t_point){0, ybnds.x}, index, FLOOR_COLOR,
+		draw_cline(rinfo->dst, &(t_point){0, ybnds.x}, index, FLOOR_COLOR,
 			bounds);
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
-		draw_wall(dst, &ybnds, index, bounds, &item->hit, game);
+		draw_wall(rinfo->dst, &ybnds, index, bounds, &item->hit, rinfo->game);
 	else if (item->hit.sect->ceil > item->y.x &&
 				item->hit.sect->floor < item->y.y)
 	{
-		nybnds = (find_hinfo(ren, item->hit.sect))->hits[index].bounds;
+		nybnds = (find_hinfo(rinfo->ren, item->hit.sect))->hits[index].bounds;
 		if (nybnds.x > 0)
-			draw_wall(dst, &(t_point){ybnds.x, nybnds.x}, index,
-				bounds, &item->hit, game);
-		if (nybnds.y < dst->h)
-			draw_wall(dst, &(t_point){nybnds.y, ybnds.y}, index,
-				bounds, &item->hit, game);
+			draw_wall(rinfo->dst, &(t_point){ybnds.x, nybnds.x}, index,
+				bounds, &item->hit, rinfo->game);
+		if (nybnds.y < rinfo->dst->h)
+			draw_wall(rinfo->dst, &(t_point){nybnds.y, ybnds.y}, index,
+				bounds, &item->hit, rinfo->game);
 		if (item->hit.wall->is_window && nybnds.x < ybnds.x)
-			draw_glass(dst, &ybnds, index, bounds, &item->hit, game);
+			draw_glass(rinfo->dst, &ybnds, index, bounds, &item->hit, rinfo->game);
 		else if (item->hit.wall->is_window)
-			draw_glass(dst, &nybnds, index, bounds, &item->hit, game);
+			draw_glass(rinfo->dst, &nybnds, index, bounds, &item->hit, rinfo->game);
 	}
 }
 
@@ -353,7 +353,6 @@ static void	render_hits(t_rinfo *rinfo, t_coord *range)
 	size_t	index;
 	t_point	bounds;
 
-	info = NULL;
 	lst = rinfo->ren;
 	while (lst)
 	{
@@ -366,7 +365,7 @@ static void	render_hits(t_rinfo *rinfo, t_coord *range)
 			else
 				bounds = info->prev->hits[index].bounds;
 			if (info->hits[index].hit.dist < MAX_HIT)
-				draw_vline(rinfo->game, rinfo->dst, info->hits + index, index, rinfo->ren, &bounds);
+				draw_vline(rinfo, info->hits + index, index, &bounds);
 			index++;
 		}
 		render_objs(rinfo, info, range);
