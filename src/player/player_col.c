@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/20 20:20:53 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/21 16:27:27 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	walls = map->sectors[player->cur_sector].walls;
 	while (i < max)
 	{
-		if (walls[i].is_portal == FALSE)
+		if (walls[i].is_portal == FALSE || walls[i].is_window == TRUE)
 			check_wall_col(coord, player, &walls[i], col);
 		else if (walls[i].is_portal == TRUE
 		&& get_sector_id(map, walls[i].window) != prev_sector)
