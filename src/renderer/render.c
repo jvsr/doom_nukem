@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 11:43:40 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/21 12:28:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,7 +357,9 @@ static void	draw_vline(t_game *game, SDL_Surface *dst, t_hitem *item, size_t ind
 		if (nybnds.y < dst->h)
 			draw_wall(dst, &(t_point){nybnds.y, ybnds.y}, index,
 				bounds, &item->hit, game);
-		if (item->hit.wall->is_window)
+		if (item->hit.wall->is_window && nybnds.x < ybnds.x)
+			draw_glass(dst, &ybnds, index, bounds, &item->hit, game);
+		else if (item->hit.wall->is_window)
 			draw_glass(dst, &nybnds, index, bounds, &item->hit, game);
 	}
 }
