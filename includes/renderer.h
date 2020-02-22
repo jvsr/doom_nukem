@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/22 15:41:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/22 16:04:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ t_point				get_bounds(t_player *player,
 void				get_hits(t_rinfo *rinfo, float tanvfov2);
 void				render_hits(t_rinfo *rinfo, t_coord *range);
 void				draw_vline(t_rinfo *rinfo,
-								t_hitem *item, size_t index, t_point *bounds);
+						t_hitem *item, size_t index, t_point *bounds);
 void				render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range);
+void				draw_cline(SDL_Surface *dst,
+						t_point **bounds, size_t index, int colour);
 
 #endif

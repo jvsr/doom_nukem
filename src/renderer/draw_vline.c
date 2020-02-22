@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 15:43:57 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/22 16:04:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,6 @@
 #include "coord.h"
 #include "rinfo.h"
 #include "game.h"
-
-static void draw_cline(SDL_Surface *dst, t_point *ybounds, size_t index, int colour, t_point *bounds)
-{
-	int *pixels;
-	int i;
-	t_point c_ybounds;
-
-	pixels = dst->pixels;
-	if (index >= (size_t)dst->w)
-		return;
-	*bounds = (t_point){ft_constrain(bounds->x, 0, dst->h), ft_constrain(bounds->y, 0, dst->h)};
-	c_ybounds.x = ft_constrain(ybounds->x, bounds->x, bounds->y);
-	c_ybounds.y = ft_constrain(ybounds->y, c_ybounds.x, bounds->y);
-	i = c_ybounds.x;
-	if (colour != -1)
-	{
-		while (i < c_ybounds.y)
-		{
-			pixels[index + (dst->w * (dst->h - i - 1))] = colour;
-			i++;
-		}
-	}
-}
 
 static void draw_wall(SDL_Surface *dst, t_point *ybounds, size_t x, t_point *bounds, t_hit *hit, t_game *game)
 {
@@ -200,14 +177,12 @@ void			draw_vline(t_rinfo *rinfo,
 	ybnds.x = ((item->hit.sect->floor - item->y.x) / item->st.x) * (rinfo->dst->h) - rinfo->game->player->screen_updown;
 	ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x) * (rinfo->dst->h)) - rinfo->game->player->screen_updown;
 	if (ybnds.y < rinfo->dst->h && item->hit.sect->has_ceiling)
-		draw_cline(rinfo->dst, &(t_point){ybnds.y, rinfo->dst->h}, index, CEILING_COLOR,
-			bounds);
+		draw_cline(rinfo->dst, (t_point*[2]){&(t_point){ybnds.y, rinfo->dst->h}, bounds}, index, CEILING_COLOR);
 	else if (ybnds.y < rinfo->dst->h)
 		draw_skybox(index, rinfo->dst, rinfo->game,
 			(t_point[2]){(t_point){ybnds.y, rinfo->dst->h}, *bounds});
 	if (ybnds.x > 0)
-		draw_cline(rinfo->dst, &(t_point){0, ybnds.x}, index, FLOOR_COLOR,
-			bounds);
+		draw_cline(rinfo->dst, (t_point*[2]){&(t_point){0, ybnds.x}, bounds}, index, FLOOR_COLOR);
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
 		draw_wall(rinfo->dst, &ybnds, index, bounds, &item->hit, rinfo->game);
