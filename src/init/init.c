@@ -65,12 +65,12 @@ static void		init_threadpool(t_game *game)
 static void		map_init(t_game *game)
 {
 	game->map = ft_memalloc(sizeof(t_map));
+	game->map->sector_count = 4;
 	if (!game->map)
 		error_msg_errno("Could not allocate Game Map");
-	game->map->sectors = ft_memalloc(sizeof(t_sector) * 5);
+	game->map->sectors = ft_memalloc(sizeof(t_sector) * (game->map->sector_count + 1));
 	if (!game->map)
 		error_msg_errno("Could not allocate Map Sector");
-	game->map->sector_count = 4;
 	game->map->has_skybox = TRUE;
 	game->map->skybox = TEXTURE_SKYBOX_DAY;
 
@@ -78,7 +78,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].ceil = 150;
 	game->map->sectors[0].floor = 0;
 	game->map->sectors[0].wall_count = 6;
-	game->map->sectors[0].walls = ft_memalloc(sizeof(t_wall) * 5);
+	game->map->sectors[0].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[0].wall_count + 1));
 	game->map->sectors[0].light_value = 0.5;
 	if (game->map->sectors[0].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
@@ -154,7 +154,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].ceil = 100;
 	game->map->sectors[1].floor = -10;
 	game->map->sectors[1].wall_count = 4;
-	game->map->sectors[1].walls = ft_memalloc(sizeof(t_wall) * 4);
+	game->map->sectors[1].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[1].wall_count + 1));
 	game->map->sectors[1].light_value = 1.0;
 	if (game->map->sectors[1].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
@@ -166,7 +166,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[1].walls[3] = (t_wall){(t_coord){-20, -20}, (t_coord){-20, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[1].walls[3].is_portal = TRUE;
 	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
-	
+
 	game->map->sectors[1].has_ceiling = TRUE;
 	game->map->sectors[1].object_count = 0;
 	game->map->sectors[1].objects = NULL;
@@ -175,7 +175,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[2].ceil = 40;
 	game->map->sectors[2].floor = 10;
 	game->map->sectors[2].wall_count = 4;
-	game->map->sectors[2].walls = ft_memalloc(sizeof(t_wall) * 4);
+	game->map->sectors[2].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[2].wall_count + 1));
 	game->map->sectors[2].light_value = 0.5;
 	if (game->map->sectors[2].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
@@ -194,7 +194,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
 	game->map->sectors[3].f_enter = test_function;
-	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * 4);
+	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[3].wall_count + 1));
 	game->map->sectors[3].light_value = 0.5;
 	if (game->map->sectors[3].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
@@ -210,19 +210,19 @@ static void		map_init(t_game *game)
 	game->map->sectors[3].objects = NULL;
 
 	// //Sector 5
-	// game->map->sectors[5].ceil = 150;
-	// game->map->sectors[5].floor = 0;
-	// game->map->sectors[5].wall_count = 4;
-	// game->map->sectors[5].walls = ft_memalloc(sizeof(t_wall) * 4);
-	// game->map->sectors[5].light_value = 0.5;
-	// if (game->map->sectors[5].walls == NULL)
+	// game->map->sectors[4].ceil = 150;
+	// game->map->sectors[4].floor = 0;
+	// game->map->sectors[4].wall_count = 4;
+	// game->map->sectors[4].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[4].wall_count + 1));
+	// game->map->sectors[4].light_value = 0.5;
+	// if (game->map->sectors[4].walls == NULL)
 	// 	error_msg_errno("Could not allocate Map Walls");
-	// game->map->sectors[5].walls[0] = (t_wall){(t_coord){-5, -5}, (t_coord){5, -5}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
-	// game->map->sectors[5].walls[1] = (t_wall){(t_coord){5, -5}, (t_coord){5, -5}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	// game->map->sectors[5].walls[2] = (t_wall){(t_coord){5, -5}, (t_coord){5, 5}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
-	// game->map->sectors[5].walls[3] = (t_wall){(t_coord){5, 5}, (t_coord){-5, 5}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	// game->map->sectors[5].has_ceiling = TRUE;
-	// game->map->sectors[5].object_count = 4;
+	// game->map->sectors[4].walls[0] = (t_wall){(t_coord){-5, -5}, (t_coord){5, -5}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[4].walls[1] = (t_wall){(t_coord){5, -5}, (t_coord){5, -5}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[4].walls[2] = (t_wall){(t_coord){5, -5}, (t_coord){5, 5}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[4].walls[3] = (t_wall){(t_coord){5, 5}, (t_coord){-5, 5}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	// game->map->sectors[4].has_ceiling = TRUE;
+	// game->map->sectors[4].object_count = 4;
 }
 
 void			*init_function(t_game *game)
