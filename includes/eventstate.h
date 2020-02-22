@@ -55,6 +55,7 @@ typedef union	u_types
 
 typedef struct	s_eventstate
 {
+	SDL_mutex			*lock;
 	t_eventstate_code	eventstate;
 	t_types				*arguments;
 }				t_eventstate;

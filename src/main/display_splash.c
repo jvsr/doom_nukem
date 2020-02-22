@@ -12,6 +12,7 @@
 
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_surface.h>
+#include <SDL2/SDL_thread.h>
 
 #include "tga.h"
 #include "game.h"
@@ -49,10 +50,11 @@ static void		fade(t_game *game, SDL_Surface *splash,
 	{
 		alpha = alpha_func((double)(frametime - now), duration);
 		sdl_set_surface_alpha(splash, alpha);
+		SDL_LockMutex(game->cureventstate->lock);
+		game->cureventstate->arguments->dgt = TRUE;
 		sdl_clear_surface(game->surface);
 		sdl_merge_surface_alpha_scaled(game->surface, splash);
-		// if (game->state == running)
-		// 	game->cureventstate->arguments->dgt = TRUE;
+		SDL_UnlockMutex(game->cureventstate->lock);
 		frametime = get_gametime(&game->starttime);
 	}
 }
@@ -76,5 +78,8 @@ void			*display_splash(t_game *game, char *loc)
 	fade(game, splashscreen, fadeout);
 	SDL_FreeSurface(splashscreen);
 	game->cureventstate->eventstate = mainmenu;
+	SDL_LockMutex(game->cureventstate->lock);
+	game->cureventstate->arguments = NULL;
+	SDL_UnlockMutex(game->cureventstate->lock);
 	return (NULL);
 }
