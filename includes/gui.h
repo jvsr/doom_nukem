@@ -109,7 +109,7 @@ struct			s_transform
 	t_bool				has_alpha;
 	t_parent_type		parent_type;
 	t_parent			parent;
-	struct s_transform	*next;
+	t_transform			*next;
 };
 
 struct			s_text
@@ -142,7 +142,7 @@ struct			s_panel
 
 struct			s_gview
 {
-
+	int			norm;
 };
 
 struct			s_gui

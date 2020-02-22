@@ -22,5 +22,4 @@ void	sdl_complete_ttask(t_ttask *task)
 	}
 	else
 		sdl_del_ttask(&task);
-
 }
