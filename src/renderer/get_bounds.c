@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:57:33 by euan           #+#    #+#                */
-/*   Updated: 2020/02/21 16:00:39 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/22 15:05:35 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_point	get_bounds(t_player *player,
 	{
 		new.x = (((hit->hit.wall->window->floor - hit->y.x) / hit->st.x) *
 				dst->h) - player->screen_updown;
-		new.y = dst->h - (((hit->y.y - hit->hit.wall->window->ceil) / hit->st.x) *
-				dst->h) - player->screen_updown;
+		new.y = dst->h - (((hit->y.y - hit->hit.wall->window->ceil) / hit->st.x)
+				* dst->h) - player->screen_updown;
 	}
 	return (new);
 }
