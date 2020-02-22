@@ -46,10 +46,8 @@ void		init_audio(t_game *game)
 		error_msg_sdl(EIO, "Failed to open Audio Mixer");
 	support = Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC);
 	if (!(support & MIX_INIT_MP3))
-	{
-		ft_printf("%i, %i\n", support & MIX_INIT_MP3, support & MIX_INIT_FLAC);
-		error_msg_sdl(EIO, "Failed to init Audio Mixer");
-	}
+		error_msg_sdl(EIO,
+			ft_strformat("Failed to init Audio Mixer (support %d)", support));
 	alloc_hashmaps(game->audio_man);
 	set_sound_volume(game->setting->sound_volume);
 	set_music_volume(game->setting->music_volume);
