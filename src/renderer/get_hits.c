@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 15:24:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/22 15:29:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		move_sector(t_hit *hit,
 	*info = ft_lstlast(rinfo->ren)->content;
 }
 
-static t_bool		hit_meth(t_hitem *hit,
+static t_bool	hit_meth(t_hitem *hit,
 									t_rinfo *rinfo, float angle, t_point *tmp)
 {
 	if (hit->hit.dist == MAX_HIT)
