@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 16:36:58 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/22 15:30:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,5 @@ typedef struct	s_rinfo
 	size_t		start;
 	size_t		end;
 }				t_rinfo;
-
 
 #endif
