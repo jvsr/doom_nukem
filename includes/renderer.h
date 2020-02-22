@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/22 16:04:03 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/22 16:15:48 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ void				draw_vline(t_rinfo *rinfo,
 void				render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range);
 void				draw_cline(SDL_Surface *dst,
 						t_point **bounds, size_t index, int colour);
+void				draw_wall(t_rinfo *rinfo,
+						t_point **bounds, size_t x, t_hit *hit);
 
 #endif
