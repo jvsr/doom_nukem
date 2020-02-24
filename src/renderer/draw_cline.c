@@ -16,13 +16,13 @@
 
 void	draw_cline(SDL_Surface *dst, t_point **bounds, size_t index, int colour)
 {
-	int *pixels;
-	int i;
-	t_point c_ybounds;
+	int		*pixels;
+	int		i;
+	t_point	c_ybounds;
 
 	pixels = dst->pixels;
 	if (index >= (size_t)dst->w)
-		return;
+		return ;
 	*bounds[0] = (t_point){ft_constrain(bounds[0]->x, 0, dst->h),
 					ft_constrain(bounds[0]->y, 0, dst->h)};
 	c_ybounds.x = ft_constrain(bounds[1]->x, bounds[0]->x, bounds[0]->y);

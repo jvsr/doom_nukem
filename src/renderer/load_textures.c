@@ -19,7 +19,7 @@
 #include "error.h"
 #include "tga.h"
 
-static SDL_Surface	*load_texture(char *loc, const char *exec_path)
+static SDL_Surface	*load_tex(char *loc, const char *exec_path)
 {
 	char		*str;
 	SDL_Surface	*surface;
@@ -35,31 +35,29 @@ static SDL_Surface	*load_texture(char *loc, const char *exec_path)
 static	void		load_enemy(char *loc,
 					const char *exec_path, size_t *i, SDL_Surface **textures)
 {
-	size_t start;
-	size_t val;
+	size_t vals[2];
 
-	start = *i;
-	while (*i - start < 19)
+	vals[0] = *i;
+	while (*i - vals[0] < 19)
 	{
-		val = *i - start;
-		if (val < 4)
-			textures[*i] = load_texture(
-				ft_strformat("%s/Forward_%i", loc, val), exec_path);
-		else if (val < 8)
-			textures[*i] = load_texture(
-				ft_strformat("%s/Back_%i", loc, val - 4), exec_path);
-		else if (val < 12)
-			textures[*i] = load_texture(
-				ft_strformat("%s/Left_%i", loc, val - 8), exec_path);
-		else if (val < 16)
-			textures[*i] = load_texture(
-				ft_strformat("%s/Right_%i", loc, val - 12), exec_path);
-		else if (val < 18)
-			textures[*i] = load_texture(
-				ft_strformat("%s/Dead_%i", loc, val - 16), exec_path);
+		vals[1] = *i - vals[0];
+		if (vals[1] < 4)
+			textures[*i] = load_tex(
+				ft_strformat("%s/Forward_%i", loc, vals[1]), exec_path);
+		else if (vals[1] < 8)
+			textures[*i] = load_tex(
+				ft_strformat("%s/Back_%i", loc, vals[1] - 4), exec_path);
+		else if (vals[1] < 12)
+			textures[*i] = load_tex(
+				ft_strformat("%s/Left_%i", loc, vals[1] - 8), exec_path);
+		else if (vals[1] < 16)
+			textures[*i] = load_tex(
+				ft_strformat("%s/Right_%i", loc, vals[1] - 12), exec_path);
+		else if (vals[1] < 18)
+			textures[*i] = load_tex(
+				ft_strformat("%s/Dead_%i", loc, vals[1] - 16), exec_path);
 		else
-			textures[*i] = load_texture(
-				ft_strformat("%s/Attack", loc), exec_path);
+			textures[*i] = load_tex(ft_strformat("%s/Attack", loc), exec_path);
 		(*i)++;
 	}
 }
@@ -81,7 +79,7 @@ void				load_textures(t_game *game)
 		error_msg_sdl(ENOMEM, "Unable to allocate textures.");
 	while (index < TEXTURE_ENEMY0_F0)
 	{
-		game->textures[index] = load_texture(files[index], game->exec_path);
+		game->textures[index] = load_tex(files[index], game->exec_path);
 		index++;
 	}
 	load_enemy("enemy0", game->exec_path, &index, game->textures);

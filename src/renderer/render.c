@@ -33,7 +33,7 @@ static void	render_chunk(t_game *game,
 
 	rinfo.hfov2 = (float)game->setting->fov / 2;
 	rinfo.vfov2 = (float)game->setting->vfov / 2;
-	rinfo.step = (float) game->setting->fov / dst->w;
+	rinfo.step = (float)game->setting->fov / dst->w;
 	rinfo.ren = ft_lstnew(NULL, sizeof(void*));
 	rinfo.game = game;
 	rinfo.start = start;
