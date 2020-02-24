@@ -175,4 +175,18 @@ typedef struct	s_rinfo
 	size_t		end;
 }				t_rinfo;
 
+typedef struct	s_winfo
+{
+	float		len;
+	float		perc;
+	float		intens;
+	int			tex_x;
+	int			*pixels;
+	int			*t_pixels;
+	t_point		c_ybounds;
+	size_t		x;
+	SDL_Surface	*tex;
+	t_list		*decals;
+}				t_winfo;
+
 #endif
