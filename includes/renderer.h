@@ -67,6 +67,8 @@ void				render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range);
 void				draw_cline(SDL_Surface *dst,
 						t_point **bounds, size_t index, int colour);
 void				draw_wall(t_rinfo *rinfo,
-						t_point **bounds, size_t x, t_hit *hit);
+							t_point **bounds, const size_t x, t_hit *hit);
+void				draw_glass(t_rinfo *rinfo,
+							t_point **bounds, const size_t x, t_hit *hit);
 
 #endif

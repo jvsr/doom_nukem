@@ -93,7 +93,7 @@ static void	render_wall(t_point *const *bounds, const t_rinfo *rinfo,
 }
 
 void		draw_wall(t_rinfo *rinfo,
-										t_point **bounds, size_t x, t_hit *hit)
+							t_point **bounds, const size_t x, t_hit *hit)
 {
 	t_winfo		win;
 
