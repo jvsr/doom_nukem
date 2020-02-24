@@ -25,7 +25,6 @@
 #include <math.h>
 #include "color.h"
 #include "error.h"
-#include "personal.h"
 
 static void	render_chunk(t_game *game,
 									SDL_Surface *dst, size_t start, size_t end)
