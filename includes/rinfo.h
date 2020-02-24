@@ -189,4 +189,12 @@ typedef struct	s_winfo
 	t_list		*decals;
 }				t_winfo;
 
+typedef struct	s_oinfo
+{
+	t_object	*obj;
+	t_list		**objs;
+	t_hinfo		*info;
+}				t_oinfo;
+
+
 #endif

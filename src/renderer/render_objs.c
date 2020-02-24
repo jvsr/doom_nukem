@@ -20,26 +20,8 @@
 #include "rinfo.h"
 #include "game.h"
 
-static void	check_obj(t_object *obj, float objang, t_list **objs, t_coord *range, t_hinfo *info, t_rinfo *rinfo)
-{
-	float	tmpang;
-	int		scrnspc;
-	float	dist;
-
-	obj->img.angle = objang;
-	tmpang = calc_fov(range->x, objang);
-	scrnspc = (int)((tmpang / calc_fov(range->x, range->y)) * rinfo->dst->w);
-	dist = get_distance(&rinfo->game->player->pos, &obj->pos);
-	if (tmpang > rinfo->hfov2)
-		dist *= cosf((tmpang - rinfo->hfov2) * PI_R);
-	else if (tmpang < rinfo->hfov2)
-		dist *= cosf((rinfo->hfov2 - tmpang) * PI_R);
-	if (dist < info->hits[scrnspc].hit.og_dist)
-		ft_lstadd(objs, ft_lstnew(new_rendobj(obj, info->sec,
-			(float[2]){dist, objang}, scrnspc), sizeof(t_objrend)));
-}
-
-static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *info)
+static void draw_object(t_list *objs,
+								SDL_Surface *dst, t_game *game, t_hinfo *info)
 {
 	int *pixels;
 	int count;
@@ -100,6 +82,25 @@ static void draw_object(t_list *objs, SDL_Surface *dst, t_game *game, t_hinfo *i
 	}
 }
 
+static void	check_obj(const float objang,
+							const t_coord *range, t_rinfo *rinfo, t_oinfo *oi)
+{
+	const float	tmpang = calc_fov(range->x, objang);
+	int			scrnspc;
+	float		dist;
+
+	oi->obj->img.angle = objang;
+	scrnspc = (int)((tmpang / calc_fov(range->x, range->y)) * rinfo->dst->w);
+	dist = get_distance(&rinfo->game->player->pos, &oi->obj->pos);
+	if (tmpang > rinfo->hfov2)
+		dist *= cosf((tmpang - rinfo->hfov2) * PI_R);
+	else if (tmpang < rinfo->hfov2)
+		dist *= cosf((rinfo->hfov2 - tmpang) * PI_R);
+	if (dist < oi->info->hits[scrnspc].hit.og_dist)
+		ft_lstadd(oi->objs, ft_lstnew(new_rendobj(oi->obj, oi->info->sec,
+			(float[2]){dist, objang}, scrnspc), sizeof(t_objrend)));
+}
+
 void render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range)
 {
 	t_list		*objs;
@@ -114,7 +115,7 @@ void render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range)
 		obj = tmp->content;
 		objang = get_object_angle_on_screen(obj, rinfo->game->player, range);
 		if (objang >= 0)
-			check_obj(obj, objang, &objs, range, info, rinfo);
+			check_obj(objang, range, rinfo, &(t_oinfo){obj, &objs, info});
 		tmp = tmp->next;
 	}
 	ft_lstsort(&objs, sort_objs);
