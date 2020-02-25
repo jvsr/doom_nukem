@@ -171,6 +171,7 @@ typedef struct	s_rinfo
 	float		hfov2;
 	float		vfov2;
 	float		step;
+	size_t		begin;
 	size_t		start;
 	size_t		end;
 }				t_rinfo;

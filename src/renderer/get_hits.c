@@ -91,7 +91,7 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 	{
 		info->prev = prev;
 		info->end = rinfo->start;
-		hit = info->hits + rinfo->start;
+		hit = info->hits + rinfo->start - rinfo->begin;
 		hit->hit = get_hit(cosin, rinfo->game->player, info->sec, prev->sec);
 		if (hit_meth(hit, rinfo, angle, &tmp))
 			continue;
@@ -108,6 +108,7 @@ void			get_hits(t_rinfo *rinfo, float tanvfov2)
 	float	r_angle;
 	t_coord	cosin;
 
+	rinfo->begin = rinfo->start;
 	rinfo->ren->content = new_hinfo(rinfo->game->map->sectors +
 		rinfo->game->player->cur_sector, rinfo->end - rinfo->start,
 		rinfo->start);
