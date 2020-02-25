@@ -1,0 +1,109 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   draw_obj.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/02/25 10:44:13 by ehollidg       #+#    #+#                */
+/*   Updated: 2020/02/25 10:44:13 by ehollidg      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft/ft_num.h"
+#include "libft/ft_list.h"
+#include "renderer.h"
+#include "player.h"
+#include "coord.h"
+#include "rinfo.h"
+#include "cmath.h"
+#include "color.h"
+#include "game.h"
+
+static void		calc_perinten(float *perc,
+					float *intensity, const t_odraw *ob, const t_orend *oren)
+{
+	*perc = (float)(ob->x - oren->xbounds.x) / (oren->xbounds.y -
+		oren->xbounds.x);
+	*intensity = ((MAX_LIGHT_DIST - clamp_float(ob->obj->dist, 0,
+		MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * ob->obj->sec->light_value;
+}
+
+static void		draw_y(const t_orend *oren, t_odraw *ob,
+											const int *t_pixels, int *pixels)
+{
+	t_point c_ybounds;
+	float	perc;
+	float	intensity;
+	int		vals[5];
+
+	c_ybounds = set_ybounds(ob->obj, ob->game, (t_ybinfo){ob->dst->h,
+		(t_point*)&oren->ybounds, ob->x, ob->info->prev});
+	calc_perinten(&perc, &intensity, ob, oren);
+	vals[0] = perc * (ob->tex->w - 1);
+	vals[1] = c_ybounds.x;
+	if (vals[1] < 0)
+		vals[1] = 0;
+	if (c_ybounds.y >= ob->dst->h)
+		c_ybounds.y = ob->dst->h - 1;
+	while (vals[1] < c_ybounds.y)
+	{
+		vals[2] = (float)(vals[1] - oren->ybounds.x) / (oren->ybounds.y -
+			oren->ybounds.x) * ob->tex->h;
+		vals[3] = t_pixels[((ob->tex->h - vals[2] - 1) * ob->tex->w) + vals[0]];
+		vals[4] = ob->x + (ob->dst->w * (ob->dst->h - vals[1] - 1));
+		if (vals[3] != 0)
+			pixels[vals[4]] = mix_color(pixels[vals[4]], rgba_intensity(vals[3],
+				intensity));
+		vals[1]++;
+	}
+}
+
+static t_point	calc_ybounds(const t_objrend *obj, const SDL_Surface *dst,
+										const t_game *game, const t_orend *oren)
+{
+	return ((t_point){(((obj->sec->floor - oren->y.x) / oren->st.x) *
+		(dst->h)) - game->player->screen_updown, dst->h - (((oren->y.y -
+		(obj->obj->size.y + obj->sec->floor)) / oren->st.x) * (dst->h)) -
+		game->player->screen_updown});
+}
+
+static void		loop_objs(t_objrend *obj,
+								t_game *game, SDL_Surface *dst, t_hinfo *info)
+{
+	t_orend		oren;
+	int			x;
+	SDL_Surface	*tex;
+
+	oren.st.y = obj->dist;
+	oren.y.x = game->player->height + game->player->heightoffset;
+	oren.y.y = oren.y.x + oren.st.y;
+	oren.y.x -= oren.st.y;
+	oren.st.x = oren.st.y * 2;
+	oren.ybounds = calc_ybounds(obj, dst, game, &oren);
+	oren.diff = (abs(oren.ybounds.y - oren.ybounds.x) * (obj->obj->size.x /
+		obj->obj->size.y)) / 2;
+	oren.xbounds = (t_point){obj->x - oren.diff, obj->x + oren.diff};
+	oren.c_xbounds.x = ft_constrain(oren.xbounds.x, 0, dst->w - 1);
+	oren.c_xbounds.y = ft_constrain(oren.xbounds.y, oren.c_xbounds.x,
+		dst->w - 1);
+	x = oren.c_xbounds.x;
+	tex = tex_from_anim(game, &obj->obj->img);
+	while (x < oren.c_xbounds.y)
+	{
+		if (x >= 0 && x < dst->w && obj->dist < info->hits[x].hit.dist)
+			draw_y(&oren, &((t_odraw){game, dst, tex, obj, info, x}),
+				tex->pixels, dst->pixels);
+		x++;
+	}
+}
+
+void			draw_object(t_list *objs,
+								SDL_Surface *dst, t_game *game, t_hinfo *info)
+{
+	while (objs)
+	{
+		loop_objs(objs->content, game, dst, info);
+		objs = objs->next;
+	}
+}

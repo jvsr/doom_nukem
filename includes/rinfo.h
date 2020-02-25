@@ -196,5 +196,24 @@ typedef struct	s_oinfo
 	t_hinfo		*info;
 }				t_oinfo;
 
+typedef struct	s_orend
+{
+	t_coord		y;
+	t_coord		st;
+	t_point		ybounds;
+	t_point		xbounds;
+	t_point		c_xbounds;
+	int			diff;
+}				t_orend;
+
+typedef struct	s_odraw
+{
+	t_game		*game;
+	SDL_Surface	*dst;
+	SDL_Surface	*tex;
+	t_objrend	*obj;
+	t_hinfo		*info;
+	size_t		x;
+}				t_odraw;
 
 #endif
