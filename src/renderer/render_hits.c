@@ -38,14 +38,14 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 	{
 		info = lst->content;
 		index = info->start;
-		while (index < info->end)
+		while (index <= info->end)
 		{
 			if (lst->next == NULL)
 				bounds = (t_point){0, rinfo->dst->h};
 			else
-				bounds = info->prev->hits[index].bounds;
-			if (info->hits[index].hit.dist < MAX_HIT)
-				draw_vline(rinfo, info->hits + index, index, &bounds);
+				bounds = info->prev->hits[index - rinfo->begin].bounds;
+			if (info->hits[index - rinfo->begin].hit.dist < MAX_HIT)
+				draw_vline(rinfo, info->hits + index - rinfo->begin, index, &bounds);
 			index++;
 		}
 		render_objs(rinfo, info, range);
