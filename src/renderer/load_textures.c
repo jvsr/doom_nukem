@@ -14,12 +14,13 @@
 #include <errno.h>
 #include "libft/ft_mem.h"
 #include "libft/ft_str.h"
+#include "libft/ft_num.h"
 #include "game.h"
 #include "types.h"
 #include "error.h"
 #include "tga.h"
 
-static SDL_Surface	*load_tex(char *loc, const char *exec_path)
+static void		load_tex(char *loc, const char *exec_path, SDL_Surface **dst)
 {
 	char		*str;
 	SDL_Surface	*surface;
@@ -27,60 +28,91 @@ static SDL_Surface	*load_tex(char *loc, const char *exec_path)
 	str = ft_strjoin("game/", loc);
 	surface = open_tga_sdl(str, exec_path);
 	if (surface == NULL)
-		error_msg_sdl(ENOENT, "Missing Texture");
+		error_msg_sdl(ENOENT, ft_strformat("Missing Texture: %s", loc));
 	ft_strdel(&str);
-	return (surface);
+	*dst = surface;
 }
 
-static	void		load_enemy(char *loc,
-					const char *exec_path, size_t *i, SDL_Surface **textures)
+static void		load_enemy(char *loc, const char *exec_path, SDL_Surface **dst)
 {
-	size_t vals[2];
+	size_t	i;
+	size_t	text_id;
+	char	*text_loc;
 
-	vals[0] = *i;
-	while (*i - vals[0] < 19)
+	i = 0;
+	while (i < ENEMY_TOTAL_TEXTURE_COUNT)
 	{
-		vals[1] = *i - vals[0];
-		if (vals[1] < 4)
-			textures[*i] = load_tex(
-				ft_strformat("%s/Forward_%i", loc, vals[1]), exec_path);
-		else if (vals[1] < 8)
-			textures[*i] = load_tex(
-				ft_strformat("%s/Back_%i", loc, vals[1] - 4), exec_path);
-		else if (vals[1] < 12)
-			textures[*i] = load_tex(
-				ft_strformat("%s/Left_%i", loc, vals[1] - 8), exec_path);
-		else if (vals[1] < 16)
-			textures[*i] = load_tex(
-				ft_strformat("%s/Right_%i", loc, vals[1] - 12), exec_path);
-		else if (vals[1] < 18)
-			textures[*i] = load_tex(
-				ft_strformat("%s/Dead_%i", loc, vals[1] - 16), exec_path);
+		text_id = i % ENEMY_MOVE_TEXTURE_COUNT;
+		if (i < ENEMY_MOVE_TEXTURE_COUNT * 1)
+			text_loc = ft_strformat("%s/Forward_%i", loc, i);
+		else if (i < ENEMY_MOVE_TEXTURE_COUNT * 2)
+			text_loc = ft_strformat("%s/Back_%i", loc, text_id);
+		else if (i < ENEMY_MOVE_TEXTURE_COUNT * 3)
+			text_loc = ft_strformat("%s/Left_%i", loc, text_id);
+		else if (i < ENEMY_MOVE_TEXTURE_COUNT * 4)
+			text_loc = ft_strformat("%s/Right_%i", loc, text_id);
+		else if (i < (ENEMY_MOVE_TEXTURE_COUNT * 4) + ENEMY_DEATH_TEXTURE_COUNT)
+			text_loc = ft_strformat("%s/Dead_%i", loc, text_id);
 		else
-			textures[*i] = load_tex(ft_strformat("%s/Attack", loc), exec_path);
-		(*i)++;
+			text_loc = ft_strformat("%s/Attack", loc);
+		load_tex(text_loc, exec_path, &dst[i]);
+		ft_strdel(&text_loc);
+		i++;
 	}
 }
 
-void				load_textures(t_game *game)
+static size_t	load_plain_textures(t_game *game, size_t tex_count)
 {
-	char	**files;
-	size_t	index;
+	size_t	i;
+	char	**texture_files;
 
-	files = (char *[]){
+	i = 0;
+	texture_files = (char *[]){
 		"brick_wall", "skybox_day", "skybox_dusk", "objs/lamp",
 		"objs/chair_back", "objs/chair_front", "objs/chair_left",
 		"objs/chair_right", "bloodsplatter", "quartz", "objs/health_pickup",
-		"objs/key", "glass"
+		"objs/key", "glass", NULL
 	};
-	index = 0;
+	while (tex_count + i < TEXTURE_ENEMY0_F0 && texture_files[i] != NULL)
+	{
+		load_tex(texture_files[i], game->exec_path,
+			&game->textures[tex_count + i]);
+		i++;
+	}
+	return (i);
+}
+
+static size_t	load_enemys(t_game *game, size_t tex_count)
+{
+	size_t	i;
+	char	**enemy_texture_files;
+
+	i = 0;
+	enemy_texture_files = (char *[]){
+		"enemy0", NULL
+	};
+	while (ft_inrange(tex_count + i, TEXTURE_ENEMY0_F0, TEXTURE_COUNT) &&
+		enemy_texture_files[i] != NULL)
+	{
+		load_enemy(enemy_texture_files[i], game->exec_path,
+			&game->textures[tex_count + i]);
+		i += ENEMY_TOTAL_TEXTURE_COUNT;
+	}
+	return (i);
+}
+
+void			load_textures(t_game *game)
+{
+	size_t	tex_count;
+
+	tex_count = 0;
 	game->textures = ft_memalloc(sizeof(SDL_Surface *) * TEXTURE_COUNT);
 	if (game->textures == NULL)
 		error_msg_sdl(ENOMEM, "Unable to allocate textures.");
-	while (index < TEXTURE_ENEMY0_F0)
-	{
-		game->textures[index] = load_tex(files[index], game->exec_path);
-		index++;
-	}
-	load_enemy("enemy0", game->exec_path, &index, game->textures);
+	tex_count += load_plain_textures(game, tex_count);
+	tex_count += load_enemys(game, tex_count);
+	if (tex_count != TEXTURE_COUNT)
+		error_msg("Enum sync error", EIO,
+			ft_strformat("Texture locations and TEXTURE_COUNT out of sync (%d)",
+			tex_count - TEXTURE_COUNT));
 }
