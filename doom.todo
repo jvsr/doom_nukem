@@ -1,6 +1,6 @@
 TODO The floor and ceiling may not be horizontal but inclined planes.
 TODO The floors and ceilings have textures.
-TODO Walls can be partially transparent, unveiling the room behind.
+DONE Walls can be partially transparent, unveiling the room behind.
 DONE Each room or area has a light control tool, affecting both the walls and the objects within.
 TODO Text messages can be displayed during the game over the rest of the graphics.
 DONE There must be a HUD (life, currency, ammunition, carried artifacts...).
