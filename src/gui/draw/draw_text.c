@@ -82,9 +82,9 @@ void				draw_text(SDL_Surface *dst, t_text *text, SDL_Point abs_dim)
 	SDL_Surface	*rendered_text;
 	SDL_Surface	*scaled_text;
 
+	font = text->fonts[text->font_type];
 	if (text->color.a == 0 || text->text == NULL || ft_strisempty(text->text))
 		return ;
-	font = text->fonts[text->font_type];
 	rendered_text = render_text(text->text, font, &text->color);
 	scaled_text = scale_text(rendered_text, text->size, abs_dim);
 	SDL_FreeSurface(rendered_text);
