@@ -27,6 +27,6 @@ t_uint64		get_gametime(t_time *time)
 		passed_time.tv_sec--;
 		passed_time.tv_usec += 1000000;
 	}
-	result = (passed_time.tv_sec * 1000) + (passed_time.tv_usec / 1000);
+	result = (passed_time.tv_sec * 1000) + ((float)passed_time.tv_usec / 1000);
 	return (result);
 }
