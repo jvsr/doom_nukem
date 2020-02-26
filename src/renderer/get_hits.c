@@ -112,7 +112,6 @@ void			get_hits(t_rinfo *rinfo, float tanvfov2)
 	rinfo->ren->content = new_hinfo(rinfo->game->map->sectors +
 		rinfo->game->player->cur_sector, rinfo->end - rinfo->start,
 		rinfo->start);
-	// printf("%zu : %zu\n", rinfo->start, rinfo->end);
 	while (rinfo->start < rinfo->end)
 	{
 		angle = rinfo->step * rinfo->start;

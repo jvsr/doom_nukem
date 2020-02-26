@@ -72,7 +72,7 @@ static void		loop_objs(t_objrend *obj,
 								t_rinfo *rin, t_hinfo *info, const t_coord size)
 {
 	t_orend			oren;
-	int				x;
+	size_t			x;
 	SDL_Surface		*tex;
 
 	oren.st.y = obj->dist;
@@ -88,7 +88,7 @@ static void		loop_objs(t_objrend *obj,
 		rin->end);
 	x = oren.c_xbounds.x;
 	tex = tex_from_anim(rin->game, &obj->obj->img);
-	while (x < oren.c_xbounds.y)
+	while (x < (size_t)oren.c_xbounds.y)
 	{
 		if (x >= rin->begin && x < rin->end && obj->dist <
 			info->hits[x - rin->begin].hit.dist)
