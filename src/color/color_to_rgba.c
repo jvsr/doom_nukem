@@ -18,10 +18,9 @@ t_uint32	color_to_rgba(SDL_Color c)
 {
 	t_uint32	rgba;
 
-	rgba = 0;
-	rgba = (c.a << 24) | rgba;
+	rgba = (c.a << 24);
 	rgba = (c.r << 16) | rgba;
 	rgba = (c.g << 8) | rgba;
-	rgba = (c.b) | rgba;
+	rgba = c.b | rgba;
 	return (rgba);
 }

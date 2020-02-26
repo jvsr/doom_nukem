@@ -39,7 +39,8 @@ static void		draw_portal(t_rinfo *rinfo,
 {
 	t_point	nybnds;
 
-	nybnds = (find_hinfo(rinfo->ren, item->hit.sect))->hits[index].bounds;
+	nybnds = (find_hinfo(rinfo->ren, item->hit.sect))->hits[index -
+				rinfo->begin].bounds;
 	if (nybnds.x > 0)
 		draw_wall(rinfo, (t_point*[2]){*bounds, &(t_point){bounds[1]->x,
 			nybnds.x}}, index, &item->hit);

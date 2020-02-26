@@ -215,6 +215,7 @@ typedef struct	s_odraw
 	t_objrend	*obj;
 	t_hinfo		*info;
 	size_t		x;
+	t_rinfo		*rinfo;
 }				t_odraw;
 
 #endif

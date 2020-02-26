@@ -36,6 +36,7 @@
 		"utility": "c",
 		"complex": "c",
 		"sstream": "c",
-		"bitset": "c"
+		"bitset": "c",
+		"__functional_03": "c"
 	}
 }

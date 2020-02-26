@@ -14,6 +14,7 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_num.h"
 #include "libft/ft_list.h"
+#include "sdl_thread.h"
 #include "game.h"
 #include "color.h"
 #include "campaign.h"
@@ -26,7 +27,7 @@
 #include "color.h"
 #include "error.h"
 
-static void	render_chunk(t_game *game,
+static void	*render_chunk(t_game *game,
 									SDL_Surface *dst, size_t start, size_t end)
 {
 	t_rinfo	rinfo;
@@ -46,10 +47,34 @@ static void	render_chunk(t_game *game,
 		0, 360),
 		wrap_float((end * rinfo.step) + (game->player->angle - rinfo.hfov2),
 		0, 360)});
+	return (NULL);
 }
 
 void		render(t_game *game, SDL_Surface *dst)
 {
+	t_ttask *tasks;
+	t_ttask *new;
+	t_point	bound;
+	size_t	step;
+	size_t	i;
+
 	game->player->screen_updown = game->player->updown * dst->h;
-	render_chunk(game, dst, 0, dst->w - 1);
+	i = 0;
+	step = dst->w / 7;
+	bound = (t_point){0, step};
+	while (i < 7)
+	{
+		if (i == 6)
+			bound.y = dst->w;
+		new = sdl_new_ttask(render_chunk, TFLAG_TASK_NO_DELETE,
+			4, game, dst, (size_t)bound.x, (size_t)bound.y);
+		sdl_add_tpool_ttask(game->pool, new);
+		new->next = tasks;
+		tasks = new;
+		bound.x += step;
+		bound.y += step;
+		i++;
+	}
+	sdl_join_ttask_all(tasks);
+	sdl_del_ttask_all(&tasks);
 }
