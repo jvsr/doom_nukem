@@ -73,7 +73,7 @@ static size_t	load_plain_textures(t_game *game, size_t tex_count)
 		"objs/chair_right", "bloodsplatter", "quartz", "objs/health_pickup",
 		"objs/key", "glass", NULL
 	};
-	while (tex_count + i < TEXTURE_ENEMY0_F0 && texture_files[i] != NULL)
+	while (texture_files[i] != NULL && tex_count + i < TEXTURE_ENEMY0_F0)
 	{
 		load_tex(texture_files[i], game->exec_path,
 			&game->textures[tex_count + i]);
@@ -91,12 +91,12 @@ static size_t	load_enemys(t_game *game, size_t tex_count)
 	enemy_texture_files = (char *[]){
 		"enemy0", NULL
 	};
-	while (ft_inrange(tex_count + i, TEXTURE_ENEMY0_F0, TEXTURE_COUNT) &&
-		enemy_texture_files[i] != NULL)
+	while (enemy_texture_files[i] != NULL && ft_inrange(tex_count +
+		(i * ENEMY_TOTAL_TEXTURE_COUNT), TEXTURE_ENEMY0_F0, TEXTURE_COUNT))
 	{
 		load_enemy(enemy_texture_files[i], game->exec_path,
-			&game->textures[tex_count + i]);
-		i += ENEMY_TOTAL_TEXTURE_COUNT;
+			&game->textures[tex_count + (i * ENEMY_TOTAL_TEXTURE_COUNT)]);
+		i++;
 	}
 	return (i);
 }
@@ -110,7 +110,7 @@ void			load_textures(t_game *game)
 	if (game->textures == NULL)
 		error_msg_sdl(ENOMEM, "Unable to allocate textures.");
 	tex_count += load_plain_textures(game, tex_count);
-	tex_count += load_enemys(game, tex_count);
+	tex_count += load_enemys(game, tex_count) * ENEMY_TOTAL_TEXTURE_COUNT;
 	if (tex_count != TEXTURE_COUNT)
 		error_msg("Enum sync error", EIO,
 			ft_strformat("Texture locations and TEXTURE_COUNT out of sync (%d)",
