@@ -66,7 +66,7 @@ static void	render_decals(t_point *const *bounds,
 		ivals[2] = t_pixels[(ivals[1] * win->tex->w) + tex_x];
 		render_decal_list(rinfo, win, ivals, fvals);
 		win->pixels[win->x + (rinfo->dst->w * (rinfo->dst->h - ivals[0] - 1))] =
-				rgba_intensity(ivals[2], win->intens);
+				rgba_set_intensity(ivals[2], win->intens);
 		ivals[0]++;
 	}
 }
@@ -86,8 +86,7 @@ static void	render_wall(t_point *const *bounds, const t_rinfo *rinfo,
 		y = (wrap_float((float)(i - bounds[1]->x) / (bounds[1]->y -
 			bounds[1]->x), 0, hity) / hity) * tex->h;
 		win->pixels[win->x + (rinfo->dst->w * (rinfo->dst->h - i - 1))] =
-			rgba_intensity(t_pixels[(y * tex->w) + tex_x],
-			win->intens);
+			rgba_set_intensity(t_pixels[(y * tex->w) + tex_x], win->intens);
 		i++;
 	}
 }

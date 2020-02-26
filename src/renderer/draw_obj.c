@@ -53,8 +53,8 @@ static void		draw_y(const t_orend *oren, t_odraw *ob,
 		vals[3] = t_pixels[((ob->tex->h - vals[2] - 1) * ob->tex->w) + vals[0]];
 		vals[4] = ob->x + (ob->dst->w * (ob->dst->h - vals[1] - 1));
 		if (vals[3] != 0)
-			pixels[vals[4]] = mix_color(pixels[vals[4]], rgba_intensity(vals[3],
-				intensity));
+			pixels[vals[4]] = mix_color(pixels[vals[4]],
+				rgba_set_intensity(vals[3], intensity));
 		vals[1]++;
 	}
 }
@@ -92,7 +92,7 @@ static void		loop_objs(t_objrend *obj,
 	{
 		if (x >= rin->begin && x < rin->end && obj->dist <
 			info->hits[x - rin->begin].hit.dist)
-			draw_y(&oren, &((t_odraw){rin->game, rin->dst, tex, obj, info, x, 
+			draw_y(&oren, &((t_odraw){rin->game, rin->dst, tex, obj, info, x,
 				rin}), tex->pixels, rin->dst->pixels);
 		x++;
 	}

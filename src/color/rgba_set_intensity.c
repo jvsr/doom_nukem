@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rgba_intensity.c                                   :+:    :+:            */
+/*   rgba_set_intensity.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -12,7 +12,7 @@
 
 #include "types.h"
 
-t_uint32	rgba_intensity(t_uint32 colour, float offset)
+t_uint32	rgba_set_intensity(t_uint32 colour, float offset)
 {
 	colour = (colour & 0xFF00FFFF) |
 		((t_uint8)(((colour & 0x00FF0000) >> 16) * offset) << 16);
