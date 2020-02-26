@@ -84,8 +84,7 @@ static void		loop_objs(t_objrend *obj,
 	oren.diff = (abs(oren.ybounds.y - oren.ybounds.x) * (size.x / size.y)) / 2;
 	oren.xbounds = (t_point){obj->x - oren.diff, obj->x + oren.diff};
 	oren.c_xbounds.x = ft_constrain(oren.xbounds.x, rin->begin, rin->end);
-	oren.c_xbounds.y = ft_constrain(oren.xbounds.y, oren.c_xbounds.x,
-		rin->end);
+	oren.c_xbounds.y = ft_constrain(oren.xbounds.y, oren.c_xbounds.x, rin->end);
 	x = oren.c_xbounds.x;
 	tex = tex_from_anim(rin->game, &obj->obj->img);
 	while (x < (size_t)oren.c_xbounds.y)

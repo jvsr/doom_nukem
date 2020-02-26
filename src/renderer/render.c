@@ -43,10 +43,10 @@ static void	*render_chunk(t_game *game,
 	get_hits(&rinfo, tanf(rinfo.vfov2 * PI_R));
 	ft_lstrev(&rinfo.ren);
 	render_hits(&rinfo, &(t_coord){
-		wrap_float((start * rinfo.step) + (game->player->angle - rinfo.hfov2),
-		0, 360),
-		wrap_float((end * rinfo.step) + (game->player->angle - rinfo.hfov2),
-		0, 360)});
+		wrap_float((0 * rinfo.step) + (rinfo.game->player->angle -
+			rinfo.hfov2), 0, 360),
+		wrap_float((rinfo.dst->w * rinfo.step) + (rinfo.game->player->angle -
+			rinfo.hfov2), 0, 360)});
 	return (NULL);
 }
 

@@ -88,7 +88,8 @@ static void	render_wall(t_point *const *bounds, const t_rinfo *rinfo,
 			bounds[1]->x), 0, hity) / hity) * tex->h;
 		vals[1] = win->x + (rinfo->dst->w * (rinfo->dst->h - i - 1));
 		win->pixels[vals[1]] = mix_color(win->pixels[vals[1]],
-			rgba_set_intensity(t_pixels[(vals[0] * tex->w) + tex_x], win->intens));
+			rgba_set_intensity(t_pixels[(vals[0] * tex->w) + tex_x],
+			win->intens));
 		i++;
 	}
 }
