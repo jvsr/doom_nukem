@@ -16,8 +16,6 @@
 # include <sys/time.h>
 # include "types.h"
 
-// # define CLOCKS_PER_MILLI (CLOCKS_PER_SEC / 1000)
-
 typedef struct timeval	t_time;
 
 void		init_gametime(t_time *time);
