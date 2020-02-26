@@ -45,7 +45,8 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 			else
 				bounds = info->prev->hits[index - rinfo->begin].bounds;
 			if (info->hits[index - rinfo->begin].hit.dist < MAX_HIT)
-				draw_vline(rinfo, info->hits + index - rinfo->begin, index, &bounds);
+				draw_vline(rinfo, info->hits + index - rinfo->begin,
+					index, &bounds);
 			index++;
 		}
 		render_objs(rinfo, info, range);
