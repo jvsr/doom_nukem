@@ -73,7 +73,7 @@ void			*display_splash(t_game *game, char *loc)
 	fade(game, splashscreen, fadein);
 	now = get_gametime(&game->starttime);
 	while (game->cureventstate->eventstate == initload
-	|| get_gametime(&game->starttime) - now < 3000)
+	|| get_gametime(&game->starttime) - now < 1800)
 		;
 	fade(game, splashscreen, fadeout);
 	SDL_FreeSurface(splashscreen);

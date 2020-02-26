@@ -11,10 +11,15 @@
 /* ************************************************************************** */
 
 #include "gametime.h"
+#include "error.h"
 
 t_uint64		get_gametime(t_time *time)
 {
-	const long double timepassed = (clock() - *time);
+	t_time		current_time;
+	t_time		passed_time;
 
-	return ((t_uint64)(timepassed / CLOCKS_PER_MILLI));
+	if (gettimeofday(&current_time, NULL) == -1)
+		error_msg_errno("Failed to get gametime");
+	timersub(&current_time, time, &passed_time);
+	return ((t_uint64)(passed_time.tv_sec * 1000) + (passed_time.tv_usec / 1000));
 }
