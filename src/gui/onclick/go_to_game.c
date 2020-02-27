@@ -25,5 +25,5 @@ void	go_to_game(t_game *game, t_transform *gui)
 	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), TRUE);
 	game->cureventstate->eventstate = hud;
-	fade_out_music(TITLE_SONG_FADE_OUT);
+	stop_music();
 }
