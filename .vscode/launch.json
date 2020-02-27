@@ -5,16 +5,12 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "doom_nukem",
-			"type": "cppdbg",
+			"type": "lldb",
 			"request": "launch",
-			"program": "${cwd}/doom-nukem",
+			"name": "Debug",
+			"program": "${workspaceFolder}/doom-nukem",
 			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "lldb",
+			"cwd": "${workspaceFolder}"
 		}
 	]
 }

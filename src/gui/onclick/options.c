@@ -12,6 +12,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "audio.h"
 #include "setting.h"
 #include "onclick.h"
 #include "eventstate.h"
@@ -58,6 +59,7 @@ void	hudoptions_return(t_game *game, t_transform *gui)
 																		FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
+	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 	game->cureventstate->eventstate = mainmenu;
 }
 

@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 20:21:45 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/24 15:20:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 15:19:01 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void			init_gui(t_game *game)
 	ui = alloc_ui();
 	game->ui = ui;
 	ui->window_surface = game->surface;
+	ui->mission_page = 0;
 	init_fonts(ui, game->exec_path);
 }

@@ -34,6 +34,9 @@
 		"vector": "c",
 		"memory": "c",
 		"utility": "c",
-		"complex": "c"
+		"complex": "c",
+		"sstream": "c",
+		"bitset": "c",
+		"__functional_03": "c"
 	}
 }

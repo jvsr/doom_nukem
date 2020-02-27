@@ -14,6 +14,7 @@
 # define EVENTSTATE_H
 
 # include <SDL2/SDL_events.h>
+# include <SDL2/SDL_thread.h>
 
 typedef struct s_game	t_game;
 
@@ -29,6 +30,7 @@ void			map_editor_eventstate(t_game *game, SDL_Event event);
 void			map_editor_select_eventstate(t_game *game, SDL_Event event);
 void			hud_eventstate(t_game *game, SDL_Event event);
 void			hud_options_eventstate(t_game *game, SDL_Event event);
+void			eventstate_hud_died(t_game *game, SDL_Event event);
 
 typedef enum	e_eventstate_code
 {
@@ -43,7 +45,8 @@ typedef enum	e_eventstate_code
 	map_editor,
 	map_editor_select,
 	hud,
-	hud_options
+	hud_options,
+	hud_died
 }				t_eventstate_code;
 
 typedef union	u_types
@@ -55,6 +58,7 @@ typedef union	u_types
 
 typedef struct	s_eventstate
 {
+	SDL_mutex			*lock;
 	t_eventstate_code	eventstate;
 	t_types				*arguments;
 }				t_eventstate;

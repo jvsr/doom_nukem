@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:02:43 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 15:13:13 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/20 17:13:24 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	mainmenu_missions(t_game *game, t_transform *gui)
 	set_elem_show_clickable(elem, TRUE);
 	elem = get_gui_child(game->ui, "missionscustombutton");
 	set_elem_show_clickable(elem, TRUE);
+	set_page_number(game);
 	game->cureventstate->eventstate = missions;
 }
 

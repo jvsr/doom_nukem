@@ -19,6 +19,8 @@
 #include "init.h"
 #include "audio.h"
 
+// Crashes due to incorrect checksum if you exit right after spalsh
+
 void	quit(int exit_code)
 {
 	Mix_Quit();

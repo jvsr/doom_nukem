@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   hud_died.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/02/27 12:33:27 by ehollidg       #+#    #+#                */
+/*   Updated: 2020/02/27 12:33:27 by ehollidg      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "eventstate.h"
+#include "renderer.h"
+#include "audio.h"
+#include "game.h"
+#include "init.h"
+#include "gui.h"
+
+void		hud_diedreload(t_game *game, t_transform *gui)
+{
+	(void)gui;
+	delete_map(&game->map);
+	map_init(game);
+	init_player(game);
+	game->cureventstate->eventstate = hud;
+	set_elem_show_clickable(get_gui_child(game->ui, "hud_died"), FALSE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+}
+
+void		hud_diedmainmenu(t_game *game, t_transform *gui)
+{
+	(void)gui;
+	game->cureventstate->eventstate = mainmenu;
+	set_elem_show_clickable(get_gui_child(game->ui, "hud_died"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
+	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
+}

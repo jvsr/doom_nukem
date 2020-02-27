@@ -42,6 +42,14 @@ static void		load_info(t_game *game)
 	{
 		while (SDL_PollEvent(&event))
 			check_quit(game, event);
+		SDL_LockMutex(game->cureventstate->lock);
+		if (game->cureventstate->arguments != NULL
+		&& game->cureventstate->arguments->dgt == TRUE)
+		{
+			SDL_UpdateWindowSurface(game->window);
+			game->cureventstate->arguments->dgt = FALSE;
+		}
+		SDL_UnlockMutex(game->cureventstate->lock);
 	}
 }
 
@@ -80,7 +88,7 @@ void			loop(t_game *game)
 	if (game->state != running)
 		return ;
 	init_frames(game, &framecount, &lastsecond, &lastframe);
-	fade_in_music(game->audio_man, TITLE_SONG, 3500);
+	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))

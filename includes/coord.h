@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:36:58 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/09 16:44:07 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/02/20 19:22:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ typedef struct	s_coord
 	double		x;
 	double		y;
 }				t_coord;
+
+typedef struct	s_tricoord
+{
+	t_coord		x;
+	t_coord		y;
+	t_coord		xy;
+}				t_tricoord;
 
 typedef struct	s_vec
 {

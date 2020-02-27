@@ -29,5 +29,6 @@ void	key_pickup(t_game *game,
 		return ;
 	ft_lstunlink(&sec->objects, lst);
 	ft_lstdelone(&lst, NULL);
+	sec->object_count--;
 	free(obj);
 }

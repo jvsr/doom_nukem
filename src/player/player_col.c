@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/19 14:44:14 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/21 22:11:05 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,21 @@ static t_uint32		get_sector_id(t_map *map, t_sector *sec)
 	return (4294967294);
 }
 
+void	check_wall_col(t_tricoord coord, t_player *player,
+						t_wall *wall, t_uint8 *col)
+{
+	if (wall_col(coord.x, player->pos, wall) == TRUE)
+		*col |= 1;
+	if (wall_col(coord.y, player->pos, wall) == TRUE)
+		*col |= 2;
+	if (wall_col(coord.xy, player->pos, wall) == TRUE)
+		*col |= 4;
+}
+
 static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 									t_map *map, float xspeed, float yspeed)
 {
-	t_coord		pos_x;
-	t_coord		pos_y;
-	t_coord		pos_xy;
+	t_tricoord	coord;
 	t_wall		*walls;
 	t_list		*objects;
 	int			i;
@@ -81,10 +90,9 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	t_list		*new_wall;
 	static t_uint32	prev_sector = UINT32_MAX;
 
-	pos_x = (t_coord){player->pos.x + xspeed, player->pos.y};
-	pos_y = (t_coord){player->pos.x, player->pos.y + yspeed};
-	pos_xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
-	walls = map->sectors[player->cur_sector].walls;
+	coord.x = (t_coord){player->pos.x + xspeed, player->pos.y};
+	coord.y = (t_coord){player->pos.x, player->pos.y + yspeed};
+	coord.xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
 	i = 0;
 	max = map->sectors[player->cur_sector].wall_count;
 	next_sector = UINT32_MAX;
@@ -92,26 +100,22 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	portals = NULL;
 	if (prev_sector == UINT32_MAX)
 		prev_sector = player->cur_sector;
+	walls = map->sectors[player->cur_sector].walls;
 	while (i < max)
 	{
-		if (walls[i].is_portal == FALSE)
-		{
-			if (wall_col(pos_x, player->pos, &walls[i]) == TRUE)
-				*col |= 1;
-			if (wall_col(pos_y, player->pos, &walls[i]) == TRUE)
-				*col |= 2;
-			if (wall_col(pos_xy, player->pos, &walls[i]) == TRUE)
-				*col |= 4;
-		}
+		if (walls[i].is_portal == FALSE || walls[i].is_window == TRUE)
+			check_wall_col(coord, player, &walls[i], col);
 		else if (walls[i].is_portal == TRUE
 		&& get_sector_id(map, walls[i].window) != prev_sector)
 		{
-			if (wall_col(pos_xy, player->pos, &walls[i]) || wall_col(pos_x, player->pos, &walls[i]) == TRUE || wall_col(pos_y, player->pos, &walls[i]) == TRUE)
+			if (wall_col(coord.xy, player->pos, &walls[i]) == TRUE
+			|| wall_col(coord.x, player->pos, &walls[i]) == TRUE
+			|| wall_col(coord.y, player->pos, &walls[i]) == TRUE)
 			{
 				new_wall = ft_lstnew(&walls[i], sizeof(t_wall*));
 				if (new_wall == NULL)
 					error_msg_errno("Failed to alloc New Wall");
-				ft_lstadd(&portals, new_wall);	
+				ft_lstadd(&portals, new_wall);
 			}
 		}
 		if (*col == 7)
@@ -130,11 +134,11 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 		objects = objects->next;
 		if (obj->size.y < player->heightoffset - player->player_height)
 			continue ;
-		if (get_distance(&pos_x, &obj->pos) <= obj->col_radius && get_distance(&pos_x, &obj->pos) < get_distance(&player->pos, &obj->pos))
+		if (get_distance(&coord.x, &obj->pos) <= obj->col_radius && get_distance(&coord.x, &obj->pos) < get_distance(&player->pos, &obj->pos))
 			tmp |= 1;
-		if (get_distance(&pos_y, &obj->pos) <= obj->col_radius && get_distance(&pos_y, &obj->pos) < get_distance(&player->pos, &obj->pos))
+		if (get_distance(&coord.y, &obj->pos) <= obj->col_radius && get_distance(&coord.y, &obj->pos) < get_distance(&player->pos, &obj->pos))
 			tmp |= 2;
-		if (get_distance(&pos_xy, &obj->pos) <= obj->col_radius && get_distance(&pos_xy, &obj->pos) < get_distance(&player->pos, &obj->pos))
+		if (get_distance(&coord.xy, &obj->pos) <= obj->col_radius && get_distance(&coord.xy, &obj->pos) < get_distance(&player->pos, &obj->pos))
 			tmp |= 4;
 		if (tmp == 0)
 			continue ;
@@ -152,9 +156,9 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	while (portals != NULL)
 	{
 		if (
-		((*col & 1) == 0 && wall_col(pos_x, player->pos, (t_wall*)portals->content))
-		|| ((*col & 2) == 0 && wall_col(pos_y, player->pos, (t_wall*)portals->content))
-		|| (*col == 0 && wall_col(pos_xy, player->pos, (t_wall*)portals->content))
+		((*col & 1) == 0 && wall_col(coord.x, player->pos, (t_wall*)portals->content))
+		|| ((*col & 2) == 0 && wall_col(coord.y, player->pos, (t_wall*)portals->content))
+		|| (*col == 0 && wall_col(coord.xy, player->pos, (t_wall*)portals->content))
 		)
 		{
 			prev_sector = player->cur_sector;
@@ -216,15 +220,17 @@ t_bool				player_col(t_game *game, float xspeed, float yspeed)
 		return (FALSE);
 	if (next_sector != UINT32_MAX)
 	{
-		ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
+		if (map->sectors[player->cur_sector].f_exit != NULL)
+			map->sectors[player->cur_sector].f_exit(game, &map->sectors[player->cur_sector]);
+		// ft_printf("%f, %f\n", player->height + player->heightoffset + PLAYER_CLIMB, map->sectors[next_sector].floor);
 		if (player->height + player->heightoffset + PLAYER_CLIMB - player->player_height < map->sectors[next_sector].floor
 		|| player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor) > map->sectors[next_sector].ceil
 		)
 		{
-			ft_printf("col: %d\n", col);
+			// ft_printf("col: %d\n", col);
 			return (FALSE);
 		}
-		ft_printf("height: %f, other: %f\n", player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor), map->sectors[next_sector].ceil);
+		// ft_printf("height: %f, other: %f\n", player->height + player->heightoffset + (map->sectors[next_sector].floor - map->sectors[player->cur_sector].floor), map->sectors[next_sector].ceil);
 		if (player->height + player->heightoffset > map->sectors[next_sector].floor + player->player_height)
 			player->heightoffset += player->height - (map->sectors[next_sector].floor + player->player_height);
 		else

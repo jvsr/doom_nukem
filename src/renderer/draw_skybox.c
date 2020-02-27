@@ -20,7 +20,7 @@
 #include "cmath.h"
 #include "game.h"
 
-void		draw_skybox(int x,
+void		draw_skybox(size_t x,
 								SDL_Surface *dst, t_game *game, t_point *bounds)
 {
 	int					*pixels;

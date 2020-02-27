@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "gametime.h"
+#include "error.h"
 
 void		init_gametime(t_time *time)
 {
-	*time = clock();
+	if (gettimeofday(time, NULL) == -1)
+		error_msg_errno("Failed to init gametime");
 }

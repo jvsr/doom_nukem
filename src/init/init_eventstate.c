@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <SDL2/SDL_thread.h>
+
 #include "libft/ft_mem.h"
 
 #include "game.h"
@@ -23,7 +25,9 @@ void	init_eventstate(t_game *game)
 	cureventstate = ft_memalloc(sizeof(t_eventstate));
 	if (cureventstate == NULL)
 		error_msg_errno("Failed to alloc eventstate");
+	cureventstate->lock = SDL_CreateMutex();
+	if (cureventstate->lock == NULL)
+		error_msg_errno("Failed to alloc eventstate mutex lock");
 	cureventstate->eventstate = initload;
-	cureventstate->arguments = NULL;
 	game->cureventstate = cureventstate;
 }
