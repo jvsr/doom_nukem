@@ -72,3 +72,4 @@ dkms.conf
 get_headers
 personal.h
 log
+resources/data/map/tmp_list

@@ -49,7 +49,7 @@ static void		addzero(t_info *info, intmax_t len, intmax_t space, char *prfx)
 	len = len - ft_max(0, space);
 	if (info->var_type == VOID || info->is_zero == FALSE)
 		len -= addprefix(info, prfx, prelen);
-	else if (ft_tolower(prfx[1]) != 'x' && info->type != 'o')
+	else if (ft_strequ_nocase(prfx, "0x") == FALSE && info->type != 'o')
 		len -= addprefix(info, prfx, prelen);
 	if (len > 0 && (PF_FLAG_MIN == FALSE || c != ' '))
 		addpad(info, len, c);
@@ -89,7 +89,7 @@ void			pf_formatpad(t_info *info)
 	space = ft_max(0, info->width) - ft_max(info->var_len, info->precision);
 	if (info->var_type == VOID || info->is_zero == FALSE)
 		space -= prelen;
-	else if (ft_tolower(prfx[1]) != 'x' && info->type != 'o')
+	else if (ft_strequ_nocase(prfx, "0x") == FALSE && info->type != 'o')
 		space -= prelen;
 	if (PF_FLAG_ZERO && (info->precision == -1 ||
 		(info->precision == 0 && PF_FLAG_HASH == FALSE)))

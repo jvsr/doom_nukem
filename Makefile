@@ -23,7 +23,7 @@ PARENTNAME = $(NAME)
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
-CCOPTIMISE = -O3
+CCOPTIMISE =
 
 # Gcov settings
 GCOV = FALSE
@@ -117,7 +117,7 @@ all: $(NAME)
 $(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -g -coverage -o $(NAME) $(OBJS) $(LIBS)
+	@gcc -g -coverage $(CCOPTIMISE) -o $(NAME) $(OBJS) $(LIBS)
 
 # Run test and gcov if $(GCOV)==TRUE
 test: $(LIB) $(SUBLIBS) FORCE
