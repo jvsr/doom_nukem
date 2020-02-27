@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 16:37:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/21 22:49:30 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/02/27 15:31:52 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,20 @@
 
 #include "rinfo.h"
 
-void		check_enemy(t_player *player, t_object *object, t_map *map)
+void		move_enemy(t_object *object, float a, float lastframe)
+{
+	float	xspeed;
+	float	yspeed;
+
+	xspeed = 0.15 * cosf(a * PI_R);
+	xspeed = lerp_max(0, xspeed, lastframe / BASE_FRAME_TIME, INFINITY);
+	object->pos.x += xspeed;
+	yspeed = 0.15 * sinf(a * PI_R);
+	yspeed = lerp_max(0, yspeed, lastframe / BASE_FRAME_TIME, INFINITY);
+	object->pos.y += yspeed;
+}
+
+void		check_enemy(t_player *player, t_object *object, t_map *map, float lastframe)
 {
 	float	dist;
 	float	ang;
@@ -32,7 +45,7 @@ void		check_enemy(t_player *player, t_object *object, t_map *map)
 	if (object->is_enemy == TRUE)
 	{
 		dist = get_distance(&player->pos, &object->pos);
-		if (dist < 100)
+		if (dist < 100 && dist > 5)
 		{
 			ang = get_angle_between_points(&object->pos, &player->pos);
 			t_uint64 i = 0;
@@ -54,6 +67,7 @@ void		check_enemy(t_player *player, t_object *object, t_map *map)
 				}
 				i++;
 			}
+			move_enemy(object, ang, lastframe);
 		}
 	}
 }
@@ -70,7 +84,7 @@ void		enemy_move(t_game *game)
 		j = 0;
 		while (j < map->sectors[i].object_count)
 		{
-			check_enemy(game->player, (ft_lstindex(map->sectors[i].objects, j))->content, game->map);
+			check_enemy(game->player, (ft_lstindex(map->sectors[i].objects, j))->content, game->map, (float)game->lastframe);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/22 15:30:53 by euan          ########   odam.nl         */
+/*   Updated: 2020/02/27 15:27:35 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ struct			s_object
 typedef struct	s_enemy
 {
 	int				health;
+	t_uint64		last_seen;
 	t_enemystate	state;
 	t_object		*obj;
+	void			(*on_los)(t_game *, t_object *, t_player *);
+	void			(*no_los)(t_game *);
 }				t_enemy;
 
 struct			s_sector
