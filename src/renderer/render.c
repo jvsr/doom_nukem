@@ -60,6 +60,7 @@ void		render(t_game *game, SDL_Surface *dst)
 
 	game->player->screen_updown = game->player->updown * dst->h;
 	i = 0;
+	tasks = NULL;
 	step = dst->w / 7;
 	bound = (t_point){0, step};
 	while (i < 7)
@@ -69,10 +70,9 @@ void		render(t_game *game, SDL_Surface *dst)
 		new = sdl_new_ttask(render_chunk, TFLAG_TASK_NO_DELETE,
 			4, game, dst, (size_t)bound.x, (size_t)bound.y);
 		sdl_add_tpool_ttask(game->pool, new);
+		bound = (t_point){bound.x + step, bound.y + step};
 		new->next = tasks;
 		tasks = new;
-		bound.x += step;
-		bound.y += step;
 		i++;
 	}
 	sdl_join_ttask_all(tasks);
