@@ -186,17 +186,18 @@ void			map_init(t_game *game)
 	//Sector 3
 	game->map->sectors[2].ceil = 40;
 	game->map->sectors[2].floor = 10;
-	game->map->sectors[2].wall_count = 4;
+	game->map->sectors[2].wall_count = 5;
 	game->map->sectors[2].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[2].wall_count + 1));
 	game->map->sectors[2].light_value = 0.5;
 	if (game->map->sectors[2].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
 	game->map->sectors[2].walls[0] = (t_wall){(t_coord){-40, -20}, (t_coord){-30, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	game->map->sectors[2].walls[1] = (t_wall){(t_coord){-40, 20}, (t_coord){-40, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	game->map->sectors[2].walls[2] = (t_wall){(t_coord){-30, 20}, (t_coord){-40, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	game->map->sectors[2].walls[3] = (t_wall){(t_coord){-30, -20}, (t_coord){-30, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	game->map->sectors[2].walls[3].is_portal = TRUE;
-	game->map->sectors[2].walls[3].window = &game->map->sectors[1];
+	game->map->sectors[2].walls[1] = (t_wall){(t_coord){-30, -20}, (t_coord){-30, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[2] = (t_wall){(t_coord){-30, 20}, (t_coord){-30, 40}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[3] = (t_wall){(t_coord){-30, 40}, (t_coord){-40, 40}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[4] = (t_wall){(t_coord){-40, 40}, (t_coord){-40, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[1].is_portal = TRUE;
+	game->map->sectors[2].walls[1].window = &game->map->sectors[1];
 	game->map->sectors[2].object_count = 0;
 	game->map->sectors[2].objects = NULL;
 	game->map->sectors[2].has_ceiling = FALSE;
