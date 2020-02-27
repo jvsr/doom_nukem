@@ -23,13 +23,6 @@ typedef struct s_coord		t_coord;
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
 
-typedef struct	s_line
-{
-	float		x;
-	float		y;
-	float		equals;
-}				t_line;
-
 t_coord			*get_collision(t_coord *start, t_coord *a, t_coord *wall,
 								t_coord *pos);
 float			get_angle_from_vectors(t_coord *vec0, t_coord *vec1);
