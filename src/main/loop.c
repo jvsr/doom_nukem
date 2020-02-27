@@ -88,7 +88,7 @@ void			loop(t_game *game)
 	if (game->state != running)
 		return ;
 	init_frames(game, &framecount, &lastsecond, &lastframe);
-	fade_in_music(game->audio_man, TITLE_SONG, 3500);
+	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 	while (game->state == running)
 	{
 		while (SDL_PollEvent(&event))

@@ -12,6 +12,7 @@
 
 #include "eventstate.h"
 #include "renderer.h"
+#include "audio.h"
 #include "game.h"
 #include "init.h"
 #include "gui.h"
@@ -33,4 +34,5 @@ void		hud_diedmainmenu(t_game *game, t_transform *gui)
 	game->cureventstate->eventstate = mainmenu;
 	set_elem_show_clickable(get_gui_child(game->ui, "hud_died"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
+	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 }

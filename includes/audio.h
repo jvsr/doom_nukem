@@ -27,6 +27,8 @@
 # define MUSIC_PATH "resources/sounds/music/"
 
 # define TITLE_SONG "hit_n_smash"
+# define TITLE_SONG_FADE_IN 3500
+# define TITLE_SONG_FADE_OUT 150
 
 typedef struct s_game		t_game;
 typedef struct s_hashmap	t_hashmap;

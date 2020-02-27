@@ -49,7 +49,7 @@ static void	manage_player_angle(t_game *game, t_bool *skip)
 	player->mag.sin = sin(player->angle * PI_R);
 }
 
-static void	enter_game(t_game *game, t_bool *skip)
+static void	enter_options(t_game *game, t_bool *skip)
 {
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"), TRUE);
@@ -80,7 +80,7 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	if (event.type == SDL_KEYDOWN)
 	{
 		if (!game->player->is_dead && event.key.keysym.sym == SDLK_ESCAPE)
-			enter_game(game, &skip_mouse_move);
+			enter_options(game, &skip_mouse_move);
 		else if (is_helddown(game->keymap, SDLK_F6)
 		&& event.key.keysym.sym == SDLK_f)
 			game->player->is_flying = !game->player->is_flying;
