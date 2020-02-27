@@ -49,6 +49,7 @@ static t_tablepair const	g_onclicks[] = {
 	{"options_return", options_return},
 	{"hudoptions_return", hudoptions_return},
 	{"hud_diedreturn", hud_diedmainmenu},
+	{"hud_diedreload", hud_diedreload},
 
 	{"missions_left_page", missions_left_page},
 	{"missions_right_page", missions_right_page},

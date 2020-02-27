@@ -110,5 +110,6 @@ void	remove_confirmation(t_game *game);
 
 void	go_to_game(t_game *game, t_transform *gui);
 void	hud_diedmainmenu(t_game *game, t_transform *gui);
+void	hud_diedreload(t_game *game, t_transform *gui);
 
 #endif

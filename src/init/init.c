@@ -62,7 +62,7 @@ static void		init_threadpool(t_game *game)
 	game->pool = sdl_new_tpool(core_count, TFLAG_POOL_ALLOC_ON_EXEC);
 }
 
-static void		map_init(t_game *game)
+void			map_init(t_game *game)
 {
 	game->map = ft_memalloc(sizeof(t_map));
 	game->map->sector_count = 4;

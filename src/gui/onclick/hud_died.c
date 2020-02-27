@@ -11,8 +11,21 @@
 /* ************************************************************************** */
 
 #include "eventstate.h"
+#include "renderer.h"
 #include "game.h"
+#include "init.h"
 #include "gui.h"
+
+void		hud_diedreload(t_game *game, t_transform *gui)
+{
+	(void)gui;
+	delete_map(&game->map);
+	map_init(game);
+	init_player(game);
+	game->cureventstate->eventstate = hud;
+	set_elem_show_clickable(get_gui_child(game->ui, "hud_died"), FALSE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+}
 
 void		hud_diedmainmenu(t_game *game, t_transform *gui)
 {

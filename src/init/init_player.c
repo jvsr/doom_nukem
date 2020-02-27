@@ -21,4 +21,7 @@ void	init_player(t_game *game)
 	game->player->cur_sector = 0;
 	game->player->height = PLAYER_HEIGHT;
 	game->player->mag = (t_mag){cosf(0), sinf(0)};
+	game->player->health = PLAYER_MAX_HEALTH;
+	game->player->is_dead = FALSE;
+	game->player->keys = 0;
 }

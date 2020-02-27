@@ -71,5 +71,6 @@ void				draw_wall(t_rinfo *rinfo,
 void				draw_glass(t_rinfo *rinfo,
 							t_point **bounds, const size_t x, t_hit *hit);
 void				draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info);
+void				delete_map(t_map **map);
 
 #endif
