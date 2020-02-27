@@ -71,7 +71,7 @@ static size_t	load_plain_textures(t_game *game, size_t tex_count)
 		"brick_wall", "skybox_day", "skybox_dusk", "objs/lamp",
 		"objs/chair_back", "objs/chair_front", "objs/chair_left",
 		"objs/chair_right", "bloodsplatter", "quartz", "objs/health_pickup",
-		"objs/key", "glass", NULL
+		"objs/key", "glass", "spike-ball", NULL
 	};
 	while (texture_files[i] != NULL && tex_count + i < TEXTURE_ENEMY0_F0)
 	{

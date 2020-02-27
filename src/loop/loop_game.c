@@ -46,22 +46,18 @@ void		check_enemy(t_player *player, t_object *object, t_map *map)
 						{
 							t_coord newangl = {-(angl.x), -(angl.y)};
 							if (get_collision(&player->pos, &newangl,
-							(t_coord[2]){cur.corner_0, cur.corner_1}, &pos)) {
-								// ft_printf("No LOS\n");
+							(t_coord[2]){cur.corner_0, cur.corner_1}, &pos))
 								return ;
-							}
 						}
 					}
 					j++;
 				}
 				i++;
 			}
-			// ft_printf("Yes LOS\n");
 		}
 	}
 }
 
-// ft_printf("X: %d, Y:%d\nobjX: %f, objY: %f\nangX: %f, angY: %f\ncur0X: %f, cur0Y: %f\ncur1X: %f, cur1Y: %f\n", i, j, object->pos.x, object->pos.y, angl.x, angl.y, cur.corner_0.x, cur.corner_0.y, cur.corner_1.x, cur.corner_1.x);
 void		enemy_move(t_game *game)
 {
 	size_t		i;
@@ -86,4 +82,6 @@ void		loop_game(t_game *game)
 	player_move(game);
 	enemy_move(game);
 	loop_game_gui(game);
+	if (game->player->is_dead)
+		player_died(game);
 }

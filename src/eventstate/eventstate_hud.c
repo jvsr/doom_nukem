@@ -79,7 +79,7 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	+ game->map->sectors[game->player->cur_sector].floor;
 	if (event.type == SDL_KEYDOWN)
 	{
-		if (event.key.keysym.sym == SDLK_ESCAPE)
+		if (!game->player->is_dead && event.key.keysym.sym == SDLK_ESCAPE)
 			enter_game(game, &skip_mouse_move);
 		else if (is_helddown(game->keymap, SDLK_F6)
 		&& event.key.keysym.sym == SDLK_f)

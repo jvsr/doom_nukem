@@ -15,6 +15,7 @@
 
 # include "types.h"
 # include "coord.h"
+# include "libft/ft_bool.h"
 
 # define PLAYER_HEIGHT 9.0
 # define PLAYER_CROUCH 5.0
@@ -37,6 +38,8 @@
 # define PLAYER_JUMP_TIME 250
 # define PLAYER_MAX_HEALTH 50
 # define PLAYER_FLY_SPEED 2000
+
+# define DAMAGE_REPEAT_SPEED 750
 
 typedef struct s_game		t_game;
 typedef struct s_hashmap	t_hashmap;
@@ -66,6 +69,7 @@ typedef	struct	s_player
 	float		updown;
 	int			screen_updown;
 	t_bool		is_flying;
+	t_bool		is_dead;
 	t_uint32	keys;
 }				t_player;
 
@@ -75,6 +79,8 @@ void			health_pickup(t_game *game,
 					t_sector *sec, t_object *obj, t_player *player);
 void			key_pickup(t_game *game,
 					t_sector *sec, t_object *obj, t_player *player);
+void			spike_damage(t_game *game,
+							t_sector *sec, t_object *obj, t_player *player);
 t_bool			move_forward(t_player *player, float speed,
 								float *xspeed, float *yspeed);
 t_bool			move_backward(t_player *player, float speed,
@@ -87,4 +93,7 @@ t_bool			move_jump(t_game *game, t_player *player, t_bool *jump);
 t_bool			move_down(t_game *game, t_player *player, t_bool *jump);
 t_bool			fly_up(t_game *game, t_player *player, t_bool *jump);
 t_bool			fly_down(t_game *game, t_player *player, t_bool *jump);
+void			damage_player(t_game *game, t_player *player, t_uint32 damage);
+void			player_died(t_game *game);
+
 #endif
