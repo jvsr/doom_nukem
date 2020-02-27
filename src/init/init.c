@@ -94,7 +94,7 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].walls[4].window = &game->map->sectors[1];
 	game->map->sectors[0].walls[5] = (t_wall){(t_coord){30, 10}, (t_coord){10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[0].has_ceiling = TRUE;
-	game->map->sectors[0].object_count = 4;
+	game->map->sectors[0].object_count = 5;
 
 	t_object *o = (t_object*)ft_memalloc(sizeof(t_object));
 	game->map->sectors[0].objects = ft_lstnew(o, sizeof(t_object*));
@@ -104,6 +104,8 @@ static void		map_init(t_game *game)
 	game->map->sectors[0].objects->next->next = ft_lstnew(o, sizeof(t_object*));
 	o = (t_object*)ft_memalloc(sizeof(t_object));
 	game->map->sectors[0].objects->next->next->next = ft_lstnew(o, sizeof(t_object*));
+	o = (t_object*)ft_memalloc(sizeof(t_object));
+	game->map->sectors[0].objects->next->next->next->next = ft_lstnew(o, sizeof(t_object*));
 
 	t_object *obj = game->map->sectors[0].objects->content;
 	obj->pos = (t_coord){5, 0};
@@ -138,6 +140,16 @@ static void		map_init(t_game *game)
 	obj->is_enemy = FALSE;
 	obj->col_radius = 1.0;
 	obj->on_collide = key_pickup;
+
+	obj = game->map->sectors[0].objects->next->next->next->next->content;
+	obj->pos = (t_coord){5, 5};
+	obj->size = (t_coord){8, 8};
+	obj->img = single_init(TEXTURE_SPIKES, obj);
+	obj->can_col = TRUE;
+	obj->is_enemy = FALSE;
+	obj->col_radius = 1.3;
+	obj->on_collide = spike_damage;
+	obj->data = ft_memalloc(sizeof(t_uint64));
 
 	t_decal *decal = ft_memalloc(sizeof(t_decal));
 	decal->texture = single_init(TEXTURE_BLOOD_SPLATTER, NULL);

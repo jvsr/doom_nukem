@@ -31,6 +31,7 @@ static t_eventstate_fnc	*const g_eventstate[] =
 	map_editor_select_eventstate,
 	hud_eventstate,
 	hud_options_eventstate,
+	eventstate_hud_died,
 };
 
 #endif
