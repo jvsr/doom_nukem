@@ -32,5 +32,6 @@ t_tthread		*sdl_new_tthread(t_tpool *pool, size_t num, int (*f)(void *))
 	thread->id = SDL_CreateThread(f, name, thread);
 	if (thread->id == NULL)
 		error_msg_sdl(13, "Failed to alloc worker thread");
+	ft_strdel(&name);
 	return (thread);
 }
