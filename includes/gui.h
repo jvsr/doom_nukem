@@ -23,17 +23,17 @@
 
 # define FONT_PATH "resources/fonts/"
 
-typedef struct s_list		t_list;
-typedef struct s_game		t_game;
-typedef struct s_gui		t_gui;
-typedef struct s_transform	t_transform;
-typedef struct s_text		t_text;
-typedef struct s_image		t_image;
-typedef struct s_button		t_button;
-typedef struct s_panel		t_panel;
-typedef struct s_gview		t_gview;
-typedef struct s_map_editor	t_map_editor;
-
+typedef struct s_list			t_list;
+typedef struct s_game			t_game;
+typedef struct s_gui			t_gui;
+typedef struct s_transform		t_transform;
+typedef struct s_text			t_text;
+typedef struct s_image			t_image;
+typedef struct s_button			t_button;
+typedef struct s_panel			t_panel;
+typedef struct s_gview			t_gview;
+typedef struct s_map_editor		t_map_editor;
+typedef struct s_editor_sector	t_editor_sector;
 
 typedef void	(t_onclick)(t_game *, t_transform *);
 
@@ -152,9 +152,10 @@ struct			s_gview
 
 struct			s_map_editor
 {
-	SDL_Point	pos;
-	SDL_Point	last_click;
-	t_bool		show_last_click;
+	SDL_Point		pos;
+	SDL_Point		last_click;
+	t_bool			show_last_click;
+	t_editor_sector	*focus_sector;
 };
 
 struct			s_gui
