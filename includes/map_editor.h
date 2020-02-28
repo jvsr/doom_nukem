@@ -32,6 +32,7 @@
 
 typedef struct s_transform	t_transform;
 typedef struct s_sector		t_sector;
+typedef struct s_object		t_object;
 typedef struct s_wall		t_wall;
 typedef struct s_game		t_game;
 typedef struct s_list		t_list;
@@ -66,5 +67,10 @@ void			map_editor_remove_last_wall(t_editor_map *editor_map);
 void			map_editor_add_wall(t_editor_map *editor_map, t_wall *wall);
 void			map_editor_delete_wall(t_editor_map *editor_map, t_wall *wall);
 t_bool			map_editor_hit_wall(t_wall *wall, SDL_Point mouse);
+
+t_editor_sector	*map_editor_find_wall_sector(t_editor_map *editor_map,
+					t_wall *wall);
+t_editor_sector	*map_editor_find_object_sector(t_editor_map *editor_map,
+					t_object *object);
 
 #endif

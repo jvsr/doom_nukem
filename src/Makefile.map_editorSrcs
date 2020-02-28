@@ -23,3 +23,5 @@ SRCS = \
 	add_wall \
 	snap_to_grid \
 	delete_wall \
+	find_wall_sector \
+	find_object_sector \
