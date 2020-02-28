@@ -87,6 +87,7 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 	int			max;
 	t_uint32	next_sector;
 	t_list		*portals;
+	t_list		*next_portal;
 	t_list		*new_wall;
 	static t_uint32	prev_sector = UINT32_MAX;
 
@@ -122,6 +123,7 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 		{
 			player->cur_sector = temp;
 			prev_sector = UINT32_MAX;
+			ft_lstdel(&portals, NULL);
 			return (UINT32_MAX);
 		}
 		i++;
@@ -150,11 +152,13 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 		{
 			player->cur_sector = temp;
 			prev_sector = UINT32_MAX;
+			ft_lstdel(&portals, NULL);
 			return (UINT32_MAX);
 		}
 	}
 	while (portals != NULL)
 	{
+		next_portal = portals->next;
 		if (
 		((*col & 1) == 0 && wall_col(coord.x, player->pos, (t_wall*)portals->content))
 		|| ((*col & 2) == 0 && wall_col(coord.y, player->pos, (t_wall*)portals->content))
@@ -167,7 +171,8 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 			check_col(game, player, col, map, xspeed, yspeed);
 			player->cur_sector = temp;
 		}
-		portals = portals->next;
+		ft_lstdelone(&portals, NULL);
+		portals = next_portal;
 	}
 	if (*col == 7)
 	{

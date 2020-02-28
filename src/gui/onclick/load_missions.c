@@ -27,7 +27,7 @@ static void		create_map_list(t_game *game, char *path)
 {
 	int			fd;
 	int			forky;
-	char *const	argument[] = {"/bin/ls", path, NULL};
+	char *const	argument[3] = {"/bin/ls", path, NULL};
 
 	forky = fork();
 	if (forky == 0)
@@ -62,6 +62,7 @@ static t_list	*read_map_list(void)
 	t_list	*maps;
 
 	maps = NULL;
+	line = NULL;
 	fd = open(TMP, O_RDONLY);
 	if (fd == -1)
 		error_msg_errno("Failed to open tmp file");
@@ -76,6 +77,7 @@ static t_list	*read_map_list(void)
 		}
 	}
 	close(fd);
+	ft_strdel(&line);
 	ft_lstsort(&maps, cmp_list);
 	return (maps);
 }
@@ -98,7 +100,7 @@ static void		add_maps(t_list *list, t_game *game)
 	}
 }
 
-void		remove_maps(t_game *game)
+void			remove_maps(t_game *game)
 {
 	int			i;
 	char		*name;
@@ -123,12 +125,6 @@ t_bool			get_focus(t_game *game)
 	if (camp->layer > custom->layer)
 		return (TRUE);
 	return (FALSE);
-}
-
-void			del(void *content, size_t content_size)
-{
-	(void)content_size;
-	free(content);
 }
 
 t_list			*skip_page(t_list *maps, size_t page)
@@ -159,5 +155,5 @@ void			load_missions(t_game *game)
 	maps = read_map_list();
 	start = skip_page(maps, game->ui->mission_page);
 	add_maps(start, game);
-	ft_lstdel(&maps, del);
+	ft_lstdel(&maps, ft_lstdelmem);
 }

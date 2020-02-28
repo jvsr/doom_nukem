@@ -59,5 +59,5 @@ void		render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range)
 	}
 	ft_lstsort(&objs, sort_objs);
 	draw_object(objs, rinfo, info);
-	ft_lstdel(&objs, NULL);
+	ft_lstdel(&objs, ft_lstdelmem);
 }
