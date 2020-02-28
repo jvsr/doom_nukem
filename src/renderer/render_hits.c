@@ -26,6 +26,50 @@ static void		del_hinfo(void *info, size_t size)
 	ft_memdel((void**)&h);
 }
 
+static t_point	find_bounds_floor(t_rinfo *rinfo, t_hinfo *hinfo)
+{
+	size_t	i;
+	t_point	bnds;
+
+	i = 0;
+	bnds = (t_point){INT32_MAX, 0};
+	while (i + rinfo->begin < hinfo->end)
+	{
+		if (hinfo->prev == NULL)
+			bnds.x = 0;
+		else if (hinfo->prev->hits[i].bounds.x < bnds.x)
+			bnds.x = hinfo->prev->hits[i].bounds.x;
+		if (hinfo->hits[i].ybnds.x > bnds.y)
+			bnds.y = hinfo->hits[i].ybnds.x;
+		i++;
+	}
+	return (bnds);
+}
+
+static void		ren_floor(t_rinfo *rinfo, t_hinfo *hinfo)
+{
+	size_t	i;
+	int		y;
+	t_point	bounds;
+
+	i = hinfo->start;
+	bounds = find_bounds_floor(rinfo, hinfo);
+	y = bounds.x;
+	while (y < bounds.y)
+	{
+
+		y++;
+	}
+}
+
+static void		render_floorceil(t_rinfo *rinfo, t_hinfo *hinfo)
+{
+	// ren_floor(rinfo, hinfo);
+	(void)rinfo;
+	(void)hinfo;
+	return ;	
+}
+
 void			render_hits(t_rinfo *rinfo, t_coord *range)
 {
 	t_list	*lst;
@@ -49,6 +93,7 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 					index, &bounds);
 			index++;
 		}
+		render_floorceil(rinfo, info);
 		render_objs(rinfo, info, range);
 		lst = lst->next;
 	}

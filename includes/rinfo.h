@@ -97,6 +97,8 @@ struct			s_sector
 	t_uint64	object_count;
 	float		floor;
 	float		ceil;
+	t_texture	floor_tex;
+	t_texture	ceil_tex;
 	t_bool		has_ceiling;
 	void		(*f_enter)(t_game *game, t_sector *cur_sector);
 	void		(*f_exit)(t_game *game, t_sector *cur_sector);
@@ -151,6 +153,7 @@ typedef struct	s_zbuf
 typedef struct	s_hitem
 {
 	t_point		bounds;
+	t_point		ybnds;
 	t_hit		hit;
 	t_coord		y;
 	t_coord		st;

@@ -95,6 +95,7 @@ void			map_init(t_game *game)
 	game->map->sectors[0].walls[5] = (t_wall){(t_coord){30, 10}, (t_coord){10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[0].has_ceiling = TRUE;
 	game->map->sectors[0].object_count = 5;
+	game->map->sectors[0].floor_tex = TEXTURE_QUARTZ;
 
 	t_object *o = (t_object*)ft_memalloc(sizeof(t_object));
 	game->map->sectors[0].objects = ft_lstnew(o, sizeof(t_object*));
@@ -178,7 +179,7 @@ void			map_init(t_game *game)
 	game->map->sectors[1].walls[3] = (t_wall){(t_coord){-20, -20}, (t_coord){-20, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[1].walls[3].is_portal = TRUE;
 	game->map->sectors[1].walls[3].window = &game->map->sectors[0];
-
+	game->map->sectors[1].floor_tex = TEXTURE_QUARTZ;
 	game->map->sectors[1].has_ceiling = TRUE;
 	game->map->sectors[1].object_count = 0;
 	game->map->sectors[1].objects = NULL;
@@ -201,6 +202,7 @@ void			map_init(t_game *game)
 	game->map->sectors[2].object_count = 0;
 	game->map->sectors[2].objects = NULL;
 	game->map->sectors[2].has_ceiling = FALSE;
+	game->map->sectors[2].floor_tex = TEXTURE_QUARTZ;
 
 	//Sector 4
 	game->map->sectors[3].ceil = 13;
@@ -221,6 +223,7 @@ void			map_init(t_game *game)
 	game->map->sectors[3].has_ceiling = TRUE;
 	game->map->sectors[3].object_count = 0;
 	game->map->sectors[3].objects = NULL;
+	game->map->sectors[3].floor_tex = TEXTURE_QUARTZ;
 
 	// //Sector 5
 	// game->map->sectors[4].ceil = 150;
