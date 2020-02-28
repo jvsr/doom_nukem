@@ -152,10 +152,9 @@ struct			s_gview
 
 struct			s_map_editor
 {
-	SDL_Point		pos;
-	t_list			*wall;
-	SDL_Point		last_click;
-	t_bool			show_last_click;
+	SDL_Point	pos;
+	SDL_Point	last_click;
+	t_bool		show_last_click;
 };
 
 struct			s_gui

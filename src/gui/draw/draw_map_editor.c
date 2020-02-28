@@ -79,7 +79,7 @@ void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 	hex_to_color(&preview_color, EDITOR_PREVIEW_PLACE_COLOR);
 	sdl_fill_surface_color(dst, background_color);
 	draw_grid(dst, pos);
-	draw_wall(dst, elem->gui_elem.map_editor->wall, pos);
+	draw_wall(dst, game->editor_map->walls, pos);
 
 	SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
 	map_editor_snap_to_grid(elem, &mouse_pos);

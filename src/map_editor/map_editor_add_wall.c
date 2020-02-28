@@ -13,7 +13,6 @@
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
 
-#include "gui.h"
 #include "cmath.h"
 #include "rinfo.h"
 #include "error.h"
@@ -83,13 +82,12 @@ static void		add_to_back(t_list **head, t_list *new)
 	return ;
 }
 
-void	map_editor_add_wall(t_transform *map_editor_elem, t_wall *wall)
+void	map_editor_add_wall(t_editor_map *editor_map, t_wall *wall)
 {
 	t_list	*new;
 
 	new = ft_lstnew((void*)wall, sizeof(t_wall));
 	if (new == NULL)
 		error_msg_errno("Failed to alloc map editor wall");
-	add_to_back(&map_editor_elem->gui_elem.map_editor->wall, new);
-	set_elem_redraw(map_editor_elem);
+	add_to_back(&editor_map->walls, new);
 }

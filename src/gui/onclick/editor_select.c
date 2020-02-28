@@ -12,6 +12,7 @@
 
 #include "gui.h"
 #include "game.h"
+#include "map_editor.h"
 #include "eventstate.h"
 
 void	map_editor_select_new(t_game *game, t_transform *gui)
@@ -19,6 +20,8 @@ void	map_editor_select_new(t_game *game, t_transform *gui)
 	(void)gui;
 	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mapeditor"), TRUE);
+	map_editor_delete(&game->editor_map);
+	game->editor_map = map_editor_new();
 	game->cureventstate->eventstate = map_editor;
 }
 

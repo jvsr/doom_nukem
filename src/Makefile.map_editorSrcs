@@ -17,6 +17,8 @@ PREFIX = map_editor_
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = \
+	new \
+	delete \
 	remove_last_wall \
 	add_wall \
 	snap_to_grid \

@@ -13,19 +13,17 @@
 #include "libft/ft_list.h"
 #include "libft/ft_printf.h"
 
-#include "gui.h"
 #include "game.h"
 #include "rinfo.h"
 #include "map_editor.h"
 
-void	map_editor_delete_wall(t_transform *map_editor_elem, t_wall *wall)
+void	map_editor_delete_wall(t_editor_map *editor_map, t_wall *wall)
 {
 	t_list	*lst;
 
-	lst = ft_lstfind_content(map_editor_elem->gui_elem.map_editor->wall,
-							wall, sizeof(t_wall));
+	lst = ft_lstfind_content(editor_map->walls, wall, sizeof(t_wall));
 	if (lst == NULL)
 		return ;
-	ft_lstunlink(&map_editor_elem->gui_elem.map_editor->wall, lst);
+	ft_lstunlink(&editor_map->walls, lst);
 	ft_lstdelone(&lst, &ft_lstdelmem);
 }

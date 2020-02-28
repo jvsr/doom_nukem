@@ -26,7 +26,6 @@ void		del_map_editor(t_map_editor **map_editor)
 {
 	if (map_editor == NULL || *map_editor == NULL)
 		return ;
-	ft_lstdel(&(*map_editor)->wall, ft_lstdelmem);
 	free(*map_editor);
 	*map_editor = NULL;
 }

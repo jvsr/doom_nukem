@@ -12,16 +12,15 @@
 
 #include "libft/ft_list.h"
 
-#include "gui.h"
 #include "map_editor.h"
 
-void	map_editor_remove_last_wall(t_transform *map_editor_elem)
+void	map_editor_remove_last_wall(t_editor_map *editor_map)
 {
 	t_list	*lst;
 	t_list	*prv;
 
 	prv = NULL;
-	lst = map_editor_elem->gui_elem.map_editor->wall;
+	lst = editor_map->walls;
 	while (lst != NULL && lst->next != NULL)
 	{
 		prv = lst;
@@ -30,7 +29,6 @@ void	map_editor_remove_last_wall(t_transform *map_editor_elem)
 	if (prv != NULL)
 		prv->next = NULL;
 	else
-		map_editor_elem->gui_elem.map_editor->wall = NULL;
+		editor_map->walls = NULL;
 	ft_lstdel(&lst, &ft_lstdelmem);
-	set_elem_redraw(map_editor_elem);
 }
