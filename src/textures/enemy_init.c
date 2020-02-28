@@ -12,11 +12,10 @@
 
 #include "libft/ft_mem.h"
 #include "renderer.h"
-#include "game.h" //
-#include "libft/libft.h" //
 #include "types.h"
 #include "rinfo.h"
 #include "error.h"
+#include "game.h"
 
 static void	left_add(t_anim *anim, t_texture start)
 {

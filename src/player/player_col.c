@@ -250,4 +250,3 @@ t_bool				player_col(t_game *game, float xspeed, float yspeed)
 	player_move_col(col, player, pos_xy, pos_x, pos_y, xspeed, yspeed);
 	return (TRUE);
 }
-
