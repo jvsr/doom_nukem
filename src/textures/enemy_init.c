@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
+#include "libft/ft_printf.h" //
 #include "renderer.h"
+#include "player.h"
 #include "types.h"
 #include "rinfo.h"
 #include "error.h"
@@ -71,12 +73,23 @@ void		shooty_func(t_game *game, t_object *obj, t_player *plr)
 
 	enemy = obj->data;
 	enemy->last_seen += game->lastframe;
-	if (enemy->last_seen > 1500)
+	if (enemy->last_seen > 2000)
 	{
-
-		return ;
+		damage_player(game, plr, 1);
+		enemy->last_seen = 0;
 	}
+	ft_printf("Shooty: %ld\n", enemy->last_seen);
 	(void)plr;
+}
+
+void		reset_func(t_game *game, t_object *obj)
+{
+	t_enemy	*enemy;
+
+	enemy = obj->data;
+	enemy->last_seen = 0;
+	ft_printf("Resety: %ld\n", enemy->last_seen);
+	(void)game;
 }
 
 t_anim		enemy_init(t_object *obj, t_texture start)
@@ -92,6 +105,7 @@ t_anim		enemy_init(t_object *obj, t_texture start)
 	enm->health = 20;
 	enm->state = ENEMY_IDLE;
 	enm->on_los = shooty_func;
+	enm->no_los = reset_func;
 	enm->last_seen = 0;
 	obj->data = enm;
 	obj->is_enemy = TRUE;

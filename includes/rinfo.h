@@ -86,7 +86,7 @@ typedef struct	s_enemy
 	t_enemystate	state;
 	t_object		*obj;
 	void			(*on_los)(t_game *, t_object *, t_player *);
-	void			(*no_los)(t_game *);
+	void			(*no_los)(t_game *, t_object *);
 }				t_enemy;
 
 struct			s_sector
