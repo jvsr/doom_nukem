@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/19 21:26:18 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/02 09:44:18 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef	enum	e_state
 	stopped
 }				t_state;
 
+typedef struct	s_ftable
+{
+	float	*table;
+	size_t	size;
+}				t_ftable;
+
 typedef struct	s_game
 {
 	char			*exec_path;
@@ -61,6 +67,7 @@ typedef struct	s_game
 	t_tpool			*pool;
 	t_uint64		frametime;
 	t_uint64		lastframe;
+	t_ftable		ftable;
 }				t_game;
 
 void			loop(t_game *game);

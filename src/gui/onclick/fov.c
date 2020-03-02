@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 13:38:49 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:05:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/02 10:26:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "onclick.h"
 #include "setting.h"
 #include "cmath.h"
+#include "init.h"
 
 void	set_fov(t_setting *setting, t_transform *parent, SDL_Surface *surf)
 {
@@ -28,6 +29,7 @@ void	options_fov_up(t_game *game, t_transform *gui)
 	game->setting->changed = TRUE;
 	incr_uint16_max(&game->setting->fov, FOV_STEP, MAX_FOV);
 	set_fov(game->setting, gui->parent.elem, game->surface);
+	reinit_ftable(game);
 }
 
 void	options_fov_down(t_game *game, t_transform *gui)
@@ -35,4 +37,5 @@ void	options_fov_down(t_game *game, t_transform *gui)
 	game->setting->changed = TRUE;
 	decr_uint16_min(&game->setting->fov, FOV_STEP, MIN_FOV);
 	set_fov(game->setting, gui->parent.elem, game->surface);
+	reinit_ftable(game);
 }

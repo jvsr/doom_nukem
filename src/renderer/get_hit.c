@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 18:15:20 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/17 18:15:20 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/03/02 10:38:31 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_hit	get_hit(t_coord *cosin,
 		{
 			dist = get_distance(&player->pos, &val);
 			if (dist < hit.dist)
-				hit = (t_hit){dist, dist, val, &walls[i], sector};
+				hit = (t_hit){dist, dist, val, &walls[i], sector, 0};
 		}
 		i++;
 	}

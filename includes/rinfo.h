@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/27 15:27:35 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/02 10:30:56 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct	s_hit
 	t_coord		pos;
 	t_wall		*wall;
 	t_sector	*sect;
+	float		angle;
 }				t_hit;
 
 typedef struct	s_objrend

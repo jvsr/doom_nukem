@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 15:44:15 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/02 10:40:18 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		del_hinfo(void *info, size_t size)
 	ft_memdel((void**)&h);
 }
 
+/*
 static t_point	find_bounds_floor(t_rinfo *rinfo, t_hinfo *hinfo)
 {
 	size_t	i;
@@ -45,30 +46,7 @@ static t_point	find_bounds_floor(t_rinfo *rinfo, t_hinfo *hinfo)
 	}
 	return (bnds);
 }
-
-static void		ren_floor(t_rinfo *rinfo, t_hinfo *hinfo)
-{
-	size_t	i;
-	int		y;
-	t_point	bounds;
-
-	i = hinfo->start;
-	bounds = find_bounds_floor(rinfo, hinfo);
-	y = bounds.x;
-	while (y < bounds.y)
-	{
-
-		y++;
-	}
-}
-
-static void		render_floorceil(t_rinfo *rinfo, t_hinfo *hinfo)
-{
-	// ren_floor(rinfo, hinfo);
-	(void)rinfo;
-	(void)hinfo;
-	return ;	
-}
+*/
 
 void			render_hits(t_rinfo *rinfo, t_coord *range)
 {
@@ -93,7 +71,6 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 					index, &bounds);
 			index++;
 		}
-		render_floorceil(rinfo, info);
 		render_objs(rinfo, info, range);
 		lst = lst->next;
 	}

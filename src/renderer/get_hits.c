@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 15:29:29 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/02 18:07:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,15 @@ static t_bool	hit_meth(t_hitem *hit,
 		return (TRUE);
 	}
 	if (angle > rinfo->hfov2)
-		hit->hit.dist *= cosf((angle - rinfo->hfov2) * PI_R);
+	{
+		hit->hit.angle = angle - rinfo->hfov2;
+		hit->hit.dist *= cosf(hit->hit.angle * PI_R);
+	}
 	else if (angle < rinfo->hfov2)
-		hit->hit.dist *= cosf((rinfo->hfov2 - angle) * PI_R);
+	{
+		hit->hit.angle = rinfo->hfov2 - angle;
+		hit->hit.dist *= cosf(hit->hit.angle * PI_R);
+	}
 	hit->hit.og_dist = hit->hit.dist;
 	hit->hit.dist *= LEVEL_MULTIPLIER;
 	return (FALSE);
