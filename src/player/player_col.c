@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/02 16:47:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/02 16:58:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,36 +107,29 @@ void			check_portals(t_game *game, t_uint8 *col, t_list **portals, t_tricoord co
 	}
 }
 
-static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
-									t_map *map, t_tricoord coord)
+t_list				*check_walls(t_game *game, t_uint8 *col,
+										t_tricoord coord, t_uint32 prev_sector)
 {
-	t_wall		*walls;
-	t_list		*objects;
 	int			i;
 	int			max;
-	t_uint32	next_sector;
-	t_list		*portals;
+	t_wall		*walls;
 	t_list		*new_wall;
-	const t_uint32	temp = player->cur_sector;
-	static t_uint32	prev_sector = UINT32_MAX;
+	t_list		*portals;
 
-	next_sector = UINT32_MAX;
 	portals = NULL;
-	if (prev_sector == UINT32_MAX)
-		prev_sector = player->cur_sector;
-	walls = map->sectors[player->cur_sector].walls;
+	walls = game->map->sectors[game->player->cur_sector].walls;
 	i = 0;
-	max = map->sectors[player->cur_sector].wall_count;
+	max = game->map->sectors[game->player->cur_sector].wall_count;
 	while (i < max)
 	{
 		if (walls[i].is_portal == FALSE || walls[i].is_window == TRUE)
-			check_wall_col(coord, player, &walls[i], col);
+			check_wall_col(coord, game->player, &walls[i], col);
 		else if (walls[i].is_portal == TRUE
-		&& get_sector_id(map, walls[i].window) != prev_sector)
+		&& get_sector_id(game->map, walls[i].window) != prev_sector)
 		{
-			if (wall_col(coord.xy, player->pos, &walls[i]) == TRUE
-			|| wall_col(coord.x, player->pos, &walls[i]) == TRUE
-			|| wall_col(coord.y, player->pos, &walls[i]) == TRUE)
+			if (wall_col(coord.xy, game->player->pos, &walls[i]) == TRUE
+			|| wall_col(coord.x, game->player->pos, &walls[i]) == TRUE
+			|| wall_col(coord.y, game->player->pos, &walls[i]) == TRUE)
 			{
 				new_wall = ft_lstnew(&walls[i], sizeof(t_wall*));
 				if (new_wall == NULL)
@@ -145,13 +138,32 @@ static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 			}
 		}
 		if (*col == 7)
-		{
-			player->cur_sector = temp;
-			prev_sector = UINT32_MAX;
-			ft_lstdel(&portals, NULL);
-			return (UINT32_MAX);
-		}
+			return (portals);
 		i++;
+	}
+	return (portals);
+}
+
+static t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
+									t_map *map, t_tricoord coord)
+{
+	t_list		*objects;
+	t_uint32	next_sector;
+	t_list		*portals;
+	const t_uint32	temp = player->cur_sector;
+	static t_uint32	prev_sector = UINT32_MAX;
+
+	next_sector = UINT32_MAX;
+	portals = NULL;
+	if (prev_sector == UINT32_MAX)
+		prev_sector = player->cur_sector;
+	portals = check_walls(game, col, coord, prev_sector);
+	if (*col == 7)
+	{
+		player->cur_sector = temp;
+		prev_sector = UINT32_MAX;
+		ft_lstdel(&portals, NULL);
+		return (UINT32_MAX);
 	}
 	objects = map->sectors[player->cur_sector].objects;
 	while (objects != NULL)
