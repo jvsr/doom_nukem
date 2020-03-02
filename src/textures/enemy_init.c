@@ -6,17 +6,17 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 17:33:26 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/27 15:31:23 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/02 13:52:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
-#include "libft/ft_printf.h" //
 #include "renderer.h"
 #include "player.h"
 #include "types.h"
 #include "rinfo.h"
 #include "error.h"
+#include "enemy.h"
 #include "game.h"
 
 static void	left_add(t_anim *anim, t_texture start)
@@ -65,31 +65,6 @@ static void	front_add(t_anim *anim, t_texture start)
 		anim->front[i - start] = (t_texture)i;
 		i++;
 	}
-}
-
-void		shooty_func(t_game *game, t_object *obj, t_player *plr)
-{
-	t_enemy	*enemy;
-
-	enemy = obj->data;
-	enemy->last_seen += game->lastframe;
-	if (enemy->last_seen > 2000)
-	{
-		damage_player(game, plr, 1);
-		enemy->last_seen = 0;
-	}
-	ft_printf("Shooty: %ld\n", enemy->last_seen);
-	(void)plr;
-}
-
-void		reset_func(t_game *game, t_object *obj)
-{
-	t_enemy	*enemy;
-
-	enemy = obj->data;
-	enemy->last_seen = 0;
-	ft_printf("Resety: %ld\n", enemy->last_seen);
-	(void)game;
 }
 
 t_anim		enemy_init(t_object *obj, t_texture start)
