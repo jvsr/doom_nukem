@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/21 22:34:02 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/02 14:34:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 void	test_function(t_game *game, t_sector *cur_sector)
 {
-	game->player->heightoffset += 100;
-	cur_sector->ceil += 120;
+	game->player->health += 10;
+	(void)cur_sector;
 }
 
 static void		player_init(t_game *game)
@@ -201,12 +201,12 @@ void			map_init(t_game *game)
 	game->map->sectors[2].object_count = 0;
 	game->map->sectors[2].objects = NULL;
 	game->map->sectors[2].has_ceiling = FALSE;
+	game->map->sectors[2].f_enter = test_function;
 
 	//Sector 4
 	game->map->sectors[3].ceil = 13;
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
-	game->map->sectors[3].f_enter = test_function;
 	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[3].wall_count + 1));
 	game->map->sectors[3].light_value = 0.5;
 	if (game->map->sectors[3].walls == NULL)
