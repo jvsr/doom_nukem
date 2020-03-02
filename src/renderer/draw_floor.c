@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/02 18:31:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/02 18:54:25 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,16 @@ static int	get_tex(t_hit *hit, t_player *player, int y, SDL_Surface *tex, t_game
 	t_coord		vec;
 
 	dist = game->ftable.table[(y + player->screen_updown) + offset];
-	dist *= (90 + player->heightoffset) * cos(hit->angle * PI_R);
-	// dist *= cos(hit->angle * PI_R);
+	dist *= (90 + player->heightoffset) * cosf(hit->angle * PI_R);
 	get_vector_from_points(&player->pos, &hit->pos, &vec);
 	dist /= hit->og_dist;
-	pos.x = player->pos.x - dist * (player->pos.x - hit->pos.x);
-	pos.y = player->pos.y - dist * (player->pos.y - hit->pos.y);
+	pos.x = player->pos.x + dist * (hit->pos.x - player->pos.x);
+	pos.y = player->pos.y + dist * (hit->pos.y - player->pos.y);
 	if (hit->angle == 0)
 		printf("Pos (%f, %f), Dist %f, Hit (%f, %f)\n", pos.x, pos.y, dist, hit->pos.x, hit->pos.y);
-	int x = (tex->w * ((abs((int)(pos.y * 4))) % tex->h));
-	int j = (abs((int)(pos.x * 4)) % tex->w);
-	return (t_pixels[j + x]);
+	int x = abs((int)(pos.y * 4)) % tex->h;
+	int j = abs((int)(pos.x * 4)) % tex->w;
+	return (t_pixels[j + (x * tex->w)]);
 }
 
 void		draw_floor(t_rinfo *rinfo, t_point **bounds, const size_t index, t_hit *hit)

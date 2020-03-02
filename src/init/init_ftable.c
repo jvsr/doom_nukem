@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 09:45:51 by euan           #+#    #+#                */
-/*   Updated: 2020/03/02 18:30:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/02 18:49:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 #include "error.h"
 #include "cmath.h"
 #include "game.h"
+#include "player.h"
 
 
 void		init_ftable(t_game *game)
 {
-	const size_t	max = game->surface->h * 2;
+	const size_t	max = (game->surface->h * 0.5) + abs((int)(game->surface->h * PLAYER_UPDOWN_MIN));
 	size_t			i;
 	float			step;
 	float			start;
