@@ -6,17 +6,18 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 17:33:26 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/27 15:31:23 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/02 13:52:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
 #include "renderer.h"
-#include "game.h" //
-#include "libft/libft.h" //
+#include "player.h"
 #include "types.h"
 #include "rinfo.h"
 #include "error.h"
+#include "enemy.h"
+#include "game.h"
 
 static void	left_add(t_anim *anim, t_texture start)
 {
@@ -66,20 +67,6 @@ static void	front_add(t_anim *anim, t_texture start)
 	}
 }
 
-void		shooty_func(t_game *game, t_object *obj, t_player *plr)
-{
-	t_enemy	*enemy;
-
-	enemy = obj->data;
-	enemy->last_seen += game->lastframe;
-	if (enemy->last_seen > 1500)
-	{
-
-		return ;
-	}
-	(void)plr;
-}
-
 t_anim		enemy_init(t_object *obj, t_texture start)
 {
 	t_anim	anim;
@@ -93,6 +80,7 @@ t_anim		enemy_init(t_object *obj, t_texture start)
 	enm->health = 20;
 	enm->state = ENEMY_IDLE;
 	enm->on_los = shooty_func;
+	enm->no_los = reset_func;
 	enm->last_seen = 0;
 	obj->data = enm;
 	obj->is_enemy = TRUE;

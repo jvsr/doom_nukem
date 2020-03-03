@@ -51,6 +51,8 @@ void		delete_map(t_map **map)
 	size_t	i;
 
 	i = 0;
+	if (map == NULL || *map == NULL)
+		return ;
 	while (i < (*map)->sector_count)
 	{
 		free_sector((*map)->sectors + i);

@@ -6,7 +6,7 @@
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2020/02/21 14:47:39 by euan          ########   odam.nl          #
+#    Updated: 2020/03/02 13:48:01 by jvisser       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ SUBLIBS = main color sdl_extra tga_reader gui game gui_config sdl_thread \
 			audio keymap serializer eventstate map_parse table renderer init \
 			cmath loop textures \
 			player \
-			map_editor
+			enemy \
+			map_editor \
+
 
 # Executable name
 NAME = doom-nukem
