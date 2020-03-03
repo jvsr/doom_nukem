@@ -73,6 +73,6 @@ void				draw_glass(t_rinfo *rinfo,
 void				draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info);
 void				delete_map(t_map **map);
 void				draw_floor(t_rinfo *rinfo, t_point **bounds,
-						const size_t index, t_hit *hit);
+						const size_t index, t_hitem *hit);
 
 #endif

@@ -25,6 +25,7 @@ t_point	get_bounds(t_player *player,
 	hit->y.y = hit->y.x + hit->st.y;
 	hit->y.x -= hit->st.y;
 	hit->st.x = hit->st.y * 2;
+	hit->hoffset = (player->heightoffset / hit->st.x) * dst->h;
 	new = (t_point){0, 0};
 	if (!hit->hit.wall->is_portal && hit->hit.sect->ceil >
 		hit->y.x && hit->hit.sect->floor < hit->y.y)

@@ -70,7 +70,7 @@ void			draw_vline(t_rinfo *rinfo,
 		draw_skybox(index, rinfo->dst, rinfo->game,
 			(t_point[2]){(t_point){item->ybnds.y, rinfo->dst->h}, *bounds});
 	if (item->ybnds.x > 0)
-		draw_floor(rinfo, (t_point*[2]){&(t_point){0, item->ybnds.x}, bounds}, index, &item->hit);
+		draw_floor(rinfo, (t_point*[2]){&(t_point){0, item->ybnds.x}, bounds}, index, item);
 		//  draw_cline(rinfo->dst, (t_point*[2]){&(t_point){0, item->ybnds.x}, bounds},
 		//  	index, FLOOR_COLOR);
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&

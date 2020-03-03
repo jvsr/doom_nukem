@@ -158,6 +158,7 @@ typedef struct	s_hitem
 	t_hit		hit;
 	t_coord		y;
 	t_coord		st;
+	int			hoffset;
 }				t_hitem;
 
 struct			s_hinfo

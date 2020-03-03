@@ -21,7 +21,7 @@
 
 void		init_ftable(t_game *game)
 {
-	const size_t	max = (game->surface->h * 0.5) + abs((int)(game->surface->h * PLAYER_UPDOWN_MIN));
+	const size_t	max = game->surface->h + (size_t)ceil(game->surface->h * (fabs(PLAYER_UPDOWN_MIN) + fabs(PLAYER_UPDOWN_MAX)));
 	size_t			i;
 	float			step;
 	float			start;
@@ -31,8 +31,8 @@ void		init_ftable(t_game *game)
 		error_msg_errno("Unable to allocate lookup table");
 	game->ftable.size = max;
 	i = 0;
-	step = 45 / (float)max;
-	start = 15;
+	step = 45.0 / (float)max;
+	start = 45;
 	while (i < max)
 	{
 		game->ftable.table[i] = tan(start * PI_R);

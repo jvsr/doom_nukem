@@ -16,27 +16,21 @@
 #include "cmath.h"
 #include "game.h"
 
-static int	get_tex(t_hit *hit, t_player *player, int y, SDL_Surface *tex, t_game *game, int offset)
+static int	get_tex(t_hit *hit, t_player *player, int y, SDL_Surface *tex, t_rinfo *rin, int val)
 {
 	float		dist;
-	t_coord		pos;
 	const int	*t_pixels = tex->pixels;
 	t_coord		vec;
 
-	dist = game->ftable.table[(y + player->screen_updown) + offset];
-	dist *= (90 + player->heightoffset) * cosf(hit->angle * PI_R);
-	get_vector_from_points(&player->pos, &hit->pos, &vec);
-	dist /= hit->og_dist;
-	pos.x = player->pos.x + dist * (hit->pos.x - player->pos.x);
-	pos.y = player->pos.y + dist * (hit->pos.y - player->pos.y);
-	if (hit->angle == 0)
-		printf("Pos (%f, %f), Dist %f, Hit (%f, %f)\n", pos.x, pos.y, dist, hit->pos.x, hit->pos.y);
-	int x = abs((int)(pos.y * 4)) % tex->h;
-	int j = abs((int)(pos.x * 4)) % tex->w;
-	return (t_pixels[j + (x * tex->w)]);
+	dist = (rin->dst->h) / (2.0 * (y + player->screen_updown) - (rin->dst->h));
+	vec.x = (dist / hit->og_dist) * hit->pos.x + (1.0 - (dist / hit->og_dist)) * player->pos.x;
+	vec.y = (dist / hit->og_dist) * hit->pos.y + (1.0 - (dist / hit->og_dist)) * player->pos.y;
+	int x = (int)fabs(vec.x * 20) % tex->w;
+	int y0 = (int)fabs(vec.y * 20) % tex->h;
+	return (t_pixels[x + (y0 * tex->w)]);
 }
 
-void		draw_floor(t_rinfo *rinfo, t_point **bounds, const size_t index, t_hit *hit)
+void		draw_floor(t_rinfo *rinfo, t_point **bounds, const size_t index, t_hitem *hit)
 {
 	int		*pixels;
 	int		i;
@@ -52,9 +46,9 @@ void		draw_floor(t_rinfo *rinfo, t_point **bounds, const size_t index, t_hit *hi
 	i = c_ybounds.x;
 	while (i < c_ybounds.y)
 	{
-		pixels[index + (rinfo->dst->w * (rinfo->dst->h - i - 1))] = get_tex(hit,
+		pixels[index + (rinfo->dst->w * (rinfo->dst->h - i - 1))] = get_tex(&hit->hit,
 			rinfo->game->player, i, get_texture(rinfo->game,
-			hit->sect->floor_tex), rinfo->game, fabs(PLAYER_UPDOWN_MIN * rinfo->dst->h));
+			hit->hit.sect->floor_tex), rinfo, c_ybounds.y);
 		i++;
 	}
 }
