@@ -10,20 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_mem.h"
 #include "libft/ft_list.h"
-#include "libft/ft_printf.h"
 
 #include "game.h"
 #include "rinfo.h"
 #include "map_editor.h"
 
-void	map_editor_delete_wall(t_editor_map *editor_map, t_wall *wall)
+static t_bool	on_point(t_wall *wall, t_wall *other)
+{
+	if (ft_memequ(&wall->corner_0, &other->corner_0, sizeof(t_coord)) == TRUE ||
+		ft_memequ(&wall->corner_0, &other->corner_1, sizeof(t_coord)) == TRUE)
+		return (TRUE);
+	if (ft_memequ(&wall->corner_1, &other->corner_0, sizeof(t_coord)) == TRUE ||
+		ft_memequ(&wall->corner_1, &other->corner_1, sizeof(t_coord)) == TRUE)
+		return (TRUE);
+	return (FALSE);
+}
+
+void			map_editor_delete_wall(t_editor_map *editor_map, t_wall *wall)
 {
 	t_list	*lst;
+	t_list	*next;
 
-	lst = ft_lstfind_content(editor_map->walls, wall, sizeof(t_wall));
-	if (lst == NULL)
-		return ;
-	ft_lstunlink(&editor_map->walls, lst);
-	ft_lstdelone(&lst, &ft_lstdelmem);
+	lst = editor_map->walls;
+	while (lst != NULL)
+	{
+		next = lst->next;
+		if (on_point(wall, lst->content) == TRUE)
+		{
+			ft_lstunlink(&editor_map->walls, lst);
+			ft_lstdelone(&lst, &ft_lstdelmem);
+		}
+		lst = next;
+	}
 }
