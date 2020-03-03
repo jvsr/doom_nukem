@@ -31,4 +31,6 @@ SRCS = \
 	player_col \
 	damage_player \
 	player_died \
+	wall_col \
+	object_col \
 	$(COL_SRCS)
