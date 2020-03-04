@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/27 15:27:35 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/04 12:19:42 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_hinfo	t_hinfo;
 
 typedef struct	s_anim
 {
-	t_point		index;
+	SDL_Point	index;
 	t_texture	left[ANIMATIONS];
 	t_texture	right[ANIMATIONS];
 	t_texture	front[ANIMATIONS];
@@ -139,7 +139,7 @@ typedef struct	s_objrend
 typedef struct	s_secbounds
 {
 	t_sector	*sec;
-	t_point		bounds;
+	SDL_Point	bounds;
 }				t_secbounds;
 
 typedef struct	s_zbuf
@@ -150,7 +150,7 @@ typedef struct	s_zbuf
 
 typedef struct	s_hitem
 {
-	t_point		bounds;
+	SDL_Point	bounds;
 	t_hit		hit;
 	t_coord		y;
 	t_coord		st;
@@ -187,7 +187,7 @@ typedef struct	s_winfo
 	int			tex_x;
 	int			*pixels;
 	int			*t_pixels;
-	t_point		c_ybounds;
+	SDL_Point	c_ybounds;
 	size_t		x;
 	SDL_Surface	*tex;
 	t_list		*decals;
@@ -204,9 +204,9 @@ typedef struct	s_orend
 {
 	t_coord		y;
 	t_coord		st;
-	t_point		ybounds;
-	t_point		xbounds;
-	t_point		c_xbounds;
+	SDL_Point	ybounds;
+	SDL_Point	xbounds;
+	SDL_Point	c_xbounds;
 	int			diff;
 }				t_orend;
 

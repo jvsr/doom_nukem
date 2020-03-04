@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 15:44:15 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/04 12:23:44 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void		del_hinfo(void *info, size_t size)
 
 void			render_hits(t_rinfo *rinfo, t_coord *range)
 {
-	t_list	*lst;
-	t_hinfo	*info;
-	size_t	index;
-	t_point	bounds;
+	t_list		*lst;
+	t_hinfo		*info;
+	size_t		index;
+	SDL_Point	bounds;
 
 	lst = rinfo->ren;
 	while (lst)
@@ -41,7 +41,7 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 		while (index <= info->end)
 		{
 			if (lst->next == NULL)
-				bounds = (t_point){0, rinfo->dst->h};
+				bounds = (SDL_Point){0, rinfo->dst->h};
 			else
 				bounds = info->prev->hits[index - rinfo->begin].bounds;
 			if (info->hits[index - rinfo->begin].hit.dist < MAX_HIT)

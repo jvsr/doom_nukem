@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/22 15:40:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/04 12:25:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ static void	*render_chunk(t_game *game,
 
 void		render(t_game *game, SDL_Surface *dst)
 {
-	t_ttask *tasks;
-	t_ttask *new;
-	t_point	bound;
-	size_t	step;
-	size_t	i;
+	t_ttask		*tasks;
+	t_ttask		*new;
+	SDL_Point	bound;
+	size_t		step;
+	size_t		i;
 
 	game->player->screen_updown = game->player->updown * dst->h;
 	i = 0;
 	tasks = NULL;
 	step = dst->w / 7;
-	bound = (t_point){0, step};
+	bound = (SDL_Point){0, step};
 	while (i < 7)
 	{
 		if (i == 6)
@@ -70,7 +70,7 @@ void		render(t_game *game, SDL_Surface *dst)
 		new = sdl_new_ttask(render_chunk, TFLAG_TASK_NO_DELETE,
 			4, game, dst, (size_t)bound.x, (size_t)bound.y);
 		sdl_add_tpool_ttask(game->pool, new);
-		bound = (t_point){bound.x + step, bound.y + step};
+		bound = (SDL_Point){bound.x + step, bound.y + step};
 		new->next = tasks;
 		tasks = new;
 		i++;

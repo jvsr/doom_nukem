@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:36:58 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/20 19:22:56 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/04 12:15:34 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,5 @@ typedef struct	s_vec
 	float		y;
 	float		z;
 }				t_vec;
-
-typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point;
 
 #endif

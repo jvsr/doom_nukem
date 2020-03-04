@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 16:06:50 by euan           #+#    #+#                */
-/*   Updated: 2020/02/19 21:37:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/04 12:27:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "types.h"
 #include "cmath.h"
 
-static void	calc_second(t_game *game, t_enemy *en, t_point *val)
+static void	calc_second(t_game *game, t_enemy *en, SDL_Point *val)
 {
 	t_uint64	time;
 
@@ -34,10 +34,10 @@ static void	calc_second(t_game *game, t_enemy *en, t_point *val)
 
 void		get_enemy_index(t_game *game, void *anim)
 {
-	t_point val;
-	t_anim	*an;
-	float	angle;
-	t_enemy *enemy;
+	SDL_Point	val;
+	t_anim		*an;
+	float		angle;
+	t_enemy		*enemy;
 
 	an = anim;
 	enemy = ((t_object*)an->data)->data;

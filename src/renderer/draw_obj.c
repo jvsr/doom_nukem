@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 10:44:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/25 10:44:13 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/03/04 15:06:09 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "color.h"
 #include "game.h"
 
-static void		calc_perinten(float *perc,
+static void			calc_perinten(float *perc,
 					float *intensity, const t_odraw *ob, const t_orend *oren)
 {
 	*perc = (float)(ob->x - oren->xbounds.x) / (oren->xbounds.y -
@@ -29,16 +29,16 @@ static void		calc_perinten(float *perc,
 		MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * ob->obj->sec->light_value;
 }
 
-static void		draw_y(const t_orend *oren, t_odraw *ob,
+static void			draw_y(const t_orend *oren, t_odraw *ob,
 											const int *t_pixels, int *pixels)
 {
-	t_point c_ybounds;
-	float	perc;
-	float	intensity;
-	int		vals[5];
+	SDL_Point	c_ybounds;
+	float		perc;
+	float		intensity;
+	int			vals[5];
 
 	c_ybounds = set_ybounds(ob->obj, ob->game, (t_ybinfo){ob->dst->h,
-		(t_point*)&oren->ybounds, ob->x - ob->rinfo->begin, ob->info->prev});
+		(SDL_Point*)&oren->ybounds, ob->x - ob->rinfo->begin, ob->info->prev});
 	calc_perinten(&perc, &intensity, ob, oren);
 	vals[0] = perc * (ob->tex->w - 1);
 	vals[1] = c_ybounds.x;
@@ -59,16 +59,16 @@ static void		draw_y(const t_orend *oren, t_odraw *ob,
 	}
 }
 
-static t_point	calc_ybounds(const t_objrend *obj, const SDL_Surface *dst,
+static SDL_Point	calc_ybounds(const t_objrend *obj, const SDL_Surface *dst,
 										const t_game *game, const t_orend *oren)
 {
-	return ((t_point){(((obj->sec->floor - oren->y.x) / oren->st.x) *
+	return ((SDL_Point){(((obj->sec->floor - oren->y.x) / oren->st.x) *
 		(dst->h)) - game->player->screen_updown, dst->h - (((oren->y.y -
 		(obj->obj->size.y + obj->sec->floor)) / oren->st.x) * (dst->h)) -
 		game->player->screen_updown});
 }
 
-static void		loop_objs(t_objrend *obj,
+static void			loop_objs(t_objrend *obj,
 								t_rinfo *rin, t_hinfo *info, const t_coord size)
 {
 	t_orend			oren;
@@ -82,7 +82,7 @@ static void		loop_objs(t_objrend *obj,
 	oren.st.x = oren.st.y * 2;
 	oren.ybounds = calc_ybounds(obj, rin->dst, rin->game, &oren);
 	oren.diff = (abs(oren.ybounds.y - oren.ybounds.x) * (size.x / size.y)) / 2;
-	oren.xbounds = (t_point){obj->x - oren.diff, obj->x + oren.diff};
+	oren.xbounds = (SDL_Point){obj->x - oren.diff, obj->x + oren.diff};
 	oren.c_xbounds.x = ft_constrain(oren.xbounds.x, rin->begin, rin->end);
 	oren.c_xbounds.y = ft_constrain(oren.xbounds.y, oren.c_xbounds.x, rin->end);
 	x = oren.c_xbounds.x;
@@ -97,7 +97,7 @@ static void		loop_objs(t_objrend *obj,
 	}
 }
 
-void			draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info)
+void				draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info)
 {
 	t_objrend *obj;
 

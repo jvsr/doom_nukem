@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:10:33 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/05 15:10:33 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/03/04 12:16:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void		get_r_object_index(t_game *game, void *anim)
 	an = (t_anim*)anim;
 	angle = wrap_float(an->angle + an->offset, 0, 360);
 	if (angle >= 45 && angle < 135)
-		an->index = (t_point){0, 0};
+		an->index = (SDL_Point){0, 0};
 	else if (angle >= 135 && angle < 225)
-		an->index = (t_point){3, 0};
+		an->index = (SDL_Point){3, 0};
 	else if (angle >= 225 && angle < 315)
-		an->index = (t_point){1, 0};
+		an->index = (SDL_Point){1, 0};
 	else
-		an->index = (t_point){2, 0};
+		an->index = (SDL_Point){2, 0};
 }

@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 16:19:11 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/04 15:05:20 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,30 @@ static t_hinfo	*find_hinfo(t_list *lst, t_sector *sec)
 }
 
 static void		draw_portal(t_rinfo *rinfo,
-								t_hitem *item, size_t index, t_point **bounds)
+								t_hitem *item, size_t index, SDL_Point **bounds)
 {
-	t_point	nybnds;
+	SDL_Point	nybnds;
 
 	nybnds = (find_hinfo(rinfo->ren, item->hit.sect))->hits[index -
 				rinfo->begin].bounds;
 	if (nybnds.x > 0)
-		draw_wall(rinfo, (t_point*[2]){*bounds, &(t_point){bounds[1]->x,
+		draw_wall(rinfo, (SDL_Point*[2]){*bounds, &(SDL_Point){bounds[1]->x,
 			nybnds.x}}, index, &item->hit);
 	if (nybnds.y < rinfo->dst->h)
-		draw_wall(rinfo, (t_point*[2]){*bounds, &(t_point){nybnds.y,
+		draw_wall(rinfo, (SDL_Point*[2]){*bounds, &(SDL_Point){nybnds.y,
 			bounds[1]->y}}, index, &item->hit);
 	if (item->hit.wall->is_window && nybnds.x < bounds[1]->x)
-		draw_glass(rinfo, (t_point*[2]){*bounds, bounds[1]}, index, &item->hit);
+		draw_glass(rinfo,
+			(SDL_Point*[2]){*bounds, bounds[1]}, index, &item->hit);
 	else if (item->hit.wall->is_window)
-		draw_glass(rinfo, (t_point*[2]){*bounds, &nybnds}, index,
+		draw_glass(rinfo, (SDL_Point*[2]){*bounds, &nybnds}, index,
 			&item->hit);
 }
 
 void			draw_vline(t_rinfo *rinfo,
-								t_hitem *item, size_t index, t_point *bounds)
+								t_hitem *item, size_t index, SDL_Point *bounds)
 {
-	t_point	ybnds;
+	SDL_Point	ybnds;
 
 	if (item == NULL || item->hit.sect == NULL)
 		return ;
@@ -66,18 +67,20 @@ void			draw_vline(t_rinfo *rinfo,
 	ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x)
 				* (rinfo->dst->h)) - rinfo->game->player->screen_updown;
 	if (ybnds.y < rinfo->dst->h && item->hit.sect->has_ceiling)
-		draw_cline(rinfo->dst, (t_point*[2]){&(t_point){ybnds.y, rinfo->dst->h},
-				bounds}, index, CEILING_COLOR);
+		draw_cline(rinfo->dst,
+			(SDL_Point*[2]){&(SDL_Point){ybnds.y, rinfo->dst->h},
+			bounds}, index, CEILING_COLOR);
 	else if (ybnds.y < rinfo->dst->h)
 		draw_skybox(index, rinfo->dst, rinfo->game,
-			(t_point[2]){(t_point){ybnds.y, rinfo->dst->h}, *bounds});
+			(SDL_Point[2]){(SDL_Point){ybnds.y, rinfo->dst->h}, *bounds});
 	if (ybnds.x > 0)
-		draw_cline(rinfo->dst, (t_point*[2]){&(t_point){0, ybnds.x}, bounds},
+		draw_cline(rinfo->dst,
+			(SDL_Point*[2]){&(SDL_Point){0, ybnds.x}, bounds},
 			index, FLOOR_COLOR);
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
-		draw_wall(rinfo, (t_point*[2]){bounds, &ybnds}, index, &item->hit);
+		draw_wall(rinfo, (SDL_Point*[2]){bounds, &ybnds}, index, &item->hit);
 	else if (item->hit.sect->ceil > item->y.x &&
 				item->hit.sect->floor < item->y.y)
-		draw_portal(rinfo, item, index, (t_point*[2]){bounds, &ybnds});
+		draw_portal(rinfo, item, index, (SDL_Point*[2]){bounds, &ybnds});
 }
