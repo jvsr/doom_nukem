@@ -96,6 +96,7 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 	while (tmp.x != tmp.y && (hit == NULL || hit->hit.wall->is_portal))
 	{
 		info->prev = prev;
+		info->floor_range = (t_point){INT32_MAX, 0};
 		info->end = rinfo->start;
 		hit = info->hits + rinfo->start - rinfo->begin;
 		hit->hit = get_hit(cosin, rinfo->game->player, info->sec, prev->sec);

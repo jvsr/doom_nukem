@@ -12,9 +12,11 @@
 
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
+#include "libft/ft_num.h"
 #include "renderer.h"
 #include "coord.h"
 #include "rinfo.h"
+#include "cmath.h"
 
 static void		del_hinfo(void *info, size_t size)
 {
@@ -26,27 +28,35 @@ static void		del_hinfo(void *info, size_t size)
 	ft_memdel((void**)&h);
 }
 
-/*
-static t_point	find_bounds_floor(t_rinfo *rinfo, t_hinfo *hinfo)
-{
-	size_t	i;
-	t_point	bnds;
 
-	i = 0;
-	bnds = (t_point){INT32_MAX, 0};
-	while (i + rinfo->begin < hinfo->end)
+static void		render_fc(t_rinfo *rin, t_hinfo *info)
+{
+	int y;
+	int x;
+	t_coord ray0;
+	t_coord ray1;
+	int *pixs = rin->dst->pixels;
+	t_point c_ybounds;
+	t_point ybnds;
+
+	info->floor_range.x = ft_constrain(info->floor_range.x, 0, rin->dst->h);
+	info->floor_range.y = ft_constrain(info->floor_range.y, 0, rin->dst->h);
+	y = info->floor_range.x;
+	while (y < info->floor_range.y)
 	{
-		if (hinfo->prev == NULL)
-			bnds.x = 0;
-		else if (hinfo->prev->hits[i].bounds.x < bnds.x)
-			bnds.x = hinfo->prev->hits[i].bounds.x;
-		if (hinfo->hits[i].ybnds.x > bnds.y)
-			bnds.y = hinfo->hits[i].ybnds.x;
-		i++;
+		x = 0;
+		while (x < info->size)
+		{
+			ybnds = info->hits[x].ybnds;
+			c_ybounds.x = ft_constrain(info->hits[x].pre_bound.x, 0, ybnds.x);
+			c_ybounds.y = ft_constrain(info->hits[x].pre_bound.y, c_ybounds.x, ybnds.x);
+			if (y < c_ybounds.y && y >= c_ybounds.x)
+				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = FLOOR_COLOR;
+			x++;
+		}
+		y++;
 	}
-	return (bnds);
 }
-*/
 
 void			render_hits(t_rinfo *rinfo, t_coord *range)
 {
@@ -67,10 +77,18 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 			else
 				bounds = info->prev->hits[index - rinfo->begin].bounds;
 			if (info->hits[index - rinfo->begin].hit.dist < MAX_HIT)
-				draw_vline(rinfo, info->hits + index - rinfo->begin,
-					index, &bounds);
+			{
+				t_hitem *hit = info->hits + index - rinfo->begin;
+				draw_vline(rinfo, hit, index, &bounds);
+				if (hit->ybnds.x > 0 && hit->ybnds.x > info->floor_range.y)
+					info->floor_range.y = hit->ybnds.x;
+				if (bounds.x < info->floor_range.x)
+					info->floor_range.x = bounds.x;
+			}
+				
 			index++;
 		}
+		render_fc(rinfo, info);
 		render_objs(rinfo, info, range);
 		lst = lst->next;
 	}

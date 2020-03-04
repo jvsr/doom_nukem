@@ -159,6 +159,7 @@ typedef struct	s_hitem
 	t_coord		y;
 	t_coord		st;
 	int			hoffset;
+	t_point		pre_bound;
 }				t_hitem;
 
 struct			s_hinfo
@@ -169,6 +170,7 @@ struct			s_hinfo
 	size_t		start;
 	size_t		end;
 	t_hinfo		*prev;
+	t_point		floor_range;
 };
 
 typedef struct	s_rinfo

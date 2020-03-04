@@ -16,17 +16,20 @@
 #include "cmath.h"
 #include "game.h"
 
-static int	get_tex(t_hit *hit, t_player *player, int y, SDL_Surface *tex, t_rinfo *rin, int val)
+static int	get_tex(t_hit *hit, t_player *player, int y, SDL_Surface *tex, t_rinfo *rin, t_hitem *in, int val)
 {
 	float		dist;
 	const int	*t_pixels = tex->pixels;
 	t_coord		vec;
 
-	dist = (rin->dst->h) / (2.0 * (y + player->screen_updown) - (rin->dst->h));
-	vec.x = (dist / hit->og_dist) * hit->pos.x + (1.0 - (dist / hit->og_dist)) * player->pos.x;
-	vec.y = (dist / hit->og_dist) * hit->pos.y + (1.0 - (dist / hit->og_dist)) * player->pos.y;
-	int x = (int)fabs(vec.x * 20) % tex->w;
-	int y0 = (int)fabs(vec.y * 20) % tex->h;
+	dist = -((float)rin->dst->h / (2.0 * (y + player->screen_updown) - rin->dst->h));
+	dist /= hit->og_dist;
+	vec.x = dist * hit->pos.x + (1.0 - dist) * player->pos.x;
+	vec.y = dist * hit->pos.y + (1.0 - dist) * player->pos.y;
+	if (y == 0)
+		printf("%f\n", hit->og_dist);
+	int x = (int)fabs(vec.x) % tex->w;
+	int y0 = (int)fabs(vec.y) % tex->h;
 	return (t_pixels[x + (y0 * tex->w)]);
 }
 
@@ -48,7 +51,7 @@ void		draw_floor(t_rinfo *rinfo, t_point **bounds, const size_t index, t_hitem *
 	{
 		pixels[index + (rinfo->dst->w * (rinfo->dst->h - i - 1))] = get_tex(&hit->hit,
 			rinfo->game->player, i, get_texture(rinfo->game,
-			hit->hit.sect->floor_tex), rinfo, c_ybounds.y);
+			hit->hit.sect->floor_tex), rinfo, hit, c_ybounds.y);
 		i++;
 	}
 }

@@ -59,6 +59,7 @@ void			draw_vline(t_rinfo *rinfo,
 {
 	if (item == NULL || item->hit.sect == NULL)
 		return ;
+	item->pre_bound = (*bounds);
 	item->ybnds.x = ((item->hit.sect->floor - item->y.x) / item->st.x) *
 				(rinfo->dst->h) - rinfo->game->player->screen_updown;
 	item->ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x)
@@ -69,10 +70,8 @@ void			draw_vline(t_rinfo *rinfo,
 	else if (item->ybnds.y < rinfo->dst->h)
 		draw_skybox(index, rinfo->dst, rinfo->game,
 			(t_point[2]){(t_point){item->ybnds.y, rinfo->dst->h}, *bounds});
-	if (item->ybnds.x > 0)
-		draw_floor(rinfo, (t_point*[2]){&(t_point){0, item->ybnds.x}, bounds}, index, item);
-		//  draw_cline(rinfo->dst, (t_point*[2]){&(t_point){0, item->ybnds.x}, bounds},
-		//  	index, FLOOR_COLOR);
+	// if (item->ybnds.x > 0)
+	// 	draw_floor(rinfo, (t_point*[2]){&(t_point){0, item->ybnds.x}, bounds}, index, item);
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
 		draw_wall(rinfo, (t_point*[2]){bounds, &item->ybnds}, index, &item->hit);
