@@ -75,8 +75,8 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 				srf = get_texture(rin->game, info->hits[x].hit.sect->floor_tex);
 				t_pixels = srf->pixels;
 				get_vector_from_points(&info->hits[x].hit.pos, &rin->game->player->pos, &vec);
-				vec = (t_coord){rin->game->player->pos.x + (vec.x * dist), rin->game->player->pos.y + (vec.x * dist)};
-				tex = (t_point){abs((int)(vec.x * 40)) % srf->w, abs((int)(vec.y * 40)) % srf->h};
+				vec = (t_coord){rin->game->player->pos.x - (vec.x * dist), rin->game->player->pos.y - (vec.y * dist)};
+				tex = (t_point){abs((int)(vec.x * LEVEL_MULTIPLIER)) % srf->w, abs((int)(vec.y * LEVEL_MULTIPLIER)) % srf->h};
 				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = t_pixels[tex.x + (tex.y * srf->w)];
 			}
 			x++;
