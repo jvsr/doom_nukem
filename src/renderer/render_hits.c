@@ -64,7 +64,6 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 	{
 		x = 0;
 		dist = tan(angle * PI_R) * height;
-		printf("%f\n", dist);
 		while (x < info->size)
 		{
 			ybnds = info->hits[x].ybnds;
