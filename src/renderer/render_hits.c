@@ -14,9 +14,12 @@
 #include "libft/ft_mem.h"
 #include "libft/ft_num.h"
 #include "renderer.h"
+#include "setting.h"
+#include "player.h"
 #include "coord.h"
 #include "rinfo.h"
 #include "cmath.h"
+#include "game.h"
 
 static void		del_hinfo(void *info, size_t size)
 {
@@ -38,23 +41,48 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 	int *pixs = rin->dst->pixels;
 	t_point c_ybounds;
 	t_point ybnds;
+	float	height;
+	float	dist;
+	float	step;
+	float	angle;
+	t_coord	vec;
+	t_point	tex;
+	SDL_Surface	*srf;
+	int *t_pixels;
+	int size;
 
 	info->floor_range.x = ft_constrain(info->floor_range.x, 0, rin->dst->h);
 	info->floor_range.y = ft_constrain(info->floor_range.y, 0, rin->dst->h);
 	y = info->floor_range.x;
+	height = rin->game->player->height + rin->game->player->heightoffset - info->sec->floor;
+	size = info->floor_range.y - info->floor_range.x;
+	step = ((float)size / rin->dst->h) * rin->game->setting->vfov;
+	float val = ((float)rin->game->player->screen_updown / rin->dst->h) * rin->game->setting->vfov;
+	angle = 90 + val - rin->vfov2;
+	step /= (float)size;
 	while (y < info->floor_range.y)
 	{
 		x = 0;
+		dist = tan(angle * PI_R) * height;
+		printf("%f\n", dist);
 		while (x < info->size)
 		{
 			ybnds = info->hits[x].ybnds;
 			c_ybounds.x = ft_constrain(info->hits[x].pre_bound.x, 0, ybnds.x);
 			c_ybounds.y = ft_constrain(info->hits[x].pre_bound.y, c_ybounds.x, ybnds.x);
 			if (y < c_ybounds.y && y >= c_ybounds.x)
-				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = FLOOR_COLOR;
+			{
+				srf = get_texture(rin->game, info->hits[x].hit.sect->floor_tex);
+				t_pixels = srf->pixels;
+				get_vector_from_points(&info->hits[x].hit.pos, &rin->game->player->pos, &vec);
+				vec = (t_coord){rin->game->player->pos.x + (vec.x * dist), rin->game->player->pos.y + (vec.x * dist)};
+				tex = (t_point){abs((int)(vec.x * 40)) % srf->w, abs((int)(vec.y * 40)) % srf->h};
+				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = t_pixels[tex.x + (tex.y * srf->w)];
+			}
 			x++;
 		}
 		y++;
+		angle += step;
 	}
 }
 
