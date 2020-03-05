@@ -19,11 +19,10 @@
 
 static t_bool	on_point(t_wall *wall, t_wall *other)
 {
-	if (ft_memequ(&wall->corner_0, &other->corner_0, sizeof(t_coord)) == TRUE ||
-		ft_memequ(&wall->corner_0, &other->corner_1, sizeof(t_coord)) == TRUE)
-		return (TRUE);
-	if (ft_memequ(&wall->corner_1, &other->corner_0, sizeof(t_coord)) == TRUE ||
-		ft_memequ(&wall->corner_1, &other->corner_1, sizeof(t_coord)) == TRUE)
+	if ((ft_memequ(&wall->corner_0, &other->corner_0, sizeof(t_coord)) ||
+		ft_memequ(&wall->corner_0, &other->corner_1, sizeof(t_coord))) &&
+		(ft_memequ(&wall->corner_1, &other->corner_0, sizeof(t_coord)) ||
+		ft_memequ(&wall->corner_1, &other->corner_1, sizeof(t_coord))))
 		return (TRUE);
 	return (FALSE);
 }

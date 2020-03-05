@@ -20,11 +20,17 @@
 # include "libft/ft_bool.h"
 
 typedef struct s_coord		t_coord;
+typedef struct s_bicoord	t_bicoord;
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
 
 t_coord		*get_collision(t_coord *start,
-				t_coord *a, t_coord *wall, t_coord *pos);
+				t_coord *a, t_coord *wall, t_coord *pos);\
+t_coord		*get_line_collision(t_bicoord *line1, t_bicoord *line2,
+				t_coord *result);
+t_bool		line_collision(t_bicoord *line1, t_bicoord *line2);
+t_bool		circle_collision(t_bicoord *line, t_coord *circle_mid,
+				float radius);
 float		get_angle_from_vectors(t_coord *vec0, t_coord *vec1);
 float		get_angle_from_vector(t_coord *vec);
 t_coord		*get_vector_from_angle(float angle, t_coord *vec);
@@ -43,8 +49,6 @@ t_bool		is_between_fov(float a, float start, float end);
 float		get_angle_between_points(t_coord *a, t_coord *b);
 float		calc_fov(float a, float b);
 float		get_angle_between_pointsv(t_coord *pos0, t_coord *pos1);
-t_bool		circle_collision(t_coord line_start, t_coord line_end,
-								t_coord circle_mid, float radius);
 float		lerp(float a, float b, float t);
 float		lerp_max(float a, float b, float t, float max);
 t_coord		get_perp(t_coord *vec);

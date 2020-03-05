@@ -21,6 +21,12 @@ typedef struct	s_coord
 	double		y;
 }				t_coord;
 
+typedef struct	s_bicoord
+{
+	t_coord		pos1;
+	t_coord		pos2;
+}				t_bicoord;
+
 typedef struct	s_tricoord
 {
 	t_coord		x;

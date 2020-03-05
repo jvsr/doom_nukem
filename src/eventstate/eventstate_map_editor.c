@@ -91,8 +91,8 @@ static void	delete_line(t_game *game, SDL_Event event, t_transform *map_editor_e
 	while (lst != NULL)
 	{
 		wall = (t_wall *)lst->content;
-		if (circle_collision(wall->corner_0, wall->corner_1, mouse_pos,
-							EDITOR_MOUSE_COLISION_SIZE))
+		if (circle_collision(&(t_bicoord){wall->corner_0, wall->corner_1}, 
+			&mouse_pos, EDITOR_MOUSE_COLISION_SIZE))
 			found = wall;
 		lst = lst->next;
 	}
