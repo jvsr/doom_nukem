@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/06 12:15:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 12:41:22 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		draw_x(t_rinfo *rin,
 	t_coord		vec;
 	t_point		tex;
 	float		in;
-	
+
 	srf = get_texture(rin->game, hit->sect->floor_tex);
 	t_pixels = srf->pixels;
 	get_vector_from_points((t_coord*)&hit->pos, &rin->game->player->pos, &vec);
@@ -78,10 +78,10 @@ static void		set_cybounds(t_point *c_ybounds,
 void			draw_floor(t_rinfo *rin, t_hinfo *info)
 {
 	const float	height = init_height(rin, info);
-	t_point	i;
-	t_point c_ybounds;
-	t_coord disintens;
-	t_coord	anstep;
+	t_point		i;
+	t_point		c_ybounds;
+	t_coord		disintens;
+	t_coord		anstep;
 
 	init_vals(rin, info, &anstep);
 	i.y = info->floor_range.x;
