@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/03/06 11:17:46 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 11:19:14 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 	{
 		x = 0;
 		dist = (tan(angle * PI_R) * height) * 0.25;
+		float intens = ((MAX_LIGHT_DIST - clamp_float(dist, 0,
+					MAX_LIGHT_DIST)) / MAX_LIGHT_DIST);
 		while (x < info->size)
 		{
 			ybnds = info->hits[x].ybnds;
@@ -80,9 +82,8 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 				get_vector_from_points(&info->hits[x].hit.pos, &rin->game->player->pos, &vec);
 				vec = (t_coord){rin->game->player->pos.x - (vec.x * dist), rin->game->player->pos.y - (vec.y * dist)};
 				tex = (t_point){abs((int)(vec.x * pow(LEVEL_MULTIPLIER, 2))) % srf->w, abs((int)(vec.y * pow(LEVEL_MULTIPLIER, 2))) % srf->h};
-				float intens = ((MAX_LIGHT_DIST - clamp_float(dist, 0,
-					MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * info->hits[x].hit.sect->light_value;
-				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = rgba_set_intensity(t_pixels[tex.x + (tex.y * srf->w)], intens);
+				float in = intens * info->hits[x].hit.sect->light_value;
+				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = rgba_set_intensity(t_pixels[tex.x + (tex.y * srf->w)], in);
 			}
 			x++;
 		}
