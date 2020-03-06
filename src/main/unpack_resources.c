@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 14:57:02 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/06 18:03:52 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/06 18:05:48 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void		unpack_resources(void)
 		if (name[0] == '\0')
 			return ;
 		size = read_size(fd, &offset);
-		printf("name: %s\nsize: %ld\n", name, size);
+		// printf("name: %s\nsize: %ld\n", name, size);
 		read_file(fd, &offset, name, size);
 		free(name);
 	}
