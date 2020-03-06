@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/03/06 11:07:57 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 11:17:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "setting.h"
 #include "player.h"
 #include "coord.h"
+#include "color.h"
 #include "rinfo.h"
 #include "cmath.h"
 #include "game.h"
@@ -74,14 +75,14 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 			c_ybounds.y = ft_constrain(info->hits[x].pre_bound.y, c_ybounds.x, ybnds.x);
 			if (y < c_ybounds.y && y >= c_ybounds.x)
 			{
-				if (y == info->floor_range.y - 1)
-					printf("Tan Dist %f, Hit Dist %f\n", dist, info->hits[x].hit.og_dist);
 				srf = get_texture(rin->game, info->hits[x].hit.sect->floor_tex);
 				t_pixels = srf->pixels;
 				get_vector_from_points(&info->hits[x].hit.pos, &rin->game->player->pos, &vec);
 				vec = (t_coord){rin->game->player->pos.x - (vec.x * dist), rin->game->player->pos.y - (vec.y * dist)};
 				tex = (t_point){abs((int)(vec.x * pow(LEVEL_MULTIPLIER, 2))) % srf->w, abs((int)(vec.y * pow(LEVEL_MULTIPLIER, 2))) % srf->h};
-				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = t_pixels[tex.x + (tex.y * srf->w)];
+				float intens = ((MAX_LIGHT_DIST - clamp_float(dist, 0,
+					MAX_LIGHT_DIST)) / MAX_LIGHT_DIST) * info->hits[x].hit.sect->light_value;
+				pixs[(x + rin->begin) + ((rin->dst->h - y - 1) * rin->dst->w)] = rgba_set_intensity(t_pixels[tex.x + (tex.y * srf->w)], intens);
 			}
 			x++;
 		}
