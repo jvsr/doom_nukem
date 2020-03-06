@@ -31,14 +31,31 @@ static t_bool	check_collision_valid(t_wall *wall, t_wall *other,
 	return (FALSE);
 }
 
+static t_bool	wall_is_bigger(t_wall *wall, t_wall *other)
+{
+	t_coord	other_vec;
+	t_coord	wall_vec;
+	float	other_mag;
+	float	wall_mag;
+
+	get_vector_from_points(&other->corner_0, &other->corner_1, &other_vec);
+	get_vector_from_points(&wall->corner_0, &wall->corner_1, &wall_vec);
+	other_mag = get_vector_magnitude(&other_vec);
+	wall_mag = get_vector_magnitude(&wall_vec);
+	if (wall_mag > other_mag)
+		return (TRUE);
+	return (FALSE);
+}
+
 static t_bool	check_coincident_valid(t_wall *wall, t_wall *other)
 {
 	float		wall_angle;
 	float		other_angle;
-	t_bicoord	wall_line;
-	t_coord		test_corner;
+	t_bicoord	other_line;
 	t_coord		d;
 
+	if (wall_is_bigger(wall, other) == TRUE)
+		return (check_coincident_valid(other, wall));
 	wall_angle = get_angle_between_points(&wall->corner_0, &wall->corner_1);
 	other_angle = get_angle_between_points(&other->corner_0, &other->corner_1);
 	if (other_angle != wall_angle && wrap_angle(other_angle + 180) != wall_angle)
@@ -46,14 +63,13 @@ static t_bool	check_coincident_valid(t_wall *wall, t_wall *other)
 	get_vector_from_points(&other->corner_0, &other->corner_1, &d);
 	if (fabs(d.x) <= EDITOR_GRID_STEP && fabs(d.y) <= EDITOR_GRID_STEP)
 		return (TRUE);
-	wall_line = (t_bicoord){wall->corner_0, wall->corner_1};
 	d = (t_coord){EDITOR_GRID_STEP * clamp_float(d.x, -1, 1),
 		EDITOR_GRID_STEP * clamp_float(d.y, -1, 1)};
-	test_corner = (t_coord){other->corner_0.x + d.x, other->corner_0.y + d.y};
-	if (circle_collision(&wall_line, &test_corner, 1) == TRUE)
-		return (FALSE);
-	test_corner = (t_coord){other->corner_1.x - d.x, other->corner_0.y - d.y};
-	if (circle_collision(&wall_line, &test_corner, 1) == TRUE)
+	other_line = (t_bicoord){
+		(t_coord){other->corner_0.x + d.x, other->corner_0.y + d.y},
+		(t_coord){other->corner_1.x - d.x, other->corner_1.y - d.y}};
+	if (circle_collision(&other_line, &wall->corner_0, 1) == TRUE ||
+		circle_collision(&other_line, &wall->corner_1, 1) == TRUE)
 		return (FALSE);
 	return (TRUE);
 }
