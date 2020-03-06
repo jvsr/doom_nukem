@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 12:38:39 by euan           #+#    #+#                */
-/*   Updated: 2020/03/06 13:43:08 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 14:56:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static float	init_height(t_rinfo *rin, t_hinfo *info)
 		info->sec->ceil);
 }
 
-static void		set_cybounds(t_point *c_ybounds, t_hitem *hit, t_point *ybnds, t_rinfo *rin)
+static void		set_cybounds(t_point *c_ybounds,
+									t_hitem *hit, t_point *ybnds, t_rinfo *rin)
 {
 	c_ybounds->x = ft_constrain(ybnds->y, hit->bounds.y, hit->pre_bound.y);
 	c_ybounds->y = ft_constrain(rin->dst->h, c_ybounds->x, hit->pre_bound.y);
