@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/03/02 10:40:18 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 10:45:41 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ static void		del_hinfo(void *info, size_t size)
 static void		render_fc(t_rinfo *rin, t_hinfo *info)
 {
 	int y;
-	int x;
-	t_coord ray0;
-	t_coord ray1;
+	size_t x;
 	int *pixs = rin->dst->pixels;
 	t_point c_ybounds;
 	t_point ybnds;
@@ -50,6 +48,7 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 	SDL_Surface	*srf;
 	int *t_pixels;
 	int size;
+	float start;
 
 	info->floor_range.x = ft_constrain(info->floor_range.x, 0, rin->dst->h);
 	info->floor_range.y = ft_constrain(info->floor_range.y, 0, rin->dst->h);
@@ -58,7 +57,11 @@ static void		render_fc(t_rinfo *rin, t_hinfo *info)
 	size = info->floor_range.y - info->floor_range.x;
 	step = ((float)size / rin->dst->h) * rin->game->setting->vfov;
 	float val = ((float)rin->game->player->screen_updown / rin->dst->h) * rin->game->setting->vfov;
-	angle = 90 + val - rin->vfov2;
+	if (info->floor_range.x != 0)
+		start = ((float)info->floor_range.x / rin->dst->h) * rin->game->setting->vfov;
+	else
+		start = 0;
+	angle = 90 + val - rin->vfov2 + start;
 	step /= (float)size;
 	while (y < info->floor_range.y)
 	{

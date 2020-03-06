@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/02 18:54:25 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 10:43:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "cmath.h"
 #include "game.h"
 
-static int	get_tex(t_hit *hit, t_player *player, int y, SDL_Surface *tex, t_rinfo *rin, t_hitem *in, int val)
+static int	get_tex(t_hit *hit, t_player *player, int y, SDL_Surface *tex, t_rinfo *rin)
 {
 	float		dist;
 	const int	*t_pixels = tex->pixels;
@@ -51,7 +51,7 @@ void		draw_floor(t_rinfo *rinfo, t_point **bounds, const size_t index, t_hitem *
 	{
 		pixels[index + (rinfo->dst->w * (rinfo->dst->h - i - 1))] = get_tex(&hit->hit,
 			rinfo->game->player, i, get_texture(rinfo->game,
-			hit->hit.sect->floor_tex), rinfo, hit, c_ybounds.y);
+			hit->hit.sect->floor_tex), rinfo);
 		i++;
 	}
 }
