@@ -6,12 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:36:58 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/20 19:22:56 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/06 11:44:34 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COORD_H
 # define COORD_H
+
+# include <stddef.h>
 
 typedef struct	s_coord
 {
@@ -38,5 +40,12 @@ typedef struct	s_point
 	int			x;
 	int			y;
 }				t_point;
+
+typedef struct	s_index
+{
+	size_t		x;
+	size_t		y;
+}				t_index;
+
 
 #endif

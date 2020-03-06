@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 16:19:11 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 11:20:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void			draw_vline(t_rinfo *rinfo,
 	else if (item->ybnds.y < rinfo->dst->h)
 		draw_skybox(index, rinfo->dst, rinfo->game,
 			(t_point[2]){(t_point){item->ybnds.y, rinfo->dst->h}, *bounds});
-	// if (item->ybnds.x > 0)
-	// 	draw_floor(rinfo, (t_point*[2]){&(t_point){0, item->ybnds.x}, bounds}, index, item);
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
 		draw_wall(rinfo, (t_point*[2]){bounds, &item->ybnds}, index, &item->hit);
