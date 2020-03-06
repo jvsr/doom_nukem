@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/06 11:20:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 13:01:35 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ void			draw_vline(t_rinfo *rinfo,
 				(rinfo->dst->h) - rinfo->game->player->screen_updown;
 	item->ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x)
 				* (rinfo->dst->h)) - rinfo->game->player->screen_updown;
-	if (item->ybnds.y < rinfo->dst->h && item->hit.sect->has_ceiling)
-		draw_cline(rinfo->dst, (t_point*[2]){&(t_point){item->ybnds.y, rinfo->dst->h},
-				bounds}, index, CEILING_COLOR);
-	else if (item->ybnds.y < rinfo->dst->h)
+	if (item->ybnds.y < rinfo->dst->h && !item->hit.sect->has_ceiling)
 		draw_skybox(index, rinfo->dst, rinfo->game,
 			(t_point[2]){(t_point){item->ybnds.y, rinfo->dst->h}, *bounds});
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&

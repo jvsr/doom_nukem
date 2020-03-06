@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/03/02 18:07:53 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 12:55:15 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 	{
 		info->prev = prev;
 		info->floor_range = (t_point){INT32_MAX, 0};
+		info->ceil_range = (t_point){INT32_MAX, 0};
 		info->end = rinfo->start;
 		hit = info->hits + rinfo->start - rinfo->begin;
 		hit->hit = get_hit(cosin, rinfo->game->player, info->sec, prev->sec);

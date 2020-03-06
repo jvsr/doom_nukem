@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/06 11:24:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 12:58:30 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void				draw_glass(t_rinfo *rinfo,
 void				draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info);
 void				delete_map(t_map **map);
 void				draw_floor(t_rinfo *rin, t_hinfo *info);
+void				draw_ceil(t_rinfo *rin, t_hinfo *info);
 
 #endif

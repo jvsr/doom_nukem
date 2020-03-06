@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/06 11:08:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 13:50:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void			map_init(t_game *game)
 	game->map->sectors[0].has_ceiling = TRUE;
 	game->map->sectors[0].object_count = 5;
 	game->map->sectors[0].floor_tex = TEXTURE_QUARTZ;
+	game->map->sectors[0].ceil_tex = TEXTURE_QUARTZ;
 
 	t_object *o = (t_object*)ft_memalloc(sizeof(t_object));
 	game->map->sectors[0].objects = ft_lstnew(o, sizeof(t_object*));
@@ -183,6 +184,7 @@ void			map_init(t_game *game)
 	game->map->sectors[1].has_ceiling = TRUE;
 	game->map->sectors[1].object_count = 0;
 	game->map->sectors[1].objects = NULL;
+	game->map->sectors[1].ceil_tex = TEXTURE_QUARTZ;
 
 	//Sector 3
 	game->map->sectors[2].ceil = 40;
@@ -203,6 +205,7 @@ void			map_init(t_game *game)
 	game->map->sectors[2].objects = NULL;
 	game->map->sectors[2].has_ceiling = FALSE;
 	game->map->sectors[2].floor_tex = TEXTURE_QUARTZ;
+	game->map->sectors[2].ceil_tex = TEXTURE_QUARTZ;
 
 	//Sector 4
 	game->map->sectors[3].ceil = 13;
@@ -224,6 +227,7 @@ void			map_init(t_game *game)
 	game->map->sectors[3].object_count = 0;
 	game->map->sectors[3].objects = NULL;
 	game->map->sectors[3].floor_tex = TEXTURE_QUARTZ;
+	game->map->sectors[3].ceil_tex = TEXTURE_QUARTZ;
 
 	// //Sector 5
 	// game->map->sectors[4].ceil = 150;

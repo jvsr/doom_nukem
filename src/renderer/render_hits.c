@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/03/06 11:26:13 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 12:59:36 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void		del_hinfo(void *info, size_t size)
 static void		render_fc(t_rinfo *rin, t_hinfo *info)
 {
 	draw_floor(rin, info);
+	if (info->sec->has_ceiling)
+		draw_ceil(rin, info);
 }
 
 void			render_hits(t_rinfo *rinfo, t_coord *range)
@@ -37,6 +39,7 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 	t_hinfo	*info;
 	size_t	index;
 	t_point	bounds;
+	t_hitem	*hit;
 
 	lst = rinfo->ren;
 	while (lst)
@@ -51,12 +54,16 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 				bounds = info->prev->hits[index - rinfo->begin].bounds;
 			if (info->hits[index - rinfo->begin].hit.dist < MAX_HIT)
 			{
-				t_hitem *hit = info->hits + index - rinfo->begin;
+				hit = info->hits + index - rinfo->begin;
 				draw_vline(rinfo, hit, index, &bounds);
 				if (hit->ybnds.x > 0 && hit->ybnds.x > info->floor_range.y)
 					info->floor_range.y = hit->ybnds.x;
 				if (bounds.x < info->floor_range.x)
 					info->floor_range.x = bounds.x;
+				if (bounds.y > info->ceil_range.y)
+					info->ceil_range.y = bounds.y;
+				if (hit->ybnds.y > 0 && hit->ybnds.y < info->ceil_range.x)
+					info->ceil_range.x = hit->ybnds.y;
 			}
 				
 			index++;
