@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/06 12:11:23 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/06 12:15:52 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #include "color.h"
 #include "game.h"
 
-static void		draw_x(t_rinfo *rin, const t_hit *hit, const t_coord fvals, const t_point ivals, int *pixs)
+static void		draw_x(t_rinfo *rin,
+					const t_hit *hit, const t_coord fvals, const t_point ivals)
 {
 	SDL_Surface *srf;
 	int			*t_pixels;
@@ -27,7 +28,6 @@ static void		draw_x(t_rinfo *rin, const t_hit *hit, const t_coord fvals, const t
 	t_point		tex;
 	float		in;
 	
-	pixs = rin->dst->pixels;
 	srf = get_texture(rin->game, hit->sect->floor_tex);
 	t_pixels = srf->pixels;
 	get_vector_from_points((t_coord*)&hit->pos, &rin->game->player->pos, &vec);
@@ -36,7 +36,8 @@ static void		draw_x(t_rinfo *rin, const t_hit *hit, const t_coord fvals, const t
 	tex = (t_point){abs((int)(vec.x * pow(LEVEL_MULTIPLIER, 2))) % srf->w,
 					abs((int)(vec.y * pow(LEVEL_MULTIPLIER, 2))) % srf->h};
 	in = fvals.y * hit->sect->light_value;
-	pixs[(ivals.x + rin->begin) + ((rin->dst->h - ivals.y - 1) * rin->dst->w)] =
+	rin->pixels[(ivals.x + rin->begin) + ((rin->dst->h - ivals.y - 1) *
+		rin->dst->w)] =
 		rgba_set_intensity(t_pixels[tex.x + (tex.y * srf->w)], in);
 }
 
@@ -95,8 +96,7 @@ void			draw_floor(t_rinfo *rin, t_hinfo *info)
 			set_cybounds(&c_ybounds, &info->hits[i.x].pre_bound,
 				&info->hits[i.x].ybnds);
 			if (i.y < c_ybounds.y && i.y >= c_ybounds.x)
-				draw_x(rin, &info->hits[i.x].hit, (t_coord){disintens.x,
-					disintens.y}, (t_point){i.x, i.y}, rin->dst->pixels);
+				draw_x(rin, &info->hits[i.x].hit, disintens, i);
 			i.x++;
 		}
 		i.y++;
