@@ -18,24 +18,44 @@
 #include "error.h"
 #include "map_editor.h"
 
-/*
-** Todo Detect if line is inside other line and prevent placing
-*/
-
-static t_bool		check_collision(t_wall *wall, t_wall *other,
-						t_coord *intersection)
+static t_bool	check_collision_valid(t_wall *wall, t_wall *other,
+					t_coord *intersection)
 {
-	return (get_line_collision(&(t_bicoord){wall->corner_0, wall->corner_1},
-		&(t_bicoord){other->corner_0, other->corner_1}, intersection) != NULL);
-}
-
-static t_bool	intersection_on_line(t_wall *wall, t_coord *intersection)
-{
+	if (get_line_collision(&(t_bicoord){wall->corner_0, wall->corner_1},
+		&(t_bicoord){other->corner_0, other->corner_1}, intersection) == NULL)
+		return (TRUE);
 	if (ft_memequ(&wall->corner_0, intersection, sizeof(t_coord)) == TRUE)
 		return (TRUE);
 	if (ft_memequ(&wall->corner_1, intersection, sizeof(t_coord)) == TRUE)
 		return (TRUE);
 	return (FALSE);
+}
+
+static t_bool	check_coincident_valid(t_wall *wall, t_wall *other)
+{
+	float		wall_angle;
+	float		other_angle;
+	t_bicoord	wall_line;
+	t_coord		test_corner;
+	t_coord		d;
+
+	wall_angle = get_angle_between_points(&wall->corner_0, &wall->corner_1);
+	other_angle = get_angle_between_points(&other->corner_0, &other->corner_1);
+	if (other_angle != wall_angle && wrap_angle(other_angle + 180) != wall_angle)
+		return (TRUE);
+	get_vector_from_points(&other->corner_0, &other->corner_1, &d);
+	if (fabs(d.x) <= EDITOR_GRID_STEP && fabs(d.y) <= EDITOR_GRID_STEP)
+		return (TRUE);
+	wall_line = (t_bicoord){wall->corner_0, wall->corner_1};
+	d = (t_coord){EDITOR_GRID_STEP * clamp_float(d.x, -1, 1),
+		EDITOR_GRID_STEP * clamp_float(d.y, -1, 1)};
+	test_corner = (t_coord){other->corner_0.x + d.x, other->corner_0.y + d.y};
+	if (circle_collision(&wall_line, &test_corner, 1) == TRUE)
+		return (FALSE);
+	test_corner = (t_coord){other->corner_1.x - d.x, other->corner_0.y - d.y};
+	if (circle_collision(&wall_line, &test_corner, 1) == TRUE)
+		return (FALSE);
+	return (TRUE);
 }
 
 static void		add_to_back(t_list **head, t_list *new)
@@ -52,8 +72,9 @@ static void		add_to_back(t_list **head, t_list *new)
 	while (lst != NULL)
 	{
 		wall = (t_wall*)lst->content;
-		if (check_collision(new_wall, wall, &intersection) == TRUE)
-			valid = intersection_on_line(new_wall, &intersection);
+		valid = check_collision_valid(new_wall, wall, &intersection);
+		if (valid == TRUE)
+			valid = check_coincident_valid(new_wall, wall);
 		if (valid == FALSE || lst->next == NULL)
 			break ;
 		lst = lst->next;
@@ -64,10 +85,9 @@ static void		add_to_back(t_list **head, t_list *new)
 		*head = new;
 	else
 		lst->next = new;
-	return ;
 }
 
-void	map_editor_add_wall(t_editor_map *editor_map, t_wall *wall)
+void			map_editor_add_wall(t_editor_map *editor_map, t_wall *wall)
 {
 	t_list	*new;
 
