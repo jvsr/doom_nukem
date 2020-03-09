@@ -35,14 +35,10 @@ static t_bool	wall_is_bigger(t_wall *wall, t_wall *other)
 {
 	t_coord	other_vec;
 	t_coord	wall_vec;
-	float	other_mag;
-	float	wall_mag;
 
 	get_vector_from_points(&other->corner_0, &other->corner_1, &other_vec);
 	get_vector_from_points(&wall->corner_0, &wall->corner_1, &wall_vec);
-	other_mag = get_vector_magnitude(&other_vec);
-	wall_mag = get_vector_magnitude(&wall_vec);
-	if (wall_mag > other_mag)
+	if (get_vector_magnitude(&wall_vec) > get_vector_magnitude(&other_vec))
 		return (TRUE);
 	return (FALSE);
 }
@@ -61,10 +57,9 @@ static t_bool	check_coincident_valid(t_wall *wall, t_wall *other)
 	if (other_angle != wall_angle && wrap_angle(other_angle + 180) != wall_angle)
 		return (TRUE);
 	get_vector_from_points(&other->corner_0, &other->corner_1, &d);
-	if (fabs(d.x) <= EDITOR_GRID_STEP && fabs(d.y) <= EDITOR_GRID_STEP)
-		return (TRUE);
-	d = (t_coord){EDITOR_GRID_STEP * clamp_float(d.x, -1, 1),
-		EDITOR_GRID_STEP * clamp_float(d.y, -1, 1)};
+	d = (t_coord){
+		(EDITOR_GRID_STEP / 2) * clamp_float(d.x, -1, 1),
+		(EDITOR_GRID_STEP / 2) * clamp_float(d.y, -1, 1)};
 	other_line = (t_bicoord){
 		(t_coord){other->corner_0.x + d.x, other->corner_0.y + d.y},
 		(t_coord){other->corner_1.x - d.x, other->corner_1.y - d.y}};
