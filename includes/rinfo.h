@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/06 12:47:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/10 15:09:37 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ struct			s_sector
 	void		(*f_enter)(t_game *game, t_sector *cur_sector);
 	void		(*f_exit)(t_game *game, t_sector *cur_sector);
 	float		light_value;
+	t_bool		has_sloop;
+	float		angle;
+	t_wall		*swall;
 };
 
 typedef struct	s_map
@@ -160,6 +163,7 @@ typedef struct	s_hitem
 	t_coord		st;
 	int			hoffset;
 	t_point		pre_bound;
+	float		tang;
 }				t_hitem;
 
 struct			s_hinfo
