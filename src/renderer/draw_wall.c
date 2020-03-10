@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 16:13:23 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 16:16:45 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/04 12:16:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	render_decal_list(const t_rinfo *rinfo,
 	}
 }
 
-static void	render_decals(t_point *const *bounds,
+static void	render_decals(SDL_Point *const *bounds,
 						const t_rinfo *rinfo, const t_hit *hit, t_winfo *win)
 {
 	float		fvals[3];
@@ -71,7 +71,7 @@ static void	render_decals(t_point *const *bounds,
 	}
 }
 
-static void	render_wall(t_point *const *bounds, const t_rinfo *rinfo,
+static void	render_wall(SDL_Point *const *bounds, const t_rinfo *rinfo,
 												const double hity, t_winfo *win)
 {
 	const int			tex_x = win->tex_x;
@@ -92,7 +92,7 @@ static void	render_wall(t_point *const *bounds, const t_rinfo *rinfo,
 }
 
 void		draw_wall(t_rinfo *rinfo,
-							t_point **bounds, const size_t x, t_hit *hit)
+							SDL_Point **bounds, const size_t x, t_hit *hit)
 {
 	t_winfo		win;
 
@@ -101,7 +101,7 @@ void		draw_wall(t_rinfo *rinfo,
 	win.x = x;
 	if (x >= (size_t)rinfo->dst->w)
 		return ;
-	*bounds[0] = (t_point){ft_constrain(bounds[0]->x, 0, rinfo->dst->h),
+	*bounds[0] = (SDL_Point){ft_constrain(bounds[0]->x, 0, rinfo->dst->h),
 					ft_constrain(bounds[0]->y, 0, rinfo->dst->h)};
 	win.c_ybounds.x = ft_constrain(bounds[1]->x, bounds[0]->x, bounds[0]->y);
 	win.c_ybounds.y = ft_constrain(bounds[1]->y, win.c_ybounds.x, bounds[0]->y);

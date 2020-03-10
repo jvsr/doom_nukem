@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:44:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/03 17:39:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_hashmap	t_hashmap;
 typedef struct s_map		t_map;
 typedef struct s_object		t_object;
 typedef struct s_sector		t_sector;
+typedef struct s_wall		t_wall;
+typedef struct s_list		t_list;
 
 typedef struct	s_mag
 {
@@ -73,6 +75,13 @@ typedef	struct	s_player
 	t_uint32	keys;
 }				t_player;
 
+typedef struct	s_col
+{
+	t_tricoord	coord;
+	t_uint32	*prev_sector;
+	t_uint32	*next_sector;
+}				t_col;
+
 t_bool			player_move(t_game *game);
 t_bool			player_col(t_game *game, float xspeed, float yspeed);
 void			health_pickup(t_game *game,
@@ -95,5 +104,14 @@ t_bool			fly_up(t_game *game, t_player *player, t_bool *jump);
 t_bool			fly_down(t_game *game, t_player *player, t_bool *jump);
 void			damage_player(t_game *game, t_player *player, t_uint32 damage);
 void			player_died(t_game *game);
+t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
+															t_tricoord coord);
+t_list			*check_walls(t_game *game, t_uint8 *col,
+										t_tricoord coord, t_uint32 prev_sector);
+void			check_wall_col(t_tricoord coord, t_player *player,
+						t_wall *wall, t_uint8 *col);
+t_bool			wall_col(t_coord c0, t_coord c1, t_wall *wall);
+t_uint32		get_sector_id(t_map *map, t_sector *sec);
+void			check_objects(t_game *game, t_uint8 *col, t_tricoord coord);
 
 #endif

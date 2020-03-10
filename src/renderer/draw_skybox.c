@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 18:26:55 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/01/17 18:26:55 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/03/04 12:24:03 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 #include "game.h"
 
 void		draw_skybox(size_t x,
-								SDL_Surface *dst, t_game *game, t_point *bounds)
+							SDL_Surface *dst, t_game *game, SDL_Point *bounds)
 {
 	int					*pixels;
 	SDL_Surface const	*skybox = get_texture(game, game->map->skybox);
 	int					x_pos;
 	int					*skybox_pixels;
-	t_point				change;
+	SDL_Point			change;
 
 	change.x = fabs(dst->h * PLAYER_UPDOWN_MIN);
 	change.y = fabs(dst->h * PLAYER_UPDOWN_MAX);
@@ -36,7 +36,7 @@ void		draw_skybox(size_t x,
 	x_pos = (((((float)game->setting->fov / 360) * skybox->w) / dst->w) * x) +
 		(wrap_float((float)game->player->angle - (game->setting->fov / 2),
 		0, 360) / 360) * skybox->w;
-	bounds[1] = (t_point){ft_constrain(bounds[1].x, 0, dst->h),
+	bounds[1] = (SDL_Point){ft_constrain(bounds[1].x, 0, dst->h),
 				ft_constrain(bounds[1].y, 0, dst->h)};
 	bounds->x = ft_constrain(bounds->x, bounds[1].x, bounds[1].y);
 	bounds->y = ft_constrain(bounds->y, bounds->x, bounds[1].y);

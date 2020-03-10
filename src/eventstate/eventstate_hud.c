@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:06:08 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/04 12:19:53 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 static void	manage_player_angle(t_game *game, t_bool *skip)
 {
 	t_player	*player;
-	t_point		mouse_pos;
+	SDL_Point	mouse_pos;
 	float		tmp;
 
 	if (!SDL_GetRelativeMouseMode())

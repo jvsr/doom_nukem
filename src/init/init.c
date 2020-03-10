@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/02 14:34:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/03 14:01:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,16 +186,17 @@ void			map_init(t_game *game)
 	//Sector 3
 	game->map->sectors[2].ceil = 40;
 	game->map->sectors[2].floor = 10;
-	game->map->sectors[2].wall_count = 5;
+	game->map->sectors[2].wall_count = 6;
 	game->map->sectors[2].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[2].wall_count + 1));
 	game->map->sectors[2].light_value = 0.5;
 	if (game->map->sectors[2].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
 	game->map->sectors[2].walls[0] = (t_wall){(t_coord){-40, -20}, (t_coord){-30, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[2].walls[1] = (t_wall){(t_coord){-30, -20}, (t_coord){-30, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	game->map->sectors[2].walls[2] = (t_wall){(t_coord){-30, 20}, (t_coord){-30, 40}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	game->map->sectors[2].walls[3] = (t_wall){(t_coord){-30, 40}, (t_coord){-40, 40}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
-	game->map->sectors[2].walls[4] = (t_wall){(t_coord){-40, 40}, (t_coord){-40, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[2] = (t_wall){(t_coord){-30, 20}, (t_coord){-20, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[3] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, 40}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[4] = (t_wall){(t_coord){-20, 40}, (t_coord){-40, 40}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
+	game->map->sectors[2].walls[5] = (t_wall){(t_coord){-40, 40}, (t_coord){-40, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[2].walls[1].is_portal = TRUE;
 	game->map->sectors[2].walls[1].window = &game->map->sectors[1];
 	game->map->sectors[2].object_count = 0;

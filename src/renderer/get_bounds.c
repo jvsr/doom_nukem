@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:57:33 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 15:05:35 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/04 12:16:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 #include "coord.h"
 #include "rinfo.h"
 
-t_point	get_bounds(t_player *player,
+SDL_Point	get_bounds(t_player *player,
 						SDL_Surface *dst, t_hitem *hit, float tanvfov2)
 {
-	t_point	new;
+	SDL_Point	new;
 
 	hit->st.y = hit->hit.dist * tanvfov2;
 	hit->y.x = player->height + player->heightoffset;
 	hit->y.y = hit->y.x + hit->st.y;
 	hit->y.x -= hit->st.y;
 	hit->st.x = hit->st.y * 2;
-	new = (t_point){0, 0};
+	new = (SDL_Point){0, 0};
 	if (!hit->hit.wall->is_portal && hit->hit.sect->ceil >
 		hit->y.x && hit->hit.sect->floor < hit->y.y)
 	{

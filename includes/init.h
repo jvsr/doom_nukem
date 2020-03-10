@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:39:20 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:18:50 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/06 15:06:35 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	init_eventstate(t_game *game);
 void	*init_main_menu(t_game *game);
 void	init_window_surface(t_game *game);
 void	map_init(t_game *game);
+void	unpack_resources(void);
 
 #endif

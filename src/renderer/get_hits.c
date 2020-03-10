@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/02/22 15:29:29 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/04 12:26:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		move_sector(t_hit *hit,
 }
 
 static t_bool	hit_meth(t_hitem *hit,
-									t_rinfo *rinfo, float angle, t_point *tmp)
+									t_rinfo *rinfo, float angle, SDL_Point *tmp)
 {
 	if (hit->hit.dist == MAX_HIT)
 	{
@@ -78,14 +78,14 @@ static t_bool	hit_meth(t_hitem *hit,
 
 static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 {
-	t_hitem	*hit;
-	t_hinfo *info;
-	t_hinfo	*prev;
-	t_point	tmp;
+	t_hitem		*hit;
+	t_hinfo		*info;
+	t_hinfo		*prev;
+	SDL_Point	tmp;
 
 	info = rinfo->ren->content;
 	prev = info;
-	tmp = (t_point){0, rinfo->dst->h};
+	tmp = (SDL_Point){0, rinfo->dst->h};
 	hit = NULL;
 	while (tmp.x != tmp.y && (hit == NULL || hit->hit.wall->is_portal))
 	{

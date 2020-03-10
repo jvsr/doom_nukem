@@ -23,4 +23,5 @@ SRCS = main \
 		display_splash \
 		error_msg \
 		error_msg_sdl \
-		error_msg_errno
+		error_msg_errno \
+		unpack_resources
