@@ -18,10 +18,11 @@ PREFIX = map_editor_
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = \
 	new \
-	delete \
-	remove_last_wall \
+	del \
+	new_wall \
 	add_wall \
+	remove_last_wall \
 	snap_to_grid \
-	delete_wall \
+	del_wall \
 	find_wall_sector \
 	find_object_sector \

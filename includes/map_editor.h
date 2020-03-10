@@ -15,6 +15,7 @@
 
 # include <SDL2/SDL_surface.h>
 
+# include "coord.h"
 # include "shape.h"
 # include "types.h"
 
@@ -59,13 +60,16 @@ typedef struct	s_editor_map
 }				t_editor_map;
 
 t_editor_map	*map_editor_new(void);
-void			map_editor_delete(t_editor_map **editor_map);
+void			map_editor_del(t_editor_map **editor_map);
+
+t_wall			*map_editor_new_wall(t_editor_map *editor_map, t_coord corner_0,
+					t_coord corner_1);
+void			map_editor_add_wall(t_editor_map *editor_map, t_wall *wall);
 
 void			map_editor_snap_to_grid(t_transform *map_editor_elem,
 					SDL_Point *point);
 void			map_editor_remove_last_wall(t_editor_map *editor_map);
-void			map_editor_add_wall(t_editor_map *editor_map, t_wall *wall);
-void			map_editor_delete_wall(t_editor_map *editor_map, t_wall *wall);
+void			map_editor_del_wall(t_editor_map *editor_map, t_wall *wall);
 t_bool			map_editor_hit_wall(t_wall *wall, SDL_Point mouse);
 
 t_editor_sector	*map_editor_find_wall_sector(t_editor_map *editor_map,

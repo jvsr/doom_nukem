@@ -49,7 +49,6 @@ static void	manage_last_click(t_game *game, SDL_Event event,
 static void	add_line(t_game *game, SDL_Event event,
 						t_transform *map_editor_elem)
 {
-	t_wall				*new;
 	SDL_Point			current;
 	t_map_editor		*map_editor_gui_elem;
 	static	t_bool		first_place = TRUE;
@@ -62,14 +61,9 @@ static void	add_line(t_game *game, SDL_Event event,
 	if (first_place == FALSE && ft_memequ(&map_editor_gui_elem->last_click,
 		&current, sizeof(SDL_Point)) == FALSE)
 	{
-		new = (t_wall*)ft_memalloc(sizeof(t_wall));
-		if (new == NULL)
-			error_msg_errno("Failed to alloc new mapeditor wall");
-		new->corner_0.x = map_editor_gui_elem->last_click.x;
-		new->corner_0.y = map_editor_gui_elem->last_click.y;
-		new->corner_1.x = current.x;
-		new->corner_1.y = current.y;
-		map_editor_add_wall(game->editor_map, new);
+		map_editor_new_wall(game->editor_map, (t_coord){
+			map_editor_gui_elem->last_click.x, map_editor_gui_elem->last_click.y
+		}, (t_coord){current.x, current.y});
 		set_elem_redraw(map_editor_elem);
 	}
 	first_place = !first_place;
@@ -91,14 +85,14 @@ static void	delete_line(t_game *game, SDL_Event event, t_transform *map_editor_e
 	while (lst != NULL)
 	{
 		wall = (t_wall *)lst->content;
-		if (circle_collision(&(t_bicoord){wall->corner_0, wall->corner_1}, 
+		if (circle_collision(&(t_bicoord){wall->corner_0, wall->corner_1},
 			&mouse_pos, EDITOR_MOUSE_COLISION_SIZE))
 			found = wall;
 		lst = lst->next;
 	}
 	if (found == NULL)
 		return ;
-	map_editor_delete_wall(game->editor_map, found);
+	map_editor_del_wall(game->editor_map, found);
 	set_elem_redraw(map_editor_elem);
 }
 

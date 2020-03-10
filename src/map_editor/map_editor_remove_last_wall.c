@@ -21,5 +21,5 @@ void	map_editor_remove_last_wall(t_editor_map *editor_map)
 	last_lst = ft_lstlast(editor_map->walls);
 	if (last_lst == NULL)
 		return ;
-	map_editor_delete_wall(editor_map, last_lst->content);
+	map_editor_del_wall(editor_map, last_lst->content);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map_editor_delete_wall.c                           :+:    :+:            */
+/*   map_editor_del_wall.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -27,7 +27,7 @@ static t_bool	on_point(t_wall *wall, t_wall *other)
 	return (FALSE);
 }
 
-void			map_editor_delete_wall(t_editor_map *editor_map, t_wall *wall)
+void			map_editor_del_wall(t_editor_map *editor_map, t_wall *wall)
 {
 	t_list	*lst;
 	t_list	*next;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map_editor_delete.c                                :+:    :+:            */
+/*   map_editor_del.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -38,7 +38,7 @@ static void	free_obj(void *obj, size_t size)
 	ft_memdel((void**)&obj);
 }
 
-void		map_editor_delete(t_editor_map **editor_map)
+void		map_editor_del(t_editor_map **editor_map)
 {
 	if (editor_map == NULL || *editor_map == NULL)
 		return ;
