@@ -29,7 +29,7 @@ dd if=/dev/zero bs=1 count=128 >> doom-nukem
 for file in $resources; do
 cat $file >> doom-nukem
 
-size=$(stat -f%z $file)
+size=$(du -bs $file | column -t | cut -d' ' -f1)
 echo $size
 echo -n $size >> doom-nukem
 pad=$((24-${#size}))
