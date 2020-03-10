@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	t_game	*game;
 
 	(void)argc;
-	// unpack_resources();
+	unpack_resources();
 	game = init_prerequisites(argv, envp);
 	loop(game);
 	return (0);
