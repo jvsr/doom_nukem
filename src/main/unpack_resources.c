@@ -44,8 +44,8 @@ char		*read_name(const int fd, off_t *offset)
 	if (ret == -1)
 		error_msg_errno("Failed to unpack resources");
     res = ft_strdup(buf);
-    if (res == NULL)
-        error_msg_errno("Failed to allocate file name");
+	if (res == NULL)
+		error_msg_errno("Failed to allocate file name");
 	return (res);
 }
 
@@ -102,7 +102,8 @@ void		read_file(const int fd, off_t *offset, const char *name,
 		ret = read(fd, buf, size);
 		if (ret == -1)
 			error_msg_errno("Failed to read resource");
-		write(w_fd, buf, size);
+		if (write(w_fd, buf, size) != size)
+			error_msg_errno(ft_strformat("Failed to unpack '%s'", name));
 		close(w_fd);
 		free(buf);
 	}
