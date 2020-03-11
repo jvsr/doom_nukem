@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 14:57:02 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/06 18:05:48 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/11 14:20:47 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #include <limits.h>
 #include <sys/stat.h>
 
-char		*read_name(const int fd, off_t *offset)
+char		*read_name(const int fd, off_t *offset, const char *prefix)
 {
 	char	buf[128];
 	ssize_t	ret;
@@ -43,7 +43,8 @@ char		*read_name(const int fd, off_t *offset)
 	ret = read(fd, buf, 128);
 	if (ret == -1)
 		error_msg_errno("Failed to unpack resources");
-    res = ft_strdup(buf);
+	res = ft_strdup(prefix);
+	ft_strappend(&res, buf);
 	if (res == NULL)
 		error_msg_errno("Failed to allocate file name");
 	return (res);
@@ -108,24 +109,25 @@ void		read_file(const int fd, off_t *offset, const char *name,
 		free(buf);
 	}
 }
-void		unpack_resources(void)
+void		unpack_resources(t_game *game)
 {
 	char		*name;
 	off_t		offset;
 	intmax_t	size;
-	const int	fd = open("doom-nukem", O_RDONLY);
+	const char	*path = ft_strjoin(game->exec_path, game->exec_name);
+	const int	fd = open(path, O_RDONLY);
 
 	offset = 0;
+
 	while (TRUE)
 	{
-		name = read_name(fd, &offset);
-		if (name[0] == '\0')
+		name = read_name(fd, &offset, game->exec_path);
+		if (ft_strequ(name, game->exec_path))
 			return ;
 		size = read_size(fd, &offset);
-		// printf("name: %s\nsize: %ld\n", name, size);
 		read_file(fd, &offset, name, size);
 		free(name);
 	}
 	close(fd);
+	free((void*)path);
 }
-// TODO make dependend on execution location
