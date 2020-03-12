@@ -24,5 +24,3 @@ SRCS = \
 	remove_last_wall \
 	snap_to_grid \
 	del_wall \
-	find_wall_sector \
-	find_object_sector \
