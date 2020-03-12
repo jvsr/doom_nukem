@@ -104,7 +104,7 @@ void		draw_wall(t_rinfo *rinfo,
 	*bounds[0] = (t_point){ft_constrain(bounds[0]->x, 0, rinfo->dst->h),
 					ft_constrain(bounds[0]->y, 0, rinfo->dst->h)};
 	win.c_ybounds.x = ft_constrain(bounds[1]->x, bounds[0]->x, bounds[0]->y);
-	win.c_ybounds.y = ft_constrain(bounds[1]->y, win.c_ybounds.x, bounds[0]->y);
+	win.c_ybounds.y = ft_min(bounds[1]->y, bounds[0]->y);
 	win.tex = tex_from_anim(rinfo->game, &hit->wall->texture);
 	win.t_pixels = win.tex->pixels;
 	win.len = get_distance(&hit->wall->corner_0, &hit->wall->corner_1);

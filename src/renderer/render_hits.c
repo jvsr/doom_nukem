@@ -51,7 +51,7 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 			if (lst->next == NULL)
 				bounds = (t_point){0, rinfo->dst->h};
 			else
-				bounds = info->prev->hits[index - rinfo->begin].bounds;
+				bounds = info->prev->hits[index - rinfo->begin].pre_bounds;
 			if (info->hits[index - rinfo->begin].hit.dist < MAX_HIT)
 			{
 				hit = info->hits + index - rinfo->begin;

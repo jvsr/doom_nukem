@@ -93,7 +93,7 @@ void			draw_floor(t_rinfo *rin, t_hinfo *info)
 					MAX_LIGHT_DIST)) / MAX_LIGHT_DIST);
 		while (i.x < (int)info->size)
 		{
-			set_cybounds(&c_ybounds, &info->hits[i.x].pre_bound,
+			set_cybounds(&c_ybounds, &info->hits[i.x].pre_bounds,
 				&info->hits[i.x].ybnds);
 			if (i.y < c_ybounds.y && i.y >= c_ybounds.x)
 				draw_x(rin, &info->hits[i.x].hit, disintens, i);

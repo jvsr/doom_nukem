@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_mem.h"
 #include "libft/ft_list.h"
-#include "player.h"
+#include "libft/ft_mem.h"
+#include "libft/ft_num.h"
 #include "renderer.h"
+#include "player.h"
 #include "cmath.h"
 #include "coord.h"
 #include "rinfo.h"
@@ -88,11 +89,13 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 	t_hinfo *info;
 	t_hinfo	*prev;
 	t_point	tmp;
+	t_point prv;
 
 	info = rinfo->ren->content;
 	prev = info;
 	tmp = (t_point){0, rinfo->dst->h};
 	hit = NULL;
+	prv = tmp;
 	while (tmp.x != tmp.y && (hit == NULL || hit->hit.wall->is_portal))
 	{
 		info->prev = prev;
@@ -105,6 +108,8 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 			continue;
 		tmp = get_bounds(rinfo->game->player, rinfo->dst, hit, tanvfov2);
 		hit->bounds = tmp;
+		hit->pre_bounds = prv;
+		prv = tmp;
 		if (tmp.x != tmp.y && hit->hit.wall->is_portal == TRUE)
 			move_sector(&hit->hit, &prev, &info, rinfo);
 	}

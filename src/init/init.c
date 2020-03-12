@@ -46,6 +46,7 @@ static void		player_init(t_game *game)
 	ft_memcpy(&game->player->mag, &(t_coord){wrap_float(game->player->angle -
 		(game->setting->fov / 2), 0.0, 360.0), wrap_float(game->player->angle +
 		(game->setting->fov / 2), 0.0, 360.0)}, sizeof(t_coord));
+	init_player(game);
 }
 
 static void		init_threadpool(t_game *game)
@@ -220,7 +221,7 @@ void			map_init(t_game *game)
 	game->map->sectors[3].ceil = 25;
 	game->map->sectors[3].floor = 5;
 	game->map->sectors[3].wall_count = 4;
-	game->map->sectors[3].f_enter = test_function;
+	// game->map->sectors[3].f_enter = test_function;
 	game->map->sectors[3].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[3].wall_count + 1));
 	game->map->sectors[3].light_value = 0.5;
 	if (game->map->sectors[3].walls == NULL)
@@ -230,14 +231,14 @@ void			map_init(t_game *game)
 	game->map->sectors[3].walls[2] = (t_wall){(t_coord){20, -20}, (t_coord){20, -30}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[3].walls[3] = (t_wall){(t_coord){40, -20}, (t_coord){20, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL};
 	game->map->sectors[3].walls[3].is_portal = TRUE;
-	game->map->sectors[3].walls[3].is_window = FALSE;
+	game->map->sectors[3].walls[3].is_window = TRUE;
 	game->map->sectors[3].walls[3].window = &game->map->sectors[0];
 	game->map->sectors[3].has_ceiling = TRUE;
 	game->map->sectors[3].object_count = 0;
 	game->map->sectors[3].objects = NULL;
 	game->map->sectors[3].floor_tex = TEXTURE_ROCKS;
 	game->map->sectors[3].ceil_tex = TEXTURE_QUARTZ;
-	game->map->sectors[3].has_sloop = TRUE;
+	// game->map->sectors[3].has_sloop = TRUE;
 	game->map->sectors[3].swall = &game->map->sectors[3].walls[0];
 	game->map->sectors[3].angle = 25;
 

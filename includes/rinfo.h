@@ -162,7 +162,7 @@ typedef struct	s_hitem
 	t_coord		y;
 	t_coord		st;
 	int			hoffset;
-	t_point		pre_bound;
+	t_point		pre_bounds;
 	float		tang;
 }				t_hitem;
 

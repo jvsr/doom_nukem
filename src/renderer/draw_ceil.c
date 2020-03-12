@@ -71,8 +71,8 @@ static float	init_height(t_rinfo *rin, t_hinfo *info)
 static void		set_cybounds(t_point *c_ybounds,
 									t_hitem *hit, t_point *ybnds, t_rinfo *rin)
 {
-	c_ybounds->x = ft_constrain(ybnds->y, hit->bounds.y, hit->pre_bound.y);
-	c_ybounds->y = ft_constrain(rin->dst->h, c_ybounds->x, hit->pre_bound.y);
+	c_ybounds->x = ft_min(ybnds->y, hit->pre_bounds.y);
+	c_ybounds->y = ft_constrain(rin->dst->h, c_ybounds->x, hit->pre_bounds.y);
 }
 
 void			draw_ceil(t_rinfo *rin, t_hinfo *info)
