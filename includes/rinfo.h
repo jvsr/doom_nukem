@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/10 15:09:37 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/17 12:20:20 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ struct			s_sector
 	void		(*f_enter)(t_game *game, t_sector *cur_sector);
 	void		(*f_exit)(t_game *game, t_sector *cur_sector);
 	float		light_value;
-	t_bool		has_sloop;
+	t_bool		has_slope;
 	float		angle;
 	t_wall		*swall;
 };

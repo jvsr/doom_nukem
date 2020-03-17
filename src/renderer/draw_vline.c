@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/10 17:18:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/17 12:21:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ static t_hinfo	*find_hinfo(t_list *lst, t_sector *sec)
 	return (NULL);
 }
 
-static int		get_sloop_bottom(t_hitem *item, t_wall *sw, float ang, t_rinfo *rin)
-{
-	t_coord	v0;
-	t_coord	v1;
-	t_coord v2;
-	float	tmp;
-
-	get_vector_from_points(&sw->corner_0, &item->hit.pos, &v0);
-	get_vector_from_points(&sw->corner_0, &sw->corner_1, &v1);
-	tmp = dot_vectors(&v0, &v1) / dot_vectors(&v1, &v1);
-	v2 = (t_coord){sw->corner_0.x + (v1.x * tmp),
-				sw->corner_0.y + (v1.y * tmp)};
-	tmp = get_distance(&v2, &item->hit.pos);
-	item->tang = tan(PI_R * ang);
-	return ((((item->tang * tmp) + item->hit.sect->floor) / item->st.x) * rin->dst->h);
-}
-
 static void		draw_portal(t_rinfo *rinfo,
 								t_hitem *item, size_t index, t_point **bounds)
 {
@@ -58,13 +41,9 @@ static void		draw_portal(t_rinfo *rinfo,
 
 	nybnds = (find_hinfo(rinfo->ren, item->hit.sect))->hits[index -
 				rinfo->begin].bounds;
-	if (item->hit.wall->window->has_sloop)
-	{
-		int i  = nybnds.x;
-		nybnds.x -= get_sloop_bottom(item, item->hit.wall->window->swall,
+	if (item->hit.wall->window->has_slope)
+		nybnds.x -= get_slope(item, item->hit.wall->window->swall,
 			item->hit.wall->window->angle, rinfo);
-		printf("%i : %i\n", i, nybnds.x);
-	}
 	if (nybnds.x > 0)
 		draw_wall(rinfo, (t_point*[2]){*bounds, &(t_point){bounds[1]->x,
 			nybnds.x}}, index, &item->hit);
@@ -87,9 +66,13 @@ void			draw_vline(t_rinfo *rinfo,
 				(rinfo->dst->h) - rinfo->game->player->screen_updown;
 	item->ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) /
 		item->st.x) * (rinfo->dst->h)) - rinfo->game->player->screen_updown;
-	if (item->hit.sect->has_sloop == TRUE && item->hit.wall != item->hit.sect->swall)
-		item->ybnds.x -= get_sloop_bottom(item, item->hit.sect->swall,
+	if (item->hit.sect->has_slope == TRUE && item->hit.wall !=
+		item->hit.sect->swall)
+	{
+		item->ybnds.x -= get_slope(item, item->hit.sect->swall,
 			item->hit.sect->angle, rinfo);
+		item->ybnds.x += (item->hit.sect->floor / item->st.x) * rinfo->dst->h;	
+	}
 	if (item->ybnds.y < rinfo->dst->h && !item->hit.sect->has_ceiling)
 		draw_skybox(index, rinfo->dst, rinfo->game,
 			(t_point[2]){(t_point){item->ybnds.y, rinfo->dst->h}, *bounds});
