@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/17 12:21:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/18 17:50:12 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ static void		draw_portal(t_rinfo *rinfo,
 
 	nybnds = (find_hinfo(rinfo->ren, item->hit.sect))->hits[index -
 				rinfo->begin].bounds;
-	if (item->hit.wall->window->has_slope)
-		nybnds.x -= get_slope(item, item->hit.wall->window->swall,
-			item->hit.wall->window->angle, rinfo);
 	if (nybnds.x > 0)
 		draw_wall(rinfo, (t_point*[2]){*bounds, &(t_point){bounds[1]->x,
 			nybnds.x}}, index, &item->hit);

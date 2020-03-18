@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/03/06 12:55:15 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/18 17:49:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 		if (hit_meth(hit, rinfo, angle, &tmp))
 			continue;
 		tmp = get_bounds(rinfo->game->player, rinfo->dst, hit, tanvfov2);
+		if (hit->hit.wall->window && hit->hit.wall->window->has_slope)
+			tmp.x -= get_slope(hit, hit->hit.wall->window->swall,
+				hit->hit.wall->window->angle, rinfo);
 		hit->bounds = tmp;
 		hit->pre_bounds = prv;
 		prv = tmp;

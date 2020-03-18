@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/06 12:41:22 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/18 17:54:49 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ void			draw_floor(t_rinfo *rin, t_hinfo *info)
 	while (i.y < info->floor_range.y)
 	{
 		i.x = 0;
-		disintens.x = (tan(anstep.x * PI_R) * height) * 0.25;
+		if (info->sec->has_slope)
+			disintens.x = ((tan(anstep.x * PI_R) * height) / cos(info->sec->angle * PI_R)) * 0.25;
+		else
+			disintens.x = (tan(anstep.x * PI_R) * height) * 0.25;
 		disintens.y = ((MAX_LIGHT_DIST - clamp_float(disintens.x, 0,
 					MAX_LIGHT_DIST)) / MAX_LIGHT_DIST);
 		while (i.x < (int)info->size)
