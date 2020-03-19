@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:44:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/19 14:01:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ t_bool			fly_up(t_game *game, t_player *player, t_bool *jump);
 t_bool			fly_down(t_game *game, t_player *player, t_bool *jump);
 void			damage_player(t_game *game, t_player *player, t_uint32 damage);
 void			player_died(t_game *game);
+float			player_slope(t_player *pyr, t_sector *sec);
 
 #endif

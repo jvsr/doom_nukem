@@ -31,4 +31,5 @@ SRCS = \
 	player_col \
 	damage_player \
 	player_died \
+	player_slope \
 	$(COL_SRCS)

@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:47:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/19 22:01:44 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/19 14:07:22 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ t_bool			player_move(t_game *game)
 			(float)game->lastframe / BASE_FRAME_TIME, INFINITY);
 	if (draw == TRUE)
 		player_col(game, move.x, move.y);
+	if (game->map->sectors[game->player->cur_sector].has_slope)
+		game->player->height = player_slope(game->player,
+			&game->map->sectors[game->player->cur_sector]);
 	return (draw);
 }
