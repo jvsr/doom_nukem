@@ -15,6 +15,7 @@
 
 # include <SDL2/SDL_surface.h>
 
+# include "rinfo.h"
 # include "coord.h"
 # include "shape.h"
 # include "types.h"
@@ -53,21 +54,7 @@ typedef struct	s_editor_wall
 	t_coord				corner_1;
 	t_bool				is_portal;
 	t_bool				is_window;
-	t_anim				left_texture;
-	t_editor_sector		*left_sector;
-	t_anim				right_texture;
-	t_editor_sector		*right_sector;
-	t_anim				win_tex;
-	t_coord				perc;
-	t_list				*decals;
-}				t_editor_wall;
-
-typedef struct	s_editor_wall
-{
-	t_coord				corner_0;
-	t_coord				corner_1;
-	t_bool				is_portal;
-	t_bool				is_window;
+	t_bool				is_door;
 	t_anim				left_texture;
 	t_editor_sector		*left_sector;
 	t_anim				right_texture;

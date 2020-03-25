@@ -18,7 +18,7 @@
 
 static void	free_wall(void *wall, size_t size)
 {
-	t_wall *w;
+	t_editor_wall *w;
 
 	(void)size;
 	w = wall;

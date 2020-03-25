@@ -16,12 +16,12 @@
 #include "rinfo.h"
 #include "map_editor.h"
 
-t_wall		*map_editor_new_wall(t_editor_map *editor_map, t_coord corner_0,
+t_editor_wall		*map_editor_new_wall(t_editor_map *editor_map, t_coord corner_0,
 				t_coord corner_1)
 {
-	t_wall	*new;
+	t_editor_wall	*new;
 
-	new = (t_wall*)ft_memalloc(sizeof(t_wall));
+	new = (t_editor_wall*)ft_memalloc(sizeof(t_editor_wall));
 	if (new == NULL)
 		error_msg_errno("Failed to alloc new map editor wall");
 	new->corner_0 = corner_0;
