@@ -24,7 +24,7 @@
 #include "keymap.h"
 #include "map_editor.h"
 
-static void	manage_last_click(t_game *game, SDL_Event event,
+static void	manage_last_click(t_game *game, SDL_MouseButtonEvent button,
 						t_map_editor *map_editor_gui_elem, t_bool *first_place)
 {
 	t_editor_wall	*wall;
@@ -41,23 +41,23 @@ static void	manage_last_click(t_game *game, SDL_Event event,
 	}
 	else if (*first_place == TRUE)
 	{
-		map_editor_gui_elem->last_click.x = event.button.x;
-		map_editor_gui_elem->last_click.y = event.button.y;
+		map_editor_gui_elem->last_click.x = button.x;
+		map_editor_gui_elem->last_click.y = button.y;
 	}
 }
 
-static void	add_line(t_game *game, SDL_Event event,
+static void	add_line(t_game *game, SDL_MouseButtonEvent button,
 						t_transform *map_editor_elem)
 {
 	SDL_Point			current;
 	t_map_editor		*map_editor_gui_elem;
 	static	t_bool		first_place = TRUE;
 
-	current.x = event.button.x;
-	current.y = event.button.y;
+	current.x = button.x;
+	current.y = button.y;
 	map_editor_gui_elem = map_editor_elem->gui_elem.map_editor;
 	map_editor_snap_to_grid(map_editor_elem, &current);
-	manage_last_click(game, event, map_editor_gui_elem, &first_place);
+	manage_last_click(game, button, map_editor_gui_elem, &first_place);
 	if (first_place == FALSE && ft_memequ(&map_editor_gui_elem->last_click,
 		&current, sizeof(SDL_Point)) == FALSE)
 	{
@@ -71,28 +71,40 @@ static void	add_line(t_game *game, SDL_Event event,
 	map_editor_gui_elem->show_last_click = !first_place;
 }
 
-static void	delete_line(t_game *game, SDL_Event event, t_transform *map_editor_elem)
+static void	delete_line(t_game *game, SDL_MouseButtonEvent button,
+				t_transform *map_editor_elem)
 {
-	t_list			*lst;
 	t_editor_wall	*wall;
-	t_editor_wall	*found;
-	t_coord			mouse_pos;
 
-	found = NULL;
-	mouse_pos.x = event.button.x + map_editor_elem->gui_elem.map_editor->pos.x;
-	mouse_pos.y = event.button.y + map_editor_elem->gui_elem.map_editor->pos.y;
-	lst = game->editor_map->walls;
-	while (lst != NULL)
-	{
-		wall = (t_editor_wall*)lst->content;
-		if (circle_collision(&(t_bicoord){wall->corner_0, wall->corner_1},
-			&mouse_pos, EDITOR_MOUSE_COLISION_SIZE))
-			found = wall;
-		lst = lst->next;
-	}
-	if (found == NULL)
+	wall = map_editor_check_hit(map_editor_elem, game->editor_map,
+		(SDL_Point){button.x, button.y});
+	if (wall == NULL)
 		return ;
-	map_editor_del_wall(game->editor_map, found);
+	map_editor_del_wall(game->editor_map, wall);
+	set_elem_redraw(map_editor_elem);
+}
+
+static void	toggle_wall(t_game *game, SDL_MouseButtonEvent button,
+				t_transform *map_editor_elem)
+{
+	t_editor_wall	*wall;
+
+	wall = map_editor_check_hit(map_editor_elem, game->editor_map,
+		(SDL_Point){button.x, button.y});
+	if (wall == NULL)
+		return ;
+	if (wall->is_door == TRUE)
+		wall->is_door = FALSE;
+	else if (wall->is_portal == FALSE)
+		wall->is_portal = TRUE;
+	else if (wall->is_window == FALSE)
+		wall->is_window = TRUE;
+	else if (wall->is_door == FALSE)
+	{
+		wall->is_door = TRUE;
+		wall->is_portal = FALSE;
+		wall->is_window = FALSE;
+	}
 	set_elem_redraw(map_editor_elem);
 }
 
@@ -102,14 +114,19 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 	t_transform			*map_editor_elem;
 
 	map_editor_elem = get_gui_child(game->ui, "mapeditorview");
+	if (event.button.x < 0 || event.button.x > map_editor_elem->abs_dim.x ||
+		event.button.y < 0 || event.button.y > map_editor_elem->abs_dim.y)
+		return ;
 	if (event.type == SDL_MOUSEMOTION)
 		set_elem_redraw(map_editor_elem);
 	if (event.type == SDL_MOUSEBUTTONDOWN && first == FALSE)
 	{
 		if (event.button.button == SDL_BUTTON_LEFT)
-			add_line(game, event, map_editor_elem);
+			add_line(game, event.button, map_editor_elem);
 		else if (event.button.button == SDL_BUTTON_RIGHT)
-			delete_line(game, event, map_editor_elem);
+			delete_line(game, event.button, map_editor_elem);
+		else if (event.button.button == SDL_BUTTON_MIDDLE)
+			toggle_wall(game, event.button, map_editor_elem);
 	}
 	else
 		first = FALSE;

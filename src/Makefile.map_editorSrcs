@@ -25,3 +25,4 @@ SRCS = \
 	snap_to_grid \
 	del_wall \
 	wall_is_bigger \
+	check_hit \

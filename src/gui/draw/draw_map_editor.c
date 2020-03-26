@@ -12,6 +12,7 @@
 
 #include "libft/ft_mem.h"
 #include "libft/ft_list.h"
+#include "libft/ft_num.h"
 
 #include "map_editor.h"
 #include "rinfo.h"
@@ -20,28 +21,37 @@
 #include "game.h"
 #include "gui.h"
 
+static void	get_wall_color(SDL_Color *result, t_editor_wall *wall)
+{
+	if (wall->is_door == TRUE)
+		hex_to_color(result, EDITOR_DOOR_COLOR);
+	else if (wall->is_window == TRUE)
+		hex_to_color(result, EDITOR_WINDOW_COLOR);
+	else if (wall->is_portal == TRUE)
+		hex_to_color(result, EDITOR_PORTAL_COLOR);
+	else
+		hex_to_color(result, EDITOR_WALL_COLOR);
+}
+
 static void	draw_wall(SDL_Surface *dst, t_list *lst, SDL_Point pos)
 {
-	t_wall		*wall;
-	t_line		line;
-	SDL_Color	portal_color;
-	SDL_Color	wall_color;
+	t_editor_wall	*wall;
+	t_line			line;
+	SDL_Color		color;
+	SDL_Color		default_color;
 
-	hex_to_color(&wall_color, EDITOR_WALL_COLOR);
-	hex_to_color(&portal_color, EDITOR_PORTAL_COLOR);
+	hex_to_color(&default_color, EDITOR_WALL_COLOR);
 	while (lst != NULL)
 	{
-		wall = (t_wall*)lst->content;
+		wall = (t_editor_wall*)lst->content;
 		line.start.x = wall->corner_0.x - pos.x;
 		line.start.y = wall->corner_0.y - pos.y;
 		line.end.x = wall->corner_1.x - pos.x;
 		line.end.y = wall->corner_1.y - pos.y;
-		if (wall->is_portal)
-			sdl_draw_surface_line(dst, portal_color, line);
-		else
-			sdl_draw_surface_line(dst, wall_color, line);
-		sdl_draw_surface_circ(dst, wall_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.end});
-		sdl_draw_surface_circ(dst, wall_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.start});
+		get_wall_color(&color, wall);
+		sdl_draw_surface_line(dst, color, line);
+		sdl_draw_surface_circ(dst, default_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.end});
+		sdl_draw_surface_circ(dst, default_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.start});
 		lst = lst->next;
 	}
 }
@@ -82,6 +92,8 @@ void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 	draw_wall(dst, game->editor_map->walls, pos);
 
 	SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
+	mouse_pos.x = ft_constrain(mouse_pos.x, 0, elem->abs_dim.x);
+	mouse_pos.y = ft_constrain(mouse_pos.y, 0, elem->abs_dim.y);
 	map_editor_snap_to_grid(elem, &mouse_pos);
 	mouse_pos.x -= pos.x;
 	mouse_pos.y -= pos.y;

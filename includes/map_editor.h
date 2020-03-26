@@ -20,13 +20,15 @@
 # include "shape.h"
 # include "types.h"
 
-# define EDITOR_MOUSE_COLISION_SIZE	3
+# define EDITOR_MOUSE_COLISION_SIZE	5
 # define EDITOR_PREVIEW_CIRCLE_SIZE	6
 # define EDITOR_WALL_CORNER_SIZE	6
 # define EDITOR_PREVIEW_PLACE_COLOR	"11AAAA"
 # define EDITOR_BACKGROUND_COLOR 	"333333"
-# define EDITOR_WALL_COLOR		 	"FFFFFF"
+# define EDITOR_DOOR_COLOR			"3F923F"
+# define EDITOR_WINDOW_COLOR		"1982D2"
 # define EDITOR_PORTAL_COLOR		"FF6666"
+# define EDITOR_WALL_COLOR		 	"FFFFFF"
 # define EDITOR_GRID_COLOR			"555555"
 # define EDITOR_GRID_STEP			20
 # define EDITOR_MOVE_SPEED			5
@@ -102,5 +104,7 @@ void			map_editor_del_wall(t_editor_map *editor_map,
 t_bool			map_editor_hit_wall(t_editor_wall *wall, SDL_Point mouse);
 t_bool			map_editor_wall_is_bigger(t_editor_wall *wall,
 					t_editor_wall *other);
+t_editor_wall	*map_editor_check_hit(t_transform *map_editor_elem,
+					t_editor_map *editor_map, SDL_Point mouse_pos);
 
 #endif

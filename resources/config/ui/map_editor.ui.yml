@@ -1,2 +1,6 @@
 - panel: mapeditor
   - map_editor: mapeditorview
+    - dim: 0.8, 1.0
+  - panel: mapeditortoolbar
+    - pos: 0.8, 0.0
+    - dim: 0.2, 1.0
