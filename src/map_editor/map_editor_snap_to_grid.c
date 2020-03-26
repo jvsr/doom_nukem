@@ -29,7 +29,7 @@ static int	calc_offset(int axis)
 }
 
 void		map_editor_snap_to_grid(t_transform *map_editor_elem,
-										SDL_Point *point)
+				SDL_Point *point)
 {
 	point->x += map_editor_elem->gui_elem.map_editor->pos.x;
 	point->y += map_editor_elem->gui_elem.map_editor->pos.y;

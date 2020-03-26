@@ -24,3 +24,4 @@ SRCS = \
 	remove_last_wall \
 	snap_to_grid \
 	del_wall \
+	wall_is_bigger \

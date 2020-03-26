@@ -14,7 +14,6 @@
 #include "libft/ft_list.h"
 
 #include "game.h"
-#include "rinfo.h"
 #include "map_editor.h"
 
 static t_bool	on_point(t_editor_wall *wall, t_editor_wall *other)

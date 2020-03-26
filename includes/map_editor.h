@@ -100,5 +100,7 @@ void			map_editor_remove_last_wall(t_editor_map *editor_map);
 void			map_editor_del_wall(t_editor_map *editor_map,
 					t_editor_wall *wall);
 t_bool			map_editor_hit_wall(t_editor_wall *wall, SDL_Point mouse);
+t_bool			map_editor_wall_is_bigger(t_editor_wall *wall,
+					t_editor_wall *other);
 
 #endif

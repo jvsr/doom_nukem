@@ -13,11 +13,10 @@
 #include "libft/ft_mem.h"
 
 #include "error.h"
-#include "rinfo.h"
 #include "map_editor.h"
 
-t_editor_wall		*map_editor_new_wall(t_editor_map *editor_map, t_coord corner_0,
-				t_coord corner_1)
+t_editor_wall		*map_editor_new_wall(t_editor_map *editor_map,
+						t_coord corner_0, t_coord corner_1)
 {
 	t_editor_wall	*new;
 

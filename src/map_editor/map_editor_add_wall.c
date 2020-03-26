@@ -14,7 +14,6 @@
 #include "libft/ft_mem.h"
 
 #include "cmath.h"
-#include "rinfo.h"
 #include "error.h"
 #include "map_editor.h"
 
@@ -64,18 +63,6 @@ static t_bool	check_collision_valid(t_editor_wall *wall, t_editor_wall *other,
 	return (TRUE);
 }
 
-static t_bool	wall_is_bigger(t_editor_wall *wall, t_editor_wall *other)
-{
-	t_coord	other_vec;
-	t_coord	wall_vec;
-
-	get_vector_from_points(&other->corner_0, &other->corner_1, &other_vec);
-	get_vector_from_points(&wall->corner_0, &wall->corner_1, &wall_vec);
-	if (get_vector_magnitude(&wall_vec) > get_vector_magnitude(&other_vec))
-		return (TRUE);
-	return (FALSE);
-}
-
 static t_bool	check_coincident_valid(t_editor_wall *wall, t_editor_wall *other)
 {
 	float		wall_angle;
@@ -83,7 +70,7 @@ static t_bool	check_coincident_valid(t_editor_wall *wall, t_editor_wall *other)
 	t_bicoord	other_line;
 	t_coord		d;
 
-	if (wall_is_bigger(wall, other) == TRUE)
+	if (map_editor_wall_is_bigger(wall, other) == TRUE)
 		return (check_coincident_valid(other, wall));
 	wall_angle = get_angle_between_points(&wall->corner_0, &wall->corner_1);
 	other_angle = get_angle_between_points(&other->corner_0, &other->corner_1);
@@ -105,8 +92,8 @@ static t_bool	check_coincident_valid(t_editor_wall *wall, t_editor_wall *other)
 static void		add_to_back(t_editor_map *editor_map, t_list *new)
 {
 	t_editor_wall	*new_wall;
-	t_list	*lst;
-	t_bool	valid;
+	t_list			*lst;
+	t_bool			valid;
 	t_editor_wall	*intersect_walls[2];
 
 	valid = TRUE;

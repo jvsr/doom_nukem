@@ -14,7 +14,6 @@
 #include "libft/ft_mem.h"
 
 #include "map_editor.h"
-#include "rinfo.h"
 
 static void	free_wall(void *wall, size_t size)
 {
