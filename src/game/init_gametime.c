@@ -6,12 +6,11 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/24 13:28:26 by euan           #+#    #+#                */
-/*   Updated: 2019/09/24 13:28:26 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:10:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-
 #include "gametime.h"
 #include "error.h"
 

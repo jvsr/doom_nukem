@@ -33,4 +33,5 @@ SRCS = \
 	player_died \
 	wall_col \
 	object_col \
+	player_slope \
 	$(COL_SRCS)

@@ -6,12 +6,14 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:36:58 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/04 12:15:34 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:07:36 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COORD_H
 # define COORD_H
+
+# include <stddef.h>
 
 typedef struct	s_coord
 {

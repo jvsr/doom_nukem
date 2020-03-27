@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/04 12:19:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:09:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define MAX_LIGHT_DIST 150.0
 # define LEVEL_MULTIPLIER 4.0
+# define LEVEL_MULTIPLIER_P2 16.0
 # define MAX_OBJ_SECTORS 32
 # define ANIMATIONS 4
 # define MAX_ANIMATION_TIME 2000
@@ -97,10 +98,15 @@ struct			s_sector
 	t_uint64	object_count;
 	float		floor;
 	float		ceil;
+	t_texture	floor_tex;
+	t_texture	ceil_tex;
 	t_bool		has_ceiling;
 	void		(*f_enter)(t_game *game, t_sector *cur_sector);
 	void		(*f_exit)(t_game *game, t_sector *cur_sector);
 	float		light_value;
+	t_bool		has_slope;
+	float		angle;
+	t_wall		*swall;
 };
 
 typedef struct	s_map
@@ -125,6 +131,7 @@ typedef struct	s_hit
 	t_coord		pos;
 	t_wall		*wall;
 	t_sector	*sect;
+	float		angle;
 }				t_hit;
 
 typedef struct	s_objrend
@@ -150,10 +157,14 @@ typedef struct	s_zbuf
 
 typedef struct	s_hitem
 {
-	SDL_Point	bounds;
+	t_point		bounds;
+	t_point		ybnds;
 	t_hit		hit;
 	t_coord		y;
 	t_coord		st;
+	int			hoffset;
+	t_point		pre_bounds;
+	float		tang;
 }				t_hitem;
 
 struct			s_hinfo
@@ -164,6 +175,8 @@ struct			s_hinfo
 	size_t		start;
 	size_t		end;
 	t_hinfo		*prev;
+	t_point		floor_range;
+	t_point		ceil_range;
 };
 
 typedef struct	s_rinfo
@@ -177,6 +190,7 @@ typedef struct	s_rinfo
 	size_t		begin;
 	size_t		start;
 	size_t		end;
+	int			*pixels;
 }				t_rinfo;
 
 typedef struct	s_winfo

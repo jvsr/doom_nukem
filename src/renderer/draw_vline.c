@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/04 15:05:20 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:11:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,27 @@ static void		draw_portal(t_rinfo *rinfo,
 void			draw_vline(t_rinfo *rinfo,
 								t_hitem *item, size_t index, SDL_Point *bounds)
 {
-	SDL_Point	ybnds;
-
 	if (item == NULL || item->hit.sect == NULL)
 		return ;
-	ybnds.x = ((item->hit.sect->floor - item->y.x) / item->st.x) *
+	item->ybnds.x = ((item->hit.sect->floor - item->y.x) / item->st.x) *
 				(rinfo->dst->h) - rinfo->game->player->screen_updown;
-	ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) / item->st.x)
-				* (rinfo->dst->h)) - rinfo->game->player->screen_updown;
-	if (ybnds.y < rinfo->dst->h && item->hit.sect->has_ceiling)
-		draw_cline(rinfo->dst,
-			(SDL_Point*[2]){&(SDL_Point){ybnds.y, rinfo->dst->h},
-			bounds}, index, CEILING_COLOR);
-	else if (ybnds.y < rinfo->dst->h)
+	item->ybnds.y = rinfo->dst->h - (((item->y.y - item->hit.sect->ceil) /
+		item->st.x) * (rinfo->dst->h)) - rinfo->game->player->screen_updown;
+	if (item->hit.sect->has_slope == TRUE && item->hit.wall !=
+		item->hit.sect->swall)
+	{
+		item->ybnds.x -= get_slope(item, item->hit.sect->swall,
+			item->hit.sect->angle, rinfo);
+		item->ybnds.x += (item->hit.sect->floor / item->st.x) * rinfo->dst->h;	
+	}
+	if (item->ybnds.y < rinfo->dst->h && !item->hit.sect->has_ceiling)
 		draw_skybox(index, rinfo->dst, rinfo->game,
-			(SDL_Point[2]){(SDL_Point){ybnds.y, rinfo->dst->h}, *bounds});
-	if (ybnds.x > 0)
-		draw_cline(rinfo->dst,
-			(SDL_Point*[2]){&(SDL_Point){0, ybnds.x}, bounds},
-			index, FLOOR_COLOR);
+			(t_point[2]){(t_point){item->ybnds.y, rinfo->dst->h}, *bounds});
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
-		draw_wall(rinfo, (SDL_Point*[2]){bounds, &ybnds}, index, &item->hit);
+		draw_wall(rinfo,
+						(t_point*[2]){bounds, &item->ybnds}, index, &item->hit);
 	else if (item->hit.sect->ceil > item->y.x &&
 				item->hit.sect->floor < item->y.y)
-		draw_portal(rinfo, item, index, (SDL_Point*[2]){bounds, &ybnds});
+		draw_portal(rinfo, item, index, (t_point*[2]){bounds, &item->ybnds});
 }

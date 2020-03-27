@@ -16,9 +16,9 @@
 
 void	init_player(t_game *game)
 {
-	game->player->pos.x = 0;
-	game->player->pos.y = 0;
-	game->player->cur_sector = 0;
+	game->player->pos.x = 30;
+	game->player->pos.y = -25;
+	game->player->cur_sector = 3;
 	game->player->height = PLAYER_HEIGHT;
 	game->player->mag = (t_mag){cosf(0), sinf(0)};
 	game->player->health = PLAYER_MAX_HEALTH;
