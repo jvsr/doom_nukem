@@ -13,8 +13,6 @@
 #ifndef COORD_H
 # define COORD_H
 
-# include <stddef.h>
-
 typedef struct	s_coord
 {
 	double		x;
