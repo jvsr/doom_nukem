@@ -22,4 +22,4 @@ FT_SRCS =
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = chair_init single_init enemy_init load_textures get_texture \
 		tex_from_anim get_r_object_index get_s_object_index get_enemy_index \
-		get_object_angle_on_screen
+		get_object_angle_on_screen get_tex_for_obj

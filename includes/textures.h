@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 12:10:27 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:08:50 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 16:54:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TEXTURES_H
 
 # include "rinfo.h"
+# include "types.h"
 
 SDL_Surface		*get_texture(t_game *game, t_texture texture);
 void			load_textures(t_game *game);
@@ -26,5 +27,6 @@ void			get_r_object_index(t_game *game, void *anim);
 void			get_enemy_index(t_game *game, void *anim);
 float			get_object_angle_on_screen(t_object *object,
 					t_player *player, t_coord *range);
+t_texture		get_tex_for_obj(t_obj obj);
 
 #endif
