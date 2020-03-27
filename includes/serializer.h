@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/20 18:30:27 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 16:35:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 # include <stdlib.h>
 # include "libft/ft_bool.h"
 # include "types.h"
+# include "coord.h"
 
 # define RESOURCE_PATH "resources/data/"
 
 typedef enum e_endian			t_endian;
 typedef struct s_list			t_list;
 typedef struct s_setting		t_setting;
+typedef struct s_anim			t_anim;
+typedef struct s_object			t_object;
 
 typedef union	u_convert
 {
@@ -68,19 +71,22 @@ void			add_float(float f, t_binary *bin);
 void			add_double(double d, t_binary *bin);
 void			add_string(char *string, t_binary *bin);
 void			add_list_gen(t_list *lst, t_binary *bin);
+void			add_anim(t_anim *anim, t_binary *bin);
+void			add_coord(t_coord *coord, t_binary *bin);
 unsigned char	read_char(t_binary_read *bin_r);
 short			read_short(t_binary_read *bin_r);
 int				read_int(t_binary_read *bin_r);
 long			read_long(t_binary_read *bin_r);
 float			read_float(t_binary_read *bin_r);
 double			read_double(t_binary_read *bin_r);
+t_coord			read_coord(t_binary_read *bin_r);
+t_anim			read_anim(t_binary_read *bin_r, t_object *obj);
 char			*read_string(t_binary_read *bin_r);
 t_list			*read_list_gen(t_binary_read *bin_r, t_uint64 d_size);
 void			finish_bin(t_binary *bin);
 t_endian		detect_endian(void);
 long			read_header(t_binary_read *bin_r);
 void			swap_bytes(void *v_bytes, t_uint64 size);
-
 t_setting		*read_settings(char const *exec_path);
 void			write_settings(t_setting *settings, char const *exec_path);
 
