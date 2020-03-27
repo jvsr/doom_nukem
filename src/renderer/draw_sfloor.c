@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 12:50:26 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 12:59:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ static float	get_height(t_rinfo *rin, t_hinfo *info, t_wall *sw)
 	get_vector_from_points(&sw->corner_0, &info->hits->hit.pos, &v0);
 	get_vector_from_points(&sw->corner_0, &sw->corner_1, &v1);
 	tmp = dot_vectors(&v0, &v1);
-	v2 = (t_coord){sw->corner_0.x + (v1.x * tmp),
-				sw->corner_0.y + (v1.y * tmp)};
+	tang = get_distance(&sw->corner_0, &sw->corner_1);
+	v2 = (t_coord){sw->corner_0.x + (v1.x * tmp * tang),
+				sw->corner_0.y + (v1.y * tmp * tang)};
 	tmp = get_distance(&v2, &info->hits->hit.pos);
 	tang = tan(PI_R * info->sec->angle);
 	return ((tang * tmp) + rin->game->player->player_height + rin->game->player->heightoffset -
