@@ -83,6 +83,10 @@ void	controls_set_crouch(t_game *game, t_transform *gui);
 void	controls_set_jump(t_game *game, t_transform *gui);
 void	controls_return(t_game *game, t_transform *gui);
 
+void	map_editor_object_next(t_game *game, t_transform *gui);
+void	map_editor_object_prv(t_game *game, t_transform *gui);
+void	map_editor_object_select(t_game *game, t_transform *gui);
+
 void	restart_game(t_game *game, t_transform *gui);
 
 void	set_sensitivity(t_setting *setting, t_transform *parent);

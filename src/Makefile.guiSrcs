@@ -39,7 +39,9 @@ ONCLICK_SRCS = mainmenu \
 				key_2 \
 				editor_select \
 				go_to_game \
-				hud_died
+				hud_died \
+				map_editor \
+
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \

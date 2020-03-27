@@ -19,6 +19,7 @@
 
 # include "libft/ft_bool.h"
 
+# include "types.h"
 # include "coord.h"
 
 # define FONT_PATH "resources/fonts/"
@@ -155,6 +156,7 @@ struct			s_map_editor
 	SDL_Point		pos;
 	SDL_Point		last_click;
 	t_bool			show_last_click;
+	t_obj			selected_object;
 	t_editor_sector	*focus_sector;
 };
 

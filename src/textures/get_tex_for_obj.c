@@ -25,5 +25,7 @@ static int const	g_texobjs[] = {
 
 t_texture	get_tex_for_obj(t_obj obj)
 {
-	return (g_texobjs[obj]);	
+	if (obj == O_INVALID)
+		return (TEXTURE_INVALID);
+	return (g_texobjs[obj]);
 }

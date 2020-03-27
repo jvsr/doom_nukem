@@ -24,6 +24,7 @@ t_map_editor		*new_map_editor(void)
 
 	map_editor = (t_map_editor *)ft_memalloc(sizeof(t_map_editor));
 	if (map_editor == NULL)
-		error_msg_errno("Failed to alloc map_edito ");
+		error_msg_errno("Failed to alloc map_editor");
+	map_editor->selected_object = -1;
 	return (map_editor);
 }

@@ -70,6 +70,10 @@ static t_tablepair const	g_onclicks[] = {
 	{"controls_set_jump", controls_set_jump},
 	{"controls_return", controls_return},
 
+	{"map_editor_object_next", map_editor_object_next},
+	{"map_editor_object_prv", map_editor_object_prv},
+	{"map_editor_object_select", map_editor_object_select},
+
 	{"restart_game", restart_game},
 	{"go_to_game", go_to_game}
 };

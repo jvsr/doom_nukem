@@ -16,6 +16,7 @@
 
 #include "map_editor.h"
 #include "rinfo.h"
+#include "textures.h"
 #include "sdl_extra.h"
 #include "color.h"
 #include "game.h"
@@ -97,7 +98,15 @@ void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 	map_editor_snap_to_grid(elem, &mouse_pos);
 	mouse_pos.x -= pos.x;
 	mouse_pos.y -= pos.y;
-	sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
+	if (elem->gui_elem.map_editor->selected_object != O_INVALID)
+	{
+		SDL_Surface	*text = get_texture(game, get_tex_for_obj(elem->gui_elem.map_editor->selected_object));
+
+		sdl_merge_surface_alpha(dst, text,
+			(SDL_Point){mouse_pos.x - (text->w / 2), mouse_pos.y - (text->h / 2)});
+	}
+	else
+		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
 	if (elem->gui_elem.map_editor->show_last_click)
 	{
 		mouse_pos = elem->gui_elem.map_editor->last_click;
