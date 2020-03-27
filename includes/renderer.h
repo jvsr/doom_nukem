@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:02:58 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 15:08:39 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,10 @@ void			draw_skybox(size_t x,
 t_objrend		*new_rendobj(t_object *obj,
 						t_sector *sec, float *flts, int x);
 t_bool			sort_objs(const t_list *a, const t_list *b);
-float			get_object_angle_on_screen(t_object *object,
-						t_player *player, t_coord *range);
 SDL_Point		set_ybounds(t_objrend *obj,
 						t_game *game, t_ybinfo info);
-void			get_s_object_index(t_game *game, void *anim);
-void			get_r_object_index(t_game *game, void *anim);
 t_list			**decals_on_vline(t_wall *wall, float perc_hit,
 						float len, t_list **out);
-void			get_enemy_index(t_game *game, void *anim);
 SDL_Point		get_bounds(t_player *player,
 						SDL_Surface *dst, t_hitem *hit, float tanvfov2);
 void			get_hits(t_rinfo *rinfo, float tanvfov2);
