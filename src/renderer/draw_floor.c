@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/19 16:51:35 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 12:36:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void		draw_x(t_rinfo *rin,
 	get_vector_from_points((t_coord*)&hit->pos, &rin->game->player->pos, &vec);
 	vec = (t_coord){rin->game->player->pos.x - (vec.x * fvals.x),
 					rin->game->player->pos.y - (vec.y * fvals.x)};
-	tex = (t_point){abs((int)(vec.x * pow(LEVEL_MULTIPLIER, 2))) % srf->w,
-					abs((int)(vec.y * pow(LEVEL_MULTIPLIER, 2))) % srf->h};
+	tex = (t_point){abs((int)(vec.x * LEVEL_MULTIPLIER_P2)) % srf->w,
+					abs((int)(vec.y * LEVEL_MULTIPLIER_P2)) % srf->h};
 	in = fvals.y * hit->sect->light_value;
 	rin->pixels[(ivals.x + rin->begin) + ((rin->dst->h - ivals.y - 1) *
 		rin->dst->w)] =
@@ -43,7 +43,6 @@ static void		draw_x(t_rinfo *rin,
 
 static void		init_vals(t_rinfo *rin, t_hinfo *info, t_coord *anstep)
 {
-	float	start;
 	int		size;
 	float	val;
 
@@ -53,19 +52,15 @@ static void		init_vals(t_rinfo *rin, t_hinfo *info, t_coord *anstep)
 	anstep->y = ((float)size / rin->dst->h) * rin->game->setting->vfov;
 	val = ((float)rin->game->player->screen_updown / rin->dst->h) *
 		rin->game->setting->vfov;
-	if (info->floor_range.x != 0)
-		start = ((float)info->floor_range.x / rin->dst->h) *
-			rin->game->setting->vfov;
-	else
-		start = 0;
-	anstep->x = 90 + val - rin->vfov2 + start;
+	anstep->x = 90 + val - rin->vfov2;
 	anstep->y /= (float)size;
 }
 
 static float	init_height(t_rinfo *rin, t_hinfo *info)
 {
+	(void)info;
 	return (rin->game->player->height + rin->game->player->heightoffset -
-		info->sec->floor);
+			info->sec->floor);
 }
 
 static void		set_cybounds(t_point *c_ybounds,
@@ -88,11 +83,7 @@ void			draw_floor(t_rinfo *rin, t_hinfo *info)
 	while (i.y < info->floor_range.y)
 	{
 		i.x = 0;
-		if (info->sec->has_slope)
-			disintens.x = ((tan(anstep.x * PI_R) * height) /
-				cos(info->sec->angle * PI_R)) * 0.25;
-		else
-			disintens.x = (tan(anstep.x * PI_R) * height) * 0.25;
+		disintens.x = tan(anstep.x * PI_R) * height * 0.25;
 		disintens.y = ((MAX_LIGHT_DIST - clamp_float(disintens.x, 0,
 					MAX_LIGHT_DIST)) / MAX_LIGHT_DIST);
 		while (i.x < (int)info->size)

@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/17 12:16:51 by euan           #+#    #+#                */
-/*   Updated: 2020/03/17 12:18:39 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 11:25:33 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		get_slope_1(t_hitem *item, t_wall *sw, float ang, t_rinfo *rin)
 
 	get_vector_from_points(&sw->corner_1, &item->hit.pos, &v0);
 	get_vector_from_points(&sw->corner_0, &sw->corner_1, &v1);
-	tmp = dot_vectors(&v0, &v1) / dot_vectors(&v1, &v1);
+	tmp = dot_vectors(&v0, &v1);
 	v2 = (t_coord){sw->corner_1.x + (-v1.x * tmp),
 				sw->corner_1.y + (-v1.y * tmp)};
 	tmp = get_distance(&v2, &item->hit.pos);
@@ -41,7 +41,7 @@ static int		get_slope_0(t_hitem *item, t_wall *sw, float ang, t_rinfo *rin)
 
 	get_vector_from_points(&sw->corner_0, &item->hit.pos, &v0);
 	get_vector_from_points(&sw->corner_0, &sw->corner_1, &v1);
-	tmp = dot_vectors(&v0, &v1) / dot_vectors(&v1, &v1);
+	tmp = dot_vectors(&v0, &v1);
 	v2 = (t_coord){sw->corner_0.x + (v1.x * tmp),
 				sw->corner_0.y + (v1.y * tmp)};
 	tmp = get_distance(&v2, &item->hit.pos);

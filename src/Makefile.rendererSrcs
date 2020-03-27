@@ -25,4 +25,4 @@ SRCS = render load_textures get_texture get_hit draw_skybox new_rendobj \
 		tex_from_anim get_r_object_index decals_on_vline get_enemy_index \
 		get_bounds get_hits render_hits draw_vline render_objs draw_cline \
 		draw_wall draw_glass draw_obj map_delete draw_floor draw_ceil \
-		get_slope
+		get_slope draw_sfloor

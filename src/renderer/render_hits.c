@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/03/10 11:18:11 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 11:04:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static void		del_hinfo(void *info, size_t size)
 
 static void		render_fc(t_rinfo *rin, t_hinfo *info)
 {
-	draw_floor(rin, info);
+	if (!info->sec->has_slope)
+		draw_floor(rin, info);
+	else
+		draw_sfloor(rin, info);
 	if (info->sec->has_ceiling)
 		draw_ceil(rin, info);
 }

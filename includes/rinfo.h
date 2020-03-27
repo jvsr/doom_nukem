@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/17 12:20:20 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/26 12:02:19 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define MAX_LIGHT_DIST 150.0
 # define LEVEL_MULTIPLIER 4.0
+# define LEVEL_MULTIPLIER_P2 16.0
 # define MAX_OBJ_SECTORS 32
 # define ANIMATIONS 4
 # define MAX_ANIMATION_TIME 2000

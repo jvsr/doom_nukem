@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/19 14:01:39 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/26 14:45:04 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void				draw_floor(t_rinfo *rin, t_hinfo *info);
 void				draw_ceil(t_rinfo *rin, t_hinfo *info);
 int					get_slope(t_hitem *item,
 						t_wall *sw, float ang, t_rinfo *rin);
+t_coord				get_vec_from_x(t_rinfo *rin, int x);
+void				draw_sfloor(t_rinfo *rin, t_hinfo *info);
 
 #endif
