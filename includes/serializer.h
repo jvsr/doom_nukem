@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 16:25:26 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 16:35:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 # include <stdlib.h>
 # include "libft/ft_bool.h"
 # include "types.h"
+# include "coord.h"
 
 # define RESOURCE_PATH "resources/data/"
 
 typedef enum e_endian			t_endian;
 typedef struct s_list			t_list;
 typedef struct s_setting		t_setting;
+typedef struct s_anim			t_anim;
+typedef struct s_object			t_object;
 
 typedef union	u_convert
 {

@@ -6,13 +6,14 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 15:47:36 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 16:15:26 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 16:33:37 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "serializer.h"
 #include "textures.h"
 #include "renderer.h"
+#include "rinfo.h"
 
 static t_anim	other_obj(t_objanim oa, t_object *obj, float off, t_texture s)
 {

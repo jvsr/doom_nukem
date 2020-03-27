@@ -6,13 +6,14 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 15:18:12 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 16:14:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 16:43:00 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "serializer.h"
 #include "textures.h"
 #include "renderer.h"
+#include "rinfo.h"
 
 static int		get_object(t_anim *anim)
 {
@@ -33,8 +34,6 @@ static t_bool	is_tex_or_anim(t_anim *anim)
 
 void			add_anim(t_anim *anim, t_binary *bin)
 {
-	t_convert con;
-
 	if (is_tex_or_anim(anim))
 	{
 		add_char(0, bin);
