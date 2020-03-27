@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:24:56 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 15:51:27 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,21 @@ typedef enum				e_enemystate
 
 typedef enum				e_objanim
 {
+	OA_INVALID = -1,
 	OA_CHAIR,
 	OA_ENEMY,
-	OA_SPIKE,
-	OA_HEALTH_PICKUP,
-	OA_KEY,
-	OA_Count
+	OA_COUNT
 }							t_objanim;
+
+typedef enum				e_obj
+{
+	OA_INVALID = -1,
+	O_CHAIR,
+	O_ENEMY,
+	O_HEALTH_PICKUP,
+	O_SPIKE,
+	O_KEY,
+	O_COUNT
+}							t_obj;
 
 #endif
