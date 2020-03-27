@@ -21,7 +21,7 @@
 static void	quit_controls(t_game *game)
 {
 	game->cureventstate->eventstate = options;
-	controls_return(game, get_gui_child(game->ui, "controlsreturnbutton"));
+	controls_return(game, get_gui_child(game->ui, "controlsReturnButton"));
 }
 
 void		controls_eventstate(t_game *game, SDL_Event event)

@@ -18,7 +18,7 @@
 void	set_hudsensitivity(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->sensitivity,
-		get_elem_child(parent, "curhudsensitivity"),
+		get_elem_child(parent, "curHudSensitivity"),
 		1);
 }
 

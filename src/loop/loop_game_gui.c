@@ -26,9 +26,9 @@ static void		health(t_game *game)
 	text = ft_strformat("Health: %i/%i\n",
 		game->player->health, PLAYER_MAX_HEALTH);
 	set_elem_text_str(
-		get_gui_child(game->ui, "hudinfohp"), text);
+		get_gui_child(game->ui, "hudInfoHp"), text);
 	ft_strdel(&text);
-	set_elem_redraw(get_gui_child(game->ui, "hudinfo"));
+	set_elem_redraw(get_gui_child(game->ui, "hudInfo"));
 	prev_health = game->player->health;
 }
 
@@ -41,9 +41,9 @@ static void		ammo(t_game *game)
 		return ;
 	text = ft_strformat("Ammo: %i", game->player->ammo);
 	set_elem_text_str(
-		get_gui_child(game->ui, "hudinfoammo"), text);
+		get_gui_child(game->ui, "hudInfoAmmo"), text);
 	ft_strdel(&text);
-	set_elem_redraw(get_gui_child(game->ui, "hudinfo"));
+	set_elem_redraw(get_gui_child(game->ui, "hudInfo"));
 	prev_ammo = game->player->ammo;
 }
 
@@ -56,9 +56,9 @@ static void		keys(t_game *game)
 		return ;
 	text = ft_strformat("Keys: %i", game->player->keys);
 	set_elem_text_str(
-		get_gui_child(game->ui, "hudinfokeys"), text);
+		get_gui_child(game->ui, "hudInfoKeys"), text);
 	ft_strdel(&text);
-	set_elem_redraw(get_gui_child(game->ui, "hudinfo"));
+	set_elem_redraw(get_gui_child(game->ui, "hudInfo"));
 	prev_keys = game->player->keys;
 }
 
@@ -74,5 +74,5 @@ void			loop_game_gui(t_game *game)
 	health(game);
 	ammo(game);
 	keys(game);
-	set_elem_redraw(get_gui_child(game->ui, "gameview"));
+	set_elem_redraw(get_gui_child(game->ui, "gameView"));
 }

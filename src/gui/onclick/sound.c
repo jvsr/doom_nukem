@@ -19,7 +19,7 @@
 void	set_sound(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->sound_volume * 100,
-		get_elem_child(parent, "cursoundvolume"),
+		get_elem_child(parent, "curSoundVolume"),
 		0);
 }
 

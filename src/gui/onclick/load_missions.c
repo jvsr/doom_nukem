@@ -119,8 +119,8 @@ void			remove_maps(t_game *game)
 
 t_bool			get_focus(t_game *game)
 {
-	const t_transform *camp = get_gui_child(game->ui, "missionscampaignbutton");
-	const t_transform *custom = get_gui_child(game->ui, "missionscustombutton");
+	const t_transform *camp = get_gui_child(game->ui, "missionsCampaignButton");
+	const t_transform *custom = get_gui_child(game->ui, "missionsCustomButton");
 
 	if (camp->layer > custom->layer)
 		return (TRUE);

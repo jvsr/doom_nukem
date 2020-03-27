@@ -22,7 +22,7 @@ static void	quit_options_confirmation(t_game *game)
 {
 	game->cureventstate->eventstate = options;
 	confirmation_return(game,
-		get_gui_child(game->ui, "confirmationreturnbutton"));
+		get_gui_child(game->ui, "confirmationReturnButton"));
 }
 
 void		options_confirmation_eventstate(t_game *game, SDL_Event event)

@@ -21,7 +21,7 @@
 static void	quit_options(t_game *game)
 {
 	game->cureventstate->eventstate = mainmenu;
-	options_return(game, get_gui_child(game->ui, "optionsreturnbutton"));
+	options_return(game, get_gui_child(game->ui, "optionsReturnButton"));
 }
 
 void		options_eventstate(t_game *game, SDL_Event event)

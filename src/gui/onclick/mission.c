@@ -22,13 +22,13 @@ static void	remove_mission(t_game *game)
 {
 	t_transform	*elem;
 
-	elem = get_gui_child(game->ui, "missionsmenu");
+	elem = get_gui_child(game->ui, "missionsMenu");
 	set_elem_show_clickable(elem, FALSE);
-	elem = get_gui_child(game->ui, "missionsoverlay");
+	elem = get_gui_child(game->ui, "missionsOverlay");
 	set_elem_show_clickable(elem, FALSE);
-	elem = get_gui_child(game->ui, "missionscampaignbutton");
+	elem = get_gui_child(game->ui, "missionsCampaignButton");
 	set_elem_show_clickable(elem, FALSE);
-	elem = get_gui_child(game->ui, "missionscustombutton");
+	elem = get_gui_child(game->ui, "missionsCustombutton");
 	set_elem_show_clickable(elem, FALSE);
 }
 
@@ -45,7 +45,7 @@ void		set_page_number(t_game *game)
 	char		*str;
 	t_transform	*page;
 
-	page = get_gui_child(game->ui, "missionpage");
+	page = get_gui_child(game->ui, "missionPage");
 	str = ft_itoa(game->ui->mission_page);
 	set_elem_text_str(page, str);
 	free(str);
@@ -76,8 +76,8 @@ void		missions_focus_campaign(t_game *game, t_transform *gui)
 	t_transform	*custom;
 
 	(void)gui;
-	campaign = get_gui_child(game->ui, "missionscampaignbutton");
-	custom = get_gui_child(game->ui, "missionscustombutton");
+	campaign = get_gui_child(game->ui, "missionsCampaignButton");
+	custom = get_gui_child(game->ui, "missionsCustomButton");
 	switch_focus(campaign, custom);
 	game->ui->mission_page = 0;
 	set_page_number(game);
@@ -91,8 +91,8 @@ void		missions_focus_custom(t_game *game, t_transform *gui)
 	t_transform	*custom;
 
 	(void)gui;
-	campaign = get_gui_child(game->ui, "missionscampaignbutton");
-	custom = get_gui_child(game->ui, "missionscustombutton");
+	campaign = get_gui_child(game->ui, "missionsCampaignButton");
+	custom = get_gui_child(game->ui, "missionsCustomButton");
 	switch_focus(custom, campaign);
 	game->ui->mission_page = 0;
 	set_page_number(game);

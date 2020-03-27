@@ -23,9 +23,9 @@ static void	quit_hud_options(t_game *game)
 {
 	game->cureventstate->eventstate = hud;
 	write_settings(game->setting, game->exec_path);
-	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"),
+	set_elem_show_clickable(get_gui_child(game->ui, "hudOptionsOverlay"),
 																		FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudOptionsMenu"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), TRUE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }

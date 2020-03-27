@@ -23,7 +23,7 @@ void	controls_set_forward(t_game *game, t_transform *gui)
 	t_transform	*elem;
 	t_types		*arguments;
 
-	elem = get_gui_child(game->ui, "controlskeychange");
+	elem = get_gui_child(game->ui, "controlsKeyChange");
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);
@@ -40,7 +40,7 @@ void	controls_set_backward(t_game *game, t_transform *gui)
 	t_transform	*elem;
 	t_types		*arguments;
 
-	elem = get_gui_child(game->ui, "controlskeychange");
+	elem = get_gui_child(game->ui, "controlsKeyChange");
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);
@@ -57,7 +57,7 @@ void	controls_set_left(t_game *game, t_transform *gui)
 	t_transform	*elem;
 	t_types		*arguments;
 
-	elem = get_gui_child(game->ui, "controlskeychange");
+	elem = get_gui_child(game->ui, "controlsKeyChange");
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);
@@ -74,7 +74,7 @@ void	controls_set_right(t_game *game, t_transform *gui)
 	t_transform	*elem;
 	t_types		*arguments;
 
-	elem = get_gui_child(game->ui, "controlskeychange");
+	elem = get_gui_child(game->ui, "controlsKeyChange");
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);
@@ -91,7 +91,7 @@ void	controls_set_interact(t_game *game, t_transform *gui)
 	t_transform	*elem;
 	t_types		*arguments;
 
-	elem = get_gui_child(game->ui, "controlskeychange");
+	elem = get_gui_child(game->ui, "controlsKeyChange");
 	set_elem_show_clickable(elem, TRUE);
 	game->cureventstate->eventstate = set_controls;
 	arguments = ft_memalloc(sizeof(t_types*) * 3);

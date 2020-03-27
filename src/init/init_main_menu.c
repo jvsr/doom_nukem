@@ -38,7 +38,7 @@ void				*init_main_menu(t_game *game)
 	add_gui_child(game->ui, create_gui(game, "hud"));
 	add_gui_child(game->ui, create_gui(game, "hud_died"));
 	add_gui_child(game->ui, create_gui(game, "hud_options"));
-	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mapEditorSelect"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 	return (NULL);
 }

@@ -17,6 +17,6 @@
 void		player_died(t_game *game)
 {
 	SDL_SetRelativeMouseMode(SDL_FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hud_died"), TRUE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudDied"), TRUE);
 	game->cureventstate->eventstate = hud_died;
 }

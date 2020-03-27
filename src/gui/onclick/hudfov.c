@@ -19,7 +19,7 @@
 
 void	set_hudfov(t_setting *setting, t_transform *parent, SDL_Surface *surf)
 {
-	set_int(setting->fov, get_elem_child(parent, "curhudfov"));
+	set_int(setting->fov, get_elem_child(parent, "curHudFov"));
 	setting->vfov = calc_vfov(setting->fov, surf->w, surf->h);
 }
 
