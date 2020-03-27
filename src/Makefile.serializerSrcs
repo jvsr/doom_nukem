@@ -19,12 +19,13 @@ PREFIX =
 FT_SRCS =
 
 ADD_SRCS = add_type add_char add_short add_int add_long add_float add_double \
-			add_string add_list_gen add_anim add_coord add_decal
+			add_string add_list_gen add_anim add_coord add_decal \
+			add_decal_list add_wall
 ADD_SRCS := $(ADD_SRCS:%=add/%)
 
 READ_SRCS = read_short read_char read_int read_long read_float read_double \
 			read_header read_anim read_settings read_coord read_string \
-			read_list_gen read_decal
+			read_list_gen read_decal read_decal_list read_wall
 READ_SRCS := $(READ_SRCS:%=read/%)
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
