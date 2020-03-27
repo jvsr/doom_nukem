@@ -15,12 +15,7 @@
 
 t_coord		*get_vector_from_points(t_coord *pos0, t_coord *pos1, t_coord *vec)
 {
-	float hyp;
-
 	vec->x = pos1->x - pos0->x;
 	vec->y = pos1->y - pos0->y;
-	hyp = sqrt(pow(vec->x, 2) + pow(vec->y, 2));
-	vec->x /= hyp;
-	vec->y /= hyp;
 	return (vec);
 }
