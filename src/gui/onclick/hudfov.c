@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 21:05:03 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:05:25 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:14:47 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "onclick.h"
 #include "setting.h"
 #include "cmath.h"
+#include "init.h"
 
 void	set_hudfov(t_setting *setting, t_transform *parent, SDL_Surface *surf)
 {

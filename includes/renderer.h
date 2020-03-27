@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/04 12:21:28 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,24 @@ t_list			**decals_on_vline(t_wall *wall, float perc_hit,
 void			get_enemy_index(t_game *game, void *anim);
 SDL_Point		get_bounds(t_player *player,
 						SDL_Surface *dst, t_hitem *hit, float tanvfov2);
-void			get_hits(t_rinfo *rinfo, float tanvfov2);
-void			render_hits(t_rinfo *rinfo, t_coord *range);
-void			draw_vline(t_rinfo *rinfo,
+void				get_hits(t_rinfo *rinfo, float tanvfov2);
+void				render_hits(t_rinfo *rinfo, t_coord *range);
+void				draw_vline(t_rinfo *rinfo,
 						t_hitem *item, size_t index, SDL_Point *bounds);
-void			render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range);
-void			draw_cline(SDL_Surface *dst,
+void				render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range);
+void				draw_cline(SDL_Surface *dst,
 						SDL_Point **bounds, size_t index, int colour);
-void			draw_wall(t_rinfo *rinfo,
-							SDL_Point **bounds, const size_t x, t_hit *hit);
-void			draw_glass(t_rinfo *rinfo,
-							SDL_Point **bounds, const size_t x, t_hit *hit);
-void			draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info);
-void			delete_map(t_map **map);
+void				draw_wall(t_rinfo *rinfo,
+						SDL_Point **bounds, const size_t x, t_hit *hit);
+void				draw_glass(t_rinfo *rinfo,
+						SDL_Point **bounds, const size_t x, t_hit *hit);
+void				draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info);
+void				delete_map(t_map **map);
+void				draw_floor(t_rinfo *rin, t_hinfo *info);
+void				draw_ceil(t_rinfo *rin, t_hinfo *info);
+int					get_slope(t_hitem *item,
+						t_wall *sw, float ang, t_rinfo *rin);
+t_coord				get_vec_from_x(t_rinfo *rin, int x);
+void				draw_sfloor(t_rinfo *rin, t_hinfo *info);
 
 #endif

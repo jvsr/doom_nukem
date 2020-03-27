@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/04 12:25:53 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:11:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	*render_chunk(t_game *game,
 	rinfo.start = start;
 	rinfo.end = end;
 	rinfo.dst = dst;
+	rinfo.pixels = dst->pixels;
 	get_hits(&rinfo, tanf(rinfo.vfov2 * PI_R));
 	ft_lstrev(&rinfo.ren);
 	render_hits(&rinfo, &(t_coord){

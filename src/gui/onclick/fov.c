@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 13:38:49 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:05:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:14:21 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "onclick.h"
 #include "setting.h"
 #include "cmath.h"
+#include "init.h"
 
 void	set_fov(t_setting *setting, t_transform *parent, SDL_Surface *surf)
 {

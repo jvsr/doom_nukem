@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/03 17:39:19 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 14:08:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ void			check_wall_col(t_tricoord coord, t_player *player,
 t_bool			wall_col(t_coord c0, t_coord c1, t_wall *wall);
 t_uint32		get_sector_id(t_map *map, t_sector *sec);
 void			check_objects(t_game *game, t_uint8 *col, t_tricoord coord);
+float			player_slope(t_player *pyr, t_sector *sec, t_coord *pos);
 
 #endif
