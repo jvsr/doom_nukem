@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 21:25:22 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 21:48:13 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 22:33:39 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/ft_mem.h"
 #include "serializer.h"
 #include "rinfo.h"
+#include "error.h"
 
 t_list		*read_decal_list(t_binary_read *bin_r)
 {

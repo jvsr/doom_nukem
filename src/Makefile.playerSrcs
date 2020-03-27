@@ -21,7 +21,7 @@ FT_SRCS =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 
-COL_SRCS = health_pickup key_pickup spike_damage
+COL_SRCS = health_pickup key_pickup spike_damage get_col_func
 COL_SRCS := $(COL_SRCS:%=col_funcs/%)
 
 SRCS = \
