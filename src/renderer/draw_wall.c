@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 16:13:23 by euan           #+#    #+#                */
-/*   Updated: 2020/03/04 12:16:11 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 15:03:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/ft_list.h"
 #include "libft/ft_mem.h"
 #include "libft/ft_num.h"
+#include "textures.h"
 #include "renderer.h"
 #include "rinfo.h"
 #include "coord.h"

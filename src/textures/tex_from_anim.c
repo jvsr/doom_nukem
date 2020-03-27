@@ -6,11 +6,11 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 14:26:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/05 14:26:13 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/03/27 15:03:35 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "renderer.h"
+#include "textures.h"
 #include "types.h"
 #include "rinfo.h"
 

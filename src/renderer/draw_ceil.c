@@ -6,11 +6,12 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 12:38:39 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 15:05:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_num.h"
+#include "textures.h"
 #include "renderer.h"
 #include "setting.h"
 #include "player.h"

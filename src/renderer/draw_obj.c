@@ -6,12 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 10:44:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/04 15:06:09 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 15:04:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_num.h"
 #include "libft/ft_list.h"
+#include "textures.h"
 #include "renderer.h"
 #include "player.h"
 #include "coord.h"
