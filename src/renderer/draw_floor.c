@@ -32,6 +32,7 @@ static void		draw_x(t_rinfo *rin,
 	srf = get_texture(rin->game, hit->sect->floor_tex);
 	t_pixels = srf->pixels;
 	get_vector_from_points((t_coord*)&hit->pos, &rin->game->player->pos, &vec);
+	normalize_vector(&vec);
 	vec = (t_coord){rin->game->player->pos.x - (vec.x * fvals.x),
 					rin->game->player->pos.y - (vec.y * fvals.x)};
 	tex = (SDL_Point){abs((int)(vec.x * LEVEL_MULTIPLIER_P2)) % srf->w,
