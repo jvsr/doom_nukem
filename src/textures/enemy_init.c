@@ -6,12 +6,12 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 17:33:26 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/02 13:52:53 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 15:12:22 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
-#include "renderer.h"
+#include "textures.h"
 #include "player.h"
 #include "types.h"
 #include "rinfo.h"

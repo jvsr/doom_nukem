@@ -6,12 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 18:26:55 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/04 12:24:03 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/27 15:04:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_surface.h>
 #include "libft/ft_num.h"
+#include "textures.h"
 #include "renderer.h"
 #include "setting.h"
 #include "player.h"

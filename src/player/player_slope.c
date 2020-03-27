@@ -24,6 +24,8 @@ static float	slope(t_sector *sec,
 
 	get_vector_from_points(cn[0], pos, &v0);
 	get_vector_from_points(cn[0], cn[1], &v1);
+	normalize_vector(&v0);
+	normalize_vector(&v1);
 	tmp = dot_vectors(&v0, &v1);
 	v2 = (t_coord){cn[0]->x + (v1.x * tmp), cn[1]->y + (v1.y * tmp)};
 	tmp = get_distance(&v2, pos);

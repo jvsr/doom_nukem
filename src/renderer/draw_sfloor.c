@@ -6,11 +6,12 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 15:04:25 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_num.h"
+#include "textures.h"
 #include "renderer.h"
 #include "setting.h"
 #include "player.h"
@@ -25,12 +26,13 @@ static void		draw_x(t_rinfo *rin,
 	SDL_Surface *srf;
 	int			*t_pixels;
 	t_coord		vec;
-	SDL_Point		tex;
+	SDL_Point	tex;
 	float		in;
 
 	srf = get_texture(rin->game, hit->sect->floor_tex);
 	t_pixels = srf->pixels;
 	get_vector_from_points((t_coord*)&hit->pos, &rin->game->player->pos, &vec);
+	normalize_vector(&vec);
 	vec = (t_coord){rin->game->player->pos.x - (vec.x * fvals.x),
 					rin->game->player->pos.y - (vec.y * fvals.x)};
 	tex = (SDL_Point){abs((int)(vec.x * LEVEL_MULTIPLIER_P2)) % srf->w,
@@ -66,8 +68,10 @@ static float	get_height(t_rinfo *rin, t_hinfo *info, t_wall *sw)
 
 	get_vector_from_points(&sw->corner_0, &info->hits->hit.pos, &v0);
 	get_vector_from_points(&sw->corner_0, &sw->corner_1, &v1);
+	tang = get_vector_magnitude(&v1);
+	normalize_vector(&v0);
+	normalize_vector(&v1);
 	tmp = dot_vectors(&v0, &v1);
-	tang = get_distance(&sw->corner_0, &sw->corner_1);
 	v2 = (t_coord){sw->corner_0.x + (v1.x * tmp * tang),
 				sw->corner_0.y + (v1.y * tmp * tang)};
 	tmp = get_distance(&v2, &info->hits->hit.pos);

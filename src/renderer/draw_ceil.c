@@ -6,11 +6,12 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 12:38:39 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 15:05:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_num.h"
+#include "textures.h"
 #include "renderer.h"
 #include "setting.h"
 #include "player.h"
@@ -31,6 +32,7 @@ static void		draw_x(t_rinfo *rin,
 	srf = get_texture(rin->game, hit->sect->ceil_tex);
 	t_pixels = srf->pixels;
 	get_vector_from_points((t_coord*)&hit->pos, &rin->game->player->pos, &vec);
+	normalize_vector(&vec);
 	vec = (t_coord){rin->game->player->pos.x - (vec.x * fvals.x),
 					rin->game->player->pos.y - (vec.y * fvals.x)};
 	tex = (SDL_Point){abs((int)(vec.x * pow(LEVEL_MULTIPLIER, 2))) % srf->w,

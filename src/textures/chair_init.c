@@ -6,13 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:08:26 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/05 15:08:26 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/03/27 15:12:34 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "textures.h"
 #include "types.h"
 #include "rinfo.h"
-#include "renderer.h"
 
 t_anim		chair_init(t_object *obj, float offset)
 {
