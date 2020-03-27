@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 14:11:49 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 	t_list	*lst;
 	t_hinfo	*info;
 	size_t	index;
-	t_point	bounds;
+	SDL_Point	bounds;
 	t_hitem	*hit;
 
 	lst = rinfo->ren;

@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 14:11:25 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 	t_hitem	*hit;
 	t_hinfo *info;
 	t_hinfo	*prev;
-	t_point	tmp;
-	t_point prv;
+	SDL_Point	tmp;
+	SDL_Point prv;
 
 	info = rinfo->ren->content;
 	prev = info;
@@ -99,8 +99,8 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 	while (tmp.x != tmp.y && (hit == NULL || hit->hit.wall->is_portal))
 	{
 		info->prev = prev;
-		info->floor_range = (t_point){INT32_MAX, 0};
-		info->ceil_range = (t_point){INT32_MAX, 0};
+		info->floor_range = (SDL_Point){INT32_MAX, 0};
+		info->ceil_range = (SDL_Point){INT32_MAX, 0};
 		info->end = rinfo->start;
 		hit = info->hits + rinfo->start - rinfo->begin;
 		hit->hit = get_hit(cosin, rinfo->game->player, info->sec, prev->sec);

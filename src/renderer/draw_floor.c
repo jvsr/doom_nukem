@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 12:36:06 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 #include "game.h"
 
 static void		draw_x(t_rinfo *rin,
-					const t_hit *hit, const t_coord fvals, const t_point ivals)
+					const t_hit *hit, const t_coord fvals, const SDL_Point ivals)
 {
 	SDL_Surface *srf;
 	int			*t_pixels;
 	t_coord		vec;
-	t_point		tex;
+	SDL_Point		tex;
 	float		in;
 
 	srf = get_texture(rin->game, hit->sect->floor_tex);
@@ -33,7 +33,7 @@ static void		draw_x(t_rinfo *rin,
 	get_vector_from_points((t_coord*)&hit->pos, &rin->game->player->pos, &vec);
 	vec = (t_coord){rin->game->player->pos.x - (vec.x * fvals.x),
 					rin->game->player->pos.y - (vec.y * fvals.x)};
-	tex = (t_point){abs((int)(vec.x * LEVEL_MULTIPLIER_P2)) % srf->w,
+	tex = (SDL_Point){abs((int)(vec.x * LEVEL_MULTIPLIER_P2)) % srf->w,
 					abs((int)(vec.y * LEVEL_MULTIPLIER_P2)) % srf->h};
 	in = fvals.y * hit->sect->light_value;
 	rin->pixels[(ivals.x + rin->begin) + ((rin->dst->h - ivals.y - 1) *
@@ -63,8 +63,8 @@ static float	init_height(t_rinfo *rin, t_hinfo *info)
 			info->sec->floor);
 }
 
-static void		set_cybounds(t_point *c_ybounds,
-											t_point *pre_bound, t_point *ybnds)
+static void		set_cybounds(SDL_Point *c_ybounds,
+											SDL_Point *pre_bound, SDL_Point *ybnds)
 {
 	c_ybounds->x = ft_constrain(pre_bound->x, 0, ybnds->x);
 	c_ybounds->y = ft_constrain(pre_bound->y, c_ybounds->x, ybnds->x);
@@ -73,8 +73,8 @@ static void		set_cybounds(t_point *c_ybounds,
 void			draw_floor(t_rinfo *rin, t_hinfo *info)
 {
 	const float	height = init_height(rin, info);
-	t_point		i;
-	t_point		c_ybounds;
+	SDL_Point		i;
+	SDL_Point		c_ybounds;
 	t_coord		disintens;
 	t_coord		anstep;
 

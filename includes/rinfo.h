@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:09:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,13 @@ typedef struct	s_zbuf
 
 typedef struct	s_hitem
 {
-	t_point		bounds;
-	t_point		ybnds;
+	SDL_Point		bounds;
+	SDL_Point		ybnds;
 	t_hit		hit;
 	t_coord		y;
 	t_coord		st;
 	int			hoffset;
-	t_point		pre_bounds;
+	SDL_Point		pre_bounds;
 	float		tang;
 }				t_hitem;
 
@@ -175,8 +175,8 @@ struct			s_hinfo
 	size_t		start;
 	size_t		end;
 	t_hinfo		*prev;
-	t_point		floor_range;
-	t_point		ceil_range;
+	SDL_Point		floor_range;
+	SDL_Point		ceil_range;
 };
 
 typedef struct	s_rinfo

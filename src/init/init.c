@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/27 14:10:45 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:15:48 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,6 @@ void			*init_function(t_game *game)
 	init_keymap(game);
 	player_init(game);
 	map_init(game);
-	init_ftable(game);
 	game->cureventstate->eventstate = splash;
 	return (NULL);
 }

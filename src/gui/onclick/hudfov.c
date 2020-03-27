@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 21:05:03 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/02 10:26:41 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:14:47 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	options_hud_fov_up(t_game *game, t_transform *gui)
 	game->setting->changed = TRUE;
 	incr_uint16_max(&game->setting->fov, FOV_STEP, MAX_FOV);
 	set_hudfov(game->setting, gui->parent.elem, game->surface);
-	reinit_ftable(game);
 }
 
 void	options_hud_fov_down(t_game *game, t_transform *gui)
@@ -37,5 +36,4 @@ void	options_hud_fov_down(t_game *game, t_transform *gui)
 	game->setting->changed = TRUE;
 	decr_uint16_min(&game->setting->fov, FOV_STEP, MIN_FOV);
 	set_hudfov(game->setting, gui->parent.elem, game->surface);
-	reinit_ftable(game);
 }

@@ -22,5 +22,4 @@ SRCS = init \
 		init_main_menu \
 		init_window \
 		init_settings \
-		init_eventstate \
-		init_ftable
+		init_eventstate

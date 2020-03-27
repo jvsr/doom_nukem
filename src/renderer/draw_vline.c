@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 14:11:03 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void			draw_vline(t_rinfo *rinfo,
 	}
 	if (item->ybnds.y < rinfo->dst->h && !item->hit.sect->has_ceiling)
 		draw_skybox(index, rinfo->dst, rinfo->game,
-			(t_point[2]){(t_point){item->ybnds.y, rinfo->dst->h}, *bounds});
+			(SDL_Point[2]){(SDL_Point){item->ybnds.y, rinfo->dst->h}, *bounds});
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
 		draw_wall(rinfo,
-						(t_point*[2]){bounds, &item->ybnds}, index, &item->hit);
+						(SDL_Point*[2]){bounds, &item->ybnds}, index, &item->hit);
 	else if (item->hit.sect->ceil > item->y.x &&
 				item->hit.sect->floor < item->y.y)
-		draw_portal(rinfo, item, index, (t_point*[2]){bounds, &item->ybnds});
+		draw_portal(rinfo, item, index, (SDL_Point*[2]){bounds, &item->ybnds});
 }

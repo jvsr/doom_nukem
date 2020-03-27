@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:09:18 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ SDL_Point		get_bounds(t_player *player,
 void				get_hits(t_rinfo *rinfo, float tanvfov2);
 void				render_hits(t_rinfo *rinfo, t_coord *range);
 void				draw_vline(t_rinfo *rinfo,
-						t_hitem *item, size_t index, t_point *bounds);
+						t_hitem *item, size_t index, SDL_Point *bounds);
 void				render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range);
 void				draw_cline(SDL_Surface *dst,
-						t_point **bounds, size_t index, int colour);
+						SDL_Point **bounds, size_t index, int colour);
 void				draw_wall(t_rinfo *rinfo,
-						t_point **bounds, const size_t x, t_hit *hit);
+						SDL_Point **bounds, const size_t x, t_hit *hit);
 void				draw_glass(t_rinfo *rinfo,
-						t_point **bounds, const size_t x, t_hit *hit);
+						SDL_Point **bounds, const size_t x, t_hit *hit);
 void				draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info);
 void				delete_map(t_map **map);
 void				draw_floor(t_rinfo *rin, t_hinfo *info);
