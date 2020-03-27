@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:52:41 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 15:53:36 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef enum				e_obj
 	O_ENEMY,
 	O_SPIKE,
 	O_KEY,
+	O_HEALTH_PICKUP,
 	O_COUNT
 }							t_obj;
 
