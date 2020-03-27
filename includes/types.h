@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:38:17 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:55:51 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef enum				e_texture
 	TEXTURE_BRICK_WALL,
 	TEXTURE_SKYBOX_DAY,
 	TEXTURE_SKYBOX_DUSK,
-	TEXTURE_LAMP,
 	TEXTURE_CHAIR_BACK,
 	TEXTURE_CHAIR_FRONT,
 	TEXTURE_CHAIR_LEFT,
@@ -80,5 +79,15 @@ typedef enum				e_enemystate
 	ENEMY_ATTACK,
 	ENEMY_DEAD
 }							t_enemystate;
+
+typedef enum				e_objanim
+{
+	OA_CHAIR,
+	OA_ENEMY,
+	OA_SPIKE,
+	OA_HEALTH_PICKUP,
+	OA_KEY,
+	OA_Count
+}							t_objanim;
 
 #endif

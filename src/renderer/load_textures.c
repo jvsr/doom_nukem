@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 16:30:23 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:39:21 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:57:43 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ static size_t	load_plain_textures(t_game *game, size_t tex_count)
 
 	i = 0;
 	texture_files = (char *[]){
-		"brick_wall", "skybox_day", "skybox_dusk", "objs/lamp",
-		"objs/chair_back", "objs/chair_front", "objs/chair_left",
-		"objs/chair_right", "bloodsplatter", "quartz", "objs/health_pickup",
-		"objs/key", "glass", "spike-ball", "rocks", "door", NULL
+		"brick_wall", "skybox_day", "skybox_dusk", "objs/chair_back",
+		"objs/chair_front", "objs/chair_left", "objs/chair_right",
+		"bloodsplatter", "quartz", "objs/health_pickup", "objs/key", "glass",
+		"spike-ball", "rocks", "door", NULL
 	};
 	while (texture_files[i] != NULL && tex_count + i < TEXTURE_ENEMY0_F0)
 	{
