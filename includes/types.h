@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:55:51 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 15:24:56 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum				e_endian
 
 typedef enum				e_texture
 {
+	TEXTURE_INVALID = -1,
 	TEXTURE_BRICK_WALL,
 	TEXTURE_SKYBOX_DAY,
 	TEXTURE_SKYBOX_DUSK,
