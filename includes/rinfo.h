@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:20:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct	s_wall
 	t_anim		win_tex;
 	t_coord		perc;
 	t_list		*decals;
+	t_bool		is_door;
 }				t_wall;
 
 struct			s_object

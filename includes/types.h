@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/06 10:59:56 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/27 14:38:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef enum				e_texture
 	TEXTURE_GLASS,
 	TEXTURE_SPIKES,
 	TEXTURE_ROCKS,
+	TEXTURE_DOOR,
 	TEXTURE_ENEMY0_F0,
 	TEXTURE_ENEMY0_F1,
 	TEXTURE_ENEMY0_F2,
