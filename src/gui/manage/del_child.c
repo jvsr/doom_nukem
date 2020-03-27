@@ -21,7 +21,7 @@ void	del_child(t_transform **children, const char *name)
 
 	prv = NULL;
 	cur = *children;
-	while (cur != NULL && ft_strequ(cur->name, name) == FALSE)
+	while (cur != NULL && ft_strequ_nocase(cur->name, name) == FALSE)
 	{
 		prv = cur;
 		cur = cur->next;

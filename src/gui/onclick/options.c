@@ -23,8 +23,8 @@ void	remove_options(t_game *game)
 	t_transform	*menu;
 	t_transform	*overlay;
 
-	menu = get_gui_child(game->ui, "optionsmenu");
-	overlay = get_gui_child(game->ui, "optionsoverlay");
+	menu = get_gui_child(game->ui, "optionsMenu");
+	overlay = get_gui_child(game->ui, "optionsOverlay");
 	set_elem_show_clickable(menu, FALSE);
 	set_elem_show_clickable(overlay, FALSE);
 	game->cureventstate->eventstate = mainmenu;
@@ -54,11 +54,11 @@ void	hudoptions_return(t_game *game, t_transform *gui)
 	write_settings(game->setting, game->exec_path);
 	game->setting->changed = FALSE;
 	game->setting->confirm = FALSE;
-	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"),
+	set_elem_show_clickable(get_gui_child(game->ui, "hudOptionsMenu"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudOptionsOverlay"),
 																		FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
 	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 	game->cureventstate->eventstate = mainmenu;
 }
@@ -75,13 +75,13 @@ void	options_open_controls(t_game *game, t_transform *gui)
 	set_elem_show_clickable(elem, TRUE);
 	elem = get_gui_child(ui, "controlsmenu");
 	set_elem_show_clickable(elem, TRUE);
-	set_key_str(control.forward, get_gui_child(ui, "controlsforwardbutton"));
-	set_key_str(control.backward, get_gui_child(ui, "controlsbackwardbutton"));
-	set_key_str(control.left, get_gui_child(ui, "controlsleftbutton"));
-	set_key_str(control.right, get_gui_child(ui, "controlsrightbutton"));
-	set_key_str(control.interact, get_gui_child(ui, "controlsinteractbutton"));
-	set_key_str(control.shoot, get_gui_child(ui, "controlsshootbutton"));
-	set_key_str(control.crouch, get_gui_child(ui, "controlscrouchbutton"));
-	set_key_str(control.jump, get_gui_child(ui, "controlsjumpbutton"));
+	set_key_str(control.forward, get_gui_child(ui, "controlsForwardButton"));
+	set_key_str(control.backward, get_gui_child(ui, "controlsBackwardButton"));
+	set_key_str(control.left, get_gui_child(ui, "controlsLeftButton"));
+	set_key_str(control.right, get_gui_child(ui, "controlsRightButton"));
+	set_key_str(control.interact, get_gui_child(ui, "controlsInteractButton"));
+	set_key_str(control.shoot, get_gui_child(ui, "controlsShootButton"));
+	set_key_str(control.crouch, get_gui_child(ui, "controlsCrouchButton"));
+	set_key_str(control.jump, get_gui_child(ui, "controlsJumpButton"));
 	game->cureventstate->eventstate = controls;
 }

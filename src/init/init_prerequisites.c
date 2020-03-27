@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 11:32:47 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/28 14:56:41 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/11 14:14:10 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_game			*init_prerequisites(char **argv, char **envp)
 	init_sdl();
 	game = alloc_game();
 	set_basic_args(game, argv, envp);
+	unpack_resources(game);
 	init_settings(game);
 	init_window_surface(game);
 	init_eventstate(game);

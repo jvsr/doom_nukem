@@ -28,7 +28,7 @@ void	map_editor_select_new(t_game *game, t_transform *gui)
 void	map_editor_select_return(t_game *game, t_transform *gui)
 {
 	(void)gui;
-	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mapEditorSelect"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
 	game->cureventstate->eventstate = mainmenu;
 }

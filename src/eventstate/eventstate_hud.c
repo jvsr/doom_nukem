@@ -52,12 +52,12 @@ static void	manage_player_angle(t_game *game, t_bool *skip)
 static void	enter_options(t_game *game, t_bool *skip)
 {
 	SDL_SetRelativeMouseMode(SDL_FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsoverlay"), TRUE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hudoptionsmenu"), TRUE);
-	set_hudsensitivity(game->setting, get_gui_child(game->ui, "hudoptions"));
-	set_hudmusic(game->setting, get_gui_child(game->ui, "hudvolume"));
-	set_hudsound(game->setting, get_gui_child(game->ui, "hudvolume"));
-	set_hudfov(game->setting, get_gui_child(game->ui, "hudfov"), game->surface);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudOptionsOverlay"), TRUE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudOptionsMenu"), TRUE);
+	set_hudsensitivity(game->setting, get_gui_child(game->ui, "hudOptions"));
+	set_hudmusic(game->setting, get_gui_child(game->ui, "hudVolume"));
+	set_hudsound(game->setting, get_gui_child(game->ui, "hudVolume"));
+	set_hudfov(game->setting, get_gui_child(game->ui, "hudFov"), game->surface);
 	game->cureventstate->eventstate = hud_options;
 	*skip = TRUE;
 }

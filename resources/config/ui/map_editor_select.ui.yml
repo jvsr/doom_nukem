@@ -1,12 +1,12 @@
-- panel: mapeditorselect
-  - image: mapeditorselectbackground
+- panel: mapEditorSelect
+  - image: mapEditorSelectBackground
     - color: #333333
-  - panel: mapeditorselectbox
+  - panel: mapEditorSelectBox
     - pos: 0.35, 0.3
     - dim: 0.3, 0.4
-    - image: mapeditorselectboxbackground
+    - image: mapEditorSelectBoxBackground
       - texture: ui/border1x1_2.tga
-    - button: mapeditorselectboxloadbutton
+    - button: mapEditorSelectBoxLoadButton
       - pos: 0.1, 0.1375
       - dim: 0.8, 0.2
       - text: "Load Map"
@@ -14,7 +14,7 @@
       - text_font: foulfiend
       - text_size: 0.6
       - texture: ui/border5x1.tga
-    - button: mapeditorselectboxnewbutton
+    - button: mapEditorSelectBoxNewButton
       - pos: 0.1, 0.4
       - dim: 0.8, 0.2
       - text: "New Map"
@@ -23,7 +23,7 @@
       - text_size: 0.6
       - texture: ui/border5x1.tga
       - onclick: map_editor_select_new
-    - button: mapeditorselectboxreturnbutton
+    - button: mapEditorSelectBoxReturnButton
       - pos: 0.1, 0.6725
       - dim: 0.8, 0.2
       - text: "Return"

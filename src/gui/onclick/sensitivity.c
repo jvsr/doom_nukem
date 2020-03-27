@@ -18,7 +18,7 @@
 void	set_sensitivity(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->sensitivity,
-		get_elem_child(parent, "cursensitivity"),
+		get_elem_child(parent, "curSensitivity"),
 		1);
 }
 

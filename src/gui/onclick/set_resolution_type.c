@@ -29,7 +29,7 @@ void		set_resolution_type(t_setting *setting, t_transform *parent)
 	t_transform	*elem;
 	char		*text;
 
-	elem = get_elem_child(parent, "curresolutiontype");
+	elem = get_elem_child(parent, "curResolutionType");
 	text = get_resolution_type(setting->resolution_type);
 	set_elem_text_str(elem, text);
 }

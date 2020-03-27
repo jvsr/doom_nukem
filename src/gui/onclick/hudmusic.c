@@ -27,7 +27,7 @@ static void	set_restart_hudmusic(t_game *game, t_transform *gui)
 void		set_hudmusic(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->music_volume * 100,
-		get_elem_child(parent, "curhudmusicvolume"),
+		get_elem_child(parent, "curHudMusicVolume"),
 		0);
 }
 

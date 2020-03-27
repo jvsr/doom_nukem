@@ -25,13 +25,13 @@ void	mainmenu_missions(t_game *game, t_transform *gui)
 
 	(void)gui;
 	load_missions(game);
-	elem = get_gui_child(game->ui, "missionsmenu");
+	elem = get_gui_child(game->ui, "missionsMenu");
 	set_elem_show_clickable(elem, TRUE);
-	elem = get_gui_child(game->ui, "missionsoverlay");
+	elem = get_gui_child(game->ui, "missionsOverlay");
 	set_elem_show_clickable(elem, TRUE);
-	elem = get_gui_child(game->ui, "missionscampaignbutton");
+	elem = get_gui_child(game->ui, "missionsCampaignButton");
 	set_elem_show_clickable(elem, TRUE);
-	elem = get_gui_child(game->ui, "missionscustombutton");
+	elem = get_gui_child(game->ui, "missionsCustomButton");
 	set_elem_show_clickable(elem, TRUE);
 	set_page_number(game);
 	game->cureventstate->eventstate = missions;
@@ -43,8 +43,8 @@ void	mainmenu_options(t_game *game, t_transform *gui)
 	t_transform	*options_overlay;
 
 	(void)gui;
-	options_menu = get_gui_child(game->ui, "optionsmenu");
-	options_overlay = get_gui_child(game->ui, "optionsoverlay");
+	options_menu = get_gui_child(game->ui, "optionsMenu");
+	options_overlay = get_gui_child(game->ui, "optionsOverlay");
 	set_elem_show_clickable(options_menu, TRUE);
 	set_elem_show_clickable(options_overlay, TRUE);
 	set_sensitivity(game->setting, options_menu);
@@ -59,8 +59,8 @@ void	mainmenu_options(t_game *game, t_transform *gui)
 void	mainmenu_mapeditor(t_game *game, t_transform *gui)
 {
 	(void)gui;
-	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), TRUE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mapEditorSelect"), TRUE);
 	game->cureventstate->eventstate = map_editor_select;
 }
 

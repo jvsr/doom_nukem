@@ -25,8 +25,8 @@ void	add_confirmation(t_game *game)
 	t_transform	*menu;
 	t_transform	*overlay;
 
-	menu = get_gui_child(game->ui, "confirmationmenu");
-	overlay = get_gui_child(game->ui, "confirmationoverlay");
+	menu = get_gui_child(game->ui, "confirmationMenu");
+	overlay = get_gui_child(game->ui, "confirmationOverlay");
 	set_elem_show_clickable(menu, TRUE);
 	set_elem_show_clickable(overlay, TRUE);
 }
@@ -36,8 +36,8 @@ void	remove_confirmation(t_game *game)
 	t_transform	*menu;
 	t_transform	*overlay;
 
-	menu = get_gui_child(game->ui, "confirmationmenu");
-	overlay = get_gui_child(game->ui, "confirmationoverlay");
+	menu = get_gui_child(game->ui, "confirmationMenu");
+	overlay = get_gui_child(game->ui, "confirmationOverlay");
 	set_elem_show_clickable(menu, FALSE);
 	set_elem_show_clickable(overlay, FALSE);
 }

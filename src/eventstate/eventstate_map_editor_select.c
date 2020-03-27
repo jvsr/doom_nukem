@@ -22,7 +22,7 @@ static void	quit_map_editor_select(t_game *game)
 {
 	game->cureventstate->eventstate = mainmenu;
 	map_editor_select_return(
-		game, get_gui_child(game->ui, "mapeditorselectboxreturnbutton"));
+		game, get_gui_child(game->ui, "mapEditorSelectBoxReturnButton"));
 }
 
 void		map_editor_select_eventstate(t_game *game, SDL_Event event)

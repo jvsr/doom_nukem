@@ -22,7 +22,7 @@ void	go_to_game(t_game *game, t_transform *gui)
 {
 	(void)gui;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), TRUE);
 	game->cureventstate->eventstate = hud;
 	stop_music();

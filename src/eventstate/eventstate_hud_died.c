@@ -23,8 +23,8 @@
 static void	quit_hud_died(t_game *game)
 {
 	game->cureventstate->eventstate = mainmenu;
-	set_elem_show_clickable(get_gui_child(game->ui, "hud_died"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "mainmenu"), TRUE);
+	set_elem_show_clickable(get_gui_child(game->ui, "huDied"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
 	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 }
 

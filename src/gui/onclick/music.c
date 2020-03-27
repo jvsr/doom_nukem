@@ -27,7 +27,7 @@ static void	set_restart_music(t_game *game, t_transform *gui)
 void		set_music(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->music_volume * 100,
-		get_elem_child(parent, "curmusicvolume"),
+		get_elem_child(parent, "curMusicVolume"),
 		0);
 }
 

@@ -34,7 +34,7 @@ void		set_resolution(t_setting *setting, t_transform *parent)
 	t_transform	*elem;
 	char		*text;
 
-	elem = get_elem_child(parent, "curresolution");
+	elem = get_elem_child(parent, "curResolution");
 	text = ft_strformat("%4d x %-4d",
 		setting->resolution.x,
 		setting->resolution.y);

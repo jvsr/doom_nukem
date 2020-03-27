@@ -1,15 +1,15 @@
-- panel: hud_died
+- panel: hudDied
   - show: 0
   - layer: 2
   - clickable: 0
-  - image: hud_diedbackground
+  - image: hudDiedBackground
     - color: #ff1100aa
   - text_block: hud_diedtext
     - text: "YOU DIED"
     - text_font: foulfiend
     - dim: 0.3, 0.3
     - pos: 0.35, 0.35
-  - button: hud_diedlevel
+  - button: hudDiedLevel
     - texture: ui/border1x1.tga
     - text: "Restart level"
     - text_font: foulfiend
@@ -17,7 +17,7 @@
     - pos: 0.35, 0.6
     - text_size: 0.8
     - onclick: hud_diedreload
-  - button: hud_diedmainmenu
+  - button: hudDiedMainMenu
     - texture: ui/border1x1.tga
     - text: "Return to menu"
     - text_font: foulfiend

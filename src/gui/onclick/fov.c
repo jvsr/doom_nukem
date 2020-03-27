@@ -19,7 +19,7 @@
 
 void	set_fov(t_setting *setting, t_transform *parent, SDL_Surface *surf)
 {
-	set_int(setting->fov, get_elem_child(parent, "curfov"));
+	set_int(setting->fov, get_elem_child(parent, "curFov"));
 	setting->vfov = calc_vfov(setting->fov, surf->w, surf->h);
 }
 

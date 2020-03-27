@@ -21,7 +21,7 @@ static t_transform	*get_child(t_transform *child, const char *name)
 	found = NULL;
 	while (child != NULL)
 	{
-		if (ft_strequ(child->name, name))
+		if (ft_strequ_nocase(child->name, name) == TRUE)
 			return (child);
 		if (child->gui_type == PANEL)
 			found = get_child(child->gui_elem.panel->children, name);

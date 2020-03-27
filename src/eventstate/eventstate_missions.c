@@ -21,7 +21,7 @@
 static void	quit_missions(t_game *game)
 {
 	game->cureventstate->eventstate = mainmenu;
-	mission_return(game, get_gui_child(game->ui, "missionreturnbutton"));
+	mission_return(game, get_gui_child(game->ui, "missionReturnButton"));
 }
 
 void		missions_eventstate(t_game *game, SDL_Event event)

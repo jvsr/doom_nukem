@@ -22,8 +22,8 @@ void	controls_return(t_game *game, t_transform *gui)
 
 	(void)gui;
 	write_settings(game->setting, game->exec_path);
-	menu = get_gui_child(game->ui, "controlsmenu");
-	overlay = get_gui_child(game->ui, "controlsoverlay");
+	menu = get_gui_child(game->ui, "controlsMenu");
+	overlay = get_gui_child(game->ui, "controlsOverlay");
 	set_elem_show_clickable(menu, FALSE);
 	set_elem_show_clickable(overlay, FALSE);
 	game->cureventstate->eventstate = options;

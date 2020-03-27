@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 21:42:49 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/19 21:43:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/12 14:07:06 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
 	cur = get_gametime(&game->starttime) - momentum;
 	new_height = PLAYER_INIT_JUMP_HEIGHT - (PLAYER_INIT_JUMP_HEIGHT
 	* pow(1.0 - ((double)cur / PLAYER_JUMP_TIME), 2));
-	player->heightoffset += new_height - old_height;
-	old_height = new_height;
 	if (cur > PLAYER_JUMP_TIME
 	|| (game->map->sectors[player->cur_sector].has_ceiling && player->height
-	+ player->heightoffset >= game->map->sectors[player->cur_sector].ceil))
+	+ player->heightoffset + new_height - old_height
+	>= game->map->sectors[player->cur_sector].ceil))
 	{
 		*jump = FALSE;
 		momentum = UINT64_MAX;
 		return (FALSE);
 	}
+	player->heightoffset += new_height - old_height;
+	old_height = new_height;
 	return (TRUE);
 }
 
