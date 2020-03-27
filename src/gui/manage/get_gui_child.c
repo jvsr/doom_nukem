@@ -23,7 +23,7 @@ t_transform		*get_gui_child(t_gui *ui, const char *name)
 	cur = ui->children;
 	while (cur != NULL)
 	{
-		if (ft_strequ(cur->name, name))
+		if (ft_strequ_nocase(cur->name, name) == TRUE)
 			return (cur);
 		found = get_elem_child(cur, name);
 		if (found != NULL)
