@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 22:00:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/28 16:10:33 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			add_anim(t_anim *anim, t_binary *bin);
 void			add_coord(t_coord *coord, t_binary *bin);
 void			add_decal(t_decal *decal, t_binary *bin);
 void			add_decal_list(t_list *lst, t_binary *bin);
-void			add_wall(t_wall *wall, t_binary *bin);
+void			add_wall(t_wall *wall, t_binary *bin, t_map *map);
 unsigned char	read_char(t_binary_read *bin_r);
 short			read_short(t_binary_read *bin_r);
 int				read_int(t_binary_read *bin_r);
@@ -87,7 +87,7 @@ char			*read_string(t_binary_read *bin_r);
 t_list			*read_list_gen(t_binary_read *bin_r, t_uint64 d_size);
 t_decal			read_decal(t_binary_read *bin_r);
 t_list			*read_decal_list(t_binary_read *bin_r);
-t_wall			*read_wall(t_binary_read *bin_r);
+t_wall			*read_wall(t_binary_read *bin_r, t_map *map);
 void			finish_bin(t_binary *bin);
 t_endian		detect_endian(void);
 long			read_header(t_binary_read *bin_r);
