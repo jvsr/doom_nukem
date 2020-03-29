@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/29 16:43:36 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/29 17:36:49 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void			add_wall(t_wall *wall, t_binary *bin, t_map *map);
 void			add_obj(t_object *obj, t_binary *bin);
 void			add_enemy(t_enemy *enemy, t_binary *bin);
 void			add_sec(t_sector *sec, t_binary *bin, t_map *map);
+void			add_map(t_map *map, t_binary *bin);
 unsigned char	read_char(t_binary_read *bin_r);
 short			read_short(t_binary_read *bin_r);
 int				read_int(t_binary_read *bin_r);
@@ -94,11 +95,15 @@ t_wall			*read_wall(t_binary_read *bin_r, t_map *map);
 t_object		*read_obj(t_binary_read *bin_r);
 t_enemy			*read_enemy(t_object *obj, t_binary_read *bin_r);
 t_sector		*read_sec(t_binary_read *bin_r, t_map *map);
+t_map			*read_map(t_binary_read *bin_r);
 void			finish_bin(t_binary *bin);
 t_endian		detect_endian(void);
 long			read_header(t_binary_read *bin_r);
 void			swap_bytes(void *v_bytes, t_uint64 size);
 t_setting		*read_settings(char const *exec_path);
 void			write_settings(t_setting *settings, char const *exec_path);
+void			write_map_struct(t_map *map, const char *loc,
+						const char *exec_path);
+t_map			*read_map_struct(char const *loc, char const *exec_path);
 
 #endif

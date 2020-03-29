@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/29 16:23:28 by euan           #+#    #+#                */
-/*   Updated: 2020/03/29 16:46:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/29 17:16:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		read_walls(t_sector *sec, t_binary_read *bin_r, t_map *map)
 	{
 		wall = read_wall(bin_r, map);
 		ft_memcpy(sec->walls + i, wall, sizeof(wall));
-		ft_memdel((void**)wall);
+		ft_memdel((void**)&wall);
 		i++;
 	}
 }
