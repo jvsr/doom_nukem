@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 22:26:08 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/29 12:55:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_object	t_object;
 typedef struct s_hinfo	t_hinfo;
 
 typedef void	(t_plyrcol)(t_game*, t_sector*, t_object*, t_player*);
+typedef void	(t_onfunc)(t_game *, t_object *, t_player *);
+typedef void	(t_nofunc)(t_game *, t_object *);
 
 typedef struct	s_anim
 {
@@ -89,8 +91,8 @@ typedef struct	s_enemy
 	t_uint64		last_seen;
 	t_enemystate	state;
 	t_object		*obj;
-	void			(*on_los)(t_game *, t_object *, t_player *);
-	void			(*no_los)(t_game *, t_object *);
+	t_onfunc		*on_los;
+	t_nofunc		*no_los;
 }				t_enemy;
 
 struct			s_sector

@@ -6,12 +6,13 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 21:54:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/28 16:11:02 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/29 13:07:43 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
 #include "serializer.h"
+#include "error.h"
 
 t_wall		*read_wall(t_binary_read *bin_r, t_map *map)
 {
@@ -19,6 +20,8 @@ t_wall		*read_wall(t_binary_read *bin_r, t_map *map)
 	int		isec;
 
 	wall = ft_memalloc(sizeof(t_wall));
+	if (wall == NULL)
+		error_msg_errno("Unable To Allocated Level Data");
 	wall->corner_0 = read_coord(bin_r);
 	wall->corner_1 = read_coord(bin_r);
 	wall->is_portal = (t_bool)read_char(bin_r);
