@@ -6,13 +6,13 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 17:20:56 by euan           #+#    #+#                */
-/*   Updated: 2020/03/28 16:08:41 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/29 15:21:02 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "serializer.h"
 
-static int	get_wall(t_map *map, t_sector *sec)
+static int	get_portal(t_map *map, t_sector *sec)
 {
 	int i;
 
@@ -34,7 +34,7 @@ void		add_wall(t_wall *wall, t_binary *bin, t_map *map)
 	add_decal_list(wall->decals, bin);
 	add_char((char)wall->is_door, bin);
 	if (wall->is_portal || map == NULL)
-		add_int(get_wall(map, wall->window), bin);
+		add_int(get_portal(map, wall->window), bin);
 	else
 		add_int(-1, bin);
 }

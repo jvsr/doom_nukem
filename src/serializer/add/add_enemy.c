@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/29 12:48:03 by euan           #+#    #+#                */
-/*   Updated: 2020/03/29 13:02:20 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/29 16:45:19 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void		add_enemy(t_enemy *enemy, t_binary *bin)
 	add_int(enemy->health, bin);
 	add_long(enemy->last_seen, bin);
 	add_int(enemy->state, bin);
-	add_string(get_on_name(enemy->on_los), bin);
-	add_string(get_no_name(enemy->no_los), bin);
+	add_string((char*)get_on_name(enemy->on_los), bin);
+	add_string((char*)get_no_name(enemy->no_los), bin);
 }
