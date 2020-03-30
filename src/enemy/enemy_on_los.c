@@ -6,12 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:49:28 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/02 13:53:59 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/30 19:51:24 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "rinfo.h"
+#include "audio.h"
 #include "player.h"
 
 void	shooty_func(t_game *game, t_object *obj, t_player *plr)
@@ -23,6 +24,7 @@ void	shooty_func(t_game *game, t_object *obj, t_player *plr)
 	if (enemy->last_seen > 2000)
 	{
 		damage_player(game, plr, 1);
+		play_sound(game->audio_man, "singleshot");
 		enemy->last_seen = 0;
 	}
 }
