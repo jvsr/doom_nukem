@@ -37,5 +37,6 @@ SRCS = \
 	wall_col \
 	object_col \
 	player_slope \
+	player_won \
 	$(COL_SRCS) \
 	$(ON_EN_SRCS)
