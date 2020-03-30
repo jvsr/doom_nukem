@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/30 14:08:17 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 15:13:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "coord.h"
 # include "rinfo.h"
 
+# define PLAYER_GRAB_DIST 4.0
 # define PLAYER_HEIGHT 9.0
 # define PLAYER_CROUCH 5.0
 # define PLAYER_JUMP 20.0
@@ -86,15 +87,15 @@ void			health_pickup(t_game *game,
 void			key_pickup(t_game *game,
 					t_sector *sec, t_object *obj, t_player *player);
 void			spike_damage(t_game *game,
-							t_sector *sec, t_object *obj, t_player *player);
+					t_sector *sec, t_object *obj, t_player *player);
 t_bool			move_forward(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_backward(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_left(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_right(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_jump(t_game *game, t_player *player, t_bool *jump);
 t_bool			move_down(t_game *game, t_player *player, t_bool *jump);
 t_bool			fly_up(t_game *game, t_player *player, t_bool *jump);
@@ -102,11 +103,11 @@ t_bool			fly_down(t_game *game, t_player *player, t_bool *jump);
 void			damage_player(t_game *game, t_player *player, t_uint32 damage);
 void			player_died(t_game *game);
 t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
-															t_tricoord coord);
+					t_tricoord coord);
 t_list			*check_walls(t_game *game, t_uint8 *col,
-										t_tricoord coord, t_uint32 prev_sector);
+					t_tricoord coord, t_uint32 prev_sector);
 void			check_wall_col(t_tricoord coord, t_player *player,
-						t_wall *wall, t_uint8 *col);
+					t_wall *wall, t_uint8 *col);
 t_bool			wall_col(t_coord c0, t_coord c1, t_wall *wall);
 t_uint32		get_sector_id(t_map *map, t_sector *sec);
 void			check_objects(t_game *game, t_uint8 *col, t_tricoord coord);
@@ -116,6 +117,9 @@ char const		*get_col_name(t_plyrcol *plyrcol);
 void			win_enter(t_game *game, t_sector *cur_sec);
 void			player_won(t_game *game);
 void			ammo_pickup(t_game *game,
-						t_sector *sec, t_object *obj, t_player *player);
+					t_sector *sec, t_object *obj, t_player *player);
+t_wall			*raycast_wall(t_sector *sec, t_player *plyr,
+					t_bool ignore_portal);
+void			click_on_door(t_player *plyr, t_map *map);
 
 #endif

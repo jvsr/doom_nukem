@@ -38,5 +38,8 @@ SRCS = \
 	object_col \
 	player_slope \
 	player_won \
+	raycast_wall \
 	$(COL_SRCS) \
-	$(ON_EN_SRCS)
+	$(ON_EN_SRCS) \
+	click_on_door \
+	

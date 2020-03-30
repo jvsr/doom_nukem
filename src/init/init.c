@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/30 14:12:02 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 15:27:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			map_init(t_game *game)
 	game->map->sectors[0].walls[2] = (t_wall){(t_coord){40, -20}, (t_coord){40, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL, 0};
 	game->map->sectors[0].walls[3] = (t_wall){(t_coord){40, 20}, (t_coord){-20, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL, 0};
 	game->map->sectors[0].walls[4] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 2}, NULL, 0};
-	game->map->sectors[0].walls[4].is_portal = TRUE;
+	game->map->sectors[0].walls[4].is_door = TRUE;
 	game->map->sectors[0].walls[4].window = &game->map->sectors[1];
 	game->map->sectors[0].walls[5] = (t_wall){(t_coord){30, 10}, (t_coord){10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL, 0};
 	game->map->sectors[0].has_ceiling = TRUE;
