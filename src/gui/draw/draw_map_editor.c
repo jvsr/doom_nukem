@@ -24,7 +24,9 @@
 
 static void	get_wall_color(SDL_Color *result, t_editor_wall *wall)
 {
-	if (wall->is_door == TRUE)
+	if (wall->is_hidden_door == TRUE)
+		hex_to_color(result, EDITOR_HIDDEN_DOOR_COLOR);
+	else if (wall->is_door == TRUE)
 		hex_to_color(result, EDITOR_DOOR_COLOR);
 	else if (wall->is_window == TRUE)
 		hex_to_color(result, EDITOR_WINDOW_COLOR);

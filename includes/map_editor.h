@@ -25,6 +25,7 @@
 # define EDITOR_WALL_CORNER_SIZE	6
 # define EDITOR_PREVIEW_PLACE_COLOR	"11AAAA"
 # define EDITOR_BACKGROUND_COLOR 	"333333"
+# define EDITOR_HIDDEN_DOOR_COLOR	"E5AC3A"
 # define EDITOR_DOOR_COLOR			"3F923F"
 # define EDITOR_WINDOW_COLOR		"1982D2"
 # define EDITOR_PORTAL_COLOR		"FF6666"
@@ -58,6 +59,7 @@ typedef struct	s_editor_wall
 	t_coord				corner_1;
 	t_bool				is_portal;
 	t_bool				is_window;
+	t_bool				is_hidden_door;
 	t_bool				is_door;
 	t_anim				left_texture;
 	t_editor_sector		*left_sector;

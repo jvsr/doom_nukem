@@ -93,18 +93,22 @@ static void	toggle_wall(t_game *game, SDL_MouseButtonEvent button,
 		(SDL_Point){button.x, button.y});
 	if (wall == NULL)
 		return ;
-	if (wall->is_door == TRUE)
+	if (wall->is_hidden_door == TRUE)
+	{
 		wall->is_door = FALSE;
-	else if (wall->is_portal == FALSE)
+		wall->is_hidden_door = FALSE;
+	}
+	else if (wall->is_portal == FALSE && wall->is_door == FALSE)
 		wall->is_portal = TRUE;
-	else if (wall->is_window == FALSE)
+	else if (wall->is_window == FALSE && wall->is_door == FALSE)
 		wall->is_window = TRUE;
 	else if (wall->is_door == FALSE)
 	{
 		wall->is_door = TRUE;
 		wall->is_portal = FALSE;
 		wall->is_window = FALSE;
-	}
+	} else if (wall->is_hidden_door == FALSE)
+		wall->is_hidden_door = TRUE;
 	set_elem_redraw(map_editor_elem);
 }
 
