@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/30 15:25:47 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 15:56:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,18 @@ static void	enter_options(t_game *game, t_bool *skip)
 	*skip = TRUE;
 }
 
+static void	manage_keydown(t_game *game,
+									SDL_Event event, t_bool skip_mouse_move)
+{
+	if (!game->player->is_dead && event.key.keysym.sym == SDLK_ESCAPE)
+		enter_options(game, &skip_mouse_move);
+	else if (is_helddown(game->keymap, SDLK_F6)
+		&& event.key.keysym.sym == SDLK_f)
+		game->player->is_flying = !game->player->is_flying;
+	else if (is_helddown(game->keymap, SDLK_e))
+		click_on_door(game->player, game->map);
+}
+
 void		hud_eventstate(t_game *game, SDL_Event event)
 {
 	static t_bool	skip_mouse_move = TRUE;
@@ -80,13 +92,8 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	if (event.type == SDL_MOUSEMOTION)
 		manage_player_angle(game, &skip_mouse_move);
 	if (event.type == SDL_KEYDOWN)
-	{
-		if (!game->player->is_dead && event.key.keysym.sym == SDLK_ESCAPE)
-			enter_options(game, &skip_mouse_move);
-		else if (is_helddown(game->keymap, SDLK_F6)
-		&& event.key.keysym.sym == SDLK_f)
-			game->player->is_flying = !game->player->is_flying;
-		else if (is_helddown(game->keymap, SDLK_e))
-			click_on_door(game->player, game->map);
-	}
+		manage_keydown(game, event, skip_mouse_move);
+	if (event.type == SDL_MOUSEBUTTONDOWN &&
+		event.button.button == SDL_BUTTON_LEFT)
+		player_shoot(game, game->player);
 }

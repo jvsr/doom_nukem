@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 16:06:50 by euan           #+#    #+#                */
-/*   Updated: 2020/03/30 11:01:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 17:17:37 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 #include "types.h"
 #include "cmath.h"
 
-static void	calc_second(t_game *game, t_enemy *en, SDL_Point *val)
+static void	calc_second(t_game *game, t_enemy *en, SDL_Point *val, t_anim *an)
 {
-	t_uint64	time;
+	static t_enemystate	pre = 0;
+	t_uint64			time;
 
 	if (en->state == ENEMY_ATTACK)
 	{
@@ -28,8 +29,16 @@ static void	calc_second(t_game *game, t_enemy *en, SDL_Point *val)
 	time = get_gametime(&game->starttime) % MAX_ANIMATION_TIME;
 	if (en->state == ENEMY_MOVING)
 		val->y = time / (t_uint64)((float)MAX_ANIMATION_TIME * 0.25);
-	else if (en->state == ENEMY_IDLE || en->state == ENEMY_DEAD)
+	else if (en->state == ENEMY_IDLE)
 		val->y = time / (t_uint64)((float)MAX_ANIMATION_TIME * 0.5);
+	else if (en->state == ENEMY_DEAD)
+	{
+		if (an->index.y != 1 || pre != ENEMY_DEAD)
+			val->y = time / (t_uint64)((float)MAX_ANIMATION_TIME * 0.5);
+		else
+			val->y = 1;
+	}
+	pre = en->state;
 }
 
 void		get_enemy_index(t_game *game, void *anim)
@@ -53,6 +62,6 @@ void		get_enemy_index(t_game *game, void *anim)
 		val.x = 1;
 	else
 		val.x = 2;
-	calc_second(game, enemy, &val);
+	calc_second(game, enemy, &val, an);
 	an->index = val;
 }

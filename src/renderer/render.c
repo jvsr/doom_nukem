@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:11:55 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 16:28:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,32 @@ static void	*render_chunk(t_game *game,
 	return (NULL);
 }
 
+static void	render_crosshair(SDL_Surface *dst)
+{
+	const int		csize = dst->w * CROSSHAIR_SIZE;
+	size_t			x;
+	size_t			y;
+	SDL_Point		i;
+	int				*pixels;
+
+	x = (dst->w / 2) - (csize * 0.5);
+	i.x = 0;
+	pixels = dst->pixels;
+	while (i.x < csize)
+	{
+		y = (dst->h / 2) - (csize * 0.5);
+		i.y = 0;
+		while (i.y < csize)
+		{
+			pixels[x + (y * dst->w)] = CROSSHAIR_COLOUR;
+			y++;
+			i.y++;
+		}
+		x++;
+		i.x++;
+	}
+}
+
 void		render(t_game *game, SDL_Surface *dst)
 {
 	t_ttask		*tasks;
@@ -78,4 +104,5 @@ void		render(t_game *game, SDL_Surface *dst)
 	}
 	sdl_join_ttask_all(tasks);
 	sdl_del_ttask_all(&tasks);
+	render_crosshair(dst);
 }

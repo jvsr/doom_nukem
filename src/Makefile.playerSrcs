@@ -42,4 +42,7 @@ SRCS = \
 	$(COL_SRCS) \
 	$(ON_EN_SRCS) \
 	click_on_door \
+	raycast_object \
+	player_shoot \
 	
+

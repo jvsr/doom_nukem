@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/30 10:06:55 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 16:33:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define MAX_ANIMATION_TIME 2000
 # define OBJECT_COL_SIZE 1.0
 # define MAX_HIT 2147483646
+# define CROSSHAIR_SIZE 0.005
+# define CROSSHAIR_COLOUR 0xff000000
 
 typedef struct s_sector	t_sector;
 typedef struct s_game	t_game;

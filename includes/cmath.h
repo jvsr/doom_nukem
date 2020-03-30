@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 13:11:10 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/19 20:43:59 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/30 18:15:58 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ float			lerp_max(float a, float b, float t, float max);
 t_coord			get_perp(t_coord *vec);
 t_coord			*normalize_vector(t_coord *vec);
 t_bool			is_between(float a, float x, float y);
+t_bool			is_between_or_equal(float a, float x, float y);
 
 #endif

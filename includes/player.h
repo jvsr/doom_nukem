@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/30 15:13:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 16:05:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "coord.h"
 # include "rinfo.h"
 
+# define PLAYER_SHOT_DAMAGE 5
 # define PLAYER_GRAB_DIST 4.0
 # define PLAYER_HEIGHT 9.0
 # define PLAYER_CROUCH 5.0
@@ -119,7 +120,11 @@ void			player_won(t_game *game);
 void			ammo_pickup(t_game *game,
 					t_sector *sec, t_object *obj, t_player *player);
 t_wall			*raycast_wall(t_sector *sec, t_player *plyr,
-					t_bool ignore_portal);
+					t_bool ignore_portal, t_bool plyer_cast);
 void			click_on_door(t_player *plyr, t_map *map);
+t_wall			*wall_ray(t_sector *secs,
+					t_sector *prv, t_player *plyr, t_bool *ip);
+t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr);
+void			player_shoot(t_game *game, t_player *plyr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:54:16 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/30 11:01:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 17:12:30 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void		move_enemy(t_object *object, t_sector *s, float a,
 	}
 	object->pos.x += xspeed;
 	object->pos.y += yspeed;
+	((t_enemy*)object->data)->state = ENEMY_MOVING;
 }
 
 void			enemy_move(t_game *game)

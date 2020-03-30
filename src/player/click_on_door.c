@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 15:05:27 by euan           #+#    #+#                */
-/*   Updated: 2020/03/30 15:11:23 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 16:06:15 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		click_on_door(t_player *plyr, t_map *map)
 {
 	t_wall	*ray;
 
-	ray = raycast_wall(map->sectors + plyr->cur_sector, plyr, TRUE);
+	ray = raycast_wall(map->sectors + plyr->cur_sector, plyr, TRUE, TRUE);
 	if (ray == NULL || ray->is_door == FALSE || plyr->keys == 0)
 		return ;
 	plyr->keys--;
