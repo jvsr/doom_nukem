@@ -44,10 +44,12 @@ typedef struct	s_editor_sector
 {
 	float		floor;
 	float		ceil;
+	t_texture	floor_tex;
+	t_texture	ceil_tex;
 	t_bool		has_ceiling;
-	void		(*f_enter)(t_game *game, t_sector *cur_sector);
-	void		(*f_exit)(t_game *game, t_sector *cur_sector);
 	float		light_value;
+	t_bool		has_slope;
+	float		angle;
 }				t_editor_sector;
 
 typedef struct	s_editor_wall
@@ -68,15 +70,9 @@ typedef struct	s_editor_wall
 
 typedef struct	s_editor_object
 {
+	t_obj			type;
 	t_coord			pos;
-	t_coord			size;
-	t_anim			img;
-	void			*data;
-	t_bool			is_enemy;
-	float			col_radius;
-	t_bool			can_col;
 	t_editor_sector	*sector;
-	void			(*on_collide)(t_game*, t_sector*, t_object*, t_player*);
 }				t_editor_object;
 
 typedef struct	s_editor_map
