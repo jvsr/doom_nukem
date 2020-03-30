@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:54:16 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/02 14:08:47 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/30 11:01:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void		move_enemy(t_object *object, t_sector *s, float a,
 	float	xspeed;
 	float	yspeed;
 
+	object->img.offset = wrap_angle(a);
 	xspeed = 0.15 * cosf(a * PI_R);
 	xspeed = lerp_max(0, xspeed, lastframe / BASE_FRAME_TIME, INFINITY);
 	yspeed = 0.15 * sinf(a * PI_R);

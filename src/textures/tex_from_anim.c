@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   tex_from_anim.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
+/*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 14:26:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:03:35 by euan          ########   odam.nl         */
+/*   Created: 2020/03/30 11:05:07 by euan           #+#    #+#                */
+/*   Updated: 2020/03/30 11:07:42 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include "types.h"
 #include "rinfo.h"
 
-SDL_Surface		*tex_from_anim(t_game *game, t_anim *anim)
+t_texture		tex_from_anim(t_game *game, t_anim *anim)
 {
 	anim->set_index(game, (void*)anim);
 	if (anim->index.x == 0)
-		return (get_texture(game, anim->left[anim->index.y]));
+		return (anim->left[anim->index.y]);
 	else if (anim->index.x == 1)
-		return (get_texture(game, anim->right[anim->index.y]));
+		return (anim->right[anim->index.y]);
 	else if (anim->index.x == 2)
-		return (get_texture(game, anim->front[anim->index.y]));
+		return (anim->front[anim->index.y]);
 	else if (anim->index.x == 3)
-		return (get_texture(game, anim->back[anim->index.y]));
-	return (get_texture(game, anim->actions[anim->index.y]));
+		return (anim->back[anim->index.y]);
+	return (anim->actions[anim->index.y]);
 }

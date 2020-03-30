@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/29 16:48:41 by euan           #+#    #+#                */
-/*   Updated: 2020/03/29 16:54:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:07:27 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ void		add_map(t_map *map, t_binary *bin)
 	add_secs(map, bin);
 	add_char((char)map->has_skybox, bin);
 	add_int(map->skybox, bin);
+	add_char((char)map->has_won, bin);
 }

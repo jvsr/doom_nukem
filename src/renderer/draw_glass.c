@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 15:55:47 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:04:57 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:21:49 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	render_decal_list(const t_rinfo *rinfo,
 	while (tmp)
 	{
 		d_tmp = tmp->content;
-		srf = tex_from_anim(rinfo->game, &d_tmp->texture);
+		srf = sdl_from_anim(rinfo->game, &d_tmp->texture);
 		fvals[1] = d_tmp->size.x / win->len;
 		ivals[3] = (wrap_float(win->perc - d_tmp->pos.x, 0, fvals[1]) /
 					fvals[1]) * srf->w;
@@ -109,7 +109,7 @@ void		draw_glass(t_rinfo *rinfo,
 					ft_constrain(bounds[0]->y, 0, rinfo->dst->h)};
 	win.c_ybounds.x = ft_constrain(bounds[1]->x, bounds[0]->x, bounds[0]->y);
 	win.c_ybounds.y = ft_constrain(bounds[1]->y, win.c_ybounds.x, bounds[0]->y);
-	win.tex = tex_from_anim(rinfo->game, &hit->wall->win_tex);
+	win.tex = sdl_from_anim(rinfo->game, &hit->wall->win_tex);
 	win.t_pixels = win.tex->pixels;
 	win.len = get_distance(&hit->wall->corner_0, &hit->wall->corner_1);
 	win.perc = get_distance(&hit->pos, &hit->wall->corner_0) / win.len;

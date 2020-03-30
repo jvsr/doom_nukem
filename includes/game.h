@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2020/03/27 14:08:14 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:16:52 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "gametime.h"
 
 typedef struct s_gui			t_gui;
-typedef struct s_level			t_level;
 typedef struct s_player			t_player;
 typedef struct s_hashmap		t_hashmap;
 typedef struct s_audio_man		t_audio_man;
@@ -47,7 +46,6 @@ typedef struct	s_game
 	SDL_Window		*window;
 	SDL_Surface		*surface;
 	t_gui			*ui;
-	t_level			*level;
 	t_map			*map;
 	t_campaign		*campaign;
 	t_player		*player;
@@ -67,6 +65,7 @@ void			loop(t_game *game);
 void			handle_event(t_game *game, SDL_Event event);
 void			check_quit(t_game *game, SDL_Event event);
 void			*display_splash(t_game *game, char *loc);
+void			load_map(t_game *game, t_map *map, t_player *plyr);
 void			loader(t_game *game);
 void			quit(int exit_code);
 

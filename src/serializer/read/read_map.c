@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/29 16:56:27 by euan           #+#    #+#                */
-/*   Updated: 2020/03/29 17:23:59 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:07:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ t_map			*read_map(t_binary_read *bin_r)
 	map->sectors = read_secs(map, bin_r);
 	map->has_skybox = (t_bool)read_char(bin_r);
 	map->skybox = (t_texture)read_int(bin_r);
+	map->has_won = (t_bool)read_char(bin_r);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 10:44:13 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:04:45 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:21:16 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void			loop_objs(t_objrend *obj,
 	oren.c_xbounds.x = ft_constrain(oren.xbounds.x, rin->begin, rin->end);
 	oren.c_xbounds.y = ft_constrain(oren.xbounds.y, oren.c_xbounds.x, rin->end);
 	x = oren.c_xbounds.x;
-	tex = tex_from_anim(rin->game, &obj->obj->img);
+	tex = sdl_from_anim(rin->game, &obj->obj->img);
 	while (x < (size_t)oren.c_xbounds.y)
 	{
 		if (x >= rin->begin && x < rin->end && obj->dist <

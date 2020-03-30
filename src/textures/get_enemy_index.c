@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 16:06:50 by euan           #+#    #+#                */
-/*   Updated: 2020/03/04 12:27:07 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/03/30 11:01:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		get_enemy_index(t_game *game, void *anim)
 	an = anim;
 	enemy = ((t_object*)an->data)->data;
 	an = (t_anim*)anim;
-	angle = wrap_float(an->angle + an->offset, 0, 360);
+	angle = wrap_float(an->angle - an->offset - 180, 0, 360);
 	if (enemy->state > ENEMY_MOVING)
 		val.x = 4;
 	else if (angle >= 45 && angle < 135)

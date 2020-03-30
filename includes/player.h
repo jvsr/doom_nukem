@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/27 22:31:19 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:13:47 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ void			check_objects(t_game *game, t_uint8 *col, t_tricoord coord);
 float			player_slope(t_player *pyr, t_sector *sec, t_coord *pos);
 t_plyrcol		*get_col_from_name(const char *name);
 char const		*get_col_name(t_plyrcol *plyrcol);
+void			win_enter(t_game *game, t_sector *cur_sec);
 
 #endif

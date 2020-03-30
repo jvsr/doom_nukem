@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:08:39 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:37:02 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,9 @@ int				get_slope(t_hitem *item,
 						t_wall *sw, float ang, t_rinfo *rin);
 t_coord			get_vec_from_x(t_rinfo *rin, int x);
 void			draw_sfloor(t_rinfo *rin, t_hinfo *info);
+void			free_sector(t_sector *sector);
+void			free_obj(void *obj, size_t size);
+void			free_wall(t_wall *wall);
+t_bool			del_obj(t_object *obj, t_sector *sec);
 
 #endif

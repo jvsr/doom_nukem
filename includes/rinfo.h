@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/29 12:55:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 10:06:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct	s_map
 	t_uint64	sector_count;
 	t_bool		has_skybox;
 	t_texture	skybox;
+	t_bool		has_won;
 }				t_map;
 
 typedef struct	s_ritem
