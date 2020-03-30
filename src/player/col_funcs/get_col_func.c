@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 22:18:13 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 22:29:05 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 14:09:57 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 static t_tablepair const	g_plyrcol[] = {
 	{"health_pickup", health_pickup},
 	{"key_pickup", key_pickup},
-	{"spike_damage", spike_damage}
+	{"spike_damage", spike_damage},
+	{"ammo_pickup", ammo_pickup}
 };
 
 char const	*get_col_name(t_plyrcol *plyrcol)

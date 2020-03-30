@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/27 14:41:57 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 14:12:02 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ void			map_init(t_game *game)
 	game->map->sectors[0].objects->next->next->next = ft_lstnew(o, sizeof(t_object*));
 	o = (t_object*)ft_memalloc(sizeof(t_object));
 	game->map->sectors[0].objects->next->next->next->next = ft_lstnew(o, sizeof(t_object*));
+	o = (t_object*)ft_memalloc(sizeof(t_object));
+	game->map->sectors[0].objects->next->next->next->next->next = ft_lstnew(o, sizeof(t_object*));
+
 
 	t_object *obj = game->map->sectors[0].objects->content;
 	obj->pos = (t_coord){5, 0};
@@ -155,6 +158,16 @@ void			map_init(t_game *game)
 	obj->is_enemy = FALSE;
 	obj->col_radius = 1.3;
 	obj->on_collide = spike_damage;
+	obj->data = ft_memalloc(sizeof(t_uint64));
+
+	obj = game->map->sectors[0].objects->next->next->next->next->next->content;
+	obj->pos = (t_coord){2, 5};
+	obj->size = (t_coord){4, 4};
+	obj->img = single_init(TEXUTRE_AMMO, obj);
+	obj->can_col = TRUE;
+	obj->is_enemy = FALSE;
+	obj->col_radius = 1.0;
+	obj->on_collide = ammo_pickup;
 	obj->data = ft_memalloc(sizeof(t_uint64));
 
 	t_decal *decal = ft_memalloc(sizeof(t_decal));

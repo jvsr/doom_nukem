@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 22:17:43 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 14:04:20 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef enum				e_texture
 	TEXTURE_DOOR,
 	TEXTURE_START,
 	TEXTURE_END,
+	TEXUTRE_AMMO,
 	TEXTURE_ENEMY0_F0,
 	TEXTURE_ENEMY0_F1,
 	TEXTURE_ENEMY0_F2,
@@ -101,6 +102,7 @@ typedef enum				e_obj
 	O_HEALTH_PICKUP,
 	O_START,
 	O_END,
+	O_AMMO,
 	O_COUNT
 }							t_obj;
 

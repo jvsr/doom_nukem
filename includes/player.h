@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/30 12:41:29 by euan          ########   odam.nl         */
+/*   Updated: 2020/03/30 14:08:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ t_plyrcol		*get_col_from_name(const char *name);
 char const		*get_col_name(t_plyrcol *plyrcol);
 void			win_enter(t_game *game, t_sector *cur_sec);
 void			player_won(t_game *game);
+void			ammo_pickup(t_game *game,
+						t_sector *sec, t_object *obj, t_player *player);
 
 #endif
