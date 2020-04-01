@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster       #+#    #+#                */
-/*   Updated: 2020/04/01 11:43:32 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/01 12:00:56 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_editor_wall
 	t_bool				is_window;
 	t_bool				is_hidden_door;
 	t_bool				is_door;
-	t_editor_sector		sectors[2];
+	t_editor_sector		*sectors[2];
 }				t_editor_wall;
 
 typedef struct	s_editor_object
