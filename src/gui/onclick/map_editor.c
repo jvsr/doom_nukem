@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 15:57:57 by pholster       #+#    #+#                */
-/*   Updated: 2020/03/27 15:57:57 by pholster      ########   odam.nl         */
+/*   Updated: 2020/04/01 14:27:06 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_obj	get_object(t_game *game)
 	const t_transform	*elem = get_gui_child(game->ui, "mapEditorObjectBlock");
 
 	if (elem->user_data == NULL)
-		return (TEXTURE_INVALID);
+		return ((t_obj)-1);
 	return (*(t_obj*)elem->user_data);
 }
 

@@ -6,9 +6,11 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 15:47:36 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 16:33:37 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/01 14:29:08 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft/ft_mem.h"
 
 #include "serializer.h"
 #include "textures.h"
@@ -19,6 +21,7 @@ static t_anim	other_obj(t_objanim oa, t_object *obj, float off, t_texture s)
 {
 	t_anim 	anim;
 
+	ft_bzero(&anim, sizeof(t_anim));
 	if (oa == OA_CHAIR)
 		return (chair_init(obj, off));
 	else if (oa == OA_ENEMY)

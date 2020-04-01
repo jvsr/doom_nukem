@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 14:37:18 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/27 14:37:18 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/04/01 14:27:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	free_wall(void *wall, size_t size)
 
 	(void)size;
 	w = wall;
-	if (w->decals != NULL)
-		ft_lstdel(&w->decals, ft_lstdelmem);
+	// if (w->decals != NULL)
+	// 	ft_lstdel(&w->decals, ft_lstdelmem);
 	ft_memdel((void**)&w);
 }
 

@@ -26,3 +26,4 @@ SRCS = \
 	del_wall \
 	wall_is_bigger \
 	check_hit \
+	convert \
