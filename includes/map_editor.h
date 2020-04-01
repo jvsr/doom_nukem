@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster       #+#    #+#                */
-/*   Updated: 2020/01/17 12:56:47 by pholster      ########   odam.nl         */
+/*   Updated: 2020/04/01 11:43:32 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,7 @@ typedef struct s_list		t_list;
 
 typedef struct	s_editor_sector
 {
-	float		floor;
-	float		ceil;
-	t_texture	floor_tex;
-	t_texture	ceil_tex;
-	t_bool		has_ceiling;
-	float		light_value;
-	t_bool		has_slope;
-	float		angle;
+	t_list		*walls;
 }				t_editor_sector;
 
 typedef struct	s_editor_wall
@@ -61,13 +54,7 @@ typedef struct	s_editor_wall
 	t_bool				is_window;
 	t_bool				is_hidden_door;
 	t_bool				is_door;
-	t_anim				left_texture;
-	t_editor_sector		*left_sector;
-	t_anim				right_texture;
-	t_editor_sector		*right_sector;
-	t_anim				win_tex;
-	t_coord				perc;
-	t_list				*decals;
+	t_editor_sector		sectors[2];
 }				t_editor_wall;
 
 typedef struct	s_editor_object
