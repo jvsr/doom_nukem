@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 17:26:55 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 21:23:24 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/01 11:19:34 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void		add_decal_list(t_list *lst, t_binary *bin)
 	con.l = 0;
 	add_type(&bin->header, &bin->h_size, &con, sizeof(t_uint64));
 	pre_c_size = bin->c_size;
-	add_decal_list(lst->content, bin);
+	add_decal(lst->content, bin);
 	if (lst->next != NULL)
-		add_list_gen(lst->next, bin);
+		add_decal_list(lst->next, bin);
 	pre_c_size = bin->c_size - pre_c_size;
 	ft_memcpy(bin->header + pre_h_size, &pre_c_size, sizeof(t_uint64));
 }
