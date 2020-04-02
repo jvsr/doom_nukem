@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster       #+#    #+#                */
-/*   Updated: 2020/04/01 12:00:56 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/02 15:15:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_list		t_list;
 typedef struct	s_editor_sector
 {
 	t_list		*walls;
+	t_list		*objects;
 }				t_editor_sector;
 
 typedef struct	s_editor_wall
