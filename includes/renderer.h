@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:08:39 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/02 11:27:23 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,12 @@ int				get_slope(t_hitem *item,
 						t_wall *sw, float ang, t_rinfo *rin);
 t_coord			get_vec_from_x(t_rinfo *rin, int x);
 void			draw_sfloor(t_rinfo *rin, t_hinfo *info);
+t_object		*new_chair(t_coord *pos, float offset, t_sector *parent);
+t_object		*new_enemy(t_coord *pos, t_sector *parent);
+t_object		*new_spike(t_coord *pos, t_sector *parent);
+t_object		*new_key(t_coord *pos, t_sector *parent);
+t_object		*new_health_pickup(t_coord *pos, t_sector *parent);
+t_object		*new_start(t_coord *pos, t_sector *parent);
+t_object		*new_end(t_coord *pos, t_sector *parent);
 
 #endif
