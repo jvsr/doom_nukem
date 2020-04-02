@@ -18,9 +18,14 @@ PREFIX =
 # These will be automaticly prefixed with ft_ and sufixed with .c
 FT_SRCS =
 
+OBJ_SRCS = new_chair new_enemy new_spike new_key new_health_pickup \
+			new_start
+OBJ_SRCS := $(OBJ_SRCS:%=objects/%)
+
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = render get_hit draw_skybox new_rendobj sort_objs \
 		set_ybounds decals_on_vline get_bounds get_hits render_hits \
 		draw_vline render_objs draw_cline draw_wall draw_glass draw_obj \
-		map_delete draw_floor draw_ceil get_slope draw_sfloor
+		map_delete draw_floor draw_ceil get_slope draw_sfloor \
+		$(OBJ_SRCS)
