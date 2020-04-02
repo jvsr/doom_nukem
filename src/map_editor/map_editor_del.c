@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 14:37:18 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/04/01 14:27:22 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/02 15:30:21 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,27 @@ static void	free_wall(void *wall, size_t size)
 
 	(void)size;
 	w = wall;
-	// if (w->decals != NULL)
-	// 	ft_lstdel(&w->decals, ft_lstdelmem);
 	ft_memdel((void**)&w);
 }
 
 static void	free_obj(void *obj, size_t size)
 {
-	t_object *o;
+	t_editor_object *o;
 
 	(void)size;
 	o = obj;
-	if (o->data != NULL)
-		ft_memdel(&o->data);
 	ft_memdel((void**)&obj);
+}
+
+static void free_sector(void *sec, size_t size)
+{
+	t_editor_sector *sc;
+
+	sc = sec;
+	(void)size;
+	ft_lstdel(&sc->objects, NULL);
+	ft_lstdel(&sc->walls, NULL);
+	ft_memdel((void**)&sec);
 }
 
 void		map_editor_del(t_editor_map **editor_map)
@@ -43,6 +50,6 @@ void		map_editor_del(t_editor_map **editor_map)
 		return ;
 	ft_lstdel(&(*editor_map)->walls, free_wall);
 	ft_lstdel(&(*editor_map)->objects, free_obj);
-	ft_lstdel(&(*editor_map)->sectors, ft_lstdelmem);
+	ft_lstdel(&(*editor_map)->sectors, free_sector);
 	ft_memdel((void**)editor_map);
 }
