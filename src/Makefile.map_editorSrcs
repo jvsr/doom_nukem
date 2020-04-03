@@ -12,18 +12,25 @@ HEADERS =
 CCFLAGS +=
 
 # Source file prefix
-PREFIX = map_editor_
+PREFIX = 
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = \
-	new \
-	del \
-	new_wall \
-	add_wall \
-	remove_last_wall \
-	snap_to_grid \
-	del_wall \
-	wall_is_bigger \
-	check_hit \
-	convert \
+	map_editor_new \
+	map_editor_del \
+	map_editor_new_wall \
+	map_editor_add_wall \
+	map_editor_remove_last_wall \
+	map_editor_snap_to_grid \
+	map_editor_del_wall \
+	map_editor_wall_is_bigger \
+	map_editor_check_hit \
+	map_editor_convert \
+	map_editor_clean \
+	map_objects \
+	map_side_room \
+	map_editor_clean_funcs0 \
+	map_editor_clean_funcs1 \
+	get_connectors \
+	

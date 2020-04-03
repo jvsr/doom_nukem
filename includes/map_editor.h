@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster       #+#    #+#                */
-/*   Updated: 2020/04/02 17:12:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/03 13:10:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ typedef struct	s_editor_map
 	t_texture	skybox;
 }				t_editor_map;
 
+typedef struct	s_angle_data
+{
+	float			ang;
+	t_list			*lst_elem;
+	t_editor_wall	*wall;
+}				t_angle_data;
+
 t_editor_map	*map_editor_new(void);
 void			map_editor_del(t_editor_map **editor_map);
 
@@ -93,5 +100,20 @@ t_bool			map_editor_wall_is_bigger(t_editor_wall *wall,
 					t_editor_wall *other);
 t_editor_wall	*map_editor_check_hit(t_transform *map_editor_elem,
 					t_editor_map *editor_map, SDL_Point mouse_pos);
+t_bool			map_editor_clean(t_editor_map *map);
+void			map_objects(t_list *secs, t_list *objs);
+t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first);
+t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first);
+t_list			*get_walls_at_wall(t_list *prv,
+					t_editor_wall *wall, t_list *walls);
+t_coord			*get_corner(t_editor_wall *wall, t_list *prv);
+t_list			*get_connectors(t_list *walls);
+t_list			*get_walls_at_point(t_coord *point,
+					t_list *walls, t_editor_wall *cur);
+t_bool			walls_equal(t_list *w0, t_list *w1);
+void			clean_up_walls(t_editor_map *map);
+t_list			*get_correct_sectors(t_editor_wall *con, t_list *walls);
+void			remove_from_list(t_list *head, t_list *elm);
+t_coord			get_wall_vector(t_editor_wall *main, t_editor_wall *sec);
 
 #endif

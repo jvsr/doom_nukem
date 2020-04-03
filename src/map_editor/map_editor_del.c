@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 14:37:18 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/04/02 15:30:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/03 11:44:25 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ static void	free_wall(void *wall, size_t size)
 
 static void	free_obj(void *obj, size_t size)
 {
-	t_editor_object *o;
-
 	(void)size;
-	o = obj;
 	ft_memdel((void**)&obj);
 }
 
