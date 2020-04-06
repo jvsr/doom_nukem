@@ -28,6 +28,7 @@ SRCS = \
 	map_editor_wall_is_bigger \
 	map_editor_check_hit \
 	map_editor_convert \
+	map_editor_rev_convert \
 	map_editor_clean \
 	map_objects \
 	map_side_room \
