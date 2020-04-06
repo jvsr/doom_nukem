@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/30 14:19:41 by euan           #+#    #+#                */
-/*   Updated: 2020/03/30 18:27:03 by euan          ########   odam.nl         */
+/*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 13:08:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_bool	collides(t_object *obj, t_player *plyr)
 	vec = (t_coord){-vec.x, -vec.y};
 	angs.x = get_angle_between_points(&plyr->pos, &(t_coord){obj->pos.x +
 		(vec.x * obj->col_radius), obj->pos.y + (vec.y * -obj->col_radius)});
-	angs.y = get_angle_between_points(&plyr->pos, 
+	angs.y = get_angle_between_points(&plyr->pos,
 		&(t_coord){obj->pos.x + (vec.y * obj->col_radius), obj->pos.y +
 		(vec.y * -obj->col_radius)});
 	return (is_between_fov(plyr->angle,
@@ -70,7 +70,7 @@ static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr)
 	return (obj);
 }
 
-t_object	*raycast_object(t_game *game, t_map *map, t_player *plyr)
+t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 {
 	t_sector	*sec;
 	t_coord		range;
