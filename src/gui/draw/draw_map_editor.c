@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/04 13:29:55 by ehollidg       #+#    #+#                */
+/*   Created: 2019/12/04 13:29:55 by ehollidg      #+#    #+#                 */
 /*   Updated: 2019/12/04 13:29:55 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -80,40 +80,50 @@ static void	draw_grid(SDL_Surface *dst, SDL_Point pos)
 	}
 }
 
+static void	draw_cursor(SDL_Surface *dst, t_game *game, t_transform *elem,
+				SDL_Point mouse_pos)
+{
+	SDL_Surface			*text;
+	SDL_Surface			*scaled;
+	SDL_Color			preview_color;
+	t_map_editor const	*map_editor = elem->gui_elem.map_editor;
+
+	if (map_editor->selected_object != O_INVALID)
+	{
+		text = get_texture(game, get_tex_for_obj(map_editor->selected_object));
+		scaled = sdl_create_surface_default((SDL_Point){20, 20});
+		sdl_merge_surface_alpha_scaled(scaled, text);
+		sdl_merge_surface_alpha(dst, scaled, (SDL_Point)
+			{mouse_pos.x - (scaled->w / 2), mouse_pos.y - (scaled->h / 2)});
+		SDL_FreeSurface(scaled);
+		return ;
+	}
+	map_editor_snap_to_grid(elem, &mouse_pos);
+	mouse_pos = (SDL_Point){mouse_pos.x - map_editor->pos.x,
+		mouse_pos.y - map_editor->pos.y};
+	hex_to_color(&preview_color, EDITOR_PREVIEW_PLACE_COLOR);
+	sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
+	if (map_editor->show_last_click)
+	{
+		mouse_pos = map_editor->last_click;
+		mouse_pos = (SDL_Point){ map_editor->last_click.x - map_editor->pos.x,
+			map_editor->last_click.y - map_editor->pos.y};
+		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
+	}
+}
+
 void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 {
 	SDL_Point		mouse_pos;
-	SDL_Color		preview_color;
 	SDL_Color		background_color;
 	SDL_Point const	pos = elem->gui_elem.map_editor->pos;
-
-	(void)game;
-	hex_to_color(&background_color, EDITOR_BACKGROUND_COLOR);
-	hex_to_color(&preview_color, EDITOR_PREVIEW_PLACE_COLOR);
-	sdl_fill_surface_color(dst, background_color);
-	draw_grid(dst, pos);
-	draw_wall(dst, game->editor_map->walls, pos);
 
 	SDL_GetMouseState(&mouse_pos.x, &mouse_pos.y);
 	mouse_pos.x = ft_constrain(mouse_pos.x, 0, elem->abs_dim.x);
 	mouse_pos.y = ft_constrain(mouse_pos.y, 0, elem->abs_dim.y);
-	map_editor_snap_to_grid(elem, &mouse_pos);
-	mouse_pos.x -= pos.x;
-	mouse_pos.y -= pos.y;
-	if (elem->gui_elem.map_editor->selected_object != O_INVALID)
-	{
-		SDL_Surface	*text = get_texture(game, get_tex_for_obj(elem->gui_elem.map_editor->selected_object));
-
-		sdl_merge_surface_alpha(dst, text,
-			(SDL_Point){mouse_pos.x - (text->w / 2), mouse_pos.y - (text->h / 2)});
-	}
-	else
-		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
-	if (elem->gui_elem.map_editor->show_last_click)
-	{
-		mouse_pos = elem->gui_elem.map_editor->last_click;
-		mouse_pos.x -= pos.x;
-		mouse_pos.y -= pos.y;
-		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
-	}
+	hex_to_color(&background_color, EDITOR_BACKGROUND_COLOR);
+	sdl_fill_surface_color(dst, background_color);
+	draw_grid(dst, pos);
+	draw_wall(dst, game->editor_map->walls, pos);
+	draw_cursor(dst, game, elem, mouse_pos);
 }

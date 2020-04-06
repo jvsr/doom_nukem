@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/17 12:56:47 by pholster       #+#    #+#                */
+/*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
 /*   Updated: 2020/04/03 13:10:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -89,6 +89,8 @@ t_editor_wall	*map_editor_new_wall(t_editor_map *editor_map, t_coord corner_0,
 					t_coord corner_1);
 void			map_editor_add_wall(t_editor_map *editor_map,
 					t_editor_wall *wall);
+void			map_editor_add(t_game *game, SDL_Point mouse_pos,
+					t_transform *map_editor_elem);
 
 void			map_editor_snap_to_grid(t_transform *map_editor_elem,
 					SDL_Point *point);
