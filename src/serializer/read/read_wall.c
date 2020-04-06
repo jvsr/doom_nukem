@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/27 21:54:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/29 13:07:43 by euan          ########   odam.nl         */
+/*   Created: 2020/03/27 21:54:04 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 11:58:27 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_wall		*read_wall(t_binary_read *bin_r, t_map *map)
 {
-	t_wall *wall;
+	t_wall	*wall;
 	int		isec;
 
 	wall = ft_memalloc(sizeof(t_wall));

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/27 15:47:36 by euan           #+#    #+#                */
-/*   Updated: 2020/04/01 11:25:20 by jvisser       ########   odam.nl         */
+/*   Created: 2020/03/27 15:47:36 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 11:59:08 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static t_anim	other_obj(t_objanim oa, t_object *obj, float off, t_texture s)
 {
-	t_anim 	anim;
+	t_anim anim;
 
 	ft_bzero(&anim, sizeof(t_anim));
 	if (oa == OA_CHAIR)
