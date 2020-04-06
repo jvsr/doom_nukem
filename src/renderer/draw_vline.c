@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/22 15:35:04 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
+/*   Created: 2020/02/22 15:35:04 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 10:40:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			draw_vline(t_rinfo *rinfo,
 	{
 		item->ybnds.x -= get_slope(item, item->hit.sect->swall,
 			item->hit.sect->angle, rinfo);
-		item->ybnds.x += (item->hit.sect->floor / item->st.x) * rinfo->dst->h;	
+		item->ybnds.x += (item->hit.sect->floor / item->st.x) * rinfo->dst->h;
 	}
 	if (item->ybnds.y < rinfo->dst->h && !item->hit.sect->has_ceiling)
 		draw_skybox(index, rinfo->dst, rinfo->game,
@@ -77,7 +77,7 @@ void			draw_vline(t_rinfo *rinfo,
 	if (!item->hit.wall->is_portal && item->hit.sect->ceil > item->y.x &&
 			item->hit.sect->floor < item->y.y)
 		draw_wall(rinfo,
-						(SDL_Point*[2]){bounds, &item->ybnds}, index, &item->hit);
+					(SDL_Point*[2]){bounds, &item->ybnds}, index, &item->hit);
 	else if (item->hit.sect->ceil > item->y.x &&
 				item->hit.sect->floor < item->y.y)
 		draw_portal(rinfo, item, index, (SDL_Point*[2]){bounds, &item->ybnds});

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/27 14:37:18 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/30 10:33:38 by euan          ########   odam.nl         */
+/*   Created: 2020/02/27 14:37:18 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 10:38:50 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_sector(t_sector *sector)
 	ft_memdel((void**)&sector->walls);
 }
 
-void		delete_map(t_map **map)
+void	delete_map(t_map **map)
 {
 	size_t	i;
 

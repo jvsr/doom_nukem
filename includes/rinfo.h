@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/30 16:33:46 by euan          ########   odam.nl         */
+/*   Created: 2020/01/07 16:15:51 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 11:14:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,5 +242,11 @@ typedef struct	s_odraw
 	size_t		x;
 	t_rinfo		*rinfo;
 }				t_odraw;
+
+typedef struct	s_rhits
+{
+	size_t		index;
+	SDL_Point	*bounds;
+}				t_rhits;
 
 #endif

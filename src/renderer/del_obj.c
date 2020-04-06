@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/30 10:28:44 by euan           #+#    #+#                */
-/*   Updated: 2020/03/30 10:36:35 by euan          ########   odam.nl         */
+/*   Created: 2020/03/30 10:28:44 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 10:59:31 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_bool	del(t_list *prv, t_list *cur)
 	return (TRUE);
 }
 
-t_bool		del_obj(t_object *obj, t_sector *sec)
+t_bool			del_obj(t_object *obj, t_sector *sec)
 {
 	t_list *lst;
 	t_list *prv;

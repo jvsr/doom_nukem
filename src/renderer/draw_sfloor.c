@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:04:25 by euan          ########   odam.nl         */
+/*   Created: 2020/02/27 16:16:04 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 10:39:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include "color.h"
 #include "game.h"
 
-static void		draw_x(t_rinfo *rin,
-					const t_hit *hit, const t_coord fvals, const SDL_Point ivals)
+static void		draw_x(t_rinfo *rin, const t_hit *hit,
+									const t_coord fvals, const SDL_Point ivals)
 {
 	SDL_Surface *srf;
 	int			*t_pixels;
@@ -76,12 +76,12 @@ static float	get_height(t_rinfo *rin, t_hinfo *info, t_wall *sw)
 				sw->corner_0.y + (v1.y * tmp * tang)};
 	tmp = get_distance(&v2, &info->hits->hit.pos);
 	tang = tan(PI_R * info->sec->angle);
-	return ((tang * tmp) + rin->game->player->player_height + rin->game->player->heightoffset -
-			info->sec->floor);
+	return ((tang * tmp) + rin->game->player->player_height +
+		rin->game->player->heightoffset - info->sec->floor);
 }
 
 static void		set_cybounds(SDL_Point *c_ybounds,
-											SDL_Point *pre_bound, SDL_Point *ybnds)
+										SDL_Point *pre_bound, SDL_Point *ybnds)
 {
 	c_ybounds->x = ft_constrain(pre_bound->x, 0, ybnds->x);
 	c_ybounds->y = ft_constrain(pre_bound->y, c_ybounds->x, ybnds->x);
@@ -89,8 +89,8 @@ static void		set_cybounds(SDL_Point *c_ybounds,
 
 void			draw_sfloor(t_rinfo *rin, t_hinfo *info)
 {
-	SDL_Point		i;
-	SDL_Point		c_ybounds;
+	SDL_Point	i;
+	SDL_Point	c_ybounds;
 	t_coord		disintens;
 	t_coord		anstep;
 
@@ -99,9 +99,10 @@ void			draw_sfloor(t_rinfo *rin, t_hinfo *info)
 	while (i.y < info->floor_range.y)
 	{
 		i.x = 0;
-		disintens.x = tan(anstep.x * PI_R) * get_height(rin, info, info->sec->swall) * 0.25;
+		disintens.x = tan(anstep.x * PI_R) *
+			get_height(rin, info, info->sec->swall) * 0.25;
 		disintens.y = ((MAX_LIGHT_DIST - clamp_float(disintens.x, 0,
-					MAX_LIGHT_DIST)) / MAX_LIGHT_DIST);
+			MAX_LIGHT_DIST)) / MAX_LIGHT_DIST);
 		while (i.x < (int)info->size)
 		{
 			set_cybounds(&c_ybounds, &info->hits[i.x].pre_bounds,
