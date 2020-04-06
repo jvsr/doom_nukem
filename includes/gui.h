@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/27 15:38:58 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/20 15:19:05 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/27 15:38:58 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:40:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_image		t_image;
 typedef struct s_button		t_button;
 typedef struct s_panel		t_panel;
 typedef struct s_gview		t_gview;
+typedef struct s_list		t_list;
 
 typedef void	(t_onclick)(t_game *, t_transform *);
 
@@ -197,5 +198,8 @@ const char		*get_font_type_name(t_font_type font_type);
 t_font_type		get_font_type_value(const char *name);
 const char		*get_gui_type_name(t_gui_type gui_type);
 t_gui_type		get_gui_type_value(const char *name);
+t_bool			get_focus(t_game *game);
+void			remove_maps(t_game *game);
+t_list			*skip_page(t_list *maps, size_t page);
 
 #endif
