@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/03 16:37:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/02 13:56:27 by jvisser       ########   odam.nl         */
+/*   Created: 2019/12/03 16:37:51 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:49:01 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ void		loop_game(t_game *game)
 	loop_game_gui(game);
 	if (game->player->is_dead)
 		player_died(game);
+	if (game->map->has_won)
+		player_won(game);
 }

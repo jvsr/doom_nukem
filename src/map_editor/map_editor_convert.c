@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/07 12:28:31 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 16:00:21 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static void fill_wall(t_wall *cur_w, t_editor_wall *e_w)
 	cur_w->is_portal = e_w->is_portal;
 	cur_w->is_window = e_w->is_window;
 	cur_w->is_door = e_w->is_door;
-	cur_w->texture = single_init(TEXTURE_BRICK_WALL, NULL);
+	if (e_w->is_door && e_w->is_hidden_door == FALSE)
+		cur_w->texture = single_init(TEXTURE_DOOR, NULL);
+	else
+		cur_w->texture = single_init(TEXTURE_BRICK_WALL, NULL);
 	cur_w->win_tex = single_init(TEXTURE_GLASS, NULL);
 	cur_w->decals = NULL;
 }
@@ -57,13 +60,13 @@ static void	add_walls(t_sector *headS, t_sector *map_s, t_editor_sector *cur_s)
 		}
 		i++;
 	}
-} // TODO(jvsr) incongruency between is_hidden_door.
+}
 
 static void	add_objects(t_sector *map_s, t_editor_sector *cur_s)
 {
 	t_list *obj;
 	t_editor_object *cur_obj;
-	
+
 	obj = cur_s->objects;
 	map_s->object_count = 0;
 	while (obj != NULL)
@@ -79,7 +82,7 @@ static void	add_objects(t_sector *map_s, t_editor_sector *cur_s)
 		else if (cur_obj->type == O_HEALTH_PICKUP)
 			new_health_pickup(&cur_obj->pos, map_s);
 		else if (cur_obj->type == O_KEY)
-			new_key(&cur_obj->pos, map_s);	
+			new_key(&cur_obj->pos, map_s);
 		else if (cur_obj->type == O_SPIKE)
 			new_spike(&cur_obj->pos, map_s);
 		else if (cur_obj->type == O_START)
@@ -130,5 +133,5 @@ t_map	*map_editor_convert(t_editor_map *m_edit)
 		add_objects(&(m->sectors[i]), cur_s);
 		i++;
 	}
-	return (m);	
+	return (m);
 }

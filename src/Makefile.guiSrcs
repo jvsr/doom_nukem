@@ -19,7 +19,9 @@ PREFIX =
 ONCLICK_SRCS = mainmenu \
 				options \
 				mission \
+				mission1 \
 				load_missions \
+				load_missions1 \
 				fov \
 				hudfov \
 				music \

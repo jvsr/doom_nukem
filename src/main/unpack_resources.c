@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/06 14:57:02 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/11 14:20:47 by jvisser       ########   odam.nl         */
+/*   Created: 2020/03/06 14:57:02 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:52:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft/ft_strarr.h"
 #include "libft/ft_num.h"
 #include "libft/ft_mem.h"
-#include "libft/ft_printf.h" //
 
 #include "game.h"
 #include "error.h"
@@ -61,11 +60,11 @@ intmax_t	read_size(const int fd, off_t *offset)
 	ret = read(fd, buf, 24);
 	if (ret == -1)
 		error_msg_errno("Failed to unpack resources");
-    res = ft_atoi(buf);
+	res = ft_atoi(buf);
 	return (res);
 }
 
-void	makedir_r(const char *name)
+void		makedir_r(const char *name)
 {
 	size_t	i;
 	char	path[PATH_MAX];
@@ -109,6 +108,7 @@ void		read_file(const int fd, off_t *offset, const char *name,
 		free(buf);
 	}
 }
+
 void		unpack_resources(t_game *game)
 {
 	char		*name;
@@ -118,7 +118,6 @@ void		unpack_resources(t_game *game)
 	const int	fd = open(path, O_RDONLY);
 
 	offset = 0;
-
 	while (TRUE)
 	{
 		name = read_name(fd, &offset, game->exec_path);

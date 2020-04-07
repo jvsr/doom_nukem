@@ -19,4 +19,6 @@ PREFIX =
 SRCS = enemy_on_los \
 	enemy_no_los \
 	enemy_move \
-	enemy_check
+	enemy_check \
+	get_enemy_funcs \
+	

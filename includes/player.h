@@ -5,18 +5,21 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/09 16:16:11 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/27 14:08:53 by euan          ########   odam.nl         */
+/*   Created: 2019/09/09 16:16:11 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/03/30 16:05:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
+# include "libft/ft_bool.h"
 # include "types.h"
 # include "coord.h"
-# include "libft/ft_bool.h"
+# include "rinfo.h"
 
+# define PLAYER_SHOT_DAMAGE 5
+# define PLAYER_GRAB_DIST 4.0
 # define PLAYER_HEIGHT 9.0
 # define PLAYER_CROUCH 5.0
 # define PLAYER_JUMP 20.0
@@ -43,10 +46,6 @@
 
 typedef struct s_game		t_game;
 typedef struct s_hashmap	t_hashmap;
-typedef struct s_map		t_map;
-typedef struct s_object		t_object;
-typedef struct s_sector		t_sector;
-typedef struct s_wall		t_wall;
 typedef struct s_list		t_list;
 
 typedef struct	s_mag
@@ -89,15 +88,15 @@ void			health_pickup(t_game *game,
 void			key_pickup(t_game *game,
 					t_sector *sec, t_object *obj, t_player *player);
 void			spike_damage(t_game *game,
-							t_sector *sec, t_object *obj, t_player *player);
+					t_sector *sec, t_object *obj, t_player *player);
 t_bool			move_forward(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_backward(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_left(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_right(t_player *player, float speed,
-								float *xspeed, float *yspeed);
+					float *xspeed, float *yspeed);
 t_bool			move_jump(t_game *game, t_player *player, t_bool *jump);
 t_bool			move_down(t_game *game, t_player *player, t_bool *jump);
 t_bool			fly_up(t_game *game, t_player *player, t_bool *jump);
@@ -105,14 +104,27 @@ t_bool			fly_down(t_game *game, t_player *player, t_bool *jump);
 void			damage_player(t_game *game, t_player *player, t_uint32 damage);
 void			player_died(t_game *game);
 t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
-															t_tricoord coord);
+					t_tricoord coord);
 t_list			*check_walls(t_game *game, t_uint8 *col,
-										t_tricoord coord, t_uint32 prev_sector);
+					t_tricoord coord, t_uint32 prev_sector);
 void			check_wall_col(t_tricoord coord, t_player *player,
-						t_wall *wall, t_uint8 *col);
+					t_wall *wall, t_uint8 *col);
 t_bool			wall_col(t_coord c0, t_coord c1, t_wall *wall);
 t_uint32		get_sector_id(t_map *map, t_sector *sec);
 void			check_objects(t_game *game, t_uint8 *col, t_tricoord coord);
 float			player_slope(t_player *pyr, t_sector *sec, t_coord *pos);
+t_plyrcol		*get_col_from_name(const char *name);
+char const		*get_col_name(t_plyrcol *plyrcol);
+void			win_enter(t_game *game, t_sector *cur_sec);
+void			player_won(t_game *game);
+void			ammo_pickup(t_game *game,
+					t_sector *sec, t_object *obj, t_player *player);
+t_wall			*raycast_wall(t_sector *sec, t_player *plyr,
+					t_bool ignore_portal, t_bool plyer_cast);
+void			click_on_door(t_player *plyr, t_map *map);
+t_wall			*wall_ray(t_sector *secs,
+					t_sector *prv, t_player *plyr, t_bool *ip);
+t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr);
+void			player_shoot(t_game *game, t_player *plyr);
 
 #endif

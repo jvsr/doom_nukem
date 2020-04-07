@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/27 16:16:04 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 15:04:34 by euan          ########   odam.nl         */
+/*   Created: 2020/02/27 16:16:04 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 10:39:30 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 #include "color.h"
 #include "game.h"
 
-static void		draw_x(t_rinfo *rin,
-					const t_hit *hit, const t_coord fvals, const SDL_Point ivals)
+static void		draw_x(t_rinfo *rin, const t_hit *hit,
+									const t_coord fvals, const SDL_Point ivals)
 {
 	SDL_Surface *srf;
 	int			*t_pixels;
 	t_coord		vec;
-	SDL_Point		tex;
+	SDL_Point	tex;
 	float		in;
 
 	srf = get_texture(rin->game, hit->sect->floor_tex);
@@ -66,7 +66,7 @@ static float	init_height(t_rinfo *rin, t_hinfo *info)
 }
 
 static void		set_cybounds(SDL_Point *c_ybounds,
-											SDL_Point *pre_bound, SDL_Point *ybnds)
+								SDL_Point *pre_bound, SDL_Point *ybnds)
 {
 	c_ybounds->x = ft_constrain(pre_bound->x, 0, ybnds->x);
 	c_ybounds->y = ft_constrain(pre_bound->y, c_ybounds->x, ybnds->x);
@@ -75,8 +75,8 @@ static void		set_cybounds(SDL_Point *c_ybounds,
 void			draw_floor(t_rinfo *rin, t_hinfo *info)
 {
 	const float	height = init_height(rin, info);
-	SDL_Point		i;
-	SDL_Point		c_ybounds;
+	SDL_Point	i;
+	SDL_Point	c_ybounds;
 	t_coord		disintens;
 	t_coord		anstep;
 

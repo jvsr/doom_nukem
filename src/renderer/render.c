@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/19 12:39:17 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:11:55 by euan          ########   odam.nl         */
+/*   Created: 2020/02/19 12:39:17 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 11:08:11 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,39 @@ static void	*render_chunk(t_game *game,
 	return (NULL);
 }
 
+static void	render_crosshair(SDL_Surface *dst)
+{
+	const int		csize = dst->w * CROSSHAIR_SIZE;
+	size_t			x;
+	size_t			y;
+	SDL_Point		i;
+	int				*pixels;
+
+	x = (dst->w / 2) - (csize * 0.5);
+	i.x = 0;
+	pixels = dst->pixels;
+	while (i.x < csize)
+	{
+		y = (dst->h / 2) - (csize * 0.5);
+		i.y = 0;
+		while (i.y < csize)
+		{
+			pixels[x + (y * dst->w)] = CROSSHAIR_COLOUR;
+			y++;
+			i.y++;
+		}
+		x++;
+		i.x++;
+	}
+}
+
+static void	bound_task(SDL_Point *bound,
+								t_game *game, t_ttask *new, size_t step)
+{
+	sdl_add_tpool_ttask(game->pool, new);
+	*bound = (SDL_Point){bound->x + step, bound->y + step};
+}
+
 void		render(t_game *game, SDL_Surface *dst)
 {
 	t_ttask		*tasks;
@@ -70,12 +103,12 @@ void		render(t_game *game, SDL_Surface *dst)
 			bound.y = dst->w;
 		new = sdl_new_ttask(render_chunk, TFLAG_TASK_NO_DELETE,
 			4, game, dst, (size_t)bound.x, (size_t)bound.y);
-		sdl_add_tpool_ttask(game->pool, new);
-		bound = (SDL_Point){bound.x + step, bound.y + step};
+		bound_task(&bound, game, new, step);
 		new->next = tasks;
 		tasks = new;
 		i++;
 	}
 	sdl_join_ttask_all(tasks);
 	sdl_del_ttask_all(&tasks);
+	render_crosshair(dst);
 }
