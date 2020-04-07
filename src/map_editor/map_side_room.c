@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 12:38:56 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 12:47:22 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first)
 			ft_lstdel(&cons, NULL);
 			return (NULL);
 		}
+		printf("L: %f, %f, %f, %f\n", ((t_editor_wall*)lmost->content)->corner_0.x,((t_editor_wall*)lmost->content)->corner_0.y,((t_editor_wall*)lmost->content)->corner_1.x,((t_editor_wall*)lmost->content)->corner_1.y);
+		printf("Post Cons %zu\n", ft_lstlen(cons));
 		dup = ft_lstdup(trail);
 		ft_lstaddbck(&dup, ft_lstdup(lmost));
 		pos = lft_room(dup, walls, first);
@@ -137,6 +139,8 @@ t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first)
 			ft_lstdel(&cons, NULL);
 			return (NULL);
 		}
+		printf("R: %f, %f, %f, %f\n", ((t_editor_wall*)rmost->content)->corner_0.x,((t_editor_wall*)rmost->content)->corner_0.y,((t_editor_wall*)rmost->content)->corner_1.x,((t_editor_wall*)rmost->content)->corner_1.y);
+		printf("Post Cons %zu\n", ft_lstlen(cons));
 		dup = ft_lstdup(trail);
 		ft_lstaddbck(&dup, ft_lstdup(rmost));
 		pos = right_room(dup, walls, first);
