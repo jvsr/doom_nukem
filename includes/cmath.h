@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/22 13:11:10 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/19 20:43:59 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/22 13:11:10 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/07 14:54:35 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ float		lerp_max(float a, float b, float t, float max);
 t_coord		get_perp(t_coord *vec);
 t_coord		*normalize_vector(t_coord *vec);
 t_bool		is_between(float a, float x, float y);
+int			get_side_vec(t_coord *v0, t_coord *v1, int is_clockwise);
 
 #endif
