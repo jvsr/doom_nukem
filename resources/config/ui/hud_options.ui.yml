@@ -64,7 +64,7 @@
           - text_size: 0.6
           - text_font: neckromancer
           - text: "Music"
-        - text_block: curhudMusicVolume
+        - text_block: curHudMusicVolume
           - pos: 0.5, 0.0
           - dim: 0.25, 1.0
           - text_size: 0.6
@@ -127,7 +127,7 @@
           - dim: 0.2, 0.6
           - texture: ui/arrow_left.tga
           - onclick: options_hud_fov_down
-        - button: hudfovright
+        - button: hudFovRight
           - pos: 0.8, 0.2
           - dim: 0.2, 0.6
           - texture: ui/arrow_right.tga
