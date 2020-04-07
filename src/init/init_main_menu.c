@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/15 16:28:08 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/13 16:01:40 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/15 16:28:08 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:46:25 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void				*init_main_menu(t_game *game)
 	add_gui_child(game->ui, create_gui(game, "hud_died"));
 	add_gui_child(game->ui, create_gui(game, "hud_options"));
 	add_gui_child(game->ui, create_gui(game, "map_editor"));
+	add_gui_child(game->ui, create_gui(game, "hud_win"));
 	set_elem_show_clickable(get_gui_child(game->ui, "mapEditor"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mapEditorSelect"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);

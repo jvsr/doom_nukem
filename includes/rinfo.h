@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/07 16:15:51 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/03/27 14:20:44 by euan          ########   odam.nl         */
+/*   Created: 2020/01/07 16:15:51 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 11:14:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define MAX_ANIMATION_TIME 2000
 # define OBJECT_COL_SIZE 1.0
 # define MAX_HIT 2147483646
+# define CROSSHAIR_SIZE 0.005
+# define CROSSHAIR_COLOUR 0xff000000
 
 typedef struct s_sector	t_sector;
 typedef struct s_game	t_game;
@@ -33,6 +35,10 @@ typedef struct s_list	t_list;
 typedef struct s_player	t_player;
 typedef struct s_object	t_object;
 typedef struct s_hinfo	t_hinfo;
+
+typedef void	(t_plyrcol)(t_game*, t_sector*, t_object*, t_player*);
+typedef void	(t_onfunc)(t_game *, t_object *, t_player *);
+typedef void	(t_nofunc)(t_game *, t_object *);
 
 typedef struct	s_anim
 {
@@ -71,14 +77,14 @@ typedef struct	s_wall
 
 struct			s_object
 {
-	t_coord	pos;
-	t_coord	size;
-	t_anim	img;
-	void	*data;
-	t_bool	is_enemy;
-	float	col_radius;
-	t_bool	can_col;
-	void	(*on_collide)(t_game*, t_sector*, t_object*, t_player*);
+	t_coord		pos;
+	t_coord		size;
+	t_anim		img;
+	void		*data;
+	t_bool		is_enemy;
+	float		col_radius;
+	t_bool		can_col;
+	t_plyrcol	*on_collide;
 };
 
 typedef struct	s_enemy
@@ -87,8 +93,8 @@ typedef struct	s_enemy
 	t_uint64		last_seen;
 	t_enemystate	state;
 	t_object		*obj;
-	void			(*on_los)(t_game *, t_object *, t_player *);
-	void			(*no_los)(t_game *, t_object *);
+	t_onfunc		*on_los;
+	t_nofunc		*no_los;
 }				t_enemy;
 
 struct			s_sector
@@ -116,6 +122,7 @@ typedef struct	s_map
 	t_uint64	sector_count;
 	t_bool		has_skybox;
 	t_texture	skybox;
+	t_bool		has_won;
 }				t_map;
 
 typedef struct	s_ritem
@@ -235,5 +242,11 @@ typedef struct	s_odraw
 	size_t		x;
 	t_rinfo		*rinfo;
 }				t_odraw;
+
+typedef struct	s_rhits
+{
+	size_t		index;
+	SDL_Point	*bounds;
+}				t_rhits;
 
 #endif

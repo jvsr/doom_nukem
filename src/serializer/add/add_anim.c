@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/27 15:18:12 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 16:43:00 by euan          ########   odam.nl         */
+/*   Created: 2020/03/27 15:18:12 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 12:00:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		get_object(t_anim *anim)
 static t_bool	is_tex_or_anim(t_anim *anim)
 {
 	if (*anim->left != TEXTURE_INVALID && *anim->right == TEXTURE_INVALID &&
-		*anim->front == TEXTURE_INVALID && *anim->back ==  TEXTURE_INVALID)
+		*anim->front == TEXTURE_INVALID && *anim->back == TEXTURE_INVALID)
 		return (1);
 	return (0);
 }

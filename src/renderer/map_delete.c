@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/27 14:37:18 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/27 14:37:18 by ehollidg      ########   odam.nl         */
+/*   Created: 2020/02/27 14:37:18 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 10:38:50 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "libft/ft_mem.h"
 #include "rinfo.h"
 
-static void	free_wall(t_wall *wall)
+void	free_wall(t_wall *wall)
 {
 	if (wall->decals)
 		ft_lstdel(&wall->decals, ft_lstdelmem);
 }
 
-static void	free_obj(void *obj, size_t size)
+void	free_obj(void *obj, size_t size)
 {
 	t_object *o;
 
@@ -31,7 +31,7 @@ static void	free_obj(void *obj, size_t size)
 	ft_memdel(&obj);
 }
 
-static void	free_sector(t_sector *sector)
+void	free_sector(t_sector *sector)
 {
 	size_t		i;
 
@@ -46,7 +46,7 @@ static void	free_sector(t_sector *sector)
 	ft_memdel((void**)&sector->walls);
 }
 
-void		delete_map(t_map **map)
+void	delete_map(t_map **map)
 {
 	size_t	i;
 

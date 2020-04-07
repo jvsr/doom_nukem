@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/27 12:33:27 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/02/27 12:33:27 by ehollidg      ########   odam.nl         */
+/*   Created: 2020/02/27 12:33:27 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:14:24 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		hud_diedmainmenu(t_game *game, t_transform *gui)
 	(void)gui;
 	game->cureventstate->eventstate = mainmenu;
 	set_elem_show_clickable(get_gui_child(game->ui, "hudDied"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudWin"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
 	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 }

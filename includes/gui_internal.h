@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/16 15:32:53 by pholster       #+#    #+#                */
-/*   Updated: 2019/10/16 15:32:53 by pholster      ########   odam.nl         */
+/*   Created: 2019/10/16 15:32:53 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:40:01 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "gui.h"
 
 # define TEXT_ALPHA_ROUND	0x30
+
 
 void			del_text(t_text **text);
 void			del_image(t_image **image);

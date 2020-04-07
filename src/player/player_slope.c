@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/19 11:44:27 by euan           #+#    #+#                */
-/*   Updated: 2020/03/26 15:32:37 by euan          ########   odam.nl         */
+/*   Created: 2020/03/19 11:44:27 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 13:13:39 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ float			player_slope(t_player *pyr, t_sector *sec, t_coord *pos)
 	a = get_distance(pos, &sw->corner_0);
 	b = get_distance(pos, &sw->corner_1);
 	if (a < b)
-		return (slope(sec, pyr, (t_coord*[2]){&sw->corner_0,
-			&sw->corner_1}, pos));
+	{
+		return (slope(sec, pyr, (t_coord*[2]){&sw->corner_0, &sw->corner_1},
+		pos));
+	}
 	return (slope(sec, pyr, (t_coord*[2]){&sw->corner_1, &sw->corner_0}, pos));
 }

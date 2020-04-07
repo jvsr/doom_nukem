@@ -5,14 +5,13 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/17 12:16:51 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 11:25:33 by euan          ########   odam.nl         */
+/*   Created: 2020/03/17 12:16:51 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 10:52:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmath.h"
 #include "rinfo.h"
-
 
 static int		get_slope_1(t_hitem *item, t_wall *sw, float ang, t_rinfo *rin)
 {

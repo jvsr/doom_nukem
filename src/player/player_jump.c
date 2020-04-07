@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/19 21:42:49 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/12 14:07:06 by jvisser       ########   odam.nl         */
+/*   Created: 2020/02/19 21:42:49 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 13:07:37 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,15 @@
 #include "cmath.h"
 #include "player.h"
 
-t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
+static t_bool	move_jump_bool(t_game *game,
+						t_player *player, float old_height, float new_height)
+{
+	return ((game->map->sectors[player->cur_sector].has_ceiling &&
+	player->height + player->heightoffset + new_height - old_height
+	>= game->map->sectors[player->cur_sector].ceil));
+}
+
+t_bool			move_jump(t_game *game, t_player *player, t_bool *jump)
 {
 	static uint64_t	momentum = UINT64_MAX;
 	static float	old_height;
@@ -35,9 +43,7 @@ t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
 	new_height = PLAYER_INIT_JUMP_HEIGHT - (PLAYER_INIT_JUMP_HEIGHT
 	* pow(1.0 - ((double)cur / PLAYER_JUMP_TIME), 2));
 	if (cur > PLAYER_JUMP_TIME
-	|| (game->map->sectors[player->cur_sector].has_ceiling && player->height
-	+ player->heightoffset + new_height - old_height
-	>= game->map->sectors[player->cur_sector].ceil))
+	|| move_jump_bool(game, player, old_height, new_height))
 	{
 		*jump = FALSE;
 		momentum = UINT64_MAX;
@@ -48,7 +54,7 @@ t_bool	move_jump(t_game *game, t_player *player, t_bool *jump)
 	return (TRUE);
 }
 
-t_bool	move_down(t_game *game, t_player *player, t_bool *jump)
+t_bool			move_down(t_game *game, t_player *player, t_bool *jump)
 {
 	static uint64_t	momentum = UINT64_MAX;
 	static float	old_drop;
@@ -73,7 +79,7 @@ t_bool	move_down(t_game *game, t_player *player, t_bool *jump)
 	return (TRUE);
 }
 
-t_bool	fly_up(t_game *game, t_player *player, t_bool *jump)
+t_bool			fly_up(t_game *game, t_player *player, t_bool *jump)
 {
 	static float	height_to_go = 400;
 	float			diff;
@@ -86,7 +92,7 @@ t_bool	fly_up(t_game *game, t_player *player, t_bool *jump)
 	return (TRUE);
 }
 
-t_bool	fly_down(t_game *game, t_player *player, t_bool *jump)
+t_bool			fly_down(t_game *game, t_player *player, t_bool *jump)
 {
 	static float	height_to_go = 400;
 	float			diff;

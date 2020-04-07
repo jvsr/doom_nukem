@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/27 13:46:04 by jvisser        #+#    #+#                */
-/*   Updated: 2020/03/27 14:41:57 by euan          ########   odam.nl         */
+/*   Created: 2019/08/27 13:46:04 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:46:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			map_init(t_game *game)
 	game->map->sectors[0].walls[2] = (t_wall){(t_coord){40, -20}, (t_coord){40, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL, 0};
 	game->map->sectors[0].walls[3] = (t_wall){(t_coord){40, 20}, (t_coord){-20, 20}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL, 0};
 	game->map->sectors[0].walls[4] = (t_wall){(t_coord){-20, 20}, (t_coord){-20, -20}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 2}, NULL, 0};
-	game->map->sectors[0].walls[4].is_portal = TRUE;
+	game->map->sectors[0].walls[4].is_door = TRUE;
 	game->map->sectors[0].walls[4].window = &game->map->sectors[1];
 	game->map->sectors[0].walls[5] = (t_wall){(t_coord){30, 10}, (t_coord){10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL, 0};
 	game->map->sectors[0].has_ceiling = TRUE;
@@ -112,6 +112,9 @@ void			map_init(t_game *game)
 	game->map->sectors[0].objects->next->next->next = ft_lstnew(o, sizeof(t_object*));
 	o = (t_object*)ft_memalloc(sizeof(t_object));
 	game->map->sectors[0].objects->next->next->next->next = ft_lstnew(o, sizeof(t_object*));
+	o = (t_object*)ft_memalloc(sizeof(t_object));
+	game->map->sectors[0].objects->next->next->next->next->next = ft_lstnew(o, sizeof(t_object*));
+
 
 	t_object *obj = game->map->sectors[0].objects->content;
 	obj->pos = (t_coord){5, 0};
@@ -155,6 +158,16 @@ void			map_init(t_game *game)
 	obj->is_enemy = FALSE;
 	obj->col_radius = 1.3;
 	obj->on_collide = spike_damage;
+	obj->data = ft_memalloc(sizeof(t_uint64));
+
+	obj = game->map->sectors[0].objects->next->next->next->next->next->content;
+	obj->pos = (t_coord){2, 5};
+	obj->size = (t_coord){4, 4};
+	obj->img = single_init(TEXUTRE_AMMO, obj);
+	obj->can_col = TRUE;
+	obj->is_enemy = FALSE;
+	obj->col_radius = 1.0;
+	obj->on_collide = ammo_pickup;
 	obj->data = ft_memalloc(sizeof(t_uint64));
 
 	t_decal *decal = ft_memalloc(sizeof(t_decal));
