@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 15:21:28 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 16:19:25 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ static t_list	*get_cons(t_list *trail, t_list *walls, t_editor_wall *first)
 		return (get_walls_at_wall(trail, ft_lstlast(trail)->content, walls));
 }
 
+static t_bool	get_closest(float prev, float cur)
+{
+	if (prev < 0 && cur > 0)
+		return (TRUE);
+	return (fabs(prev) > fabs(cur));
+}
+
 static t_list	*get_most(t_list **cons, t_editor_wall *wall, t_bool is_right)
 {
 	t_angle_data	ret;
@@ -31,20 +38,20 @@ static t_list	*get_most(t_list **cons, t_editor_wall *wall, t_bool is_right)
 	t_coord			tvec;
 	float			angle;
 
-	ret = (t_angle_data){-1, NULL, NULL};
+	ret = (t_angle_data){-400, NULL, NULL};
 	i = *cons;
 	printf("\n Angles : \n");
 	(void)is_right;
 	while (i && i->content)
 	{
-		printf("L: %p, %p\n", i->content, wall);
 		tvec = get_wall_vector(i->content, wall);
 		vec = get_wall_vector(wall, (*cons)->content);
 		angle = get_angle_from_vectors(&vec, &tvec);
 		vec = get_wall_vector(wall, i->content);
-		// angle *= get_side_vec(&vec, &tvec, (int)is_right);
+		angle *= get_side_vec(&vec, &tvec, (int)is_right);
+		// angle = wrap_angle(angle);
 		printf("Angle %f\n", angle);
-		if (angle > ret.ang && angle < 360)
+		if (get_closest(ret.ang, angle))
 			ret = (t_angle_data){angle, i, i->content};
 		i = i->next;
 	}
@@ -70,10 +77,7 @@ t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first)
 		if (lmost == NULL)
 			return (NULL);
 		else if (lmost->content == first)
-		{
-			printf("Here\n");
 			return (lmost);
-		}
 		else if (ft_lstfind_content(trail, lmost->content, lmost->content_size))
 		{
 			ft_lstdel(&lmost, NULL);
@@ -125,7 +129,6 @@ t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first)
 		pos = right_room(dup, walls, first);
 		if (pos != NULL)
 		{
-			printf("Here");
 			rmost->next = pos;
 			ret = rmost;
 			ft_lstdel(&cons, NULL);

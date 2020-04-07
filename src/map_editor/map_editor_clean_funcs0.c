@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 15:19:12 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/07 15:29:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_list			*get_walls_at_point(t_coord *point,
 	ret = NULL;
 	while (walls && walls->content != NULL)
 	{
-		printf("W: %p, %p\n", walls->content, cur);
 		wall = walls->content;
 		printf("Walls %p : %p\n", cur, wall);
 		if (wall != cur && (ft_memequ(&wall->corner_0, point, sizeof(t_coord))
