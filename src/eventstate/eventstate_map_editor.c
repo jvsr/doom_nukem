@@ -97,8 +97,8 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 		else if (event.button.button == SDL_BUTTON_RIGHT)
 			delete(game, mouse_pos, map_editor_elem);
 	}
-	else if (event.type == SDL_MOUSEBUTTONDOWN)
-		first = FALSE;
+	else
+		first = get_gui_child(game->ui, "mapEditorConfirmationMenu")->show;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 	{
 		map_editor_add_confirmation(game);
