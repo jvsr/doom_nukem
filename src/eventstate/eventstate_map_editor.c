@@ -24,16 +24,24 @@
 #include "keymap.h"
 #include "map_editor.h"
 
-static void	delete_line(t_game *game, SDL_Point mouse_pos,
+static void	delete(t_game *game, SDL_Point mouse_pos,
 				t_transform *map_editor_elem)
 {
 	t_editor_wall	*wall;
+	t_editor_object	*object;
 
-	wall = map_editor_check_hit(map_editor_elem, game->editor_map,
-		(SDL_Point){mouse_pos.x, mouse_pos.y});
-	if (wall == NULL)
-		return ;
-	map_editor_del_wall(game->editor_map, wall);
+	object = map_editor_check_hit_object(map_editor_elem, game->editor_map,
+		mouse_pos);
+	if (object != NULL)
+		map_editor_del_object(game->editor_map, object);
+	else
+	{
+		wall = map_editor_check_hit_wall(map_editor_elem, game->editor_map,
+			mouse_pos);
+		if (wall == NULL)
+			return ;
+		map_editor_del_wall(game->editor_map, wall);
+	}
 	set_elem_redraw(map_editor_elem);
 }
 
@@ -42,8 +50,8 @@ static void	toggle_wall(t_game *game, SDL_Point mouse_pos,
 {
 	t_editor_wall	*wall;
 
-	wall = map_editor_check_hit(map_editor_elem, game->editor_map,
-		(SDL_Point){mouse_pos.x, mouse_pos.y});
+	wall = map_editor_check_hit_wall(map_editor_elem, game->editor_map,
+		mouse_pos);
 	if (wall == NULL)
 		return ;
 	if (wall->is_hidden_door == TRUE)
@@ -85,7 +93,7 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 		else if (event.button.button == SDL_BUTTON_LEFT)
 			map_editor_add(game, mouse_pos, map_editor_elem);
 		else if (event.button.button == SDL_BUTTON_RIGHT)
-			delete_line(game, mouse_pos, map_editor_elem);
+			delete(game, mouse_pos, map_editor_elem);
 	}
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		quit(0);

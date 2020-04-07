@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/23 17:37:31 by pholster       #+#    #+#                */
+/*   Created: 2020/01/23 17:37:31 by pholster      #+#    #+#                 */
 /*   Updated: 2020/01/23 17:37:31 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -15,8 +15,8 @@
 #include "error.h"
 #include "map_editor.h"
 
-t_editor_wall		*map_editor_new_wall(t_editor_map *editor_map,
-						t_coord corner_0, t_coord corner_1)
+t_editor_wall	*map_editor_new_wall(t_editor_map *editor_map,
+					t_coord corner_0, t_coord corner_1)
 {
 	t_editor_wall	*new;
 

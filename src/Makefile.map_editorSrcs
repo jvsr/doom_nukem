@@ -19,14 +19,18 @@ PREFIX =
 SRCS = \
 	map_editor_new \
 	map_editor_del \
+	map_editor_del_wall \
+	map_editor_del_object \
 	map_editor_new_wall \
+	map_editor_new_object \
 	map_editor_add_wall \
+	map_editor_add_object \
 	map_editor_add \
 	map_editor_remove_last_wall \
 	map_editor_snap_to_grid \
-	map_editor_del_wall \
 	map_editor_wall_is_bigger \
-	map_editor_check_hit \
+	map_editor_check_hit_wall \
+	map_editor_check_hit_object \
 	map_editor_convert \
 	map_editor_rev_convert \
 	map_editor_clean \
