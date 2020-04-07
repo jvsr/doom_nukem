@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 15:16:12 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 13:40:22 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list			*get_walls_at_point(t_coord *point,
 	t_list			*ret;
 
 	ret = NULL;
-	while (walls)
+	while (walls && walls->content != NULL)
 	{
 		wall = walls->content;
 		if (wall != cur && (ft_memequ(&wall->corner_0, point, sizeof(t_coord))
@@ -33,21 +33,12 @@ t_list			*get_walls_at_point(t_coord *point,
 	return (ret);
 }
 
-static t_list	*get_second_last(t_list *lst)
-{
-	if (ft_lstlen(lst) < 2)
-		return (lst);
-	while (lst->next->next)
-		lst = lst->next;
-	return (lst);
-}
-
 t_coord			*get_corner(t_editor_wall *wall, t_list *prv)
 {
 	t_list			*lst;
 	t_editor_wall	*sw;
 
-	lst = get_second_last(prv);
+	lst = ft_lstindex(prv, ft_lstlen(prv) - 2);
 	sw = lst->content;
 	if (ft_memequ(&wall->corner_0, &sw->corner_0, sizeof(t_coord)) ||
 		ft_memequ(&wall->corner_0, &sw->corner_1, sizeof(t_coord)))
