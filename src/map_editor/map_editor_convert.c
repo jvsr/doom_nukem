@@ -26,7 +26,10 @@ static void fill_wall(t_wall *cur_w, t_editor_wall *e_w)
 	cur_w->is_portal = e_w->is_portal;
 	cur_w->is_window = e_w->is_window;
 	cur_w->is_door = e_w->is_door;
-	cur_w->texture = single_init(TEXTURE_BRICK_WALL, NULL);
+	if (e_w->is_door && e_w->is_hidden_door == FALSE)
+		cur_w->texture = single_init(TEXTURE_DOOR, NULL);
+	else
+		cur_w->texture = single_init(TEXTURE_BRICK_WALL, NULL);
 	cur_w->win_tex = single_init(TEXTURE_GLASS, NULL);
 	cur_w->decals = NULL;
 }
@@ -57,7 +60,7 @@ static void	add_walls(t_sector *headS, t_sector *map_s, t_editor_sector *cur_s)
 		}
 		i++;
 	}
-} // TODO(jvsr) incongruency between is_hidden_door.
+}
 
 static void	add_objects(t_sector *map_s, t_editor_sector *cur_s)
 {
