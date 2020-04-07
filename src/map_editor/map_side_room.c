@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 13:20:26 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 13:25:07 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static t_list	*get_left_most(t_list **cons, t_editor_wall *wall)
 	printf("\n Angles : \n");
 	while (i && i->content)
 	{
+		printf("L: %p, %p\n", i->content, wall);
 		tvec = get_wall_vector(i->content, wall);
 		angle = wrap_angle(get_angle_from_vectors(&vec, &tvec));
 		printf("Angle %f\n", angle);
@@ -64,6 +65,7 @@ static t_list	*get_right_most(t_list **cons, t_editor_wall *wall)
 	printf("\n Angles : \n");
 	while (i && i->content)
 	{
+		printf("R: %p, %p\n", i->content, wall);
 		tvec = get_wall_vector(i->content, wall);
 		angle = wrap_angle(get_angle_from_vectors(&vec, &tvec));
 		printf("Angle %f\n", angle);
