@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/07 17:27:29 by pholster       #+#    #+#                */
+/*   Created: 2019/10/07 17:27:29 by pholster      #+#    #+#                 */
 /*   Updated: 2020/02/20 15:51:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -25,6 +25,12 @@ static t_tablepair const	g_onclicks[] = {
 
 	{"map_editor_select_return", map_editor_select_return},
 	{"map_editor_select_new", map_editor_select_new},
+
+	{"map_editor_object_next", map_editor_object_next},
+	{"map_editor_object_prv", map_editor_object_prv},
+	{"map_editor_object_select", map_editor_object_select},
+	{"map_editor_confirmation_return", map_editor_confirmation_return},
+	{"map_editor_remove_confirmation", map_editor_remove_confirmation},
 
 	{"options_sensitivity_up", options_sensitivity_up},
 	{"options_hud_sensitivity_up", options_hud_sensitivity_up},
@@ -69,10 +75,6 @@ static t_tablepair const	g_onclicks[] = {
 	{"controls_set_crouch", controls_set_crouch},
 	{"controls_set_jump", controls_set_jump},
 	{"controls_return", controls_return},
-
-	{"map_editor_object_next", map_editor_object_next},
-	{"map_editor_object_prv", map_editor_object_prv},
-	{"map_editor_object_select", map_editor_object_select},
 
 	{"restart_game", restart_game},
 	{"go_to_game", go_to_game}

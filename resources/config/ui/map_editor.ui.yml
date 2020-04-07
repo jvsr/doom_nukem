@@ -37,3 +37,40 @@
           - dim: 0.2, 0.6
           - texture: ui/arrow_right.tga
           - onclick: map_editor_object_next
+
+  - panel: mapEditorConfirmationMenu
+    - show: 0
+    - clickable: 0
+    - layer: 2
+    - image: mapEditorConfirmationOverlay
+      - color: #26020699
+    - panel: mapEditorConfirmationBox
+      - pos: 0.35, 0.35
+      - dim: 0.3, 0.3
+      - image: mapEditorConfirmationBackground
+        - texture: ui/border1x1.tga
+      - text_block: mapEditorConfirmationText
+        - pos: 0.05, 0.1
+        - dim: 0.9, 0.2
+        - text: "Unsaved data will be lost"
+        - text_font: foulfiend
+        - text_color: #e3e3e3
+        - text_size: 0.7
+      - button: mapEditorConfirmationReturnButton
+        - pos: 0.1, 0.37
+        - dim: 0.8, 0.25
+        - texture: ui/border5x1.tga
+        - text: "Ok"
+        - text_font: neckromancer
+        - text_color: #e3e3e3
+        - text_size: 0.7
+        - onclick: map_editor_confirmation_return
+      - button: mapEditorConfirmationRestartButton
+        - pos: 0.1, 0.64
+        - dim: 0.8, 0.25
+        - texture: ui/border5x1.tga
+        - text: "Cancel"
+        - text_font: neckromancer
+        - text_color: #e3e3e3
+        - text_size: 0.7
+        - onclick: map_editor_remove_confirmation

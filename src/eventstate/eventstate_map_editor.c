@@ -16,6 +16,7 @@
 #include "libft/ft_printf.h"
 
 #include "gui.h"
+#include "onclick.h"
 #include "game.h"
 #include "cmath.h"
 #include "coord.h"
@@ -75,13 +76,14 @@ static void	toggle_wall(t_game *game, SDL_Point mouse_pos,
 
 void		map_editor_eventstate(t_game *game, SDL_Event event)
 {
+	static t_bool		first = TRUE;
 	t_transform			*map_editor_elem;
 	SDL_Point			mouse_pos;
 
-	map_editor_elem = get_gui_child(game->ui, "mapeditorview");
+	map_editor_elem = get_gui_child(game->ui, "mapEditorView");
 	if (event.type == SDL_MOUSEMOTION)
 		set_elem_redraw(map_editor_elem);
-	if (event.type == SDL_MOUSEBUTTONDOWN)
+	if (event.type == SDL_MOUSEBUTTONDOWN && first == FALSE)
 	{
 		if (event.button.x < 0 || event.button.x > map_editor_elem->abs_dim.x ||
 			event.button.y < 0 || event.button.y > map_editor_elem->abs_dim.y)
@@ -95,6 +97,11 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 		else if (event.button.button == SDL_BUTTON_RIGHT)
 			delete(game, mouse_pos, map_editor_elem);
 	}
+	else if (event.type == SDL_MOUSEBUTTONDOWN)
+		first = FALSE;
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-		quit(0);
+	{
+		map_editor_add_confirmation(game);
+		first = TRUE;
+	}
 }

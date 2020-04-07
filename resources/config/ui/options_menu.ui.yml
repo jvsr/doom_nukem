@@ -217,7 +217,7 @@
     - layer: 2
     - image: confirmationOverlay
       - color: #00000000
-    - panel: confirmationbox
+    - panel: confirmationBox
       - pos: 0.35, 0.35
       - dim: 0.3, 0.3
       - image: confirmationBackground
@@ -228,7 +228,7 @@
         - text: "Restart to apply changes"
         - text_font: foulfiend
         - text_color: #e3e3e3
-        - text_size: 0.5
+        - text_size: 0.7
       - button: confirmationReturnButton
         - pos: 0.1, 0.37
         - dim: 0.8, 0.25
