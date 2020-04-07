@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/04/03 12:36:29 by euan           #+#    #+#                */
-/*   Updated: 2020/04/03 13:16:21 by euan          ########   odam.nl         */
+/*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 15:16:12 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ t_coord			*get_corner(t_editor_wall *wall, t_list *prv)
 
 	lst = get_second_last(prv);
 	sw = lst->content;
-	if (ft_memcmp(&wall->corner_0, &sw->corner_0, sizeof(t_coord)) ||
-		ft_memcmp(&wall->corner_0, &sw->corner_1, sizeof(t_coord)))
+	if (ft_memequ(&wall->corner_0, &sw->corner_0, sizeof(t_coord)) ||
+		ft_memequ(&wall->corner_0, &sw->corner_1, sizeof(t_coord)))
 		return (&wall->corner_1);
 	return (&wall->corner_0);
 }
 
 static t_bool	check(t_editor_wall *wall, t_editor_wall *cur, t_list *prv)
 {
-	return (ft_memcmp(&cur->corner_0, &wall->corner_0, sizeof(t_coord)) ||
-			ft_memcmp(&cur->corner_1, &wall->corner_0, sizeof(t_coord)) ||
+	return (ft_memequ(&cur->corner_0, &wall->corner_0, sizeof(t_coord)) ||
+			ft_memequ(&cur->corner_1, &wall->corner_0, sizeof(t_coord)) ||
 			ft_lstfind_content(prv, cur, sizeof(t_editor_wall)) != NULL);
 }
 
@@ -76,16 +76,12 @@ t_list			*get_walls_at_wall(t_list *prv,
 	{
 		if (check(wall, tmp->content, prv))
 		{
-			if (per != NULL)
-				per->next = tmp->next;
-			else
-				per = tmp->next;
-			tmp->next = NULL;
-			ft_lstdel(&tmp, NULL);
+			ft_lstunlink(&list, tmp);
 			tmp = per;
 		}
 		per = tmp;
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 	return (list);
 }

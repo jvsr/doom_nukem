@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/04/03 12:41:08 by euan           #+#    #+#                */
-/*   Updated: 2020/04/03 13:08:31 by euan          ########   odam.nl         */
+/*   Created: 2020/04/03 12:41:08 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 15:28:34 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,24 @@ t_coord		get_wall_vector(t_editor_wall *main, t_editor_wall *sec)
 	return (vec);
 }
 
-void		remove_from_list(t_list *head, t_list *elm)
+void		remove_from_list(t_list **head, t_list *elm)
 {
 	t_list *i;
 	t_list *prv;
 
-	i = head;
+	i = *head;
 	prv = NULL;
 	while (i != elm)
 	{
 		prv = i;
 		i = i->next;
 	}
-	prv->next = i->next;
-	i->next = NULL;
+	if (prv != NULL && i != NULL)
+		prv->next = i->next;
+	else if (i != NULL)
+		*head = i->next;
+	if (i != NULL)
+		i->next = NULL;
 }
 
 t_list		*get_correct_sectors(t_editor_wall *con, t_list *walls)

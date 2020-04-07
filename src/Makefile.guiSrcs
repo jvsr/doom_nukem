@@ -41,6 +41,8 @@ ONCLICK_SRCS = mainmenu \
 				go_to_game \
 				hud_died \
 				map_editor \
+				save_map \
+				
 
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
@@ -57,7 +59,8 @@ CREATE_SRCS = new_elem \
 		del_gview \
 		new_gview \
 		del_map_editor \
-		new_map_editor
+		new_map_editor \
+		
 CREATE_SRCS := $(CREATE_SRCS:%=create/%)
 
 DEBUG_SRCS = print_elem \

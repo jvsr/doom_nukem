@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/04/03 12:33:09 by euan           #+#    #+#                */
-/*   Updated: 2020/04/03 12:56:17 by euan          ########   odam.nl         */
+/*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 15:53:40 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_list	*get_cons(t_list *trail, t_list *walls, t_editor_wall *first)
 		return (get_walls_at_wall(trail, ft_lstlast(trail)->content, walls));
 }
 
-static t_list	*get_left_most(t_list *walls, t_editor_wall *wall)
+static t_list	*get_left_most(t_list **cons, t_editor_wall *wall)
 {
 	t_angle_data	ret;
 	t_list			*i;
@@ -32,21 +32,25 @@ static t_list	*get_left_most(t_list *walls, t_editor_wall *wall)
 	float			angle;
 
 	ret = (t_angle_data){-1, NULL, NULL};
-	i = walls;
-	vec = get_wall_vector(wall, walls->content);
+	i = *cons;
+	vec = get_wall_vector(wall, (*cons)->content);
 	while (i)
 	{
+		printf("%p, %p\n", i, i->content);
 		tvec = get_wall_vector(i->content, wall);
 		angle = wrap_angle(get_angle_from_vectors(&vec, &tvec));
+		printf("Angle %f\n", angle);
 		if (angle > ret.ang && angle < 360)
 			ret = (t_angle_data){angle, i, i->content};
 		i = i->next;
 	}
-	remove_from_list(walls, ret.lst_elem);
+	if (*cons)
+		ft_lstunlink(cons, ret.lst_elem);
+	printf("Final Ang %f\n", ret.ang);
 	return (ret.lst_elem);
 }
 
-static t_list	*get_right_most(t_list *walls, t_editor_wall *wall)
+static t_list	*get_right_most(t_list **cons, t_editor_wall *wall)
 {
 	t_angle_data	ret;
 	t_list			*i;
@@ -54,18 +58,23 @@ static t_list	*get_right_most(t_list *walls, t_editor_wall *wall)
 	t_coord			tvec;
 	float			angle;
 
-	ret = (t_angle_data){-1, NULL, NULL};
-	i = walls;
-	vec = get_wall_vector(wall, walls->content);
+	ret = (t_angle_data){361, NULL, NULL};
+	i = *cons;
+	vec = get_wall_vector(wall, (*cons)->content);
 	while (i)
 	{
 		tvec = get_wall_vector(i->content, wall);
 		angle = wrap_angle(get_angle_from_vectors(&vec, &tvec));
+		printf("Angle %f\n", angle);
 		if (angle < ret.ang && angle > 0)
+		{
+			printf("%p\n", i);
 			ret = (t_angle_data){angle, i, i->content};
+		}
 		i = i->next;
 	}
-	remove_from_list(walls, ret.lst_elem);
+	if (*cons)
+		ft_lstunlink(cons, ret.lst_elem);
 	return (ret.lst_elem);
 }
 
@@ -79,9 +88,15 @@ t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first)
 
 	ret = NULL;
 	cons = get_cons(trail, walls, first);
+	if (cons->content == first)
+		return (cons->content);
+	if (ft_lstfind_content(trail, cons->content, cons->content_size))
+		return (NULL);
 	while (cons)
 	{
-		lmost = get_left_most(walls, ft_lstlast(trail)->content);
+		printf("Pre Cons %zu\n", ft_lstlen(cons));
+		lmost = get_left_most(&cons, ft_lstlast(trail)->content);
+		printf("Post Cons %zu\n", ft_lstlen(cons));
 		if (lmost->content == first)
 			return (lmost);
 		dup = ft_lstdup(trail);
@@ -108,9 +123,17 @@ t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first)
 
 	ret = NULL;
 	cons = get_cons(trail, walls, first);
+	if (cons->content == first)
+		return (cons->content);
+	if (ft_lstfind_content(trail, cons->content, cons->content_size))
+		return (NULL);
 	while (cons)
 	{
-		rmost = get_right_most(walls, ft_lstlast(trail)->content);
+		printf("Pre Cons %zu\n", ft_lstlen(cons));
+		rmost = get_right_most(&cons, ft_lstlast(trail)->content);
+		printf("Post Cons %zu\n", ft_lstlen(cons));
+		if (rmost == NULL)
+			return (NULL);
 		if (rmost->content == first)
 			return (rmost);
 		dup = ft_lstdup(trail);

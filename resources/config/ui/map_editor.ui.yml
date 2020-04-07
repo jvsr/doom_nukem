@@ -37,3 +37,13 @@
           - dim: 0.2, 0.6
           - texture: ui/arrow_right.tga
           - onclick: map_editor_object_next
+    - button: mapEditorSaveButton
+      - pos: 0.2, 0.2
+      - dim: 0.6, 0.05
+      - text: "Save File"
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - text_draw_method: centered
+      - texture: ui/border5x1.tga
+      - text_size: 0.8
+      - onclick: save_map

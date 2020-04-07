@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/31 12:17:43 by euan           #+#    #+#                */
-/*   Updated: 2020/04/03 13:11:02 by euan          ########   odam.nl         */
+/*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 14:04:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		clean_up_dups(t_editor_map *map)
 			if (s0 != s1 && ft_lstlen(s0->walls) == ft_lstlen(s1->walls) &&
 				walls_equal(s0->walls, s1->walls))
 			{
-				remove_from_list(map->sectors, x);
+				remove_from_list(&map->sectors, x);
 				remove_sec(s1->walls, s1);
 				ft_lstdel(&s1->walls, NULL);
 				ft_memdel((void**)&s1);
@@ -116,5 +116,6 @@ t_bool			map_editor_clean(t_editor_map *map)
 	}
 	else
 		add_all_to_sector(map->walls, map);
+	printf("Here %zu\n",ft_lstlen(map->sectors));
 	return (TRUE);
 }

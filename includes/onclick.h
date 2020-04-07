@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/15 17:08:10 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/20 17:13:10 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/15 17:08:10 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 13:37:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	controls_return(t_game *game, t_transform *gui);
 void	map_editor_object_next(t_game *game, t_transform *gui);
 void	map_editor_object_prv(t_game *game, t_transform *gui);
 void	map_editor_object_select(t_game *game, t_transform *gui);
+void		save_map(t_game *game, t_transform *gui);
 
 void	restart_game(t_game *game, t_transform *gui);
 
