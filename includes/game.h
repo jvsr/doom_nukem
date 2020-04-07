@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 19:01:54 by pholster       #+#    #+#                */
-/*   Updated: 2020/03/27 14:08:14 by euan          ########   odam.nl         */
+/*   Created: 2019/08/22 19:01:54 by pholster      #+#    #+#                 */
+/*   Updated: 2020/03/30 10:16:52 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void			loop(t_game *game);
 void			handle_event(t_game *game, SDL_Event event);
 void			check_quit(t_game *game, SDL_Event event);
 void			*display_splash(t_game *game, char *loc);
+void			load_map(t_game *game, t_map *map, t_player *plyr);
 void			loader(t_game *game);
 void			quit(int exit_code);
 

@@ -16,4 +16,4 @@ PREFIX =
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = init_gametime get_gametime
+SRCS = init_gametime get_gametime load_map

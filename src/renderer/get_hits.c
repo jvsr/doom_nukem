@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/21 15:53:58 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 14:12:54 by euan          ########   odam.nl         */
+/*   Created: 2020/02/21 15:53:58 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 11:29:27 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@
 #include "rinfo.h"
 #include "error.h"
 #include "game.h"
-
-static t_hinfo	*new_hinfo(t_sector *sec, size_t ar_size, size_t start)
-{
-	t_hinfo *info;
-
-	info = ft_memalloc(sizeof(t_hinfo));
-	if (info == NULL)
-		error_msg_errno("Error allocating hinfo");
-	info->sec = sec;
-	info->hits = (t_hitem*)ft_memalloc(sizeof(t_hitem) * ar_size);
-	if (info->hits == NULL)
-		error_msg_errno("Error allocating hinfo hits");
-	info->size = ar_size;
-	info->start = start;
-	return (info);
-}
 
 static void		move_sector(t_hit *hit,
 								t_hinfo **prev, t_hinfo **info, t_rinfo *rinfo)
@@ -83,13 +67,26 @@ static t_bool	hit_meth(t_hitem *hit,
 	return (FALSE);
 }
 
+static void		hit_end(t_hitem *hit,
+							t_rinfo *rinfo, SDL_Point **points, t_hinfo ***ins)
+{
+	if (hit->hit.wall->window && hit->hit.wall->window->has_slope)
+		points[0]->x -= get_slope(hit, hit->hit.wall->window->swall,
+			hit->hit.wall->window->angle, rinfo);
+	hit->bounds = *points[0];
+	hit->pre_bounds = *points[1];
+	*points[1] = *points[0];
+	if (points[0]->x != points[0]->y && hit->hit.wall->is_portal == TRUE)
+		move_sector(&hit->hit, ins[1], ins[0], rinfo);
+}
+
 static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 {
-	t_hitem	*hit;
-	t_hinfo *info;
-	t_hinfo	*prev;
+	t_hitem		*hit;
+	t_hinfo		*info;
+	t_hinfo		*prev;
 	SDL_Point	tmp;
-	SDL_Point prv;
+	SDL_Point	prv;
 
 	info = rinfo->ren->content;
 	prev = info;
@@ -107,14 +104,8 @@ static void		hit(t_rinfo *rinfo, t_coord *cosin, float angle, float tanvfov2)
 		if (hit_meth(hit, rinfo, angle, &tmp))
 			continue;
 		tmp = get_bounds(rinfo->game->player, rinfo->dst, hit, tanvfov2);
-		if (hit->hit.wall->window && hit->hit.wall->window->has_slope)
-			tmp.x -= get_slope(hit, hit->hit.wall->window->swall,
-				hit->hit.wall->window->angle, rinfo);
-		hit->bounds = tmp;
-		hit->pre_bounds = prv;
-		prv = tmp;
-		if (tmp.x != tmp.y && hit->hit.wall->is_portal == TRUE)
-			move_sector(&hit->hit, &prev, &info, rinfo);
+		hit_end(hit, rinfo, (SDL_Point*[2]){&tmp, &prv},
+			(t_hinfo**[2]){&info, &prev});
 	}
 }
 

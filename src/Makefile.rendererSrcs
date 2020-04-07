@@ -27,5 +27,5 @@ OBJ_SRCS := $(OBJ_SRCS:%=objects/%)
 SRCS = render get_hit draw_skybox new_rendobj sort_objs \
 		set_ybounds decals_on_vline get_bounds get_hits render_hits \
 		draw_vline render_objs draw_cline draw_wall draw_glass draw_obj \
-		map_delete draw_floor draw_ceil get_slope draw_sfloor \
-		$(OBJ_SRCS)
+		map_delete draw_floor draw_ceil get_slope draw_sfloor del_obj \
+		new_hinfo $(OBJ_SRCS)

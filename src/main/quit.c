@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/03 12:49:32 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/03 12:49:32 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/03 12:49:32 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:51:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "init.h"
 #include "audio.h"
 
-// Crashes due to incorrect checksum if you exit right after spalsh
+/* Crashes due to incorrect checksum if you exit right after spalsh           */
 
 void	quit(int exit_code)
 {

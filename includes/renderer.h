@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/15 16:59:14 by ehollidg       #+#    #+#                */
-/*   Updated: 2020/04/02 11:27:23 by euan          ########   odam.nl         */
+/*   Created: 2019/10/15 16:59:14 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 10:44:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,10 @@ t_object		*new_key(t_coord *pos, t_sector *parent);
 t_object		*new_health_pickup(t_coord *pos, t_sector *parent);
 t_object		*new_start(t_coord *pos, t_sector *parent);
 t_object		*new_end(t_coord *pos, t_sector *parent);
+void			free_sector(t_sector *sector);
+void			free_obj(void *obj, size_t size);
+void			free_wall(t_wall *wall);
+t_bool			del_obj(t_object *obj, t_sector *sec);
+t_hinfo			*new_hinfo(t_sector *sec, size_t ar_size, size_t start);
 
 #endif

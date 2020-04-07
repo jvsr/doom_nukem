@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/07 20:40:08 by jvisser        #+#    #+#                */
-/*   Updated: 2020/02/13 16:04:13 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/07 20:40:08 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/03/30 12:40:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef enum	e_eventstate_code
 	map_editor_select,
 	hud,
 	hud_options,
-	hud_died
+	hud_died,
+	hud_win
 }				t_eventstate_code;
 
 typedef union	u_types

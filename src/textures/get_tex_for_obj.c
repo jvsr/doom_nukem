@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/27 16:44:32 by euan           #+#    #+#                */
-/*   Updated: 2020/03/27 17:01:29 by euan          ########   odam.nl         */
+/*   Created: 2020/03/27 16:44:32 by euan          #+#    #+#                 */
+/*   Updated: 2020/04/06 11:49:23 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int const	g_texobjs[] = {
 	[O_KEY] = TEXTURE_KEYS,
 	[O_SPIKE] = TEXTURE_SPIKES,
 	[O_START] = TEXTURE_START,
-	[O_END] = TEXTURE_END
+	[O_END] = TEXTURE_END,
+	[O_AMMO] = TEXUTRE_AMMO
 };
 
 t_texture	get_tex_for_obj(t_obj obj)
