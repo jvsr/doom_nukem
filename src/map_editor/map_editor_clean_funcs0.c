@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 16:20:55 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 17:44:11 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include "libft/ft_mem.h"
 #include "map_editor.h"
 #include "error.h"
+
+t_editor_sector	*get_sector(t_list *walls)
+{
+	t_editor_sector *sec;
+
+	sec = ft_memalloc(sizeof(t_editor_sector));
+	if (sec == NULL)
+		error_msg_errno("Unable to allocate sector");
+	sec->walls = walls;
+	return (sec);
+}
 
 t_list			*get_walls_at_point(t_coord *point,
 											t_list *walls, t_editor_wall *cur)

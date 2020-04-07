@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/07 11:46:32 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 17:44:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ t_list			*get_correct_sectors(t_editor_wall *con, t_list *walls);
 void			remove_from_list(t_list **head, t_list *elm);
 t_coord			get_wall_vector(t_editor_wall *main, t_editor_wall *sec);
 t_map			*map_editor_convert(t_editor_map *m_edit);
+t_editor_sector	*get_sector(t_list *walls);
 
 #endif
