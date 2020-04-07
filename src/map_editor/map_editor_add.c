@@ -68,9 +68,27 @@ static void	add_line(t_game *game, SDL_Point mouse_pos,
 	map_editor_gui_elem->show_last_click = !first_place;
 }
 
+
+static void	add_object(t_game *game, SDL_Point mouse_pos,
+				t_transform *map_editor_elem)
+{
+	t_map_editor	*map_editor_gui_elem;
+
+	map_editor_gui_elem = map_editor_elem->gui_elem.map_editor;
+	mouse_pos.x += map_editor_gui_elem->pos.x;
+	mouse_pos.y += map_editor_gui_elem->pos.y;
+	map_editor_new_object(game->editor_map,
+		map_editor_gui_elem->selected_object,
+		(t_coord){mouse_pos.x, mouse_pos.y});
+	map_editor_gui_elem->show_last_click = FALSE;
+	set_elem_redraw(map_editor_elem);
+}
+
 void		map_editor_add(t_game *game, SDL_Point mouse_pos,
 				t_transform *map_editor_elem)
 {
 	if (map_editor_elem->gui_elem.map_editor->selected_object == O_INVALID)
 		add_line(game, mouse_pos, map_editor_elem);
+	else
+		add_object(game, mouse_pos, map_editor_elem);
 }

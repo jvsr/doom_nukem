@@ -85,10 +85,14 @@ typedef struct	s_angle_data
 t_editor_map	*map_editor_new(void);
 void			map_editor_del(t_editor_map **editor_map);
 
-t_editor_wall	*map_editor_new_wall(t_editor_map *editor_map, t_coord corner_0,
-					t_coord corner_1);
+t_editor_wall	*map_editor_new_wall(t_editor_map *editor_map,
+					t_coord corner_0, t_coord corner_1);
+t_editor_object	*map_editor_new_object(t_editor_map *editor_map, t_obj type,
+					t_coord pos);
 void			map_editor_add_wall(t_editor_map *editor_map,
 					t_editor_wall *wall);
+void			map_editor_add_object(t_editor_map *editor_map,
+					t_editor_object *object);
 void			map_editor_add(t_game *game, SDL_Point mouse_pos,
 					t_transform *map_editor_elem);
 
@@ -97,10 +101,14 @@ void			map_editor_snap_to_grid(t_transform *map_editor_elem,
 void			map_editor_remove_last_wall(t_editor_map *editor_map);
 void			map_editor_del_wall(t_editor_map *editor_map,
 					t_editor_wall *wall);
+void			map_editor_del_object(t_editor_map *editor_map,
+					t_editor_object *object);
 t_bool			map_editor_hit_wall(t_editor_wall *wall, SDL_Point mouse);
 t_bool			map_editor_wall_is_bigger(t_editor_wall *wall,
 					t_editor_wall *other);
-t_editor_wall	*map_editor_check_hit(t_transform *map_editor_elem,
+t_editor_wall	*map_editor_check_hit_wall(t_transform *map_editor_elem,
+					t_editor_map *editor_map, SDL_Point mouse_pos);
+t_editor_object	*map_editor_check_hit_object(t_transform *map_editor_elem,
 					t_editor_map *editor_map, SDL_Point mouse_pos);
 t_bool			map_editor_clean(t_editor_map *map);
 void			map_objects(t_list *secs, t_list *objs);
