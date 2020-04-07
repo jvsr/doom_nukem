@@ -79,12 +79,13 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 			event.button.y < 0 || event.button.y > map_editor_elem->abs_dim.y)
 			return ;
 		mouse_pos = (SDL_Point){event.button.x, event.button.y};
-		if (event.button.button == SDL_BUTTON_LEFT)
+		if (event.button.button == SDL_BUTTON_LEFT &&
+				is_helddown(game->keymap, SDLK_LCTRL) == TRUE)
+			toggle_wall(game, mouse_pos, map_editor_elem);
+		else if (event.button.button == SDL_BUTTON_LEFT)
 			map_editor_add(game, mouse_pos, map_editor_elem);
 		else if (event.button.button == SDL_BUTTON_RIGHT)
 			delete_line(game, mouse_pos, map_editor_elem);
-		else if (event.button.button == SDL_BUTTON_MIDDLE)
-			toggle_wall(game, mouse_pos, map_editor_elem);
 	}
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 		quit(0);
