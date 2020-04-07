@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 14:04:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 13:17:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void		clean_up_dups(t_editor_map *map)
 	t_editor_sector	*s1;
 
 	x = map->sectors;
-	while (x)
+	while (x && x->content)
 	{
 		s0 = x->content;
 		y = map->sectors;
-		while (y)
+		while (y && y->content)
 		{
 			s1 = y->content;
 			if (s0 != s1 && ft_lstlen(s0->walls) == ft_lstlen(s1->walls) &&

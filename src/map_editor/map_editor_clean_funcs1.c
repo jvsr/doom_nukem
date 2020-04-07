@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:41:08 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 15:28:34 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 13:06:57 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@ t_list		*get_correct_sectors(t_editor_wall *con, t_list *walls)
 	t_list *secs;
 
 	secs = NULL;
+	printf("Left\n\n");
 	ft_lstaddbck(&secs,
-		lft_room(ft_lstnew(con, sizeof(t_editor_wall)), walls, con));
+		ft_lstnew(lft_room(ft_lstnew(con, sizeof(t_editor_wall)), walls, con), sizeof(t_list)));
+	printf("Right\n\n");
 	ft_lstaddbck(&secs,
-		right_room(ft_lstnew(con, sizeof(t_editor_wall)), walls, con));
+		ft_lstnew(right_room(ft_lstnew(con, sizeof(t_editor_wall)), walls, con), sizeof(t_list)));
+	printf("Sectors : %zu\n", ft_lstlen(secs));
 	return (secs);
 }
 
