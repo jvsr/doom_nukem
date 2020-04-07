@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/08 16:12:36 by pholster       #+#    #+#                */
+/*   Created: 2019/01/08 16:12:36 by pholster      #+#    #+#                 */
 /*   Updated: 2019/08/23 15:56:42 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -26,6 +26,7 @@ typedef struct	s_list
 }				t_list;
 
 t_list			*ft_lstdup(const t_list *lst);
+t_list			*ft_lstdup_dup(const t_list *lst);
 t_list			*ft_lstdupone(const t_list *lst);
 t_list			*ft_lstfind_content(t_list *lst, const void *content,
 					size_t size);
