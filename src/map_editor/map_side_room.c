@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 15:53:40 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 12:38:56 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,14 @@ static t_list	*get_left_most(t_list **cons, t_editor_wall *wall)
 	vec = get_wall_vector(wall, (*cons)->content);
 	while (i)
 	{
-		printf("%p, %p\n", i, i->content);
 		tvec = get_wall_vector(i->content, wall);
 		angle = wrap_angle(get_angle_from_vectors(&vec, &tvec));
-		printf("Angle %f\n", angle);
 		if (angle > ret.ang && angle < 360)
 			ret = (t_angle_data){angle, i, i->content};
 		i = i->next;
 	}
-	if (*cons)
+	if (*cons && ret.lst_elem)
 		ft_lstunlink(cons, ret.lst_elem);
-	printf("Final Ang %f\n", ret.ang);
 	return (ret.lst_elem);
 }
 
@@ -73,7 +70,7 @@ static t_list	*get_right_most(t_list **cons, t_editor_wall *wall)
 		}
 		i = i->next;
 	}
-	if (*cons)
+	if (*cons && ret.lst_elem)
 		ft_lstunlink(cons, ret.lst_elem);
 	return (ret.lst_elem);
 }
@@ -88,17 +85,19 @@ t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first)
 
 	ret = NULL;
 	cons = get_cons(trail, walls, first);
-	if (cons->content == first)
-		return (cons->content);
-	if (ft_lstfind_content(trail, cons->content, cons->content_size))
-		return (NULL);
-	while (cons)
+	while (cons && cons->content)
 	{
-		printf("Pre Cons %zu\n", ft_lstlen(cons));
 		lmost = get_left_most(&cons, ft_lstlast(trail)->content);
-		printf("Post Cons %zu\n", ft_lstlen(cons));
-		if (lmost->content == first)
+		if (lmost == NULL)
+			return (NULL);
+		else if (lmost->content == first)
 			return (lmost);
+		else if (ft_lstfind_content(trail, lmost->content, lmost->content_size))
+		{
+			ft_lstdel(&lmost, NULL);
+			ft_lstdel(&cons, NULL);
+			return (NULL);
+		}
 		dup = ft_lstdup(trail);
 		ft_lstaddbck(&dup, ft_lstdup(lmost));
 		pos = lft_room(dup, walls, first);
@@ -108,6 +107,8 @@ t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first)
 			ret = lmost;
 			ft_lstdel(&cons, NULL);
 		}
+		else
+			ft_lstdel(&lmost, NULL);
 		ft_lstdel(&dup, NULL);
 	}
 	return (ret);
@@ -123,19 +124,19 @@ t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first)
 
 	ret = NULL;
 	cons = get_cons(trail, walls, first);
-	if (cons->content == first)
-		return (cons->content);
-	if (ft_lstfind_content(trail, cons->content, cons->content_size))
-		return (NULL);
-	while (cons)
+	while (cons && cons->content)
 	{
-		printf("Pre Cons %zu\n", ft_lstlen(cons));
 		rmost = get_right_most(&cons, ft_lstlast(trail)->content);
-		printf("Post Cons %zu\n", ft_lstlen(cons));
 		if (rmost == NULL)
 			return (NULL);
-		if (rmost->content == first)
+		else if (rmost->content == first)
 			return (rmost);
+		else if (ft_lstfind_content(trail, rmost->content, rmost->content_size))
+		{
+			ft_lstdel(&rmost, NULL);
+			ft_lstdel(&cons, NULL);
+			return (NULL);
+		}
 		dup = ft_lstdup(trail);
 		ft_lstaddbck(&dup, ft_lstdup(rmost));
 		pos = right_room(dup, walls, first);
@@ -145,6 +146,8 @@ t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first)
 			ret = rmost;
 			ft_lstdel(&cons, NULL);
 		}
+		else
+			ft_lstdel(&rmost, NULL);
 		ft_lstdel(&dup, NULL);
 	}
 	return (ret);
