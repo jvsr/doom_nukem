@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:41:08 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 13:06:57 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 13:23:04 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_coord		get_wall_vector(t_editor_wall *main, t_editor_wall *sec)
 
 	if (ft_memequ(&main->corner_0, &sec->corner_0, csize))
 		get_vector_from_points(&main->corner_1, &main->corner_0, &vec);
-	else if (ft_memequ(&main->corner_0, &sec->corner_1, sizeof(csize)))
+	else if (ft_memequ(&main->corner_0, &sec->corner_1, csize))
 		get_vector_from_points(&main->corner_1, &main->corner_0, &vec);
 	else
 		get_vector_from_points(&main->corner_0, &main->corner_1, &vec);
