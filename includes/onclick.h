@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 13:37:54 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 15:14:43 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ void	mainmenu_quit(t_game *game, t_transform *gui);
 
 void	map_editor_select_return(t_game *game, t_transform *gui);
 void	map_editor_select_new(t_game *game, t_transform *gui);
+
+void	map_editor_object_next(t_game *game, t_transform *gui);
+void	map_editor_object_prv(t_game *game, t_transform *gui);
+void	map_editor_object_select(t_game *game, t_transform *gui);
+void	map_editor_confirmation_return(t_game *game, t_transform *gui);
+void	map_editor_remove_confirmation(t_game *game);
+void	map_editor_add_confirmation(t_game *game);
 
 void	options_sensitivity_up(t_game *game, t_transform *gui);
 void	options_hud_sensitivity_up(t_game *game, t_transform *gui);

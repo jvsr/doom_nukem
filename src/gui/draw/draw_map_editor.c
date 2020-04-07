@@ -148,7 +148,9 @@ void		draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem)
 	hex_to_color(&background_color, EDITOR_BACKGROUND_COLOR);
 	sdl_fill_surface_color(dst, background_color);
 	draw_grid(dst, editor_pos);
-	draw_walls(dst, game->editor_map->walls, editor_pos);
+	if (game->editor_map == NULL)
+		return ;
 	draw_objects(dst, game, editor_pos);
+	draw_walls(dst, game->editor_map->walls, editor_pos);
 	draw_cursor(dst, game, elem, mouse_pos);
 }

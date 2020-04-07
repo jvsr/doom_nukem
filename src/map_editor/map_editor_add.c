@@ -25,21 +25,21 @@
 #include "map_editor.h"
 
 static void	manage_last_click(t_game *game, SDL_Point mouse_pos,
-				t_map_editor *map_editor_gui_elem, t_bool *first_place)
+				t_map_editor *map_editor_gui_elem)
 {
 	t_editor_wall	*wall;
 
 	if (is_helddown(game->keymap, SDLK_LSHIFT) && game->editor_map->walls != NULL)
 	{
-		if (*first_place == TRUE)
+		if (map_editor_gui_elem->show_last_click == FALSE)
 		{
 			wall = (t_editor_wall*)ft_lstlast(game->editor_map->walls)->content;
 			map_editor_gui_elem->last_click.x = wall->corner_1.x;
 			map_editor_gui_elem->last_click.y = wall->corner_1.y;
 		}
-		*first_place = FALSE;
+		map_editor_gui_elem->show_last_click = TRUE;
 	}
-	else if (*first_place == TRUE)
+	else if (map_editor_gui_elem->show_last_click == FALSE)
 	{
 		map_editor_gui_elem->last_click.x = mouse_pos.x;
 		map_editor_gui_elem->last_click.y = mouse_pos.y;
@@ -49,23 +49,22 @@ static void	manage_last_click(t_game *game, SDL_Point mouse_pos,
 static void	add_line(t_game *game, SDL_Point mouse_pos,
 				t_transform *map_editor_elem)
 {
-	t_map_editor		*map_editor_gui_elem;
-	static	t_bool		first_place = TRUE;
+	t_map_editor	*map_editor_gui_elem;
 
 	map_editor_gui_elem = map_editor_elem->gui_elem.map_editor;
 	map_editor_snap_to_grid(map_editor_elem, &mouse_pos);
-	manage_last_click(game, mouse_pos, map_editor_gui_elem, &first_place);
-	if (first_place == FALSE && ft_memequ(&map_editor_gui_elem->last_click,
-		&mouse_pos, sizeof(SDL_Point)) == FALSE)
+	manage_last_click(game, mouse_pos, map_editor_gui_elem);
+	if (map_editor_gui_elem->show_last_click == TRUE &&
+		ft_memequ(&map_editor_gui_elem->last_click,	&mouse_pos,
+		sizeof(SDL_Point)) == FALSE)
 	{
 		map_editor_new_wall(game->editor_map, (t_coord){
 			map_editor_gui_elem->last_click.x, map_editor_gui_elem->last_click.y
 		}, (t_coord){mouse_pos.x, mouse_pos.y});
 		set_elem_redraw(map_editor_elem);
 	}
-	first_place = !first_place;
 	map_editor_gui_elem->last_click = mouse_pos;
-	map_editor_gui_elem->show_last_click = !first_place;
+	map_editor_gui_elem->show_last_click = !map_editor_gui_elem->show_last_click;
 }
 
 

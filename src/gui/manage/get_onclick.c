@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/06 13:42:12 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 15:15:59 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static t_tablepair const	g_onclicks[] = {
 
 	{"map_editor_select_return", map_editor_select_return},
 	{"map_editor_select_new", map_editor_select_new},
+
+	{"map_editor_object_next", map_editor_object_next},
+	{"map_editor_object_prv", map_editor_object_prv},
+	{"map_editor_object_select", map_editor_object_select},
+	{"map_editor_confirmation_return", map_editor_confirmation_return},
+	{"map_editor_remove_confirmation", map_editor_remove_confirmation},
 
 	{"options_sensitivity_up", options_sensitivity_up},
 	{"options_hud_sensitivity_up", options_hud_sensitivity_up},
