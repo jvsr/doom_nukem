@@ -30,17 +30,17 @@ static void	delete(t_game *game, SDL_Point mouse_pos,
 	t_editor_wall	*wall;
 	t_editor_object	*object;
 
-	object = map_editor_check_hit_object(map_editor_elem, game->editor_map,
+	wall = map_editor_check_hit_wall(map_editor_elem, game->editor_map,
 		mouse_pos);
-	if (object != NULL)
-		map_editor_del_object(game->editor_map, object);
+	if (wall != NULL)
+		map_editor_del_wall(game->editor_map, wall);
 	else
 	{
-		wall = map_editor_check_hit_wall(map_editor_elem, game->editor_map,
+		object = map_editor_check_hit_object(map_editor_elem, game->editor_map,
 			mouse_pos);
-		if (wall == NULL)
+		if (object == NULL)
 			return ;
-		map_editor_del_wall(game->editor_map, wall);
+		map_editor_del_object(game->editor_map, object);
 	}
 	set_elem_redraw(map_editor_elem);
 }
