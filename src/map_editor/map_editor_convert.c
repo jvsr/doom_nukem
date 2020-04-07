@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/04/01 12:20:53 by jvisser        #+#    #+#                */
+/*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
 /*   Updated: 2020/04/02 18:22:59 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -63,7 +63,7 @@ static void	add_objects(t_sector *map_s, t_editor_sector *cur_s)
 {
 	t_list *obj;
 	t_editor_object *cur_obj;
-	
+
 	obj = cur_s->objects;
 	map_s->object_count = 0;
 	while (obj != NULL)
@@ -79,7 +79,7 @@ static void	add_objects(t_sector *map_s, t_editor_sector *cur_s)
 		else if (cur_obj->type == O_HEALTH_PICKUP)
 			new_health_pickup(&cur_obj->pos, map_s);
 		else if (cur_obj->type == O_KEY)
-			new_key(&cur_obj->pos, map_s);	
+			new_key(&cur_obj->pos, map_s);
 		else if (cur_obj->type == O_SPIKE)
 			new_spike(&cur_obj->pos, map_s);
 		else if (cur_obj->type == O_START)
@@ -130,5 +130,5 @@ t_map	*map_editor_convert(t_editor_map *m_edit)
 		add_objects(&(m->sectors[i]), cur_s);
 		i++;
 	}
-	return (m);	
+	return (m);
 }
