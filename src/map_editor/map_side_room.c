@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 16:00:30 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/07 16:01:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_list	*get_cons(t_list *trail, t_list *walls, t_editor_wall *first)
 
 static t_list	*get_most(t_list **cons, t_editor_wall *wall, t_bool is_right)
 {
-		t_angle_data	ret;
+	t_angle_data	ret;
 	t_list			*i;
 	t_coord			vec;
 	t_coord			tvec;
