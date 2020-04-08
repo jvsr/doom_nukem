@@ -80,3 +80,4 @@
         - text_font: neckromancer
         - text_color: #EAEAEA
         - text_size: 0.7
+        - onclick: load_editor_map_cancel

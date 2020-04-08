@@ -36,6 +36,8 @@ void	mainmenu_quit(t_game *game, t_transform *gui);
 
 void	map_editor_select_return(t_game *game, t_transform *gui);
 void	map_editor_select_new(t_game *game, t_transform *gui);
+void	load_editor_map(t_game *game, t_transform *gui);
+void	load_editor_map_cancel(t_game *game, t_transform *gui);
 
 void	map_editor_object_next(t_game *game, t_transform *gui);
 void	map_editor_object_prv(t_game *game, t_transform *gui);
@@ -43,6 +45,10 @@ void	map_editor_object_select(t_game *game, t_transform *gui);
 void	map_editor_confirmation_return(t_game *game, t_transform *gui);
 void	map_editor_remove_confirmation(t_game *game);
 void	map_editor_add_confirmation(t_game *game);
+void	map_editor_object_next(t_game *game, t_transform *gui);
+void	map_editor_object_prv(t_game *game, t_transform *gui);
+void	map_editor_object_select(t_game *game, t_transform *gui);
+void	save_map(t_game *game, t_transform *gui);
 
 void	options_sensitivity_up(t_game *game, t_transform *gui);
 void	options_hud_sensitivity_up(t_game *game, t_transform *gui);
@@ -89,12 +95,6 @@ void	controls_set_interact(t_game *game, t_transform *gui);
 void	controls_set_crouch(t_game *game, t_transform *gui);
 void	controls_set_jump(t_game *game, t_transform *gui);
 void	controls_return(t_game *game, t_transform *gui);
-
-void	map_editor_object_next(t_game *game, t_transform *gui);
-void	map_editor_object_prv(t_game *game, t_transform *gui);
-void	map_editor_object_select(t_game *game, t_transform *gui);
-void	save_map(t_game *game, t_transform *gui);
-void	load_editor_map(t_game *game, t_transform *gui);
 
 void	restart_game(t_game *game, t_transform *gui);
 

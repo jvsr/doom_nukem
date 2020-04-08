@@ -39,6 +39,15 @@ void		create_map(t_game *game, char *name)
 	game->editor_map = emap;
 }
 
+void		load_editor_map_cancel(t_game *game, t_transform *gui)
+{
+	t_transform	*load_ui;
+
+	(void)gui;
+	load_ui = get_gui_child(game->ui, "mapEditorSelectLoadMenu");
+	set_elem_show_clickable(load_ui, FALSE);
+}
+
 void		load_editor_map(t_game *game, t_transform *gui)
 {
 	t_list		*maps;

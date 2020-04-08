@@ -25,12 +25,18 @@ static t_tablepair const	g_onclicks[] = {
 
 	{"map_editor_select_return", map_editor_select_return},
 	{"map_editor_select_new", map_editor_select_new},
+	{"load_editor_map", load_editor_map},
+	{"load_editor_map_cancel", load_editor_map_cancel},
 
 	{"map_editor_object_next", map_editor_object_next},
 	{"map_editor_object_prv", map_editor_object_prv},
 	{"map_editor_object_select", map_editor_object_select},
 	{"map_editor_confirmation_return", map_editor_confirmation_return},
 	{"map_editor_remove_confirmation", map_editor_remove_confirmation},
+	{"map_editor_object_next", map_editor_object_next},
+	{"map_editor_object_prv", map_editor_object_prv},
+	{"map_editor_object_select", map_editor_object_select},
+	{"save_map", save_map},
 
 	{"options_sensitivity_up", options_sensitivity_up},
 	{"options_hud_sensitivity_up", options_hud_sensitivity_up},
@@ -75,12 +81,6 @@ static t_tablepair const	g_onclicks[] = {
 	{"controls_set_crouch", controls_set_crouch},
 	{"controls_set_jump", controls_set_jump},
 	{"controls_return", controls_return},
-
-	{"map_editor_object_next", map_editor_object_next},
-	{"map_editor_object_prv", map_editor_object_prv},
-	{"map_editor_object_select", map_editor_object_select},
-	{"save_map", save_map},
-	{"load_editor_map", load_editor_map},
 
 	{"restart_game", restart_game},
 	{"go_to_game", go_to_game}
