@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/07 17:44:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 13:09:00 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ t_editor_object	*map_editor_check_hit_object(t_transform *map_editor_elem,
 					t_editor_map *editor_map, SDL_Point mouse_pos);
 t_bool			map_editor_clean(t_editor_map *map);
 void			map_objects(t_list *secs, t_list *objs);
-t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first);
-t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first);
+t_list			*get_room(t_list *trail,
+					t_list *walls, t_editor_wall *first, t_bool is_right);
 t_list			*get_walls_at_wall(t_list *prv,
 					t_editor_wall *wall, t_list *walls);
 t_coord			*get_corner(t_editor_wall *wall, t_list *prv);
@@ -127,5 +127,8 @@ void			remove_from_list(t_list **head, t_list *elm);
 t_coord			get_wall_vector(t_editor_wall *main, t_editor_wall *sec);
 t_map			*map_editor_convert(t_editor_map *m_edit);
 t_editor_sector	*get_sector(t_list *walls);
+void			free_ewall(void *wall, size_t size);
+void			free_eobj(void *obj, size_t size);
+void			free_esector(void *sec, size_t size);
 
 #endif

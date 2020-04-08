@@ -6,12 +6,13 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 17:48:24 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 15:36:41 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_bool.h"
 #include "libft/ft_list.h"
+#include "libft/ft_printf.h"
 #include "libft/ft_mem.h"
 #include "map_editor.h"
 #include "coord.h"
@@ -45,8 +46,6 @@ static void		clean_up_dups(t_editor_map *map)
 	{
 		s0 = x->content;
 		y = map->sectors;
-			int i = 0;
-			printf("Len %zu\n", ft_lstlen(map->sectors));
 		while (y && y->content)
 		{
 			s1 = y->content;
@@ -58,8 +57,6 @@ static void		clean_up_dups(t_editor_map *map)
 				ft_lstdel(&s1->walls, NULL);
 				ft_memdel((void**)&s1);
 			}
-				printf("i : %i\n", i);
-				i++;
 			y = y->next;
 		}
 		x = x->next;
@@ -99,29 +96,28 @@ static void		make_sectors(t_list *cons, t_editor_map *map)
 {
 	t_list *walls;
 	t_list *tmp;
-	
-	walls = NULL;
+
 	while (cons)
 	{
-		ft_lstaddbck(&walls, get_correct_sectors(cons->content, map->walls));
+		walls = get_correct_sectors(cons->content, map->walls);
+		tmp = walls;
+		while (tmp)
+		{
+			ft_lstaddbck(&map->sectors,
+				ft_lstnew(get_sector(tmp->content), sizeof(void*)));
+			tmp = tmp->next;
+		}
+		ft_lstdel(&walls, NULL);
 		cons = cons->next;
 	}
 	clean_up_walls(map);
-	tmp = walls;
-	while (tmp)
-	{
-		ft_lstaddbck(&map->sectors,
-			ft_lstnew(get_sector(tmp->content), sizeof(void*)));
-		tmp = tmp->next;
-	}
-	ft_lstdel(&walls, NULL);
 	clean_up_dups(map);
 	map_objects(map->sectors, map->objects);
 }
 
 t_bool			map_editor_clean(t_editor_map *map)
 {
-	t_list *cons;
+	t_list			*cons;
 
 	cons = get_connectors(map->walls);
 	if (cons)

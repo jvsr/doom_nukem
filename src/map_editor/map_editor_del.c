@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 14:37:18 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/03 11:44:25 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 10:21:40 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "map_editor.h"
 
-static void	free_wall(void *wall, size_t size)
+void		free_ewall(void *wall, size_t size)
 {
 	t_editor_wall *w;
 
@@ -24,13 +24,13 @@ static void	free_wall(void *wall, size_t size)
 	ft_memdel((void**)&w);
 }
 
-static void	free_obj(void *obj, size_t size)
+void		free_eobj(void *obj, size_t size)
 {
 	(void)size;
 	ft_memdel((void**)&obj);
 }
 
-static void free_sector(void *sec, size_t size)
+void		free_esector(void *sec, size_t size)
 {
 	t_editor_sector *sc;
 
@@ -45,8 +45,8 @@ void		map_editor_del(t_editor_map **editor_map)
 {
 	if (editor_map == NULL || *editor_map == NULL)
 		return ;
-	ft_lstdel(&(*editor_map)->walls, free_wall);
-	ft_lstdel(&(*editor_map)->objects, free_obj);
-	ft_lstdel(&(*editor_map)->sectors, free_sector);
+	ft_lstdel(&(*editor_map)->walls, free_ewall);
+	ft_lstdel(&(*editor_map)->objects, free_eobj);
+	ft_lstdel(&(*editor_map)->sectors, free_esector);
 	ft_memdel((void**)editor_map);
 }

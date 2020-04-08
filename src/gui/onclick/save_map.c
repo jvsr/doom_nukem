@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 13:35:31 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 17:53:26 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 15:36:28 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void		save_map(t_game *game, t_transform *gui)
 
 	(void)gui;
 	map = NULL;
+	(void)map;
 	if (ft_lstlen(game->editor_map->walls) < 3)
 		return ((void)ft_printf("Map Does Not Contain Enough Walls\n"));
 	map_editor_clean(game->editor_map);
-	// map = map_editor_convert(game->editor_map);
-	printf("%p\n", map);
 }

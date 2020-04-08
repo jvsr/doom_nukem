@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 17:44:11 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 11:46:00 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,21 @@
 t_editor_sector	*get_sector(t_list *walls)
 {
 	t_editor_sector *sec;
+	t_editor_wall	*tmp;
 
 	sec = ft_memalloc(sizeof(t_editor_sector));
 	if (sec == NULL)
 		error_msg_errno("Unable to allocate sector");
 	sec->walls = walls;
+	while (walls)
+	{
+		tmp = walls->content;
+		if (tmp->sectors[0] == NULL)
+			tmp->sectors[0] = sec;
+		else if (tmp->sectors[1] == NULL)
+			tmp->sectors[1] = sec;
+		walls = walls->next;
+	}
 	return (sec);
 }
 
@@ -36,13 +46,9 @@ t_list			*get_walls_at_point(t_coord *point,
 	while (walls && walls->content != NULL)
 	{
 		wall = walls->content;
-		printf("Walls %p : %p\n", cur, wall);
 		if (wall != cur && (ft_memequ(&wall->corner_0, point, sizeof(t_coord))
 			|| ft_memequ(&wall->corner_1, point, sizeof(t_coord))))
-		{
-			printf("Added : %p\n", wall);
 			ft_lstaddbck(&ret, ft_lstnew(wall, sizeof(t_editor_wall)));
-		}
 		walls = walls->next;
 	}
 	return (ret);

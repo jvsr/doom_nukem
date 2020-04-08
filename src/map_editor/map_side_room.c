@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 16:21:10 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 15:37:05 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ static t_bool	get_closest(float prev, float cur)
 {
 	if (prev < 0 && cur > 0)
 		return (TRUE);
-	return (fabs(prev) > fabs(cur));
+	else if (prev < 0 && cur < 0 && cur > prev)
+		return (TRUE);
+	else if (prev > 0 && cur > 0 && cur < prev)
+		return (TRUE);
+	return (FALSE);
 }
 
 static t_list	*get_most(t_list **cons, t_editor_wall *wall, t_bool is_right)
@@ -40,32 +44,27 @@ static t_list	*get_most(t_list **cons, t_editor_wall *wall, t_bool is_right)
 
 	ret = (t_angle_data){-400, NULL, NULL};
 	i = *cons;
-	printf("\n Angles : \n");
-	(void)is_right;
+	vec = get_wall_vector(wall, (*cons)->content);
 	while (i && i->content)
 	{
 		tvec = get_wall_vector(i->content, wall);
-		vec = get_wall_vector(wall, (*cons)->content);
 		angle = get_angle_from_vectors(&vec, &tvec);
-		vec = get_wall_vector(wall, i->content);
 		angle *= get_side_vec(&vec, &tvec, (int)is_right);
-		// angle = wrap_angle(angle);
-		printf("Angle %f\n", angle);
 		if (get_closest(ret.ang, angle))
 			ret = (t_angle_data){angle, i, i->content};
 		i = i->next;
 	}
 	if (*cons && ret.lst_elem)
 		ft_lstunlink(cons, ret.lst_elem);
-	printf("Final Angle %f\n", ret.ang);
 	return (ret.lst_elem);
 }
 
-t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first)
+t_list			*get_room(t_list *trail,
+						t_list *walls, t_editor_wall *first, t_bool is_right)
 {
 	t_list	*ret;
 	t_list	*cons;
-	t_list	*lmost;
+	t_list	*most;
 	t_list	*pos;
 	t_list	*dup;
 
@@ -73,68 +72,31 @@ t_list			*lft_room(t_list *trail, t_list *walls, t_editor_wall *first)
 	cons = get_cons(trail, walls, first);
 	while (cons && cons->content)
 	{
-		lmost = get_most(&cons, ft_lstlast(trail)->content, FALSE);
-		if (lmost == NULL)
+		most = get_most(&cons, ft_lstlast(trail)->content, is_right);
+		if (most == NULL)
 			return (NULL);
-		else if (lmost->content == first)
-			return (lmost);
-		else if (ft_lstfind_content(trail, lmost->content, lmost->content_size))
+		else if (most->content == first)
 		{
-			ft_lstdel(&lmost, NULL);
+			ft_lstdel(&cons, NULL);
+			return (most);
+		}
+		else if (ft_lstfind_content(trail, most->content, most->content_size))
+		{
+			ft_lstdel(&most, NULL);
 			ft_lstdel(&cons, NULL);
 			return (NULL);
 		}
 		dup = ft_lstdup(trail);
-		ft_lstaddbck(&dup, ft_lstdup(lmost));
-		pos = lft_room(dup, walls, first);
+		ft_lstaddbck(&dup, ft_lstdup(most));
+		pos = get_room(dup, walls, first, is_right);
 		if (pos != NULL)
 		{
-			lmost->next = pos;
-			ret = lmost;
+			most->next = pos;
+			ret = most;
 			ft_lstdel(&cons, NULL);
 		}
 		else
-			ft_lstdel(&lmost, NULL);
-		ft_lstdel(&dup, NULL);
-	}
-	return (ret);
-}
-
-t_list			*right_room(t_list *trail, t_list *walls, t_editor_wall *first)
-{
-	t_list	*ret;
-	t_list	*cons;
-	t_list	*rmost;
-	t_list	*pos;
-	t_list	*dup;
-
-	ret = NULL;
-	cons = get_cons(trail, walls, first);
-	while (cons && cons->content)
-	{
-		rmost = get_most(&cons, ft_lstlast(trail)->content, TRUE);
-		if (rmost == NULL)
-			return (NULL);
-		else if (rmost->content == first)
-			return (rmost);
-		else if (ft_lstfind_content(trail, rmost->content, rmost->content_size))
-		{
-			ft_lstdel(&rmost, NULL);
-			if (cons)
-				ft_lstdel(&cons, NULL);
-			return (NULL);
-		}
-		dup = ft_lstdup(trail);
-		ft_lstaddbck(&dup, ft_lstdup(rmost));
-		pos = right_room(dup, walls, first);
-		if (pos != NULL)
-		{
-			rmost->next = pos;
-			ret = rmost;
-			ft_lstdel(&cons, NULL);
-		}
-		else
-			ft_lstdel(&rmost, NULL);
+			ft_lstdel(&most, NULL);
 		ft_lstdel(&dup, NULL);
 	}
 	return (ret);
