@@ -44,6 +44,8 @@ ONCLICK_SRCS = mainmenu \
 				hud_died \
 				map_editor \
 				save_map \
+				load_editor_map \
+				
 				
 
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)

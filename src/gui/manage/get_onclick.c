@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 17:27:29 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/07 15:59:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/08 16:56:57 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static t_tablepair const	g_onclicks[] = {
 	{"map_editor_object_prv", map_editor_object_prv},
 	{"map_editor_object_select", map_editor_object_select},
 	{"save_map", save_map},
+	{"load_editor_map", load_editor_map},
 
 	{"restart_game", restart_game},
 	{"go_to_game", go_to_game}
