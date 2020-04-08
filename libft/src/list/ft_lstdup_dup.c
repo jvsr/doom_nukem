@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/13 16:03:21 by pholster      #+#    #+#                 */
-/*   Updated: 2019/08/23 15:56:52 by pholster      ########   odam.nl         */
+/*   Updated: 2020/04/08 15:58:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_list			*ft_lstdup_dup(const t_list *lst)
 	t_list	*prvlst;
 	t_list	*retlst;
 
+	if (lst == NULL)
+		return (NULL);
 	retlst = ft_lstnew_dup(lst->content, lst->content_size);
 	if (retlst == NULL)
 		return (NULL);

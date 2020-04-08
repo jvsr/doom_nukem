@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/08 15:36:41 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 15:55:52 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static void		add_all_to_sector(t_list *walls, t_editor_map *map)
 	sec = ft_memalloc(sizeof(t_editor_sector));
 	if (sec == NULL)
 		error_msg_errno("Unable to allocate sector");
-	sec->walls = walls;
-	sec->objects = map->objects;
+	sec->walls = ft_lstdup(walls);
+	sec->objects = ft_lstdup(map->objects);
 	lst = walls;
 	while (lst)
 	{
