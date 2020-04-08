@@ -33,3 +33,50 @@
       - text_size: 0.6
       - texture: ui/border5x1.tga
       - onclick: map_editor_select_return
+
+  - panel: mapEditorSelectLoadMenu
+    - show: 0
+    - clickable: 0
+    - layer: 2
+    - image: mapEditorSelectLoadOverlay
+      - color: #26020699
+
+    - panel: mapEditorSelectLoadBox
+      - pos: 0.25, 0.1
+      - dim: 0.5, 0.4
+      - image: mapEditorSelectLoadBackground
+        - texture: ui/border1x1.tga
+      - panel: mapEditorSelectLoadBlock
+        - pos: 0.1, 0.05
+        - dim: 0.8, 0.5
+        - text_block: mapEditorSelectLoadText
+          - pos: 0.2, 0.0
+          - dim: 0.6, 0.8
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.7
+        - button: mapEditorSelectLoadLeft
+          - pos: 0.0, 0.2
+          - dim: 0.1, 0.4
+          - texture: ui/arrow_left.tga
+        - button: mapEditorSelectLoadRight
+          - pos: 0.9, 0.2
+          - dim: 0.1, 0.4
+          - texture: ui/arrow_right.tga
+
+      - button: mapEditorSelectLoadOkButton
+        - pos: 0.2, 0.45
+        - dim: 0.6, 0.2
+        - texture: ui/border5x1.tga
+        - text: "Ok"
+        - text_font: neckromancer
+        - text_color: #EAEAEA
+        - text_size: 0.7
+      - button: mapEditorSelectLoadCancelButton
+        - pos: 0.2, 0.7
+        - dim: 0.6, 0.2
+        - texture: ui/border5x1.tga
+        - text: "Cancel"
+        - text_font: neckromancer
+        - text_color: #EAEAEA
+        - text_size: 0.7

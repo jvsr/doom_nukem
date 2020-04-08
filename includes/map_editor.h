@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:34:28 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 17:14:48 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ t_editor_sector	*get_sector(t_list *walls);
 void			free_ewall(void *wall, size_t size);
 void			free_eobj(void *obj, size_t size);
 void			free_esector(void *sec, size_t size);
+t_editor_map	*map_editor_rev_convert(t_map *m);
 
 #endif
