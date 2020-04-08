@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 21:54:04 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 11:58:27 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 16:09:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ t_wall		*read_wall(t_binary_read *bin_r, t_map *map)
 	wall->texture = read_anim(bin_r, NULL);
 	wall->win_tex = read_anim(bin_r, NULL);
 	wall->perc = read_coord(bin_r);
-	wall->decals = read_decal_list(bin_r);
+	if (read_int(bin_r))
+		wall->decals = read_decal_list(bin_r);
+	else
+		wall->decals = NULL;
 	wall->is_door = (t_bool)read_char(bin_r);
 	isec = read_int(bin_r);
 	if (isec == -1 || map == NULL)
