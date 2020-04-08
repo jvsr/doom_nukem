@@ -43,6 +43,7 @@ ONCLICK_SRCS = mainmenu \
 				go_to_game \
 				hud_died \
 				map_editor \
+				load_level \
 
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 

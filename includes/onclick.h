@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/02/20 17:13:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/08 19:43:41 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # define MISSION_PATH "resources/data/map"
 # define TMP "resources/data/map/tmp_list"
 # define CAMPAIGN_PATH "./resources/data/map/campaign"
+# define SELECT_CAMPAIGN_PATH "./map/campaign"
 # define CUSTOM_PATH "./resources/data/map/custom"
+# define SELECT_CUSTOM_PATH "./map/custom"
 
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
@@ -116,6 +118,7 @@ void	remove_options(t_game *game);
 void	add_confirmation(t_game *game);
 void	remove_confirmation(t_game *game);
 
+void	load_level(t_game *game, t_transform *gui);
 void	go_to_game(t_game *game, t_transform *gui);
 void	hud_diedmainmenu(t_game *game, t_transform *gui);
 void	hud_diedreload(t_game *game, t_transform *gui);
