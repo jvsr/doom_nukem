@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 12:40:55 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 16:59:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,8 @@ t_font_type		get_font_type_value(const char *name);
 const char		*get_gui_type_name(t_gui_type gui_type);
 t_gui_type		get_gui_type_value(const char *name);
 t_bool			get_focus(t_game *game);
+t_list			*read_map_list(void);
+void			create_map_list(t_game *game, char *path);
 void			remove_maps(t_game *game);
 t_list			*skip_page(t_list *maps, size_t page);
 

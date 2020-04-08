@@ -14,6 +14,7 @@
       - text_font: foulfiend
       - text_size: 0.6
       - texture: ui/border5x1.tga
+      - onclick: load_editor_map
     - button: mapEditorSelectBoxNewButton
       - pos: 0.1, 0.4
       - dim: 0.8, 0.2
