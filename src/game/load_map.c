@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/09 13:40:40 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 13:42:37 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ static void	start_end(t_game *game,
 		plyr->pos = obj->pos;
 		plyr->cur_sector = get_sec_num(game->map, sec);
 		del_obj(obj, sec);
+		sec->object_count--;
 	}
 	if (tex == TEXTURE_END)
 	{
 		sec->f_enter = win_enter;
 		del_obj(obj, sec);
+		sec->object_count--;
 	}
 }
 
