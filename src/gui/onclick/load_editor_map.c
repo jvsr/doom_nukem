@@ -14,13 +14,14 @@
 #include "libft/ft_str.h"
 #include "serializer.h"
 #include "map_editor.h"
+#include "eventstate.h"
 #include "renderer.h"
 #include "onclick.h"
 #include "error.h"
 #include "game.h"
 #include "gui.h"
 
-void		create_map(t_game *game, char *name)
+void		create_map(t_game *game, char *name) //Todo add protection if file doesn't exists
 {
 	char			*loc;
 	t_map			*map;
@@ -37,6 +38,84 @@ void		create_map(t_game *game, char *name)
 	delete_map(&map);
 	ft_strdel(&loc);
 	game->editor_map = emap;
+}
+
+void		load_editor_map_ok(t_game *game, t_transform *gui)
+{
+	t_transform	*load_ui;
+	t_transform	*select_map;
+	char		*map_name;
+
+	(void)gui;
+	select_map = get_gui_child(game->ui, "mapEditorSelectLoadText");
+	map_name = select_map->gui_elem.text->text;
+	if (ft_strisempty(map_name) == TRUE)
+		return ;
+	map_editor_del(&game->editor_map);
+	create_map(game, map_name);
+	set_elem_show_clickable(get_gui_child(game->ui, "mapEditor"), TRUE);
+	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
+	load_ui = get_gui_child(game->ui, "mapEditorSelectLoadMenu");
+	set_elem_show_clickable(load_ui, FALSE);
+	game->cureventstate->eventstate = map_editor;
+}
+
+void		load_editor_map_next(t_game *game, t_transform *gui)
+{
+	t_list		*lst;
+	t_list		*maps;
+	t_transform	*select_map;
+
+	(void)gui;
+	select_map = get_gui_child(game->ui, "mapEditorSelectLoadText");
+	create_map_list(game, CUSTOM_PATH);
+    maps = read_map_list();
+	lst = maps;
+	while (lst != NULL)
+	{
+		if (ft_strequ(lst->content, select_map->gui_elem.text->text))
+		{
+			lst = lst->next;
+			break;
+		}
+		lst = lst->next;
+	}
+	if (lst == NULL)
+		lst = maps;
+	if (lst == NULL)
+		set_elem_text_str(select_map, "");
+	else
+		set_elem_text_str(select_map, lst->content);
+	ft_lstdel(&maps, ft_lstdelmem);
+}
+
+void		load_editor_map_prv(t_game *game, t_transform *gui)
+{
+	t_list		*lst;
+	t_list		*prv;
+	t_list		*maps;
+	t_transform	*select_map;
+
+	(void)gui;
+	prv = NULL;
+	select_map = get_gui_child(game->ui, "mapEditorSelectLoadText");
+	create_map_list(game, CUSTOM_PATH);
+    maps = read_map_list();
+	lst = maps;
+	while (lst != NULL)
+	{
+		if (ft_strequ(lst->content, select_map->gui_elem.text->text))
+			break;
+		prv = lst;
+		lst = lst->next;
+	}
+	if (prv == NULL && maps != NULL)
+		prv = ft_lstlast(maps);
+	if (prv == NULL)
+		set_elem_text_str(select_map, "");
+	else
+		set_elem_text_str(select_map, prv->content);
+	ft_lstdel(&maps, ft_lstdelmem);
 }
 
 void		load_editor_map_cancel(t_game *game, t_transform *gui)
@@ -60,7 +139,9 @@ void		load_editor_map(t_game *game, t_transform *gui)
 	set_elem_show_clickable(load_ui, TRUE);
 	create_map_list(game, CUSTOM_PATH);
     maps = read_map_list();
-	if (maps != NULL)
+	if (maps == NULL)
+		set_elem_text_str(select_map, "");
+	else
 		set_elem_text_str(select_map, maps->content);
     ft_lstdel(&maps, ft_lstdelmem);
 }

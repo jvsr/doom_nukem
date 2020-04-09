@@ -25,12 +25,10 @@ t_list		*read_decal_list(t_binary_read *bin_r)
 	bin_r->header_pos += sizeof(t_uint64);
 	size = read_header(bin_r);
 	decal = read_decal(bin_r);
-	list = ft_lstnew(ft_memdup(&decal, sizeof(t_decal)), sizeof(t_decal));
+	list = ft_lstnew_dup(&decal, sizeof(t_decal));
 	if (list == NULL)
 		error_msg_errno("Unable To allocate list");
 	if (size != sizeof(t_decal))
 		ft_lstaddbck(&list, read_decal_list(bin_r));
-	else
-		list->next = NULL;
 	return (list);
 }

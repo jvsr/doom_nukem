@@ -15,7 +15,7 @@
 #include "serializer.h"
 #include "error.h"
 
-static t_sector	*read_secs(t_map *map, t_binary_read *bin_r)
+static void	read_secs(t_map *map, t_binary_read *bin_r)
 {
 	t_sector	*secs;
 	t_uint64	i;
@@ -25,14 +25,13 @@ static t_sector	*read_secs(t_map *map, t_binary_read *bin_r)
 	while (i < map->sector_count)
 	{
 		secs = read_sec(bin_r, map);
-		ft_memcpy(map->sectors + i, secs, sizeof(secs));
+		ft_memcpy(map->sectors + i, secs, sizeof(t_sector));
 		ft_memdel((void**)&secs);
 		i++;
 	}
-	return (secs);
 }
 
-t_map			*read_map(t_binary_read *bin_r)
+t_map		*read_map(t_binary_read *bin_r)
 {
 	t_map	*map;
 
@@ -40,7 +39,7 @@ t_map			*read_map(t_binary_read *bin_r)
 	if (map == NULL)
 		error_msg_errno("Unable To Allocated Level Data");
 	map->sector_count = read_long(bin_r);
-	map->sectors = read_secs(map, bin_r);
+	read_secs(map, bin_r);
 	map->has_skybox = (t_bool)read_char(bin_r);
 	map->skybox = (t_texture)read_int(bin_r);
 	map->has_won = (t_bool)read_char(bin_r);

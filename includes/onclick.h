@@ -37,6 +37,9 @@ void	mainmenu_quit(t_game *game, t_transform *gui);
 void	map_editor_select_return(t_game *game, t_transform *gui);
 void	map_editor_select_new(t_game *game, t_transform *gui);
 void	load_editor_map(t_game *game, t_transform *gui);
+void	load_editor_map_ok(t_game *game, t_transform *gui);
+void	load_editor_map_next(t_game *game, t_transform *gui);
+void	load_editor_map_prv(t_game *game, t_transform *gui);
 void	load_editor_map_cancel(t_game *game, t_transform *gui);
 
 void	map_editor_object_next(t_game *game, t_transform *gui);

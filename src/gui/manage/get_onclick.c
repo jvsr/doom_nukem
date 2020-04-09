@@ -26,6 +26,9 @@ static t_tablepair const	g_onclicks[] = {
 	{"map_editor_select_return", map_editor_select_return},
 	{"map_editor_select_new", map_editor_select_new},
 	{"load_editor_map", load_editor_map},
+	{"load_editor_map_ok", load_editor_map_ok},
+	{"load_editor_map_next", load_editor_map_next},
+	{"load_editor_map_prv", load_editor_map_prv},
 	{"load_editor_map_cancel", load_editor_map_cancel},
 
 	{"map_editor_object_next", map_editor_object_next},
