@@ -22,7 +22,7 @@ static void		read_walls(t_sector *sec, t_binary_read *bin_r, t_map *map)
 	t_wall		*wall;
 
 	i = 0;
-	sec->walls = ft_memalloc(sizeof(t_sector) * (sec->wall_count + 1));
+	sec->walls = ft_memalloc(sizeof(t_wall) * (sec->wall_count + 1));
 	while (i < sec->wall_count)
 	{
 		wall = read_wall(bin_r, map);
