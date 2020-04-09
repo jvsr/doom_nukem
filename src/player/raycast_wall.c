@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:44:20 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 12:55:12 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 15:08:04 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_wall		*wall_ray(t_sector *secs, t_sector *prv, t_player *plyr, t_bool *ip)
 			if (!wall->is_portal)
 				return (wall);
 			else if (ip[0] == FALSE && wall->window != prv)
+				return (wall);
+			else if (wall->is_window)
 				return (wall);
 			else if (wall->window != prv)
 				return (wall_ray(wall->window, secs, plyr, ip));

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 10:44:17 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 12:03:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void			free_obj(void *obj, size_t size);
 void			free_wall(t_wall *wall);
 t_bool			del_obj(t_object *obj, t_sector *sec);
 t_hinfo			*new_hinfo(t_sector *sec, size_t ar_size, size_t start);
+void			smash_glass(t_game *game, t_wall *glass, t_sector *sec);
 
 #endif

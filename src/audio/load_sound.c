@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/25 17:28:18 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 11:31:45 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 11:59:49 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void		load_sound(t_hashmap *sound_map, char const *exec_path)
 	addsound(sound_map, "explosion", exec_path);
 	addsound(sound_map, "shotgun", exec_path);
 	addsound(sound_map, "singleshot", exec_path);
+	addsound(sound_map, "window_shatter", exec_path);
 }
