@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 13:08:06 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 11:26:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ static t_object	*get_closer(t_object *obj, t_object *prv, t_player *plyr)
 static t_bool	collides(t_object *obj, t_player *plyr)
 {
 	t_coord vec;
-	t_coord	angs;
+	t_coord	c0;
+	t_coord c1;
 
 	get_vector_from_points(&plyr->pos, &obj->pos, &vec);
 	normalize_vector(&vec);
-	vec = (t_coord){-vec.x, -vec.y};
-	angs.x = get_angle_between_points(&plyr->pos, &(t_coord){obj->pos.x +
-		(vec.x * obj->col_radius), obj->pos.y + (vec.y * -obj->col_radius)});
-	angs.y = get_angle_between_points(&plyr->pos,
-		&(t_coord){obj->pos.x + (vec.y * obj->col_radius), obj->pos.y +
-		(vec.y * -obj->col_radius)});
-	return (is_between_fov(plyr->angle,
-		wrap_angle(angs.x), wrap_angle(angs.y)));
+	vec = (t_coord){vec.y, vec.x};
+	c0 = (t_coord){obj->pos.x + (vec.x * obj->col_radius),
+		obj->pos.y + (vec.y * -obj->col_radius)};
+	c1 = (t_coord){obj->pos.x + (vec.y * obj->col_radius), obj->pos.y +
+		(vec.y * -obj->col_radius)};
+	return (get_collision(&plyr->pos, &(t_coord){plyr->mag.cos, plyr->mag.sin},
+		(t_coord[2]){c0, c1}, &vec) != NULL);
 }
 
 static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr)

@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 15:45:07 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 12:55:17 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 17:50:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		player_shoot(t_game *game, t_player *plyr)
 	obj = raycast_object(game, game->map, plyr);
 	plyr->ammo--;
 	play_sound(game->audio_man, "shotgun");
+	printf("Obj %p, Is_Enemy %i\n", obj, obj ? obj->is_enemy : 0);
 	if (obj == NULL || obj->is_enemy == FALSE)
 		return ;
 	en = obj->data;
