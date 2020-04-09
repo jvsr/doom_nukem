@@ -31,7 +31,7 @@ static int	get_sec_num(t_map *map, t_sector *sec)
 	return (i - 1);
 }
 
-static void	start_end(t_game *game,
+static t_bool	start_end(t_game *game,
 								t_object *obj, t_player *plyr, t_sector *sec)
 {
 	t_texture tex;
@@ -42,12 +42,15 @@ static void	start_end(t_game *game,
 		plyr->pos = obj->pos;
 		plyr->cur_sector = get_sec_num(game->map, sec);
 		del_obj(obj, sec);
+		return (FALSE);
 	}
 	if (tex == TEXTURE_END)
 	{
 		sec->f_enter = win_enter;
 		del_obj(obj, sec);
+		return (FALSE);
 	}
+	return (TRUE);
 }
 
 void		load_map(t_game *game, t_map *map, t_player *plyr)
@@ -63,10 +66,10 @@ void		load_map(t_game *game, t_map *map, t_player *plyr)
 	{
 		j = 0;
 		sec = map->sectors + i;
-		while (j < map->sectors[j].object_count)
+		while (j < sec->object_count)
 		{
-			start_end(game, (sec->objects + j)->content, plyr, sec);
-			j++;
+			if (start_end(game, (sec->objects + j)->content, plyr, sec))
+				j++;
 		}
 		i++;
 	}
