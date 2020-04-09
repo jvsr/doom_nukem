@@ -29,8 +29,9 @@ static t_bool	create_map(t_game *game, char *name)
 	char			*loc;
 	t_map			*map;
 	t_editor_map	*emap;
+	size_t			offset;
 
-	loc = ft_strformat("%s/%s", CUSTOM_PATH, name);
+	loc = ft_strformat("%s/%s/%s", game->exec_path, CUSTOM_PATH, name);
 	if (loc == NULL)
 		error_msg_errno("Failed to allocate file name");
 	if (access(loc, F_OK) != 0)
@@ -39,11 +40,8 @@ static t_bool	create_map(t_game *game, char *name)
 		ft_strdel(&loc);
 		return (FALSE);
 	}
-	ft_strdel(&loc);
-	loc = ft_strformat("%s/%s", SAVE_LOCATION, name);
-	if (loc == NULL)
-		error_msg_errno("Failed to allocate file name");
-	map = read_map_struct(loc, game->exec_path);
+	offset = (size_t)ft_strstr(loc, SAVE_LOCATION) - (size_t)loc;
+	map = read_map_struct(&loc[offset], game->exec_path);
 	ft_strdel(&loc);
 	if (map == NULL)
 		error_msg_errno("Invalid Map Location or Allocation Error");

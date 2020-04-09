@@ -44,6 +44,7 @@ static void			write_map(t_game *game, t_map *map)
 {
 	size_t	i;
 	char	*name;
+	size_t	offset;
 
 	i = 0;
 	name = ft_strformat("%s/%s/%s_%d",
@@ -59,12 +60,9 @@ static void			write_map(t_game *game, t_map *map)
 		if (name == NULL)
 			error_msg_errno("Failed to allocate file name");
 	}
-	ft_strdel(&name);
-	name = ft_strformat("%s/%s_%d", SAVE_LOCATION, SAVE_NAME, i);
-	if (name == NULL)
-		error_msg_errno("Failed to allocate file name");
-	write_map_struct(map, name, game->exec_path);
-	ft_printf("Map Saved! (%s)\n", name);
+	offset = (size_t)ft_strstr(name, SAVE_LOCATION) - (size_t)name;
+	write_map_struct(map, &name[offset], game->exec_path);
+	ft_printf("Map Saved! (%s)\n", &name[offset]);
 	ft_strdel(&name);
 }
 
