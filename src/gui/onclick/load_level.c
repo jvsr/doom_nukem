@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 19:04:08 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/09 12:32:43 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/09 12:51:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void load_level(t_game *game, t_transform *gui)
 	ft_strcat(full_path, "/");
 	ft_strcat(full_path, gui->gui_elem.button->text->text);
 	ft_printf("%s\n", full_path);
-	t_binary_read *map_bin = new_binary_read(full_path, TRUE, game->exec_path);
 	(void)map;
-	(void)map_bin;
-	map = read_map(map_bin);
+	map = read_map_struct(full_path, game->exec_path);
 }
