@@ -49,6 +49,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level2
       - pos: 0.1, 0.26
       - dim: 0.35, 0.18
@@ -56,6 +57,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level3
       - pos: 0.1, 0.45
       - dim: 0.35, 0.18
@@ -63,6 +65,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level4
       - pos: 0.1, 0.64
       - dim: 0.35, 0.18
@@ -70,6 +73,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level5
       - pos: 0.55, 0.07
       - dim: 0.35, 0.18
@@ -77,6 +81,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level6
       - pos: 0.55, 0.26
       - dim: 0.35, 0.18
@@ -84,6 +89,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level7
       - pos: 0.55, 0.45
       - dim: 0.35, 0.18
@@ -91,6 +97,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level8
       - pos: 0.55, 0.64
       - dim: 0.35, 0.18
@@ -98,6 +105,7 @@
       - text_font: neckromancer
       - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
 
     - button: missionReturnButton
       - pos: 0.3, 0.845
