@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
 #include "libft/ft_list.h"
+#include "libft/ft_printf.h"
 #include "libft/ft_str.h"
 #include "serializer.h"
 #include "map_editor.h"
@@ -21,12 +24,20 @@
 #include "game.h"
 #include "gui.h"
 
-void		create_map(t_game *game, char *name) //Todo add protection if file doesn't exists
+static t_bool	create_map(t_game *game, char *name)
 {
 	char			*loc;
 	t_map			*map;
 	t_editor_map	*emap;
 
+	loc = ft_strformat("%s/%s", CUSTOM_PATH, name);
+	if (loc == NULL)
+		error_msg_errno("Failed to allocate file name");
+	if (access(name, F_OK) != 0)
+	{
+		ft_printf("File doesn't exists anymore: %s\n", loc);
+		return (FALSE);
+	}
 	loc = ft_strformat("%s/%s", SAVE_LOCATION, name);
 	if (loc == NULL)
 		error_msg_errno("Failed to allocate file name");
@@ -38,9 +49,10 @@ void		create_map(t_game *game, char *name) //Todo add protection if file doesn't
 	delete_map(&map);
 	ft_strdel(&loc);
 	game->editor_map = emap;
+	return (TRUE);
 }
 
-void		load_editor_map_ok(t_game *game, t_transform *gui)
+void			load_editor_map_ok(t_game *game, t_transform *gui)
 {
 	t_transform	*load_ui;
 	t_transform	*select_map;
@@ -52,7 +64,8 @@ void		load_editor_map_ok(t_game *game, t_transform *gui)
 	if (ft_strisempty(map_name) == TRUE)
 		return ;
 	map_editor_del(&game->editor_map);
-	create_map(game, map_name);
+	if (create_map(game, map_name) == FALSE)
+		return ;
 	set_elem_show_clickable(get_gui_child(game->ui, "mapEditor"), TRUE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mapeditorselect"), FALSE);
 	load_ui = get_gui_child(game->ui, "mapEditorSelectLoadMenu");
@@ -60,7 +73,7 @@ void		load_editor_map_ok(t_game *game, t_transform *gui)
 	game->cureventstate->eventstate = map_editor;
 }
 
-void		load_editor_map_next(t_game *game, t_transform *gui)
+void			load_editor_map_next(t_game *game, t_transform *gui)
 {
 	t_list		*lst;
 	t_list		*maps;
@@ -89,7 +102,7 @@ void		load_editor_map_next(t_game *game, t_transform *gui)
 	ft_lstdel(&maps, ft_lstdelmem);
 }
 
-void		load_editor_map_prv(t_game *game, t_transform *gui)
+void			load_editor_map_prv(t_game *game, t_transform *gui)
 {
 	t_list		*lst;
 	t_list		*prv;
@@ -118,7 +131,7 @@ void		load_editor_map_prv(t_game *game, t_transform *gui)
 	ft_lstdel(&maps, ft_lstdelmem);
 }
 
-void		load_editor_map_cancel(t_game *game, t_transform *gui)
+void			load_editor_map_cancel(t_game *game, t_transform *gui)
 {
 	t_transform	*load_ui;
 
@@ -127,7 +140,7 @@ void		load_editor_map_cancel(t_game *game, t_transform *gui)
 	set_elem_show_clickable(load_ui, FALSE);
 }
 
-void		load_editor_map(t_game *game, t_transform *gui)
+void			load_editor_map(t_game *game, t_transform *gui)
 {
 	t_list		*maps;
 	t_transform	*load_ui;
