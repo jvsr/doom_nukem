@@ -34,7 +34,10 @@ t_bool			del_obj(t_object *obj, t_sector *sec)
 	while (lst != NULL)
 	{
 		if (lst->content == obj)
+		{
+			sec->object_count--;
 			return (del(prv, lst));
+		}
 		prv = lst;
 		lst = lst->next;
 	}
