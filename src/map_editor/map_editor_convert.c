@@ -55,9 +55,9 @@ static void	add_walls(t_sector *headS, t_sector *map_s, t_editor_sector *cur_s)
 		if (cur_w->is_portal || cur_w->is_window || cur_w->is_door)
 		{
 			if (cur_s == cur_w->sectors[0])
-				map_s->walls[i].window = &headS[cur_w->sectors[0]->index];
-			else
 				map_s->walls[i].window = &headS[cur_w->sectors[1]->index];
+			else
+				map_s->walls[i].window = &headS[cur_w->sectors[0]->index];
 		}
 		i++;
 	}
@@ -123,6 +123,15 @@ t_map	*map_editor_convert(t_editor_map *m_edit)
 	m->sectors = ft_memalloc(sizeof(t_sector) * ft_lstlen(m_edit->sectors));
 	if (m->sectors == NULL)
 		error_msg_errno("Failed to allocate map sectors.");
+
+	i = 0;
+	tmp = m_edit->sectors;
+	while (tmp != NULL) {
+		((t_editor_sector*)tmp->content)->index = i;
+		tmp = tmp->next;
+		i++;
+	}
+
 	i = 0;
 	tmp = m_edit->sectors;
 	while (i < ft_lstlen(m_edit->sectors))
