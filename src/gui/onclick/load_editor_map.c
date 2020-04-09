@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 16:53:05 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/08 17:40:12 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 16:33:29 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ static t_bool	create_map(t_game *game, char *name)
 	}
 	offset = (size_t)ft_strstr(loc, SAVE_LOCATION) - (size_t)loc;
 	map = read_map_struct(&loc[offset], game->exec_path);
+	printf("Map Sectors %zu\n", map->sector_count);
 	ft_strdel(&loc);
 	if (map == NULL)
 		error_msg_errno("Invalid Map Location or Allocation Error");
 	emap = map_editor_rev_convert(map);
 	delete_map(&map);
+	printf("Walls : %zu, Objects : %zu, Sectors : %zu\n", ft_lstlen(emap->walls), ft_lstlen(emap->objects), ft_lstlen(emap->sectors));
 	game->editor_map = emap;
 	return (TRUE);
 }

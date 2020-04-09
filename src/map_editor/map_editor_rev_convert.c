@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 13:09:17 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 16:44:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/09 16:34:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	add_wall(t_editor_map *m_edit, t_wall *w)
 	w_edit->is_window = w->is_window;
 	w_edit->is_hidden_door = FALSE;
 	w_edit->is_door = w->is_door;
-	ft_lstaddbck(&m_edit->sectors, ft_lstnew(w_edit, sizeof(t_editor_wall)));
+	ft_lstaddbck(&m_edit->walls, ft_lstnew(w_edit, sizeof(t_editor_wall)));
 }
 
 static void	add_object(t_editor_map *m_edit, t_list *o_lst)
@@ -56,7 +56,7 @@ static void	add_object(t_editor_map *m_edit, t_list *o_lst)
 		o_edit->type = O_KEY;
 	else if (o->img.left[0] == TEXTURE_HEALTH_PICKUP)
 		o_edit->type = O_HEALTH_PICKUP;
-	ft_lstaddbck(&m_edit->sectors, ft_lstnew(o_edit, sizeof(t_editor_object)));
+	ft_lstaddbck(&m_edit->objects, ft_lstnew(o_edit, sizeof(t_editor_object)));
 }
 
 static void	loop_sector(t_editor_map *m_edit, t_sector *s)
