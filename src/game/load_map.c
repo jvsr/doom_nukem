@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 12:06:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 13:40:40 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void		load_map(t_game *game, t_map *map, t_player *plyr)
 	t_uint64	j;
 	t_sector	*sec;
 
+	delete_map(&game->map);
+	game->map = map;
 	i = 0;
 	while (i < map->sector_count)
 	{
