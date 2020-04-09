@@ -61,7 +61,8 @@ static void	add_object(t_editor_map *m_edit, t_list *o_lst)
 
 static void	loop_sector(t_editor_map *m_edit, t_sector *s)
 {
-	size_t i;
+	size_t			i;
+	t_list			*obj;
 	t_editor_sector	*s_edit;
 
 	s_edit = (t_editor_sector*)ft_memalloc(sizeof(t_editor_sector));
@@ -74,10 +75,11 @@ static void	loop_sector(t_editor_map *m_edit, t_sector *s)
 		add_wall(m_edit, &s->walls[i]);
 		i++;
 	}
-	while (s->objects)
+	obj = s->objects;
+	while (obj != NULL)
 	{
-		add_object(m_edit, &s->objects[i]);
-		i++;
+		add_object(m_edit, obj);
+		obj = obj->next;
 	}
 }
 

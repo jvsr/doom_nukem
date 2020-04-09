@@ -118,7 +118,7 @@ t_map	*map_editor_convert(t_editor_map *m_edit)
 	if (m == NULL)
 		error_msg_errno("Failed to allocate map");
 	m->has_skybox = m_edit->has_skybox;
-	m->skybox = m_edit->skybox;
+	m->skybox = TEXTURE_SKYBOX_DAY;
 	m->sector_count = ft_lstlen(m_edit->sectors);
 	m->sectors = ft_memalloc(sizeof(t_sector) * ft_lstlen(m_edit->sectors));
 	if (m->sectors == NULL)

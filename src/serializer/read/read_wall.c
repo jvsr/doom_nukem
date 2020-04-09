@@ -29,7 +29,7 @@ t_wall		*read_wall(t_binary_read *bin_r, t_map *map)
 	wall->texture = read_anim(bin_r, NULL);
 	wall->win_tex = read_anim(bin_r, NULL);
 	wall->perc = read_coord(bin_r);
-	if (read_int(bin_r))
+	if (read_int(bin_r) == 1)
 		wall->decals = read_decal_list(bin_r);
 	else
 		wall->decals = NULL;
