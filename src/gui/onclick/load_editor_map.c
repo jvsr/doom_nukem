@@ -36,18 +36,19 @@ static t_bool	create_map(t_game *game, char *name)
 	if (access(loc, F_OK) != 0)
 	{
 		ft_printf("File doesn't exists anymore: %s\n", loc);
+		ft_strdel(&loc);
 		return (FALSE);
 	}
+	ft_strdel(&loc);
 	loc = ft_strformat("%s/%s", SAVE_LOCATION, name);
 	if (loc == NULL)
 		error_msg_errno("Failed to allocate file name");
-	ft_strdel(&name);
 	map = read_map_struct(loc, game->exec_path);
+	ft_strdel(&loc);
 	if (map == NULL)
 		error_msg_errno("Invalid Map Location or Allocation Error");
 	emap = map_editor_rev_convert(map);
 	delete_map(&map);
-	ft_strdel(&loc);
 	game->editor_map = emap;
 	return (TRUE);
 }
