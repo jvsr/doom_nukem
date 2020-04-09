@@ -33,7 +33,7 @@ static t_bool	create_map(t_game *game, char *name)
 	loc = ft_strformat("%s/%s", CUSTOM_PATH, name);
 	if (loc == NULL)
 		error_msg_errno("Failed to allocate file name");
-	if (access(name, F_OK) != 0)
+	if (access(loc, F_OK) != 0)
 	{
 		ft_printf("File doesn't exists anymore: %s\n", loc);
 		return (FALSE);
