@@ -72,7 +72,6 @@ static void	add_objects(t_sector *map_s, t_editor_sector *cur_s)
 	while (obj != NULL)
 	{
 		cur_obj = (t_editor_object*)obj->content;
-		map_s->object_count++;
 		if (cur_obj->type == O_CHAIR)
 			new_chair(&cur_obj->pos, 0, map_s);
 		else if (cur_obj->type == O_END)
