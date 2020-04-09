@@ -26,6 +26,7 @@ static void fill_wall(t_wall *cur_w, t_editor_wall *e_w)
 	cur_w->is_portal = e_w->is_portal;
 	cur_w->is_window = e_w->is_window;
 	cur_w->is_door = e_w->is_door;
+	cur_w->perc = (t_coord){0.2, 0.2};
 	if (e_w->is_door && e_w->is_hidden_door == FALSE)
 		cur_w->texture = single_init(TEXTURE_DOOR, NULL);
 	else
@@ -95,12 +96,12 @@ static void	fill_sector_default(t_sector *m_s, t_list **tmp)
 	*tmp = (*tmp)->next;
 	m_s->floor = 0;
 	m_s->floor_tex = TEXTURE_QUARTZ;
-	m_s->ceil = 40;
+	m_s->ceil = 60;
 	m_s->ceil_tex = TEXTURE_QUARTZ;
 	m_s->has_ceiling = TRUE;
 	m_s->f_enter = NULL;
 	m_s->f_exit = NULL;
-	m_s->light_value = 5;
+	m_s->light_value = 0.5;
 	m_s->has_slope = FALSE;
 	m_s->angle = 0;
 	m_s->swall = NULL;

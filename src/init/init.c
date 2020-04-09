@@ -73,19 +73,18 @@ void			map_init(t_game *game)
 	game->map->skybox = TEXTURE_SKYBOX_DAY;
 
 	//Sector 1
-	game->map->sectors[0].ceil = 150;
+	game->map->sectors[0].ceil = 40;
 	game->map->sectors[0].floor = 0;
 	game->map->sectors[0].wall_count = 4;
 	game->map->sectors[0].walls = ft_memalloc(sizeof(t_wall) * (game->map->sectors[0].wall_count + 1));
 	game->map->sectors[0].light_value = 0.5;
 	if (game->map->sectors[0].walls == NULL)
 		error_msg_errno("Could not allocate Map Walls");
-	game->map->sectors[0].walls[0] = (t_wall){(t_coord){10, -10}, (t_coord){10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL, 0};
-	game->map->sectors[0].walls[1] = (t_wall){(t_coord){10, 10}, (t_coord){-10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL, 0};
-	game->map->sectors[0].walls[2] = (t_wall){(t_coord){-10, 10}, (t_coord){-10, -10}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.5}, NULL, 0};
-	game->map->sectors[0].walls[3] = (t_wall){(t_coord){-10, -10}, (t_coord){10, -10}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.5}, NULL, 0};
+	game->map->sectors[0].walls[0] = (t_wall){(t_coord){10, -10}, (t_coord){10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.2}, NULL, 0};
+	game->map->sectors[0].walls[1] = (t_wall){(t_coord){10, 10}, (t_coord){-10, 10}, FALSE, FALSE, NULL, single_init(TEXTURE_BRICK_WALL, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.2}, NULL, 0};
+	game->map->sectors[0].walls[2] = (t_wall){(t_coord){-10, 10}, (t_coord){-10, -10}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL),single_init(TEXTURE_GLASS, NULL), (t_coord){0.2, 0.2}, NULL, 0};
+	game->map->sectors[0].walls[3] = (t_wall){(t_coord){-10, -10}, (t_coord){10, -10}, FALSE, FALSE, NULL, single_init(TEXTURE_QUARTZ, NULL), single_init(TEXTURE_GLASS, NULL),(t_coord){0.2, 0.2}, NULL, 0};
 	game->map->sectors[0].has_ceiling = TRUE;
-	game->map->sectors[0].object_count = 0;
 	game->map->sectors[0].floor_tex = TEXTURE_QUARTZ;
 	game->map->sectors[0].ceil_tex = TEXTURE_QUARTZ;
 	game->map->sectors[0].has_slope = FALSE;

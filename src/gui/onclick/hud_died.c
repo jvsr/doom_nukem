@@ -22,7 +22,7 @@ void		hud_diedreload(t_game *game, t_transform *gui)
 	(void)gui;
 	delete_map(&game->map);
 	map_init(game);
-	init_player(game);
+	// init_player(game); //TODO Think about how to implement this
 	game->cureventstate->eventstate = hud;
 	set_elem_show_clickable(get_gui_child(game->ui, "hudDied"), FALSE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
