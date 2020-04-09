@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:54:16 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 11:37:34 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 15:29:47 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void			enemy_move(t_game *game)
 	while (i < map->sector_count)
 	{
 		j = 0;
+		// ft_printf("obj: %ld\n", map->sectors[i].object_count);
 		while (j < map->sectors[i].object_count)
 		{
 			obj = ft_lstindex(map->sectors[i].objects, j)->content;

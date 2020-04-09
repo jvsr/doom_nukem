@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 18:05:18 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/02/13 16:04:42 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/09 16:28:24 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static t_eventstate_fnc	*const g_eventstate[] =
 	hud_eventstate,
 	hud_options_eventstate,
 	eventstate_hud_died,
+	hud_win_eventstate,
 };
 
 #endif
