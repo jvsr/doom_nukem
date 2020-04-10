@@ -94,6 +94,8 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	if (event.type == SDL_KEYDOWN)
 		manage_keydown(game, event, &skip_mouse_move);
 	if (event.type == SDL_MOUSEBUTTONDOWN &&
-		event.button.button == SDL_BUTTON_LEFT)
+		event.button.button == SDL_BUTTON_LEFT && skip_mouse_move == FALSE)
 		player_shoot(game, game->player);
+	else
+		skip_mouse_move = FALSE;
 }
