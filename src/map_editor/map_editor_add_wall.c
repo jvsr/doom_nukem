@@ -50,6 +50,11 @@ static t_bool	check_collision_valid(t_editor_wall *wall, t_editor_wall *other,
 {
 	t_coord	intersection;
 
+	if ((ft_memequ(&wall->corner_0, &other->corner_0, sizeof(t_coord)) ||
+		ft_memequ(&wall->corner_0, &other->corner_1, sizeof(t_coord))) &&
+		(ft_memequ(&wall->corner_1, &other->corner_0, sizeof(t_coord)) ||
+		ft_memequ(&wall->corner_1, &other->corner_1, sizeof(t_coord))))
+		return (FALSE);
 	if (get_line_collision(&(t_bicoord){wall->corner_0, wall->corner_1},
 		&(t_bicoord){other->corner_0, other->corner_1}, &intersection) == NULL)
 		return (TRUE);
@@ -89,7 +94,7 @@ static t_bool	check_coincident_valid(t_editor_wall *wall, t_editor_wall *other)
 	return (TRUE);
 }
 
-static void		add_to_back(t_editor_map *editor_map, t_list *new)
+static t_bool	add_to_back(t_editor_map *editor_map, t_list *new)
 {
 	t_editor_wall	*new_wall;
 	t_list			*lst;
@@ -112,21 +117,22 @@ static void		add_to_back(t_editor_map *editor_map, t_list *new)
 	if (valid == FALSE)
 	{
 		ft_lstdel(&new, ft_lstdelmem);
-		return ;
+		return (FALSE);
 	}
 	if (lst == NULL)
 		editor_map->walls = new;
 	else
 		lst->next = new;
 	split_intersect_walls(editor_map, new_wall, intersect_walls);
+	return (TRUE);
 }
 
-void			map_editor_add_wall(t_editor_map *editor_map, t_editor_wall *wall)
+t_bool			map_editor_add_wall(t_editor_map *editor_map, t_editor_wall *wall)
 {
 	t_list	*new;
 
 	new = ft_lstnew((void*)wall, sizeof(t_editor_wall));
 	if (new == NULL)
 		error_msg_errno("Failed to alloc map editor wall");
-	add_to_back(editor_map, new);
+	return (add_to_back(editor_map, new));
 }

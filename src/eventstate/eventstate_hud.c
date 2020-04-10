@@ -63,10 +63,10 @@ static void	enter_options(t_game *game, t_bool *skip)
 }
 
 static void	manage_keydown(t_game *game,
-									SDL_Event event, t_bool skip_mouse_move)
+									SDL_Event event, t_bool *skip_mouse_move)
 {
 	if (!game->player->is_dead && event.key.keysym.sym == SDLK_ESCAPE)
-		enter_options(game, &skip_mouse_move);
+		enter_options(game, skip_mouse_move);
 	else if (is_helddown(game->keymap, SDLK_F6)
 		&& event.key.keysym.sym == SDLK_f)
 		game->player->is_flying = !game->player->is_flying;
@@ -92,7 +92,7 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	if (event.type == SDL_MOUSEMOTION)
 		manage_player_angle(game, &skip_mouse_move);
 	if (event.type == SDL_KEYDOWN)
-		manage_keydown(game, event, skip_mouse_move);
+		manage_keydown(game, event, &skip_mouse_move);
 	if (event.type == SDL_MOUSEBUTTONDOWN &&
 		event.button.button == SDL_BUTTON_LEFT)
 		player_shoot(game, game->player);

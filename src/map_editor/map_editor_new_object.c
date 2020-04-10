@@ -25,6 +25,7 @@ t_editor_object	*map_editor_new_object(t_editor_map *editor_map, t_obj type,
 		error_msg_errno("Failed to alloc new map editor object");
 	new->pos = pos;
 	new->type = type;
-	map_editor_add_object(editor_map, new);
+	if (map_editor_add_object(editor_map, new) == FALSE)
+		return (NULL);
 	return (new);
 }

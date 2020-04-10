@@ -24,7 +24,7 @@ static t_bool	check_collision_valid(t_editor_object *object,
 	return (TRUE);
 }
 
-static void		add_to_back(t_editor_map *editor_map, t_list *new)
+static t_bool	add_to_back(t_editor_map *editor_map, t_list *new)
 {
 	t_editor_object	*new_object;
 	t_list			*lst;
@@ -43,15 +43,16 @@ static void		add_to_back(t_editor_map *editor_map, t_list *new)
 	if (valid == FALSE)
 	{
 		ft_lstdel(&new, ft_lstdelmem);
-		return ;
+		return (FALSE);
 	}
 	if (lst == NULL)
 		editor_map->objects = new;
 	else
 		lst->next = new;
+	return (TRUE);
 }
 
-void			map_editor_add_object(t_editor_map *editor_map,
+t_bool			map_editor_add_object(t_editor_map *editor_map,
 					t_editor_object *object)
 {
 	t_list	*new;
@@ -59,5 +60,5 @@ void			map_editor_add_object(t_editor_map *editor_map,
 	new = ft_lstnew((void*)object, sizeof(t_editor_object));
 	if (new == NULL)
 		error_msg_errno("Failed to alloc map editor object");
-	add_to_back(editor_map, new);
+	return (add_to_back(editor_map, new));
 }

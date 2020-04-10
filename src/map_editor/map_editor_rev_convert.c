@@ -21,54 +21,46 @@ static void	add_wall(t_editor_map *m_edit, t_wall *w)
 {
 	t_editor_wall *w_edit;
 
-	w_edit = (t_editor_wall*)ft_memalloc(sizeof(t_editor_wall));
+	w_edit = map_editor_new_wall(m_edit, w->corner_0, w->corner_1);
 	if (w_edit == NULL)
-		error_msg_errno("Failed to alloc editor wall");
-	w_edit->corner_0 = w->corner_0;
-	w_edit->corner_1 = w->corner_1;
+		return ;
 	w_edit->is_portal = w->is_portal;
 	w_edit->is_window = w->is_window;
 	w_edit->is_hidden_door = FALSE;
 	w_edit->is_door = w->is_door;
-	ft_lstaddbck(&m_edit->walls, ft_lstnew(w_edit, sizeof(t_editor_wall)));
 }
 
 static void	add_object(t_editor_map *m_edit, t_list *o_lst)
 {
-	const t_object *o = (t_object*)o_lst->content;
+	const t_object	*o = (t_object*)o_lst->content;
 	t_editor_object *o_edit;
+	t_obj			type;
 
-	o_edit = (t_editor_object*)ft_memalloc(sizeof(t_editor_object));
-	if (o_edit == NULL)
-		error_msg_errno("Failed to alloc editor wall");
-	o_edit->pos = o->pos;
+	type = O_INVALID;
 	if (o->img.left[0] == TEXTURE_CHAIR_LEFT)
-		o_edit->type = O_CHAIR;
+		type = O_CHAIR;
 	else if (o->img.left[0] == TEXTURE_SPIKES)
-		o_edit->type = O_SPIKE;
+		type = O_SPIKE;
 	else if (o->img.left[0] == TEXTURE_START)
-		o_edit->type = O_START;
+		type = O_START;
 	else if (o->img.left[0] == TEXTURE_END)
-		o_edit->type = O_END;
+		type = O_END;
 	else if (o->img.left[0] == TEXTURE_ENEMY0_F0 + 8)
-		o_edit->type = O_ENEMY;
+		type = O_ENEMY;
 	else if (o->img.left[0] == TEXTURE_KEYS)
-		o_edit->type = O_KEY;
+		type = O_KEY;
 	else if (o->img.left[0] == TEXTURE_HEALTH_PICKUP)
-		o_edit->type = O_HEALTH_PICKUP;
-	ft_lstaddbck(&m_edit->objects, ft_lstnew(o_edit, sizeof(t_editor_object)));
+		type = O_HEALTH_PICKUP;
+	o_edit = map_editor_new_object(m_edit, type, o->pos);
+	if (o_edit == NULL)
+		return ;
 }
 
 static void	loop_sector(t_editor_map *m_edit, t_sector *s)
 {
 	size_t			i;
 	t_list			*obj;
-	t_editor_sector	*s_edit;
 
-	s_edit = (t_editor_sector*)ft_memalloc(sizeof(t_editor_sector));
-	if (s_edit == NULL)
-		error_msg_errno("Failed to alloc editor sector");
-	ft_lstaddbck(&m_edit->sectors, ft_lstnew(s_edit, sizeof(t_editor_sector)));
 	i = 0;
 	while (i < s->wall_count)
 	{
