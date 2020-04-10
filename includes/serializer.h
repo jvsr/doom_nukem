@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/10 18:17:58 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 18:19:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "rinfo.h"
 
 # define RESOURCE_PATH "resources/data/"
+
+# define MAP_HEADER 5318008
 
 typedef enum e_endian			t_endian;
 typedef struct s_list			t_list;
