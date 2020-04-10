@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 15:57:33 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 11:03:55 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 14:29:00 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ SDL_Point	get_bounds(t_player *player,
 		new.y = dst->h - (((hit->y.y - hit->hit.sect->ceil) / hit->st.x) *
 				dst->h) - player->screen_updown;
 	}
-	else if (hit->hit.sect->ceil > hit->y.x && hit->hit.sect->floor < hit->y.y)
+	else if (hit->hit.sect->ceil > hit->y.x &&
+		hit->hit.sect->floor < hit->y.y && hit->hit.wall->window)
 	{
 		new.x = (((hit->hit.wall->window->floor - hit->y.x) / hit->st.x) *
 				dst->h) - player->screen_updown;
