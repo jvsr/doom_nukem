@@ -50,7 +50,7 @@ static void		clean_up_dups(t_editor_map *map)
 		{
 			s1 = y->content;
 			if (s0 != s1 && ft_lstlen(s0->walls) == ft_lstlen(s1->walls) &&
-				walls_equal(s0->walls, s1->walls))
+				walls_equal(&s0->walls, &s1->walls))
 			{
 				remove_from_list(&map->sectors, x);
 				remove_sec(s1->walls, s1);

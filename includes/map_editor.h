@@ -122,7 +122,7 @@ t_coord			*get_corner(t_editor_wall *wall, t_list *prv);
 t_list			*get_connectors(t_list *walls);
 t_list			*get_walls_at_point(t_coord *point,
 					t_list *walls, t_editor_wall *cur);
-t_bool			walls_equal(t_list *w0, t_list *w1);
+t_bool			walls_equal(t_list **w0, t_list **w1);
 void			clean_up_walls(t_editor_map *map);
 t_list			*get_correct_sectors(t_editor_wall *con, t_list *walls);
 void			remove_from_list(t_list **head, t_list *elm);

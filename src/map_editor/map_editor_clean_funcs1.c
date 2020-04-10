@@ -17,7 +17,7 @@
 #include "error.h"
 #include "cmath.h"
 
-t_coord		get_wall_vector(t_editor_wall *main, t_editor_wall *sec)
+t_coord			get_wall_vector(t_editor_wall *main, t_editor_wall *sec)
 {
 	const size_t	csize = sizeof(t_coord);
 	t_coord			vec;
@@ -31,7 +31,7 @@ t_coord		get_wall_vector(t_editor_wall *main, t_editor_wall *sec)
 	return (vec);
 }
 
-void		remove_from_list(t_list **head, t_list *elm)
+void			remove_from_list(t_list **head, t_list *elm)
 {
 	t_list *i;
 	t_list *prv;
@@ -51,7 +51,7 @@ void		remove_from_list(t_list **head, t_list *elm)
 		i->next = NULL;
 }
 
-t_list		*get_correct_sectors(t_editor_wall *con, t_list *walls)
+t_list			*get_correct_sectors(t_editor_wall *con, t_list *walls)
 {
 	t_list 	*secs;
 
@@ -91,7 +91,7 @@ t_list		*get_correct_sectors(t_editor_wall *con, t_list *walls)
 	return (secs);
 }
 
-void		clean_up_walls(t_editor_map *map)
+void			clean_up_walls(t_editor_map *map)
 {
 	t_list			*lst;
 	t_editor_sector	*sec;
@@ -118,12 +118,24 @@ void		clean_up_walls(t_editor_map *map)
 		ft_lstaddbck(&map->sectors, ft_lstnew(sec, sizeof(t_editor_sector)));
 }
 
-t_bool		walls_equal(t_list *w0, t_list *w1)
+static t_bool	sort_memoryard(t_list const *lst1, t_list const *lst2)
 {
-	while (w0 && w1 && w0->content == w1->content)
+	return ((size_t)lst1->content > (size_t)lst2->content);
+}
+
+t_bool			walls_equal(t_list **w0, t_list **w1)
+{
+	t_list	*lst1;
+	t_list	*lst2;
+
+	ft_lstsort(w0, sort_memoryard);
+	ft_lstsort(w1, sort_memoryard);
+	lst1 = *w0;
+	lst2 = *w1;
+	while (lst1 && lst2 && lst1->content == lst2->content)
 	{
-		w0 = w0->next;
-		w1 = w1->next;
+		lst1 = lst1->next;
+		lst2 = lst2->next;
 	}
-	return (w0 == NULL && w1 == NULL);
+	return (lst1 == NULL && lst2 == NULL);
 }
