@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 13:11:10 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/07 15:58:24 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/10 18:00:19 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ t_coord		*normalize_vector(t_coord *vec);
 t_bool		is_between(float a, float x, float y);
 int			get_side_vec(t_coord *v0, t_coord *v1, int is_clockwise);
 t_bool		is_between_or_equal(float a, float x, float y);
+t_bool		coordequ(t_coord *v0, t_coord *v1);
 
 #endif

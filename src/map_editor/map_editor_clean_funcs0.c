@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 17:13:43 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 18:09:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,39 @@
 #include "libft/ft_mem.h"
 #include "map_editor.h"
 #include "error.h"
+#include "cmath.h"
+
+t_bool			set_side(t_editor_wall *prev,
+					t_editor_wall *cur, t_bool is_right)
+{
+	if (coordequ(&prev->corner_0, &cur->corner_1) ||
+		coordequ(&prev->corner_1, &cur->corner_0))
+		return (is_right);
+	return (!is_right);	
+}
 
 t_editor_sector	*get_sector(t_list *walls, t_bool is_right)
 {
 	t_editor_sector *sec;
 	t_editor_wall	*tmp;
+	t_list			*prv;
 
 	sec = ft_memalloc(sizeof(t_editor_sector));
 	if (sec == NULL)
 		error_msg_errno("Unable to allocate sector");
+	ft_lstrev(&walls);
 	sec->walls = walls;
+	prv = NULL;
 	while (walls)
 	{
 		tmp = walls->content;
-		if (!is_right)
+		if (prv != NULL)
+			is_right = set_side(prv->content, walls->content, is_right);
+		if (is_right == FALSE)
 			tmp->sectors[0] = sec;
 		else
 			tmp->sectors[1] = sec;
+		prv = walls;
 		walls = walls->next;
 	}
 	return (sec);
