@@ -31,8 +31,12 @@ static t_anim	other_obj(t_objanim oa, t_object *obj, float off, t_texture s)
 
 t_anim			read_anim(t_binary_read *bin_r, t_object *obj)
 {
+	t_objanim	ao;
+	float		offset;
+
 	if (!read_char(bin_r))
 		return (single_init(read_int(bin_r), obj));
-	return (other_obj(read_int(bin_r), obj, read_float(bin_r),
-		read_int(bin_r)));
+	ao = read_int(bin_r);
+	offset = read_float(bin_r);
+	return (other_obj(ao, obj, offset, read_int(bin_r)));
 }

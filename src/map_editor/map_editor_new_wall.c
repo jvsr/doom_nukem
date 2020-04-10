@@ -25,6 +25,7 @@ t_editor_wall	*map_editor_new_wall(t_editor_map *editor_map,
 		error_msg_errno("Failed to alloc new map editor wall");
 	new->corner_0 = corner_0;
 	new->corner_1 = corner_1;
-	map_editor_add_wall(editor_map, new);
+	if (map_editor_add_wall(editor_map, new) == FALSE)
+		return (NULL);
 	return (new);
 }

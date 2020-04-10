@@ -57,6 +57,7 @@ void		load_map(t_game *game, t_map *map, t_player *plyr)
 {
 	t_uint64	i;
 	t_uint64	j;
+	t_list		*lst;
 	t_sector	*sec;
 
 	delete_map(&game->map);
@@ -68,7 +69,8 @@ void		load_map(t_game *game, t_map *map, t_player *plyr)
 		sec = map->sectors + i;
 		while (j < sec->object_count)
 		{
-			if (start_end(game, (sec->objects + j)->content, plyr, sec))
+			lst = ft_lstindex(sec->objects, j);
+			if (start_end(game, lst->content, plyr, sec))
 				j++;
 		}
 		i++;

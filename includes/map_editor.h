@@ -91,9 +91,9 @@ t_editor_wall	*map_editor_new_wall(t_editor_map *editor_map,
 					t_coord corner_0, t_coord corner_1);
 t_editor_object	*map_editor_new_object(t_editor_map *editor_map, t_obj type,
 					t_coord pos);
-void			map_editor_add_wall(t_editor_map *editor_map,
+t_bool			map_editor_add_wall(t_editor_map *editor_map,
 					t_editor_wall *wall);
-void			map_editor_add_object(t_editor_map *editor_map,
+t_bool			map_editor_add_object(t_editor_map *editor_map,
 					t_editor_object *object);
 void			map_editor_add(t_game *game, SDL_Point mouse_pos,
 					t_transform *map_editor_elem);
