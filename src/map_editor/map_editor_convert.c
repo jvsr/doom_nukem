@@ -6,12 +6,13 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/07 16:00:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/09 18:01:56 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
 #include "libft/ft_list.h"
+#include "libft/ft_printf.h"
 
 #include "error.h"
 #include "rinfo.h"
@@ -54,6 +55,8 @@ static void	add_walls(t_sector *headS, t_sector *map_s, t_editor_sector *cur_s)
 		fill_wall(&(map_s->walls[i]), cur_w);
 		if (cur_w->is_portal || cur_w->is_window || cur_w->is_door)
 		{
+			ft_printf("P:%d, W:%d, D:%d\n", cur_w->is_portal, cur_w->is_window, cur_w->is_door);
+            ft_printf("curS: %p, curW: %p, S1: %p, S2: %p\n", cur_s, cur_w, cur_w->sectors[0], cur_w->sectors[1]);
 			if (cur_s == cur_w->sectors[0])
 				map_s->walls[i].window = &headS[cur_w->sectors[1]->index];
 			else

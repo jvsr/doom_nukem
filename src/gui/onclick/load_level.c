@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 19:04:08 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/09 13:37:01 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/09 13:40:57 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void load_level(t_game *game, t_transform *gui)
 	ft_strcat(full_path, "/");
 	ft_strcat(full_path, gui->gui_elem.button->text->text);
 	map = read_map_struct(full_path, game->exec_path);
-	delete_map(&game->map);
+	// delete_map(&game->map);
 	load_map(game, map, game->player);
-	game->map = map;
+	// game->map = map;
 	go_to_game(game, gui);
 }
