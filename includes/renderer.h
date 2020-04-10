@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/09 12:03:38 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 13:59:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_object		*new_key(t_coord *pos, t_sector *parent);
 t_object		*new_health_pickup(t_coord *pos, t_sector *parent);
 t_object		*new_start(t_coord *pos, t_sector *parent);
 t_object		*new_end(t_coord *pos, t_sector *parent);
+t_object		*new_ammo(t_coord *pos, t_sector *parent);
 void			free_sector(t_sector *sector);
 void			free_obj(void *obj, size_t size);
 void			free_wall(t_wall *wall);
