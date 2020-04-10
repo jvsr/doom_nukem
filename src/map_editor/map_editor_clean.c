@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 13:03:37 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 15:02:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void		clean_up_dups(t_editor_map *map)
 {
 	t_list			*x;
 	t_list			*y;
+	t_list			*next;
 	t_editor_sector	*s0;
 	t_editor_sector	*s1;
 
@@ -46,20 +47,22 @@ static void		clean_up_dups(t_editor_map *map)
 	{
 		s0 = x->content;
 		y = map->sectors;
+		next = x->next;
 		while (y && y->content)
 		{
 			s1 = y->content;
 			if (s0 != s1 && ft_lstlen(s0->walls) == ft_lstlen(s1->walls) &&
 				walls_equal(&s0->walls, &s1->walls))
 			{
-				remove_from_list(&map->sectors, x);
+				ft_lstunlink(&map->sectors, x);
 				remove_sec(s1->walls, s1);
 				ft_lstdel(&s1->walls, NULL);
 				ft_memdel((void**)&s1);
 			}
 			y = y->next;
 		}
-		x = x->next;
+		ft_lstdelone(&x, ft_lstdelmem);
+		x = next;
 	}
 }
 
@@ -115,6 +118,18 @@ static void		make_sectors(t_list *cons, t_editor_map *map)
 	map_objects(map->sectors, map->objects);
 }
 
+void printwall(const t_list *elem)
+{
+	ft_printf("wal: %p\n", elem->content);
+}
+
+void printlist(const t_list *elem)
+{
+	ft_printf("sec: %p\n", elem->content);
+	ft_printf("wct: %zu\n", ft_lstlen(((t_editor_sector*)elem->content)->walls));
+	ft_lstiter(((t_editor_sector*)elem->content)->walls, printwall);
+}
+
 t_bool			map_editor_clean(t_editor_map *map)
 {
 	t_list			*cons;
@@ -127,5 +142,6 @@ t_bool			map_editor_clean(t_editor_map *map)
 	}
 	else
 		add_all_to_sector(map->walls, map);
+	ft_lstiter(map->sectors, printlist);
 	return (TRUE);
 }
