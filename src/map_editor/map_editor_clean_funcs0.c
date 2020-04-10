@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/08 11:46:00 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 17:13:43 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "map_editor.h"
 #include "error.h"
 
-t_editor_sector	*get_sector(t_list *walls)
+t_editor_sector	*get_sector(t_list *walls, t_bool is_right)
 {
 	t_editor_sector *sec;
 	t_editor_wall	*tmp;
@@ -27,9 +27,9 @@ t_editor_sector	*get_sector(t_list *walls)
 	while (walls)
 	{
 		tmp = walls->content;
-		if (tmp->sectors[0] == NULL)
+		if (!is_right)
 			tmp->sectors[0] = sec;
-		else if (tmp->sectors[1] == NULL)
+		else
 			tmp->sectors[1] = sec;
 		walls = walls->next;
 	}

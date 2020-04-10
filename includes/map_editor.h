@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/10 15:29:59 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 16:18:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct	s_editor_wall
 	t_bool				is_hidden_door;
 	t_bool				is_door;
 	t_editor_sector		*sectors[2];
+	t_bool				left;
+	t_bool				right;
 }				t_editor_wall;
 
 typedef struct	s_editor_object
@@ -129,7 +131,7 @@ t_list			*get_correct_sectors(t_editor_wall *con, t_list *walls);
 void			remove_from_list(t_list **head, t_list *elm);
 t_coord			get_wall_vector(t_editor_wall *main, t_editor_wall *sec);
 t_map			*map_editor_convert(t_editor_map *m_edit);
-t_editor_sector	*get_sector(t_list *walls);
+t_editor_sector	*get_sector(t_list *walls, t_bool is_right);
 void			free_ewall(void *wall, size_t size);
 void			free_eobj(void *obj, size_t size);
 void			free_esector(void *sec, size_t size);

@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:41:08 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 13:03:17 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 17:19:34 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,38 +56,14 @@ t_list			*get_correct_sectors(t_editor_wall *con, t_list *walls)
 	t_list 	*secs;
 
 	secs = NULL;
-	if (con->sectors[0] == NULL && con->sectors[1] == NULL)
-	{
-		ft_lstaddbck(&secs,
-			ft_lstnew(get_room(ft_lstnew(con,
-				sizeof(t_editor_wall)), walls, con, FALSE), sizeof(t_list)));
-		ft_lstaddbck(&secs,
-			ft_lstnew(get_room(ft_lstnew(con,
-				sizeof(t_editor_wall)), walls, con, TRUE), sizeof(t_list)));
-	}
-	else if (con->sectors[0] != NULL && con->sectors[1] != NULL)
+	if (con->sectors[0] != NULL && con->sectors[1] != NULL)
 		return (NULL);
-	else
-	{
-		t_editor_sector *sec;
-		t_list			*cons;
-		t_coord			vec;
-		t_coord			tvec;
-
-		if (con->sectors[0])
-			sec = con->sectors[0];
-		else
-			sec = con->sectors[1];
-		cons = get_walls_at_point(&con->corner_0, sec->walls, con);
-		vec = get_wall_vector(con, cons->content);
-		tvec = get_wall_vector(cons->content, con);
-		if (get_side_vec(&vec, &tvec, TRUE) == 1)
-			ft_lstaddbck(&secs, ft_lstnew(get_room(ft_lstnew(con,
-				sizeof(t_editor_wall)), walls, con, FALSE), sizeof(t_list)));
-		else
-			ft_lstaddbck(&secs,	ft_lstnew(get_room(ft_lstnew(con,
-				sizeof(t_editor_wall)), walls, con, TRUE), sizeof(t_list)));
-	}
+	if (con->sectors[0] == NULL)
+		ft_lstaddbck(&secs, ft_lstnew(get_room(ft_lstnew(con,
+			sizeof(t_editor_wall)), walls, con, FALSE), sizeof(t_list)));
+	if (con->sectors[1] == NULL)
+		ft_lstaddbck(&secs,	ft_lstnew(get_room(ft_lstnew(con,
+			sizeof(t_editor_wall)), walls, con, TRUE), sizeof(t_list)));
 	return (secs);
 }
 
@@ -102,7 +78,7 @@ void			clean_up_walls(t_editor_map *map)
 	while (lst)
 	{
 		wall = lst->content;
-		if (wall->sectors[0] == NULL)
+		if (wall->sectors[0] == NULL && wall->sectors[1] == NULL)
 		{
 			if (sec == NULL)
 			{
