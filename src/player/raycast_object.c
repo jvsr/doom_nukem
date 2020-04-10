@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/09 15:20:35 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 12:48:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static t_bool	collides(t_object *obj, t_player *plyr)
 	get_vector_from_points(&plyr->pos, &obj->pos, &vec);
 	normalize_vector(&vec);
 	vec = (t_coord){vec.y, vec.x};
-	c0 = (t_coord){obj->pos.x + (vec.x * obj->col_radius),
+	c0 = (t_coord){obj->pos.x + (vec.x * obj->col_radius * 2),
 		obj->pos.y + (vec.y * -obj->col_radius)};
-	c1 = (t_coord){obj->pos.x + (vec.y * obj->col_radius), obj->pos.y +
+	c1 = (t_coord){obj->pos.x + (vec.y * obj->col_radius * 2), obj->pos.y +
 		(vec.y * -obj->col_radius)};
 	return (get_collision(&plyr->pos, &(t_coord){plyr->mag.cos, plyr->mag.sin},
 		(t_coord[2]){c0, c1}, &vec) != NULL);
@@ -76,8 +76,10 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 	t_coord		range;
 	t_wall		*wall;
 	t_object	*obj;
+	t_sector	*cur;
 
 	sec = map->sectors + plyr->cur_sector;
+	cur = sec;
 	range.x = wrap_angle(plyr->angle - (game->setting->fov / 2));
 	range.y = wrap_angle(plyr->angle + (game->setting->fov / 2));
 	obj = ray(sec, &range, plyr);
@@ -90,13 +92,14 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 		return (NULL);
 	while (wall->is_portal == TRUE)
 	{
-		obj = ray(wall->window, &range, plyr);
+		obj = ray(cur, &range, plyr);
 		if (obj != NULL)
 			return (obj);
-		wall = wall_ray(wall->window, sec, plyr, (t_bool[2]){TRUE, FALSE});
+		wall = wall_ray(cur, sec, plyr, (t_bool[2]){TRUE, FALSE});
 		if (wall->is_window)
 			smash_glass(game, wall, sec);
-		sec = wall->window;
+		sec = cur;
+		cur = wall->window;
 	}
 	return (NULL);
 }

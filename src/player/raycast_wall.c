@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:44:20 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/09 15:08:04 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 11:20:15 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,9 @@ t_wall		*wall_ray(t_sector *secs, t_sector *prv, t_player *plyr, t_bool *ip)
 			wall->corner_0, wall->corner_1}, &vec) != NULL &&
 			(!ip[1] || get_distance(&plyr->pos, &vec) <= PLAYER_GRAB_DIST))
 		{
-			if (!wall->is_portal)
+			if (!wall->is_portal || wall->is_window)
 				return (wall);
 			else if (ip[0] == FALSE && wall->window != prv)
-				return (wall);
-			else if (wall->is_window)
 				return (wall);
 			else if (wall->window != prv)
 				return (wall_ray(wall->window, secs, plyr, ip));
