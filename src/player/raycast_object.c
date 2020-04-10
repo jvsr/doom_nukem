@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 14:34:51 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 21:36:42 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 
 	sec = map->sectors + plyr->cur_sector;
 	cur = sec;
-	range.x = wrap_angle(plyr->angle - (game->setting->fov / 2));
-	range.y = wrap_angle(plyr->angle + (game->setting->fov / 2));
+	range.x = wrap_angle(plyr->angle - ((float)game->setting->fov / 2));
+	range.y = wrap_angle(plyr->angle + ((float)game->setting->fov / 2));
 	obj = ray(sec, &range, plyr);
 	if (obj != NULL)
 		return (obj);

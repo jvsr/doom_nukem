@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 13:43:25 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 21:41:42 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static t_bool	start_end(t_game *game,
 {
 	t_texture tex;
 
+	if (obj == NULL)
+		return (TRUE);
 	tex = tex_from_anim(game, &obj->img);
 	if (tex == TEXTURE_START)
 	{
