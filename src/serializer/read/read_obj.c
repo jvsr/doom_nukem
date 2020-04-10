@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/29 13:13:15 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 11:54:05 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 14:16:57 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,11 @@ t_object	*read_obj(t_binary_read *bin_r)
 	obj->on_collide = get_col_from_name(read_string(bin_r));
 	if (obj->is_enemy)
 		read_enemy(obj, bin_r);
+	if (obj->img.left[0] == TEXTURE_SPIKES)
+	{
+		obj->data = ft_memalloc(sizeof(t_uint64));
+		if (obj->data == NULL)
+			error_msg_errno("Unable To Allocate Spike Data");
+	}
 	return (obj);
 }
