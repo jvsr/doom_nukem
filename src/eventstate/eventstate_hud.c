@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 12:06:12 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 14:23:51 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static void	manage_keydown(t_game *game,
 		game->player->is_flying = !game->player->is_flying;
 	else if (is_helddown(game->keymap, SDLK_e))
 		click_on_door(game->player, game->map);
+	else if (event.key.keysym.sym == SDLK_F10)
+		SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
 }
 
 void		hud_eventstate(t_game *game, SDL_Event event)
