@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/07 11:10:53 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/03/29 17:36:49 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 18:17:58 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_binary_read
 	size_t			content_pos;
 	size_t			header_size;
 	t_endian		endian;
+	size_t			file_size;
 }				t_binary_read;
 
 t_binary		*new_binary(void);
@@ -59,7 +60,8 @@ t_binary_read	*new_binary_read(const char *loc,
 									t_bool add_header, char const *exec_path);
 void			del_binary_read(t_binary_read **bin_r);
 t_bool			write_struct(char *loc, t_binary *bin, char const *exec_path);
-unsigned char	*read_struct(const char *loc, char const *exec_path);
+unsigned char	*read_struct(const char *loc,
+								char const *exec_path, size_t *file_size);
 void			add_type(unsigned char **bytes, t_uint64 *b_size,
 											t_convert *val, t_uint64 v_size);
 void			add_char(char c, t_binary *bin);
