@@ -6,17 +6,20 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/08 11:02:44 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 11:53:55 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 21:54:19 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_mem.h"
 #include "serializer.h"
+#include "error.h"
 
 short		read_short(t_binary_read *bin_r)
 {
 	short s;
 
+	if (bin_r->content_pos + sizeof(short) > bin_r->file_size)
+		error_msg("No space in file", 876, "Serializer");
 	ft_memcpy(&s, bin_r->bytes + bin_r->content_pos, sizeof(s));
 	bin_r->content_pos += sizeof(s);
 	if (bin_r->endian == detect_endian())
