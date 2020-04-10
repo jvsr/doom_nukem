@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/09 13:42:37 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 13:43:25 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void		load_map(t_game *game, t_map *map, t_player *plyr)
 		sec = map->sectors + i;
 		while (j < sec->object_count)
 		{
-			if (start_end(game, (sec->objects + j)->content, plyr, sec))
+			if (start_end(game,
+				ft_lstindex(sec->objects, j)->content, plyr, sec))
 				j++;
 		}
 		i++;

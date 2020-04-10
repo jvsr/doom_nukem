@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 15:47:36 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 11:59:08 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 13:37:35 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@ static t_anim	other_obj(t_objanim oa, t_object *obj, float off, t_texture s)
 
 t_anim			read_anim(t_binary_read *bin_r, t_object *obj)
 {
+	int		r0;
+	float	r1;
+	int		r2;
+
 	if (!read_char(bin_r))
 		return (single_init(read_int(bin_r), obj));
-	return (other_obj(read_int(bin_r), obj, read_float(bin_r),
-		read_int(bin_r)));
+	r0 = read_int(bin_r);
+	r1 = read_float(bin_r);
+	r2 = read_int(bin_r);
+	return (other_obj(r0, obj, r1, r2));
 }
