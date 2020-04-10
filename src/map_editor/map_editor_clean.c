@@ -38,6 +38,7 @@ static void		clean_up_dups(t_editor_map *map)
 {
 	t_list			*x;
 	t_list			*y;
+	t_list			*next;
 	t_editor_sector	*s0;
 	t_editor_sector	*s1;
 
@@ -46,20 +47,22 @@ static void		clean_up_dups(t_editor_map *map)
 	{
 		s0 = x->content;
 		y = map->sectors;
+		next = x->next;
 		while (y && y->content)
 		{
 			s1 = y->content;
 			if (s0 != s1 && ft_lstlen(s0->walls) == ft_lstlen(s1->walls) &&
 				walls_equal(&s0->walls, &s1->walls))
 			{
-				remove_from_list(&map->sectors, x);
+				ft_lstunlink(&map->sectors, x);
 				remove_sec(s1->walls, s1);
 				ft_lstdel(&s1->walls, NULL);
 				ft_memdel((void**)&s1);
 			}
 			y = y->next;
 		}
-		x = x->next;
+		ft_lstdelone(&x, ft_lstdelmem);
+		x = next;
 	}
 }
 
