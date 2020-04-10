@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:59:52 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 11:37:19 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 21:45:28 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_bool		check_enemy(t_game *game, t_object *obj)
 	const t_enemy	*enemy = obj->data;
 	const float		dist = get_distance(&game->player->pos, &obj->pos);
 
-	if (obj->is_enemy == TRUE && enemy->state != ENEMY_DEAD)
+	if (obj != NULL && obj->is_enemy == TRUE && enemy->state != ENEMY_DEAD)
 	{
 		if (check_far(dist, obj, game) == FALSE)
 			return (FALSE);
