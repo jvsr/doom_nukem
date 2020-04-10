@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 13:03:37 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 15:02:32 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,18 @@ static void		make_sectors(t_list *cons, t_editor_map *map)
 	map_objects(map->sectors, map->objects);
 }
 
+void printwall(const t_list *elem)
+{
+	ft_printf("wal: %p\n", elem->content);
+}
+
+void printlist(const t_list *elem)
+{
+	ft_printf("sec: %p\n", elem->content);
+	ft_printf("wct: %zu\n", ft_lstlen(((t_editor_sector*)elem->content)->walls));
+	ft_lstiter(((t_editor_sector*)elem->content)->walls, printwall);
+}
+
 t_bool			map_editor_clean(t_editor_map *map)
 {
 	t_list			*cons;
@@ -130,5 +142,6 @@ t_bool			map_editor_clean(t_editor_map *map)
 	}
 	else
 		add_all_to_sector(map->walls, map);
+	ft_lstiter(map->sectors, printlist);
 	return (TRUE);
 }

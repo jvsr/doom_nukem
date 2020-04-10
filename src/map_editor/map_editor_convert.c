@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/09 18:01:56 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/10 15:00:12 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	add_walls(t_sector *headS, t_sector *map_s, t_editor_sector *cur_s)
 		error_msg_errno("Failed to allocate map walls");
 	i = 0;
 	tmp = cur_s->walls;
+	ft_printf("WALLLEN: %zu\n ", ft_lstlen(cur_s->walls));
 	while (i < ft_lstlen(cur_s->walls))
 	{
 		cur_w = (t_editor_wall*)tmp->content;
