@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 17:18:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 20:50:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,53 +18,6 @@
 #include "coord.h"
 #include "cmath.h"
 #include "error.h"
-
-// static void		remove_sec(t_list *walls, t_editor_sector *sec)
-// {
-// 	t_editor_wall *wall;
-
-// 	while (walls)
-// 	{
-// 		wall = walls->content;
-// 		if (wall->sectors[0] == sec)
-// 			wall->sectors[0] = NULL;
-// 		else
-// 			wall->sectors[1] = NULL;
-// 		walls = walls->next;
-// 	}
-// }
-
-// static void		clean_up_dups(t_editor_map *map)
-// {
-// 	t_list			*x;
-// 	t_list			*y;
-// 	t_list			*next;
-// 	t_editor_sector	*s0;
-// 	t_editor_sector	*s1;
-
-// 	x = map->sectors;
-// 	while (x && x->content)
-// 	{
-// 		s0 = x->content;
-// 		y = map->sectors;
-// 		next = x->next;
-// 		while (y && y->content)
-// 		{
-// 			s1 = y->content;
-// 			if (s0 != s1 && ft_lstlen(s0->walls) == ft_lstlen(s1->walls) &&
-// 				walls_equal(&s0->walls, &s1->walls))
-// 			{
-// 				ft_lstunlink(&map->sectors, x);
-// 				remove_sec(s1->walls, s1);
-// 				ft_lstdel(&s1->walls, NULL);
-// 				ft_memdel((void**)&s1);
-// 			}
-// 			y = y->next;
-// 		}
-// 		ft_lstdelone(&x, ft_lstdelmem);
-// 		x = next;
-// 	}
-// }
 
 static void		add_all_to_sector(t_list *walls, t_editor_map *map)
 {
@@ -95,6 +48,40 @@ static void		add_all_to_sector(t_list *walls, t_editor_map *map)
 	map->sectors = ft_lstnew(sec, sizeof(t_editor_sector));
 }
 
+static void		clean_up_objs(t_editor_map *map)
+{
+	t_editor_sector *sec;
+	t_list			*lst;
+	t_editor_object	*obj;
+
+	sec = NULL;
+	lst = map->objects;
+	while (lst)
+	{
+		obj = lst->content;
+		if (obj->sector == NULL)
+		{
+			if (sec == NULL)
+			{
+				if (((t_editor_sector*)
+					ft_lstlast(map->sectors)->content)->is_invalid)
+					sec = ft_lstlast(map->sectors)->content;
+				else
+				{
+					sec = ft_memalloc(sizeof(t_editor_sector));
+					if (sec == NULL)
+						error_msg_errno("Error allocating sector map");
+					ft_lstaddbck(&map->sectors,
+					ft_lstnew(sec, sizeof(t_editor_sector)));
+				}
+			}
+			obj->sector = sec;
+			ft_lstaddbck(&sec->objects, ft_lstnew(obj, sizeof(t_editor_object)));
+		}
+		lst = lst->next;
+	}
+}
+
 static void		make_sectors(t_list *cons, t_editor_map *map)
 {
 	t_list	*walls;
@@ -118,8 +105,8 @@ static void		make_sectors(t_list *cons, t_editor_map *map)
 		cons = cons->next;
 	}
 	clean_up_walls(map);
-	// clean_up_dups(map);
 	map_objects(map->sectors, map->objects);
+	clean_up_objs(map);
 }
 
 void printwall(const t_list *elem)
@@ -131,7 +118,8 @@ void printlist(const t_list *elem)
 {
 	ft_printf("\nsec: %p\n", elem->content);
 	ft_printf("wct: %zu\n", ft_lstlen(((t_editor_sector*)elem->content)->walls));
-	ft_lstiter(((t_editor_sector*)elem->content)->walls, printwall);
+	if (((t_editor_sector*)elem->content)->walls)
+		ft_lstiter(((t_editor_sector*)elem->content)->walls, printwall);
 }
 
 t_bool			map_editor_clean(t_editor_map *map)

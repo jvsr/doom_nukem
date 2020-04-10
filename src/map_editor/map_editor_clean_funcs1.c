@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:41:08 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 17:35:11 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 20:25:32 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void			clean_up_walls(t_editor_map *map)
 				sec = ft_memalloc(sizeof(t_editor_sector));
 				if (sec == NULL)
 					error_msg_errno("Unable to allocate sector");
+				sec->is_invalid = TRUE;
 			}
 			ft_lstaddbck(&sec->walls, ft_lstnew(wall, sizeof(t_editor_wall)));
 		}
