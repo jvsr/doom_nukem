@@ -90,6 +90,8 @@ static void	add_objects(t_sector *map_s, t_editor_sector *cur_s)
 			new_spike(&cur_obj->pos, map_s);
 		else if (cur_obj->type == O_START)
 			new_start(&cur_obj->pos, map_s);
+		else if (cur_obj->type == O_AMMO)
+			new_ammo(&cur_obj->pos, map_s);
 		obj = obj->next;
 	}
 }

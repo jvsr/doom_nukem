@@ -51,6 +51,8 @@ static void	add_object(t_editor_map *m_edit, t_list *o_lst)
 		type = O_KEY;
 	else if (o->img.left[0] == TEXTURE_HEALTH_PICKUP)
 		type = O_HEALTH_PICKUP;
+	else if (o->img.left[0] == TEXUTRE_AMMO)
+		type = O_AMMO;
 	o_edit = map_editor_new_object(m_edit, type, o->pos);
 	if (o_edit == NULL)
 		return ;
