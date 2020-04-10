@@ -15,27 +15,20 @@
 #include "renderer.h"
 #include "rinfo.h"
 
-static t_bool	del(t_list *prv, t_list *cur)
-{
-	if (prv != NULL)
-		prv->next = cur->next;
-	cur->next = NULL;
-	ft_lstdelone(&cur, free_obj);
-	return (TRUE);
-}
-
 t_bool			del_obj(t_object *obj, t_sector *sec)
 {
 	t_list *lst;
-	t_list *prv;
 
 	lst = sec->objects;
-	prv = NULL;
 	while (lst != NULL)
 	{
 		if (lst->content == obj)
-			return (del(prv, lst));
-		prv = lst;
+		{
+			ft_lstunlink(&sec->objects, lst);
+			ft_lstdelone(&lst, free_obj);
+			sec->object_count--;
+			return (TRUE);
+		}
 		lst = lst->next;
 	}
 	return (FALSE);

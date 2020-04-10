@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 17:20:56 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 11:55:06 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 16:08:16 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,13 @@ void		add_wall(t_wall *wall, t_binary *bin, t_map *map)
 	add_anim(&wall->texture, bin);
 	add_anim(&wall->win_tex, bin);
 	add_coord(&wall->perc, bin);
-	add_decal_list(wall->decals, bin);
+	if (wall->decals == NULL)
+		add_int(0, bin);
+	else
+	{
+		add_int(1, bin);
+		add_decal_list(wall->decals, bin);
+	}
 	add_char((char)wall->is_door, bin);
 	if (wall->is_portal || map == NULL)
 		add_int(get_portal(map, wall->window), bin);

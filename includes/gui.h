@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 12:40:55 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 16:59:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,22 @@
 
 # include "libft/ft_bool.h"
 
+# include "types.h"
 # include "coord.h"
 
 # define FONT_PATH "resources/fonts/"
 
-typedef struct s_game		t_game;
-typedef struct s_gui		t_gui;
-typedef struct s_transform	t_transform;
-typedef struct s_text		t_text;
-typedef struct s_image		t_image;
-typedef struct s_button		t_button;
-typedef struct s_panel		t_panel;
-typedef struct s_gview		t_gview;
-typedef struct s_list		t_list;
+typedef struct s_list			t_list;
+typedef struct s_game			t_game;
+typedef struct s_gui			t_gui;
+typedef struct s_transform		t_transform;
+typedef struct s_text			t_text;
+typedef struct s_image			t_image;
+typedef struct s_button			t_button;
+typedef struct s_panel			t_panel;
+typedef struct s_gview			t_gview;
+typedef struct s_map_editor		t_map_editor;
+typedef struct s_editor_sector	t_editor_sector;
 
 typedef void	(t_onclick)(t_game *, t_transform *);
 
@@ -42,7 +45,8 @@ typedef enum	e_gui_type
 	IMAGE,
 	BUTTON,
 	PANEL,
-	GVIEW
+	GVIEW,
+	MAP_EDITOR
 }				t_gui_type;
 
 typedef enum	e_parent_type
@@ -76,11 +80,12 @@ typedef enum	e_draw_method
 
 typedef	union	u_gui_elem
 {
-	t_text		*text;
-	t_image		*image;
-	t_button	*button;
-	t_panel		*panel;
-	t_gview		*gview;
+	t_text			*text;
+	t_image			*image;
+	t_button		*button;
+	t_panel			*panel;
+	t_gview			*gview;
+	t_map_editor	*map_editor;
 }				t_gui_elem;
 
 typedef	union	u_parent
@@ -146,6 +151,15 @@ struct			s_gview
 	int			norm;
 };
 
+struct			s_map_editor
+{
+	SDL_Point		pos;
+	SDL_Point		last_click;
+	t_bool			show_last_click;
+	t_obj			selected_object;
+	t_editor_sector	*focus_sector;
+};
+
 struct			s_gui
 {
 	SDL_Surface	*window_surface;
@@ -199,6 +213,8 @@ t_font_type		get_font_type_value(const char *name);
 const char		*get_gui_type_name(t_gui_type gui_type);
 t_gui_type		get_gui_type_value(const char *name);
 t_bool			get_focus(t_game *game);
+t_list			*read_map_list(void);
+void			create_map_list(t_game *game, char *path);
 void			remove_maps(t_game *game);
 t_list			*skip_page(t_list *maps, size_t page);
 

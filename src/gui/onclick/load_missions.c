@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 15:09:03 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 12:34:13 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/08 16:58:41 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "error.h"
 #include "onclick.h"
 
-static void		create_map_list(t_game *game, char *path)
+void			create_map_list(t_game *game, char *path)
 {
 	int			fd;
 	int			forky;
@@ -54,7 +54,7 @@ static t_bool	cmp_list(const t_list *l1, const t_list *l2)
 	return (FALSE);
 }
 
-static t_list	*read_map_list(void)
+t_list			*read_map_list(void)
 {
 	int		fd;
 	char	*line;

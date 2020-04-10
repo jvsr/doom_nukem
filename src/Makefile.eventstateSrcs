@@ -28,4 +28,5 @@ SRCS = controls \
 		initload \
 		hud \
 		hud_options \
-		hud_died
+		hud_died \
+		hud_win \

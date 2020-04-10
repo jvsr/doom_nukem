@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:41:08 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 12:56:27 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 13:03:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ t_coord		get_wall_vector(t_editor_wall *main, t_editor_wall *sec)
 	const size_t	csize = sizeof(t_coord);
 	t_coord			vec;
 
-	if (ft_memequ(&main->corner_0, &sec->corner_0, csize))
-		get_vector_from_points(&main->corner_1, &main->corner_0, &vec);
-	else if (ft_memequ(&main->corner_0, &sec->corner_1, sizeof(csize)))
+	if (ft_memequ(&main->corner_0, &sec->corner_0, csize)
+	|| ft_memequ(&main->corner_0, &sec->corner_1, csize))
 		get_vector_from_points(&main->corner_1, &main->corner_0, &vec);
 	else
 		get_vector_from_points(&main->corner_0, &main->corner_1, &vec);
@@ -54,14 +53,41 @@ void		remove_from_list(t_list **head, t_list *elm)
 
 t_list		*get_correct_sectors(t_editor_wall *con, t_list *walls)
 {
-	t_list *secs;
+	t_list 	*secs;
 
 	secs = NULL;
-	ft_lstaddbck(&secs,
-		ft_lstnew(lft_room(ft_lstnew(con, sizeof(t_editor_wall)), walls, con), sizeof(t_list)));
-	ft_lstaddbck(&secs,
-		ft_lstnew(right_room(ft_lstnew(con, sizeof(t_editor_wall)), walls, con), sizeof(t_list)));
-	printf("Sectors : %zu\n", ft_lstlen(secs));
+	if (con->sectors[0] == NULL && con->sectors[1] == NULL)
+	{
+		ft_lstaddbck(&secs,
+			ft_lstnew(get_room(ft_lstnew(con,
+				sizeof(t_editor_wall)), walls, con, FALSE), sizeof(t_list)));
+		ft_lstaddbck(&secs,
+			ft_lstnew(get_room(ft_lstnew(con,
+				sizeof(t_editor_wall)), walls, con, TRUE), sizeof(t_list)));
+	}
+	else if (con->sectors[0] != NULL && con->sectors[1] != NULL)
+		return (NULL);
+	else
+	{
+		t_editor_sector *sec;
+		t_list			*cons;
+		t_coord			vec;
+		t_coord			tvec;
+
+		if (con->sectors[0])
+			sec = con->sectors[0];
+		else
+			sec = con->sectors[1];
+		cons = get_walls_at_point(&con->corner_0, sec->walls, con);
+		vec = get_wall_vector(con, cons->content);
+		tvec = get_wall_vector(cons->content, con);
+		if (get_side_vec(&vec, &tvec, TRUE) == 1)
+			ft_lstaddbck(&secs, ft_lstnew(get_room(ft_lstnew(con,
+				sizeof(t_editor_wall)), walls, con, FALSE), sizeof(t_list)));
+		else
+			ft_lstaddbck(&secs,	ft_lstnew(get_room(ft_lstnew(con,
+				sizeof(t_editor_wall)), walls, con, TRUE), sizeof(t_list)));
+	}
 	return (secs);
 }
 

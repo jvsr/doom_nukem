@@ -24,7 +24,6 @@ typedef struct s_game	t_game;
 t_game	*init_prerequisites(char **argv, char **envp);
 void	*init_function(t_game *game);
 void	init_gui(t_game *game);
-void	init_player(t_game *game);
 void	init_audio(t_game *game);
 void	init_keymap(t_game *game);
 void	init_settings(t_game *game);

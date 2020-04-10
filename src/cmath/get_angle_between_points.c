@@ -16,5 +16,5 @@
 
 float		get_angle_between_points(t_coord *a, t_coord *b)
 {
-	return (atan2(b->y - a->y, b->x - a->x) * PI_D);
+	return (wrap_angle(atan2(b->y - a->y, b->x - a->x) * PI_D));
 }

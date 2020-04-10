@@ -6,12 +6,13 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/07 12:58:21 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 13:03:37 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_bool.h"
 #include "libft/ft_list.h"
+#include "libft/ft_printf.h"
 #include "libft/ft_mem.h"
 #include "map_editor.h"
 #include "coord.h"
@@ -41,11 +42,11 @@ static void		clean_up_dups(t_editor_map *map)
 	t_editor_sector	*s1;
 
 	x = map->sectors;
-	while (x)
+	while (x && x->content)
 	{
 		s0 = x->content;
 		y = map->sectors;
-		while (y && s0 != NULL)
+		while (y && y->content)
 		{
 			s1 = y->content;
 			if (s0 != s1 && ft_lstlen(s0->walls) == ft_lstlen(s1->walls) &&
@@ -62,19 +63,6 @@ static void		clean_up_dups(t_editor_map *map)
 	}
 }
 
-static void		make_sectors(t_list *cons, t_editor_map *map)
-{
-	while (cons)
-	{
-		ft_lstaddbck(&map->sectors,
-			get_correct_sectors(cons->content, map->walls));
-		cons = cons->next;
-	}
-	clean_up_walls(map);
-	clean_up_dups(map);
-	map_objects(map->sectors, map->objects);
-}
-
 static void		add_all_to_sector(t_list *walls, t_editor_map *map)
 {
 	t_editor_sector *sec;
@@ -85,8 +73,8 @@ static void		add_all_to_sector(t_list *walls, t_editor_map *map)
 	sec = ft_memalloc(sizeof(t_editor_sector));
 	if (sec == NULL)
 		error_msg_errno("Unable to allocate sector");
-	sec->walls = walls;
-	sec->objects = map->objects;
+	sec->walls = ft_lstdup(walls);
+	sec->objects = ft_lstdup(map->objects);
 	lst = walls;
 	while (lst)
 	{
@@ -104,9 +92,32 @@ static void		add_all_to_sector(t_list *walls, t_editor_map *map)
 	map->sectors = ft_lstnew(sec, sizeof(t_editor_sector));
 }
 
+static void		make_sectors(t_list *cons, t_editor_map *map)
+{
+	t_list *walls;
+	t_list *tmp;
+
+	while (cons)
+	{
+		walls = get_correct_sectors(cons->content, map->walls);
+		tmp = walls;
+		while (tmp)
+		{
+			ft_lstaddbck(&map->sectors,
+				ft_lstnew(get_sector(tmp->content), sizeof(void*)));
+			tmp = tmp->next;
+		}
+		ft_lstdel(&walls, NULL);
+		cons = cons->next;
+	}
+	clean_up_walls(map);
+	clean_up_dups(map);
+	map_objects(map->sectors, map->objects);
+}
+
 t_bool			map_editor_clean(t_editor_map *map)
 {
-	t_list *cons;
+	t_list			*cons;
 
 	cons = get_connectors(map->walls);
 	if (cons)
@@ -116,6 +127,5 @@ t_bool			map_editor_clean(t_editor_map *map)
 	}
 	else
 		add_all_to_sector(map->walls, map);
-	printf("Here %zu\n",ft_lstlen(map->sectors));
 	return (TRUE);
 }

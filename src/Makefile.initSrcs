@@ -17,7 +17,6 @@ PREFIX =
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
 SRCS = init \
-		init_player \
 		init_prerequisites \
 		init_main_menu \
 		init_window \

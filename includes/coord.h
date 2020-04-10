@@ -13,11 +13,19 @@
 #ifndef COORD_H
 # define COORD_H
 
+# include <SDL2/SDL_rect.h>
+
 typedef struct	s_coord
 {
 	double		x;
 	double		y;
 }				t_coord;
+
+typedef struct	s_bicoord
+{
+	t_coord		pos1;
+	t_coord		pos2;
+}				t_bicoord;
 
 typedef struct	s_tricoord
 {

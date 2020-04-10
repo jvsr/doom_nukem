@@ -26,6 +26,7 @@ typedef struct	s_list
 }				t_list;
 
 t_list			*ft_lstdup(const t_list *lst);
+t_list			*ft_lstdup_dup(const t_list *lst);
 t_list			*ft_lstdupone(const t_list *lst);
 t_list			*ft_lstfind_content(t_list *lst, const void *content,
 					size_t size);

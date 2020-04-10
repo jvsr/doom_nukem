@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/29 16:23:28 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 11:54:02 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 13:21:55 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void		read_walls(t_sector *sec, t_binary_read *bin_r, t_map *map)
 	t_wall		*wall;
 
 	i = 0;
-	sec->walls = ft_memalloc(sizeof(t_sector) * (sec->wall_count + 1));
+	sec->walls = ft_memalloc(sizeof(t_wall) * (sec->wall_count + 1));
 	while (i < sec->wall_count)
 	{
 		wall = read_wall(bin_r, map);
-		ft_memcpy(sec->walls + i, wall, sizeof(wall));
+		ft_memcpy(sec->walls + i, wall, sizeof(t_wall));
 		ft_memdel((void**)&wall);
 		i++;
 	}

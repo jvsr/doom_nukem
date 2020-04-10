@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/19 11:44:27 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 13:13:39 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 13:45:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ float			player_slope(t_player *pyr, t_sector *sec, t_coord *pos)
 	float	a;
 	float	b;
 
+	if (sec->has_slope == FALSE)
+		return (0);
 	sw = sec->swall;
 	a = get_distance(pos, &sw->corner_0);
 	b = get_distance(pos, &sw->corner_1);

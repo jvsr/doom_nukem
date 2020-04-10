@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:08:10 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/02/20 17:13:10 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/09 12:27:14 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # define MISSION_PATH "resources/data/map"
 # define TMP "resources/data/map/tmp_list"
 # define CAMPAIGN_PATH "./resources/data/map/campaign"
+# define SELECT_CAMPAIGN_PATH "./map/campaign"
 # define CUSTOM_PATH "./resources/data/map/custom"
+# define SELECT_CUSTOM_PATH "./map/custom"
 
 typedef struct s_game		t_game;
 typedef struct s_setting	t_setting;
@@ -35,6 +37,23 @@ void	mainmenu_mapeditor(t_game *game, t_transform *gui);
 void	mainmenu_quit(t_game *game, t_transform *gui);
 
 void	map_editor_select_return(t_game *game, t_transform *gui);
+void	map_editor_select_new(t_game *game, t_transform *gui);
+void	load_editor_map(t_game *game, t_transform *gui);
+void	load_editor_map_ok(t_game *game, t_transform *gui);
+void	load_editor_map_next(t_game *game, t_transform *gui);
+void	load_editor_map_prv(t_game *game, t_transform *gui);
+void	load_editor_map_cancel(t_game *game, t_transform *gui);
+
+void	map_editor_object_next(t_game *game, t_transform *gui);
+void	map_editor_object_prv(t_game *game, t_transform *gui);
+void	map_editor_object_select(t_game *game, t_transform *gui);
+void	map_editor_confirmation_return(t_game *game, t_transform *gui);
+void	map_editor_remove_confirmation(t_game *game);
+void	map_editor_add_confirmation(t_game *game);
+void	map_editor_object_next(t_game *game, t_transform *gui);
+void	map_editor_object_prv(t_game *game, t_transform *gui);
+void	map_editor_object_select(t_game *game, t_transform *gui);
+void	save_map(t_game *game, t_transform *gui);
 
 void	options_sensitivity_up(t_game *game, t_transform *gui);
 void	options_hud_sensitivity_up(t_game *game, t_transform *gui);
@@ -108,6 +127,7 @@ void	remove_options(t_game *game);
 void	add_confirmation(t_game *game);
 void	remove_confirmation(t_game *game);
 
+void	load_level(t_game *game, t_transform *gui);
 void	go_to_game(t_game *game, t_transform *gui);
 void	hud_diedmainmenu(t_game *game, t_transform *gui);
 void	hud_diedreload(t_game *game, t_transform *gui);

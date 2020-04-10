@@ -215,21 +215,21 @@
     - show: 0
     - clickable: 0
     - layer: 2
-    - image: confirmationoOverlay
+    - image: confirmationOverlay
       - color: #00000000
-    - panel: confirmationbox
+    - panel: confirmationBox
       - pos: 0.35, 0.35
       - dim: 0.3, 0.3
       - image: confirmationBackground
         - texture: ui/border1x1.tga
-      - text_block: confirmationtext
+      - text_block: confirmationText
         - pos: 0.05, 0.1
         - dim: 0.9, 0.2
         - text: "Restart to apply changes"
         - text_font: foulfiend
         - text_color: #e3e3e3
-        - text_size: 0.5
-      - button: confirmationTeturnButton
+        - text_size: 0.7
+      - button: confirmationReturnButton
         - pos: 0.1, 0.37
         - dim: 0.8, 0.25
         - texture: ui/border5x1.tga

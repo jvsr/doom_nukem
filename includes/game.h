@@ -27,6 +27,7 @@ typedef struct s_setting		t_setting;
 typedef struct s_campaign		t_campaign;
 typedef struct s_eventstate		t_eventstate;
 typedef struct s_map			t_map;
+typedef struct s_editor_map		t_editor_map;
 typedef struct s_tpool			t_tpool;
 
 typedef	enum	e_state
@@ -47,6 +48,7 @@ typedef struct	s_game
 	SDL_Surface		*surface;
 	t_gui			*ui;
 	t_map			*map;
+	t_editor_map	*editor_map;
 	t_campaign		*campaign;
 	t_player		*player;
 	t_hashmap		*keymap;

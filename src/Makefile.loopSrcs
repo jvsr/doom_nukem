@@ -12,8 +12,12 @@ HEADERS =
 CCFLAGS +=
 
 # Source file prefix
-PREFIX =
+PREFIX = loop_
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = loop_core loop_game loop_game_gui
+SRCS = \
+	core \
+	game \
+	map_editor \
+	game_gui \

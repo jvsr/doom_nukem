@@ -31,6 +31,8 @@ static void	new_gui_elem(t_gui *ui, t_gui_type type, t_gui_elem *gui_elem)
 		gui_elem->panel = new_panel();
 	else if (type == GVIEW)
 		gui_elem->gview = new_gview();
+	else if (type == MAP_EDITOR)
+		gui_elem->map_editor = new_map_editor();
 }
 
 t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)

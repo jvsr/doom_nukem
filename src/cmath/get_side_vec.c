@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init_player.c                                      :+:    :+:            */
+/*   get_side_vec.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
+/*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 21:17:24 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/09 15:14:25 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 13:02:41 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
-#include "player.h"
 #include "coord.h"
+#include "cmath.h"
 
-void	init_player(t_game *game)
+static float	dot_side(t_coord *v0, t_coord *v1)
 {
-	game->player->pos.x = 30;
-	game->player->pos.y = -25;
-	game->player->cur_sector = 3;
-	game->player->height = PLAYER_HEIGHT;
-	game->player->mag = (t_mag){cosf(0), sinf(0)};
-	game->player->health = PLAYER_MAX_HEALTH;
-	game->player->is_dead = FALSE;
-	game->player->keys = 0;
-	game->player->angle = 180;
+	return (-v0->x * v1->y + v0->y * v1->x);
+}
+
+int				get_side_vec(t_coord *v0, t_coord *v1, int is_clockwise)
+{
+	float dot;
+
+	dot = dot_side(v0, v1);
+	if ((is_clockwise && dot >= 0) || (!is_clockwise && dot <= 0))
+		return (1);
+	return (-1);
 }

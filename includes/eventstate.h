@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 20:40:08 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/03/30 12:40:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/09 16:29:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void			map_editor_select_eventstate(t_game *game, SDL_Event event);
 void			hud_eventstate(t_game *game, SDL_Event event);
 void			hud_options_eventstate(t_game *game, SDL_Event event);
 void			eventstate_hud_died(t_game *game, SDL_Event event);
+void			hud_win_eventstate(t_game *game, SDL_Event event);
 
 typedef enum	e_eventstate_code
 {

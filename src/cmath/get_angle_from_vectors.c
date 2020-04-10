@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 13:19:58 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 11:34:16 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/07 15:59:11 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ float	get_angle_from_vectors(t_coord *vec0, t_coord *vec1)
 
 	top = dot_vectors(vec0, vec1);
 	bottom = get_vector_magnitude(vec0) * get_vector_magnitude(vec1);
-	return (top / bottom);
+	return (wrap_angle(acos(top / bottom) * PI_D));
 }

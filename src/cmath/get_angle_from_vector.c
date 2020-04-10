@@ -16,5 +16,5 @@
 
 float	get_angle_from_vector(t_coord *vec)
 {
-	return (atan(vec->y / vec->x) * PI_D);
+	return (wrap_angle(atan(vec->y / vec->x) * PI_D));
 }
