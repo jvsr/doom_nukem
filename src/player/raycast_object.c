@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 12:48:45 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 14:34:51 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 	if (obj != NULL)
 		return (obj);
 	wall = raycast_wall(sec, plyr, FALSE, FALSE);
+	if (wall == NULL)
+		return (NULL);
 	if (wall->is_window)
 		smash_glass(game, wall, sec);
 	if (wall->is_portal == FALSE)

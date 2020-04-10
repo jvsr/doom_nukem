@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/09 18:01:56 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/10 15:30:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,6 @@ t_map	*map_editor_convert(t_editor_map *m_edit)
 		add_objects(&(m->sectors[i]), cur_s);
 		i++;
 	}
+	convert_clean_doors(m);
 	return (m);
 }

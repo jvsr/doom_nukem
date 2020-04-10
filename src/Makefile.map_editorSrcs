@@ -39,4 +39,5 @@ SRCS = \
 	map_editor_clean_funcs0 \
 	map_editor_clean_funcs1 \
 	get_connectors \
+	convert_clean_doors \
 

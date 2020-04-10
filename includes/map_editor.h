@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/08 17:14:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/10 15:29:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_editor_wall	*map_editor_check_hit_wall(t_transform *map_editor_elem,
 t_editor_object	*map_editor_check_hit_object(t_transform *map_editor_elem,
 					t_editor_map *editor_map, SDL_Point mouse_pos);
 t_bool			map_editor_clean(t_editor_map *map);
+void			convert_clean_doors(t_map *map);
 void			map_objects(t_list *secs, t_list *objs);
 t_list			*get_room(t_list *trail,
 					t_list *walls, t_editor_wall *first, t_bool is_right);
