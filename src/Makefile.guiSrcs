@@ -84,6 +84,7 @@ DRAW_SRCS = draw_gui \
 		draw_gview \
 		draw_map_editor \
 		merge_elem \
+		draw_walls \
 
 DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/04 13:29:55 by ehollidg      #+#    #+#                 */
-/*   Updated: 2019/12/04 13:29:55 by ehollidg      ########   odam.nl         */
+/*   Updated: 2020/04/13 14:29:37 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,43 +34,6 @@ static void	draw_object(SDL_Surface *dst, t_game *game, t_obj obj,
 	sdl_merge_surface_alpha(dst, scaled,
 		(SDL_Point){pos.x - (scaled->w / 2), pos.y - (scaled->h / 2)});
 	SDL_FreeSurface(scaled);
-}
-
-static void	get_wall_color(SDL_Color *result, t_editor_wall *wall)
-{
-	if (wall->is_hidden_door == TRUE)
-		hex_to_color(result, EDITOR_HIDDEN_DOOR_COLOR);
-	else if (wall->is_door == TRUE)
-		hex_to_color(result, EDITOR_DOOR_COLOR);
-	else if (wall->is_window == TRUE)
-		hex_to_color(result, EDITOR_WINDOW_COLOR);
-	else if (wall->is_portal == TRUE)
-		hex_to_color(result, EDITOR_PORTAL_COLOR);
-	else
-		hex_to_color(result, EDITOR_WALL_COLOR);
-}
-
-static void	draw_walls(SDL_Surface *dst, t_list *lst, SDL_Point editor_pos)
-{
-	t_editor_wall	*wall;
-	t_line			line;
-	SDL_Color		color;
-	SDL_Color		default_color;
-
-	hex_to_color(&default_color, EDITOR_WALL_COLOR);
-	while (lst != NULL)
-	{
-		wall = (t_editor_wall*)lst->content;
-		line.start.x = wall->corner_0.x - editor_pos.x;
-		line.start.y = wall->corner_0.y - editor_pos.y;
-		line.end.x = wall->corner_1.x - editor_pos.x;
-		line.end.y = wall->corner_1.y - editor_pos.y;
-		get_wall_color(&color, wall);
-		sdl_draw_surface_line(dst, color, line);
-		sdl_draw_surface_circ(dst, default_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.end});
-		sdl_draw_surface_circ(dst, default_color, (t_circle){EDITOR_WALL_CORNER_SIZE, line.start});
-		lst = lst->next;
-	}
 }
 
 static void	draw_objects(SDL_Surface *dst, t_game *game, SDL_Point editor_pos)
@@ -126,13 +89,15 @@ static void	draw_cursor(SDL_Surface *dst, t_game *game, t_transform *elem,
 	mouse_pos = (SDL_Point){mouse_pos.x - map_editor->pos.x,
 		mouse_pos.y - map_editor->pos.y};
 	hex_to_color(&preview_color, EDITOR_PREVIEW_PLACE_COLOR);
-	sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
+	sdl_draw_surface_circ(dst, preview_color,
+						(t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
 	if (map_editor->show_last_click)
 	{
 		mouse_pos = map_editor->last_click;
 		mouse_pos = (SDL_Point){map_editor->last_click.x - map_editor->pos.x,
 			map_editor->last_click.y - map_editor->pos.y};
-		sdl_draw_surface_circ(dst, preview_color, (t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
+		sdl_draw_surface_circ(dst, preview_color,
+							(t_circle){EDITOR_PREVIEW_CIRCLE_SIZE, mouse_pos});
 	}
 }
 

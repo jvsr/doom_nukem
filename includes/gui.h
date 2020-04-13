@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 15:38:58 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:59:53 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:30:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ struct			s_gui
 
 t_transform		*check_gui_hit(t_game *game, SDL_Point pos);
 void			draw_gui(t_gui *ui, t_game *game);
+void			draw_walls(SDL_Surface *dst, t_list *lst, SDL_Point editor_pos);
 void			print_elem(t_transform *elem, t_bool print_children);
 t_transform		*new_elem(t_gui *ui, const char *name, t_gui_type type);
 void			add_gui_child(t_gui *ui, t_transform *panel);
