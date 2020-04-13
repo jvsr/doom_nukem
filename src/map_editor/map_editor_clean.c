@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 12:17:43 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 20:50:46 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:04:15 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ static void		add_all_to_sector(t_list *walls, t_editor_map *map)
 	map->sectors = ft_lstnew(sec, sizeof(t_editor_sector));
 }
 
+static void		make_new_sec(t_editor_map *map, t_editor_sector **sec)
+{
+	*sec = ft_memalloc(sizeof(t_editor_sector));
+	if (*sec == NULL)
+		error_msg_errno("Error allocating sector map");
+	ft_lstaddbck(&map->sectors, ft_lstnew(*sec, sizeof(t_editor_sector)));
+}
+
 static void		clean_up_objs(t_editor_map *map)
 {
 	t_editor_sector *sec;
@@ -67,16 +75,11 @@ static void		clean_up_objs(t_editor_map *map)
 					ft_lstlast(map->sectors)->content)->is_invalid)
 					sec = ft_lstlast(map->sectors)->content;
 				else
-				{
-					sec = ft_memalloc(sizeof(t_editor_sector));
-					if (sec == NULL)
-						error_msg_errno("Error allocating sector map");
-					ft_lstaddbck(&map->sectors,
-					ft_lstnew(sec, sizeof(t_editor_sector)));
-				}
+					make_new_sec(map, &sec);
 			}
 			obj->sector = sec;
-			ft_lstaddbck(&sec->objects, ft_lstnew(obj, sizeof(t_editor_object)));
+			ft_lstaddbck(&sec->objects, ft_lstnew(obj,
+				sizeof(t_editor_object)));
 		}
 		lst = lst->next;
 	}
@@ -95,11 +98,13 @@ static void		make_sectors(t_list *cons, t_editor_map *map)
 			tmp = walls;
 			if (((t_editor_wall*)cons->content)->sectors[0] == NULL)
 			{
-				ft_lstaddbck(&map->sectors, ft_lstnew(get_sector(tmp->content, FALSE), sizeof(void*)));
+				ft_lstaddbck(&map->sectors, ft_lstnew(get_sector(tmp->content,
+					FALSE), sizeof(void*)));
 				tmp = tmp->next;
 			}
 			if (((t_editor_wall*)cons->content)->sectors[1] == NULL)
-				ft_lstaddbck(&map->sectors, ft_lstnew(get_sector(tmp->content, TRUE), sizeof(void*)));
+				ft_lstaddbck(&map->sectors, ft_lstnew(get_sector(tmp->content,
+					TRUE), sizeof(void*)));
 			ft_lstdel(&walls, NULL);
 		}
 		cons = cons->next;
@@ -107,19 +112,6 @@ static void		make_sectors(t_list *cons, t_editor_map *map)
 	clean_up_walls(map);
 	map_objects(map->sectors, map->objects);
 	clean_up_objs(map);
-}
-
-void printwall(const t_list *elem)
-{
-	ft_printf("wal: %p\n", elem->content);
-}
-
-void printlist(const t_list *elem)
-{
-	ft_printf("\nsec: %p\n", elem->content);
-	ft_printf("wct: %zu\n", ft_lstlen(((t_editor_sector*)elem->content)->walls));
-	if (((t_editor_sector*)elem->content)->walls)
-		ft_lstiter(((t_editor_sector*)elem->content)->walls, printwall);
 }
 
 t_bool			map_editor_clean(t_editor_map *map)
@@ -134,6 +126,5 @@ t_bool			map_editor_clean(t_editor_map *map)
 	}
 	else
 		add_all_to_sector(map->walls, map);
-	ft_lstiter(map->sectors, printlist);
 	return (TRUE);
 }

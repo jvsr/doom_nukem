@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:41:08 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 20:25:32 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:36:08 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,6 @@ void			remove_from_list(t_list **head, t_list *elm)
 		*head = i->next;
 	if (i != NULL)
 		i->next = NULL;
-}
-
-t_list			*get_correct_sectors(t_editor_wall *con, t_list *walls)
-{
-	t_list 	*secs;
-
-	secs = NULL;
-	if (con->sectors[0] != NULL && con->sectors[1] != NULL)
-		return (NULL);
-	if (con->sectors[0] == NULL)
-		ft_lstaddbck(&secs, ft_lstnew(get_room(ft_lstnew(con,
-			sizeof(t_editor_wall)), walls, con, FALSE), sizeof(t_list)));
-	if (con->sectors[1] == NULL)
-		ft_lstaddbck(&secs,	ft_lstnew(get_room(ft_lstnew(con,
-			sizeof(t_editor_wall)), walls, con, TRUE), sizeof(t_list)));
-	return (secs);
 }
 
 void			clean_up_walls(t_editor_map *map)

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 13:09:17 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/09 16:34:46 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:34:14 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "rinfo.h"
 #include "map_editor.h"
 
-static void	add_wall(t_editor_map *m_edit, t_wall *w)
+static void		add_wall(t_editor_map *m_edit, t_wall *w)
 {
 	t_editor_wall *w_edit;
 
@@ -30,7 +30,7 @@ static void	add_wall(t_editor_map *m_edit, t_wall *w)
 	w_edit->is_door = w->is_door;
 }
 
-static void	add_object(t_editor_map *m_edit, t_list *o_lst)
+static void		add_object(t_editor_map *m_edit, t_list *o_lst)
 {
 	const t_object	*o = (t_object*)o_lst->content;
 	t_editor_object *o_edit;
@@ -58,7 +58,7 @@ static void	add_object(t_editor_map *m_edit, t_list *o_lst)
 		return ;
 }
 
-static void	loop_sector(t_editor_map *m_edit, t_sector *s)
+static void		loop_sector(t_editor_map *m_edit, t_sector *s)
 {
 	size_t			i;
 	t_list			*obj;

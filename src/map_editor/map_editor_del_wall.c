@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:04:41 by pholster      #+#    #+#                 */
-/*   Updated: 2020/02/12 15:04:41 by pholster      ########   odam.nl         */
+/*   Updated: 2020/04/13 14:40:31 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static t_bool	on_point(t_editor_wall *wall, t_editor_wall *other)
 	return (FALSE);
 }
 
-void			map_editor_del_wall(t_editor_map *editor_map, t_editor_wall *wall)
+void			map_editor_del_wall(t_editor_map *editor_map,
+					t_editor_wall *wall)
 {
 	t_list	*lst;
 	t_list	*next;

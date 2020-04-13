@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:36:29 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 18:09:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:40:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_bool			set_side(t_editor_wall *prev,
 	if (coordequ(&prev->corner_0, &cur->corner_1) ||
 		coordequ(&prev->corner_1, &cur->corner_0))
 		return (is_right);
-	return (!is_right);	
+	return (!is_right);
 }
 
 t_editor_sector	*get_sector(t_list *walls, t_bool is_right)

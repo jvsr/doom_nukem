@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 14:14:05 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/06 14:14:05 by pholster      ########   odam.nl         */
+/*   Updated: 2020/04/13 14:33:14 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	manage_last_click(t_game *game, SDL_Point mouse_pos,
 {
 	t_editor_wall	*wall;
 
-	if (is_helddown(game->keymap, SDLK_LSHIFT) && game->editor_map->walls != NULL)
+	if (is_helddown(game->keymap, SDLK_LSHIFT) &&
+		game->editor_map->walls != NULL)
 	{
 		if (map_editor_gui_elem->show_last_click == FALSE)
 		{
@@ -47,7 +48,7 @@ static void	manage_last_click(t_game *game, SDL_Point mouse_pos,
 }
 
 static void	add_line(t_game *game, SDL_Point mouse_pos,
-				t_transform *map_editor_elem)
+					t_transform *map_editor_elem)
 {
 	t_map_editor	*map_editor_gui_elem;
 
@@ -55,7 +56,7 @@ static void	add_line(t_game *game, SDL_Point mouse_pos,
 	map_editor_snap_to_grid(map_editor_elem, &mouse_pos);
 	manage_last_click(game, mouse_pos, map_editor_gui_elem);
 	if (map_editor_gui_elem->show_last_click == TRUE &&
-		ft_memequ(&map_editor_gui_elem->last_click,	&mouse_pos,
+		ft_memequ(&map_editor_gui_elem->last_click, &mouse_pos,
 		sizeof(SDL_Point)) == FALSE)
 	{
 		map_editor_new_wall(game->editor_map, (t_coord){
@@ -64,9 +65,9 @@ static void	add_line(t_game *game, SDL_Point mouse_pos,
 		set_elem_redraw(map_editor_elem);
 	}
 	map_editor_gui_elem->last_click = mouse_pos;
-	map_editor_gui_elem->show_last_click = !map_editor_gui_elem->show_last_click;
+	map_editor_gui_elem->show_last_click =
+		!map_editor_gui_elem->show_last_click;
 }
-
 
 static void	add_object(t_game *game, SDL_Point mouse_pos,
 				t_transform *map_editor_elem)
