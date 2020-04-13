@@ -6,15 +6,15 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:48:43 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/03/29 13:01:02 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:40:14 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENEMY_H
 # define ENEMY_H
 
-#include "libft/ft_bool.h"
-#include "rinfo.h"
+# include "libft/ft_bool.h"
+# include "rinfo.h"
 
 typedef struct s_game	t_game;
 typedef struct s_object	t_object;

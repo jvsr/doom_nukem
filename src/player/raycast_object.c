@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 13:25:50 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:41:33 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_bool	collides(t_object *obj, SDL_Surface *dst)
 	int half;
 
 	half = dst->w / 2;
-	return (obj->sSize.x < half && obj->sSize.y > half);
+	return (obj->ssize.x < half && obj->ssize.y > half);
 }
 
 static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr, t_game *game)
@@ -54,7 +54,6 @@ static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr, t_game *game
 	{
 		t_object *tmp = lst->content;
 		i = get_object_angle_on_screen(lst->content, plyr, range);
-		printf("Range (%f, %f), I %f, isEnemy %i\n", range->x, range->y, i, tmp->is_enemy);
 		if (i != -1)
 			if (collides(lst->content, game->surface))
 				obj = get_closer(lst->content, obj, plyr);
