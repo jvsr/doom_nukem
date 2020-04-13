@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 19:04:08 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/13 15:20:38 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/13 15:34:21 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void load_level(t_game *game, t_transform *gui)
 		ft_strcpy(full_path, SELECT_CUSTOM_PATH);
 	ft_strcat(full_path, "/");
 	ft_strcat(full_path, gui->gui_elem.button->text->text);
+	map = read_map_struct(full_path, game->exec_path);
 	load_map(game, map, game->player);
 	go_to_game(game, gui);
 }
