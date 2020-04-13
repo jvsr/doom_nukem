@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 17:37:31 by pholster      #+#    #+#                 */
-/*   Updated: 2020/01/23 17:37:31 by pholster      ########   odam.nl         */
+/*   Updated: 2020/04/13 14:00:23 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include "error.h"
 #include "map_editor.h"
 
-static void		split_wall_intersection(t_editor_map *editor_map, t_editor_wall *wall,
-					t_editor_wall *other)
+static void		split_wall_intersection(t_editor_map *editor_map,
+					t_editor_wall *wall, t_editor_wall *other)
 {
 	t_coord	intersection;
 	t_coord	corner_0;
@@ -36,8 +36,8 @@ static void		split_wall_intersection(t_editor_map *editor_map, t_editor_wall *wa
 	map_editor_new_wall(editor_map, intersection, corner_1);
 }
 
-void			split_intersect_walls(t_editor_map *editor_map, t_editor_wall *wall,
-					t_editor_wall *intersect_walls[2])
+void			split_intersect_walls(t_editor_map *editor_map,
+					t_editor_wall *wall, t_editor_wall *intersect_walls[2])
 {
 	if (intersect_walls[0] != NULL)
 		split_wall_intersection(editor_map, wall, intersect_walls[0]);
@@ -68,7 +68,8 @@ static t_bool	check_collision_valid(t_editor_wall *wall, t_editor_wall *other,
 	return (TRUE);
 }
 
-static t_bool	check_coincident_valid(t_editor_wall *wall, t_editor_wall *other)
+static t_bool	check_coincident_valid(t_editor_wall *wall,
+					t_editor_wall *other)
 {
 	float		wall_angle;
 	float		other_angle;
@@ -127,7 +128,8 @@ static t_bool	add_to_back(t_editor_map *editor_map, t_list *new)
 	return (TRUE);
 }
 
-t_bool			map_editor_add_wall(t_editor_map *editor_map, t_editor_wall *wall)
+t_bool			map_editor_add_wall(t_editor_map *editor_map,
+					t_editor_wall *wall)
 {
 	t_list	*new;
 
