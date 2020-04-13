@@ -4,65 +4,16 @@ Warning: /Users/jvisser/Documents/GitHub/doom_nukem/tests/src/test_ft_color.c ma
 Norme: ./tests/src/test_ft_keymap.c
 Warning: /Users/jvisser/Documents/GitHub/doom_nukem/tests/src/test_ft_keymap.c may not compile or is invalid for some reasons.
 --
-Norme: ./includes/gui_internal.h
-Error (line 20): multiple empty lines
-Error (line 47): line has 84 characters
---
 Norme: ./includes/personal.h
 Error: not protected against double inclusion
 Error (line 13): multiline define
 Error (line 13): parameterized macros are forbidden
 Error (line 18): line has 84 characters
 --
-Norme: ./includes/libft/ft_printf.h
-Error (line 50): define must be a constant value
-Error (line 51): define must be a constant value
-Error (line 52): define must be a constant value
-Error (line 53): define must be a constant value
-Error (line 54): define must be a constant value
-Error (line 55): define must be a constant value
---
-Norme: ./includes/rinfo.h
-Error (line 88, col 11): sSize not unixcase
-Error (line 167): Struct s_hitem bad aligned
-Error (line 179): Struct s_hinfo bad aligned
---
-Norme: ./includes/enemy.h
-Error (line 16): wrong number of spaces in preprocessor indentation
-Error (line 17): wrong number of spaces in preprocessor indentation
---
-Norme: ./libft/includes/ft_printf.h
-Error (line 50): define must be a constant value
-Error (line 51): define must be a constant value
-Error (line 52): define must be a constant value
-Error (line 53): define must be a constant value
-Error (line 54): define must be a constant value
-Error (line 55): define must be a constant value
---
-Norme: ./src/init/init.c
-Error: global scope bad aligned
-Error (line 64): function map_init has 28 lines
-Error (line 70): line has 88 characters
-Error (line 75): Empty line
-Error (line 76): C++ comment
-Error (line 80): line has 104 characters
-Error (line 84): line has 208 characters
-Error (line 84, col 139): bad character after ,
-Error (line 85): line has 208 characters
-Error (line 85, col 173): bad character after ,
-Error (line 86): line has 206 characters
-Error (line 86, col 137): bad character after ,
-Error (line 87): line has 206 characters
-Error (line 87, col 171): bad character after ,
---
 Norme: ./src/map_editor/map_editor_add_wall.c
 Error: 6 functions in the file
-Error (line 20): line has 87 characters
-Error (line 39): line has 85 characters
-Error (line 71): line has 82 characters
-Error (line 82): line has 82 characters
-Error (line 97): function add_to_back has 29 lines
-Error (line 130): line has 83 characters
+Error (line 83): line has 82 characters
+Error (line 98): function add_to_back has 29 lines
 --
 Norme: ./src/map_editor/map_editor_clean.c
 Error: 6 functions in the file
@@ -183,9 +134,6 @@ Error (line 24): Space before function name
 Error (line 36): C++ comment
 Error (line 38): C++ comment
 --
-Norme: ./src/gui/onclick/hud_died.c
-Error (line 25): C++ comment
---
 Norme: ./src/gui/onclick/map_editor.c
 Error: 8 functions in the file
 Error: file must end with a single empty line
@@ -214,21 +162,3 @@ Error (line 70): line has 98 characters
 Error (line 71): line has 100 characters
 Error (line 129): line has 98 characters
 Error (line 135): line has 102 characters
---
-Norme: ./src/main/loop.c
-Error (line 97): C++ comment
---
-Norme: ./src/main/quit.c
-Error (line 22): comment not well formatted
---
-Norme: ./src/eventstate/eventstate_map_editor.c
-Error (line 72, col 1): no newline after block
-Error (line 77): function map_editor_eventstate has 28 lines
---
-Norme: ./src/player/raycast_object.c
-Error (line 45): line has 82 characters
-Error (line 45): declarations in ray must be at the top of the function
-Error (line 45): declarations must be followed by one empty line in ray
-Error (line 55, col 12): tmp is instanciated during declaration
-Error (line 57): line has 92 characters
-Error (line 66): function raycast_object has 32 lines
