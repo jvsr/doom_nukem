@@ -17,5 +17,6 @@ t_bool	pf_iszeropad(const t_info *info)
 	if (info->precision != -1 && info->var_len != 0 &&
 		info->var_len >= info->precision)
 		return (FALSE);
-	return (PF_FLAG_ZERO || (info->precision != -1 && pf_isstr(info) == FALSE));
+	return (info->flag[1] ||
+		(info->precision != -1 && pf_isstr(info) == FALSE));
 }
