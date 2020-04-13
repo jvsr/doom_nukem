@@ -18,7 +18,8 @@ short		read_short(t_binary_read *bin_r)
 {
 	short s;
 
-	if (bin_r->content_pos - bin_r->header_size + sizeof(short) > bin_r->file_size)
+	if (bin_r->content_pos - bin_r->header_size + sizeof(short) >
+		bin_r->file_size)
 		error_msg("No space in file", 876, "Serializer");
 	ft_memcpy(&s, bin_r->bytes + bin_r->content_pos, sizeof(s));
 	bin_r->content_pos += sizeof(s);
