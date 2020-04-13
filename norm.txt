@@ -10,25 +10,6 @@ Error (line 13): multiline define
 Error (line 13): parameterized macros are forbidden
 Error (line 18): line has 84 characters
 --
-Norme: ./src/map_editor/map_editor_convert.c
-Error: global scope bad aligned
-Error (line 23): Space before function name
-Error (line 39): function add_walls has 27 lines
-Error (line 39): declarations in add_walls are bad aligned
-Error (line 39, col 22): headS not unixcase
-Error (line 59): line has 97 characters
-Error (line 60): bad indentation
-Error (line 60): line has 115 characters
-Error (line 60): must begin only by tabulations
-Error (line 70): declarations in add_objects are bad aligned
-Error (line 70): function add_objects has 26 lines
-Error (line 116): declarations in map_editor_convert are bad aligned
-Error (line 116): function map_editor_convert has 35 lines
-Error (line 132): Empty line
-Error (line 135): missing newline after while
-Error (line 135, col 21): no newline before block
-Error (line 140): Empty line
---
 Norme: ./src/renderer/get_bounds.c
 Error (line 18): function get_bounds has 26 lines
 --
@@ -62,23 +43,8 @@ Error (line 25): C++ comment
 Error (line 26): C++ comment
 Error (line 27): C++ comment
 --
-Norme: ./src/game/load_map.c
-Error: global scope bad aligned
---
-Norme: ./src/enemy/enemy_move.c
-Error (line 85): C++ comment
---
 Norme: ./src/gui/onclick/load_level.c
 Error (line 24): declarations in load_level are bad aligned
 Error (line 24): Space before function name
 Error (line 36): C++ comment
 Error (line 38): C++ comment
---
-Norme: ./src/gui/onclick/map_editor.c
-Error: 8 functions in the file
-Error: file must end with a single empty line
-Error (line 41): line has 82 characters
---
-Norme: ./src/gui/onclick/go_to_game.c
-Error (line 27): line has 87 characters
-Error (line 28): line has 85 characters
