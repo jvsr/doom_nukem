@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 14:36:22 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/09 14:55:19 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/13 14:16:33 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void			loop(t_game *game)
 		while (SDL_PollEvent(&event))
 			handle_event(game, event);
 		loop_core(game, game->cureventstate->eventstate);
-		// ft_printf("heyo\n");
 		draw_gui(game->ui, game);
 		SDL_UpdateWindowSurface(game->window);
 		handle_frames(game, &framecount, &lastsecond, &lastframe);
