@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/14 11:06:09 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 12:06:05 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:09:06 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,31 @@ static void	toggle_wall(t_game *game, SDL_Point mouse_pos,
 		wall->is_door = TRUE;
 		wall->is_portal = FALSE;
 		wall->is_window = FALSE;
-	} else if (wall->is_hidden_door == FALSE)
+	}
+	else if (wall->is_hidden_door == FALSE)
 		wall->is_hidden_door = TRUE;
 	set_elem_redraw(map_editor_elem);
+}
+
+void		mouse_move(t_game *game, SDL_Event event,
+						t_transform *map_editor_elem)
+{
+	SDL_Point			mouse_pos;
+
+	mouse_pos = (SDL_Point){event.button.x, event.button.y};
+	if (event.button.button == SDL_BUTTON_LEFT &&
+			is_helddown(game->keymap, SDLK_LCTRL) == TRUE)
+		toggle_wall(game, mouse_pos, map_editor_elem);
+	else if (event.button.button == SDL_BUTTON_LEFT)
+		map_editor_add(game, mouse_pos, map_editor_elem);
+	else if (event.button.button == SDL_BUTTON_RIGHT)
+		delete(game, mouse_pos, map_editor_elem);
 }
 
 void		map_editor_eventstate(t_game *game, SDL_Event event)
 {
 	static t_bool		first = TRUE;
 	t_transform			*map_editor_elem;
-	SDL_Point			mouse_pos;
 
 	map_editor_elem = get_gui_child(game->ui, "mapEditorView");
 	if (event.type == SDL_MOUSEMOTION)
@@ -88,14 +103,7 @@ void		map_editor_eventstate(t_game *game, SDL_Event event)
 		if (event.button.x < 0 || event.button.x > map_editor_elem->abs_dim.x ||
 			event.button.y < 0 || event.button.y > map_editor_elem->abs_dim.y)
 			return ;
-		mouse_pos = (SDL_Point){event.button.x, event.button.y};
-		if (event.button.button == SDL_BUTTON_LEFT &&
-				is_helddown(game->keymap, SDLK_LCTRL) == TRUE)
-			toggle_wall(game, mouse_pos, map_editor_elem);
-		else if (event.button.button == SDL_BUTTON_LEFT)
-			map_editor_add(game, mouse_pos, map_editor_elem);
-		else if (event.button.button == SDL_BUTTON_RIGHT)
-			delete(game, mouse_pos, map_editor_elem);
+		mouse_move(game, event, map_editor_elem);
 	}
 	else
 		first = get_gui_child(game->ui, "mapEditorConfirmationMenu")->show;
