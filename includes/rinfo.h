@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 11:14:59 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:17:02 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ struct			s_object
 	float		col_radius;
 	t_bool		can_col;
 	t_plyrcol	*on_collide;
+	SDL_Point	sSize;
 };
 
 typedef struct	s_enemy

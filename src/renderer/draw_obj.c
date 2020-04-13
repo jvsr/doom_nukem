@@ -6,12 +6,13 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 10:44:13 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 11:03:45 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:18:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/ft_num.h"
 #include "libft/ft_list.h"
+#include "libft/ft_mem.h"
+#include "libft/ft_num.h"
 #include "textures.h"
 #include "renderer.h"
 #include "player.h"
@@ -84,6 +85,7 @@ static void			loop_objs(t_objrend *obj,
 	oren.ybounds = calc_ybounds(obj, rin->dst, rin->game, &oren);
 	oren.diff = (abs(oren.ybounds.y - oren.ybounds.x) * (size.x / size.y)) / 2;
 	oren.xbounds = (SDL_Point){obj->x - oren.diff, obj->x + oren.diff};
+	ft_memcpy(&obj->obj->sSize, &oren.xbounds, sizeof(SDL_Point));
 	oren.c_xbounds.x = ft_constrain(oren.xbounds.x, rin->begin, rin->end);
 	oren.c_xbounds.y = ft_constrain(oren.xbounds.y, oren.c_xbounds.x, rin->end);
 	x = oren.c_xbounds.x;

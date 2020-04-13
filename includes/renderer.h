@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:59:13 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:12:27 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,35 @@ typedef struct	s_ybinfo
 
 void			render(t_game *game, SDL_Surface *dst);
 t_hit			get_hit(t_coord *cosin,
-						t_player *player, t_sector *sector, t_sector *prev);
+					t_player *player, t_sector *sector, t_sector *prev);
 void			draw_skybox(size_t x,
-						SDL_Surface *dst, t_game *game, SDL_Point *bounds);
+					SDL_Surface *dst, t_game *game, SDL_Point *bounds);
 t_objrend		*new_rendobj(t_object *obj,
-						t_sector *sec, float *flts, int x);
+					t_sector *sec, float *flts, int x);
 t_bool			sort_objs(const t_list *a, const t_list *b);
 SDL_Point		set_ybounds(t_objrend *obj,
-						t_game *game, t_ybinfo info);
+					t_game *game, t_ybinfo info);
 t_list			**decals_on_vline(t_wall *wall, float perc_hit,
-						float len, t_list **out);
+					float len, t_list **out);
 SDL_Point		get_bounds(t_player *player,
-						SDL_Surface *dst, t_hitem *hit, float tanvfov2);
+					SDL_Surface *dst, t_hitem *hit, float tanvfov2);
 void			get_hits(t_rinfo *rinfo, float tanvfov2);
 void			render_hits(t_rinfo *rinfo, t_coord *range);
 void			draw_vline(t_rinfo *rinfo,
-						t_hitem *item, size_t index, SDL_Point *bounds);
+					t_hitem *item, size_t index, SDL_Point *bounds);
 void			render_objs(t_rinfo *rinfo, t_hinfo *info, t_coord *range);
 void			draw_cline(SDL_Surface *dst,
-						SDL_Point **bounds, size_t index, int colour);
+					SDL_Point **bounds, size_t index, int colour);
 void			draw_wall(t_rinfo *rinfo,
-						SDL_Point **bounds, const size_t x, t_hit *hit);
+					SDL_Point **bounds, const size_t x, t_hit *hit);
 void			draw_glass(t_rinfo *rinfo,
-						SDL_Point **bounds, const size_t x, t_hit *hit);
+					SDL_Point **bounds, const size_t x, t_hit *hit);
 void			draw_object(t_list *objs, t_rinfo *rinfo, t_hinfo *info);
 void			delete_map(t_map **map);
 void			draw_floor(t_rinfo *rin, t_hinfo *info);
 void			draw_ceil(t_rinfo *rin, t_hinfo *info);
 int				get_slope(t_hitem *item,
-						t_wall *sw, float ang, t_rinfo *rin);
+					t_wall *sw, float ang, t_rinfo *rin);
 t_coord			get_vec_from_x(t_rinfo *rin, int x);
 void			draw_sfloor(t_rinfo *rin, t_hinfo *info);
 t_object		*new_chair(t_coord *pos, float offset, t_sector *parent);

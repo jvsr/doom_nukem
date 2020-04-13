@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 21:36:42 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:25:50 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,15 @@ static t_object	*get_closer(t_object *obj, t_object *prv, t_player *plyr)
 	return (prv);
 }
 
-static t_bool	collides(t_object *obj, t_player *plyr)
+static t_bool	collides(t_object *obj, SDL_Surface *dst)
 {
-	t_coord vec;
-	t_coord	c0;
-	t_coord c1;
+	int half;
 
-	get_vector_from_points(&plyr->pos, &obj->pos, &vec);
-	normalize_vector(&vec);
-	vec = (t_coord){vec.y, vec.x};
-	c0 = (t_coord){obj->pos.x + (vec.x * obj->col_radius * 2),
-		obj->pos.y + (vec.y * -obj->col_radius)};
-	c1 = (t_coord){obj->pos.x + (vec.y * obj->col_radius * 2), obj->pos.y +
-		(vec.y * -obj->col_radius)};
-	return (get_collision(&plyr->pos, &(t_coord){plyr->mag.cos, plyr->mag.sin},
-		(t_coord[2]){c0, c1}, &vec) != NULL);
+	half = dst->w / 2;
+	return (obj->sSize.x < half && obj->sSize.y > half);
 }
 
-static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr)
+static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr, t_game *game)
 {
 	t_list		*lst;
 	float		i;
@@ -61,9 +52,11 @@ static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr)
 	obj = NULL;
 	while (lst != NULL)
 	{
+		t_object *tmp = lst->content;
 		i = get_object_angle_on_screen(lst->content, plyr, range);
+		printf("Range (%f, %f), I %f, isEnemy %i\n", range->x, range->y, i, tmp->is_enemy);
 		if (i != -1)
-			if (collides(lst->content, plyr))
+			if (collides(lst->content, game->surface))
 				obj = get_closer(lst->content, obj, plyr);
 		lst = lst->next;
 	}
@@ -82,7 +75,7 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 	cur = sec;
 	range.x = wrap_angle(plyr->angle - ((float)game->setting->fov / 2));
 	range.y = wrap_angle(plyr->angle + ((float)game->setting->fov / 2));
-	obj = ray(sec, &range, plyr);
+	obj = ray(sec, &range, plyr, game);
 	if (obj != NULL)
 		return (obj);
 	wall = raycast_wall(sec, plyr, FALSE, FALSE);
@@ -94,7 +87,7 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 		return (NULL);
 	while (wall->is_portal == TRUE)
 	{
-		obj = ray(cur, &range, plyr);
+		obj = ray(cur, &range, plyr, game);
 		if (obj != NULL)
 			return (obj);
 		wall = wall_ray(cur, sec, plyr, (t_bool[2]){TRUE, FALSE});
