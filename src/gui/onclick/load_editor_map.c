@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 16:53:05 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/09 16:33:29 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:52:46 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ void			load_editor_map_next(t_game *game, t_transform *gui)
 	(void)gui;
 	select_map = get_gui_child(game->ui, "mapEditorSelectLoadText");
 	create_map_list(game, CUSTOM_PATH);
-    maps = read_map_list();
+	maps = read_map_list();
 	lst = maps;
 	while (lst != NULL)
 	{
 		if (ft_strequ(lst->content, select_map->gui_elem.text->text))
 		{
 			lst = lst->next;
-			break;
+			break ;
 		}
 		lst = lst->next;
 	}
@@ -112,12 +112,12 @@ void			load_editor_map_prv(t_game *game, t_transform *gui)
 	prv = NULL;
 	select_map = get_gui_child(game->ui, "mapEditorSelectLoadText");
 	create_map_list(game, CUSTOM_PATH);
-    maps = read_map_list();
+	maps = read_map_list();
 	lst = maps;
 	while (lst != NULL)
 	{
 		if (ft_strequ(lst->content, select_map->gui_elem.text->text))
-			break;
+			break ;
 		prv = lst;
 		lst = lst->next;
 	}
@@ -128,15 +128,6 @@ void			load_editor_map_prv(t_game *game, t_transform *gui)
 	else
 		set_elem_text_str(select_map, prv->content);
 	ft_lstdel(&maps, ft_lstdelmem);
-}
-
-void			load_editor_map_cancel(t_game *game, t_transform *gui)
-{
-	t_transform	*load_ui;
-
-	(void)gui;
-	load_ui = get_gui_child(game->ui, "mapEditorSelectLoadMenu");
-	set_elem_show_clickable(load_ui, FALSE);
 }
 
 void			load_editor_map(t_game *game, t_transform *gui)
@@ -150,10 +141,10 @@ void			load_editor_map(t_game *game, t_transform *gui)
 	select_map = get_gui_child(game->ui, "mapEditorSelectLoadText");
 	set_elem_show_clickable(load_ui, TRUE);
 	create_map_list(game, CUSTOM_PATH);
-    maps = read_map_list();
+	maps = read_map_list();
 	if (maps == NULL)
 		set_elem_text_str(select_map, "");
 	else
 		set_elem_text_str(select_map, maps->content);
-    ft_lstdel(&maps, ft_lstdelmem);
+	ft_lstdel(&maps, ft_lstdelmem);
 }

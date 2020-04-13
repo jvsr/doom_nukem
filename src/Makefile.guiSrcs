@@ -45,6 +45,7 @@ ONCLICK_SRCS = mainmenu \
 				map_editor \
 				save_map \
 				load_editor_map \
+				load_editor_map_cancel \
 				load_level \
 
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
