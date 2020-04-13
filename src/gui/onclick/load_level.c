@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 19:04:08 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/13 15:34:21 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/13 15:50:40 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "renderer.h"
 #include "serializer.h"
 
-void load_level(t_game *game, t_transform *gui)
+void	load_level(t_game *game, t_transform *gui)
 {
 	t_map	*map;
 	char	full_path[PATH_MAX];
