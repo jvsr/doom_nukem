@@ -10,34 +10,6 @@ Error (line 13): multiline define
 Error (line 13): parameterized macros are forbidden
 Error (line 18): line has 84 characters
 --
-Norme: ./src/map_editor/map_editor_add_wall.c
-Error: 6 functions in the file
-Error (line 83): line has 82 characters
-Error (line 98): function add_to_back has 29 lines
---
-Norme: ./src/map_editor/map_editor_clean.c
-Error: 6 functions in the file
-Error: global scope bad aligned
-Error (line 51): function clean_up_objs has 30 lines
-Error (line 79): line has 82 characters
-Error (line 98): line has 104 characters
-Error (line 102): line has 103 characters
-Error (line 112): Space before function name
-Error (line 117): Space before function name
-Error (line 120): line has 82 characters
---
-Norme: ./src/map_editor/map_editor_add.c
-Error (line 32): line has 83 characters
-Error (line 49): bad spacing after add_line
-Error (line 58, col 44): bad character after ,
-Error (line 67): line has 82 characters
-Error (line 70): multiple empty lines
-Error (line 71): bad spacing before add_object
---
-Norme: ./src/map_editor/map_editor_clean_funcs0.c
-Error (line 25): spaces at the end of line
-Error (line 25, col 19): bad character after ;
---
 Norme: ./src/map_editor/map_editor_convert.c
 Error: global scope bad aligned
 Error (line 23): Space before function name
@@ -57,43 +29,11 @@ Error (line 135): missing newline after while
 Error (line 135, col 21): no newline before block
 Error (line 140): Empty line
 --
-Norme: ./src/map_editor/map_editor_del_wall.c
-Error (line 29): line has 83 characters
---
-Norme: ./src/map_editor/map_editor_clean_funcs1.c
-Error: 6 functions in the file
-Error (line 56, col 7): bad spacing
-Error (line 65, col 20): bad character after ,
---
-Norme: ./src/map_editor/map_side_room.c
-Error (line 62): function get_room has 38 lines
---
-Norme: ./src/map_editor/map_editor_rev_convert.c
-Error: global scope bad aligned
---
 Norme: ./src/renderer/get_bounds.c
 Error (line 18): function get_bounds has 26 lines
 --
 Norme: ./src/renderer/render_hits.c
 Error (line 61): function render_hits has 26 lines
---
-Norme: ./src/serializer/read/read_long.c
-Error (line 21): line has 83 characters
---
-Norme: ./src/serializer/read/read_double.c
-Error (line 21): line has 85 characters
---
-Norme: ./src/serializer/read/read_int.c
-Error (line 22): line has 82 characters
---
-Norme: ./src/serializer/read/read_char.c
-Error (line 20): line has 83 characters
---
-Norme: ./src/serializer/read/read_short.c
-Error (line 21): line has 84 characters
---
-Norme: ./src/serializer/read/read_float.c
-Error (line 21): line has 84 characters
 --
 Norme: ./src/serializer/read_map_struct.c
 Error (line 17): C++ comment
@@ -142,23 +82,3 @@ Error (line 41): line has 82 characters
 Norme: ./src/gui/onclick/go_to_game.c
 Error (line 27): line has 87 characters
 Error (line 28): line has 85 characters
---
-Norme: ./src/gui/onclick/load_editor_map.c
-Error: 6 functions in the file
-Error (line 84): must begin only by tabulations
-Error (line 84): bad indentation
-Error (line 91, col 3): missing space after break
-Error (line 115): bad indentation
-Error (line 115): must begin only by tabulations
-Error (line 120, col 3): missing space after break
-Error (line 153): must begin only by tabulations
-Error (line 153): bad indentation
-Error (line 158): must begin only by tabulations
-Error (line 158): bad indentation
---
-Norme: ./src/gui/draw/draw_map_editor.c
-Error: 7 functions in the file
-Error (line 70): line has 98 characters
-Error (line 71): line has 100 characters
-Error (line 129): line has 98 characters
-Error (line 135): line has 102 characters
