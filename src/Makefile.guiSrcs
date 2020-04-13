@@ -43,6 +43,7 @@ ONCLICK_SRCS = mainmenu \
 				go_to_game \
 				hud_died \
 				map_editor \
+				map_editor_object \
 				save_map \
 				load_editor_map \
 				load_editor_map_cancel \

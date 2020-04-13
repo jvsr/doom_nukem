@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 13:58:52 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/09 16:36:33 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/13 15:04:39 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	go_to_game(t_game *game, t_transform *gui)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	set_elem_show_clickable(get_gui_child(game->ui, "missionsMenu"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "missionsOverlay"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "missionsCampaignButton"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "missionsCustomButton"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "missionsCampaignButton"),
+											FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "missionsCustomButton"),
+											FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), TRUE);
 	game->cureventstate->eventstate = hud;
