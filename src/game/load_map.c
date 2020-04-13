@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 13:54:59 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 15:07:27 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include "rinfo.h"
 #include "game.h"
 
-static int	get_sec_num(t_map *map, t_sector *sec)
+static int		get_sec_num(t_map *map, t_sector *sec)
 {
-	t_uint64 i;
+	t_uint64	i;
 
 	i = 0;
 	while (i < map->sector_count)
@@ -32,9 +32,9 @@ static int	get_sec_num(t_map *map, t_sector *sec)
 }
 
 static t_bool	start_end(t_game *game,
-								t_object *obj, t_player *plyr, t_sector *sec)
+					t_object *obj, t_player *plyr, t_sector *sec)
 {
-	t_texture tex;
+	t_texture	tex;
 
 	if (obj == NULL)
 		return (TRUE);
@@ -55,7 +55,7 @@ static t_bool	start_end(t_game *game,
 	return (TRUE);
 }
 
-void		load_map(t_game *game, t_map *map, t_player *plyr)
+void			load_map(t_game *game, t_map *map, t_player *plyr)
 {
 	t_uint64	i;
 	t_uint64	j;
