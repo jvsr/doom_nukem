@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 20:18:47 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 20:35:48 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 #include "rinfo.h"
 #include "game.h"
 
-static int		get_sec_num(t_map *map, t_sector *sec)
+static t_bool	load_skybox(t_game *game, t_object *obj,
+					t_sector *sec, t_texture tex)
 {
-	t_uint64	i;
-
-	i = 0;
-	while (i < map->sector_count)
+	if (tex == TEXTURE_SKYBOX_DAY || tex == TEXTURE_SKYBOX_DUSK)
 	{
-		if (sec == map->sectors + i)
-			return (i);
-		i++;
+		sec->has_ceiling = FALSE;
+		game->map->has_skybox = TRUE;
+		game->map->skybox = tex;
+		del_obj(obj, sec);
+		return (FALSE);
 	}
-	return (i - 1);
+	return (TRUE);
 }
 
 static t_bool	start_end(t_game *game,
@@ -53,35 +53,22 @@ static t_bool	start_end(t_game *game,
 		del_obj(obj, sec);
 		return (FALSE);
 	}
-	return (TRUE);
+	return (load_skybox(game, obj, sec, tex));
 }
 
-/*
-static t_bool	load_skybox(t_game *game, t_object *obj, t_sector *sec)
+static void		shrinkwall(t_wall *wall)
 {
-	t_texture	tex;
-
-	if (obj == NULL)
-		return (TRUE);
-	tex = tex_from_anim(game, &obj->img);
-	if (tex == TEXTURE_SKYBOX_DAY || tex == TEXTURE_SKYBOX_DUSK)
-	{
-		sec->has_ceiling = FALSE;
-		game->map->has_skybox = TRUE;
-		game->map->skybox = tex;
-		del_obj(obj, sec);
-		return (FALSE);
-	}
-	return (TRUE);
+	wall->corner_0 = (t_coord){wall->corner_0.x / SHRINK_SIZE,
+		wall->corner_0.y / SHRINK_SIZE};
+	wall->corner_1 = (t_coord){wall->corner_1.x / SHRINK_SIZE,
+		wall->corner_1.y / SHRINK_SIZE};
 }
-*/
 
 static void		shrink(t_map *map)
 {
 	t_uint64	i;
 	t_list		*lst;
 	t_object	*obj;
-	t_wall		*wall;
 	t_uint64	j;
 
 	i = 0;
@@ -98,11 +85,7 @@ static void		shrink(t_map *map)
 		j = 0;
 		while (j < map->sectors[i].wall_count)
 		{
-			wall = &map->sectors[i].walls[j];
-			wall->corner_0 = (t_coord){wall->corner_0.x / SHRINK_SIZE,
-				wall->corner_0.y / SHRINK_SIZE};
-			wall->corner_1 = (t_coord){wall->corner_1.x / SHRINK_SIZE,
-				wall->corner_1.y / SHRINK_SIZE};
+			shrinkwall(&map->sectors[i].walls[j]);
 			j++;
 		}
 		i++;

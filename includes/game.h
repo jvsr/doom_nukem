@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster      #+#    #+#                 */
-/*   Updated: 2020/03/30 10:16:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 20:36:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_eventstate		t_eventstate;
 typedef struct s_map			t_map;
 typedef struct s_editor_map		t_editor_map;
 typedef struct s_tpool			t_tpool;
+typedef struct s_sector			t_sector;
 
 typedef	enum	e_state
 {
@@ -70,5 +71,6 @@ void			*display_splash(t_game *game, char *loc);
 void			load_map(t_game *game, t_map *map, t_player *plyr);
 void			loader(t_game *game);
 void			quit(int exit_code);
+int				get_sec_num(t_map *map, t_sector *sec);
 
 #endif
