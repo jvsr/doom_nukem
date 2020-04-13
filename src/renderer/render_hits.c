@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 15:31:45 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 13:11:54 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/13 15:30:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ static void		del_hinfo(void *info, size_t size)
 	ft_memdel((void**)&h);
 }
 
-static void		render_fc(t_rinfo *rin, t_hinfo *info)
-{
-	if (!info->sec->has_slope)
-		draw_floor(rin, info);
-	else
-		draw_sfloor(rin, info);
-	if (info->sec->has_ceiling)
-		draw_ceil(rin, info);
-}
-
 static void		render_ifs(t_hinfo *info, t_hitem *hit, SDL_Point *bounds)
 {
 	if (hit->ybnds.x > 0 && hit->ybnds.x > info->floor_range.y)
@@ -48,7 +38,7 @@ static void		render_ifs(t_hinfo *info, t_hitem *hit, SDL_Point *bounds)
 }
 
 static void		if_hits(t_rinfo *rinfo,
-									t_hinfo *info, t_hitem *hit, t_rhits hits)
+					t_hinfo *info, t_hitem *hit, t_rhits hits)
 {
 	if (info->hits[hits.index - rinfo->begin].hit.dist < MAX_HIT)
 	{
@@ -56,6 +46,12 @@ static void		if_hits(t_rinfo *rinfo,
 		draw_vline(rinfo, hit, hits.index, hits.bounds);
 		render_ifs(info, hit, hits.bounds);
 	}
+}
+
+static void		init(t_hitem **hit, t_list **lst, t_rinfo *rinfo)
+{
+	*hit = NULL;
+	*lst = rinfo->ren;
 }
 
 void			render_hits(t_rinfo *rinfo, t_coord *range)
@@ -66,8 +62,7 @@ void			render_hits(t_rinfo *rinfo, t_coord *range)
 	SDL_Point	bounds;
 	t_hitem		*hit;
 
-	hit = NULL;
-	lst = rinfo->ren;
+	init(&hit, &lst, rinfo);
 	while (lst)
 	{
 		info = lst->content;
