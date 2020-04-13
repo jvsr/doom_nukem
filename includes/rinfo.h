@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/13 13:17:02 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:41:49 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ struct			s_object
 	float		col_radius;
 	t_bool		can_col;
 	t_plyrcol	*on_collide;
-	SDL_Point	sSize;
+	SDL_Point	ssize;
 };
 
 typedef struct	s_enemy
@@ -166,13 +166,13 @@ typedef struct	s_zbuf
 
 typedef struct	s_hitem
 {
-	SDL_Point		bounds;
-	SDL_Point		ybnds;
+	SDL_Point	bounds;
+	SDL_Point	ybnds;
 	t_hit		hit;
 	t_coord		y;
 	t_coord		st;
 	int			hoffset;
-	SDL_Point		pre_bounds;
+	SDL_Point	pre_bounds;
 	float		tang;
 }				t_hitem;
 
@@ -184,8 +184,8 @@ struct			s_hinfo
 	size_t		start;
 	size_t		end;
 	t_hinfo		*prev;
-	SDL_Point		floor_range;
-	SDL_Point		ceil_range;
+	SDL_Point	floor_range;
+	SDL_Point	ceil_range;
 };
 
 typedef struct	s_rinfo

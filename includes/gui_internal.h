@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 15:32:53 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/06 12:40:01 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:39:36 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "gui.h"
 
 # define TEXT_ALPHA_ROUND	0x30
-
 
 void			del_text(t_text **text);
 void			del_image(t_image **image);
@@ -41,13 +40,14 @@ void			draw_elements(t_transform *elem, t_game *game);
 void			draw_image(SDL_Surface *dst, t_image *image);
 void			draw_text(SDL_Surface *dst, t_text *text, SDL_Point abs_dim);
 void			draw_button(SDL_Surface *dst, t_button *button,
-							SDL_Point abs_dim);
+					SDL_Point abs_dim);
 void			draw_panel(t_panel *panel, t_game *game);
 void			draw_gview(SDL_Surface *dst, t_game *game);
-void			draw_map_editor(SDL_Surface *dst, t_game *game, t_transform *elem);
+void			draw_map_editor(SDL_Surface *dst,
+					t_game *game, t_transform *elem);
 void			merge_elem(t_transform *elem);
 SDL_Surface		*render_text(const char *str, TTF_Font *font, SDL_Color *color);
 void			check_elem_duplicate(t_transform *root_children,
-									t_transform *new);
+					t_transform *new);
 
 #endif
