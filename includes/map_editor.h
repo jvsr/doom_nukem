@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/13 14:21:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:55:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,6 @@ void			free_eobj(void *obj, size_t size);
 void			free_esector(void *sec, size_t size);
 t_editor_map	*map_editor_rev_convert(t_map *m);
 t_bool			get_closest(float prev, float cur);
+void			fill_wall(t_wall *cur_w, t_editor_wall *e_w);
 
 #endif
