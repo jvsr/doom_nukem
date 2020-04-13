@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 21:41:42 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 13:54:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void		load_map(t_game *game, t_map *map, t_player *plyr)
 	delete_map(&game->map);
 	game->map = map;
 	i = 0;
+	plyr->health = PLAYER_MAX_HEALTH;
+	plyr->is_dead = FALSE;
 	while (i < map->sector_count)
 	{
 		j = 0;

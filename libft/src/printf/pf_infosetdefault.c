@@ -22,12 +22,12 @@ void	pf_infosetdefault(t_info *info)
 	info->var_type = -1;
 	info->var_base = -1;
 	info->padadded = 0;
-	PF_FLAG_HASH = FALSE;
-	PF_FLAG_ZERO = FALSE;
-	PF_FLAG_MIN = FALSE;
-	PF_FLAG_PLUS = FALSE;
-	PF_FLAG_SPACE = FALSE;
-	PF_FLAG_APOST = FALSE;
+	info->flag[0] = FALSE;
+	info->flag[1] = FALSE;
+	info->flag[2] = FALSE;
+	info->flag[3] = FALSE;
+	info->flag[4] = FALSE;
+	info->flag[5] = FALSE;
 	info->is_zero = FALSE;
 	info->is_negative = FALSE;
 }

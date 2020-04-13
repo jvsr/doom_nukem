@@ -24,7 +24,7 @@ size_t	pf_getwidth(t_info *info, const char *str)
 		info->width = va_arg(info->args, int);
 		if (info->width < 0)
 		{
-			PF_FLAG_MIN = TRUE;
+			info->flag[2] = TRUE;
 			info->width = -info->width;
 		}
 		return (1);
