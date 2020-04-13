@@ -1,0 +1,232 @@
+Norme: ./tests/src/test_ft_color.c
+Warning: /Users/jvisser/Documents/GitHub/doom_nukem/tests/src/test_ft_color.c may not compile or is invalid for some reasons.
+--
+Norme: ./tests/src/test_ft_keymap.c
+Warning: /Users/jvisser/Documents/GitHub/doom_nukem/tests/src/test_ft_keymap.c may not compile or is invalid for some reasons.
+--
+Norme: ./includes/gui_internal.h
+Error (line 20): multiple empty lines
+Error (line 47): line has 84 characters
+--
+Norme: ./includes/personal.h
+Error: not protected against double inclusion
+Error (line 13): multiline define
+Error (line 13): parameterized macros are forbidden
+Error (line 18): line has 84 characters
+--
+Norme: ./includes/libft/ft_printf.h
+Error (line 50): define must be a constant value
+Error (line 51): define must be a constant value
+Error (line 52): define must be a constant value
+Error (line 53): define must be a constant value
+Error (line 54): define must be a constant value
+Error (line 55): define must be a constant value
+--
+Norme: ./includes/rinfo.h
+Error (line 166): Struct s_hitem bad aligned
+Error (line 178): Struct s_hinfo bad aligned
+--
+Norme: ./includes/enemy.h
+Error (line 16): wrong number of spaces in preprocessor indentation
+Error (line 17): wrong number of spaces in preprocessor indentation
+--
+Norme: ./libft/includes/ft_printf.h
+Error (line 50): define must be a constant value
+Error (line 51): define must be a constant value
+Error (line 52): define must be a constant value
+Error (line 53): define must be a constant value
+Error (line 54): define must be a constant value
+Error (line 55): define must be a constant value
+--
+Norme: ./src/init/init.c
+Error: global scope bad aligned
+Error (line 64): function map_init has 28 lines
+Error (line 70): line has 88 characters
+Error (line 75): Empty line
+Error (line 76): C++ comment
+Error (line 80): line has 104 characters
+Error (line 84): line has 208 characters
+Error (line 84, col 139): bad character after ,
+Error (line 85): line has 208 characters
+Error (line 85, col 173): bad character after ,
+Error (line 86): line has 206 characters
+Error (line 86, col 137): bad character after ,
+Error (line 87): line has 206 characters
+Error (line 87, col 171): bad character after ,
+--
+Norme: ./src/map_editor/map_editor_add_wall.c
+Error: 6 functions in the file
+Error (line 20): line has 87 characters
+Error (line 39): line has 85 characters
+Error (line 71): line has 82 characters
+Error (line 82): line has 82 characters
+Error (line 97): function add_to_back has 29 lines
+Error (line 130): line has 83 characters
+--
+Norme: ./src/map_editor/map_editor_clean.c
+Error: 6 functions in the file
+Error: global scope bad aligned
+Error (line 51): function clean_up_objs has 30 lines
+Error (line 79): line has 82 characters
+Error (line 98): line has 104 characters
+Error (line 102): line has 103 characters
+Error (line 112): Space before function name
+Error (line 117): Space before function name
+Error (line 120): line has 82 characters
+--
+Norme: ./src/map_editor/map_editor_add.c
+Error (line 32): line has 83 characters
+Error (line 49): bad spacing after add_line
+Error (line 58, col 44): bad character after ,
+Error (line 67): line has 82 characters
+Error (line 70): multiple empty lines
+Error (line 71): bad spacing before add_object
+--
+Norme: ./src/map_editor/map_editor_clean_funcs0.c
+Error (line 25): spaces at the end of line
+Error (line 25, col 19): bad character after ;
+--
+Norme: ./src/map_editor/map_editor_convert.c
+Error: global scope bad aligned
+Error (line 23): Space before function name
+Error (line 39): function add_walls has 27 lines
+Error (line 39): declarations in add_walls are bad aligned
+Error (line 39, col 22): headS not unixcase
+Error (line 59): line has 97 characters
+Error (line 60): bad indentation
+Error (line 60): line has 115 characters
+Error (line 60): must begin only by tabulations
+Error (line 70): declarations in add_objects are bad aligned
+Error (line 70): function add_objects has 26 lines
+Error (line 116): declarations in map_editor_convert are bad aligned
+Error (line 116): function map_editor_convert has 35 lines
+Error (line 132): Empty line
+Error (line 135): missing newline after while
+Error (line 135, col 21): no newline before block
+Error (line 140): Empty line
+--
+Norme: ./src/map_editor/map_editor_del_wall.c
+Error (line 29): line has 83 characters
+--
+Norme: ./src/map_editor/map_editor_clean_funcs1.c
+Error: 6 functions in the file
+Error (line 56, col 7): bad spacing
+Error (line 65, col 20): bad character after ,
+--
+Norme: ./src/map_editor/map_side_room.c
+Error (line 62): function get_room has 38 lines
+--
+Norme: ./src/map_editor/map_editor_rev_convert.c
+Error: global scope bad aligned
+--
+Norme: ./src/renderer/get_bounds.c
+Error (line 18): function get_bounds has 26 lines
+--
+Norme: ./src/renderer/render_hits.c
+Error (line 61): function render_hits has 26 lines
+--
+Norme: ./src/serializer/read/read_long.c
+Error (line 22): line has 96 characters
+Error (line 23): line has 83 characters
+--
+Norme: ./src/serializer/read/read_double.c
+Error (line 22): line has 96 characters
+Error (line 23): Empty line
+Error (line 24): line has 85 characters
+--
+Norme: ./src/serializer/read/read_int.c
+Error (line 22): line has 96 characters
+Error (line 23): line has 82 characters
+--
+Norme: ./src/serializer/read/read_char.c
+Error (line 22): line has 96 characters
+Error (line 23): line has 83 characters
+--
+Norme: ./src/serializer/read/read_short.c
+Error (line 22): line has 96 characters
+Error (line 23): line has 84 characters
+--
+Norme: ./src/serializer/read/read_float.c
+Error (line 22): line has 96 characters
+Error (line 23): line has 84 characters
+--
+Norme: ./src/serializer/read_map_struct.c
+Error (line 17): C++ comment
+Error (line 18): C++ comment
+Error (line 19): C++ comment
+Error (line 20): C++ comment
+Error (line 22): C++ comment
+Error (line 23): C++ comment
+Error (line 24): C++ comment
+Error (line 25): C++ comment
+Error (line 26): C++ comment
+Error (line 27): C++ comment
+Error (line 28): C++ comment
+Error (line 29): C++ comment
+Error (line 30): C++ comment
+Error (line 38): C++ comment
+--
+Norme: ./src/serializer/write_map_struct.c
+Error (line 16): declarations in write_map_struct are bad aligned
+Error (line 23): C++ comment
+Error (line 24): C++ comment
+Error (line 25): C++ comment
+Error (line 26): C++ comment
+Error (line 27): C++ comment
+--
+Norme: ./src/game/load_map.c
+Error: global scope bad aligned
+--
+Norme: ./src/enemy/enemy_move.c
+Error (line 85): C++ comment
+--
+Norme: ./src/gui/onclick/load_level.c
+Error (line 24): declarations in load_level are bad aligned
+Error (line 24): Space before function name
+Error (line 36): C++ comment
+Error (line 38): C++ comment
+--
+Norme: ./src/gui/onclick/hud_died.c
+Error (line 25): C++ comment
+--
+Norme: ./src/gui/onclick/map_editor.c
+Error: 8 functions in the file
+Error: file must end with a single empty line
+Error (line 41): line has 82 characters
+--
+Norme: ./src/gui/onclick/go_to_game.c
+Error (line 27): line has 87 characters
+Error (line 28): line has 85 characters
+--
+Norme: ./src/gui/onclick/load_editor_map.c
+Error: 6 functions in the file
+Error (line 84): must begin only by tabulations
+Error (line 84): bad indentation
+Error (line 91, col 3): missing space after break
+Error (line 115): bad indentation
+Error (line 115): must begin only by tabulations
+Error (line 120, col 3): missing space after break
+Error (line 153): must begin only by tabulations
+Error (line 153): bad indentation
+Error (line 158): must begin only by tabulations
+Error (line 158): bad indentation
+--
+Norme: ./src/gui/draw/draw_map_editor.c
+Error: 7 functions in the file
+Error (line 70): line has 98 characters
+Error (line 71): line has 100 characters
+Error (line 129): line has 98 characters
+Error (line 135): line has 102 characters
+--
+Norme: ./src/main/loop.c
+Error (line 97): C++ comment
+--
+Norme: ./src/main/quit.c
+Error (line 22): comment not well formatted
+--
+Norme: ./src/eventstate/eventstate_map_editor.c
+Error (line 72, col 1): no newline after block
+Error (line 77): function map_editor_eventstate has 28 lines
+--
+Norme: ./src/player/raycast_object.c
+Error (line 73): function raycast_object has 32 lines
