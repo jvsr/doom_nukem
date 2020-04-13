@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 13:46:33 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 14:05:13 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static t_bool	collides(t_object *obj, SDL_Surface *dst)
 	return (obj->ssize.x < half && obj->ssize.y > half);
 }
 
-static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr, t_game *game)
+static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr,
+					t_game *game)
 {
 	t_list		*lst;
 	float		i;
@@ -61,21 +62,14 @@ static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr, t_game *game
 	return (obj);
 }
 
-t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
+t_object		*handle_wall(t_game *game, t_player *plyr, t_sector *sec,
+							t_coord *range)
 {
-	t_sector	*sec;
-	t_coord		range;
 	t_wall		*wall;
-	t_object	*obj;
 	t_sector	*cur;
+	t_object	*obj;
 
-	sec = map->sectors + plyr->cur_sector;
 	cur = sec;
-	range.x = wrap_angle(plyr->angle - ((float)game->setting->fov / 2));
-	range.y = wrap_angle(plyr->angle + ((float)game->setting->fov / 2));
-	obj = ray(sec, &range, plyr, game);
-	if (obj != NULL)
-		return (obj);
 	wall = raycast_wall(sec, plyr, FALSE, FALSE);
 	if (wall == NULL)
 		return (NULL);
@@ -85,7 +79,7 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 		return (NULL);
 	while (wall->is_portal == TRUE)
 	{
-		obj = ray(cur, &range, plyr, game);
+		obj = ray(cur, range, plyr, game);
 		if (obj != NULL)
 			return (obj);
 		wall = wall_ray(cur, sec, plyr, (t_bool[2]){TRUE, FALSE});
@@ -95,4 +89,19 @@ t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
 		cur = wall->window;
 	}
 	return (NULL);
+}
+
+t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr)
+{
+	t_sector	*sec;
+	t_coord		range;
+	t_object	*obj;
+
+	sec = map->sectors + plyr->cur_sector;
+	range.x = wrap_angle(plyr->angle - ((float)game->setting->fov / 2));
+	range.y = wrap_angle(plyr->angle + ((float)game->setting->fov / 2));
+	obj = ray(sec, &range, plyr, game);
+	if (obj != NULL)
+		return (obj);
+	return (handle_wall(game, plyr, sec, &range));
 }
