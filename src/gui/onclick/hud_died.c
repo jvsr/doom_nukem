@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/27 12:33:27 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/09 16:39:17 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/13 13:50:52 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void		hud_diedreload(t_game *game, t_transform *gui)
 {
 	(void)gui;
 	delete_map(&game->map);
-	map_init(game);
-	// init_player(game); //TODO Think about how to implement this
 	game->cureventstate->eventstate = hud;
 	set_elem_show_clickable(get_gui_child(game->ui, "hudDied"), FALSE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
