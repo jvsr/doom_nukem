@@ -23,8 +23,9 @@ Error (line 54): define must be a constant value
 Error (line 55): define must be a constant value
 --
 Norme: ./includes/rinfo.h
-Error (line 166): Struct s_hitem bad aligned
-Error (line 178): Struct s_hinfo bad aligned
+Error (line 88, col 11): sSize not unixcase
+Error (line 167): Struct s_hitem bad aligned
+Error (line 179): Struct s_hinfo bad aligned
 --
 Norme: ./includes/enemy.h
 Error (line 16): wrong number of spaces in preprocessor indentation
@@ -126,29 +127,22 @@ Norme: ./src/renderer/render_hits.c
 Error (line 61): function render_hits has 26 lines
 --
 Norme: ./src/serializer/read/read_long.c
-Error (line 22): line has 96 characters
-Error (line 23): line has 83 characters
+Error (line 21): line has 83 characters
 --
 Norme: ./src/serializer/read/read_double.c
-Error (line 22): line has 96 characters
-Error (line 23): Empty line
-Error (line 24): line has 85 characters
+Error (line 21): line has 85 characters
 --
 Norme: ./src/serializer/read/read_int.c
-Error (line 22): line has 96 characters
-Error (line 23): line has 82 characters
+Error (line 22): line has 82 characters
 --
 Norme: ./src/serializer/read/read_char.c
-Error (line 22): line has 96 characters
-Error (line 23): line has 83 characters
+Error (line 20): line has 83 characters
 --
 Norme: ./src/serializer/read/read_short.c
-Error (line 22): line has 96 characters
-Error (line 23): line has 84 characters
+Error (line 21): line has 84 characters
 --
 Norme: ./src/serializer/read/read_float.c
-Error (line 22): line has 96 characters
-Error (line 23): line has 84 characters
+Error (line 21): line has 84 characters
 --
 Norme: ./src/serializer/read_map_struct.c
 Error (line 17): C++ comment
@@ -167,7 +161,10 @@ Error (line 30): C++ comment
 Error (line 38): C++ comment
 --
 Norme: ./src/serializer/write_map_struct.c
-Error (line 16): declarations in write_map_struct are bad aligned
+Error (line 16): declarations in write_map_struct must be at the top of the function
+Error (line 18): bad indentation
+Error (line 18): C++ comment
+Error (line 22): C++ comment
 Error (line 23): C++ comment
 Error (line 24): C++ comment
 Error (line 25): C++ comment
@@ -229,4 +226,9 @@ Error (line 72, col 1): no newline after block
 Error (line 77): function map_editor_eventstate has 28 lines
 --
 Norme: ./src/player/raycast_object.c
-Error (line 73): function raycast_object has 32 lines
+Error (line 45): line has 82 characters
+Error (line 45): declarations in ray must be at the top of the function
+Error (line 45): declarations must be followed by one empty line in ray
+Error (line 55, col 12): tmp is instanciated during declaration
+Error (line 57): line has 92 characters
+Error (line 66): function raycast_object has 32 lines
