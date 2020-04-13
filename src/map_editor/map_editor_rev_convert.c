@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 13:09:17 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/13 14:34:14 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 20:22:05 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ static void		add_wall(t_editor_map *m_edit, t_wall *w)
 	w_edit->is_window = w->is_window;
 	w_edit->is_hidden_door = FALSE;
 	w_edit->is_door = w->is_door;
+}
+
+static void		add_object2(t_obj *type, const t_object *o)
+{
+	if (o->img.left[0] == TEXTURE_SKYBOX_DAY)
+		*type = O_SKYBOX_DAY;
+	else if (o->img.left[0] == TEXTURE_SKYBOX_DUSK)
+		*type = O_SKYBOX_DUSK;
 }
 
 static void		add_object(t_editor_map *m_edit, t_list *o_lst)
@@ -53,6 +61,7 @@ static void		add_object(t_editor_map *m_edit, t_list *o_lst)
 		type = O_HEALTH_PICKUP;
 	else if (o->img.left[0] == TEXUTRE_AMMO)
 		type = O_AMMO;
+	add_object2(&type, o);
 	o_edit = map_editor_new_object(m_edit, type, o->pos);
 	if (o_edit == NULL)
 		return ;

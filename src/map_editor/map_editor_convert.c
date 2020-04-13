@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/13 14:56:29 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 18:18:42 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 #include "renderer.h"
 #include "textures.h"
 #include "map_editor.h"
+#include "table.h"
+
+static t_tablepair_ii const	g_objfuncs[] = {
+	{O_CHAIR, new_chair},
+	{O_END, new_end},
+	{O_ENEMY, new_enemy},
+	{O_HEALTH_PICKUP, new_health_pickup},
+	{O_KEY, new_key},
+	{O_SPIKE, new_spike},
+	{O_START, new_start},
+	{O_AMMO, new_ammo},
+	{O_SKYBOX_DAY, new_skybox_day},
+	{O_SKYBOX_DUSK, new_skybox_dusk}
+};
 
 static void		add_walls(t_sector *heads, t_sector *map_s,
 					t_editor_sector *cur_s)
@@ -51,29 +65,18 @@ static void		add_walls(t_sector *heads, t_sector *map_s,
 
 static void		add_objects(t_sector *map_s, t_editor_sector *cur_s)
 {
-	const t_list	*obj = cur_s->objects;
+	size_t const	table_size = sizeof(g_objfuncs) / sizeof(t_tablepair_ii);
+	t_list			*obj;
 	t_editor_object	*cur_obj;
+	t_objcreate		func;
 
 	map_s->object_count = 0;
+	obj = cur_s->objects;
 	while (obj != NULL)
 	{
 		cur_obj = (t_editor_object*)obj->content;
-		if (cur_obj->type == O_CHAIR)
-			new_chair(&cur_obj->pos, 0, map_s);
-		else if (cur_obj->type == O_END)
-			new_end(&cur_obj->pos, map_s);
-		else if (cur_obj->type == O_ENEMY)
-			new_enemy(&cur_obj->pos, map_s);
-		else if (cur_obj->type == O_HEALTH_PICKUP)
-			new_health_pickup(&cur_obj->pos, map_s);
-		else if (cur_obj->type == O_KEY)
-			new_key(&cur_obj->pos, map_s);
-		else if (cur_obj->type == O_SPIKE)
-			new_spike(&cur_obj->pos, map_s);
-		else if (cur_obj->type == O_START)
-			new_start(&cur_obj->pos, map_s);
-		else if (cur_obj->type == O_AMMO)
-			new_ammo(&cur_obj->pos, map_s);
+		func = find_tablepair_ii_value(g_objfuncs, table_size, cur_obj->type);
+		func(&cur_obj->pos, map_s);
 		obj = obj->next;
 	}
 }

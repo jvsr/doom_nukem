@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 16:44:32 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 11:49:23 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 16:45:47 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static int const	g_texobjs[] = {
 	[O_SPIKE] = TEXTURE_SPIKES,
 	[O_START] = TEXTURE_START,
 	[O_END] = TEXTURE_END,
-	[O_AMMO] = TEXUTRE_AMMO
+	[O_AMMO] = TEXUTRE_AMMO,
+	[O_SKYBOX_DAY] = TEXTURE_SKYBOX_DAY,
+	[O_SKYBOX_DUSK] = TEXTURE_SKYBOX_DUSK
 };
 
 t_texture	get_tex_for_obj(t_obj obj)

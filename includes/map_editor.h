@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 12:56:47 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/13 14:55:13 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 18:15:30 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define EDITOR_GRID_START_OFFSET	1
 # define SAVE_LOCATION				"map/custom"
 # define SAVE_NAME					"NewMap"
+# define SHRINK_SIZE				2.0
 
 typedef struct s_transform	t_transform;
 typedef struct s_sector		t_sector;

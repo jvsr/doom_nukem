@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/03/30 14:04:20 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 16:44:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ typedef enum				e_obj
 	O_START,
 	O_END,
 	O_AMMO,
+	O_SKYBOX_DAY,
+	O_SKYBOX_DUSK,
 	O_COUNT
 }							t_obj;
 

@@ -6,11 +6,12 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 15:07:27 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 20:18:47 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/ft_list.h"
+#include "map_editor.h"
 #include "textures.h"
 #include "renderer.h"
 #include "player.h"
@@ -55,6 +56,59 @@ static t_bool	start_end(t_game *game,
 	return (TRUE);
 }
 
+/*
+static t_bool	load_skybox(t_game *game, t_object *obj, t_sector *sec)
+{
+	t_texture	tex;
+
+	if (obj == NULL)
+		return (TRUE);
+	tex = tex_from_anim(game, &obj->img);
+	if (tex == TEXTURE_SKYBOX_DAY || tex == TEXTURE_SKYBOX_DUSK)
+	{
+		sec->has_ceiling = FALSE;
+		game->map->has_skybox = TRUE;
+		game->map->skybox = tex;
+		del_obj(obj, sec);
+		return (FALSE);
+	}
+	return (TRUE);
+}
+*/
+
+static void		shrink(t_map *map)
+{
+	t_uint64	i;
+	t_list		*lst;
+	t_object	*obj;
+	t_wall		*wall;
+	t_uint64	j;
+
+	i = 0;
+	while (i < map->sector_count)
+	{
+		lst = map->sectors[i].objects;
+		while (lst)
+		{
+			obj = lst->content;
+			obj->pos = (t_coord){obj->pos.x / SHRINK_SIZE,
+				obj->pos.y / SHRINK_SIZE};
+			lst = lst->next;
+		}
+		j = 0;
+		while (j < map->sectors[i].wall_count)
+		{
+			wall = &map->sectors[i].walls[j];
+			wall->corner_0 = (t_coord){wall->corner_0.x / SHRINK_SIZE,
+				wall->corner_0.y / SHRINK_SIZE};
+			wall->corner_1 = (t_coord){wall->corner_1.x / SHRINK_SIZE,
+				wall->corner_1.y / SHRINK_SIZE};
+			j++;
+		}
+		i++;
+	}
+}
+
 void			load_map(t_game *game, t_map *map, t_player *plyr)
 {
 	t_uint64	i;
@@ -64,6 +118,7 @@ void			load_map(t_game *game, t_map *map, t_player *plyr)
 
 	delete_map(&game->map);
 	game->map = map;
+	shrink(map);
 	i = 0;
 	plyr->health = PLAYER_MAX_HEALTH;
 	plyr->is_dead = FALSE;

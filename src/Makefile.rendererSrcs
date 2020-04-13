@@ -19,7 +19,8 @@ PREFIX =
 FT_SRCS =
 
 OBJ_SRCS = new_chair new_enemy new_spike new_key new_health_pickup \
-			new_start new_end new_ammo
+			new_start new_end new_ammo new_skybox_day new_skybox_dusk \
+			
 OBJ_SRCS := $(OBJ_SRCS:%=objects/%)
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)

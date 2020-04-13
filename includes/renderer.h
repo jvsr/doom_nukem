@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/13 15:30:40 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/13 17:08:40 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list		t_list;
 typedef struct s_game		t_game;
 typedef struct s_player		t_player;
 typedef enum e_texture		t_texture;
+typedef void (*t_objcreate)(t_coord *pos, t_sector *parent);
 
 typedef struct	s_ybinfo
 {
@@ -85,5 +86,7 @@ t_bool			del_obj(t_object *obj, t_sector *sec);
 t_hinfo			*new_hinfo(t_sector *sec, size_t ar_size, size_t start);
 void			smash_glass(t_game *game, t_wall *glass, t_sector *sec);
 void			render_fc(t_rinfo *rin, t_hinfo *info);
+t_object		*new_skybox_day(t_coord *pos, t_sector *parent);
+t_object		*new_skybox_dusk(t_coord *pos, t_sector *parent);
 
 #endif
