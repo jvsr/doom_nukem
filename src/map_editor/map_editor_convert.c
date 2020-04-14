@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/14 17:03:14 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:54:01 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void		fill_sector_default(t_sector *m_s, t_list **tmp)
 	m_s->floor = 0;
 	m_s->floor_tex = TEXTURE_QUARTZ;
 	m_s->ceil = 60;
-	m_s->ceil_tex = TEXTURE_QUARTZ;
+	m_s->ceil_tex = TEXTURE_ROCKS;
 	m_s->has_ceiling = TRUE;
 	m_s->f_enter = NULL;
 	m_s->f_exit = NULL;
