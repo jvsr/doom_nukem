@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/27 13:46:04 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/13 13:45:08 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 21:04:11 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		init_player(t_game *game)
 	game->player->height = PLAYER_HEIGHT;
 	game->player->health = PLAYER_MAX_HEALTH;
 	game->player->mag = (t_mag){cosf(0), sinf(0)};
-	game->player->ammo = 1000;
+	game->player->ammo = 15;
 }
 
 static void		init_threadpool(t_game *game)
