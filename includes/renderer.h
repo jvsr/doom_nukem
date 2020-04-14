@@ -28,7 +28,7 @@ typedef struct s_list		t_list;
 typedef struct s_game		t_game;
 typedef struct s_player		t_player;
 typedef enum e_texture		t_texture;
-typedef void (*t_objcreate)(t_coord *pos, t_sector *parent);
+typedef void				(*t_objcreate)(t_coord *pos, t_sector *parent);
 
 typedef struct	s_ybinfo
 {

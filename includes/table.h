@@ -33,7 +33,6 @@ typedef struct	s_tablepair_ii
 	void *const	value;
 }				t_tablepair_ii;
 
-
 char const		*find_tablepair_id(t_tablepair const *table, size_t table_size,
 					void const *value);
 void const		*find_tablepair_value(t_tablepair const *table,
