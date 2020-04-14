@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:15:51 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/13 13:41:49 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 20:35:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "types.h"
 # include <SDL2/SDL_surface.h>
 
-# define MAX_LIGHT_DIST 150.0
+# define MAX_LIGHT_DIST 300.0
 # define LEVEL_MULTIPLIER 4.0
 # define LEVEL_MULTIPLIER_P2 16.0
 # define MAX_OBJ_SECTORS 32
