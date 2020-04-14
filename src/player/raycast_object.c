@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 14:05:13 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/14 14:17:51 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ t_object		*handle_wall(t_game *game, t_player *plyr, t_sector *sec,
 		if (obj != NULL)
 			return (obj);
 		wall = wall_ray(cur, sec, plyr, (t_bool[2]){TRUE, FALSE});
+		if (wall == NULL)
+			break;
 		if (wall->is_window)
 			smash_glass(game, wall, sec);
 		sec = cur;
