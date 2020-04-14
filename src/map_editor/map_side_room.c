@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/03 12:33:09 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 14:23:46 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 14:59:01 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ t_list			*get_room(t_list *trail,
 			ft_lstdel(&most, NULL);
 		ft_lstdel(&dup, NULL);
 	}
+	ft_lstdel(&cons, NULL);
 	return (ret);
 }
