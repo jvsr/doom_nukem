@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/14 17:50:42 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 21:13:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_object		*handle_wall(t_game *game, t_player *plyr, t_sector *sec,
 		obj = ray(cur, range, plyr, game);
 		if (obj != NULL)
 			return (obj);
-		wall = wall_ray(cur, sec, plyr, (t_bool[2]){TRUE, FALSE});
+		wall = wall_ray(cur, sec, plyr, (t_bool[2]){FALSE, FALSE});
 		if (wall == NULL)
 			break ;
 		if (wall->is_window)
