@@ -35,11 +35,6 @@ LIBFT_DISABLE_GCOV = FALSE
 MAKEINCLUDES = includes/
 include $(MAKEINCLUDES)/Makefile.color
 
-# Tests info
-TESTPATH = tests
-TESTNAME = libtest
-TEST = $(TESTPATH)/$(TESTNAME)
-
 # Sublib info
 SUBLIBSPATH = .sublibs
 SUBLIBS := $(sort $(SUBLIBS))
@@ -79,18 +74,6 @@ $(NAME): $(SUBLIBS)
 	@rm -f $(NAME)
 	@ar rcs $(NAME) $(OBJS)
 
-# Run test and gcov if $(GCOV)==TRUE
-test: $(NAME) FORCE
-ifeq ($(wildcard $(TESTPATH)),)
-	@echo "Error: $(TESTPATH) not present"
-else
-	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) OBJS="$(OBJS:src/%=../src/%)"
-	@./$(TEST)
-ifeq ($(GCOV)_$(LIBFT_DISABLE_GCOV), TRUE_FALSE)
-	@$(SUBLIBS_GCOV)
-endif
-endif
-
 # Compile $(SUBLIBS)
 src/$(SUBLIBSPATH)/%.content: FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
@@ -118,4 +101,4 @@ re: fclean
 
 FORCE: ;
 
-.PHONY: all test clean fclean re FORCE
+.PHONY: all clean fclean re FORCE

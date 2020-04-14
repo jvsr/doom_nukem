@@ -38,11 +38,6 @@ LIBFT_DISABLE_GCOV = TRUE
 MAKEINCLUDES = includes/libft
 include $(MAKEINCLUDES)/Makefile.color
 
-# Tests info
-TESTPATH = tests
-TESTNAME = doomtest
-TEST = $(TESTPATH)/$(TESTNAME)
-
 # Libft info
 LIBPATH = libft
 LIB = $(LIBPATH)/libft.a
@@ -123,18 +118,6 @@ $(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
 	@gcc -g -coverage $(CCOPTIMISE) -o $(NAME) $(OBJS) $(LIBS)
 	@bash pack_textures.bash
 
-# Run test and gcov if $(GCOV)==TRUE
-test: $(LIB) $(SUBLIBS) FORCE
-ifeq ($(wildcard $(TESTPATH)),)
-	@echo "Error: $(TESTPATH) not present"
-else
-	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) OBJS="$(OBJS:src/%=../src/%)"
-	@./$(TEST)
-ifeq ($(GCOV), TRUE)
-	@$(SUBLIBS_GCOV)
-endif
-endif
-
 # Create required $(DATAPATH)
 $(DATAPATH):
 	@mkdir -p $(DATAPATH)
@@ -157,6 +140,7 @@ ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif
 	@$(SUBLIBS_CLEAN)
+	@$(MAKE) -s -e -C $(LIBPATH) clean
 
 # Clean all .content files
 fclean: clean
@@ -167,23 +151,12 @@ ifneq ($(FCLEAN),)
 	@$(call FNC_PRINT_DEL,$(NAME),fclean $(FCLEAN:src/$(SUBLIBSPATH)/%=%))
 	@rm -f $(NAME) $(SUBLIBS)
 endif
-
-# Clean $(LIB)
-clean_lib:
-	@$(MAKE) -s -e -C $(LIBPATH) clean
-
-# Fclean $(LIB)
-fclean_lib: clean_lib
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
 
 # Recompile only the project
 re: fclean
 	@$(MAKE)
 
-# Recompile the $(LIB) and project
-re_all: fclean_lib fclean
-	@$(MAKE)
-
 FORCE: ;
 
-.PHONY: all test clean fclean re FORCE
+.PHONY: all clean fclean re FORCE
