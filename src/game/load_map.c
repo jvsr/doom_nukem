@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/13 20:35:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 13:57:22 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ static t_bool	load_skybox(t_game *game, t_object *obj,
 		sec->has_ceiling = FALSE;
 		game->map->has_skybox = TRUE;
 		game->map->skybox = tex;
+		del_obj(obj, sec);
+		return (FALSE);
+	}
+	if (tex == TEXTURE_SLOPE)
+	{
+		sec->angle = 15;
+		sec->has_slope = TRUE;
+		sec->swall = &sec->walls[0];
 		del_obj(obj, sec);
 		return (FALSE);
 	}
