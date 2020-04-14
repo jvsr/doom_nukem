@@ -6,7 +6,7 @@
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/22 19:01:54 by pholster      #+#    #+#                 */
-/*   Updated: 2020/04/13 20:36:54 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:07:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void			load_map(t_game *game, t_map *map, t_player *plyr);
 void			loader(t_game *game);
 void			quit(int exit_code);
 int				get_sec_num(t_map *map, t_sector *sec);
+void			shrink(t_map *map);
 
 #endif

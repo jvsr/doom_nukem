@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/10 14:53:49 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:46:36 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:09:46 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ typedef enum				e_texture
 	TEXTURE_END,
 	TEXUTRE_AMMO,
 	TEXTURE_SLOPE,
+	TEXTURE_CPLUS,
+	TEXTURE_CMINUS,
+	TEXTURE_FPLUS,
+	TEXTURE_FMINUS,
 	TEXTURE_ENEMY0_F0,
 	TEXTURE_ENEMY0_F1,
 	TEXTURE_ENEMY0_F2,
@@ -107,6 +111,10 @@ typedef enum				e_obj
 	O_SKYBOX_DAY,
 	O_SKYBOX_DUSK,
 	O_SLOPE,
+	O_CPLUS,
+	O_CMINUS,
+	O_FPLUS,
+	O_FMINUS,
 	O_COUNT
 }							t_obj;
 

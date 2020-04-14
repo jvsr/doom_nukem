@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/01 12:20:53 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/14 13:50:13 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:03:14 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ static t_tablepair_ii const	g_objfuncs[] = {
 	{O_AMMO, new_ammo},
 	{O_SKYBOX_DAY, new_skybox_day},
 	{O_SKYBOX_DUSK, new_skybox_dusk},
-	{O_SLOPE, new_slope}
+	{O_SLOPE, new_slope},
+	{O_CPLUS, new_cplus},
+	{O_CMINUS, new_cminus},
+	{O_FPLUS, new_fplus},
+	{O_FMINUS, new_fminus}
 };
 
 static void		add_walls(t_sector *heads, t_sector *map_s,

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 13:09:17 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/13 20:22:05 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:09:36 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ static void		add_object2(t_obj *type, const t_object *o)
 		*type = O_SKYBOX_DAY;
 	else if (o->img.left[0] == TEXTURE_SKYBOX_DUSK)
 		*type = O_SKYBOX_DUSK;
+	else if (o->img.left[0] == TEXTURE_SLOPE)
+		*type = O_SLOPE;
+	else if (o->img.left[0] == TEXTURE_CPLUS)
+		*type = O_CPLUS;
+	else if (o->img.left[0] == TEXTURE_CMINUS)
+		*type = O_CMINUS;
+	else if (o->img.left[0] == TEXTURE_FPLUS)
+		*type = O_FPLUS;
+	else if (o->img.left[0] == TEXTURE_FMINUS)
+		*type = O_FMINUS;
 }
 
 static void		add_object(t_editor_map *m_edit, t_list *o_lst)
