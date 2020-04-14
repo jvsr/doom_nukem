@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 15:05:27 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 12:55:08 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 20:17:26 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void		click_on_door(t_player *plyr, t_map *map)
 	plyr->keys--;
 	ray->is_door = FALSE;
 	ray->is_portal = TRUE;
+	ray->texture.left[0] = TEXTURE_BRICK_WALL;
 }
