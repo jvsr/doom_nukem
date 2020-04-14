@@ -43,6 +43,7 @@
           - texture: ui/arrow_right.tga
           - onclick: map_editor_object_next
     - button: mapEditorSaveButton
+      - layer: 1
       - pos: 0.2, 0.2
       - dim: 0.6, 0.05
       - text: "Save File"
