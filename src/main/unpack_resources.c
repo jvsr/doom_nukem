@@ -80,6 +80,7 @@ void		makedir_r(const char *name)
 		mkdir(path, 0770);
 		i++;
 	}
+	ft_strarrdel(&arr);
 }
 
 void		read_file(const int fd, off_t *offset, const char *name,
@@ -122,7 +123,10 @@ void		unpack_resources(t_game *game)
 	{
 		name = read_name(fd, &offset, game->exec_path);
 		if (ft_strequ(name, game->exec_path))
-			return ;
+		{
+			free(name);
+			break ;
+		}
 		size = read_size(fd, &offset);
 		read_file(fd, &offset, name, size);
 		free(name);
