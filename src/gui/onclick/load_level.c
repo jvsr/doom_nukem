@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 19:04:08 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/13 15:50:40 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/14 17:38:46 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	load_level(t_game *game, t_transform *gui)
 	t_map	*map;
 	char	full_path[PATH_MAX];
 
+	if (ft_strisempty(gui->gui_elem.button->text->text))
+		return ;
 	if (get_focus(game))
 		ft_strcpy(full_path, SELECT_CAMPAIGN_PATH);
 	else
