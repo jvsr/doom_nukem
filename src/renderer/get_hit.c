@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/17 18:15:20 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 11:08:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:33:32 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ t_hit	get_hit(t_coord *cosin,
 	{
 		if (!(prev != NULL && walls[i].is_portal && walls[i].window == prev) &&
 			get_collision(&player->pos, cosin,
-							(t_coord[2]){walls[i].corner_0, walls[i].corner_1},
-							&val))
+			(t_coord[2]){walls[i].corner_0, walls[i].corner_1}, &val))
 		{
 			dist = get_distance(&player->pos, &val);
 			if (dist < hit.dist)
