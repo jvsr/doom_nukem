@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/24 16:30:23 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:54:26 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 16:52:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static size_t	load_plain_textures(t_game *game, size_t tex_count)
 		"objs/chair_front", "objs/chair_left", "objs/chair_right",
 		"bloodsplatter", "quartz", "objs/health_pickup", "objs/key", "glass",
 		"spike-ball", "rocks", "door", "start_flag", "end_flag", "ammo",
-		"slope", NULL
+		"slope", "c+", "c-", "f+", "f-", NULL
 	};
 	while (texture_files[i] != NULL && tex_count + i < TEXTURE_ENEMY0_F0)
 	{

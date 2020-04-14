@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/14 13:57:22 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:20:09 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,31 @@
 #include "player.h"
 #include "rinfo.h"
 #include "game.h"
+
+static t_bool	load_fc(t_object *obj, t_sector *sec, t_texture tex)
+{
+	if (tex == TEXTURE_CMINUS)
+	{
+		if (sec->floor < sec->ceil - 7.5)
+			sec->ceil -= 2.5;
+		del_obj(obj, sec);
+		return (FALSE);
+	}
+	if (tex == TEXTURE_FPLUS)
+	{
+		if (sec->floor + 2.5 < sec->ceil - 5)
+			sec->floor += 2.5;
+		del_obj(obj, sec);
+		return (FALSE);
+	}
+	if (tex == TEXTURE_FMINUS)
+	{
+		sec->floor -= 2.5;
+		del_obj(obj, sec);
+		return (FALSE);
+	}
+	return (TRUE);
+}
 
 static t_bool	load_skybox(t_game *game, t_object *obj,
 					t_sector *sec, t_texture tex)
@@ -37,7 +62,13 @@ static t_bool	load_skybox(t_game *game, t_object *obj,
 		del_obj(obj, sec);
 		return (FALSE);
 	}
-	return (TRUE);
+	if (tex == TEXTURE_CPLUS)
+	{
+		sec->ceil += 2.5;
+		del_obj(obj, sec);
+		return (FALSE);
+	}
+	return (load_fc(obj, sec, tex));
 }
 
 static t_bool	start_end(t_game *game,
@@ -62,42 +93,6 @@ static t_bool	start_end(t_game *game,
 		return (FALSE);
 	}
 	return (load_skybox(game, obj, sec, tex));
-}
-
-static void		shrinkwall(t_wall *wall)
-{
-	wall->corner_0 = (t_coord){wall->corner_0.x / SHRINK_SIZE,
-		wall->corner_0.y / SHRINK_SIZE};
-	wall->corner_1 = (t_coord){wall->corner_1.x / SHRINK_SIZE,
-		wall->corner_1.y / SHRINK_SIZE};
-}
-
-static void		shrink(t_map *map)
-{
-	t_uint64	i;
-	t_list		*lst;
-	t_object	*obj;
-	t_uint64	j;
-
-	i = 0;
-	while (i < map->sector_count)
-	{
-		lst = map->sectors[i].objects;
-		while (lst)
-		{
-			obj = lst->content;
-			obj->pos = (t_coord){obj->pos.x / SHRINK_SIZE,
-				obj->pos.y / SHRINK_SIZE};
-			lst = lst->next;
-		}
-		j = 0;
-		while (j < map->sectors[i].wall_count)
-		{
-			shrinkwall(&map->sectors[i].walls[j]);
-			j++;
-		}
-		i++;
-	}
 }
 
 void			load_map(t_game *game, t_map *map, t_player *plyr)

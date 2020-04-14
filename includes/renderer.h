@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 16:59:14 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:49:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 16:59:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ t_object		*new_ammo(t_coord *pos, t_sector *parent);
 t_object		*new_slope(t_coord *pos, t_sector *parent);
 t_object		*new_skybox_day(t_coord *pos, t_sector *parent);
 t_object		*new_skybox_dusk(t_coord *pos, t_sector *parent);
+t_object		*new_fminus(t_coord *pos, t_sector *parent);
+t_object		*new_fplus(t_coord *pos, t_sector *parent);
+t_object		*new_cplus(t_coord *pos, t_sector *parent);
+t_object		*new_cminus(t_coord *pos, t_sector *parent);
 void			free_sector(t_sector *sector);
 void			free_obj(void *obj, size_t size);
 void			free_wall(t_wall *wall);
