@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/09 11:34:39 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/09 12:21:40 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 21:39:38 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ void			smash_glass(t_game *game, t_wall *glass, t_sector *sec)
 
 	o_glass = get_opposite(glass, sec);
 	if (o_glass != NULL)
+	{
 		o_glass->is_window = FALSE;
+		o_glass->is_portal = TRUE;
+		o_glass->is_door = FALSE;
+	}
 	glass->is_window = FALSE;
+	glass->is_portal = TRUE;
+	glass->is_door = FALSE;
 	play_sound(game->audio_man, "window_shatter");
 }
