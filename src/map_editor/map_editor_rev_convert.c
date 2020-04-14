@@ -26,8 +26,11 @@ static void		add_wall(t_editor_map *m_edit, t_wall *w)
 		return ;
 	w_edit->is_portal = w->is_portal;
 	w_edit->is_window = w->is_window;
-	w_edit->is_hidden_door = FALSE;
 	w_edit->is_door = w->is_door;
+	if (w_edit->is_door && w->texture.left[0] == TEXTURE_BRICK_WALL)
+		w_edit->is_hidden_door = TRUE;
+	else
+		w_edit->is_hidden_door = FALSE;
 }
 
 static void		add_object2(t_obj *type, const t_object *o)
