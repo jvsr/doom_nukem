@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/10 15:17:25 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 15:31:16 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 20:26:15 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	change_door(t_wall *wall, t_sector *wsec)
 		{
 			tmp->is_door = FALSE;
 			tmp->is_portal = TRUE;
+			tmp->texture.left[0] = TEXTURE_BRICK_WALL;
 		}
 		i++;
 	}
