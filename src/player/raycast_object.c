@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/14 14:17:51 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 17:50:42 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ t_object		*handle_wall(t_game *game, t_player *plyr, t_sector *sec,
 
 	cur = sec;
 	wall = raycast_wall(sec, plyr, FALSE, FALSE);
-	if (wall == NULL)
+	if (wall == NULL || wall->is_portal == FALSE)
 		return (NULL);
 	if (wall->is_window)
 		smash_glass(game, wall, sec);
-	if (wall->is_portal == FALSE)
-		return (NULL);
 	while (wall->is_portal == TRUE)
 	{
 		obj = ray(cur, range, plyr, game);
@@ -84,7 +82,7 @@ t_object		*handle_wall(t_game *game, t_player *plyr, t_sector *sec,
 			return (obj);
 		wall = wall_ray(cur, sec, plyr, (t_bool[2]){TRUE, FALSE});
 		if (wall == NULL)
-			break;
+			break ;
 		if (wall->is_window)
 			smash_glass(game, wall, sec);
 		sec = cur;
