@@ -6,10 +6,11 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/29 13:13:15 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/10 14:16:57 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 14:36:08 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/ft_str.h"
 #include "libft/ft_mem.h"
 #include "serializer.h"
 #include "player.h"
@@ -18,6 +19,7 @@
 t_object	*read_obj(t_binary_read *bin_r)
 {
 	t_object	*obj;
+	char		*str;
 
 	obj = ft_memalloc(sizeof(t_object));
 	if (obj == NULL)
@@ -28,7 +30,9 @@ t_object	*read_obj(t_binary_read *bin_r)
 	obj->is_enemy = (t_bool)read_char(bin_r);
 	obj->col_radius = read_float(bin_r);
 	obj->can_col = (t_bool)read_char(bin_r);
-	obj->on_collide = get_col_from_name(read_string(bin_r));
+	str = read_string(bin_r);
+	obj->on_collide = get_col_from_name(str);
+	ft_strdel(&str);
 	if (obj->is_enemy)
 		read_enemy(obj, bin_r);
 	if (obj->img.left[0] == TEXTURE_SPIKES)
