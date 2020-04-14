@@ -100,8 +100,8 @@ static t_bool	add_to_back(t_editor_map *editor_map, t_list *new)
 	ft_bzero(&intersect_walls, sizeof(t_editor_wall*) * 2);
 	while (lst != NULL)
 	{
-		if (check_collision_valid(new_wall, lst->content, intersect_walls) &&
-			check_coincident_valid(new_wall, lst->content) == FALSE)
+		if (!check_collision_valid(new_wall, lst->content, intersect_walls) ||
+			!check_coincident_valid(new_wall, lst->content))
 			return (FALSE);
 		if (lst->next == NULL)
 			break ;
