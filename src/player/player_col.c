@@ -23,19 +23,18 @@
 #include <stdio.h>
 #include <limits.h>
 
-static void	player_move_col(t_uint8 col, t_player *player,
-																t_tricoord pos)
+static void	move_col(t_uint8 col, t_coord *new_pos, t_tricoord pos)
 {
 	if (col == 0)
-		ft_memcpy(&(player->pos), &pos.xy, sizeof(pos.xy));
+		ft_memcpy(new_pos, &pos.xy, sizeof(pos.xy));
 	else
 	{
 		if ((col & 3) == 0)
-			ft_memcpy(&(player->pos), &pos.x, sizeof(pos.x));
+			ft_memcpy(new_pos, &pos.x, sizeof(pos.x));
 		else if ((col & 1) == 0)
-			ft_memcpy(&(player->pos), &pos.x, sizeof(pos.x));
+			ft_memcpy(new_pos, &pos.x, sizeof(pos.x));
 		else if ((col & 2) == 0)
-			ft_memcpy(&(player->pos), &pos.y, sizeof(pos.y));
+			ft_memcpy(new_pos, &pos.y, sizeof(pos.y));
 	}
 }
 
@@ -73,6 +72,7 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 {
 	t_tricoord	pos;
 	t_uint8		col;
+	t_coord		new_pos;
 	t_uint32	next_sector;
 	t_map		*map;
 	t_player	*player;
@@ -87,9 +87,11 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	check_objects(game, &col, pos);
 	if (col == 7)
 		return (FALSE);
-	player_move_col(col, player, pos);
-	next_sector = player_get_sector(player, game->map, &player->pos);
-	if (switch_sector(game, map, player, next_sector) == FALSE)
+	move_col(col, &new_pos, pos);
+	next_sector = player_get_sector(player, game->map, &new_pos);
+	if (next_sector != player->cur_sector &&
+		switch_sector(game, map, player, next_sector) == FALSE)
 		return (FALSE);
+	move_col(col, &player->pos, pos);
 	return (TRUE);
 }
