@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/15 13:49:00 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 19:28:54 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static t_bool	start_end(t_game *game,
 	if (tex == TEXTURE_END)
 	{
 		sec->f_enter = win_enter;
+		obj->on_collide = end_col;
 		return (TRUE);
 	}
 	return (load_skybox(game, obj, sec, tex));

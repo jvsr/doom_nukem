@@ -24,7 +24,8 @@ FT_SRCS =
 ON_EN_SRCS = win_enter
 ON_EN_SRCS := $(ON_EN_SRCS:%=on_enter/%)
 
-COL_SRCS = health_pickup key_pickup spike_damage get_col_func ammo_pickup
+COL_SRCS = health_pickup key_pickup spike_damage get_col_func ammo_pickup \
+			end_col
 COL_SRCS := $(COL_SRCS:%=col_funcs/%)
 
 SRCS = \

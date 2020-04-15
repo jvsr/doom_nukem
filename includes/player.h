@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/15 18:49:30 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 19:23:41 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ t_bool			move_left(t_player *player, float speed,
 					float *xspeed, float *yspeed);
 t_bool			move_right(t_player *player, float speed,
 					float *xspeed, float *yspeed);
+void			end_col(t_game *game,
+					t_sector *sec, t_object *obj, t_player *player);
 t_bool			move_jump(t_game *game, t_player *player, t_bool *jump);
 t_bool			move_down(t_game *game, t_player *player, t_bool *jump);
 t_bool			fly_up(t_game *game, t_player *player, t_bool *jump);
