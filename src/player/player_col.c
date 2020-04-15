@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/15 17:40:13 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 18:49:40 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	if (col == 7)
 		return (FALSE);
 	player_move_col(col, player, pos);
-	next_sector = player_get_sector(player, game->map);
+	next_sector = player_get_sector(player, game->map, &player->pos);
 	if (switch_sector(game, map, player, next_sector) == FALSE)
 		return (FALSE);
 	return (TRUE);

@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/09 16:16:11 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/15 17:37:22 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 18:49:30 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,6 @@ t_wall			*wall_ray(t_sector *secs,
 					t_sector *prv, t_player *plyr, t_bool *ip);
 t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr);
 void			player_shoot(t_game *game, t_player *plyr);
-t_uint32		player_get_sector(t_player *plyr, t_map *map);
+t_uint32		player_get_sector(t_player *plyr, t_map *map, t_coord *pos);
 
 #endif

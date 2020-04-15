@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/15 17:13:47 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/15 17:54:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 18:49:14 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,17 @@
 #include "rinfo.h"
 #include "cmath.h"
 
-static t_bool	check_cur(t_player *plyr, t_sector *cur)
+static t_bool	check_cur(t_coord *pos, t_sector *cur)
 {
-	t_coord		mag;
 	t_uint64	i;
 	t_uint64	j;
 	t_coord		vec;
 
 	i = 0;
 	j = 0;
-	mag = (t_coord){plyr->mag.cos, plyr->mag.sin};
 	while (i < cur->wall_count)
 	{
-		if (get_collision(&plyr->pos, &mag,
+		if (get_collision(pos, &(t_coord){cos(90), sin(90)},
 			(t_coord[2]){cur->walls[i].corner_0, cur->walls[i].corner_1}, &vec))
 			j++;
 		i++;
@@ -59,7 +57,7 @@ static t_uint32	ret(t_list *lst, t_sector *sec, t_map *map)
 	return (get_sector_id(map, sec));
 }
 
-static t_uint32	second_layer(t_list *lst, t_map *map, t_player *plyr)
+static t_uint32	second_layer(t_list *lst, t_map *map, t_coord *pos)
 {
 	t_list	*secs;
 	t_list	*s0;
@@ -72,7 +70,7 @@ static t_uint32	second_layer(t_list *lst, t_map *map, t_player *plyr)
 		s1 = s0;
 		while (s1)
 		{
-			if (check_cur(plyr, s1->content))
+			if (check_cur(pos, s1->content))
 			{
 				ft_lstdel(&lst, NULL);
 				return (ret(s0, s1->content, map));
@@ -83,23 +81,23 @@ static t_uint32	second_layer(t_list *lst, t_map *map, t_player *plyr)
 		secs = secs->next;
 	}
 	ft_lstdel(&secs, NULL);
-	return (plyr->cur_sector);
+	return (0);
 }
 
-t_uint32		player_get_sector(t_player *plyr, t_map *map)
+t_uint32		player_get_sector(t_player *plyr, t_map *map, t_coord *pos)
 {
 	t_list	*secs;
 	t_list	*tmp;
 
-	if (check_cur(plyr, &map->sectors[plyr->cur_sector]))
+	if (check_cur(pos, &map->sectors[plyr->cur_sector]))
 		return (plyr->cur_sector);
 	secs = get_connected(&map->sectors[plyr->cur_sector]);
 	tmp = secs;
 	while (tmp)
 	{
-		if (check_cur(plyr, tmp->content))
+		if (check_cur(pos, tmp->content))
 			return (ret(secs, tmp->content, map));
 		tmp = tmp->next;
 	}
-	return (second_layer(secs, map, plyr));
+	return (second_layer(secs, map, pos));
 }
