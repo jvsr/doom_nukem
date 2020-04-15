@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/14 17:20:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 13:20:16 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ static t_bool	start_end(t_game *game,
 	if (tex == TEXTURE_END)
 	{
 		sec->f_enter = win_enter;
-		del_obj(obj, sec);
-		return (FALSE);
+		return (TRUE);
 	}
 	return (load_skybox(game, obj, sec, tex));
 }
@@ -108,6 +107,7 @@ void			load_map(t_game *game, t_map *map, t_player *plyr)
 	i = 0;
 	plyr->health = PLAYER_MAX_HEALTH;
 	plyr->is_dead = FALSE;
+	plyr->ammo = 15;
 	while (i < map->sector_count)
 	{
 		j = 0;

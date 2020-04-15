@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/02 11:24:04 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/02 11:27:37 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 13:19:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_object		*new_end(t_coord *pos, t_sector *parent)
 	if (obj == NULL)
 		error_msg_errno("Unable to allocate start");
 	ft_memcpy(&obj->pos, pos, sizeof(t_coord));
-	obj->size = (t_coord){4, 4};
+	obj->size = (t_coord){4, 8};
 	obj->img = single_init(TEXTURE_END, obj);
 	obj->is_enemy = FALSE;
 	obj->can_col = FALSE;
