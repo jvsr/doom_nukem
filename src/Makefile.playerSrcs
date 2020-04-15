@@ -44,5 +44,5 @@ SRCS = \
 	click_on_door \
 	raycast_object \
 	player_shoot \
-	
+	player_get_sector
 

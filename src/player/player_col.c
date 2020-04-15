@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 17:24:34 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 12:55:23 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 17:40:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_uint32	check_col(t_game *game, t_player *player, t_uint8 *col,
 		ft_lstdel(&portals, NULL);
 		return (UINT32_MAX);
 	}
-	check_portals(game, col, &portals, (t_col){coord, &p_sec, &next_sector});
+	// check_portals(game, col, &portals, (t_col){coord, &p_sec, &next_sector});
 	if (*col == 7)
 	{
 		player->cur_sector = temp;
@@ -149,5 +149,6 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	&& switch_sector(game, map, player, next_sector) == FALSE)
 		return (FALSE);
 	player_move_col(col, player, pos);
+	player->cur_sector = player_get_sector(player, map);
 	return (TRUE);
 }
