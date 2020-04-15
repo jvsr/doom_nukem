@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:06:05 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 12:55:50 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 12:33:07 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ammo_pickup(t_game *game,
 
 	(void)game;
 	player->ammo += ammo_add;
-	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(obj));
+	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(t_object));
 	ft_lstunlink(&sec->objects, lst);
 	if (lst == NULL)
 		return ;

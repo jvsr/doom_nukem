@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:54:16 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/14 21:52:46 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/14 22:09:19 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			enemy_move(t_game *game)
 		while (j < map->sectors[i].object_count)
 		{
 			obj = ft_lstindex(map->sectors[i].objects, j)->content;
-			if (obj != NULL && check_enemy(game, obj))
+			if (obj != NULL && obj->data != NULL && check_enemy(game, obj))
 				move_enemy(obj, &map->sectors[i],
 					get_angle_between_points(&obj->pos, &game->player->pos),
 					(float)game->lastframe);

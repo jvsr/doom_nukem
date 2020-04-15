@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/14 15:20:57 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/06 12:55:52 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 12:33:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	key_pickup(t_game *game,
 
 	(void)game;
 	player->keys++;
-	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(obj));
+	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(t_object));
 	if (lst == NULL)
 		return ;
 	ft_lstunlink(&sec->objects, lst);
+	if (lst == NULL)
+		return ;
 	ft_lstdelone(&lst, NULL);
 	sec->object_count--;
 	free(obj);

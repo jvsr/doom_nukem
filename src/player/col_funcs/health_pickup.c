@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:03:32 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 12:55:54 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 12:32:56 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	health_pickup(t_game *game,
 		player->health = PLAYER_MAX_HEALTH;
 	else
 		player->health += health_add;
-	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(obj));
+	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(t_object));
 	ft_lstunlink(&sec->objects, lst);
 	if (lst == NULL)
 		return ;
