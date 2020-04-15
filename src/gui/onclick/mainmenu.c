@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/15 17:02:43 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 12:14:09 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 16:02:50 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	mainmenu_missions(t_game *game, t_transform *gui)
 	t_transform	*elem;
 
 	(void)gui;
+	remove_maps(game);
 	load_missions(game);
 	elem = get_gui_child(game->ui, "missionsMenu");
 	set_elem_show_clickable(elem, TRUE);
