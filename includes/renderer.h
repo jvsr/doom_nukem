@@ -24,6 +24,8 @@
 # define CEILING_COLOR 0xFFFFFFF0
 # define FLOOR_COLOR 0xFFF4EEB1
 
+# define RENDER_THREADS 1
+
 typedef struct s_list		t_list;
 typedef struct s_game		t_game;
 typedef struct s_player		t_player;

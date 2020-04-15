@@ -95,11 +95,11 @@ void		render(t_game *game, SDL_Surface *dst)
 	game->player->screen_updown = game->player->updown * dst->h;
 	i = 0;
 	tasks = NULL;
-	step = dst->w / 7;
+	step = dst->w / RENDER_THREADS;
 	bound = (SDL_Point){0, step};
-	while (i < 7)
+	while (i < RENDER_THREADS)
 	{
-		if (i == 6)
+		if (i == (RENDER_THREADS - 1))
 			bound.y = dst->w;
 		new = sdl_new_ttask(render_chunk, TFLAG_TASK_NO_DELETE,
 			4, game, dst, (size_t)bound.x, (size_t)bound.y);
