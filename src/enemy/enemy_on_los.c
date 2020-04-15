@@ -23,7 +23,7 @@ void	shooty_func(t_game *game, t_object *obj, t_player *plr)
 	enemy->last_seen += game->lastframe;
 	if (enemy->last_seen > 2000)
 	{
-		damage_player(game, plr, 1);
+		damage_player(game, plr, 2);
 		play_sound(game->audio_man, "singleshot");
 		enemy->last_seen = 0;
 	}
