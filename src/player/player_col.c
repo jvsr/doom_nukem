@@ -90,6 +90,6 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	if (next_sector != player->cur_sector &&
 		switch_sector(game, game->map, player, next_sector) == FALSE)
 		return (FALSE);
-	ft_memcpy(&player->pos, &new_pos);
+	ft_memcpy(&player->pos, &new_pos, sizeof(t_coord));
 	return (TRUE);
 }
