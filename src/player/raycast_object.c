@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 14:19:41 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/14 21:13:17 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 21:47:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_object	*ray(t_sector *sec, t_coord *range, t_player *plyr,
 	while (lst != NULL)
 	{
 		i = get_object_angle_on_screen(lst->content, plyr, range);
-		if (i != -1)
+		if (i != -1 && ((t_object*)lst->content)->can_col)
 			if (collides(lst->content, game->surface))
 				obj = get_closer(lst->content, obj, plyr);
 		lst = lst->next;
