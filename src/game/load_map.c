@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 09:47:55 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/15 13:20:16 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 13:49:00 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void			load_map(t_game *game, t_map *map, t_player *plyr)
 	plyr->health = PLAYER_MAX_HEALTH;
 	plyr->is_dead = FALSE;
 	plyr->ammo = 15;
+	plyr->keys = 0;
 	while (i < map->sector_count)
 	{
 		j = 0;
