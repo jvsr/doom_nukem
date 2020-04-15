@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/15 17:13:47 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/15 17:50:31 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 17:54:52 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ static t_uint32	second_layer(t_list *lst, t_map *map, t_player *plyr)
 	printf("length %zu\n", ft_lstlen(lst));
 	while (secs)
 	{
-		if (check_cur(plyr, secs->content))
-			return (ret(lst, secs->content, map));
 		s0 = get_connected(secs->content);
 		printf("Length2 %zu\n", ft_lstlen(s0));
 		s1 = s0;
@@ -96,6 +94,7 @@ t_uint32		player_get_sector(t_player *plyr, t_map *map)
 {
 	t_list	*secs;
 	t_list	*tmp;
+	t_list	*lst;
 
 	if (check_cur(plyr, &map->sectors[plyr->cur_sector]))
 		return (plyr->cur_sector);
