@@ -64,42 +64,18 @@ void			check_wall_col(t_tricoord coord, t_player *player,
 		*col |= 4;
 }
 
-static void		add_wall(t_wall *wall, t_list **portals)
-{
-	t_list		*new_wall;
-
-	new_wall = ft_lstnew(wall, sizeof(t_wall*));
-	if (new_wall == NULL)
-		error_msg_errno("Failed to alloc New Wall");
-	ft_lstadd(portals, new_wall);
-}
-
-t_list			*check_walls(t_game *game, t_uint8 *col, t_tricoord coord,
-														t_uint32 prev_sector)
+void			check_walls(t_game *game, t_uint8 *col, t_tricoord coord)
 {
 	int			i;
 	const int	max = game->map->sectors[game->player->cur_sector].wall_count;
 	t_wall		*walls;
-	t_list		*portals;
 
-	portals = NULL;
-	walls = game->map->sectors[game->player->cur_sector].walls;
 	i = 0;
-	while (i < max)
+	walls = game->map->sectors[game->player->cur_sector].walls;
+	while (i < max && *col != 7)
 	{
 		if (walls[i].is_portal == FALSE || walls[i].is_window == TRUE)
 			check_wall_col(coord, game->player, &walls[i], col);
-		else if (walls[i].is_portal == TRUE
-		&& get_sector_id(game->map, walls[i].window) != prev_sector)
-		{
-			if (wall_col(coord.xy, game->player->pos, &walls[i]) == TRUE
-			|| wall_col(coord.x, game->player->pos, &walls[i]) == TRUE
-			|| wall_col(coord.y, game->player->pos, &walls[i]) == TRUE)
-				add_wall(&walls[i], &portals);
-		}
-		if (*col == 7)
-			return (portals);
 		i++;
 	}
-	return (portals);
 }

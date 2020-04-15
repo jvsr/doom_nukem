@@ -23,65 +23,6 @@
 #include <stdio.h>
 #include <limits.h>
 
-void		check_portals(t_game *game, t_uint8 *col, t_list **portals,
-								t_col col_inf)
-{
-	t_uint32	temp;
-	t_list		*next_portal;
-	t_player	*player;
-	t_wall		*wall;
-
-	player = game->player;
-	while ((*portals) != NULL)
-	{
-		next_portal = (*portals)->next;
-		wall = (*portals)->content;
-		if (((*col & 1) == 0 && wall_col(col_inf.coord.x, player->pos, wall))
-		|| ((*col & 2) == 0 && wall_col(col_inf.coord.y, player->pos, wall))
-		|| (*col == 0 && wall_col(col_inf.coord.xy, player->pos, wall)))
-		{
-			*col_inf.prev_sector = player->cur_sector;
-			*col_inf.next_sector = get_sector_id(game->map, (*wall).window);
-			temp = player->cur_sector;
-			player->cur_sector = *col_inf.next_sector;
-			check_col(game, player, col, col_inf.coord);
-			player->cur_sector = temp;
-		}
-		ft_lstdelone(portals, NULL);
-		(*portals) = next_portal;
-	}
-}
-
-t_uint32	check_col(t_game *game, t_player *player, t_uint8 *col,
-															t_tricoord coord)
-{
-	t_uint32		next_sector;
-	t_list			*portals;
-	const t_uint32	temp = player->cur_sector;
-	static t_uint32	p_sec = UINT32_MAX;
-
-	next_sector = UINT32_MAX;
-	if (p_sec == UINT32_MAX)
-		p_sec = player->cur_sector;
-	portals = check_walls(game, col, coord, p_sec);
-	check_objects(game, col, coord);
-	if (*col == 7)
-	{
-		player->cur_sector = temp;
-		p_sec = UINT32_MAX;
-		ft_lstdel(&portals, NULL);
-		return (UINT32_MAX);
-	}
-	// check_portals(game, col, &portals, (t_col){coord, &p_sec, &next_sector});
-	if (*col == 7)
-	{
-		player->cur_sector = temp;
-		return (UINT32_MAX);
-	}
-	p_sec = UINT32_MAX;
-	return (next_sector);
-}
-
 static void	player_move_col(t_uint8 col, t_player *player,
 																t_tricoord pos)
 {
@@ -142,13 +83,13 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	pos.y = (t_coord){player->pos.x, player->pos.y + yspeed};
 	pos.xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
 	col = 0;
-	next_sector = check_col(game, player, &col, pos);
+	check_walls(game, &col, pos);
+	check_objects(game, &col, pos);
 	if (col == 7)
 		return (FALSE);
-	if (next_sector != UINT32_MAX
-	&& switch_sector(game, map, player, next_sector) == FALSE)
-		return (FALSE);
 	player_move_col(col, player, pos);
-	player->cur_sector = player_get_sector(player, map);
+	next_sector = player_get_sector(player, game->map);
+	if (switch_sector(game, map, player, next_sector) == FALSE)
+		return (FALSE);
 	return (TRUE);
 }

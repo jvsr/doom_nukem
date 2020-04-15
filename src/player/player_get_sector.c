@@ -22,9 +22,9 @@ static t_bool	check_cur(t_player *plyr, t_sector *cur)
 	t_uint64	j;
 	t_coord		vec;
 
-	mag = (t_coord){plyr->mag.cos, plyr->mag.sin};
 	i = 0;
 	j = 0;
+	mag = (t_coord){plyr->mag.cos, plyr->mag.sin};
 	while (i < cur->wall_count)
 	{
 		if (get_collision(&plyr->pos, &mag,
@@ -32,7 +32,6 @@ static t_bool	check_cur(t_player *plyr, t_sector *cur)
 			j++;
 		i++;
 	}
-	printf("J %zu\n", j);
 	return ((t_bool)j % 2 == 1);
 }
 
@@ -48,7 +47,7 @@ static t_list	*get_connected(t_sector *sec)
 	{
 		wl = &sec->walls[i];
 		if (wl->is_portal)
-			ft_lstaddbck(&lst, ft_lstnew(&wl->window, sizeof(t_sector)));
+			ft_lstaddbck(&lst, ft_lstnew(wl->window, sizeof(t_sector)));
 		i++;
 	}
 	return (lst);
@@ -67,11 +66,9 @@ static t_uint32	second_layer(t_list *lst, t_map *map, t_player *plyr)
 	t_list	*s1;
 
 	secs = lst;
-	printf("length %zu\n", ft_lstlen(lst));
 	while (secs)
 	{
 		s0 = get_connected(secs->content);
-		printf("Length2 %zu\n", ft_lstlen(s0));
 		s1 = s0;
 		while (s1)
 		{
@@ -86,7 +83,6 @@ static t_uint32	second_layer(t_list *lst, t_map *map, t_player *plyr)
 		secs = secs->next;
 	}
 	ft_lstdel(&secs, NULL);
-	printf("Here\n");
 	return (plyr->cur_sector);
 }
 
@@ -94,7 +90,6 @@ t_uint32		player_get_sector(t_player *plyr, t_map *map)
 {
 	t_list	*secs;
 	t_list	*tmp;
-	t_list	*lst;
 
 	if (check_cur(plyr, &map->sectors[plyr->cur_sector]))
 		return (plyr->cur_sector);
@@ -103,7 +98,7 @@ t_uint32		player_get_sector(t_player *plyr, t_map *map)
 	while (tmp)
 	{
 		if (check_cur(plyr, tmp->content))
-			ret(secs, tmp->content, map);
+			return (ret(secs, tmp->content, map));
 		tmp = tmp->next;
 	}
 	return (second_layer(secs, map, plyr));

@@ -105,8 +105,8 @@ void			damage_player(t_game *game, t_player *player, t_uint32 damage);
 void			player_died(t_game *game);
 t_uint32		check_col(t_game *game, t_player *player, t_uint8 *col,
 					t_tricoord coord);
-t_list			*check_walls(t_game *game, t_uint8 *col,
-					t_tricoord coord, t_uint32 prev_sector);
+void			check_walls(t_game *game, t_uint8 *col,
+					t_tricoord coord);
 void			check_wall_col(t_tricoord coord, t_player *player,
 					t_wall *wall, t_uint8 *col);
 t_bool			wall_col(t_coord c0, t_coord c1, t_wall *wall);
