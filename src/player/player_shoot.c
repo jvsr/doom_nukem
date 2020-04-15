@@ -6,7 +6,7 @@
 /*   By: euan <euan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 15:45:07 by euan          #+#    #+#                 */
-/*   Updated: 2020/04/14 14:19:16 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/15 17:09:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ void		player_shoot(t_game *game, t_player *plyr)
 	en = obj->data;
 	en->health -= PLAYER_SHOT_DAMAGE;
 	if (en->health <= 0)
+	{
 		en->state = ENEMY_DEAD;
+		obj->can_col = FALSE;
+	}
 }
