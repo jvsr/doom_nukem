@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-static void	move_col(t_uint8 col, t_coord *new_pos, t_tricoord pos)
+static void	move_pos_col(t_uint8 col, t_coord *new_pos, t_tricoord pos)
 {
 	if (col == 0)
 		ft_memcpy(new_pos, &pos.xy, sizeof(pos.xy));
@@ -74,11 +74,9 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	t_uint8		col;
 	t_coord		new_pos;
 	t_uint32	next_sector;
-	t_map		*map;
 	t_player	*player;
 
 	player = game->player;
-	map = game->map;
 	pos.x = (t_coord){player->pos.x + xspeed, player->pos.y};
 	pos.y = (t_coord){player->pos.x, player->pos.y + yspeed};
 	pos.xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
@@ -87,11 +85,11 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	check_objects(game, &col, pos);
 	if (col == 7)
 		return (FALSE);
-	move_col(col, &new_pos, pos);
+	move_pos_col(col, &new_pos, pos);
 	next_sector = player_get_sector(player, game->map, &new_pos);
 	if (next_sector != player->cur_sector &&
-		switch_sector(game, map, player, next_sector) == FALSE)
+		switch_sector(game, game->map, player, next_sector) == FALSE)
 		return (FALSE);
-	move_col(col, &player->pos, pos);
+	ft_memcpy(&player->pos, &new_pos);
 	return (TRUE);
 }
