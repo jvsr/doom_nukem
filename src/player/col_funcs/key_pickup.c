@@ -24,11 +24,10 @@ void	key_pickup(t_game *game,
 
 	(void)game;
 	player->keys++;
-	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(obj));
+	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(t_object));
 	if (lst == NULL)
 		return ;
 	ft_lstunlink(&sec->objects, lst);
-	ft_lstdelone(&lst, NULL);
+	ft_lstdelone(&lst, ft_lstdelmem);
 	sec->object_count--;
-	free(obj);
 }

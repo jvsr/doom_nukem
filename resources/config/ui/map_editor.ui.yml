@@ -6,14 +6,13 @@
     - pos: 0.75, 0.0
     - dim: 0.25, 1.0
     - image: mapEditorToolbarBackgroundColor
-      - layer: 0
+      - layer: -1
       - color: #333333
     - image: mapEditorToolbarBackground
-      - layer: 1
+      - layer: 0
       - texture: ui/border5x9.tga
 
     - panel: mapEditorObject
-      - layer: 2
       - pos: 0.1, 0.04
       - dim: 0.8, 0.1
       - button: mapEditorObjectChoice
