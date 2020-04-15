@@ -1,4 +1,0 @@
-Norme: ./tests/src/test_ft_keymap.c
-Warning: /home/holster/Workspace/doom_nukem/tests/src/test_ft_keymap.c may not compile or is invalid for some reasons.
-Norme: ./tests/src/test_ft_color.c
-Warning: /home/holster/Workspace/doom_nukem/tests/src/test_ft_color.c may not compile or is invalid for some reasons.

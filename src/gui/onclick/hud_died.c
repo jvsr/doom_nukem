@@ -17,22 +17,13 @@
 #include "init.h"
 #include "gui.h"
 
-void		hud_diedreload(t_game *game, t_transform *gui)
-{
-	(void)gui;
-	delete_map(&game->map);
-	game->cureventstate->eventstate = hud;
-	set_elem_show_clickable(get_gui_child(game->ui, "hudDied"), FALSE);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-}
-
 void		hud_diedmainmenu(t_game *game, t_transform *gui)
 {
 	(void)gui;
 	game->cureventstate->eventstate = mainmenu;
+	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hudDied"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hudWin"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
 	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 }

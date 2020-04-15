@@ -22,6 +22,7 @@
 static void	quit_hud_win(t_game *game)
 {
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
+	set_elem_show_clickable(get_gui_child(game->ui, "hudWin"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
 	game->cureventstate->eventstate = mainmenu;
 }
