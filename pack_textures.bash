@@ -19,24 +19,29 @@ declare -a extensions=(
 )
 resources=
 
-for ext in ${extensions[@]}; do
+for ext in "${extensions[@]}"; do
 resources+=$(find resources -name "*.$ext")
-resources+=" "
+resources+=$'\n'
 done
+readarray -t resources <<< "$resources"
 
 dd if=/dev/zero bs=1 count=128 >> doom-nukem
 
-for file in $resources; do
-cat $file >> doom-nukem
-
-if [[ $(uname -s) == "Darwin" ]]; then
-    size=$(stat -f%z $file)
-else
-    size=$(du -bs $file | column -t | cut -d' ' -f1)
+for file in "${resources[@]}"; do
+if [[ ! -s "$file" ]]; then
+	continue
 fi
 
-echo $size
-echo -n $size >> doom-nukem
+cat "$file" >> doom-nukem
+
+if [[ $(uname -s) == "Darwin" ]]; then
+	size=$(stat -f%z "$file")
+else
+	size=$(du -bs "$file" | column -t | cut -d' ' -f1)
+fi
+
+echo "$size"
+echo -n "$size" >> doom-nukem
 pad=$((24-${#size}))
 echo $pad
 dd if=/dev/zero bs=1 count=$pad >> doom-nukem
