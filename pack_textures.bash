@@ -27,7 +27,7 @@ resources+=$(find resources -type f -name "*.$ext")
 resources+=$'\n'
 done
 
-readarray -t resources <<< "$resources"
+IFS=$'\n' resources=( $resources )
 
 dd if=/dev/zero bs=1 count=128 >> doom-nukem
 
