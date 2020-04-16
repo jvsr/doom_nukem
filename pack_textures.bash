@@ -20,10 +20,10 @@ declare -a extensions=(
 
 resources=
 
-resources+=$(find resources/data/map/campaign)
+resources+=$(find resources/data/map/campaign -type f)
 resources+=$'\n'
 for ext in "${extensions[@]}"; do
-resources+=$(find resources -name "*.$ext")
+resources+=$(find resources -type f -name "*.$ext")
 resources+=$'\n'
 done
 
