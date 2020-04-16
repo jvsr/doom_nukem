@@ -74,11 +74,6 @@ SUBLIBS := $(sort $(SUBLIBS))
 SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.content)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
-# Resource Folders
-DATAPATH = resources/data
-DATAPATH := $(DATAPATH)/map $(DATAPATH)/map/custom $(DATAPATH)/map/campaign \
-	$(DATAPATH)/settings/
-
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
@@ -112,15 +107,11 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
+$(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
 	@gcc -g -coverage $(CCOPTIMISE) -o $(NAME) $(OBJS) $(LIBS)
 	@bash pack_textures.bash
-
-# Create required $(DATAPATH)
-$(DATAPATH):
-	@mkdir -p $(DATAPATH)
 
 # Compile $(LIB)
 $(LIB): FORCE

@@ -17,18 +17,22 @@ declare -a extensions=(
     "wav"
     "mp3"
 )
+
 resources=
 
+resources+=$(find resources/data/map/campaign)
+resources+=$'\n'
 for ext in "${extensions[@]}"; do
 resources+=$(find resources -name "*.$ext")
 resources+=$'\n'
 done
+
 readarray -t resources <<< "$resources"
 
 dd if=/dev/zero bs=1 count=128 >> doom-nukem
 
 for file in "${resources[@]}"; do
-if [[ ! -s "$file" ]]; then
+if [[ -z "$file" ]]; then
 	continue
 fi
 
@@ -46,8 +50,8 @@ pad=$((24-${#size}))
 echo $pad
 dd if=/dev/zero bs=1 count=$pad >> doom-nukem
 
-echo $file
-echo -n $file >> doom-nukem
+echo "$file"
+echo -n "$file" >> doom-nukem
 pad=$((128-${#file}))
 dd if=/dev/zero bs=1 count=$pad >> doom-nukem
 
