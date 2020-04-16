@@ -24,4 +24,7 @@ SRCS = \
 		find_tablepair_int_id \
 		find_tablepair_int_value \
 		find_tablepair_id \
-		find_tablepair_value
+		find_tablepair_value \
+		find_tablepair_ii_id \
+		find_tablepair_ii_value \
+

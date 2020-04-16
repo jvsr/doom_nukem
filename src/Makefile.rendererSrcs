@@ -1,0 +1,33 @@
+# $(PARENTNAME) = Name of parent folder
+# $(SUBLIB) = Name of outputfile
+# $(SRCFOLDER) = Name of the folder which holds the sources
+# $(INCLUDES) = Path to the includes folder
+# $(MAKEINCLUDES) = Path to the makefile includes folder
+# $(CCFLAGS) = All the flags that will be used to compile
+
+# Headers libary is dependent on (relative to $(INCLUDES))
+HEADERS =
+
+# Additions to the compile flags (-Wall -Wextra -Werror allready included)
+CCFLAGS +=
+
+# Source file prefix
+PREFIX =
+
+# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with ft_ and sufixed with .c
+FT_SRCS =
+
+OBJ_SRCS = new_chair new_enemy new_spike new_key new_health_pickup \
+			new_start new_end new_ammo new_skybox_day new_skybox_dusk \
+			new_slope new_cplus new_cminus new_fplus new_fminus
+
+OBJ_SRCS := $(OBJ_SRCS:%=objects/%)
+
+# All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+SRCS = render get_hit draw_skybox new_rendobj sort_objs \
+		set_ybounds decals_on_vline get_bounds get_hits render_hits \
+		draw_vline render_objs draw_cline draw_wall draw_glass draw_obj \
+		map_delete draw_floor draw_ceil get_slope draw_sfloor del_obj \
+		smash_glass new_hinfo render_fc $(OBJ_SRCS)

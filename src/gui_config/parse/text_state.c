@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/11 17:14:39 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/11 17:14:39 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/11 17:14:39 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:43:17 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "lex.h"
 #include "parse.h"
+#include "error.h"
 
 t_return_code	colon_text_state(t_parse_manager *manager)
 {
@@ -28,6 +29,8 @@ t_return_code	space_text_state(t_parse_manager *manager)
 t_return_code	dquote_start_text_state(t_parse_manager *manager)
 {
 	manager->parse_info->text = ft_strnew(0);
+	if (manager->parse_info->text == NULL)
+		error_msg_errno("Failed to alloc text");
 	return (check_next(manager->token, DQUOTE));
 }
 

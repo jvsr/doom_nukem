@@ -1,24 +1,24 @@
 - panel: options
   - layer: 1
-  - image: optionsoverlay
+  - image: optionsOverlay
     - show: 0
     - clickable: 0
     - color: #26020699
     - layer: 0
 
-  - panel: optionsmenu
+  - panel: optionsMenu
     - show: 0
     - clickable: 0
     - pos: 0.25, 0.05
     - dim: 0.5, 0.9
     - layer: 1
-    - image: optionsbackground
+    - image: optionsBackground
       - texture: ui/border5x9.tga
 
     - panel: sensitivity
       - pos: 0.1, 0.03
       - dim: 0.8, 0.14
-      - text_block: sensitivitytext
+      - text_block: sensitivityText
         - pos: 0.0, 0.05
         - dim: 1.0, 0.5
         - text_size: 0.8
@@ -26,20 +26,20 @@
         - text_color: #EAEAEA
         - text: "Sensitivity"
         - layer: 1
-      - panel: sensitivityblock
+      - panel: sensitivityBlock
         - pos: 0.4, 0.5
         - dim: 0.2, 0.5
-        - text_block: cursensitivity
+        - text_block: curSensitivity
           - pos: 0.2, 0.0
           - dim: 0.6, 1.0
           - text_size: 0.7
           - text_font: neckromancer
-        - button: sensitivityleft
+        - button: sensitivityLeft
           - pos: 0.0, 0.2
           - dim: 0.2, 0.6
           - texture: ui/arrow_left.tga
           - onclick: options_sensitivity_down
-        - button: sensitivityright
+        - button: sensitivityRight
           - pos: 0.8, 0.2
           - dim: 0.2, 0.6
           - texture: ui/arrow_right.tga
@@ -48,57 +48,57 @@
     - panel: volume
       - pos: 0.1, 0.18
       - dim: 0.8, 0.14
-      - text_block: volumetext
+      - text_block: volumeText
         - pos: 0.0, 0.05
         - dim: 1.0, 0.5
         - text_size: 0.8
         - text_font: foulfiend
         - text_color: #EAEAEA
         - text: "Volume"
-      - panel: musicvolumeblock
+      - panel: musicVolumeBlock
         - pos: 0.0, 0.5
         - dim: 0.5, 0.5
-        - text_block: musicvolumetext
+        - text_block: musicVolumeText
           - pos: 0.0, 0.0
           - dim: 0.5, 1.0
           - text_size: 0.6
           - text_font: neckromancer
           - text: "Music"
-        - text_block: curmusicvolume
+        - text_block: curMusicVolume
           - pos: 0.5, 0.0
           - dim: 0.25, 1.0
           - text_size: 0.6
           - text_font: neckromancer
-        - button: musicvolumeleft
+        - button: musicVolumeLeft
           - pos: 0.42, 0.2
           - dim: 0.08, 0.6
           - texture: ui/arrow_left.tga
           - onclick: options_music_volume_down
-        - button: musicvolumeright
+        - button: musicVolumeRight
           - pos: 0.75, 0.2
           - dim: 0.08, 0.6
           - texture: ui/arrow_right.tga
           - onclick: options_music_volume_up
-      - panel: soundvolumeblock
+      - panel: soundVolumeBlock
         - pos: 0.5, 0.5
         - dim: 0.5, 0.5
-        - text_block: soundvolumetext
+        - text_block: soundVolumeText
           - pos: 0.0, 0.0
           - dim: 0.5, 1.0
           - text_size: 0.6
           - text_font: neckromancer
           - text: "Sound"
-        - text_block: cursoundvolume
+        - text_block: curSoundVolume
           - pos: 0.5, 0.0
           - dim: 0.25, 1.0
           - text_size: 0.6
           - text_font: neckromancer
-        - button: soundvolumeleft
+        - button: soundVolumeLeft
           - pos: 0.42, 0.2
           - dim: 0.08, 0.6
           - texture: ui/arrow_left.tga
           - onclick: options_sound_volume_down
-        - button: soundvolumeright
+        - button: soundVolumeRight
           - pos: 0.75, 0.2
           - dim: 0.08, 0.6
           - texture: ui/arrow_right.tga
@@ -107,27 +107,27 @@
     - panel: fov
       - pos: 0.1, 0.33
       - dim: 0.8, 0.14
-      - text_block: fovtext
+      - text_block: fovText
         - pos: 0.0, 0.05
         - dim: 1.0, 0.5
         - text_size: 0.8
         - text_font: foulfiend
         - text_color: #EAEAEA
         - text: "FOV"
-      - panel: fovblock
+      - panel: fovBlock
         - pos: 0.4, 0.5
         - dim: 0.2, 0.5
-        - text_block: curfov
+        - text_block: curFov
           - pos: 0.2, 0.0
           - dim: 0.6, 1.0
           - text_size: 0.7
           - text_font: neckromancer
-        - button: fovleft
+        - button: fovLeft
           - pos: 0.0, 0.2
           - dim: 0.2, 0.6
           - texture: ui/arrow_left.tga
           - onclick: options_fov_down
-        - button: fovright
+        - button: fovRight
           - pos: 0.8, 0.2
           - dim: 0.2, 0.6
           - texture: ui/arrow_right.tga
@@ -136,62 +136,62 @@
     - panel: resolution
       - pos: 0.1, 0.48
       - dim: 0.8, 0.14
-      - text_block: resolutiontext
+      - text_block: resolutionText
         - pos: 0.0, 0.05
         - dim: 1.0, 0.5
         - text_size: 0.8
         - text_font: foulfiend
         - text_color: #EAEAEA
         - text: "Resolution"
-      - panel: resolutionblock
+      - panel: resolutionBlock
         - pos: 0.3, 0.5
         - dim: 0.4, 0.5
-        - text_block: curresolution
+        - text_block: curResolution
           - pos: 0.2, 0.0
           - dim: 0.6, 1.0
           - text_size: 0.9
           - text_font: neckromancer
-        - button: resolutionleft
+        - button: resolutionLeft
           - pos: 0.0, 0.2
           - dim: 0.1, 0.6
           - texture: ui/arrow_left.tga
           - onclick: options_resolution_down
-        - button: resolutionright
+        - button: resolutionRight
           - pos: 0.9, 0.2
           - dim: 0.1, 0.6
           - texture: ui/arrow_right.tga
           - onclick: options_resolution_up
 
-    - panel: resolutiontype
+    - panel: resolutionType
       - pos: 0.1, 0.63
       - dim: 0.8, 0.14
-      - text_block: resolutiontypetext
+      - text_block: resolutionTypeText
         - pos: 0.0, 0.05
         - dim: 1.0, 0.5
         - text_size: 0.8
         - text_font: foulfiend
         - text_color: #EAEAEA
         - text: "Resolution Type"
-      - panel: resolutiontypeblock
+      - panel: resolutionTypeBlock
         - pos: 0.3, 0.5
         - dim: 0.4, 0.5
-        - text_block: curresolutiontype
+        - text_block: curResolutionType
           - pos: 0.2, 0.0
           - dim: 0.6, 1.0
           - text_size: 0.9
           - text_font: neckromancer
-        - button: resolutiontypeleft
+        - button: resolutionTypeLeft
           - pos: 0.0, 0.2
           - dim: 0.1, 0.6
           - texture: ui/arrow_left.tga
           - onclick: options_resolutiontype_down
-        - button: resolutiontyperight
+        - button: resolutionTypeRight
           - pos: 0.9, 0.2
           - dim: 0.1, 0.6
           - texture: ui/arrow_right.tga
           - onclick: options_resolutiontype_up
 
-    - button: optionscontrolsbutton
+    - button: optionsControlsButton
       - pos: 0.1, 0.78
       - dim: 0.8, 0.08
       - text_size: 0.5
@@ -201,7 +201,7 @@
       - texture: ui/border5x1.tga
       - onclick: options_open_controls
 
-    - button: optionsreturnbutton
+    - button: optionsReturnButton
       - pos: 0.1, 0.88
       - dim: 0.8, 0.08
       - text_size: 0.5
@@ -211,25 +211,25 @@
       - onclick: options_return
       - texture: ui/border5x1.tga
 
-  - panel: confirmationmenu
+  - panel: confirmationMenu
     - show: 0
     - clickable: 0
     - layer: 2
-    - image: confirmationoverlay
+    - image: confirmationOverlay
       - color: #00000000
-    - panel: confirmationbox
+    - panel: confirmationBox
       - pos: 0.35, 0.35
       - dim: 0.3, 0.3
-      - image: confirmationbackground
+      - image: confirmationBackground
         - texture: ui/border1x1.tga
-      - text_block: confirmationtext
+      - text_block: confirmationText
         - pos: 0.05, 0.1
         - dim: 0.9, 0.2
         - text: "Restart to apply changes"
         - text_font: foulfiend
         - text_color: #e3e3e3
-        - text_size: 0.5
-      - button: confirmationreturnbutton
+        - text_size: 0.7
+      - button: confirmationReturnButton
         - pos: 0.1, 0.37
         - dim: 0.8, 0.25
         - texture: ui/border5x1.tga
@@ -238,7 +238,7 @@
         - text_color: #e3e3e3
         - text_size: 0.7
         - onclick: confirmation_return
-      - button: confirmationrestartbutton
+      - button: confirmationRestartButton
         - pos: 0.1, 0.64
         - dim: 0.8, 0.25
         - texture: ui/border5x1.tga

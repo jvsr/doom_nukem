@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/24 13:40:37 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/05 17:22:01 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/24 13:40:37 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:14:05 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	set_restart_music(t_game *game, t_transform *gui)
 void		set_music(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->music_volume * 100,
-		get_elem_child(parent, "curmusicvolume"),
+		get_elem_child(parent, "curMusicVolume"),
 		0);
 }
 

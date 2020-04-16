@@ -5,14 +5,19 @@
 #                                                      +:+                     #
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/11/12 16:39:37 by jvisser       ########   odam.nl          #
+#    Created: 2019/01/07 20:00:45 by pholster      #+#    #+#                  #
+#    Updated: 2020/03/06 17:50:43 by jvisser       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names
-SUBLIBS = main color sdl_extra tga_reader gui gametime gui_config sdl_thread \
-			audio keymap serializer eventstate table
+SUBLIBS = main color sdl_extra tga_reader gui game gui_config sdl_thread \
+			audio keymap serializer eventstate map_parse table renderer init \
+			cmath loop textures \
+			player \
+			enemy \
+			map_editor \
+
 
 # Executable name
 NAME = doom-nukem
@@ -21,7 +26,7 @@ PARENTNAME = $(NAME)
 # Compile settings
 CCSILENT = FALSE
 CCSTRICT = -Wall -Werror -Wextra
-CCOPTIMISE = -O1
+CCOPTIMISE = -O3
 
 # Gcov settings
 GCOV = FALSE
@@ -32,11 +37,6 @@ LIBFT_DISABLE_GCOV = TRUE
 # Mafile includes
 MAKEINCLUDES = includes/libft
 include $(MAKEINCLUDES)/Makefile.color
-
-# Tests info
-TESTPATH = tests
-TESTNAME = doomtest
-TEST = $(TESTPATH)/$(TESTNAME)
 
 # Libft info
 LIBPATH = libft
@@ -74,11 +74,6 @@ SUBLIBS := $(sort $(SUBLIBS))
 SUBLIBS := $(SUBLIBS:%=src/$(SUBLIBSPATH)/%.content)
 SUBLIBMAKE = $(MAKE) -s -e -C src FOLDER=$(SUBLIBSPATH)
 
-# Resource Folders
-DATAPATH = resources/data
-DATAPATH := $(DATAPATH)/map $(DATAPATH)/map/custom $(DATAPATH)/map/campaign \
-	$(DATAPATH)/settings/
-
 # Fclean target files
 FCLEAN := $(wildcard $(NAME) $(SUBLIBS))
 
@@ -112,26 +107,11 @@ export LIBFT_DISABLE_GCOV
 all: $(NAME)
 
 # Create $(NAME)
-$(NAME): $(DATAPATH) $(LIB) $(SUBLIBS)
+$(NAME): $(LIB) $(SUBLIBS)
 	@$(call FNC_PRINT_EQUAL,$(NAME),$(NAME))
 	@rm -f $(NAME)
-	@gcc -coverage -o $(NAME) $(OBJS) $(LIBS)
-
-# Run test and gcov if $(GCOV)==TRUE
-test: $(LIB) $(SUBLIBS) FORCE
-ifeq ($(wildcard $(TESTPATH)),)
-	@echo "Error: $(TESTPATH) not present"
-else
-	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) OBJS="$(OBJS:src/%=../src/%)"
-	@./$(TEST)
-ifeq ($(GCOV), TRUE)
-	@$(SUBLIBS_GCOV)
-endif
-endif
-
-# Create required $(DATAPATH)
-$(DATAPATH):
-	@mkdir -p $(DATAPATH)
+	@gcc -g -coverage $(CCOPTIMISE) -o $(NAME) $(OBJS) $(LIBS)
+	@bash pack_textures.bash
 
 # Compile $(LIB)
 $(LIB): FORCE
@@ -151,6 +131,7 @@ ifneq ($(wildcard $(TESTPATH)),)
 	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) clean
 endif
 	@$(SUBLIBS_CLEAN)
+	@$(MAKE) -s -e -C $(LIBPATH) clean
 
 # Clean all .content files
 fclean: clean
@@ -161,23 +142,12 @@ ifneq ($(FCLEAN),)
 	@$(call FNC_PRINT_DEL,$(NAME),fclean $(FCLEAN:src/$(SUBLIBSPATH)/%=%))
 	@rm -f $(NAME) $(SUBLIBS)
 endif
-
-# Clean $(LIB)
-clean_lib:
-	@$(MAKE) -s -e -C $(LIBPATH) clean
-
-# Fclean $(LIB)
-fclean_lib: clean_lib
 	@$(MAKE) -s -e -C $(LIBPATH) fclean
 
 # Recompile only the project
 re: fclean
 	@$(MAKE)
 
-# Recompile the $(LIB) and project
-re_all: fclean_lib fclean
-	@$(MAKE)
-
 FORCE: ;
 
-.PHONY: all test clean fclean re FORCE
+.PHONY: all clean fclean re FORCE

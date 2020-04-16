@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/03/15 17:08:43 by pholster       #+#    #+#                */
-/*   Updated: 2019/08/21 21:10:19 by pholster      ########   odam.nl         */
+/*   Created: 2019/03/15 17:08:43 by pholster      #+#    #+#                 */
+/*   Updated: 2020/02/20 13:30:28 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			ft_lstsort(t_list **head,
 	t_list	*half;
 	t_list	*temp;
 
-	if ((*head)->next == NULL)
+	if ((*head) == NULL || (*head)->next == NULL)
 		return ;
 	temp = ft_lstindex(*head, (ft_lstlen(*head) - 1) / 2);
 	half = temp->next;

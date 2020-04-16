@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/24 17:15:08 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/13 18:09:01 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/24 17:15:08 by pholster      #+#    #+#                 */
+/*   Updated: 2020/02/19 20:53:45 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define MAX_TTASK_PARAMS	4
 
 typedef struct s_ttask		t_ttask;
+typedef struct s_tjob		t_tjob;
 typedef	struct s_tthread	t_tthread;
 typedef struct s_tpool		t_tpool;
 
@@ -56,10 +57,16 @@ struct				s_ttask
 	t_ttask			*next;
 };
 
+struct				s_tjob
+{
+	t_ttask			*task;
+	t_tjob			*next;
+};
+
 typedef struct		s_tqueue
 {
-	t_ttask			*first;
-	t_ttask			*last;
+	t_tjob			*first;
+	t_tjob			*last;
 	size_t			size;
 	SDL_cond		*cond_empty;
 	SDL_cond		*cond_not_empty;
@@ -85,7 +92,10 @@ struct				s_tpool
 	t_uint64		flags;
 };
 
-// --- Alloc functions ---
+/*
+**	--- Alloc functions ---
+*/
+t_tjob				*sdl_new_tjob(t_ttask *task);
 t_tpool				*sdl_new_tpool(size_t size, t_uint64 flags);
 t_tthread			*sdl_new_tthread(t_tpool *pool, size_t num,
 									int (*f)(void *));
@@ -95,28 +105,40 @@ t_ttask				*sdl_new_ttask(void *(*fnc)(), t_uint64 flags,
 
 void				sdl_alloc_tpool_tthreads(t_tpool **pool);
 
-// --- Delete functions ---
+/*
+**	--- Delete functions ---
+*/
+void				*sdl_del_tjob(t_tjob **job, t_bool delete_task);
 void				*sdl_del_tpool(t_tpool **pool);
 void				*sdl_del_tthread(t_tthread **thread);
 void				*sdl_del_tqueue(t_tqueue **queue);
 void				*sdl_del_ttask(t_ttask **task);
+void				*sdl_del_ttask_all(t_ttask **task);
 
-// --- Sync functions ---
+/*
+**	--- Sync functions ---
+*/
 void				sdl_join_tpool(t_tpool *pool);
 void				sdl_join_ttask(t_ttask *task);
-void				sdl_join_ttasks(t_ttask **tasks, size_t len);
+void				sdl_join_ttask_all(t_ttask *task);
 
-// --- Task functions ---
+/*
+**	--- Task functions ---
+*/
 void				sdl_run_ttask(t_ttask *task);
 void				sdl_get_ttask(t_tthread *thread);
 void				sdl_complete_ttask(t_ttask *task);
 t_ttask				*sdl_add_tpool_ttask(t_tpool *pool, t_ttask *task);
 t_ttask				*sdl_add_tqueue_ttask(t_tqueue *queue, t_ttask *task);
 
-// --- Thread logic functions ---
+/*
+**	--- Thread logic functions ---
+*/
 int					sdl_worker_tthread(void *param);
 
-// --- Misc functions ---
+/*
+**	--- Misc functions ---
+*/
 ssize_t				sdl_get_core_count(void);
 t_ttask				*sdl_run_thread(const char *name, t_ttask *task);
 

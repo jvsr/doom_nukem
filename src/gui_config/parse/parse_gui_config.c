@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/25 12:35:58 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/01 15:53:32 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/25 12:35:58 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:43:42 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_parse_info		*parse_gui_config(t_token *tokens)
 
 	cur_state = entry;
 	manager = new_parse_manager(tokens);
-	while (1)
+	while (cur_state <= end && cur_state >= 0)
 	{
 		state_fnc = g_state[cur_state];
 		rc = state_fnc(manager);
@@ -75,6 +75,10 @@ t_parse_info		*parse_gui_config(t_token *tokens)
 			next_token(&manager->token);
 		cur_state = lookup_state(cur_state, rc);
 	}
+	if (cur_state > end || cur_state < 0)
+		error_msg("Out of bounds", 20,
+		ft_strformat("Index '%d' out of bounds of g_state (%zu)", cur_state,
+			(sizeof(g_state) / sizeof(t_state_fnc*))));
 	parse_info = manager->parse_info;
 	free(manager);
 	return (parse_info);

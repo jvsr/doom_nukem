@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 15:53:13 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/09 21:25:02 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/29 15:53:13 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:48:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,14 +276,14 @@ static t_tablepair_int const	g_keytable[] = {
 ** *	{"AUDIOFASTFORWARD", SDLK_AUDIOFASTFORWARD},
 */
 
-char const	*get_keystate_name(SDL_Keycode key)
+char const		*get_keystate_name(SDL_Keycode key)
 {
 	size_t const	size = sizeof(g_keytable) / sizeof(t_tablepair_int);
 
 	return (find_tablepair_int_id(g_keytable, size, key));
 }
 
-static void			print_list(t_hashlist *lst)
+static void		print_list(t_hashlist *lst)
 {
 	size_t			pos;
 	t_hashlist		*cur;
@@ -305,7 +305,7 @@ static void			print_list(t_hashlist *lst)
 	}
 }
 
-void				print_keymap(const t_hashmap *keymap)
+void			print_keymap(const t_hashmap *keymap)
 {
 	size_t	i;
 

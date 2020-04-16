@@ -1,0 +1,49 @@
+# $(PARENTNAME) = Name of parent folder
+# $(SUBLIB) = Name of outputfile
+# $(SRCFOLDER) = Name of the folder which holds the sources
+# $(INCLUDES) = Path to the includes folder
+# $(MAKEINCLUDES) = Path to the makefile includes folder
+# $(CCFLAGS) = All the flags that will be used to compile
+
+# Headers libary is dependent on (relative to $(INCLUDES))
+HEADERS =
+
+# Additions to the compile flags (-Wall -Wextra -Werror allready included)
+CCFLAGS +=
+
+# Source file prefix
+PREFIX =
+
+# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with ft_ and sufixed with .c
+FT_SRCS =
+
+# All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+
+ON_EN_SRCS = win_enter
+ON_EN_SRCS := $(ON_EN_SRCS:%=on_enter/%)
+
+COL_SRCS = health_pickup key_pickup spike_damage get_col_func ammo_pickup \
+			end_col
+COL_SRCS := $(COL_SRCS:%=col_funcs/%)
+
+SRCS = \
+	player_move \
+	player_directions \
+	player_jump \
+	player_col \
+	damage_player \
+	player_died \
+	wall_col \
+	object_col \
+	player_slope \
+	player_won \
+	raycast_wall \
+	$(COL_SRCS) \
+	$(ON_EN_SRCS) \
+	click_on_door \
+	raycast_object \
+	player_shoot \
+	player_get_sector
+

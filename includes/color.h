@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/27 17:00:37 by jvisser        #+#    #+#                */
+/*   Created: 2019/08/27 17:00:37 by jvisser       #+#    #+#                 */
 /*   Updated: 2019/09/10 14:56:50 by ehollidg      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -25,5 +25,6 @@ void		rgba_to_color(SDL_Color *c, t_uint32 rgba);
 void		hex_to_color(SDL_Color *c, char *hex);
 t_uint32	hex_to_rgba(char *hex);
 t_uint32	mix_color(t_uint32 dst, t_uint32 src);
+t_uint32	rgba_set_intensity(t_uint32 colour, float offset);
 
 #endif

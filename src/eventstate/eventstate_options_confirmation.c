@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/12 17:19:02 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:20:07 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/12 17:19:02 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:06:02 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	quit_options_confirmation(t_game *game)
 {
 	game->cureventstate->eventstate = options;
 	confirmation_return(game,
-		get_gui_child(game->ui, "confirmationreturnbutton"));
+		get_gui_child(game->ui, "confirmationReturnButton"));
 }
 
 void		options_confirmation_eventstate(t_game *game, SDL_Event event)

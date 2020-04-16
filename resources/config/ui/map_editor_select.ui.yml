@@ -1,0 +1,86 @@
+- panel: mapEditorSelect
+  - image: mapEditorSelectBackground
+    - color: #333333
+  - panel: mapEditorSelectBox
+    - pos: 0.35, 0.3
+    - dim: 0.3, 0.4
+    - image: mapEditorSelectBoxBackground
+      - texture: ui/border1x1_2.tga
+    - button: mapEditorSelectBoxLoadButton
+      - pos: 0.1, 0.1375
+      - dim: 0.8, 0.2
+      - text: "Load Map"
+      - text_color: #EAEAEA
+      - text_font: foulfiend
+      - text_size: 0.6
+      - texture: ui/border5x1.tga
+      - onclick: load_editor_map
+    - button: mapEditorSelectBoxNewButton
+      - pos: 0.1, 0.4
+      - dim: 0.8, 0.2
+      - text: "New Map"
+      - text_color: #EAEAEA
+      - text_font: foulfiend
+      - text_size: 0.6
+      - texture: ui/border5x1.tga
+      - onclick: map_editor_select_new
+    - button: mapEditorSelectBoxReturnButton
+      - pos: 0.1, 0.6725
+      - dim: 0.8, 0.2
+      - text: "Return"
+      - text_color: #EAEAEA
+      - text_font: foulfiend
+      - text_size: 0.6
+      - texture: ui/border5x1.tga
+      - onclick: map_editor_select_return
+
+  - panel: mapEditorSelectLoadMenu
+    - show: 0
+    - clickable: 0
+    - layer: 2
+    - image: mapEditorSelectLoadOverlay
+      - color: #26020699
+
+    - panel: mapEditorSelectLoadBox
+      - pos: 0.25, 0.1
+      - dim: 0.5, 0.4
+      - image: mapEditorSelectLoadBackground
+        - texture: ui/border1x1.tga
+      - panel: mapEditorSelectLoadBlock
+        - pos: 0.1, 0.05
+        - dim: 0.8, 0.5
+        - text_block: mapEditorSelectLoadText
+          - pos: 0.2, 0.0
+          - dim: 0.6, 0.8
+          - text_font: foulfiend
+          - text_color: #EAEAEA
+          - text_size: 0.7
+        - button: mapEditorSelectLoadLeft
+          - pos: 0.0, 0.2
+          - dim: 0.1, 0.4
+          - texture: ui/arrow_left.tga
+          - onclick: load_editor_map_next
+        - button: mapEditorSelectLoadRight
+          - pos: 0.9, 0.2
+          - dim: 0.1, 0.4
+          - texture: ui/arrow_right.tga
+          - onclick: load_editor_map_prv
+
+      - button: mapEditorSelectLoadOkButton
+        - pos: 0.2, 0.45
+        - dim: 0.6, 0.2
+        - texture: ui/border5x1.tga
+        - text: "Ok"
+        - text_font: neckromancer
+        - text_color: #EAEAEA
+        - text_size: 0.7
+        - onclick: load_editor_map_ok
+      - button: mapEditorSelectLoadCancelButton
+        - pos: 0.2, 0.7
+        - dim: 0.6, 0.2
+        - texture: ui/border5x1.tga
+        - text: "Cancel"
+        - text_font: neckromancer
+        - text_color: #EAEAEA
+        - text_size: 0.7
+        - onclick: load_editor_map_cancel

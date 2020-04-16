@@ -1,0 +1,30 @@
+# $(PARENTNAME) = Name of parent folder
+# $(SUBLIB) = Name of outputfile
+# $(SRCFOLDER) = Name of the folder which holds the sources
+# $(INCLUDES) = Path to the includes folder
+# $(MAKEINCLUDES) = Path to the makefile includes folder
+# $(CCFLAGS) = All the flags that will be used to compile
+
+# Headers libary is dependent on (relative to $(INCLUDES))
+HEADERS =
+
+# Additions to the compile flags (-Wall -Wextra -Werror allready included)
+CCFLAGS +=
+
+# Source file prefix
+PREFIX =
+
+# All ft_ source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with ft_ and sufixed with .c
+FT_SRCS =
+
+# All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+SRCS = get_collision get_angle_from_vectors get_angle_from_vector \
+		get_vector_from_angle dot_vectors get_vector_magnitude \
+		get_vector_from_points get_distance calc_vfov mod_float \
+		clamp_float wrap_float get_perps wrap_angle \
+		is_between_fov get_angle_between_points calc_fov \
+		get_angle_between_pointsv circle_collision lerp get_perp  \
+		normalize_vector is_between get_vec_from_x get_line_collision \
+		line_collision get_side_vec is_between_or_equal coordequ

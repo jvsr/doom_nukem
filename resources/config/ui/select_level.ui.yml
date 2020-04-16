@@ -1,12 +1,12 @@
 - panel: missions
   - layer: 1
-  - image: missionsoverlay
+  - image: missionsOverlay
     - show: 0
     - clickable: 0
     - colour: #26020699
     - layer: 1
 
-  - button: missionscampaignbutton
+  - button: missionsCampaignButton
     - show: 0
     - clickable: 0
     - layer: 4
@@ -19,7 +19,7 @@
     - text_color: #E3E3E3
     - text_draw_method: centered
     - onclick: missions_focus_campaign
-  - button: missionscustombutton
+  - button: missionsCustomButton
     - show: 0
     - clickable: 0
     - layer: 3
@@ -33,49 +33,81 @@
     - text_draw_method: centered
     - onclick: missions_focus_custom
 
-  - panel: missionsmenu
+  - panel: missionsMenu
     - show: 0
     - clickable: 0
     - pos: 0.06, 0.05
     - dim: 0.9, 0.9
     - layer: 2
-    - image: missionsbackground
+    - image: missionsBackground
       - texture: ui/border1x1.tga
 
     - button: level1
       - pos: 0.1, 0.07
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level2
       - pos: 0.1, 0.26
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level3
       - pos: 0.1, 0.45
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level4
       - pos: 0.1, 0.64
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level5
       - pos: 0.55, 0.07
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level6
       - pos: 0.55, 0.26
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level7
       - pos: 0.55, 0.45
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
     - button: level8
       - pos: 0.55, 0.64
       - dim: 0.35, 0.18
+      - text_size: 0.9
+      - text_font: neckromancer
+      - text_color: #E3E3E3
       - texture: ui/border5x1.tga
+      - onclick: load_level
 
-    - button: missionreturnbutton
+    - button: missionReturnButton
       - pos: 0.3, 0.845
       - dim: 0.4, 0.085
       - text: "return"
@@ -84,3 +116,24 @@
       - text_color: #e3e3e3
       - texture: ui/border5x1.tga
       - onclick: mission_return
+
+    - text_block: missionPage
+      - pos: 0.45, 0.75
+      - dim: 0.1, 0.085
+      - text: "0"
+      - text_font: foulfiend
+      - text_size: 1.0
+      - text_color: #e3e3e3
+      - onclick: mission_return
+
+    - button: missionLeftPageButton
+      - pos: 0.2, 0.845
+      - dim: 0.05, 0.085
+      - texture: ui/arrow_left.tga
+      - onclick: missions_left_page
+
+    - button: missionRightPageButton
+      - pos: 0.75, 0.845
+      - dim: 0.05, 0.085
+      - texture: ui/arrow_right.tga
+      - onclick: missions_right_page

@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/04 13:08:45 by jvisser        #+#    #+#                */
+/*   Created: 2019/09/04 13:08:45 by jvisser       #+#    #+#                 */
 /*   Updated: 2019/09/09 15:19:40 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -20,5 +20,11 @@ typedef struct	s_circle
 	size_t		d;
 	SDL_Point	mid;
 }				t_circle;
+
+typedef struct	s_line
+{
+	SDL_Point	start;
+	SDL_Point	end;
+}				t_line;
 
 #endif

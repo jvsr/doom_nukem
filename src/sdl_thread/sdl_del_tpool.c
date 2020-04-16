@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/07 16:41:38 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/07 16:41:38 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:41:38 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:03:23 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static void	del_threads(t_tpool *pool)
 	i = 0;
 	if (pool->threads == NULL)
 		return ;
+	SDL_LockMutex(pool->tasks->lock);
 	SDL_CondBroadcast(pool->tasks->cond_not_empty);
+	SDL_UnlockMutex(pool->tasks->lock);
 	while (i < pool->size)
 	{
 		SDL_WaitThread(pool->threads[i]->id, NULL);

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/07 16:56:11 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/07 16:56:11 by pholster      ########   odam.nl         */
+/*   Created: 2019/11/07 16:56:11 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:13:22 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	check_duplicate(t_transform *child, const char *name)
 {
 	while (child != NULL)
 	{
-		if (ft_strequ(child->name, name))
+		if (ft_strequ_nocase(child->name, name) == TRUE)
 			duplicate_error(name);
 		if (child->gui_type == PANEL)
 			check_duplicate(child->gui_elem.panel->children, name);

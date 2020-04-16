@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 13:47:23 by jvisser        #+#    #+#                */
-/*   Updated: 2019/09/10 14:58:04 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/08/29 13:47:23 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 11:36:14 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 void	rgba_to_color(SDL_Color *c, t_uint32 rgba)
 {
-	c->a = (unsigned char)(rgba >> 24);
-	c->r = (unsigned char)(rgba >> 16);
-	c->g = (unsigned char)(rgba >> 8);
-	c->b = (unsigned char)(rgba);
+	c->a = (t_uint8)(rgba >> 24);
+	c->r = (t_uint8)(rgba >> 16);
+	c->g = (t_uint8)(rgba >> 8);
+	c->b = (t_uint8)rgba;
 }

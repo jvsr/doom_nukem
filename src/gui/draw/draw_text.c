@@ -5,12 +5,13 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 17:27:05 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 15:19:30 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/29 17:27:05 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:11:49 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <errno.h>
 #include <SDL2/SDL_rect.h>
 
 #include "libft/ft_str.h"
@@ -82,6 +83,9 @@ void				draw_text(SDL_Surface *dst, t_text *text, SDL_Point abs_dim)
 	SDL_Surface	*rendered_text;
 	SDL_Surface	*scaled_text;
 
+	if (text->font_type > FONT_AMOUNT || text->font_type < FONT_UNDEFINED)
+		error_msg("Invalid font", EPERM,
+			ft_strformat("Font out side range %d", text->font_type));
 	if (text->color.a == 0 || text->text == NULL || ft_strisempty(text->text))
 		return ;
 	font = text->fonts[text->font_type];

@@ -12,13 +12,21 @@ HEADERS =
 CCFLAGS +=
 
 # Source file prefix
-PREFIX =
+PREFIX = eventstate_
 
 # All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
 # These will be automaticly prefixed with $(PREFIX) and sufixed with .c
-SRCS = eventstate_controls \
-		eventstate_mainmenu \
-		eventstate_missions \
-		eventstate_options \
-		eventstate_options_confirmation \
-		eventstate_set_controls
+SRCS = controls \
+		mainmenu \
+		missions \
+		options \
+		options_confirmation \
+		set_controls \
+		map_editor \
+		map_editor_select \
+		splash \
+		initload \
+		hud \
+		hud_options \
+		hud_died \
+		hud_win \

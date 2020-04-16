@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/07/01 16:13:59 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/25 17:18:17 by jvisser       ########   odam.nl         */
+/*   Created: 2019/07/01 16:13:59 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 11:38:19 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ void			create_image(const char *file_name, char const *exec_path,
 
 	file_stream = read_tga_file(file_name, exec_path);
 	set_tga_header(file_stream, &tga, img);
-	if (tga.img_type == 0)
+	if (tga.img_type != 2)
 	{
 		ft_strdel((char**)&file_stream);
-		error_msg("Invalid tga format", EPERM, "Failed to read file");
+		error_msg("Invalid tga format", EPERM,
+			ft_strformat("Invalid format %d in %s", tga.img_type, file_name));
 	}
 	str_to_img(img, &tga, file_stream);
 	ft_strdel((char**)&file_stream);

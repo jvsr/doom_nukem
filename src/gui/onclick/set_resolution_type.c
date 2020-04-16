@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/24 15:50:46 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:51:17 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/24 15:50:46 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:13:55 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		set_resolution_type(t_setting *setting, t_transform *parent)
 	t_transform	*elem;
 	char		*text;
 
-	elem = get_elem_child(parent, "curresolutiontype");
+	elem = get_elem_child(parent, "curResolutionType");
 	text = get_resolution_type(setting->resolution_type);
 	set_elem_text_str(elem, text);
 }

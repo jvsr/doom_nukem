@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/29 17:28:28 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 15:20:55 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/29 17:28:28 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:12:01 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void		reset_surface(t_transform *elem)
 	elem->surface = sdl_create_surface_default(elem->abs_dim);
 }
 
-static void		draw_gui_elem(t_transform *elem)
+static void		draw_gui_elem(t_transform *elem, t_game *game)
 {
 	SDL_Surface	*dst;
 
@@ -88,34 +88,27 @@ static void		draw_gui_elem(t_transform *elem)
 		draw_image(dst, elem->gui_elem.image);
 	else if (elem->gui_type == BUTTON)
 		draw_button(dst, elem->gui_elem.button, elem->abs_dim);
+	else if (elem->gui_type == GVIEW)
+		draw_gview(dst, game);
+	else if (elem->gui_type == MAP_EDITOR)
+		draw_map_editor(dst, game, elem);
 	else if (elem->gui_type == PANEL)
 	{
-		draw_panel(elem->gui_elem.panel);
+		draw_panel(elem->gui_elem.panel, game);
 		elem->has_alpha = sdl_has_surface_alpha(elem->surface);
 	}
 }
 
-void			draw_elem(t_transform *elem)
+void			*draw_elem(t_transform *elem, t_game *game)
 {
-	SDL_Surface	*dst_surface;
-
-	if (elem->show == FALSE)
-		return ;
 	if (elem->redraw == TRUE || elem->moved == TRUE)
 		update_pos_dim(elem);
 	if (elem->redraw == TRUE || (elem->gui_type == PANEL && child_moved(elem)))
 	{
 		reset_surface(elem);
-		draw_gui_elem(elem);
+		draw_gui_elem(elem, game);
 	}
-	if (elem->parent_type == ELEM)
-		dst_surface = elem->parent.elem->surface;
-	else
-		dst_surface = elem->parent.ui->window_surface;
-	if (elem->gui_type == TEXT || elem->has_alpha)
-		sdl_merge_surface_alpha(dst_surface, elem->surface, elem->rel_pos);
-	else
-		sdl_merge_surface(dst_surface, elem->surface, elem->rel_pos);
 	elem->redraw = FALSE;
 	elem->moved = FALSE;
+	return (elem);
 }

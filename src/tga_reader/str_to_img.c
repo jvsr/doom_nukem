@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/07/08 21:36:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/12 18:24:54 by jvisser       ########   odam.nl         */
+/*   Created: 2019/07/08 21:36:50 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 11:38:23 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,6 @@
 
 #include "tga.h"
 #include "error.h"
-
-static void	bottomright(t_img *img, t_tga *tga, unsigned char *str)
-{
-	size_t			i;
-	size_t			j;
-	size_t			min;
-	const size_t	pitch = img->px_depth / 8;
-
-	min = TGA_HEADER_SIZE + tga->id_len;
-	if (tga->clr_map_type == 2)
-		min += tga->cm_len * (tga->cm_size / 4);
-	i = (img->height * img->width * pitch) + min;
-	j = 0;
-	while (min < i)
-	{
-		i -= pitch;
-		img->pixels[j] = pixel_from_pos(str, i, img);
-		j++;
-	}
-}
 
 static void	bottomleft(t_img *img, t_tga *tga, unsigned char *str)
 {
@@ -47,15 +27,35 @@ static void	bottomleft(t_img *img, t_tga *tga, unsigned char *str)
 	min = TGA_HEADER_SIZE + tga->id_len;
 	if (tga->clr_map_type == 2)
 		min += tga->cm_len * (tga->cm_size / 4);
-	i = ((img->height - 1) * img->width * pitch) + min;
+	i = ((img->height - 1) * img->pitch) + min;
 	j = 0;
-	while (j != (size_t)(img->width * img->height))
+	while (i > min)
 	{
 		img->pixels[j] = pixel_from_pos(str, i, img);
 		i += pitch;
 		j++;
 		if (j != 0 && j % img->width == 0)
-			i -= (img->width * pitch) * 2;
+			i -= img->pitch * 2;
+	}
+}
+
+static void	bottomright(t_img *img, t_tga *tga, unsigned char *str)
+{
+	size_t			i;
+	size_t			j;
+	size_t			min;
+	const size_t	pitch = img->px_depth / 8;
+
+	min = TGA_HEADER_SIZE + tga->id_len;
+	if (tga->clr_map_type == 2)
+		min += tga->cm_len * (tga->cm_size / 4);
+	i = (img->height * img->pitch) + min;
+	j = 0;
+	while (min < i)
+	{
+		i -= pitch;
+		img->pixels[j] = pixel_from_pos(str, i, img);
+		j++;
 	}
 }
 
@@ -69,9 +69,9 @@ static void	topleft(t_img *img, t_tga *tga, unsigned char *str)
 	i = TGA_HEADER_SIZE + tga->id_len;
 	if (tga->clr_map_type == 2)
 		i += tga->cm_len * (tga->cm_size / 4);
-	max = (img->height * img->width * pitch) + i;
+	max = img->height * img->width;
 	j = 0;
-	while (i < max)
+	while (j < max)
 	{
 		img->pixels[j] = pixel_from_pos(str, i, img);
 		i += pitch;
@@ -83,23 +83,21 @@ static void	topright(t_img *img, t_tga *tga, unsigned char *str)
 {
 	size_t			i;
 	size_t			j;
-	size_t			max;
 	size_t			min;
 	const size_t	pitch = img->px_depth / 8;
 
 	min = TGA_HEADER_SIZE + tga->id_len;
 	if (tga->clr_map_type == 2)
 		min += tga->cm_len * (tga->cm_size / 4);
-	max = (img->height * img->width * pitch) + min;
-	j = img->width * img->height - 1;
-	i = min + (img->width * pitch);
-	while (i < max)
+	j = img->height * img->width;
+	i = min + img->pitch;
+	while (j > 0)
 	{
+		j--;
 		i -= pitch;
 		img->pixels[j] = pixel_from_pos(str, i, img);
-		if (i - min == 0 || (i - min) % (img->width * pitch) == 0)
-			i += (img->width * pitch) * 2;
-		j--;
+		if ((i - min) % img->pitch == 0 && j != 0)
+			i += img->pitch * 2;
 	}
 }
 
@@ -111,7 +109,7 @@ void		str_to_img(t_img *img, t_tga *tga, unsigned char *str)
 		error_msg_errno("Failed to allocate tga pixels");
 	if ((img->origin & 0x30) == 0x00)
 		bottomleft(img, tga, str);
-	else if ((img->origin & 0x30) == 0x10)
+	if ((img->origin & 0x30) == 0x10)
 		bottomright(img, tga, str);
 	else if ((img->origin & 0x30) == 0x20)
 		topleft(img, tga, str);

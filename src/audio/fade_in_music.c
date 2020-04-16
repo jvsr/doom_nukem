@@ -5,15 +5,26 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/26 14:21:01 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/26 14:21:01 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/09/26 14:21:01 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 11:32:18 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL_mixer.h>
+
+#include "libft/ft_printf.h"
+
 #include "audio.h"
 
-void		fade_in_music(t_audio_man *man, t_music music, int time)
+void		fade_in_music(t_audio_man *man, char *const music, int time)
 {
-	Mix_FadeInMusic(man->tracks[music], -1, time);
+	void	*chunk;
+
+	chunk = get_track_from_map(man->music_map, music);
+	if (chunk == NULL)
+	{
+		ft_dprintf(2, "Trying to fade none existing music '%s'\n", music);
+		return ;
+	}
+	Mix_FadeInMusic(chunk, -1, time);
 }

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/07 16:40:35 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/07 16:40:35 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:40:35 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:02:47 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ t_tthread		*sdl_new_tthread(t_tpool *pool, size_t num, int (*f)(void *))
 	thread->id = SDL_CreateThread(f, name, thread);
 	if (thread->id == NULL)
 		error_msg_sdl(13, "Failed to alloc worker thread");
+	ft_strdel(&name);
 	return (thread);
 }

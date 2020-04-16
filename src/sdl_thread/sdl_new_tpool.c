@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dkroeke <dkroeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/02 16:46:03 by dkroeke        #+#    #+#                */
-/*   Updated: 2020/02/02 21:34:03 by dkroeke       ########   odam.nl         */
+/*   Created: 2020/02/02 16:46:03 by dkroeke       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:03:02 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	alloc_queues(t_tpool *pool)
 		error_msg_errno("Failed to alloc queue struct");
 }
 
-t_tpool			*sdl_new_tpool(size_t size, t_uint64 flags)
+t_tpool		*sdl_new_tpool(size_t size, t_uint64 flags)
 {
 	t_tpool		*pool;
 

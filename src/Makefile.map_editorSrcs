@@ -1,0 +1,45 @@
+# $(PARENTNAME) = Name of parent folder
+# $(SUBLIB) = Name of outputfile
+# $(SRCFOLDER) = Name of the folder which holds the sources
+# $(INCLUDES) = Path to the includes folder
+# $(MAKEINCLUDES) = Path to the makefile includes folder
+# $(CCFLAGS) = All the flags that will be used to compile
+
+# Headers libary is dependent on (relative to $(INCLUDES))
+HEADERS =
+
+# Additions to the compile flags (-Wall -Wextra -Werror allready included)
+CCFLAGS +=
+
+# Source file prefix
+PREFIX =
+
+# All SRCSPREFIX source files for the sublib (relative to src/$(SRCFOLDER)/)
+# These will be automaticly prefixed with $(PREFIX) and sufixed with .c
+SRCS = \
+	map_editor_new \
+	map_editor_del \
+	map_editor_del_wall \
+	map_editor_del_object \
+	map_editor_new_wall \
+	map_editor_new_object \
+	map_editor_add_wall \
+	map_editor_add_object \
+	map_editor_add \
+	map_editor_remove_last_wall \
+	map_editor_snap_to_grid \
+	map_editor_wall_is_bigger \
+	map_editor_check_hit_wall \
+	map_editor_check_hit_object \
+	map_editor_convert \
+	map_editor_rev_convert \
+	map_editor_clean \
+	map_objects \
+	map_side_room \
+	map_editor_clean_funcs0 \
+	map_editor_clean_funcs1 \
+	map_editor_clean_funcs2 \
+	get_connectors \
+	convert_clean_doors \
+	map_editor_fill_wall \
+

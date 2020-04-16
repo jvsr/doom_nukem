@@ -1,5 +1,20 @@
 - panel: hud
-  - pos: 0.85, 0.0
-  - dim: 0.15, 1.0
-  - image: hudbackground
-    - texture: splash/splash.tga
+  - gview: gameView
+    - dim: 1.0, 0.8
+  - panel: hudInfo
+    - pos: 0.0, 0.8
+    - dim: 1.0, 0.2
+    - image: hudInfoBack
+      - color: #360206FF
+    - text_block: hudInfoHp
+      - text: "Health: "
+      - pos: 0.0, 0.3
+      - dim: 0.4, 0.3
+    - text_block: hudInfoAmmo
+      - text: "Ammo: "
+      - pos: 0.3, 0.3
+      - dim: 0.4, 0.3
+    - text_block: hudInfoKeys
+      - text: "Keys: "
+      - pos: 0.6, 0.3
+      - dim: 0.4, 0.3

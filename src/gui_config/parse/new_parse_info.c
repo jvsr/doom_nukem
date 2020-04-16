@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/30 15:41:15 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/30 15:41:15 by pholster      ########   odam.nl         */
+/*   Created: 2019/09/30 15:41:15 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:43:48 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ t_parse_info		*new_parse_info(void)
 	parse_info->type = GUI_UNDEFINED;
 	parse_info->dim = (t_coord){1, 1};
 	parse_info->color = ft_strdup("FFFFFFFF");
+	if (parse_info->color == NULL)
+		error_msg_errno("Failed to alloc Color");
 	parse_info->text_color = ft_strdup("FFFFFFFF");
+	if (parse_info->text_color == NULL)
+		error_msg_errno("Failed to alloc Text Color");
 	parse_info->text_size = 1;
 	parse_info->clickable = TRUE;
 	parse_info->show = TRUE;

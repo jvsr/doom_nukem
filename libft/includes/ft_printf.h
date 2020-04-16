@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/02/02 14:13:30 by pholster       #+#    #+#                */
+/*   Created: 2019/02/02 14:13:30 by pholster      #+#    #+#                 */
 /*   Updated: 2019/08/23 11:05:51 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -47,12 +47,6 @@
 # define PF_A_LENGTH_D	"hl"
 # define PF_DOUBLE_H	208
 # define PF_DOUBLE_L	216
-# define PF_FLAG_HASH	info->flag[0]
-# define PF_FLAG_ZERO	info->flag[1]
-# define PF_FLAG_MIN	info->flag[2]
-# define PF_FLAG_PLUS	info->flag[3]
-# define PF_FLAG_SPACE	info->flag[4]
-# define PF_FLAG_APOST	info->flag[5]
 # define PF_BUFF_SIZE	256
 
 typedef enum	e_type

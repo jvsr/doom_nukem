@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/24 15:19:01 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:39:07 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/24 15:19:01 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:13:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	add_confirmation(t_game *game)
 	t_transform	*menu;
 	t_transform	*overlay;
 
-	menu = get_gui_child(game->ui, "confirmationmenu");
-	overlay = get_gui_child(game->ui, "confirmationoverlay");
+	menu = get_gui_child(game->ui, "confirmationMenu");
+	overlay = get_gui_child(game->ui, "confirmationOverlay");
 	set_elem_show_clickable(menu, TRUE);
 	set_elem_show_clickable(overlay, TRUE);
 }
@@ -36,8 +36,8 @@ void	remove_confirmation(t_game *game)
 	t_transform	*menu;
 	t_transform	*overlay;
 
-	menu = get_gui_child(game->ui, "confirmationmenu");
-	overlay = get_gui_child(game->ui, "confirmationoverlay");
+	menu = get_gui_child(game->ui, "confirmationMenu");
+	overlay = get_gui_child(game->ui, "confirmationOverlay");
 	set_elem_show_clickable(menu, FALSE);
 	set_elem_show_clickable(overlay, FALSE);
 }

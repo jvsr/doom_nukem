@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/25 17:22:43 by ehollidg       #+#    #+#                */
+/*   Created: 2019/09/25 17:22:43 by ehollidg      #+#    #+#                 */
 /*   Updated: 2019/11/12 15:48:04 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -20,54 +20,52 @@
 # define AUDIO_CHANNELS MIX_DEFAULT_CHANNELS
 # define AUDIO_BUFFER 4096
 
-# define SOUND_EFFECT_PATH "resources/sounds/effects/"
+# define SOUND_MAP_SIZE 80
+# define SOUND_PATH "resources/sounds/effect/"
+
+# define MUSIC_MAP_SIZE 30
 # define MUSIC_PATH "resources/sounds/music/"
 
+# define TITLE_SONG "hit_n_smash"
+# define TITLE_SONG_FADE_IN 3500
+# define TITLE_SONG_FADE_OUT 1500
+
 typedef struct s_game		t_game;
-
-typedef enum	e_music
-{
-	MUSIC_LONELY_TROUTMAN,
-	MUSIC_ASKING_QUESTIONS,
-	MUSIC_HIT_N_SMASH,
-	MUSIC_COUNT
-}				t_music;
-
-typedef enum	e_sounds
-{
-	SOUND_EXPLOSION,
-	SOUND_COUNT
-}				t_sounds;
+typedef struct s_hashmap	t_hashmap;
 
 typedef struct	s_audio_man
 {
-	Mix_Music	*tracks[MUSIC_COUNT];
-	Mix_Chunk	*effects[SOUND_COUNT];
+	t_hashmap	*music_map;
+	t_hashmap	*sound_map;
 }				t_audio_man;
 
-void			load_audio(t_game *game);
+void			load_audio(t_audio_man *man, char const *exec_path);
+void			load_sound(t_hashmap *sound_map, char const *exec_path);
+void			load_music(t_hashmap *music_map, char const *exec_path);
+void			free_audio(t_game *game);
+void			add_track_to_map(t_hashmap *map, void *track, char *const name);
+void			*get_track_from_map(t_hashmap *map, char *const name);
 Mix_Chunk		*get_chunk_from_wav(char *file, char const *exec_path);
 Mix_Music		*get_music_from_mp3(char *file, char const *exec_path);
-void			play_music(t_audio_man *man, t_music music);
+void			play_music(t_audio_man *man, char *const music);
+void			stop_music(void);
 void			pause_music(void);
 void			resume_music(void);
-void			stop_music(void);
-void			play_sound(t_audio_man *man, t_sounds sound);
-void			play_sound_repeat(t_audio_man *man, t_sounds sound,
-					int times);
-void			stop_all_sounds(void);
-void			pause_all_sounds(void);
-void			resume_all_sounds(void);
-void			effect_sounds(t_audio_man *man, t_sounds sound,
-					int (*func)(int));
-void			pause_sounds(t_audio_man *man, t_sounds sound);
-void			stop_sounds(t_audio_man *man, t_sounds sound);
-void			resume_sounds(t_audio_man *man, t_sounds sound);
-void			fade_in_music(t_audio_man *man, t_music music, int time);
+void			fade_in_music(t_audio_man *man, char *const music, int time);
 void			fade_out_music(int time);
-void			effect_all_sounds(int(*func)(int));
 void			set_music_volume(float volume);
+void			play_sound(t_audio_man *man, char *const sound);
+void			play_sound_repeat(t_audio_man *man, char *const sound,
+									int times);
+void			stop_all_sound(void);
+void			pause_all_sound(void);
+void			resume_all_sound(void);
+void			effect_sound(t_audio_man *man, char *const sound,
+								int(*func)(int));
+void			pause_sound(t_audio_man *man, char *const sound);
+void			stop_sound(t_audio_man *man, char *const sound);
+void			resume_sound(t_audio_man *man, char *const sound);
+void			effect_all_sound(int(*func)(int));
 void			set_sound_volume(float volume);
-void			free_audio(t_game *game);
 
 #endif

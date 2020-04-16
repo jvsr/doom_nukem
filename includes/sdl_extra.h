@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/03 17:23:57 by jvisser        #+#    #+#                */
+/*   Created: 2019/09/03 17:23:57 by jvisser       #+#    #+#                 */
 /*   Updated: 2019/09/18 16:17:58 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -20,6 +20,9 @@
 # include "libft/ft_bool.h"
 # include "types.h"
 
+# define DEFAULT_LINE_SIZE 2
+
+typedef struct s_line	t_line;
 typedef struct s_coord	t_coord;
 typedef struct s_circle	t_circle;
 
@@ -28,6 +31,8 @@ void		sdl_clear_surface(SDL_Surface *surface);
 void		sdl_fill_surface_color(SDL_Surface *surface, SDL_Color color);
 void		sdl_draw_surface_circ(SDL_Surface *dst, SDL_Color color,
 									t_circle c);
+void		sdl_draw_surface_line(SDL_Surface *dst, SDL_Color color,
+									t_line line);
 void		sdl_draw_surface_rect(SDL_Surface *dst, SDL_Color color,
 									SDL_Rect rect);
 void		sdl_draw_surface_rect_alpha(SDL_Surface *dst, SDL_Color color,

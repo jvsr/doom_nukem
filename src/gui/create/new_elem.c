@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/11 20:26:12 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/24 15:20:23 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/11 20:26:12 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:09:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static void	new_gui_elem(t_gui *ui, t_gui_type type, t_gui_elem *gui_elem)
 		gui_elem->button = new_button(ui);
 	else if (type == PANEL)
 		gui_elem->panel = new_panel();
+	else if (type == GVIEW)
+		gui_elem->gview = new_gview();
+	else if (type == MAP_EDITOR)
+		gui_elem->map_editor = new_map_editor();
 }
 
 t_transform	*new_elem(t_gui *ui, const char *name, t_gui_type type)

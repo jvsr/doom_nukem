@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/12 17:13:29 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:25:51 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/12 17:13:29 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:06:00 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 static void	quit_options(t_game *game)
 {
 	game->cureventstate->eventstate = mainmenu;
-	options_return(game, get_gui_child(game->ui, "optionsreturnbutton"));
+	options_return(game, get_gui_child(game->ui, "optionsReturnButton"));
 }
 
 void		options_eventstate(t_game *game, SDL_Event event)

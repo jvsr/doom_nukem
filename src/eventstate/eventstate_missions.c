@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/12 17:17:04 by jvisser        #+#    #+#                */
-/*   Updated: 2019/11/12 17:20:10 by jvisser       ########   odam.nl         */
+/*   Created: 2019/11/12 17:17:04 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:06:03 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 static void	quit_missions(t_game *game)
 {
 	game->cureventstate->eventstate = mainmenu;
-	mission_return(game, get_gui_child(game->ui, "missionreturnbutton"));
+	mission_return(game, get_gui_child(game->ui, "missionReturnButton"));
 }
 
 void		missions_eventstate(t_game *game, SDL_Event event)

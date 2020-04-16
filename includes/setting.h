@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/16 19:19:06 by pholster       #+#    #+#                */
+/*   Created: 2019/10/16 19:19:06 by pholster      #+#    #+#                 */
 /*   Updated: 2019/10/16 19:19:06 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -18,6 +18,10 @@
 
 # include "types.h"
 # include "libft/ft_bool.h"
+
+# define MAX_FOV 75
+# define MIN_FOV 45
+# define FOV_STEP 5
 
 # define SETTINGS_PATH "resources/data/settings/"
 
@@ -45,6 +49,7 @@ typedef struct	s_setting
 	float				sensitivity;
 	float				music_volume;
 	float				sound_volume;
+	float				vfov;
 	t_uint16			fov;
 	SDL_Point			resolution;
 	t_resolution_type	resolution_type;

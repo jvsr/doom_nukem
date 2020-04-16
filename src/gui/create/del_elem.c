@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/11 15:21:28 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/24 15:16:11 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/11 15:21:28 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:09:27 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ static void	del_gui_elem(t_transform *elem)
 		del_button(&elem->gui_elem.button);
 	else if (elem->gui_type == PANEL)
 		del_panel(&elem->gui_elem.panel);
+	else if (elem->gui_type == GVIEW)
+		del_gview(&elem->gui_elem.gview);
+	else if (elem->gui_type == MAP_EDITOR)
+		del_map_editor(&elem->gui_elem.map_editor);
 }
 
 void		del_elem(t_transform **elem)

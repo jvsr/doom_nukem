@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/24 13:42:51 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 15:39:58 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/24 13:42:51 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:13:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		set_resolution(t_setting *setting, t_transform *parent)
 	t_transform	*elem;
 	char		*text;
 
-	elem = get_elem_child(parent, "curresolution");
+	elem = get_elem_child(parent, "curResolution");
 	text = ft_strformat("%4d x %-4d",
 		setting->resolution.x,
 		setting->resolution.y);

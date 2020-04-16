@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/03/16 17:46:23 by pholster       #+#    #+#                */
+/*   Created: 2019/03/16 17:46:23 by pholster      #+#    #+#                 */
 /*   Updated: 2019/08/21 21:28:01 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -24,7 +24,7 @@ void		pf_formatunum(t_info *info)
 	if (info->precision >= 0 && info->is_zero)
 	{
 		if (info->precision > 0 ||
-			(info->type == 'o' && PF_FLAG_HASH))
+			(info->type == 'o' && info->flag[0]))
 			pf_addnstr(info, "0", 1);
 		else if (info->width > 0)
 			pf_addnstr(info, " ", 1);

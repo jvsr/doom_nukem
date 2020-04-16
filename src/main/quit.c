@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/03 12:49:32 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/03 12:49:32 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/03 12:49:32 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/13 14:14:36 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,5 @@
 
 void	quit(int exit_code)
 {
-	Mix_Quit();
-	TTF_Quit();
-	SDL_Quit();
 	exit(exit_code);
 }

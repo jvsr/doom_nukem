@@ -5,13 +5,13 @@
 #                                                      +:+                     #
 #    By: pholster <pholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2019/01/07 20:00:45 by pholster       #+#    #+#                 #
-#    Updated: 2019/08/24 14:25:13 by pholster      ########   odam.nl          #
+#    Created: 2019/01/07 20:00:45 by pholster      #+#    #+#                  #
+#    Updated: 2020/02/19 14:20:01 by jvisser       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Sublib folder names of libft
-SUBLIBS = printf threadpool unum num numarr float char str strarr utf8 mem \
+SUBLIBS = printf unum num numarr float char str strarr utf8 mem \
 	list hash color term bool
 
 # Libft name
@@ -34,11 +34,6 @@ LIBFT_DISABLE_GCOV = FALSE
 # Mafile includes
 MAKEINCLUDES = includes/
 include $(MAKEINCLUDES)/Makefile.color
-
-# Tests info
-TESTPATH = tests
-TESTNAME = libtest
-TEST = $(TESTPATH)/$(TESTNAME)
 
 # Sublib info
 SUBLIBSPATH = .sublibs
@@ -79,18 +74,6 @@ $(NAME): $(SUBLIBS)
 	@rm -f $(NAME)
 	@ar rcs $(NAME) $(OBJS)
 
-# Run test and gcov if $(GCOV)==TRUE
-test: $(NAME) FORCE
-ifeq ($(wildcard $(TESTPATH)),)
-	@echo "Error: $(TESTPATH) not present"
-else
-	@$(MAKE) -s -e -C $(TESTPATH) NAME=$(TESTNAME) OBJS="$(OBJS:src/%=../src/%)"
-	@./$(TEST)
-ifeq ($(GCOV)_$(LIBFT_DISABLE_GCOV), TRUE_FALSE)
-	@$(SUBLIBS_GCOV)
-endif
-endif
-
 # Compile $(SUBLIBS)
 src/$(SUBLIBSPATH)/%.content: FORCE
 	@$(SUBLIBMAKE) SUBLIB=$(@:src/$(SUBLIBSPATH)/%=%)
@@ -118,4 +101,4 @@ re: fclean
 
 FORCE: ;
 
-.PHONY: all test clean fclean re FORCE
+.PHONY: all clean fclean re FORCE

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/06 11:27:49 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/09/24 15:19:43 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/06 11:27:49 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:13:08 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_transform	*get_child(t_transform *child, const char *name)
 	found = NULL;
 	while (child != NULL)
 	{
-		if (ft_strequ(child->name, name))
+		if (ft_strequ_nocase(child->name, name) == TRUE)
 			return (child);
 		if (child->gui_type == PANEL)
 			found = get_child(child->gui_elem.panel->children, name);

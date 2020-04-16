@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/24 13:48:02 by jvisser        #+#    #+#                */
-/*   Updated: 2019/10/24 13:57:45 by jvisser       ########   odam.nl         */
+/*   Created: 2019/10/24 13:48:02 by jvisser       #+#    #+#                 */
+/*   Updated: 2020/04/06 12:13:57 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	set_sensitivity(t_setting *setting, t_transform *parent)
 {
 	set_float(setting->sensitivity,
-		get_elem_child(parent, "cursensitivity"),
+		get_elem_child(parent, "curSensitivity"),
 		1);
 }
 

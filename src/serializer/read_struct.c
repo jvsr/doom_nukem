@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/07 14:25:37 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/10/07 14:25:37 by ehollidg      ########   odam.nl         */
+/*   Created: 2019/10/07 14:25:37 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/10 18:17:42 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 #include "serializer.h"
 #include "error.h"
 
-unsigned char		*read_struct(const char *loc, char const *exec_path)
+unsigned char		*read_struct(const char *loc,
+									char const *exec_path, size_t *file_size)
 {
 	int				fd;
 	unsigned char	*file_stream;
 	char			full_path[PATH_MAX];
+	ssize_t			size;
 
 	ft_strcpy(full_path, exec_path);
 	ft_strcat(full_path, RESOURCE_PATH);
@@ -33,9 +35,10 @@ unsigned char		*read_struct(const char *loc, char const *exec_path)
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
 		error_msg_errno(ft_strformat("Failed to open %s", full_path));
-	ft_readfile(fd, (char**)&file_stream);
+	size = ft_readfile(fd, (char**)&file_stream);
 	if (file_stream == NULL)
 		error_msg_errno(ft_strformat("Failed to read %s", full_path));
+	*file_size = size;
 	close(fd);
 	return (file_stream);
 }

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/03 10:38:50 by ehollidg       #+#    #+#                */
-/*   Updated: 2019/11/06 17:32:54 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/03 10:38:50 by ehollidg      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:12:59 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static t_tablepair_int const	g_types[] = {
 	{"IMAGE", IMAGE},
 	{"BUTTON", BUTTON},
 	{"PANEL", PANEL},
+	{"GVIEW", GVIEW},
+	{"MAP_EDITOR", MAP_EDITOR},
 };
 
 char const		*get_gui_type_name(t_gui_type gui_type)

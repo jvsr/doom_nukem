@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/07 16:41:55 by pholster       #+#    #+#                */
-/*   Updated: 2020/02/07 16:41:55 by pholster      ########   odam.nl         */
+/*   Created: 2020/02/07 16:41:55 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:03:13 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 static void	exract_task(t_tthread *thread, t_tqueue *tasks)
 {
-	thread->task = tasks->first;
-	tasks->first = tasks->first->next;
+	t_tjob	*job;
+
+	job = tasks->first;
+	thread->task = job->task;
+	tasks->first = job->next;
+	sdl_del_tjob(&job, FALSE);
 	if (tasks->first == NULL)
 		tasks->last = NULL;
 	tasks->size--;
@@ -39,7 +43,4 @@ void		sdl_get_ttask(t_tthread *thread)
 		exract_task(thread, tasks);
 	}
 	SDL_UnlockMutex(tasks->lock);
-	if (thread->task != NULL)
-		thread->task->next = NULL;
 }
-

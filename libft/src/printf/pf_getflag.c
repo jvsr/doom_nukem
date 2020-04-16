@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/02/04 17:50:26 by pholster       #+#    #+#                */
+/*   Created: 2019/02/04 17:50:26 by pholster      #+#    #+#                 */
 /*   Updated: 2019/08/21 21:28:09 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -15,8 +15,8 @@
 
 static void	handleconflicts(t_info *info)
 {
-	PF_FLAG_SPACE = (PF_FLAG_PLUS == FALSE && PF_FLAG_SPACE);
-	PF_FLAG_ZERO = (PF_FLAG_MIN == FALSE && PF_FLAG_ZERO);
+	info->flag[4] = (info->flag[3] == FALSE && info->flag[4]);
+	info->flag[1] = (info->flag[2] == FALSE && info->flag[1]);
 }
 
 size_t		pf_getflag(t_info *info, const char *str)
@@ -30,17 +30,17 @@ size_t		pf_getflag(t_info *info, const char *str)
 		(ft_chrin(PF_A_SPACER, str[i]) && spacer == FALSE))
 	{
 		if (str[i] == '#')
-			PF_FLAG_HASH = TRUE;
+			info->flag[0] = TRUE;
 		else if (str[i] == '0')
-			PF_FLAG_ZERO = TRUE;
+			info->flag[1] = TRUE;
 		else if (str[i] == '-')
-			PF_FLAG_MIN = TRUE;
+			info->flag[2] = TRUE;
 		else if (str[i] == '+')
-			PF_FLAG_PLUS = TRUE;
+			info->flag[3] = TRUE;
 		else if (str[i] == ' ')
-			PF_FLAG_SPACE = TRUE;
+			info->flag[4] = TRUE;
 		else if (str[i] == '\'')
-			PF_FLAG_APOST = TRUE;
+			info->flag[5] = TRUE;
 		spacer = (str[i] != 0);
 		i++;
 	}

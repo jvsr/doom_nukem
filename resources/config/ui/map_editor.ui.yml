@@ -1,0 +1,135 @@
+- panel: mapEditor
+  - map_editor: mapEditorView
+    - dim: 0.75, 1.0
+
+  - panel: mapEditorToolbar
+    - pos: 0.75, 0.0
+    - dim: 0.25, 1.0
+    - image: mapEditorToolbarBackgroundColor
+      - layer: -1
+      - color: #333333
+    - image: mapEditorToolbarBackground
+      - texture: ui/border5x9.tga
+
+    - panel: mapEditorObject
+      - pos: 0.1, 0.04
+      - dim: 0.8, 0.1
+      - button: mapEditorObjectChoice
+        - pos: 0.325, 0.65
+        - dim: 0.35, 0.35
+        - text: "Select"
+        - text_size: 0.8
+        - text_color: #EAEAEA
+        - text_font: foulfiend
+        - texture: ui/border5x1.tga
+        - onclick: map_editor_object_select
+      - panel: mapEditorObjectBlock
+        - pos: 0.3, 0.1
+        - dim: 0.4, 0.5
+        - image: mapEditorObjectTexture
+          - pos: 0.2, 0.0
+          - dim: 0.6, 1.0
+          - color: #00000000
+        - button: mapEditorObjectLeft
+          - pos: 0.0, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_left.tga
+          - onclick: map_editor_object_prv
+        - button: mapEditorObjectRight
+          - pos: 0.8, 0.2
+          - dim: 0.2, 0.6
+          - texture: ui/arrow_right.tga
+          - onclick: map_editor_object_next
+    - button: mapEditorSaveButton
+      - pos: 0.2, 0.2
+      - dim: 0.6, 0.05
+      - text: "Save File"
+      - text_font: foulfiend
+      - text_color: #EAEAEA
+      - text_draw_method: centered
+      - texture: ui/border5x1.tga
+      - text_size: 0.8
+      - onclick: save_map
+
+    - panel: mapEditorInfo
+      - pos: 0.1, 0.68
+      - dim: 0.8, 0.5
+      - text_block: mapEditorInfoGreenFlagText
+        - pos: 0.0, 0.0
+        - dim: 1.0, 0.08
+        - text: "Green flag - Start pos"
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+      - text_block: mapEditorInfoRedFlagText
+        - pos: 0.0, 0.1
+        - dim: 1.0, 0.08
+        - text: "Red flag - End pos"
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+      - text_block: mapEditorInfoRedWallText
+        - pos: 0.0, 0.2
+        - dim: 1.0, 0.08
+        - text: "Red wall - Sector portal"
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+      - text_block: mapEditorInfoBlueWallText
+        - pos: 0.0, 0.3
+        - dim: 1.0, 0.08
+        - text: "Blue wall - Window"
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+      - text_block: mapEditorInfoGreenWallText
+        - pos: 0.0, 0.4
+        - dim: 1.0, 0.08
+        - text: "Green wall - Door"
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+      - text_block: mapEditorInfoYellowWallText
+        - pos: 0.0, 0.5
+        - dim: 1.0, 0.08
+        - text: "Yellow wall - Hidden door"
+        - text_size: 0.8
+        - text_font: foulfiend
+        - text_color: #EAEAEA
+
+  - panel: mapEditorConfirmationMenu
+    - show: 0
+    - clickable: 0
+    - layer: 2
+    - image: mapEditorConfirmationOverlay
+      - color: #26020699
+    - panel: mapEditorConfirmationBox
+      - pos: 0.35, 0.35
+      - dim: 0.3, 0.3
+      - image: mapEditorConfirmationBackground
+        - texture: ui/border1x1.tga
+      - text_block: mapEditorConfirmationText
+        - pos: 0.05, 0.1
+        - dim: 0.9, 0.2
+        - text: "Unsaved data will be lost"
+        - text_font: foulfiend
+        - text_color: #e3e3e3
+        - text_size: 0.7
+      - button: mapEditorConfirmationReturnButton
+        - pos: 0.1, 0.37
+        - dim: 0.8, 0.25
+        - texture: ui/border5x1.tga
+        - text: "Ok"
+        - text_font: neckromancer
+        - text_color: #e3e3e3
+        - text_size: 0.7
+        - onclick: map_editor_confirmation_return
+      - button: mapEditorConfirmationRestartButton
+        - pos: 0.1, 0.64
+        - dim: 0.8, 0.25
+        - texture: ui/border5x1.tga
+        - text: "Cancel"
+        - text_font: neckromancer
+        - text_color: #e3e3e3
+        - text_size: 0.7
+        - onclick: map_editor_remove_confirmation

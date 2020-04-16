@@ -19,19 +19,36 @@ PREFIX =
 ONCLICK_SRCS = mainmenu \
 				options \
 				mission \
+				mission1 \
+				load_missions \
+				load_missions1 \
 				fov \
+				hudfov \
 				music \
+				hudmusic \
 				resolution_type \
 				set_resolution_type \
 				resolution \
 				sensitivity \
+				hudsensitivity \
 				sound \
+				hudsound \
 				utils \
 				set_utils \
 				confirmation \
 				controls \
 				keys_1 \
-				key_2
+				key_2 \
+				editor_select \
+				go_to_game \
+				hud_died \
+				map_editor \
+				map_editor_object \
+				save_map \
+				load_editor_map \
+				load_editor_map_cancel \
+				load_level \
+
 ONCLICK_SRCS := $(ONCLICK_SRCS:%=onclick/%)
 
 CREATE_SRCS = new_elem \
@@ -43,7 +60,12 @@ CREATE_SRCS = new_elem \
 		new_text \
 		del_text \
 		new_panel \
-		del_panel
+		del_panel \
+		del_gview \
+		new_gview \
+		del_map_editor \
+		new_map_editor \
+		
 CREATE_SRCS := $(CREATE_SRCS:%=create/%)
 
 DEBUG_SRCS = print_elem \
@@ -55,11 +77,17 @@ DEBUG_SRCS := $(DEBUG_SRCS:%=debug/%)
 
 DRAW_SRCS = draw_gui \
 		draw_elem \
+		draw_elements \
 		draw_button \
 		draw_image \
 		render_text \
 		draw_text \
-		draw_panel
+		draw_panel \
+		draw_gview \
+		draw_map_editor \
+		merge_elem \
+		draw_walls \
+
 DRAW_SRCS := $(DRAW_SRCS:%=draw/%)
 
 MANAGE_SRCS = add_gui_child \

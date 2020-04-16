@@ -5,7 +5,7 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/08 16:12:36 by pholster       #+#    #+#                */
+/*   Created: 2019/01/08 16:12:36 by pholster      #+#    #+#                 */
 /*   Updated: 2019/08/23 15:56:42 by pholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
@@ -26,6 +26,7 @@ typedef struct	s_list
 }				t_list;
 
 t_list			*ft_lstdup(const t_list *lst);
+t_list			*ft_lstdup_dup(const t_list *lst);
 t_list			*ft_lstdupone(const t_list *lst);
 t_list			*ft_lstfind_content(t_list *lst, const void *content,
 					size_t size);
@@ -38,7 +39,7 @@ t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(const t_list *lst, t_list *(*f)(const t_list *elem));
 t_list			*ft_lstnew(void *content, size_t content_size);
 t_list			*ft_lstnew_dup(const void *content, size_t content_size);
-t_list			*ft_lstunlink(t_list *head, t_list *lst);
+t_list			*ft_lstunlink(t_list **head, t_list *lst);
 size_t			ft_lstlen(const t_list *lst);
 size_t			ft_lstnlen(const t_list *lst, size_t n);
 void			ft_lstadd(t_list **head, t_list *new);

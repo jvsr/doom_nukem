@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/08/22 17:24:25 by pholster       #+#    #+#                */
-/*   Updated: 2019/11/12 15:44:16 by jvisser       ########   odam.nl         */
+/*   Created: 2019/08/22 17:24:25 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:49:45 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 #include "game.h"
 #include "init.h"
+#include "audio.h"
 #include "sdl_thread.h"
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_game		*game;
-	t_bool		is_loaded;
+	t_game	*game;
 
 	(void)argc;
-	is_loaded = FALSE;
-	game = init(argv, envp);
-	sdl_run_thread("mainmenu", sdl_new_ttask(init_main_menu, 0, 2,
-								game, &is_loaded));
-	splash(game, &is_loaded, "splash/splash", game->exec_path);
+	game = init_prerequisites(argv, envp);
 	loop(game);
-	quit(0);
+	return (0);
 }

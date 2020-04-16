@@ -1,0 +1,19 @@
+- panel: hudWin
+  - show: 0
+  - layer: 2
+  - clickable: 0
+  - image: hudWinBackground
+    - color: #ff1100aa
+  - text_block: hudWinText
+    - text: "YOU WIN"
+    - text_font: foulfiend
+    - dim: 0.3, 0.3
+    - pos: 0.35, 0.35
+  - button: hudWinLevel
+    - texture: ui/border1x1.tga
+    - text: "Return to menu"
+    - text_font: foulfiend
+    - dim: 0.3, 0.15
+    - pos: 0.35, 0.8
+    - text_size: 0.8
+    - onclick: hud_diedreturn

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: pholster <pholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/16 11:50:04 by pholster       #+#    #+#                */
-/*   Updated: 2019/09/24 15:17:53 by jvisser       ########   odam.nl         */
+/*   Created: 2019/09/16 11:50:04 by pholster      #+#    #+#                 */
+/*   Updated: 2020/04/06 12:13:20 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	del_child(t_transform **children, const char *name)
 
 	prv = NULL;
 	cur = *children;
-	while (cur != NULL && ft_strequ(cur->name, name) == FALSE)
+	while (cur != NULL && ft_strequ_nocase(cur->name, name) == FALSE)
 	{
 		prv = cur;
 		cur = cur->next;
