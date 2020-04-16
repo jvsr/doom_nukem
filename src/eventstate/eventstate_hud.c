@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/16 14:44:44 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 14:50:53 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ static void	manage_keydown(t_game *game,
 		game->player->angle = wrap_float(game->player->angle - 15, 0, 360.0);
 	else if (event.key.keysym.sym == SDLK_RIGHT)
 		game->player->angle = wrap_float(game->player->angle + 15, 0, 360.0);
+	else if (event.key.keysym.sym == game->setting->controls.shoot)
+		player_shoot(game, game->player);
 	game->player->mag.cos = cos(game->player->angle * PI_R);
 	game->player->mag.sin = sin(game->player->angle * PI_R);
 }
@@ -108,7 +110,8 @@ void		hud_eventstate(t_game *game, SDL_Event event)
 	if (event.type == SDL_KEYDOWN)
 		manage_keydown(game, event, &skip_mouse_move);
 	if (event.type == SDL_MOUSEBUTTONDOWN &&
-		event.button.button == SDL_BUTTON_LEFT && skip_mouse_move == FALSE)
+		event.button.button == game->setting->controls.shoot &&
+		skip_mouse_move == FALSE)
 		player_shoot(game, game->player);
 	else
 		skip_mouse_move = FALSE;
