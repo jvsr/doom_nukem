@@ -123,7 +123,7 @@ void			ammo_pickup(t_game *game,
 					t_sector *sec, t_object *obj, t_player *player);
 t_wall			*raycast_wall(t_sector *sec, t_player *plyr,
 					t_bool ignore_portal, t_bool plyer_cast);
-void			click_on_door(t_player *plyr, t_map *map);
+void			click_on_door(t_player *plyr, t_game *game);
 t_wall			*wall_ray(t_sector *secs,
 					t_sector *prv, t_player *plyr, t_bool *ip);
 t_object		*raycast_object(t_game *game, t_map *map, t_player *plyr);

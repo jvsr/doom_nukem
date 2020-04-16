@@ -30,4 +30,9 @@ void		load_sound(t_hashmap *sound_map, char const *exec_path)
 	addsound(sound_map, "shotgun", exec_path);
 	addsound(sound_map, "singleshot", exec_path);
 	addsound(sound_map, "window_shatter", exec_path);
+	addsound(sound_map, "ammo_pickup", exec_path);
+	addsound(sound_map, "key_pickup", exec_path);
+	addsound(sound_map, "health_pickup", exec_path);
+	addsound(sound_map, "button_ui", exec_path);
+	addsound(sound_map, "door_unlock", exec_path);
 }

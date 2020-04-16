@@ -14,6 +14,7 @@
 #include "libft/ft_bool.h"
 #include "player.h"
 #include "types.h"
+#include "audio.h"
 #include "rinfo.h"
 #include "game.h"
 
@@ -22,8 +23,8 @@ void	key_pickup(t_game *game,
 {
 	t_list		*lst;
 
-	(void)game;
 	player->keys++;
+	play_sound(game->audio_man, "key_pickup");
 	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(t_object));
 	if (lst == NULL)
 		return ;

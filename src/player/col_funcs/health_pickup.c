@@ -15,6 +15,7 @@
 #include "player.h"
 #include "types.h"
 #include "rinfo.h"
+#include "audio.h"
 #include "game.h"
 
 void	health_pickup(t_game *game,
@@ -23,13 +24,13 @@ void	health_pickup(t_game *game,
 	const int	health_add = 10;
 	t_list		*lst;
 
-	(void)game;
 	if (player->health == PLAYER_MAX_HEALTH)
 		return ;
 	if (player->health + health_add > PLAYER_MAX_HEALTH)
 		player->health = PLAYER_MAX_HEALTH;
 	else
 		player->health += health_add;
+	play_sound(game->audio_man, "health_pickup");
 	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(t_object));
 	if (lst == NULL)
 		return ;
