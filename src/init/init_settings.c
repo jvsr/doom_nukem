@@ -64,7 +64,7 @@ void			init_settings(t_game *game)
 		setting->sensitivity = 1.0;
 		setting->music_volume = 0.8;
 		setting->sound_volume = 0.8;
-		setting->fov = 75;
+		setting->fov = 45;
 		setting->resolution.x = INIT_WIDTH;
 		setting->resolution.y = INIT_HEIGHT;
 		setting->resolution_type = fullscreen;
