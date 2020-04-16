@@ -28,7 +28,7 @@ readarray -t resources <<< "$resources"
 dd if=/dev/zero bs=1 count=128 >> doom-nukem
 
 for file in "${resources[@]}"; do
-if [[ ! -s "$file" ]]; then
+if [[ -z "$file" ]]; then
 	continue
 fi
 
