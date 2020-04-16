@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 11:32:47 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/16 14:28:06 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 14:31:28 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static void		init_general(t_game *game)
 	game->setting->vfov = calc_vfov(game->setting->fov, surf->w, surf->h);
 	SDL_GL_SetSwapInterval(-1);
 	path = ft_strformat("%s/resources/data/settings", game->exec_path);
-	if (access(path, F_OK) == -1)
+	if (access(path, F_OK) != 0)
 		mkdir(path, 0770);
 	ft_strdel(&path);
 	path = ft_strformat("%s/resources/data/map/custom", game->exec_path);
-	if (access(path, F_OK) == -1)
+	if (access(path, F_OK) != 0)
 		mkdir(path, 0770);
 	ft_strdel(&path);
 }
