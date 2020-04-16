@@ -6,11 +6,15 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 11:32:47 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 12:46:22 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 14:28:06 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/stat.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_audio.h>
 #include <SDL2/SDL_ttf.h>
@@ -37,12 +41,21 @@ static void		init_sdl(void)
 static void		init_general(t_game *game)
 {
 	SDL_Surface const	*surf = game->surface;
+	char				*path;
 
 	game->state = running;
 	init_gametime(&game->starttime);
 	game->cursoractive = TRUE;
 	game->setting->vfov = calc_vfov(game->setting->fov, surf->w, surf->h);
 	SDL_GL_SetSwapInterval(-1);
+	path = ft_strformat("%s/resources/data/settings", game->exec_path);
+	if (access(path, F_OK) == -1)
+		mkdir(path, 0770);
+	ft_strdel(&path);
+	path = ft_strformat("%s/resources/data/map/custom", game->exec_path);
+	if (access(path, F_OK) == -1)
+		mkdir(path, 0770);
+	ft_strdel(&path);
 }
 
 static t_game	*alloc_game(void)
