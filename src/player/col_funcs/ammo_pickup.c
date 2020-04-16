@@ -14,6 +14,7 @@
 #include "libft/ft_bool.h"
 #include "player.h"
 #include "types.h"
+#include "audio.h"
 #include "rinfo.h"
 #include "game.h"
 
@@ -23,8 +24,8 @@ void	ammo_pickup(t_game *game,
 	const int	ammo_add = 10;
 	t_list		*lst;
 
-	(void)game;
 	player->ammo += ammo_add;
+	play_sound(game->audio_man, "ammo_pickup");
 	lst = ft_lstfind_content(sec->objects, (void*)obj, sizeof(t_object));
 	if (lst == NULL)
 		return ;

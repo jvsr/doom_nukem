@@ -17,6 +17,7 @@
 #include "keymap.h"
 #include "eventstate.h"
 #include "eventstate_transition_table.h"
+#include "audio.h"
 
 void			check_quit(t_game *game, SDL_Event event)
 {
@@ -34,7 +35,10 @@ static void		check_ui_click(t_game *game, SDL_Event event)
 	{
 		hit = check_gui_hit(game, (SDL_Point){event.button.x, event.button.y});
 		if (hit != NULL && hit->onclick != NULL)
+		{
+			play_sound(game->audio_man, "button_ui");
 			hit->onclick(game, hit);
+		}
 	}
 }
 

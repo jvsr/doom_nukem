@@ -10,17 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "player.h"
+#include "audio.h"
 #include "rinfo.h"
 
-void		click_on_door(t_player *plyr, t_map *map)
+void		click_on_door(t_player *plyr, t_game *game)
 {
 	t_wall	*ray;
 
-	ray = raycast_wall(map->sectors + plyr->cur_sector, plyr, TRUE, TRUE);
+	ray = raycast_wall(game->map->sectors + plyr->cur_sector, plyr, TRUE, TRUE);
 	if (ray == NULL || ray->is_door == FALSE || plyr->keys == 0)
 		return ;
 	plyr->keys--;
+	play_sound(game->audio_man, "door_unlock");
 	ray->is_door = FALSE;
 	ray->is_portal = TRUE;
 	ray->texture.left[0] = TEXTURE_BRICK_WALL;

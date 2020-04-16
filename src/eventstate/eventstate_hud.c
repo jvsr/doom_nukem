@@ -71,7 +71,7 @@ static void	manage_keydown(t_game *game,
 		&& event.key.keysym.sym == SDLK_f)
 		game->player->is_flying = !game->player->is_flying;
 	else if (is_helddown(game->keymap, SDLK_e))
-		click_on_door(game->player, game->map);
+		click_on_door(game->player, game);
 	else if (event.key.keysym.sym == SDLK_F10)
 		SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
 }
