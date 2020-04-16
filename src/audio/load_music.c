@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/25 17:28:18 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/06 11:31:48 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 12:36:15 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void		load_music(t_hashmap *music_map, char const *exec_path)
 	addmusic(music_map, "lonely_troutman_ii", exec_path);
 	addmusic(music_map, "asking_questions", exec_path);
 	addmusic(music_map, "hit_n_smash", exec_path);
+	addmusic(music_map, "Enemies LOOP", exec_path);
 }

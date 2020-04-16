@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 14:27:39 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/06 12:14:03 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 12:48:08 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	hudoptions_return(t_game *game, t_transform *gui)
 																		FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
 	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
+	stop_music();
 	fade_in_music(game->audio_man, TITLE_SONG, TITLE_SONG_FADE_IN);
 	game->cureventstate->eventstate = mainmenu;
 }

@@ -6,7 +6,7 @@
 /*   By: ehollidg <ehollidg@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 13:58:52 by ehollidg      #+#    #+#                 */
-/*   Updated: 2020/04/13 15:04:39 by jvisser       ########   odam.nl         */
+/*   Updated: 2020/04/16 12:50:43 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	go_to_game(t_game *game, t_transform *gui)
 	set_elem_show_clickable(get_gui_child(game->ui, "hud"), TRUE);
 	game->cureventstate->eventstate = hud;
 	stop_music();
+	play_music(game->audio_man, "Enemies LOOP");
 }
