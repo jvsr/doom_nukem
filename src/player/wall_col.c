@@ -46,36 +46,55 @@ static t_bool	coll(t_coord c0, t_coord c1, t_coord c2, t_coord c3)
 	return (TRUE);
 }
 
-t_bool			wall_col(t_coord c0, t_coord c1, t_wall *wall)
+static t_bool	wall_col(t_coord c0, t_coord c1, t_wall *wall)
 {
 	if (coll(c0, c1, wall->corner_0, wall->corner_1))
 		return (TRUE);
 	return (FALSE);
 }
 
-void			check_wall_col(t_tricoord coord, t_player *player,
-						t_wall *wall, t_uint8 *col)
+static t_uint8	check_wall_col(t_tricoord coord, t_player *player,
+					t_wall *wall)
 {
+	t_uint8	col;
+
+	col = 0;
 	if (wall_col(coord.x, player->pos, wall) == TRUE)
-		*col |= 1;
+		col |= 1;
 	if (wall_col(coord.y, player->pos, wall) == TRUE)
-		*col |= 2;
+		col |= 2;
 	if (wall_col(coord.xy, player->pos, wall) == TRUE)
-		*col |= 4;
+		col |= 4;
+	return (col);
 }
 
-void			check_walls(t_game *game, t_uint8 *col, t_tricoord coord)
+static t_uint8	check(t_game *game, t_sector *sec, t_tricoord coord,
+					t_uint8 recursion)
 {
 	int			i;
-	const int	max = game->map->sectors[game->player->cur_sector].wall_count;
+	t_uint8		col;
+	const int	max = sec->wall_count;
 	t_wall		*walls;
 
 	i = 0;
-	walls = game->map->sectors[game->player->cur_sector].walls;
-	while (i < max && *col != 7)
+	col = 0;
+	walls = sec->walls;
+	while (i < max && col != 7)
 	{
 		if (walls[i].is_portal == FALSE || walls[i].is_window == TRUE)
-			check_wall_col(coord, game->player, &walls[i], col);
+			col |= check_wall_col(coord, game->player, &walls[i]);
+		if (walls[i].is_portal == TRUE && col != 7 && recursion > 0)
+		{
+			recursion--;
+			col |= check(game, walls[i].window, coord, recursion);
+		}
 		i++;
 	}
+	return (col);
+}
+
+void			check_walls(t_game *game, t_uint8 *col, t_sector *sec,
+					t_tricoord coord)
+{
+	*col |= check(game, sec, coord, 1);
 }

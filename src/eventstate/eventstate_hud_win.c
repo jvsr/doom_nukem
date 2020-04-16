@@ -19,16 +19,8 @@
 #include "serializer.h"
 #include "eventstate.h"
 
-static void	quit_hud_win(t_game *game)
-{
-	set_elem_show_clickable(get_gui_child(game->ui, "hud"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "hudWin"), FALSE);
-	set_elem_show_clickable(get_gui_child(game->ui, "mainMenu"), TRUE);
-	game->cureventstate->eventstate = mainmenu;
-}
-
 void		hud_win_eventstate(t_game *game, SDL_Event event)
 {
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-		quit_hud_win(game);
+		hud_diedmainmenu(game, NULL);
 }

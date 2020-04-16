@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-static void	move_pos_col(t_uint8 col, t_coord *new_pos, t_tricoord pos)
+static void		move_pos_col(t_uint8 col, t_coord *new_pos, t_tricoord pos)
 {
 	if (col == 0)
 		ft_memcpy(new_pos, &pos.xy, sizeof(pos.xy));
@@ -38,7 +38,7 @@ static void	move_pos_col(t_uint8 col, t_coord *new_pos, t_tricoord pos)
 	}
 }
 
-t_bool		switch_sector(t_game *game, t_map *map, t_player *player,
+static t_bool	switch_sector(t_game *game, t_map *map, t_player *player,
 														t_uint32 next_sector)
 {
 	float		h_o;
@@ -68,7 +68,7 @@ t_bool		switch_sector(t_game *game, t_map *map, t_player *player,
 	return (TRUE);
 }
 
-t_bool		player_col(t_game *game, float xspeed, float yspeed)
+t_bool			player_col(t_game *game, float xspeed, float yspeed)
 {
 	t_tricoord	pos;
 	t_uint8		col;
@@ -81,7 +81,7 @@ t_bool		player_col(t_game *game, float xspeed, float yspeed)
 	pos.y = (t_coord){player->pos.x, player->pos.y + yspeed};
 	pos.xy = (t_coord){player->pos.x + xspeed, player->pos.y + yspeed};
 	col = 0;
-	check_walls(game, &col, pos);
+	check_walls(game, &col, &game->map->sectors[player->cur_sector], pos);
 	check_objects(game, &col, pos);
 	if (col == 7)
 		return (FALSE);
