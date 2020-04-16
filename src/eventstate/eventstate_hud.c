@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/16 14:50:53 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 14:59:47 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ static void	manage_keydown(t_game *game,
 		game->player->updown = clamp_float(game->player->updown - 0.1,
 		PLAYER_UPDOWN_MIN, PLAYER_UPDOWN_MAX);
 	else if (event.key.keysym.sym == SDLK_LEFT)
-		game->player->angle = wrap_float(game->player->angle - 15, 0, 360.0);
+		game->player->angle = wrap_float(game->player->angle - 7.5, 0, 360.0);
 	else if (event.key.keysym.sym == SDLK_RIGHT)
-		game->player->angle = wrap_float(game->player->angle + 15, 0, 360.0);
+		game->player->angle = wrap_float(game->player->angle + 7.5, 0, 360.0);
 	else if (event.key.keysym.sym == game->setting->controls.shoot)
 		player_shoot(game, game->player);
 	game->player->mag.cos = cos(game->player->angle * PI_R);
