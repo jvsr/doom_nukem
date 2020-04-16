@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 13:59:52 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/10 21:45:28 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 12:02:05 by jvisser       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_bool		check_collision(t_game *game, t_object *obj)
 		while (j < game->map->sectors[i].wall_count)
 		{
 			cur = game->map->sectors[i].walls[j];
-			if (cur.is_portal == FALSE
+			if ((cur.is_portal == FALSE || cur.is_window == TRUE)
 			&& check_wall(ang, cur, obj, game) == FALSE)
 				return (FALSE);
 			j++;
