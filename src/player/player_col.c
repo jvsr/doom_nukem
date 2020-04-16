@@ -20,7 +20,6 @@
 #include "rinfo.h"
 #include "cmath.h"
 #include "keymap.h"
-#include <stdio.h>
 #include <limits.h>
 
 static void		move_pos_col(t_uint8 col, t_coord *new_pos, t_tricoord pos)

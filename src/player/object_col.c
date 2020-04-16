@@ -21,7 +21,6 @@
 #include "cmath.h"
 #include "keymap.h"
 
-#include <stdio.h>
 #include <limits.h>
 
 t_uint32	get_sector_id(t_map *map, t_sector *sec)

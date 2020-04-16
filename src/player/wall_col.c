@@ -21,7 +21,6 @@
 #include "cmath.h"
 #include "keymap.h"
 
-#include <stdio.h>
 #include <limits.h>
 
 static t_bool	coll(t_coord c0, t_coord c1, t_coord c2, t_coord c3)
