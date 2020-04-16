@@ -6,7 +6,7 @@
 /*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 17:13:29 by jvisser       #+#    #+#                 */
-/*   Updated: 2020/04/10 14:23:51 by euan          ########   odam.nl         */
+/*   Updated: 2020/04/16 14:44:44 by euan          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,22 @@ static void	manage_keydown(t_game *game,
 	else if (is_helddown(game->keymap, SDLK_F6)
 		&& event.key.keysym.sym == SDLK_f)
 		game->player->is_flying = !game->player->is_flying;
-	else if (is_helddown(game->keymap, SDLK_e))
+	else if (is_helddown(game->keymap, game->setting->controls.interact))
 		click_on_door(game->player, game);
 	else if (event.key.keysym.sym == SDLK_F10)
 		SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
+	else if (event.key.keysym.sym == SDLK_UP)
+		game->player->updown = clamp_float(game->player->updown + 0.1,
+		PLAYER_UPDOWN_MIN, PLAYER_UPDOWN_MAX);
+	else if (event.key.keysym.sym == SDLK_DOWN)
+		game->player->updown = clamp_float(game->player->updown - 0.1,
+		PLAYER_UPDOWN_MIN, PLAYER_UPDOWN_MAX);
+	else if (event.key.keysym.sym == SDLK_LEFT)
+		game->player->angle = wrap_float(game->player->angle - 15, 0, 360.0);
+	else if (event.key.keysym.sym == SDLK_RIGHT)
+		game->player->angle = wrap_float(game->player->angle + 15, 0, 360.0);
+	game->player->mag.cos = cos(game->player->angle * PI_R);
+	game->player->mag.sin = sin(game->player->angle * PI_R);
 }
 
 void		hud_eventstate(t_game *game, SDL_Event event)
