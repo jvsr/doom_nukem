@@ -10,8 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-#!/bin/bash
-
 function norm {
 	local NORM=`python ~/norminette+/run.py $1 | grep --color=never -E "(Error: [^N])" -B 1`
 
