@@ -10,8 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-#!/bin/bash
-
 if [[ $0 =~ $PWD ]]; then
 	SELF_LOCATION=$0
 else
@@ -40,20 +38,19 @@ function osxInstall {
 }
 
 function generalInstall {
-	git clone https://github.com/thijsdejong/codam-norminette-plus ~/norminette+
+	if [ -n $GITHUB_ACTION ]; then
+		git clone https://github.com/thijsdejong/codam-norminette-plus ~/norminette+
+	fi
 }
 
 OS_NAME=`uname -s`
-if [ -z $GITHUB_ACTION ]; then
-	echo "Error: Not running travis"
-	exit 1
-elif [[ $OS_NAME == "Linux" ]]; then
+if [[ $OS_NAME == "Linux" ]]; then
 	linuxInstall
 	generalInstall
 elif [[ $OS_NAME == "Darwin" ]]; then
 	osxInstall
 	generalInstall
 else
-	echo "Error: OS is not supported"
+	echo "Error: OS: '$OS_NAME' is not supported"
 	exit 1
 fi
