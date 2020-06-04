@@ -1,10 +1,8 @@
-
-
 # Doom-Nukem
 
 [![Doom-Nukem Master test](https://github.com/jvsr/doom_nukem/workflows/Doom-Nukem%20Master%20test/badge.svg)](https://github.com/jvsr/doom_nukem/actions)
 
-Doom-Nukem is a Codam project, in which the task is to make a Doom/Duke Nukem 3D engine. Doom-Nukem elaborates on allot of things introduced in the project right before it: [Wolf3D](https://gitlab.com/Eathox/wolf3d).
+Doom-Nukem is a Codam project, in which the task is to make a Doom/Duke Nukem 3D engine. Doom-Nukem elaborates on a lot of things introduced in the project right before it: [Wolf3D](https://gitlab.com/Eathox/wolf3d).
 
 ![Main menu image](examplePicture1.png)
 
